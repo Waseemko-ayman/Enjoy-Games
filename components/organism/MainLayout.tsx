@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import TopBanner from './header/TopBanner';
 import Header from './header/Header';
