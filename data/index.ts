@@ -1,15 +1,21 @@
-import { FaGamepad, FaSimCard } from 'react-icons/fa6';
+import { FaApple, FaGamepad, FaGooglePlay, FaSimCard } from 'react-icons/fa6';
 import { IoGameControllerOutline } from 'react-icons/io5';
-import { MdMoreHoriz, MdRestaurant, MdSignalCellularAlt } from 'react-icons/md';
+import { MdApps, MdMoreHoriz, MdRestaurant, MdSignalCellularAlt } from 'react-icons/md';
 import { PiShoppingCartLight, PiSquaresFourLight } from 'react-icons/pi';
 
 const digitalStores = [
+  { label: 'آيتونز', Icon: FaApple },
+  { label: 'قوقل بلاي', Icon: FaGooglePlay },
+  { label: 'هواوي', Icon: MdApps },
+];
+
+const gamingPlatforms = [
   { label: 'بلاي ستيشن', Icon: FaGamepad },
   { label: 'إكس بوكس', Icon: FaGamepad },
   { label: 'ستيم', Icon: FaGamepad },
   { label: 'بيبجي', Icon: FaGamepad },
   { label: 'جواكر', Icon: FaGamepad },
-  { label: 'بلا فوةة', Icon: FaGamepad },
+  { label: 'يلا لودو', Icon: FaGamepad },
   { label: 'روبلوكس', Icon: FaGamepad },
   { label: 'فري فاير', Icon: FaGamepad },
   { label: 'موبايل ليجندز', Icon: FaGamepad },
@@ -47,12 +53,6 @@ const digitalStores = [
   { label: 'آي آي إف سي 24', Icon: FaGamepad },
   { label: 'فـاينل فانتسي', Icon: FaGamepad },
   { label: 'كـلشـي كـرافـي سـاغـا', Icon: FaGamepad },
-];
-
-const gamingPlatforms = [
-  { label: 'بلاي ستيشن', Icon: FaGamepad },
-  { label: 'Xbox', Icon: FaGamepad },
-  { label: 'Steam', Icon: FaGamepad },
 ];
 
 const contactAndData = [
