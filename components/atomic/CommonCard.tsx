@@ -3,13 +3,13 @@ import Link from 'next/link';
 import React from 'react';
 import Avatar from './Avatar';
 import { PiStarFourFill } from 'react-icons/pi';
+import Button from './Button';
 
 interface CommonCardProps {
   title: string;
   isLink?: boolean;
   productLink?: string;
   description?: boolean;
-  // action?: React.ReactNode;
   imgSrc: string;
   imgAlt: string;
   imgTitle: string;
@@ -20,6 +20,10 @@ interface CommonCardProps {
   cardLinkPath?: string;
   ratings?: string;
   tall?: boolean;
+  btnVariant?: 'primary' | 'secondary';
+  btnText?: string;
+  otherClassNameBtn?: string;
+  Icon?: React.ElementType;
 }
 
 const CommonCard: React.FC<CommonCardProps> = ({
@@ -27,7 +31,6 @@ const CommonCard: React.FC<CommonCardProps> = ({
   isLink = false,
   productLink = '#',
   description,
-  // action,
   imgSrc,
   imgAlt,
   imgTitle,
@@ -38,6 +41,10 @@ const CommonCard: React.FC<CommonCardProps> = ({
   cardLinkPath = '#',
   ratings,
   tall = false,
+  btnVariant = 'primary',
+  btnText,
+  otherClassNameBtn,
+  Icon,
 }) => {
   return (
     <Link
@@ -113,7 +120,15 @@ const CommonCard: React.FC<CommonCardProps> = ({
         </div>
       )}
 
-      {/* {action && <button>{btnText}</button>} */}
+      {btnVariant && (
+        <Button
+          variant={btnVariant}
+          Icon={Icon}
+          otherClassName={otherClassNameBtn}
+        >
+          {btnText}
+        </Button>
+      )}
     </Link>
   );
 };
