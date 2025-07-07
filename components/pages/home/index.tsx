@@ -4,6 +4,7 @@ import SectionsTypes from './Sections/SectionsTypes';
 import BestSellers from './Sections/BestSellers';
 import SuggestedProducts from './Sections/SuggestedProducts';
 import NewlyArrived from './Sections/NewlyArrived';
+import RedeemPoints from './Sections/RedeemPoints';
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
         <BestSellers />
         <SuggestedProducts />
         <NewlyArrived />
+        <RedeemPoints />
       </Container>
     </>
   );
