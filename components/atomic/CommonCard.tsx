@@ -7,7 +7,7 @@ import Button from './Button';
 
 interface CommonCardProps {
   title: string;
-  isLink?: boolean;
+  titleIsLink?: boolean;
   productLink?: string;
   description?: boolean;
   imgSrc: string;
@@ -28,7 +28,7 @@ interface CommonCardProps {
 
 const CommonCard: React.FC<CommonCardProps> = ({
   title,
-  isLink = false,
+  titleIsLink = false,
   productLink = '#',
   description,
   imgSrc,
@@ -63,10 +63,10 @@ const CommonCard: React.FC<CommonCardProps> = ({
         />
       </div>
 
-      {isLink ? (
+      {titleIsLink ? (
         <Link
           href={productLink}
-          className="font-medium mt-2.5 mb-1.5 text-xl text-[var(--daleel-gray-50)]"
+          className="font-bold mt-3.5 inline-block mb-1.5 text-base text-[var(--daleel-gray-650)] hover:text-[var(--daleel-gray-300)] transition-all duration-600"
         >
           {title}
         </Link>
@@ -95,10 +95,16 @@ const CommonCard: React.FC<CommonCardProps> = ({
                 width={19}
                 height={19}
               />
-              <p className="text-sm font-bold">{storeName}</p>
+              <p
+                className={`${
+                  variant === 'row' ? 'text-sm' : 'text-base'
+                } font-bold`}
+              >
+                {storeName}
+              </p>
             </div>
             <div
-              className={`text-[var(--daleel-secondary-dark))] ${
+              className={`text-[var(--daleel-secondary))] ${
                 variant === 'row' ? 'text-sm order-2' : 'text-2xl order-1'
               }`}
             >
