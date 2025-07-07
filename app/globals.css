@@ -4,8 +4,8 @@
   --daleel-primary: #7338f0;
   --daleel-primary-dark: #6d28d9;
   --daleel-primary-light: #8f5ff5;
-  --daleel-secondary: #f4ae6a;
-  --daleel-secondary-dark: #ef993a;
+  --daleel-secondary: #ef993a;
+  --daleel-secondary-light: #f4ae6a;
   --daleel-lime-yellow: #cbff2e;
   --daleel-primary-deep: #090f30;
   --daleel-accent: #ec4899;
@@ -19,6 +19,7 @@
   --daleel-gray-400: #9ca3af;
   --daleel-gray-500: #6b7280;
   --daleel-gray-600: #4b5563;
+  --daleel-gray-650: #53576e;
   --daleel-gray-700: #374151;
   --daleel-gray-800: #1f2937;
   --daleel-gray-900: #111827;
@@ -61,8 +62,8 @@
     background-color: var(--daleel-primary-light);
   }
 
-  .hover\:bg-daleel-secondary-dark:hover {
-    background-color: var(--daleel-secondary-dark);
+  .hover\:bg-daleel-secondary-light:hover {
+    background-color: var(--daleel-secondary-light);
   }
 
   .shadow-custom {
