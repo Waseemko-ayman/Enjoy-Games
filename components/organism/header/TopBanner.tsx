@@ -4,7 +4,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 
 const TopBanner = () => {
   return (
-    <Link href="#">
+    <Link href="#" dir="ltr">
       <div className="bg-daleel-primary text-white text-center py-2 px-2 text-lg font-bold relative">
         <div className="flex items-center justify-center gap-2">
           <IoIosArrowBack />
