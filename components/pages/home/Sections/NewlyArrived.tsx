@@ -2,7 +2,6 @@ import CommonCard from '@/components/atomic/CommonCard';
 import SectionComponent from '@/components/atomic/SectionComponent';
 import { NewlyArrivedData } from '@/data';
 import React from 'react';
-import { PiShoppingCartLight } from 'react-icons/pi';
 
 const NewlyArrived = () => {
   return (
@@ -19,7 +18,6 @@ const NewlyArrived = () => {
             btnVariant="primary"
             btnText="اشترِ الآن"
             otherClassNameBtn="p-3"
-            Icon={PiShoppingCartLight}
             {...card}
           />
         ))}
