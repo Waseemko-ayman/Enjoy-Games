@@ -10,8 +10,7 @@ import { MdOutlineShoppingCart } from 'react-icons/md';
 
 const Header = () => {
   return (
-    // <header className="bg-white shadow-sm">
-    <header className="bg-white">
+    <header className="bg-white" dir="ltr">
       <Container>
         <div className="flex items-center justify-between gap-10">
           {/* Language and Country */}
