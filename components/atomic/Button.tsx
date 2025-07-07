@@ -22,11 +22,11 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`flex items-center justify-center gap-1 w-full text-white cursor-pointer text-base outline-none font-semibold transition-all duration-600 ${borderRadius} ${
+      className={`flex items-center justify-center gap-1 w-full text-white cursor-pointer text-lg outline-none font-semibold transition-all duration-600 ${borderRadius} ${
         variant === 'primary'
           ? 'bg-daleel-primary hover:bg-daleel-primary-light'
           : variant === 'secondary'
-          ? 'bg-daleel-secondary hover:bg-daleel-secondary-dark'
+          ? 'bg-daleel-secondary hover:bg-daleel-secondary-light'
           : ''
       } ${otherClassName}`}
       onClick={handleClick}
