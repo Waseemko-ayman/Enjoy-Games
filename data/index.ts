@@ -745,7 +745,7 @@ export const NewlyArrivedData = [
   },
 ];
 
-export const DaleelWinWinData = [
+export const EnjoyWinWinData = [
   {
     id: 1,
     title: 'شارك وأربح',
