@@ -1,0 +1,80 @@
+import React, { useState } from 'react';
+import Container from '../Container';
+import { PiSquaresFourLight } from 'react-icons/pi';
+import { MdOutlineShoppingCart } from 'react-icons/md';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import NavItem from '@/components/atomic/NavItem';
+import { subMenuItems } from '@/data';
+
+const MobileHeader = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <header className="h-[60px] bg-daleel-gray-light flex items-center">
+      <Container otherClassName="w-full flex items-center justify-between gap-4">
+        <Sheet>
+          <SheetTrigger>
+            <PiSquaresFourLight className="text-3xl cursor-pointer text-daleel-primary" />
+          </SheetTrigger>
+          <SheetContent className="pt-20">
+            <h4 className="text-white text-2xl font-semibold mb-5">
+              أقسام البطاقات
+            </h4>
+
+            {subMenuItems.map((item, index) => {
+              const isOpen = openIndex === index;
+              const hasSubmenu = !!item.submenu;
+              const isLastTwoItems = index >= subMenuItems.length - 2;
+
+              return (
+                <div key={index} className="relative">
+                  <NavItem
+                    key={index}
+                    Icon={item.Icon}
+                    text={item.label}
+                    otherClassName="text-white"
+                    showArrow={!!item.submenu}
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                  />
+
+                  {hasSubmenu && isOpen && (
+                    <div
+                      className={`z-50 mt-2 border border-gray-100 rounded-xl shadow-lg bg-white 
+            ${
+              item.submenu.length > 3
+                ? 'max-h-[300px] overflow-y-auto p-3 grid grid-cols-2 gap-2'
+                : 'p-2'
+            }
+            w-full
+            ${
+              isLastTwoItems
+                ? 'lg:absolute lg:left-full lg:top-0 lg:ml-2 lg:w-[320px]'
+                : 'lg:absolute lg:right-full lg:top-0 lg:ml-2 lg:w-[320px]'
+            }`}
+                    >
+                      {item.submenu.map((subItem, subIndex) => (
+                        <NavItem
+                          key={subIndex}
+                          Icon={subItem.Icon}
+                          text={subItem.label}
+                          otherClassName="!py-2 !px-0 !text-base !font-medium"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </SheetContent>
+        </Sheet>
+
+        <h5 className="text-center text-2xl font-bold w-full overflow-hidden whitespace-nowrap">
+          الرئيسية
+        </h5>
+        <MdOutlineShoppingCart className="text-3xl cursor-pointer text-daleel-primary" />
+      </Container>
+    </header>
+  );
+};
+
+export default MobileHeader;

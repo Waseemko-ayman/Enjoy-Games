@@ -1,6 +1,6 @@
 import Input from '@/components/atomic/Input';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '../Container';
 import { FiUser } from 'react-icons/fi';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import { IoSearch } from 'react-icons/io5';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 
 const Header = () => {
+  const [productsCount] = useState(0);
   return (
     <header className="bg-white" dir="ltr">
       <Container>
@@ -36,21 +37,25 @@ const Header = () => {
 
           {/* Icons */}
           <div className="flex items-center gap-5">
-            <Link href="#">
+            <Link href="#" className="relative">
               <MdOutlineShoppingCart className="w-9 h-9 text-[var(--daleel-primary-deep)] cursor-pointer" />
+              {productsCount > 0 && (
+                <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-[12px] w-4 h-4 rounded-[50%]">
+                  <span>{productsCount}</span>
+                </div>
+              )}
             </Link>
             <Link href="#">
               <FiUser className="w-9 h-9 text-[var(--daleel-primary-deep)] cursor-pointer" />
             </Link>
           </div>
 
-          <form className="flex-1 flex items-center justify-between gap-0.5 px-3 text-[var(--daleel-primary-deep)] bg-[var(--daleel-glass-lavender)] rounded-4xl">
-            <IoSearch className="cursor-pointer text-2xl" />
+          <form className="flex-1">
             <Input
               type="text"
               inputName="search"
               placeholder="إبحث عن بطاقة وعروض"
-              otherClassName="flex-1"
+              Icon={IoSearch}
             />
           </form>
 
