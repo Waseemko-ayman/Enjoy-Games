@@ -6,7 +6,7 @@ import React from 'react';
 
 const EnjoyWinWin = () => {
   return (
-    <Layer otherClassName="bg-[var(--daleel-glass-lavender)]">
+    <Layer otherClassName="bg-[var(--enjoy-glass-lavender)]">
       <Container otherClassName="py-[70px]">
         <h2 className="text-3xl font-semibold mb-6 max-sm:text-center">
           الكل رابح مع إنجوي قيمز

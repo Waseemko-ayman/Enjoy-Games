@@ -2,32 +2,32 @@
 @import 'tw-animate-css';
 
 :root {
-  --daleel-primary: #7338f0;
-  --daleel-primary-dark: #6d28d9;
-  --daleel-primary-light: #8f5ff5;
-  --daleel-secondary: #ef993a;
-  --daleel-secondary-light: #f4ae6a;
-  --daleel-lime-yellow: #cbff2e;
-  --daleel-primary-deep: #090f30;
-  --daleel-primary-deep-light: #1a235c;
-  --daleel-accent: #ec4899;
-  --daleel-success: #10b981;
-  --daleel-error: #ef4444;
-  --daleel-glass: #dde0ff;
-  --daleel-glass-lavender: #dde0ff4c;
-  --daleel-gray-light: #dde0ff66;
-  --daleel-gray-50: #f9fafb;
-  --daleel-gray-100: #f3f4f6;
-  --daleel-gray-200: #e5e7eb;
-  --daleel-gray-300: #d1d5db;
-  --daleel-gray-400: #9ca3af;
-  --daleel-gray-500: #6b7280;
-  --daleel-gray-600: #4b5563;
-  --daleel-gray-650: #53576e;
-  --daleel-gray-675: #848798;
-  --daleel-gray-700: #374151;
-  --daleel-gray-800: #1f2937;
-  --daleel-gray-900: #111827;
+  --enjoy-primary: #7338f0;
+  --enjoy-primary-dark: #6d28d9;
+  --enjoy-primary-light: #8f5ff5;
+  --enjoy-secondary: #ef993a;
+  --enjoy-secondary-light: #f4ae6a;
+  --enjoy-lime-yellow: #cbff2e;
+  --enjoy-primary-deep: #090f30;
+  --enjoy-primary-deep-light: #1a235c;
+  --enjoy-accent: #ec4899;
+  --enjoy-success: #10b981;
+  --enjoy-error: #ef4444;
+  --enjoy-glass: #dde0ff;
+  --enjoy-glass-lavender: #dde0ff4c;
+  --enjoy-gray-light: #dde0ff66;
+  --enjoy-gray-50: #f9fafb;
+  --enjoy-gray-100: #f3f4f6;
+  --enjoy-gray-200: #e5e7eb;
+  --enjoy-gray-300: #d1d5db;
+  --enjoy-gray-400: #9ca3af;
+  --enjoy-gray-500: #6b7280;
+  --enjoy-gray-600: #4b5563;
+  --enjoy-gray-650: #53576e;
+  --enjoy-gray-675: #848798;
+  --enjoy-gray-700: #374151;
+  --enjoy-gray-800: #1f2937;
+  --enjoy-gray-900: #111827;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -66,70 +66,70 @@
   body {
     font-family: 'Inter', sans-serif;
     /* font-family: "IBM Plex Sans Arabic"; */
-    background: var(--daleel-gray-50);
-    color: var(--daleel-primary-deep);
+    background: var(--enjoy-gray-50);
+    color: var(--enjoy-primary-deep);
   }
 }
 
 @layer utilities {
-  .text-daleel-primary {
-    color: var(--daleel-primary);
+  .text-enjoy-primary {
+    color: var(--enjoy-primary);
   }
 
-  .text-daleel-primary-deep {
-    color: var(--daleel-primary-deep);
+  .text-enjoy-primary-deep {
+    color: var(--enjoy-primary-deep);
   }
 
-  .bg-daleel-primary {
-    background-color: var(--daleel-primary);
+  .bg-enjoy-primary {
+    background-color: var(--enjoy-primary);
   }
 
-  .bg-daleel-secondary {
-    background-color: var(--daleel-secondary);
+  .bg-enjoy-secondary {
+    background-color: var(--enjoy-secondary);
   }
 
-  .bg-daleel-primary-deep {
-    background-color: var(--daleel-primary-deep);
+  .bg-enjoy-primary-deep {
+    background-color: var(--enjoy-primary-deep);
   }
 
-  .bg-daleel-glass {
-    background-color: var(--daleel-glass);
+  .bg-enjoy-glass {
+    background-color: var(--enjoy-glass);
   }
 
-  .bg-daleel-gray-light {
-    background-color: var(--daleel-gray-light);
+  .bg-enjoy-gray-light {
+    background-color: var(--enjoy-gray-light);
   }
 
-  .border-daleel-primary {
-    border-color: var(--daleel-primary);
+  .border-enjoy-primary {
+    border-color: var(--enjoy-primary);
   }
 
-  .hover\:text-daleel-primary:hover {
-    color: var(--daleel-primary);
+  .hover\:text-enjoy-primary:hover {
+    color: var(--enjoy-primary);
   }
 
-  .hover\:text-daleel-primary-deep:hover {
-    color: var(--daleel-primary-deep);
+  .hover\:text-enjoy-primary-deep:hover {
+    color: var(--enjoy-primary-deep);
   }
 
-  .hover\:bg-daleel-primary-dark:hover {
-    background-color: var(--daleel-primary-dark);
+  .hover\:bg-enjoy-primary-dark:hover {
+    background-color: var(--enjoy-primary-dark);
   }
 
-  .hover\:bg-daleel-primary-light:hover {
-    background-color: var(--daleel-primary-light);
+  .hover\:bg-enjoy-primary-light:hover {
+    background-color: var(--enjoy-primary-light);
   }
 
-  .hover\:bg-daleel-secondary-light:hover {
-    background-color: var(--daleel-secondary-light);
+  .hover\:bg-enjoy-secondary-light:hover {
+    background-color: var(--enjoy-secondary-light);
   }
 
-  .hover\:bg-daleel-primary-deep-light:hover {
-    background-color: var(--daleel-primary-deep-light);
+  .hover\:bg-enjoy-primary-deep-light:hover {
+    background-color: var(--enjoy-primary-deep-light);
   }
 
-  .hover\:bg-daleel-gray-700:hover {
-    background-color: var(--daleel-gray-700);
+  .hover\:bg-enjoy-gray-700:hover {
+    background-color: var(--enjoy-gray-700);
   }
 
   .shadow-custom {

@@ -16,7 +16,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ label, email, Icon }) => {
         <Icon className="text-gray-900 text-xl relative z-10 group-hover:-rotate-[20deg] transition-all duration-400" />
       </div>
       <div>
-        <h5 className="text-base text-[var(--daleel-gray-675)] font-bold">
+        <h5 className="text-base text-[var(--enjoy-gray-675)] font-bold">
           {label}
         </h5>
         <p className="text-[15px] font-bold">{email}</p>

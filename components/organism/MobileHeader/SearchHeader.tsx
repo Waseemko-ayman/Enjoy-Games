@@ -5,7 +5,7 @@ import { IoSearch } from 'react-icons/io5';
 
 const SearchHeader = () => {
   return (
-    <div className="py-2 bg-daleel-glass">
+    <div className="py-2 bg-enjoy-glass">
       <Container>
         <form>
           <Input

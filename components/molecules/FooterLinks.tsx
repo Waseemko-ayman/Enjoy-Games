@@ -48,7 +48,7 @@ const FooterLinks = ({
                   otherClassName ? otherClassName : ''
                 } ${
                   listName !== 'socialMedia'
-                    ? 'hover:pr-2 hover:bg-daleel-gray-700 transition-all duration-400 w-[150px]'
+                    ? 'hover:pr-2 hover:bg-enjoy-gray-700 transition-all duration-400 w-[150px]'
                     : ''
                 }`}
               >
@@ -56,7 +56,7 @@ const FooterLinks = ({
                   {/* By type guard To check if an item is of a type that contains icon or text */}
                   {'icon' in item ? (
                     <div className="flex items-center justify-center bg-white rounded-sm p-2 cursor-pointer">
-                      <item.icon className="text-daleel-primary-deep group-hover:text-[var(--daleel-primary)] transition-all duration-300" />
+                      <item.icon className="text-enjoy-primary-deep group-hover:text-[var(--enjoy-primary)] transition-all duration-300" />
                     </div>
                   ) : (
                     item.text

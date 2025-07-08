@@ -21,10 +21,10 @@ const RewardCard = ({
   return (
     <div className="flex items-end gap-4 max-sm:flex-col max-sm:items-center max-sm:justify-center max-sm:text-center">
       <div className="mt-10 max-sm:order-2">
-        <h3 className="text-3xl font-bold text-daleel-primary mb-3.5">
+        <h3 className="text-3xl font-bold text-enjoy-primary mb-3.5">
           {title}
         </h3>
-        <p className="text-base text-[var(--daleel-gray-675)] font-medium mb-4">
+        <p className="text-base text-[var(--enjoy-gray-675)] font-medium mb-4">
           {description}
         </p>
         <Button

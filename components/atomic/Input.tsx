@@ -54,7 +54,7 @@ const Input = ({
     <div
       className={`flex items-center px-3 ${
         variant === 'primary'
-          ? 'flex-row rounded-4xl bg-[var(--daleel-glass-lavender)]'
+          ? 'flex-row rounded-4xl bg-[var(--enjoy-glass-lavender)]'
           : 'flex-row-reverse rounded-sm bg-white'
       } ${otherClassNameContainer}`}
     >

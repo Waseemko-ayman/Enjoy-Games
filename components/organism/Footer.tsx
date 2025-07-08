@@ -7,7 +7,7 @@ import FooterBanner from './FooterBanner';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-daleel-primary-deep mt-40 md:mt-32">
+    <footer className="relative bg-enjoy-primary-deep mt-40 md:mt-32">
       <Container otherClassName="relative">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-6xl px-4">
           <HelpSection />

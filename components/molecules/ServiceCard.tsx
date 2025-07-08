@@ -15,8 +15,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   description,
 }) => {
   return (
-    <div className="flex gap-7 bg-[var(--daleel-glass-lavender)] rounded-[20px] py-5 px-3">
-      <div className="flex items-center justify-between bg-daleel-primary rounded-sm p-2 h-fit">
+    <div className="flex gap-7 bg-[var(--enjoy-glass-lavender)] rounded-[20px] py-5 px-3">
+      <div className="flex items-center justify-between bg-enjoy-primary rounded-sm p-2 h-fit">
         <Image
           src={`/assets/${image}.GIF`}
           alt={imgAlt}
@@ -26,7 +26,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       </div>
       <div>
         <h4 className="text-lg mb-1 font-semibold">{title}</h4>
-        <p className="text-base font-medium text-[var(--daleel-gray-650)]">
+        <p className="text-base font-medium text-[var(--enjoy-gray-650)]">
           {description}
         </p>
       </div>

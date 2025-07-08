@@ -8,7 +8,7 @@ import { PiShoppingCartLight } from 'react-icons/pi';
 const RedeemPoints = () => {
   return (
     <Layer>
-      <div className="bg-[var(--daleel-secondary-light)] rounded-[20px] overflow-hidden px-10 pt-5 pb-10">
+      <div className="bg-[var(--enjoy-secondary-light)] rounded-[20px] overflow-hidden px-10 pt-5 pb-10">
         <div className="flex items-center justify-between gap-1">
           <h2 className="text-xl px-3 lg:px-0 font-semibold my-3 inline-block">
             استبدل نقاطك

@@ -15,7 +15,7 @@ const Header = () => {
       <Container>
         <div className="flex items-center justify-between gap-10">
           {/* Language and Country */}
-          <div className="flex items-center rounded-full py-2.5 px-4 border border-gray-300 overflow-hidden text-base font-semibold text-[var(--daleel-primary-deep)]">
+          <div className="flex items-center rounded-full py-2.5 px-4 border border-gray-300 overflow-hidden text-base font-semibold text-[var(--enjoy-primary-deep)]">
             <button className="cursor-pointer transition-opacity hover:opacity-70 text-sm">
               English
             </button>
@@ -38,7 +38,7 @@ const Header = () => {
           {/* Icons */}
           <div className="flex items-center gap-5">
             <Link href="#" className="relative">
-              <MdOutlineShoppingCart className="w-9 h-9 text-[var(--daleel-primary-deep)] cursor-pointer" />
+              <MdOutlineShoppingCart className="w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer" />
               {productsCount > 0 && (
                 <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-[12px] w-4 h-4 rounded-[50%]">
                   <span>{productsCount}</span>
@@ -46,7 +46,7 @@ const Header = () => {
               )}
             </Link>
             <Link href="#">
-              <FiUser className="w-9 h-9 text-[var(--daleel-primary-deep)] cursor-pointer" />
+              <FiUser className="w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer" />
             </Link>
           </div>
 

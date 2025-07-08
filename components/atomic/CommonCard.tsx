@@ -66,7 +66,7 @@ const CommonCard: React.FC<CommonCardProps> = ({
         className={`${
           variant === 'row'
             ? 'font-bold mt-3.5 text-xl'
-            : 'font-bold mt-3.5 inline-block mb-1.5 text-base text-[var(--daleel-gray-650)] hover:text-[var(--daleel-gray-300)] transition-all duration-600'
+            : 'font-bold mt-3.5 inline-block mb-1.5 text-base text-[var(--enjoy-gray-650)] hover:text-[var(--enjoy-gray-300)] transition-all duration-600'
         }`}
       >
         {title}
@@ -101,7 +101,7 @@ const CommonCard: React.FC<CommonCardProps> = ({
               </p>
             </div>
             <div
-              className={`text-[var(--daleel-secondary))] ${
+              className={`text-[var(--enjoy-secondary))] ${
                 variant === 'row' ? 'text-sm order-2' : 'text-2xl order-1'
               }`}
             >

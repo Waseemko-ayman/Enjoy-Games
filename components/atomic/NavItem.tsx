@@ -32,12 +32,12 @@ const NavItem: React.FC<NavItemProps> = ({
         rounded-md
         transition cursor-pointer
         px-[36px] py-[19px]
-        hover:text-[var(--daleel-primary)]
+        hover:text-[var(--enjoy-primary)]
         max-[991px]:!py-3
         max-[991px]:!pl-0
         max-[991px]:!pr-1
         max-[991px]:hover:bg-[#f4f4ff]
-        max-[991px]:hover:!text-[var(--daleel-primary)]
+        max-[991px]:hover:!text-[var(--enjoy-primary)]
         max-[991px]:rounded-lg
 
         ${otherClassName}
@@ -54,7 +54,7 @@ const NavItem: React.FC<NavItemProps> = ({
           />
         ) : (
           <Icon
-            className={`text-xl text-[var(--daleel-primary)] max-[991px]:text-white ${otherClassNameIcon}`}
+            className={`text-xl text-[var(--enjoy-primary)] max-[991px]:text-white ${otherClassNameIcon}`}
           />
         )}
         <span>{text}</span>

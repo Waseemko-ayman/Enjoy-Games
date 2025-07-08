@@ -25,11 +25,11 @@ const Button = ({
     <button
       className={`flex items-center justify-center gap-1 text-white cursor-pointer text-lg outline-none font-semibold transition-all duration-600 ${borderRadius} ${
         variant === 'primary'
-          ? 'bg-daleel-primary hover:bg-daleel-primary-light'
+          ? 'bg-enjoy-primary hover:bg-enjoy-primary-light'
           : variant === 'secondary'
-          ? 'bg-daleel-secondary hover:bg-daleel-secondary-light'
+          ? 'bg-enjoy-secondary hover:bg-enjoy-secondary-light'
           : variant === 'third'
-          ? 'bg-daleel-primary-deep hover:bg-daleel-primary-deep-light'
+          ? 'bg-enjoy-primary-deep hover:bg-enjoy-primary-deep-light'
           : ''
       } ${otherClassName}`}
       onClick={handleClick}

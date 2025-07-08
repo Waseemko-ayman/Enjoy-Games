@@ -10,11 +10,11 @@ const MobileHeader = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <header className="h-[60px] bg-daleel-gray-light flex items-center">
+    <header className="h-[60px] bg-enjoy-gray-light flex items-center">
       <Container otherClassName="w-full flex items-center justify-between gap-4">
         <Sheet>
           <SheetTrigger>
-            <PiSquaresFourLight className="text-3xl cursor-pointer text-daleel-primary" />
+            <PiSquaresFourLight className="text-3xl cursor-pointer text-enjoy-primary" />
           </SheetTrigger>
           <SheetContent className="pt-20">
             <h4 className="text-white text-2xl font-semibold mb-5">
@@ -71,7 +71,7 @@ const MobileHeader = () => {
         <h5 className="text-center text-2xl font-bold w-full overflow-hidden whitespace-nowrap">
           الرئيسية
         </h5>
-        <MdOutlineShoppingCart className="text-3xl cursor-pointer text-daleel-primary" />
+        <MdOutlineShoppingCart className="text-3xl cursor-pointer text-enjoy-primary" />
       </Container>
     </header>
   );
