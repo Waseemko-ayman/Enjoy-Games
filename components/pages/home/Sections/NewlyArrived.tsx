@@ -15,9 +15,9 @@ const NewlyArrived = () => {
             imgSrc={`/assets/newly-arrived/${card.src}.webp`}
             storeFlagImg={`/assets/flags/${card.storeFlagImgSrc}.png`}
             description
+            showBtn={true}
             btnVariant="primary"
             btnText="اشترِ الآن"
-            otherClassNameBtn="p-3"
             {...card}
           />
         ))}
