@@ -20,6 +20,7 @@ interface CommonCardProps {
   cardLinkPath?: string;
   ratings?: string;
   tall?: boolean;
+  showBtn?: boolean;
   btnVariant?: 'primary' | 'secondary';
   btnText?: string;
   otherClassNameBtn?: string;
@@ -28,8 +29,6 @@ interface CommonCardProps {
 
 const CommonCard: React.FC<CommonCardProps> = ({
   title,
-  titleIsLink = false,
-  productLink = '#',
   description,
   imgSrc,
   imgAlt,
@@ -41,6 +40,7 @@ const CommonCard: React.FC<CommonCardProps> = ({
   cardLinkPath = '#',
   ratings,
   tall = false,
+  showBtn = false,
   btnVariant = 'primary',
   btnText,
   otherClassNameBtn,
@@ -62,18 +62,15 @@ const CommonCard: React.FC<CommonCardProps> = ({
           className="absolute inset-0 object-cover rounded-[6px]"
         />
       </div>
-
-      {titleIsLink ? (
-        <Link
-          href={productLink}
-          className="font-bold mt-3.5 inline-block mb-1.5 text-base text-[var(--daleel-gray-650)] hover:text-[var(--daleel-gray-300)] transition-all duration-600"
-        >
-          {title}
-        </Link>
-      ) : (
-        <h3 className="font-bold mt-3.5 text-xl">{title}</h3>
-      )}
-
+      <h3
+        className={`${
+          variant === 'row'
+            ? 'font-bold mt-3.5 text-xl'
+            : 'font-bold mt-3.5 inline-block mb-1.5 text-base text-[var(--daleel-gray-650)] hover:text-[var(--daleel-gray-300)] transition-all duration-600'
+        }`}
+      >
+        {title}
+      </h3>
       {description && (
         <div className="mb-3 text-sm">
           {price && <h4 className="font-semibold mb-2 text-base">${price}</h4>}
@@ -126,11 +123,11 @@ const CommonCard: React.FC<CommonCardProps> = ({
         </div>
       )}
 
-      {btnVariant && (
+      {showBtn && (
         <Button
           variant={btnVariant}
           Icon={Icon}
-          otherClassName={otherClassNameBtn}
+          otherClassName={`${otherClassNameBtn} w-full p-2`}
         >
           {btnText}
         </Button>
