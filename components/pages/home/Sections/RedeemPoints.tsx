@@ -26,12 +26,11 @@ const RedeemPoints = () => {
               imgSrc={`/assets/newly-arrived/${card.src}.webp`}
               storeFlagImg={`/assets/flags/${card.storeFlagImgSrc}.png`}
               description
-              titleIsLink
               variant="column"
+              showBtn
               btnVariant="secondary"
               btnText="إحصل عليها الآن"
               Icon={PiShoppingCartLight}
-              otherClassNameBtn="p-2"
               {...card}
             />
           ))}
