@@ -1,17 +1,8 @@
+import { NavItemProps } from '@/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
-
-interface NavItemProps {
-  Icon: React.ElementType | string;
-  text: string;
-  linkPath?: string;
-  otherClassName?: string;
-  otherClassNameIcon?: string;
-  showArrow?: boolean;
-  onClick?: () => void;
-}
 
 const NavItem: React.FC<NavItemProps> = ({
   Icon,

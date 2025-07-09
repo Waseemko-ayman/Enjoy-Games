@@ -1,19 +1,6 @@
 import React from 'react';
 import NavItem from '@/components/atomic/NavItem';
-
-interface SubMenuItem {
-  label: string;
-  Icon: React.ElementType | string;
-  submenu?: SubMenuItem[];
-  path?: string;
-}
-
-interface DropdownNavItemProps {
-  text: string;
-  Icon: React.ElementType | string;
-  submenu?: SubMenuItem[];
-  isMainMenu?: boolean;
-}
+import { DropdownNavItemProps } from '@/interfaces';
 
 const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
   text,

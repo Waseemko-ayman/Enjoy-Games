@@ -4,28 +4,7 @@ import React from 'react';
 import Avatar from './Avatar';
 import { PiStarFourFill } from 'react-icons/pi';
 import Button from './Button';
-
-interface CommonCardProps {
-  title: string;
-  titleIsLink?: boolean;
-  productLink?: string;
-  description?: boolean;
-  imgSrc: string;
-  imgAlt: string;
-  imgTitle: string;
-  price?: number;
-  storeName?: string;
-  storeFlagImg?: string;
-  variant?: 'row' | 'column';
-  cardLinkPath?: string;
-  ratings?: string;
-  tall?: boolean;
-  showBtn?: boolean;
-  btnVariant?: 'primary' | 'secondary';
-  btnText?: string;
-  otherClassNameBtn?: string;
-  Icon?: React.ElementType;
-}
+import { CommonCardProps } from '@/interfaces';
 
 const CommonCard: React.FC<CommonCardProps> = ({
   title,

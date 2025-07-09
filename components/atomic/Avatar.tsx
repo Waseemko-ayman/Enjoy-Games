@@ -1,14 +1,6 @@
+import { ImageProps } from '@/interfaces';
 import Image from 'next/image';
 import React from 'react';
-
-interface ImageProps {
-  imgSrc: string;
-  imgAlt: string;
-  imgTitle: string;
-  width: number;
-  height: number;
-  otherClassName?: string;
-}
 
 const Avatar = ({
   imgSrc,

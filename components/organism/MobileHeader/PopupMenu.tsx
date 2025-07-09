@@ -3,7 +3,7 @@ import CountryDrawer from '@/components/molecules/CountryDrawer';
 import MenuCard from '@/components/molecules/MenuCard';
 import { countries, menuLists } from '@/data';
 import { PATHS } from '@/data/paths';
-import { PopupMenuProps } from '@/utils/type';
+import { PopupMenuProps } from '@/interfaces';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FaGlobe } from 'react-icons/fa6';

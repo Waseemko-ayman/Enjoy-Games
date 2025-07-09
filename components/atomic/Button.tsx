@@ -1,15 +1,5 @@
+import { ButtonProps } from '@/interfaces';
 import React from 'react';
-
-interface ButtonProps {
-  children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'third' | 'forth';
-  borderRadius?: string;
-  otherClassName?: string;
-  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  type?: 'submit' | 'button' | 'reset';
-  Icon?: React.ElementType;
-  iconPosition?: 'left' | 'right';
-}
 
 const Button = ({
   children,

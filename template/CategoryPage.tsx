@@ -6,17 +6,7 @@ import Link from 'next/link';
 import PageHeader from '@/components/molecules/PageHeader';
 import Layer from '@/components/atomic/Layer';
 import Container from '@/components/organism/Container';
-
-interface CardItem {
-  Icon: string;
-  label: string;
-  banner?: string;
-  href?: string;
-}
-
-interface CategoryPageProps {
-  cards: CardItem[];
-}
+import { CategoryPageProps } from '@/interfaces';
 
 const CategoryPage: FC<CategoryPageProps> = ({ cards }) => {
   return (

@@ -4,7 +4,7 @@ import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer';
 import { IoIosArrowBack } from 'react-icons/io';
 import Image from 'next/image';
 import { FiLogIn } from 'react-icons/fi';
-import { CountryDrawerProps } from '@/utils/type';
+import { CountryDrawerProps } from '@/interfaces';
 
 const CountryDrawer: React.FC<CountryDrawerProps> = ({
   countries,

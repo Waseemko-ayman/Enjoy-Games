@@ -4,13 +4,7 @@ import Link from 'next/link';
 import FooterTitle from '../atomic/FooterTitle';
 import { FOOTER_LINKS_DATA } from '@/data';
 import Image from 'next/image';
-
-interface FooterLinksProps {
-  secTitle: string;
-  listClassName?: string;
-  listName: 'followUs' | 'works' | 'works2' | 'shop_app' | 'socialMedia';
-  otherClassName?: string;
-}
+import { FooterLinksProps } from '@/interfaces';
 
 const FooterLinks = ({
   secTitle,

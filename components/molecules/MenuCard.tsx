@@ -1,13 +1,7 @@
+import { LinkItem } from '@/interfaces';
 import Link from 'next/link';
 import React from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
-
-interface LinkItem {
-  id: number;
-  title: string;
-  icon: React.ElementType;
-  link: string;
-}
 
 const MenuCard = ({ linksList }: { linksList: LinkItem[] }) => {
   return (

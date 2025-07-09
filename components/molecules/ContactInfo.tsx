@@ -1,11 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-
-interface ContactInfoProps {
-  label: string;
-  email: string;
-  Icon: React.ElementType;
-}
+import { ContactInfoProps } from '@/interfaces';
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ label, email, Icon }) => {
   return (

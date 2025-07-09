@@ -3,13 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
-
-interface BannerProps {
-  images: {
-    src: string;
-    alt: string;
-  }[];
-}
+import { BannerProps } from '@/interfaces';
 
 export default function Banner({ images }: BannerProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({

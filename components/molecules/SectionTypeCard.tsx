@@ -1,16 +1,7 @@
 import React from 'react';
 import Avatar from '../atomic/Avatar';
 import Link from 'next/link';
-
-interface SectionTypeCardProps {
-  path: string;
-  title: string;
-  imgSrc: string;
-  imgAlt: string;
-  imgTitle: string;
-  width: number;
-  height: number;
-}
+import { SectionTypeCardProps } from '@/interfaces';
 
 const SectionTypeCard: React.FC<SectionTypeCardProps> = ({
   path,
