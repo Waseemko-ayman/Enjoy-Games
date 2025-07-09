@@ -5,6 +5,7 @@ interface SubMenuItem {
   label: string;
   Icon: React.ElementType | string;
   submenu?: SubMenuItem[];
+  path?: string;
 }
 
 interface DropdownNavItemProps {
@@ -40,6 +41,7 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
                 text={item.label}
                 otherClassName="!px-2 !py-3 !text-base hover:bg-[#f4f4ff] rounded-lg text-lg"
                 showArrow={!!item.submenu}
+                linkPath={item.path}
               />
 
               {item.submenu && (

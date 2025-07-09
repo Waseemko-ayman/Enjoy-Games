@@ -75,6 +75,12 @@
   .text-enjoy-primary {
     color: var(--enjoy-primary);
   }
+  .text-enjoy-primary-dark {
+    color: var(--enjoy-primary-dark);
+  }
+  .text-enjoy-primary-light {
+    color: var(--enjoy-primary-light);
+  }
 
   .text-enjoy-primary-deep {
     color: var(--enjoy-primary-deep);
@@ -135,4 +141,8 @@
   .shadow-custom {
     box-shadow: 0 4px 18px 2px rgba(0, 0, 0, 0.08);
   }
+}
+
+a {
+  text-decoration: none;
 }
