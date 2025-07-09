@@ -4,32 +4,10 @@ import React from 'react';
 import Avatar from './Avatar';
 import { PiStarFourFill } from 'react-icons/pi';
 import Button from './Button';
-
-interface CommonCardProps {
-  title: string;
-  isLink?: boolean;
-  productLink?: string;
-  description?: boolean;
-  imgSrc: string;
-  imgAlt: string;
-  imgTitle: string;
-  price?: number;
-  storeName?: string;
-  storeFlagImg?: string;
-  variant?: 'row' | 'column';
-  cardLinkPath?: string;
-  ratings?: string;
-  tall?: boolean;
-  btnVariant?: 'primary' | 'secondary';
-  btnText?: string;
-  otherClassNameBtn?: string;
-  Icon?: React.ElementType;
-}
+import { CommonCardProps } from '@/interfaces';
 
 const CommonCard: React.FC<CommonCardProps> = ({
   title,
-  isLink = false,
-  productLink = '#',
   description,
   imgSrc,
   imgAlt,
@@ -41,6 +19,7 @@ const CommonCard: React.FC<CommonCardProps> = ({
   cardLinkPath = '#',
   ratings,
   tall = false,
+  showBtn = false,
   btnVariant = 'primary',
   btnText,
   otherClassNameBtn,
@@ -62,18 +41,15 @@ const CommonCard: React.FC<CommonCardProps> = ({
           className="absolute inset-0 object-cover rounded-[6px]"
         />
       </div>
-
-      {isLink ? (
-        <Link
-          href={productLink}
-          className="font-medium mt-2.5 mb-1.5 text-xl text-[var(--daleel-gray-50)]"
-        >
-          {title}
-        </Link>
-      ) : (
-        <h3 className="font-bold mt-3.5 text-xl">{title}</h3>
-      )}
-
+      <h3
+        className={`${
+          variant === 'row'
+            ? 'font-bold mt-3.5 text-xl'
+            : 'font-bold mt-3.5 inline-block mb-1.5 text-base text-[var(--enjoy-gray-650)] hover:text-[var(--enjoy-gray-300)] transition-all duration-600'
+        }`}
+      >
+        {title}
+      </h3>
       {description && (
         <div className="mb-3 text-sm">
           {price && <h4 className="font-semibold mb-2 text-base">${price}</h4>}
@@ -95,10 +71,16 @@ const CommonCard: React.FC<CommonCardProps> = ({
                 width={19}
                 height={19}
               />
-              <p className="text-sm font-bold">{storeName}</p>
+              <p
+                className={`${
+                  variant === 'row' ? 'text-sm' : 'text-base'
+                } font-bold`}
+              >
+                {storeName}
+              </p>
             </div>
             <div
-              className={`text-[var(--daleel-secondary-dark))] ${
+              className={`text-[var(--enjoy-secondary))] ${
                 variant === 'row' ? 'text-sm order-2' : 'text-2xl order-1'
               }`}
             >
@@ -120,11 +102,11 @@ const CommonCard: React.FC<CommonCardProps> = ({
         </div>
       )}
 
-      {btnVariant && (
+      {showBtn && (
         <Button
           variant={btnVariant}
           Icon={Icon}
-          otherClassName={otherClassNameBtn}
+          otherClassName={`${otherClassNameBtn} w-full p-2`}
         >
           {btnText}
         </Button>

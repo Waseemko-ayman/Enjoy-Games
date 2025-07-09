@@ -1,0 +1,51 @@
+import Image from 'next/image';
+import React from 'react';
+import Button from '../atomic/Button';
+import { FaArrowLeftLong } from 'react-icons/fa6';
+
+type RewardCardProps = {
+  title: string;
+  description: string;
+  image: string;
+  buttonText: string;
+  onClick?: () => void;
+};
+
+const RewardCard = ({
+  title,
+  description,
+  image,
+  buttonText,
+  onClick,
+}: RewardCardProps) => {
+  return (
+    <div className="flex items-end gap-4 max-sm:flex-col max-sm:items-center max-sm:justify-center max-sm:text-center">
+      <div className="mt-10 max-sm:order-2">
+        <h3 className="text-3xl font-bold text-enjoy-primary mb-3.5">
+          {title}
+        </h3>
+        <p className="text-base text-[var(--enjoy-gray-675)] font-medium mb-4">
+          {description}
+        </p>
+        <Button
+          variant="third"
+          handleClick={onClick}
+          Icon={FaArrowLeftLong}
+          otherClassName="py-2 px-5 gap-5 max-sm:mx-auto"
+          iconPosition="right"
+        >
+          {buttonText}
+        </Button>
+      </div>
+      <Image
+        src={image}
+        alt={title}
+        width={112}
+        height={112}
+        className="max-sm:order-1"
+      />
+    </div>
+  );
+};
+
+export default RewardCard;

@@ -1,71 +1,178 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
 
 :root {
-  --daleel-primary: #7338f0;
-  --daleel-primary-dark: #6d28d9;
-  --daleel-primary-light: #8f5ff5;
-  --daleel-secondary: #f4ae6a;
-  --daleel-secondary-dark: #ef993a;
-  --daleel-lime-yellow: #cbff2e;
-  --daleel-primary-deep: #090f30;
-  --daleel-accent: #ec4899;
-  --daleel-success: #10b981;
-  --daleel-error: #ef4444;
-  --daleel-glass-lavender: #dde0ff4c;
-  --daleel-gray-50: #f9fafb;
-  --daleel-gray-100: #f3f4f6;
-  --daleel-gray-200: #e5e7eb;
-  --daleel-gray-300: #d1d5db;
-  --daleel-gray-400: #9ca3af;
-  --daleel-gray-500: #6b7280;
-  --daleel-gray-600: #4b5563;
-  --daleel-gray-700: #374151;
-  --daleel-gray-800: #1f2937;
-  --daleel-gray-900: #111827;
+  --enjoy-primary: #7338f0;
+  --enjoy-primary-dark: #6d28d9;
+  --enjoy-primary-light: #8f5ff5;
+  --enjoy-secondary: #ef993a;
+  --enjoy-secondary-light: #f4ae6a;
+  --enjoy-lime-yellow: #cbff2e;
+  --enjoy-primary-deep: #090f30;
+  --enjoy-primary-deep-light: #1a235c;
+  --enjoy-accent: #ec4899;
+  --enjoy-success: #10b981;
+  --enjoy-error: #ef4444;
+  --enjoy-glass: #dde0ff;
+  --enjoy-glass-lavender: #dde0ff4c;
+  --enjoy-gray-light: #dde0ff66;
+  --enjoy-gray-50: #f9fafb;
+  --enjoy-gray-100: #f3f4f6;
+  --enjoy-gray-200: #e5e7eb;
+  --enjoy-gray-300: #d1d5db;
+  --enjoy-gray-400: #9ca3af;
+  --enjoy-gray-500: #6b7280;
+  --enjoy-gray-600: #4b5563;
+  --enjoy-gray-650: #53576e;
+  --enjoy-gray-675: #848798;
+  --enjoy-gray-700: #374151;
+  --enjoy-gray-800: #1f2937;
+  --enjoy-gray-900: #111827;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
-    background: var(--daleel-gray-50);
-    color: var(--daleel-primary-deep);
+    /* font-family: "IBM Plex Sans Arabic"; */
+    background: var(--enjoy-gray-50);
+    color: var(--enjoy-primary-deep);
   }
 }
 
 @layer utilities {
-  .text-daleel-primary {
-    color: var(--daleel-primary);
+  .text-enjoy-primary {
+    color: var(--enjoy-primary);
   }
 
-  .text-daleel-primary-deep {
-    color: var(--daleel-primary-deep);
+  .text-enjoy-primary-dark {
+    color: var(--enjoy-primary-dark);
   }
 
-  .bg-daleel-primary {
-    background-color: var(--daleel-primary);
+  .text-enjoy-primary-light {
+    color: var(--enjoy-primary-light);
   }
 
-  .bg-daleel-secondary {
-    background-color: var(--daleel-secondary);
+  .text-enjoy-primary-deep {
+    color: var(--enjoy-primary-deep);
   }
 
-  .border-daleel-primary {
-    border-color: var(--daleel-primary);
+  .text-enjoy-glass {
+    color: var(--enjoy-glass);
   }
 
-  .hover\:bg-daleel-primary-dark:hover {
-    background-color: var(--daleel-primary-dark);
+  .bg-enjoy-primary {
+    background-color: var(--enjoy-primary);
   }
 
-  .hover\:bg-daleel-primary-light:hover {
-    background-color: var(--daleel-primary-light);
+  .bg-enjoy-secondary {
+    background-color: var(--enjoy-secondary);
   }
 
-  .hover\:bg-daleel-secondary-dark:hover {
-    background-color: var(--daleel-secondary-dark);
+  .bg-enjoy-primary-deep {
+    background-color: var(--enjoy-primary-deep);
+  }
+
+  .bg-enjoy-glass {
+    background-color: var(--enjoy-glass);
+  }
+
+  .bg-enjoy-gray-light {
+    background-color: var(--enjoy-gray-light);
+  }
+
+  .border-enjoy-primary {
+    border-color: var(--enjoy-primary);
+  }
+
+  .border-enjoy-glass {
+    border-color: var(--enjoy-glass);
+  }
+
+  .hover\:text-enjoy-primary:hover {
+    color: var(--enjoy-primary);
+  }
+
+  .hover\:text-enjoy-primary-deep:hover {
+    color: var(--enjoy-primary-deep);
+  }
+
+  .hover\:bg-enjoy-primary-dark:hover {
+    background-color: var(--enjoy-primary-dark);
+  }
+
+  .hover\:bg-enjoy-primary-light:hover {
+    background-color: var(--enjoy-primary-light);
+  }
+
+  .hover\:bg-enjoy-secondary-light:hover {
+    background-color: var(--enjoy-secondary-light);
+  }
+
+  .hover\:bg-enjoy-primary-deep-light:hover {
+    background-color: var(--enjoy-primary-deep-light);
+  }
+
+  .hover\:bg-enjoy-gray-light:hover {
+    background-color: var(--enjoy-gray-light);
+  }
+
+  .hover\:bg-enjoy-gray-700:hover {
+    background-color: var(--enjoy-gray-700);
   }
 
   .shadow-custom {
     box-shadow: 0 4px 18px 2px rgba(0, 0, 0, 0.08);
   }
+
+  .shadow-header {
+    box-shadow: 0 2px 3px 0 rgba(210, 210, 228, 0.09);
+  }
+}
+
+body {
+  background: #f8f9ff;
+}
+
+a {
+  text-decoration: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

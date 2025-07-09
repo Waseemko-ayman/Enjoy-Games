@@ -1,10 +1,6 @@
 import React from 'react';
 import Layer from './Layer';
-
-interface SectionComponentProps {
-  title: string;
-  children: React.ReactNode;
-}
+import { SectionComponentProps } from '@/interfaces';
 
 const SectionComponent: React.FC<SectionComponentProps> = ({
   title,
