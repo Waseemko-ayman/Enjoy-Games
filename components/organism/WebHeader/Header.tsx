@@ -4,13 +4,17 @@ import React, { useState } from 'react';
 import Container from '../Container';
 import { FiUser } from 'react-icons/fi';
 import Link from 'next/link';
-import { IoIosArrowBack } from 'react-icons/io';
 import { IoSearch } from 'react-icons/io5';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { PATHS } from '@/data/paths';
+import { countries } from '@/data';
+import CountryDialog from '@/components/molecules/CountryDialog';
 
 const Header = () => {
+  const [selectedCountry, setSelectedCountry] = useState(countries[0]);
+  const [open, setOpen] = useState(false);
   const [productsCount] = useState(0);
+
   return (
     <header className="bg-white" dir="ltr">
       <Container>
@@ -21,19 +25,13 @@ const Header = () => {
               English
             </button>
             <span className="h-6 w-px bg-gray-200 mx-2"></span>
-            <div className="flex items-center gap-1 cursor-pointer transition-opacity hover:opacity-70">
-              <div className="flex items-center gap-1">
-                <IoIosArrowBack className="text-lg" />
-                <span>السعودية - ريال سعودي</span>
-              </div>
-              <Image
-                src="/saudi-flag.png"
-                alt="Saudi Flag"
-                className="w-6 h-4 object-cover"
-                width={80}
-                height={80}
-              />
-            </div>
+            <CountryDialog
+              countries={countries}
+              selectedCountry={selectedCountry}
+              setSelectedCountry={setSelectedCountry}
+              open={open}
+              setOpen={setOpen}
+            />
           </div>
 
           {/* Icons */}

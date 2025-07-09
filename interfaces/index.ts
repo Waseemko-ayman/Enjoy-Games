@@ -165,3 +165,10 @@ export interface CategoryCardProps {
   banner?: string;
   label: string;
 }
+
+export interface CountrySelectorContentProps {
+  countries: Country[];
+  selectedCountry: Country;
+  setSelectedCountry: (country: Country) => void;
+  closeHandler: () => void;
+}
