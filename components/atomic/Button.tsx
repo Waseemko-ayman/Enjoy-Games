@@ -2,7 +2,7 @@ import React from 'react';
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant: 'primary' | 'secondary' | 'third';
+  variant?: 'primary' | 'secondary' | 'third' | 'forth';
   borderRadius?: string;
   otherClassName?: string;
   handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -13,7 +13,7 @@ interface ButtonProps {
 
 const Button = ({
   children,
-  variant,
+  variant = 'primary',
   borderRadius = 'rounded-4xl',
   otherClassName = '',
   type = 'submit',
@@ -23,13 +23,15 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`flex items-center justify-center gap-1 text-white cursor-pointer text-lg outline-none font-semibold transition-all duration-600 ${borderRadius} ${
+      className={`flex items-center justify-center gap-2 text-white cursor-pointer text-lg outline-none font-semibold transition-all duration-600 ${borderRadius} ${
         variant === 'primary'
           ? 'bg-enjoy-primary hover:bg-enjoy-primary-light'
           : variant === 'secondary'
           ? 'bg-enjoy-secondary hover:bg-enjoy-secondary-light'
           : variant === 'third'
           ? 'bg-enjoy-primary-deep hover:bg-enjoy-primary-deep-light'
+          : variant === 'forth'
+          ? 'bg-enjoy-glass hover:bg-enjoy-gray-light text-enjoy-primary-deep'
           : ''
       } ${otherClassName}`}
       onClick={handleClick}
