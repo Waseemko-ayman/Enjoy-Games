@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import Container from '../Container';
 import { PiSquaresFourLight } from 'react-icons/pi';
 import { MdOutlineShoppingCart } from 'react-icons/md';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import NavItem from '@/components/atomic/NavItem';
 import { subMenuItems } from '@/data';
 
@@ -17,6 +23,10 @@ const MobileHeader = () => {
             <PiSquaresFourLight className="text-3xl cursor-pointer text-enjoy-primary" />
           </SheetTrigger>
           <SheetContent className="pt-20">
+            <SheetTitle className="sr-only">أقسام البطاقات</SheetTitle>
+            <SheetDescription className="sr-only">
+              هنا قائمة بأقسام البطاقات المتوفرة للتصفح والاختيار.
+            </SheetDescription>
             <h4 className="text-white text-2xl font-semibold mb-5">
               أقسام البطاقات
             </h4>
