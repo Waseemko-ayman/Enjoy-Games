@@ -2,12 +2,14 @@ import {
   FaFacebook,
   FaInstagram,
   FaLinkedin,
+  FaRegHeart,
   FaTwitter,
 } from 'react-icons/fa6';
-import { IoGameControllerOutline } from 'react-icons/io5';
-import { MdMoreHoriz, MdRestaurant, MdSignalCellularAlt } from 'react-icons/md';
+import { IoArrowRedoOutline, IoGameControllerOutline } from 'react-icons/io5';
+import { MdMoreHoriz, MdOutlineEmail, MdRestaurant, MdSignalCellularAlt } from 'react-icons/md';
 import { PiShoppingCartLight, PiSquaresFourLight } from 'react-icons/pi';
 import { PATHS } from './paths';
+import { IoMdHelpCircleOutline } from 'react-icons/io';
 
 export const digitalStores = [
   {
@@ -1288,3 +1290,51 @@ export const FOOTER_LINKS_DATA = {
     },
   ],
 };
+
+export const menuLists = [
+  {
+    id: 1,
+    linksItem: [
+      {
+        id: 1,
+        title: 'دليل إنجوي',
+        icon: IoArrowRedoOutline,
+        link: '#',
+      },
+      {
+        id: 2,
+        title: 'الإهتمامات',
+        icon: FaRegHeart,
+        link: '#',
+      },
+    ],
+  },
+  {
+    id: 2,
+    linksItem: [
+      {
+        id: 1,
+        title: 'التحدث مع خدمة العملاء',
+        icon: MdOutlineEmail,
+        link: '#',
+      },
+      {
+        id: 2,
+        title: 'الأسئلة الشائعة',
+        icon: IoMdHelpCircleOutline,
+        link: '#',
+      },
+    ],
+  },
+];
+
+export const countries = [
+  { name: 'السعودية', currency: 'الريال السعودي', img: 'saudi-arabia' },
+  { name: 'الإمارات', currency: 'درهم إماراتي', img: 'united-arab-emirates' },
+  { name: 'الكويت', currency: 'الدينار الكويتي', img: 'kuwait' },
+  { name: 'قطر', currency: 'الريال القطري', img: 'qatar' },
+  { name: 'البحرين', currency: 'الدينار البحريني', img: 'bahrain' },
+  { name: 'عمان', currency: 'الدينار العماني', img: 'oman' },
+  { name: 'العراق', currency: 'الدينار العراقي', img: 'iraq' },
+  { name: 'الأردن', currency: 'الدينار الأردني', img: 'jordan' },
+];

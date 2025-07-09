@@ -1,3 +1,7 @@
+import { FiUser } from 'react-icons/fi';
+import { IoHomeOutline, IoSearch } from 'react-icons/io5';
+import { MdOutlineAssignment } from 'react-icons/md';
+
 export const PATHS = {
   HOME: { name: 'الرئيسية', link: '/' },
   APP_STORES: { name: 'بطاقات المتاجر الرقمية', link: '/category/app-stores' },
@@ -11,4 +15,12 @@ export const PATHS = {
   SHOP_CARDS: { name: 'بطاقات تسوّق متنوعة', link: '/category/shop-cards' },
   LOGIN: 'login',
   SIGN_UP: '/signup',
+  STORE: '/store',
 };
+
+export const navBarLinks = [
+  { id: 1, icon: IoHomeOutline, title: 'الرئيسية', link: PATHS.HOME.link },
+  { id: 2, icon: IoSearch, title: 'المتجر', link: PATHS.STORE },
+  { id: 3, icon: MdOutlineAssignment, title: 'طلباتي', link: '#' },
+  { id: 4, icon: FiUser, title: 'سجّل الآن', link: PATHS.LOGIN },
+];

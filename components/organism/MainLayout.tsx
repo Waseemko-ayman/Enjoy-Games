@@ -6,6 +6,7 @@ import Navbar from './WebHeader/Navbar';
 import Footer from './Footer';
 import MobileHeader from './MobileHeader/Header';
 import SearchHeader from './MobileHeader/SearchHeader';
+import MobileNavbar from './MobileHeader/Navbar';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -29,12 +30,13 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         <>
           <MobileHeader />
           <SearchHeader />
+          <MobileNavbar />
         </>
       ) : (
-        <>
+        <div className="shadow-header">
           <Header />
           <Navbar />
-        </>
+        </div>
       )}
       {children}
       <Footer />

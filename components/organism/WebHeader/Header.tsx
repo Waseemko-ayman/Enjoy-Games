@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { IoIosArrowBack } from 'react-icons/io';
 import { IoSearch } from 'react-icons/io5';
 import { MdOutlineShoppingCart } from 'react-icons/md';
+import { PATHS } from '@/data/paths';
 
 const Header = () => {
   const [productsCount] = useState(0);
@@ -60,13 +61,15 @@ const Header = () => {
           </form>
 
           {/* Right side - Logo and Icons */}
-          <Image
-            src="/assets/logo.png"
-            alt="Enjoy Games"
-            title="Enjoy Games"
-            width={100}
-            height={100}
-          />
+          <Link href={PATHS.HOME.link}>
+            <Image
+              src="/assets/logo.png"
+              alt="Enjoy Games"
+              title="Enjoy Games"
+              width={100}
+              height={100}
+            />
+          </Link>
         </div>
       </Container>
     </header>

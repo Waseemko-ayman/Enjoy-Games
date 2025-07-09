@@ -15,6 +15,7 @@ const SearchHeader = () => {
             variant="secondary"
             otherClassName="placeholder:text-lg"
             otherClassNameContainer="max-w-[500px] mx-auto"
+            iconClassName="text-gray-400"
             Icon={IoSearch}
           />
         </form>
