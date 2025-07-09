@@ -5,7 +5,13 @@ import {
   ButtonVarinats,
   CommonCardVariant,
   footerListsName,
+  NavbarLayout,
 } from '@/utils/type';
+
+export interface NavbarProps {
+  layout?: NavbarLayout;
+  isMobile?: boolean;
+}
 
 export interface Country {
   name: string;
@@ -76,6 +82,8 @@ export interface NavItemProps {
   otherClassNameIcon?: string;
   showArrow?: boolean;
   onClick?: () => void;
+  layout?: NavbarLayout;
+  isMobile?: boolean;
 }
 
 export interface SectionComponentProps {
@@ -150,4 +158,10 @@ export interface CardItem {
 
 export interface CategoryPageProps {
   cards: CardItem[];
+}
+
+export interface CategoryCardProps {
+  href?: string;
+  banner?: string;
+  label: string;
 }

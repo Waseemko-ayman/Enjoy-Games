@@ -12,17 +12,21 @@ const NavItem: React.FC<NavItemProps> = ({
   otherClassNameIcon,
   showArrow = false,
   onClick,
+  layout,
+  isMobile,
 }) => {
   return (
     <Link
       href={linkPath}
       onClick={onClick}
       className={`
-        w-full flex items-center justify-between gap-2
-        text-xl font-semibold
+        flex
+        items-center
+        gap-2
+        font-semibold
         rounded-md
         transition cursor-pointer
-        px-[36px] py-[19px]
+        py-[19px]
         hover:text-[var(--enjoy-primary)]
         max-[991px]:!py-3
         max-[991px]:!pl-0
@@ -30,11 +34,21 @@ const NavItem: React.FC<NavItemProps> = ({
         max-[991px]:hover:bg-[#f4f4ff]
         max-[991px]:hover:!text-[var(--enjoy-primary)]
         max-[991px]:rounded-lg
-
+        ${
+          layout === 'store'
+            ? isMobile
+              ? 'px-2'
+              : 'text-lg'
+            : 'w-full text-xl justify-between px-[36px]'
+        }
         ${otherClassName}
       `}
     >
-      <div className="flex items-center gap-2">
+      <div
+        className={`flex items-center gap-2 ${
+          layout === 'store' && isMobile ? 'flex-col' : ''
+        }`}
+      >
         {typeof Icon === 'string' ? (
           <Image
             src={`/assets/${Icon}`}
@@ -44,9 +58,19 @@ const NavItem: React.FC<NavItemProps> = ({
             height={26}
           />
         ) : (
-          <Icon
-            className={`text-xl text-[var(--enjoy-primary)] max-[991px]:text-white ${otherClassNameIcon}`}
-          />
+          <div
+            className={
+              isMobile
+                ? 'flex items-center justify-center w-10 h-10 rounded-full bg-white border border-[var(--enjoy-gray-300)]'
+                : ''
+            }
+          >
+            <Icon
+              className={`text-xl text-[var(--enjoy-primary)] ${
+                isMobile ? 'max-[991px]:text-primary' : 'max-[991px]:text-white'
+              } ${otherClassNameIcon}`}
+            />
+          </div>
         )}
         <span>{text}</span>
       </div>

@@ -5,8 +5,35 @@ import NavItem from '@/components/atomic/NavItem';
 import { IoSearch } from 'react-icons/io5';
 import DropdownNavItem from '@/components/molecules/DropdownMenuItem';
 import { subMenuItems } from '@/data';
+import { PATHS } from '@/data/paths';
+import { NavbarProps } from '@/interfaces';
 
-const Navbar = () => {
+const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
+  if (layout === 'store') {
+    return (
+      <nav className={`${!isMobile ? 'bg-white' : 'pt-2 mt-4'}`} dir="rtl">
+        <Container>
+          <ul
+            className={`flex items-center ${
+              isMobile ? 'justify-center flex-wrap gap-4' : 'gap-7'
+            }`}
+          >
+            {subMenuItems.map((item) => (
+              <NavItem
+                key={item.label}
+                Icon={item.Icon}
+                text={item.label}
+                linkPath={item.path}
+                layout={layout}
+                isMobile={isMobile}
+              />
+            ))}
+          </ul>
+        </Container>
+      </nav>
+    );
+  }
+
   return (
     <nav className="bg-white" dir="rtl">
       <Container>
@@ -20,7 +47,7 @@ const Navbar = () => {
             />
           </li>
           <li>
-            <NavItem Icon={IoSearch} text="المتجر" />
+            <NavItem Icon={IoSearch} text="المتجر" linkPath={PATHS.STORE} />
           </li>
         </ul>
       </Container>

@@ -7,17 +7,16 @@ import Footer from './Footer';
 import MobileHeader from './MobileHeader/Header';
 import SearchHeader from './MobileHeader/SearchHeader';
 import MobileNavbar from './MobileHeader/Navbar';
+import { usePathname } from 'next/navigation';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
+  const pathname = usePathname();
+  const isStorePage = pathname === '/store';
+
   const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 991) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
+    const handleResize = () => setIsMobile(window.innerWidth <= 991);
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -31,11 +30,17 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           <MobileHeader />
           <SearchHeader />
           <MobileNavbar />
+          {isStorePage && (
+            <Navbar
+              layout={isStorePage ? 'store' : 'default'}
+              isMobile={isMobile}
+            />
+          )}
         </>
       ) : (
         <div className="shadow-header">
           <Header />
-          <Navbar />
+          <Navbar layout={isStorePage ? 'store' : 'default'} />
         </div>
       )}
       {children}

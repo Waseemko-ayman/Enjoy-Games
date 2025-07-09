@@ -9,3 +9,5 @@ export type footerListsName =
   | 'works2'
   | 'shop_app'
   | 'socialMedia';
+
+export type NavbarLayout = 'default' | 'store';

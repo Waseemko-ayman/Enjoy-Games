@@ -12,16 +12,14 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 
 const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
-  const [selectedCountry, setSelectedCountry] = useState<string>(
-    'السعودية - ريال سعودي'
-  );
+  const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [open, setOpen] = useState(false);
 
   const circularButtonContainerStyle =
     'relative bg-white flex items-center justify-between p-1 rounded-[50%]';
 
   const iconStyle = 'cursor-pointer';
-  const btnStyle = 'py-1.5';
+  const btnStyle = 'w-full py-1.5';
 
   return (
     <div
@@ -31,6 +29,7 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
           : 'animate-in slide-in-from-top duration-300'
       }`}
     >
+      {/* Header */}
       <div className="h-[60px] bg-enjoy-glass flex items-center justify-between gap-2 px-3">
         <div className={`${circularButtonContainerStyle} !bg-gray-300`}>
           <IoIosArrowForward
@@ -50,7 +49,9 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
         </div>
       </div>
 
+      {/* Popup Menu Content */}
       <div className="px-4 mt-4">
+        {/* Buttons for Login and registration */}
         <div className="flex items-center justify-between gap-2">
           <Link href={PATHS.LOGIN} className="w-full">
             <Button
@@ -67,6 +68,8 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
             </Button>
           </Link>
         </div>
+
+        {/* Popup Menu Lists */}
         <div className="mt-8">
           {menuLists.map((card) => (
             <MenuCard key={card.id} linksList={card.linksItem} />
@@ -74,7 +77,12 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
           <div className="flex flex-col items-start gap-3 py-3 px-5 bg-white rounded-[10px] shadow-[0_8.293px_37.319px_4.147px_rgba(0,0,0,0.08)] mb-4">
             <div className="flex items-center gap-3">
               <FaGlobe />
-              <button className="text-lg cursor-pointer">غير اللغة</button>
+              <button
+                className="text-lg cursor-pointer"
+                onClick={() => setOpen(true)}
+              >
+                غير اللغة
+              </button>
             </div>
             <CountryDrawer
               countries={countries}

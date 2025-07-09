@@ -1,10 +1,25 @@
 import React from 'react';
 import Button from '../atomic/Button';
-import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from '../ui/drawer';
 import { IoIosArrowBack } from 'react-icons/io';
 import Image from 'next/image';
 import { FiLogIn } from 'react-icons/fi';
-import { CountryDrawerProps } from '@/interfaces';
+import { Country } from '@/interfaces';
+// import { CountryDrawerProps } from '@/interfaces';
+
+interface CountryDrawerProps {
+  countries: Country[];
+  selectedCountry: Country;
+  setSelectedCountry: (country: Country) => void;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
 
 const CountryDrawer: React.FC<CountryDrawerProps> = ({
   countries,
@@ -17,24 +32,35 @@ const CountryDrawer: React.FC<CountryDrawerProps> = ({
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <button className="flex items-center justify-between w-full gap-2 cursor-pointer">
-          <h4 className="flex items-center gap-3 text-lg font-normal">
-            {selectedCountry}
-          </h4>
+          <div className="flex items-center gap-3">
+            <Image
+              src={`/assets/flags/${selectedCountry.img}.png`}
+              alt={`${selectedCountry.name} - ${selectedCountry.currency}`}
+              width={22}
+              height={16}
+            />
+            <h4 className="text-lg font-normal">
+              {selectedCountry.name} - {selectedCountry.currency}
+            </h4>
+          </div>
           <IoIosArrowBack />
         </button>
       </DrawerTrigger>
       <DrawerContent>
+        <DrawerTitle className="sr-only">تغيير الدولة - العملة</DrawerTitle>
+        <DrawerDescription className="sr-only">
+          اختر الدولة والعملة المناسبة لك من القائمة أدناه.
+        </DrawerDescription>
         <h5 className="text-xl font-bold mb-6">تغيير الدولة - العملة</h5>
         <div className="max-h-[400px] overflow-y-auto space-y-4 mb-5 px-2 scrollbar-none">
           <ul className="space-y-4">
             {countries.map((country, index) => {
-              const isSelected =
-                selectedCountry === `${country.name} - ${country.currency}`;
+              const isSelected = selectedCountry.name === country.name;
               return (
                 <li
                   key={index}
                   onClick={() => {
-                    setSelectedCountry(`${country.name} - ${country.currency}`);
+                    setSelectedCountry(country);
                     setOpen(false);
                   }}
                   className={`flex items-center justify-between gap-4 cursor-pointer border p-2 rounded-md ${

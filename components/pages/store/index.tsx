@@ -1,7 +1,7 @@
+import CategoryCardsGrid from '@/components/organism/CategoryCardsGrid';
+import { shoppingCarts } from '@/data';
 import React from 'react';
 
-const StorePage = () => {
-  return <div>StorePage</div>;
-};
+const StorePage = () => <CategoryCardsGrid cards={shoppingCarts} />;
 
 export default StorePage;
