@@ -187,3 +187,9 @@ export interface FeatureCardProps {
   bgColor: string;
   textColor?: string;
 }
+
+export interface TierBadgeProps {
+  name: string;
+  icon: React.ElementType;
+  isActive?: boolean;
+}

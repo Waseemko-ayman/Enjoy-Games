@@ -1,8 +1,15 @@
 import {
+  FaChartBar,
+  FaCrown,
+  FaDiamond,
   FaFacebook,
+  FaGift,
   FaInstagram,
   FaLinkedin,
+  FaRegGem,
   FaRegHeart,
+  FaRegStar,
+  FaSackDollar,
   FaTwitter,
 } from 'react-icons/fa6';
 import { IoArrowRedoOutline, IoGameControllerOutline } from 'react-icons/io5';
@@ -15,6 +22,7 @@ import {
 import { PiShoppingCartLight, PiSquaresFourLight } from 'react-icons/pi';
 import { PATHS } from './paths';
 import { IoMdHelpCircleOutline } from 'react-icons/io';
+import { FiAward, FiTrendingUp } from 'react-icons/fi';
 
 export const digitalStores = [
   {
@@ -1347,27 +1355,60 @@ export const countries = [
 export const featuresData = [
   {
     id: 1,
-    title: 'اجمع النقاط 🏆',
+    title: 'اجمع النقاط',
     description: 'احصل على نقاط مع كل عملية شراء',
     bgColor: 'bg-enjoy-primary-deep',
     textColor: 'text-white',
+    icon: FiTrendingUp,
   },
   {
     id: 2,
-    title: 'ضاعف مكافآتك 🚀',
+    title: 'ضاعف مكافآتك ',
     description: 'ارتقِ بالمستويات للحصول على مزايا أكثر.',
     bgColor: 'bg-enjoy-secondary-soft',
+    icon: FaGift,
   },
   {
     id: 3,
-    title: 'راقب تقدمك 📊',
+    title: 'راقب تقدمك ',
     description: 'تابع نقاطك وتاريخ معاملاتك في حسابك.',
     bgColor: 'bg-enjoy-glass',
+    icon: FaChartBar,
   },
   {
     id: 4,
-    title: 'استبدل النقاط 💰',
+    title: 'استبدل النقاط',
     description: 'استبدلها ببطاقات رقمية أو حوّلها إلى نقاط نقدي',
     bgColor: 'bg-enjoy-primary-soft',
+    icon: FaSackDollar,
+  },
+];
+
+export const tiers = [
+  {
+    id: 1,
+    name: 'دليل جونيور',
+    icon: FaRegGem,
+    isActive: true,
+  },
+  {
+    id: 2,
+    name: 'دليل نشط',
+    icon: FaCrown,
+  },
+  {
+    id: 3,
+    name: 'دليل محترف',
+    icon: FaRegStar,
+  },
+  {
+    id: 4,
+    name: 'دليل خبير',
+    icon: FiAward,
+  },
+  {
+    id: 5,
+    name: 'دليل مميز',
+    icon: FaDiamond,
   },
 ];

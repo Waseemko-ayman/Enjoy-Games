@@ -8,7 +8,7 @@
   --enjoy-primary-soft: #d1b5ff;
   --enjoy-secondary: #ef993a;
   --enjoy-secondary-light: #f4ae6a;
-  --enjoy-secondary-soft: #fcecdb; 
+  --enjoy-secondary-soft: #fcecdb;
   --enjoy-lime-yellow: #cbff2e;
   --enjoy-primary-deep: #090f30;
   --enjoy-primary-deep-light: #1a235c;
@@ -90,6 +90,14 @@
     color: var(--enjoy-primary-deep);
   }
 
+  .text-enjoy-primary-soft {
+    color: var(--enjoy-primary-soft);
+  }
+
+  .text-enjoy-secondary {
+    color: var(--enjoy-secondary);
+  }
+
   .text-enjoy-glass {
     color: var(--enjoy-glass);
   }
@@ -134,6 +142,10 @@
     border-color: var(--enjoy-primary);
   }
 
+  .border-enjoy-primary-dark {
+    border-color: var(--enjoy-primary-dark);
+  }
+
   .border-enjoy-glass {
     border-color: var(--enjoy-glass);
   }
@@ -148,6 +160,10 @@
 
   .hover\:text-enjoy-primary-soft:hover {
     color: var(--enjoy-primary-soft);
+  }
+
+  .hover\:text-enjoy-primary-deep-light:hover {
+    color: var(--enjoy-primary-deep-light);
   }
 
   .hover\:bg-enjoy-primary-dark:hover {
