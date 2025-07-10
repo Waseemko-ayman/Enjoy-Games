@@ -106,7 +106,7 @@ export default function Banner({ images }: BannerProps) {
               <div
                 key={index}
                 className="flex-[0_0_100%] min-w-0 relative"
-                style={{ flex: '0 0 100%' }} // إضافة مهمة
+                style={{ flex: '0 0 100%' }}
               >
                 <div className="relative w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px]">
                   <Image
@@ -115,7 +115,7 @@ export default function Banner({ images }: BannerProps) {
                     fill
                     className="object-contain"
                     priority={index === 0}
-                    unoptimized={true} // جرب هذه إذا استمرت المشكلة
+                    unoptimized={true}
                   />
                 </div>
               </div>

@@ -6,7 +6,12 @@ import {
   FaTwitter,
 } from 'react-icons/fa6';
 import { IoArrowRedoOutline, IoGameControllerOutline } from 'react-icons/io5';
-import { MdMoreHoriz, MdOutlineEmail, MdRestaurant, MdSignalCellularAlt } from 'react-icons/md';
+import {
+  MdMoreHoriz,
+  MdOutlineEmail,
+  MdRestaurant,
+  MdSignalCellularAlt,
+} from 'react-icons/md';
 import { PiShoppingCartLight, PiSquaresFourLight } from 'react-icons/pi';
 import { PATHS } from './paths';
 import { IoMdHelpCircleOutline } from 'react-icons/io';
@@ -1337,4 +1342,32 @@ export const countries = [
   { name: 'عمان', currency: 'الدينار العماني', img: 'oman' },
   { name: 'العراق', currency: 'الدينار العراقي', img: 'iraq' },
   { name: 'الأردن', currency: 'الدينار الأردني', img: 'jordan' },
+];
+
+export const featuresData = [
+  {
+    id: 1,
+    title: 'اجمع النقاط 🏆',
+    description: 'احصل على نقاط مع كل عملية شراء',
+    bgColor: 'bg-enjoy-primary-deep',
+    textColor: 'text-white',
+  },
+  {
+    id: 2,
+    title: 'ضاعف مكافآتك 🚀',
+    description: 'ارتقِ بالمستويات للحصول على مزايا أكثر.',
+    bgColor: 'bg-enjoy-secondary-soft',
+  },
+  {
+    id: 3,
+    title: 'راقب تقدمك 📊',
+    description: 'تابع نقاطك وتاريخ معاملاتك في حسابك.',
+    bgColor: 'bg-enjoy-glass',
+  },
+  {
+    id: 4,
+    title: 'استبدل النقاط 💰',
+    description: 'استبدلها ببطاقات رقمية أو حوّلها إلى نقاط نقدي',
+    bgColor: 'bg-enjoy-primary-soft',
+  },
 ];

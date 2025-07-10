@@ -59,3 +59,64 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
 };
 
 export default DropdownNavItem;
+
+
+// const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
+//   text,
+//   Icon,
+//   submenu,
+//   isMainMenu = false,
+// }) => {
+//   return (
+//     <div className="relative group">
+//       <NavItem Icon={Icon} text={text} />
+
+//       {submenu && (
+//         <div
+//           className={`
+//             absolute top-full right-6 z-50 hidden group-hover:block bg-white py-2 pr-1 pl-2 rounded-xl shadow-lg border border-gray-100
+//             ${isMainMenu ? 'w-[200px]' : 'w-[240px]'}
+//             transition-all duration-200 ease-out
+//           `}
+//         >
+//           {submenu.map((item, index) => (
+//             <div key={index} className="relative group/sub">
+//               <NavItem
+//                 Icon={item.Icon}
+//                 text={item.label}
+//                 otherClassName="!px-2 !py-3 !text-base hover:bg-[#f4f4ff] rounded-lg text-lg"
+//                 showArrow={!!item.submenu}
+//                 linkPath={item.path}
+//               />
+//             </div>
+//           ))}
+
+//           {/* قائمة المستوى الثالث الموحدة */}
+//           <div
+//             className={`
+//               absolute right-full top-0 ml-2 border border-gray-100 rounded-xl shadow-lg bg-red-500
+//               transition-all duration-200 ease-out
+//               invisible opacity-0 pointer-events-none
+//               group-hover:visible group-hover:opacity-100 group-hover:pointer-events-auto
+//               w-[800px] p-3 grid grid-cols-4 gap-1
+//             `}
+//           >
+//             {submenu
+//               .filter((item) => item.submenu)
+//               .flatMap((item) => item.submenu!)
+//               .map((subItem, subIndex) => (
+//                 <NavItem
+//                   key={subIndex}
+//                   Icon={subItem.Icon}
+//                   text={subItem.label}
+//                   otherClassName="!py-2 !px-0 !text-base !font-medium"
+//                 />
+//               ))}
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default DropdownNavItem;

@@ -172,3 +172,18 @@ export interface CountrySelectorContentProps {
   setSelectedCountry: (country: Country) => void;
   closeHandler: () => void;
 }
+
+export interface SectionTitleProps {
+  Icon?: React.ElementType | string;
+  title: React.ReactNode;
+  subtitle: React.ReactNode;
+  className?: string;
+}
+
+export interface FeatureCardProps {
+  icon?: React.ElementType;
+  title: string;
+  description: string;
+  bgColor: string;
+  textColor?: string;
+}
