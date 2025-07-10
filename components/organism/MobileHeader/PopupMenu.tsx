@@ -23,7 +23,7 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
 
   return (
     <div
-      className={`fixed inset-0 bg-white z-[1000] ${
+      className={`fixed inset-0 bg-[#f8f9ff] z-[1000] ${
         animateClose
           ? 'animate-out slide-out-to-top duration-300'
           : 'animate-in slide-in-from-top duration-300'
