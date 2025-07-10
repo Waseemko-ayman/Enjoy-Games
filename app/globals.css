@@ -5,8 +5,10 @@
   --enjoy-primary: #7338f0;
   --enjoy-primary-dark: #6d28d9;
   --enjoy-primary-light: #8f5ff5;
+  --enjoy-primary-soft: #d1b5ff;
   --enjoy-secondary: #ef993a;
   --enjoy-secondary-light: #f4ae6a;
+  --enjoy-secondary-soft: #fcecdb; 
   --enjoy-lime-yellow: #cbff2e;
   --enjoy-primary-deep: #090f30;
   --enjoy-primary-deep-light: #1a235c;
@@ -96,8 +98,24 @@
     background-color: var(--enjoy-primary);
   }
 
+  .bg-enjoy-primary-light {
+    background-color: var(--enjoy-primary-light);
+  }
+
+  .bg-enjoy-primary-soft {
+    background-color: var(--enjoy-primary-soft);
+  }
+
   .bg-enjoy-secondary {
     background-color: var(--enjoy-secondary);
+  }
+
+  .bg-enjoy-secondary-light {
+    background-color: var(--enjoy-secondary-light);
+  }
+
+  .bg-enjoy-secondary-soft {
+    background-color: var(--enjoy-secondary-soft);
   }
 
   .bg-enjoy-primary-deep {
@@ -126,6 +144,10 @@
 
   .hover\:text-enjoy-primary-deep:hover {
     color: var(--enjoy-primary-deep);
+  }
+
+  .hover\:text-enjoy-primary-soft:hover {
+    color: var(--enjoy-primary-soft);
   }
 
   .hover\:bg-enjoy-primary-dark:hover {
