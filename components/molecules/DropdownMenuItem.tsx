@@ -37,7 +37,7 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
                   ${
                     item.submenu.length > 3
                       ? 'invisible opacity-0 pointer-events-none group-hover/sub:visible group-hover/sub:opacity-100 group-hover/sub:pointer-events-auto w-[800px] p-3 grid grid-cols-4 gap-1'
-                      : 'hidden group-hover/sub:block w-[240px] py-2 pr-1 pl-2'
+                      : 'hidden group-hover/sub:block w-[240px] py-2 pr-3 pl-2'
                   }`}
                 >
                   {item.submenu.map((subItem, subIndex) => (
