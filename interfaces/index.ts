@@ -197,6 +197,7 @@ export interface TierBadgeProps {
 export interface ResponsiveDialogDrawerProps {
   open: boolean;
   setOpen: (open: boolean) => void;
+  isMobile?: boolean;
   trigger: React.ReactNode;
   children: React.ReactNode;
   contentClassName?: string;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CustomDrawer from '../molecules/CustomDrawer';
 import CustomDialog from '../molecules/CustomDialog';
 import { ResponsiveDialogDrawerProps } from '@/interfaces';
@@ -11,16 +11,8 @@ const ResponsiveDialogDrawer: React.FC<ResponsiveDialogDrawerProps> = ({
   trigger,
   children,
   contentClassName,
+  isMobile,
 }) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 991);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   const Component = isMobile ? CustomDrawer : CustomDialog;
 
   const title = 'إنجوي قيمز من إنجوي قيمز';
