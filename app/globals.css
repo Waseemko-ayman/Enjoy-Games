@@ -166,6 +166,10 @@
     color: var(--enjoy-primary-deep-light);
   }
 
+  .hover\:bg-enjoy-primary:hover {
+    background-color: var(--enjoy-primary);
+  }
+
   .hover\:bg-enjoy-primary-dark:hover {
     background-color: var(--enjoy-primary-dark);
   }

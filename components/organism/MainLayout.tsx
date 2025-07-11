@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import TopBanner from './WebHeader/TopBanner';
+import TopBanner from './TopBanner';
 import Header from './WebHeader/Header';
 import Navbar from './WebHeader/Navbar';
 import Footer from './Footer';

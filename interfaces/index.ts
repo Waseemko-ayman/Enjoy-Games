@@ -193,3 +193,17 @@ export interface TierBadgeProps {
   icon: React.ElementType;
   isActive?: boolean;
 }
+
+export interface ResponsiveDialogDrawerProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  trigger: React.ReactNode;
+  children: React.ReactNode;
+  contentClassName?: string;
+  headerClassName?: string;
+}
+
+export interface CustomDialogDrawerProps extends ResponsiveDialogDrawerProps {
+  title?: string;
+  description?: string;
+}

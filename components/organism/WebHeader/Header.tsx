@@ -44,7 +44,7 @@ const Header = () => {
                 </div>
               )}
             </Link>
-            <Link href="#">
+            <Link href={PATHS.LOGIN}>
               <FiUser className="w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer" />
             </Link>
           </div>
