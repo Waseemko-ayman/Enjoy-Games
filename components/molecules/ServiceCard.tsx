@@ -1,8 +1,7 @@
 import { ServiceCardProps } from '@/interfaces';
 import Image from 'next/image';
 import React from 'react';
-
-
+import CardWrapper from '../atomic/CardWrapper';
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
   image,
@@ -11,7 +10,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   description,
 }) => {
   return (
-    <div className="flex gap-7 bg-[var(--enjoy-glass-lavender)] rounded-[20px] py-5 px-3">
+    <CardWrapper
+      className="py-5 px-3 flex gap-7 !shadow-none"
+      bgColor="bg-[var(--enjoy-glass-lavender)]"
+    >
       <div className="flex items-center justify-between bg-enjoy-primary rounded-sm p-2 h-fit">
         <Image
           src={`/assets/${image}.GIF`}
@@ -26,7 +28,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           {description}
         </p>
       </div>
-    </div>
+    </CardWrapper>
   );
 };
 

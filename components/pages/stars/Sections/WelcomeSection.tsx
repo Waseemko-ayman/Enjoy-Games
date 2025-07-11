@@ -1,3 +1,4 @@
+import CardWrapper from '@/components/atomic/CardWrapper';
 import Layer from '@/components/atomic/Layer';
 import SectionTitle from '@/components/atomic/SectionTitle';
 import FeatureCard from '@/components/molecules/FeatureCard';
@@ -20,7 +21,7 @@ const WelcomeSection = () => {
         />
 
         {/* Main Content Card */}
-        <div className="bg-white rounded-2xl p-8 shadow-custom mb-8">
+        <CardWrapper className="p-8 mb-8">
           {/* Title with sparkle */}
           <div className="text-center mb-8 p-3 rounded-2xl border border-gray-200">
             <h2 className="text-xl font-bold text-[var(--enjoy-secondary)] flex items-center justify-center gap-2">
@@ -57,7 +58,7 @@ const WelcomeSection = () => {
             </Link>
             <p>وحقق أقصى استفادة من مشترياتك! 🔥</p>
           </div>
-        </div>
+        </CardWrapper>
       </Container>
     </Layer>
   );
