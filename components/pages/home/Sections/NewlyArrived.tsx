@@ -1,12 +1,13 @@
 import CommonCard from '@/components/atomic/CommonCard';
 import SectionComponent from '@/components/atomic/SectionComponent';
+import GridWrapper from '@/components/molecules/GridWrapper';
 import { NewlyArrivedData } from '@/data';
 import React from 'react';
 
 const NewlyArrived = () => {
   return (
     <SectionComponent title="وصل حديثًا">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+      <GridWrapper otherClassName="gap-5" isScrollable>
         {NewlyArrivedData.map((card) => (
           <CommonCard
             key={card.id}
@@ -17,11 +18,11 @@ const NewlyArrived = () => {
             description
             showBtn={true}
             btnVariant="primary"
-            btnText="اشترِ الآن"
+            btnText="إشترِ الآن"
             {...card}
           />
         ))}
-      </div>
+      </GridWrapper>
     </SectionComponent>
   );
 };

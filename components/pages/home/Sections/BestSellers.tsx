@@ -1,12 +1,13 @@
 import CommonCard from '@/components/atomic/CommonCard';
 import SectionComponent from '@/components/atomic/SectionComponent';
+import GridWrapper from '@/components/molecules/GridWrapper';
 import { BestSellersData } from '@/data';
 import React from 'react';
 
 const BestSellers = () => {
   return (
     <SectionComponent title="البطاقات الأكثر مبيعًا">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+      <GridWrapper isScrollable>
         {BestSellersData.map((card) => (
           <CommonCard
             key={card.id}
@@ -17,7 +18,7 @@ const BestSellers = () => {
             tall
           />
         ))}
-      </div>
+      </GridWrapper>
     </SectionComponent>
   );
 };

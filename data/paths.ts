@@ -16,7 +16,7 @@ export const PATHS = {
   LOGIN: 'login',
   SIGN_UP: '/signup',
   STORE: '/store',
-  STARS: '/stars',
+  STARS: { name: 'دليل ستارز', link: '/stars' },
 };
 
 export const navBarLinks = [

@@ -1,4 +1,5 @@
 import Layer from '@/components/atomic/Layer';
+import SectionTitle from '@/components/atomic/SectionTitle';
 import ProgressCircle from '@/components/molecules/ProgressCircle';
 import TierBadge from '@/components/molecules/TierBadge';
 import Container from '@/components/organism/Container';
@@ -10,7 +11,11 @@ const RewardsTierSection = () => {
     <Layer otherClassName="bg-enjoy-gray-light py-16 px-4">
       <Container>
         <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl font-bold mb-3 text-center">إشتري أكثر، وضاعف نقاطك</h2>
+          <SectionTitle
+            title="إشتري أكثر، وضاعف نقاطك"
+            className="!mb-3"
+            titleClassName="!text-2xl"
+          />
 
           {/* Tier Badges */}
           <div className="flex justify-center mb-20">
