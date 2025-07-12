@@ -26,7 +26,7 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
                 key={index}
                 Icon={item.Icon}
                 text={item.label}
-                otherClassName="!px-2 !py-3 !text-base hover:bg-[#f4f4ff] rounded-lg text-lg"
+                otherClassName="!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg"
                 showArrow={!!item.submenu}
                 linkPath={item.path}
               />

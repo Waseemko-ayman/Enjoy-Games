@@ -13,7 +13,7 @@ const MenuCard = ({ linksList }: { linksList: LinkItem[] }) => {
               href={list.link}
               className="flex items-center justify-between gap-2"
             >
-              <h4 className="flex items-center gap-3 text-lg font-normal">
+              <h4 className="flex items-center gap-3 text-base font-normal">
                 <list.icon />
                 {list.title}
               </h4>

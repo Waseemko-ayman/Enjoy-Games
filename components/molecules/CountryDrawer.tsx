@@ -37,7 +37,7 @@ const CountryDrawer: React.FC<CountryDrawerProps> = ({
               width={22}
               height={16}
             />
-            <h4 className="text-lg font-normal">
+            <h4 className="text-base font-normal">
               {selectedCountry.name} - {selectedCountry.currency}
             </h4>
           </div>

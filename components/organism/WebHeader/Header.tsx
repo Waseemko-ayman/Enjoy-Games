@@ -15,6 +15,8 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [productsCount] = useState(0);
 
+  const iconsStyle = 'w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer';
+
   return (
     <header className="bg-white" dir="ltr">
       <Container>
@@ -37,7 +39,7 @@ const Header = () => {
           {/* Icons */}
           <div className="flex items-center gap-5">
             <Link href="#" className="relative">
-              <MdOutlineShoppingCart className="w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer" />
+              <MdOutlineShoppingCart className={iconsStyle} />
               {productsCount > 0 && (
                 <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-[12px] w-4 h-4 rounded-[50%]">
                   <span>{productsCount}</span>
@@ -45,7 +47,7 @@ const Header = () => {
               )}
             </Link>
             <Link href={PATHS.LOGIN}>
-              <FiUser className="w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer" />
+              <FiUser className={iconsStyle} />
             </Link>
           </div>
 

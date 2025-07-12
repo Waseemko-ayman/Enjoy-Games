@@ -6,15 +6,19 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
   title,
   subtitle,
   className,
+  titleClassName,
 }) => {
   return (
-    <div className={`text-center mb-12 ${className}`}>
-      <h1 className="text-4xl font-bold mb-2 flex items-center justify-center gap-2">
-        <span className="text-3xl"></span>
+    <div className={`text-center mb-10 ${className}`}>
+      <h1
+        className={`text-[32px] font-bold ${subtitle ? 'mb-2' : ''} ${
+          Icon ? 'flex items-center justify-center gap-2' : ''
+        } ${titleClassName}`}
+      >
         {title}
         {Icon && <Icon className="text-[var(--enjoy-secondary)]" />}
       </h1>
-      <p className="text-lg">{subtitle}</p>
+      {subtitle && <p className="text-base font-normal">{subtitle}</p>}
     </div>
   );
 };

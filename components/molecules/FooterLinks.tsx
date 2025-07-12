@@ -15,9 +15,7 @@ const FooterLinks = ({
     <div className="flex flex-col">
       <FooterTitle title={secTitle} />
       <ul
-        className={`${
-          listName === 'socialMedia' ? 'flex items-center gap-2' : ''
-        }`}
+        className={`${listName === 'socialMedia' ? 'flex items-center gap-2' : ''}`}
       >
         {FOOTER_LINKS_DATA[listName].map((item) => {
           if (listName === 'shop_app') {
@@ -38,15 +36,15 @@ const FooterLinks = ({
             return (
               <li
                 key={item.id}
-                className={`group font-bold cursor-pointer rounded-lg ${
+                className={`group font-bold cursor-pointer rounded-lg py-2 ${
                   otherClassName ? otherClassName : ''
                 } ${
                   listName !== 'socialMedia'
-                    ? 'hover:pr-2 hover:bg-enjoy-gray-700 transition-all duration-400 w-[150px]'
+                    ? 'hover:pr-2 hover:bg-[var(--enjoy-primary-deep-soft)] transition-all duration-400 w-[150px]'
                     : ''
                 }`}
               >
-                <Link href={item.url} target="_blank" className="block py-1.5">
+                <Link href={item.url} target="_blank" className="block text-sm">
                   {/* By type guard To check if an item is of a type that contains icon or text */}
                   {'icon' in item ? (
                     <div className="flex items-center justify-center bg-white rounded-sm p-2 cursor-pointer">

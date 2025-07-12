@@ -5,7 +5,7 @@ const FooterBanner = () => {
   const dateNow = new Date();
   const yearNow = dateNow.getFullYear();
   return (
-    <div className="flex flex-col items-center justify-between gap-4 lg:flex-row text-[var(--enjoy-glass)] pb-7 pt-2">
+    <div className="flex flex-col items-center justify-between gap-4 lg:flex-row text-[var(--enjoy-glass)] py-7">
       {/* <div className='flex items-center gap-1'> */}
       <div>
         <Image src="/assets/pay/pay.png" alt="pay" width={200} height={200} />

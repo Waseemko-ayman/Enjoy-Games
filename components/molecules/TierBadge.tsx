@@ -64,13 +64,13 @@ const TierBadge: React.FC<TierBadgeProps> = ({
       </div>
 
       <h3
-        className={`text-base font-medium mb-1 ${
+        className={`text-[12px] font-medium mb-1 ${
           isActive ? 'text-enjoy-primary' : 'text-[var(--enjoy-gray-600)]'
         }`}
       >
         {name}
       </h3>
-      <p className="text-lg text-[var(--enjoy-gray-500)]">1 عائد لكل عملية</p>
+      <p className="text-[15px] text-[var(--enjoy-gray-500)]">1 عائد لكل عملية</p>
     </div>
   );
 };

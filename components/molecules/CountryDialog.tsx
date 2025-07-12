@@ -29,15 +29,15 @@ const CountryDialog: React.FC<CountryDrawerProps> = ({
       trigger={
         <button className="flex items-center justify-between w-full gap-2 cursor-pointer">
           <IoIosArrowBack />
-          <div className="flex items-center gap-3">
-            <h4 className="text-lg font-normal">
+          <div className="flex items-center gap-3 font-semibold">
+            <h4 className="text-sm">
               {selectedCountry.name} - {selectedCountry.currency}
             </h4>
             <Image
               src={`/assets/flags/${selectedCountry.img}.png`}
               alt={`${selectedCountry.name} - ${selectedCountry.currency}`}
-              width={22}
-              height={16}
+              width={25}
+              height={23}
             />
           </div>
         </button>

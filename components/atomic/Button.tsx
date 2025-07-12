@@ -13,7 +13,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`flex items-center justify-center gap-2 text-white cursor-pointer text-lg outline-none font-semibold transition-all duration-600 ${borderRadius} ${
+      className={`flex items-center justify-center gap-2 text-white cursor-pointer text-base outline-none font-semibold transition-all duration-600 ${borderRadius} ${
         variant === 'primary'
           ? 'bg-enjoy-primary hover:bg-enjoy-primary-light'
           : variant === 'secondary'

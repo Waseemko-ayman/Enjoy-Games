@@ -30,9 +30,12 @@ const MobileNavbar = () => {
                 key={item.id}
                 className="text-[var(--enjoy-gray-650)] font-medium"
               >
-                <Link href={item.link} className="flex flex-col items-center">
+                <Link
+                  href={item.link}
+                  className="flex flex-col items-center font-medium"
+                >
                   <item.icon className="text-2xl" />
-                  <h5 className="text-lg">{item.title}</h5>
+                  <h5 className="text-base mt-2">{item.title}</h5>
                 </Link>
               </li>
             ))}
@@ -42,7 +45,7 @@ const MobileNavbar = () => {
             >
               <div className="flex flex-col items-center">
                 <MdMoreHoriz className="text-2xl" />
-                <h5 className="text-lg">المزيد</h5>
+                <h5 className="text-base mt-2">المزيد</h5>
               </div>
             </li>
           </ul>

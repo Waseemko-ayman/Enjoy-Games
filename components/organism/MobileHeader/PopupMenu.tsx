@@ -19,7 +19,7 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
     'relative bg-white flex items-center justify-between p-1 rounded-[50%]';
 
   const iconStyle = 'cursor-pointer';
-  const btnStyle = 'w-full py-1.5';
+  const btnStyle = 'w-full py-2.5 text-sm';
 
   return (
     <div
@@ -37,7 +37,7 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
             onClick={onClose}
           />
         </div>
-        <h5 className="text-center text-2xl font-bold w-full overflow-hidden whitespace-nowrap">
+        <h5 className="text-center text-lg font-bold w-full overflow-hidden whitespace-nowrap">
           المزيد
         </h5>
         <div
@@ -77,12 +77,7 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
           <div className="flex flex-col items-start gap-3 py-3 px-5 bg-white rounded-[10px] shadow-[0_8.293px_37.319px_4.147px_rgba(0,0,0,0.08)] mb-4">
             <div className="flex items-center gap-3">
               <FaGlobe />
-              <button
-                className="text-lg cursor-pointer"
-                onClick={() => setOpen(true)}
-              >
-                غير اللغة
-              </button>
+              <button className="text-base cursor-pointer">غير اللغة</button>
             </div>
             <CountryDrawer
               countries={countries}

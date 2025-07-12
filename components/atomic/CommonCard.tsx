@@ -43,10 +43,10 @@ const CommonCard: React.FC<CommonCardProps> = ({
           />
         </div>
         <h3
-          className={`${
+          className={`mt-3.5 ${
             variant === 'row'
-              ? 'font-bold mt-3.5 text-xl'
-              : 'font-bold mt-3.5 inline-block mb-1.5 text-base text-[var(--enjoy-gray-650)] hover:text-[var(--enjoy-gray-300)] transition-all duration-600'
+              ? 'font-bold text-lg'
+              : 'font-semibold inline-block mb-1.5 text-[15px] text-[var(--enjoy-gray-650)] hover:text-[var(--enjoy-gray-300)] transition-all duration-600'
           }`}
         >
           {title}
@@ -54,7 +54,7 @@ const CommonCard: React.FC<CommonCardProps> = ({
         {description && (
           <div className="mb-3 text-sm">
             {price && (
-              <h4 className="font-semibold mb-2 text-base">${price}</h4>
+              <h4 className="font-semibold mb-2 text-[15px]">${price}</h4>
             )}
 
             <div
@@ -76,7 +76,7 @@ const CommonCard: React.FC<CommonCardProps> = ({
                 />
                 <p
                   className={`${
-                    variant === 'row' ? 'text-sm' : 'text-base'
+                    variant === 'row' ? 'text-[15px]' : 'text-sm'
                   } font-bold`}
                 >
                   {storeName}

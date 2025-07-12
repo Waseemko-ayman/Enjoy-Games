@@ -12,7 +12,7 @@ const CountrySelectorContent: React.FC<CountrySelectorContentProps> = ({
 }) => {
   return (
     <>
-      <h5 className="text-xl font-bold mb-5">تغيير الدولة - العملة</h5>
+      <h5 className="text-lg font-bold mb-5">تغيير الدولة - العملة</h5>
       <div className="max-h-[400px] overflow-y-auto space-y-4 mb-5 px-2 scrollbar-none">
         <ul className="space-y-4">
           {countries.map((country, index) => {
@@ -24,7 +24,7 @@ const CountrySelectorContent: React.FC<CountrySelectorContentProps> = ({
                   setSelectedCountry(country);
                   closeHandler();
                 }}
-                className={`flex items-center justify-between gap-4 cursor-pointer border p-2 rounded-md ${
+                className={`flex items-center text-[var(--enjoy-gray-400)] justify-between gap-4 cursor-pointer border p-2 rounded-md ${
                   isSelected
                     ? 'border-[var(--enjoy-primary)]'
                     : 'border-gray-300'
@@ -37,7 +37,7 @@ const CountrySelectorContent: React.FC<CountrySelectorContentProps> = ({
                     width={22}
                     height={16}
                   />
-                  <span className="text-lg">
+                  <span className="text-base font-medium">
                     {country.name} - {country.currency}
                   </span>
                 </div>
@@ -56,7 +56,7 @@ const CountrySelectorContent: React.FC<CountrySelectorContentProps> = ({
 
       <div className="flex items-center justify-between gap-2 px-2">
         <Button
-          otherClassName="w-full py-1.5"
+          otherClassName="w-full py-2"
           iconPosition="left"
           Icon={FiLogIn}
         >
@@ -64,7 +64,7 @@ const CountrySelectorContent: React.FC<CountrySelectorContentProps> = ({
         </Button>
         <Button
           variant="forth"
-          otherClassName="w-full py-1.5"
+          otherClassName="w-full py-2"
           handleClick={closeHandler}
         >
           إلغاء

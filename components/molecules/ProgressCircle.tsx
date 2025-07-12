@@ -41,16 +41,16 @@ const ProgressCircle = () => {
             />
 
             {/* Inner content */}
-            <div className="absolute inset-1.5 bg-white rounded-full flex flex-col items-center justify-center z-10">
-              <div className="text-5xl font-bold text-enjoy-secondary mb-2">
+            <div className="absolute inset-1.5 bg-white rounded-full flex flex-col items-center justify-center z-10 font-bold">
+              <div className="text-[46px] text-enjoy-secondary mb-2">
                 {progress}%
               </div>
-              <p className="text-base font-medium text-gray-800 mb-1">
+              <p className="text-sm text-gray-800 mb-[7px]">
                 عائد لكل عملية
               </p>
               <Link
                 href="#"
-                className="text-lg text-enjoy-primary hover:text-enjoy-primary-soft transition-all duration-300"
+                className="text-sm text-enjoy-primary hover:text-enjoy-primary-soft transition-all duration-300"
               >
                 سجل دخول الآن
               </Link>

@@ -12,6 +12,7 @@ import Layer from '@/components/atomic/Layer';
 import { faqData } from '@/data';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import Container from '@/components/organism/Container';
+import SectionTitle from '@/components/atomic/SectionTitle';
 
 const FAQ = () => {
   const [activeItem, setActiveItem] = useState<string | null>(null);
@@ -19,15 +20,11 @@ const FAQ = () => {
   return (
     <Layer>
       <Container>
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-3xl font-bold mb-3 text-center"
-        >
-          الأسئلة الشائعة
-        </motion.h2>
+        <SectionTitle
+          title="الأسئلة الشائعة"
+          className="!mb-3"
+          titleClassName="!text-2xl"
+        />
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -53,12 +50,12 @@ const FAQ = () => {
                 <CardWrapper className="mb-4 px-4 py-2">
                   <AccordionItem value={`item-${index}`}>
                     <AccordionTrigger className="text-black font-normal hover:no-underline transition-colors w-full cursor-pointer">
-                      <p className="text-right text-base md:text-lg w-full">
+                      <p className="text-right text-sm md:text-base w-full font-semibold">
                         {item.question}
                       </p>
                     </AccordionTrigger>
                     <AccordionContent className="px-3">
-                      <div className="prose prose-sm prose-invert max-w-none text-[14px] md:text-lg">
+                      <div className="prose prose-sm prose-invert max-w-none text-[14px] md:text-base">
                         {typeof item.answer === 'string' ? (
                           item.answer
                         ) : (
