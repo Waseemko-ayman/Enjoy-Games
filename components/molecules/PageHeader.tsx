@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/breadcrumb';
 import Container from '../organism/Container';
 import { PATHS } from '@/data/paths';
-import Link from 'next/link';
 
 const PageHeader: FC = () => {
   const pathname = usePathname();
