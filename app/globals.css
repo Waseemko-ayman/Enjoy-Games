@@ -12,6 +12,7 @@
   --enjoy-lime-yellow: #cbff2e;
   --enjoy-primary-deep: #090f30;
   --enjoy-primary-deep-light: #1a235c;
+  --enjoy-primary-deep-soft: #3a3f59;
   --enjoy-accent: #ec4899;
   --enjoy-success: #10b981;
   --enjoy-error: #ef4444;
@@ -66,9 +67,8 @@
 
 @layer base {
   body {
-    font-family: 'Inter', sans-serif;
-    /* font-family: "IBM Plex Sans Arabic"; */
-    background: var(--enjoy-gray-50);
+    font-family: 'IBM Plex Sans Arabic';
+    background: #f8f9ff;
     color: var(--enjoy-primary-deep);
   }
 }
@@ -201,10 +201,6 @@
   .shadow-header {
     box-shadow: 0 2px 3px 0 rgba(210, 210, 228, 0.09);
   }
-}
-
-body {
-  background: #f8f9ff;
 }
 
 a {
