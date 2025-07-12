@@ -42,7 +42,7 @@ const PageHeader: FC = () => {
     { label: 'الرئيسية', href: '/' },
     {
       label: title,
-      href: undefined, // No link since it's the final item
+      href: pathname, // No link since it's the final item
     },
   ];
 
@@ -62,12 +62,9 @@ const PageHeader: FC = () => {
               </div>
             ))}
           </Breadcrumb>
-          <Link
-            href={pathname}
-            className="text-3xl md:text-4xl font-bold mt-5 mb-7"
-          >
+          <h1 className="text-2xl md:text-3xl font-semibold mt-5 mb-7">
             {title}
-          </Link>
+          </h1>
         </div>
       </Container>
     </div>
