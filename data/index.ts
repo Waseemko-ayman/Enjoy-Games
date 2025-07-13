@@ -1224,6 +1224,7 @@ export const faqData = [
 export const cardsData = [
   {
     id: 1,
+    link: PATHS.MAX_PROGRAM,
     title: 'محفظتي',
     value: '0',
     unit: 'saudi_riyal',
@@ -1233,6 +1234,7 @@ export const cardsData = [
   },
   {
     id: 2,
+    link: PATHS.MAX_PROGRAM,
     title: 'دليل ستارز',
     value: '0',
     unit: 'نقطة',
@@ -1242,11 +1244,53 @@ export const cardsData = [
   },
   {
     id: 3,
+    link: PATHS.MAX_PROGRAM,
     title: 'دليل مكسب',
     value: '0',
     unit: 'saudi_riyal',
     icon: Wallet,
     bgColor: 'bg-amber-50',
     textColor: 'text-[#060919]',
+  },
+];
+
+export const inviteStepsData = [
+  {
+    id: 1,
+    title: 'انسخ رابط الدعوة',
+    description:
+      'تقوم بداية بنسخ رابط الدعوة الفريد الخاص بك لتستطيع مشاركته مع أصدقائك ومعارفك',
+    image: 'character-2',
+    footerType: 'button',
+  },
+  {
+    id: 2,
+    title: 'شارك الرابط مع الأصدقاء',
+    description:
+      'أرسل رابط الدعوة لأصدقائك ومعارفك عبر الواتساب، تويتر، أو حتى الحمام الزاجل. كلما زاد عدد المشاركين، زادت أرباحك.',
+    image: 'character-3',
+    footerType: 'social',
+    socialLinks: [
+      { icon: '/icons/whatsapp.svg', href: '#' },
+      { icon: '/icons/twitter.svg', href: '#' },
+      { icon: '/icons/pigeon.svg', href: '#' },
+    ],
+    order: 'left',
+  },
+  {
+    id: 3,
+    title: 'اربح 0.7% على كل عملية',
+    description:
+      'كل مرة يشتري أحد أصدقائك عبر رابط الدعوة الخاص بك، تربح 0.7% تضاف إلى محفظتك بكل سهولة!',
+    image: 'character-4',
+    footerType: 'none',
+  },
+  {
+    id: 4,
+    title: 'انتقل للمستوى التالي',
+    description: 'دليل تتيح لك 5 مستويات بنسبة عائد تصل الى 0.7%',
+    image: 'character-5',
+    footerType: 'none',
+    order: 'left',
   },
 ];

@@ -227,3 +227,32 @@ export interface AuthLayoutProps extends SectionComponentProps {
   isSubmitDisabled?: boolean;
   onSubmit?: () => void;
 }
+
+export interface WalletCardProps extends BaseIconProps {
+  title: string;
+  value: string;
+  unit: string;
+  bgColor: string;
+  textColor: string;
+  pathName: string;
+}
+
+export interface RewardTier {
+  id: number;
+  name: string;
+  percentage: number;
+  isActive: boolean;
+}
+
+export interface EarnMoreDrawerCardProps {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt?: string;
+  order?: 'left' | 'right';
+  footerType?: 'button' | 'social' | 'none';
+  onCopyLink?: () => void;
+  socialLinks?: React.ReactNode;
+  otherClassName?: string;
+}

@@ -18,6 +18,7 @@ export const PATHS = {
   STORE: '/store',
   STARS: { name: 'دليل ستارز', link: '/stars' },
   OTP: '/otp',
+  MAX_PROGRAM: '/maxup-program',
 };
 
 export const navBarLinks = [
