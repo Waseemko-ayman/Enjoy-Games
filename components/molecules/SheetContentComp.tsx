@@ -25,7 +25,7 @@ const SheetContentComp = () => {
 
             {hasSubmenu && isOpen && (
               <div
-                className={`z-50 mt-2 border border-gray-100 rounded-xl shadow-lg bg-white 
+                className={`z-50 mt-2 border border-gray-100 rounded-xl shadow-lg bg-white scrollbar-none
                 ${
                   item.submenu.length > 3
                     ? 'max-h-[300px] overflow-y-auto p-3 grid grid-cols-2 gap-2'

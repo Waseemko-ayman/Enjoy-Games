@@ -13,12 +13,7 @@ import {
   FaTwitter,
 } from 'react-icons/fa6';
 import { IoArrowRedoOutline, IoGameControllerOutline } from 'react-icons/io5';
-import {
-  MdMoreHoriz,
-  MdOutlineEmail,
-  MdRestaurant,
-  MdSignalCellularAlt,
-} from 'react-icons/md';
+import { MdMoreHoriz, MdOutlineEmail } from 'react-icons/md';
 import { PiShoppingCartLight, PiSquaresFourLight } from 'react-icons/pi';
 import { PATHS } from './paths';
 import { IoMdHelpCircleOutline } from 'react-icons/io';
@@ -262,94 +257,6 @@ export const gamingPlatforms = [
     label: 'كاندي كراش سـاغـا',
     Icon: 'games-logos/candy-crush-logo.webp',
     banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-];
-
-export const contactAndData = [
-  {
-    label: 'شحن سوا',
-    Icon: 'Communication-data-logos/stc-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'شحن موبايلي',
-    Icon: 'Communication-data-logos/mobily-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'شحن ليبارا',
-    Icon: 'Communication-data-logos/Lebara-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'فيرجن موبايل',
-    Icon: 'Communication-data-logos/virgin-mobile-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'كويك نت',
-    Icon: 'Communication-data-logos/stc-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'فرندي موبايل',
-    Icon: 'Communication-data-logos/friendi-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'فرندي نت',
-    Icon: 'Communication-data-logos/friendi-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'زين نت',
-    Icon: 'Communication-data-logos/zain-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'زين فليكس',
-    Icon: 'Communication-data-logos/zain-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'زين شباب',
-    Icon: 'Communication-data-logos/zain-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'شحن زين',
-    Icon: 'Communication-data-logos/zain-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'موبايلي نت',
-    Icon: 'Communication-data-logos/mobily-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'باقات سوا',
-    Icon: 'Communication-data-logos/stc-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'سلام',
-    Icon: 'Communication-data-logos/salam-mobile-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'ليبارا نت',
-    Icon: 'Communication-data-logos/Lebara-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'ريد بل داتا',
-    Icon: 'Communication-data-logos/red-bull-mobile-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'إيـوا',
-    Icon: 'Communication-data-logos/aywa-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
   },
 ];
 
@@ -899,144 +806,6 @@ export const servicesAndSubscriptions = [
   },
 ];
 
-export const restaurants = [
-  {
-    label: 'وشنة (Washna)',
-    Icon: 'restaurants-logos/washna-logo.jpeg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'فينور (Venor)',
-    Icon: 'restaurants-logos/venor-logo.webp',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'صبحي كابر (Sobhy Kaber)',
-    Icon: 'restaurants-logos/sobhy-kaber-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'سراي (Seray)',
-    Icon: 'restaurants-logos/seray-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'ميموز (Memos)',
-    Icon: 'restaurants-logos/memos-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'هابرا (HABRA beef canteen)',
-    Icon: 'restaurants-logos/habra-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'في قلبك (Figalbak)',
-    Icon: 'restaurants-logos/figalbak-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'بلاك تاب (Black Tap Craft Burgers)',
-    Icon: 'restaurants-logos/black-tap-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'عسيب (Aseeb)',
-    Icon: 'restaurants-logos/aseeb-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'ميز (Meez)',
-    Icon: 'restaurants-logos/meez-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'أوڤن (Ovun)',
-    Icon: 'restaurants-logos/ovun-logo.jpeg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'مدموزيل (Mlle)',
-    Icon: 'restaurants-logos/mlle-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'ال كامينو (El Camino)',
-    Icon: 'restaurants-logos/elcamino-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'دار العوجا (Daralauja)',
-    Icon: 'restaurants-logos/daralauja-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'اركومي (Arcomi)',
-    Icon: 'restaurants-logos/arcomi-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'شاركوزا (Charcoza)',
-    Icon: 'restaurants-logos/charcoza-logo.jpeg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'الكوفية (Alkofeia)',
-    Icon: 'restaurants-logos/alkofeia-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'سنشري برجر (Century Burger)',
-    Icon: 'restaurants-logos/century-burger-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'لاڤاش (Lavash)',
-    Icon: 'restaurants-logos/lavash-logo.jpeg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'أوف وايت (Offwhite)',
-    Icon: 'restaurants-logos/offwhite-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'بيت عمر (Beit Omar)',
-    Icon: 'restaurants-logos/beit-omar-logo.jpeg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'ميسور (Maysore)',
-    Icon: 'restaurants-logos/maysore-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'كرزة (Karazah)',
-    Icon: 'restaurants-logos/karazah-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'Section-B',
-    Icon: 'restaurants-logos/section-b-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'باكو (Baco)',
-    Icon: 'restaurants-logos/baco-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'أرمين (Armin)',
-    Icon: 'restaurants-logos/armin-logo.webp',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'ياواتشا',
-    Icon: 'restaurants-logos/yawatsha-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-];
-
 export const subMenuItems = [
   {
     id: 1,
@@ -1056,14 +825,6 @@ export const subMenuItems = [
   },
   {
     id: 3,
-    label: 'الإتصال والبيانات',
-    Icon: MdSignalCellularAlt,
-    submenu: contactAndData,
-    src: '/assets/contactAndData.webp',
-    path: PATHS.RECHARGE_CARDS.link,
-  },
-  {
-    id: 4,
     label: 'بطاقات تسوق',
     Icon: PiShoppingCartLight,
     submenu: shoppingCarts,
@@ -1077,14 +838,6 @@ export const subMenuItems = [
     submenu: servicesAndSubscriptions,
     src: '/assets/servicesAndSubscriptions.webp',
     path: PATHS.SERVICES.link,
-  },
-  {
-    id: 6,
-    label: 'مطاعم',
-    Icon: MdRestaurant,
-    submenu: restaurants,
-    src: '/assets/restaurants.webp',
-    path: PATHS.RESTAURANT.link,
   },
 ];
 

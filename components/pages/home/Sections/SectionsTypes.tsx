@@ -6,7 +6,7 @@ import React from 'react';
 const SectionsTypes = () => {
   return (
     <Container>
-      <div className="grid grid-cols-3 lg:grid-cols-6 gap-5">
+      <div className="grid grid-cols-3 lg:grid-cols-4 gap-5">
         {subMenuItems.map((item) => (
           <SectionTypeCard
             key={item.id}
