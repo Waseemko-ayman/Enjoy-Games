@@ -7,6 +7,7 @@ import RedeemPoints from './Sections/RedeemPoints';
 import EnjoyWinWin from './Sections/EnjoyWinWin';
 import ServiceAdvantages from './Sections/ServiceAdvantages';
 import Banner from './Sections/Banner';
+import WalletSection from './Sections/WalletSection';
 
 const HomePage = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage = () => {
         ]}
       />
       <SectionsTypes />
+      <WalletSection />
       <BestSellers />
       <SuggestedProducts />
       <NewlyArrived />

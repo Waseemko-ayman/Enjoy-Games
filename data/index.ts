@@ -18,6 +18,7 @@ import { PiShoppingCartLight, PiSquaresFourLight } from 'react-icons/pi';
 import { PATHS } from './paths';
 import { IoMdHelpCircleOutline } from 'react-icons/io';
 import { FiAward, FiTrendingUp } from 'react-icons/fi';
+import { Sparkles, Wallet } from 'lucide-react';
 
 export const digitalStores = [
   {
@@ -1217,5 +1218,35 @@ export const faqData = [
     question: '8️⃣ ماذا أفعل إذا لم يصلني الرصيد أو البطاقة بعد الاستبدال ؟',
     answer:
       'إذا واجهت أي مشكلة، يمكنك التواصل مع الدعم الفني، وسنساعدك في حل المشكلة بأسرع وقت ممكن.',
+  },
+];
+
+export const cardsData = [
+  {
+    id: 1,
+    title: 'محفظتي',
+    value: '0',
+    unit: 'saudi_riyal',
+    icon: Wallet,
+    bgColor: 'bg-violet-600',
+    textColor: 'text-white',
+  },
+  {
+    id: 2,
+    title: 'دليل ستارز',
+    value: '0',
+    unit: 'نقطة',
+    icon: Sparkles,
+    bgColor: 'bg-orange-300',
+    textColor: 'text-[#060919]',
+  },
+  {
+    id: 3,
+    title: 'دليل مكسب',
+    value: '0',
+    unit: 'saudi_riyal',
+    icon: Wallet,
+    bgColor: 'bg-amber-50',
+    textColor: 'text-[#060919]',
   },
 ];
