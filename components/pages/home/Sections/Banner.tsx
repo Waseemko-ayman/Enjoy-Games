@@ -52,7 +52,7 @@ export default function Banner({ images }: BannerProps) {
   }, [emblaApi, images.length]);
 
   return (
-    <div className="relative overflow-hidden w-full">
+    <div className="relative overflow-hidden w-full mb-20">
       <div className="relative">
         {/* Navigation buttons */}
         <div className="hidden sm:block">

@@ -9,8 +9,8 @@ import { PiShoppingCartLight } from 'react-icons/pi';
 const RedeemPoints = () => {
   return (
     <Layer>
-      <div className="bg-[var(--enjoy-secondary-light)] rounded-[20px] overflow-hidden px-5 pt-5 pb-7 sm:px-10 sm:pb-10">
-        <div className="flex items-center justify-between gap-1">
+      <div className="bg-[var(--enjoy-secondary-light)] rounded-[20px] overflow-hidden pt-5 pb-7 sm:pb-10">
+        <div className="flex items-center justify-between gap-1 px-5 sm:px-10">
           <h2 className="text-xl px-3 lg:px-0 font-semibold my-3 inline-block">
             استبدل نقاطك
           </h2>
@@ -18,7 +18,7 @@ const RedeemPoints = () => {
             عرض الكل
           </Link>
         </div>
-        <GridWrapper otherClassName="mt-3 !p-0" isScrollable>
+        <GridWrapper otherClassName="mt-3 !py-0 px-5 sm:px-10" isScrollable>
           {NewlyArrivedData.map((card) => (
             <CommonCard
               key={card.id}

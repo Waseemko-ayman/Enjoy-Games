@@ -88,8 +88,8 @@ export interface ImageProps extends BaseClassNameProps {
   imgSrc: string;
   imgAlt: string;
   imgTitle: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 }
 
 export interface SectionComponentProps extends WithChildren {
@@ -131,8 +131,9 @@ export interface SectionTypeCardProps extends BaseClassNameProps {
   imgSrc: string;
   imgAlt: string;
   imgTitle: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
+  otherClassName?: string;
 }
 
 export interface ServiceCardProps extends BaseClassNameProps {

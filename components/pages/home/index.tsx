@@ -1,4 +1,3 @@
-import Container from '@/components/organism/Container';
 import React from 'react';
 import SectionsTypes from './Sections/SectionsTypes';
 import BestSellers from './Sections/BestSellers';
@@ -19,13 +18,11 @@ const HomePage = () => {
           { src: '/assets/banners/banner3.webp', alt: 'Banner 3' },
         ]}
       />
-      <Container>
-        <SectionsTypes />
-        <BestSellers />
-        <SuggestedProducts />
-        <NewlyArrived />
-        <RedeemPoints />
-      </Container>
+      <SectionsTypes />
+      <BestSellers />
+      <SuggestedProducts />
+      <NewlyArrived />
+      <RedeemPoints />
       <EnjoyWinWin />
       <ServiceAdvantages />
     </>
