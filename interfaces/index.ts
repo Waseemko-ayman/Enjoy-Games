@@ -27,6 +27,7 @@ export interface ButtonProps extends BaseClassNameProps, WithChildren {
   type?: ButtonTypes;
   Icon?: React.ElementType;
   iconPosition?: ButtonIconPosition;
+  disabled?: boolean;
 }
 
 export interface CommonCardProps extends BaseIconProps {
@@ -217,4 +218,12 @@ export interface GridWrapperProps extends BaseClassNameProps, WithChildren {
   isScrollable?: boolean;
   gridCols?: string;
   itemClassName?: string;
+}
+
+export interface AuthLayoutProps extends SectionComponentProps {
+  btnText: string;
+  description: string;
+  showFooterText?: boolean;
+  isSubmitDisabled?: boolean;
+  onSubmit?: () => void;
 }

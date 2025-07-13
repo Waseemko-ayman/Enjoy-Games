@@ -14,7 +14,7 @@ const RedeemPoints = () => {
           <h2 className="text-xl px-3 lg:px-0 font-semibold my-3 inline-block">
             استبدل نقاطك
           </h2>
-          <Link href="#" className="text-lg">
+          <Link href="#" className="text-base">
             عرض الكل
           </Link>
         </div>

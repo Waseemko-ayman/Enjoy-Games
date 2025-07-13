@@ -10,6 +10,7 @@ const Button = ({
   handleClick,
   Icon,
   iconPosition = 'left',
+  disabled = false,
 }: ButtonProps) => {
   return (
     <button
@@ -22,10 +23,13 @@ const Button = ({
           ? 'bg-enjoy-primary-deep hover:bg-enjoy-primary-deep-light'
           : variant === 'forth'
           ? 'bg-enjoy-glass hover:bg-enjoy-gray-light text-enjoy-primary-deep'
+          : variant === 'fifth'
+          ? 'bg-amber-100 border border-amber-300 text-enjoy-primary-deep'
           : ''
       } ${otherClassName}`}
       onClick={handleClick}
       type={type}
+      disabled={disabled}
     >
       {iconPosition === 'left' && Icon && <Icon />}
       {children}

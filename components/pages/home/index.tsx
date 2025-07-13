@@ -14,8 +14,8 @@ const HomePage = () => {
       <Banner
         images={[
           { src: '/assets/banners/banner1.webp', alt: 'Banner 1' },
-          { src: '/assets/banners/banner2.webp', alt: 'Banner 2' },
-          { src: '/assets/banners/banner3.webp', alt: 'Banner 3' },
+          // { src: '/assets/banners/banner2.webp', alt: 'Banner 2' },
+          // { src: '/assets/banners/banner3.webp', alt: 'Banner 3' },
         ]}
       />
       <SectionsTypes />

@@ -1,5 +1,5 @@
 export type ButtonMainVarinats = 'primary' | 'secondary';
-export type ButtonVarinats = ButtonMainVarinats | 'third' | 'forth';
+export type ButtonVarinats = ButtonMainVarinats | 'third' | 'forth' | 'fifth';
 export type ButtonTypes = 'submit' | 'button' | 'reset';
 export type ButtonIconPosition = 'left' | 'right';
 export type CommonCardVariant = 'row' | 'column';
