@@ -1,6 +1,6 @@
 import CommonCard from '@/components/atomic/CommonCard';
-import Layer from '@/components/atomic/Layer';
 import GridWrapper from '@/components/molecules/GridWrapper';
+import ResponsiveWrapper from '@/components/molecules/ResponsiveWrapper';
 import { NewlyArrivedData } from '@/data';
 import Link from 'next/link';
 import React from 'react';
@@ -8,7 +8,7 @@ import { PiShoppingCartLight } from 'react-icons/pi';
 
 const RedeemPoints = () => {
   return (
-    <Layer>
+    <ResponsiveWrapper>
       <div className="bg-[var(--enjoy-secondary-light)] rounded-[20px] overflow-hidden pt-5 pb-7 sm:pb-10">
         <div className="flex items-center justify-between gap-1 px-5 sm:px-10">
           <h2 className="text-xl px-3 lg:px-0 font-semibold my-3 inline-block">
@@ -37,7 +37,7 @@ const RedeemPoints = () => {
           ))}
         </GridWrapper>
       </div>
-    </Layer>
+    </ResponsiveWrapper>
   );
 };
 
