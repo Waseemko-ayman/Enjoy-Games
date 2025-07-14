@@ -8,6 +8,7 @@ import {
   footerListsName,
   NavbarLayout,
 } from '@/utils/type';
+import { JSX } from 'react';
 
 interface BaseIconProps {
   Icon?: React.ElementType | string;
@@ -263,4 +264,15 @@ export interface TierProgressWrapperProps extends WithChildren {
   connectionLineWidth: number;
   progress: string;
   progressFooter: React.ComponentProps<typeof ProgressCircle>['footer'];
+}
+
+export interface EarningsPointsSectionProps {
+  variant: 'earnings' | 'points';
+  totalAmount: number;
+  withdrawableAmount: number;
+  conversionRate?: string;
+  starPoints?: number;
+  lastWithdrawalText: JSX.Element | string;
+  firstButtonHref?: string;
+  secondButtonHref?: string;
 }
