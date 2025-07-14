@@ -15,7 +15,7 @@ const StarsGiftsPage = () => {
           title="هدايا دليل ستارز 🤩"
           subtitle="يمكنك استبدال البطاقات بنقاط دليل ستارز!"
         />
-        <GridWrapper otherClassName="mt-3 !py-0 px-5 sm:px-10">
+        <GridWrapper otherClassName="mt-3">
           {NewlyArrivedData.map((card) => (
             <CommonCard
               key={card.id}
