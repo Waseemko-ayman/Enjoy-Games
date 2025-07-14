@@ -3,6 +3,7 @@ import CardWrapper from '@/components/atomic/CardWrapper';
 import { EarningsPointsSectionProps } from '@/interfaces';
 import Image from 'next/image';
 import React from 'react';
+import { PiStarFourFill } from 'react-icons/pi';
 
 const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   variant,
@@ -16,8 +17,15 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
 }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-      <CardWrapper bgColor="bg-enjoy-glass" className="py-[60px] px-5">
-        <div className="text-center">
+      <CardWrapper
+        bgColor="bg-enjoy-glass"
+        className="px-5 flex items-center justify-between"
+      >
+        <div className="text-center mx-auto">
+          <PiStarFourFill
+            className="mx-auto mb-1 text-enjoy-secondary"
+            size={40}
+          />
           <h5 className="text-sm font-bold">
             {variant === 'earnings'
               ? 'الأرباح القابلة للسحب'
@@ -121,7 +129,7 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
           </h5>
           <CardWrapper
             bgColor="bg-white"
-            className="p-5 border border-[#f4f4f4]"
+            className="p-5 border border-[#f4f4f4] max-h-[100px] overflow-y-auto scrollbar-none"
           >
             {lastWithdrawalText}
           </CardWrapper>
