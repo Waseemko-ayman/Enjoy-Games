@@ -1,17 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Container from '../organism/Container';
 import Layer from '../atomic/Layer';
+import useIsMobile from '@/hook/useIsMobile';
 
 const ResponsiveWrapper = ({ children }: { children: React.ReactNode }) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 991);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useIsMobile();
 
   return (
     <Layer>{isMobile ? children : <Container>{children}</Container>}</Layer>

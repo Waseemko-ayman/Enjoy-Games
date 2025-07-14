@@ -2,9 +2,10 @@
 import CardWrapper from '@/components/atomic/CardWrapper';
 import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import Container from './Container';
+import useIsMobile from '@/hook/useIsMobile';
 
 interface DiscoverEarnMoreCardProps {
   title: string;
@@ -24,14 +25,7 @@ const DiscoverEarnMoreCard: React.FC<DiscoverEarnMoreCardProps> = ({
   triggerClassName = '',
 }) => {
   const [open, setOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 991);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useIsMobile();
   return (
     <Container>
       <CardWrapper

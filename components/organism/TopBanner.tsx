@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import ResponsiveDialogDrawer from './ResponsiveDialogDrawer';
 import { PATHS } from '@/data/paths';
 import { useRouter } from 'next/navigation';
 import TopBannerDrawerContent from '../molecules/TopBannerDrawerContent';
+import useIsMobile from '@/hook/useIsMobile';
 
 const TopBanner = () => {
   const [open, setOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
 
   const router = useRouter();
 
@@ -15,13 +16,6 @@ const TopBanner = () => {
     setTimeout(() => router.push(PATHS.STARS.link), 200);
     setOpen(false);
   };
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 991);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <div

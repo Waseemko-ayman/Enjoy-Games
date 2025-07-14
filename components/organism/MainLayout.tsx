@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TopBanner from './TopBanner';
 import Header from './WebHeader/Header';
 import Navbar from './WebHeader/Navbar';
@@ -8,19 +8,13 @@ import MobileHeader from './MobileHeader/Header';
 import SearchHeader from './MobileHeader/SearchHeader';
 import MobileNavbar from './MobileHeader/Navbar';
 import { usePathname } from 'next/navigation';
+import useIsMobile from '@/hook/useIsMobile';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const isStorePage = pathname === '/store';
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 991);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useIsMobile();
 
   return (
     <>
