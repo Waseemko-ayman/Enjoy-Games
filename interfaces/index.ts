@@ -276,3 +276,27 @@ export interface EarningsPointsSectionProps {
   firstButtonHref?: string;
   secondButtonHref?: string;
 }
+
+interface RewardProgram {
+  id: number;
+  title: string;
+  type: string;
+  amount?: number;
+  currency?: string;
+  description?: string;
+}
+
+export interface RewardProgramItemProps {
+  program: RewardProgram;
+  isSelected: boolean;
+}
+
+export interface SelectableListProps<T> {
+  items: T[];
+  selectedItem: T;
+  getKey: (item: T) => React.Key;
+  onSelect: (item: T) => void;
+  renderContent: (item: T, isSelected: boolean) => React.ReactNode;
+  className?: string;
+  listClassName?: string;
+}

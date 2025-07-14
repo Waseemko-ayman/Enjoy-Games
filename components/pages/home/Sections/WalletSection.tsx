@@ -1,14 +1,14 @@
 import GridWrapper from '@/components/molecules/GridWrapper';
 import WalletCard from '@/components/molecules/WalletCard';
 import Container from '@/components/organism/Container';
-import { cardsData } from '@/data';
+import { WalletSectionData } from '@/data';
 import React from 'react';
 
 const WalletSection = () => {
   return (
     <Container otherClassName="mt-10">
       <GridWrapper gridCols="grid-cols-1">
-        {cardsData.map((card) => (
+        {WalletSectionData.map((card) => (
           <WalletCard
             key={card.id}
             pathName={card.link}
