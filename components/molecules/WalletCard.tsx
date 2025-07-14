@@ -1,15 +1,8 @@
 // components/WalletCard.tsx
 import React from 'react';
 import Image from 'next/image';
-
-interface WalletCardProps {
-  title: string;
-  value: string;
-  unit: string;
-  Icon?: React.ElementType;
-  bgColor: string;
-  textColor: string;
-}
+import Link from 'next/link';
+import { WalletCardProps } from '@/interfaces';
 
 const imageUnits = ['saudi_riyal'];
 
@@ -20,11 +13,13 @@ const WalletCard: React.FC<WalletCardProps> = ({
   Icon,
   bgColor,
   textColor,
+  pathName,
 }) => {
   const isImageUnit = imageUnits.includes(unit);
 
   return (
-    <div
+    <Link
+      href={pathName}
       className={`rounded-2xl px-5 py-8 flex flex-col justify-between h-[120px] ${bgColor} ${textColor}`}
     >
       <div className="flex items-center gap-2">
@@ -44,7 +39,7 @@ const WalletCard: React.FC<WalletCardProps> = ({
           <span className="text-sm">{unit}</span>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 

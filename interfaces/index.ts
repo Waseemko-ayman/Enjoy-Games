@@ -1,3 +1,4 @@
+import ProgressCircle from '@/components/molecules/ProgressCircle';
 import {
   ButtonIconPosition,
   ButtonMainVarinats,
@@ -255,4 +256,11 @@ export interface EarnMoreDrawerCardProps {
   onCopyLink?: () => void;
   socialLinks?: React.ReactNode;
   otherClassName?: string;
+}
+
+export interface TierProgressWrapperProps extends WithChildren {
+  title: string;
+  connectionLineWidth: number;
+  progress: string;
+  progressFooter: React.ComponentProps<typeof ProgressCircle>['footer'];
 }

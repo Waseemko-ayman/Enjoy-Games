@@ -2,12 +2,22 @@ import { TierBadgeProps } from '@/interfaces';
 import React from 'react';
 import { FaRegStar } from 'react-icons/fa6';
 
-const TierBadge: React.FC<TierBadgeProps> = ({
+interface ExtendedTierBadgeProps extends TierBadgeProps {
+  progress?: number; // النسبة الحالية (0-1)
+  requiredProgress?: number; // النسبة المطلوبة للوصول للـ Tier
+}
+
+const TierBadge: React.FC<ExtendedTierBadgeProps> = ({
   name,
-  icon: Icon,
+  Icon,
   isActive,
+  progress = 0,
+  requiredProgress = 0,
 }) => {
-  const isActiveStyle = `
+  const isReached = progress >= requiredProgress;
+  const isCurrentTier = isActive ?? isReached;
+
+  const activeStyle = `
     text-[var(--enjoy-primary)] 
     border-[var(--enjoy-primary)] 
     bg-gradient-to-br from-purple-100 to-blue-100
@@ -15,7 +25,7 @@ const TierBadge: React.FC<TierBadgeProps> = ({
     shadow-[0_4px_12px_var(--enjoy-primary-soft)]
   `;
 
-  const isNotActiveStyle = `
+  const notActiveStyle = `
     text-[var(--enjoy-gray-675)] 
     bg-[var(--enjoy-gray-100)] 
     border-[var(--enjoy-gray-300)] 
@@ -25,20 +35,19 @@ const TierBadge: React.FC<TierBadgeProps> = ({
   return (
     <div className="text-center">
       <div
-        className={`
-          relative w-24 h-28 mx-auto mb-5 rounded-t-full rounded-b-lg
+        className={`relative w-24 h-28 mx-auto mb-5 rounded-t-full rounded-b-lg
           border-2 shadow-lg flex flex-col items-center justify-center
-          ${isActive ? isActiveStyle : isNotActiveStyle}
+          ${isCurrentTier ? activeStyle : notActiveStyle}
         `}
       >
-        <Icon className="w-9 h-9 mb-1" />
+        {Icon && <Icon className="w-9 h-9 mb-1" />}
 
         <div
           className={`
             absolute -bottom-3 w-7 h-7 rounded-full border-2
             flex items-center justify-center
             ${
-              isActive
+              isCurrentTier
                 ? 'bg-enjoy-primary border-enjoy-primary-dark'
                 : 'bg-[var(--enjoy-gray-300)] border-[var(--enjoy-gray-400)]'
             }
@@ -46,12 +55,12 @@ const TierBadge: React.FC<TierBadgeProps> = ({
         >
           <div
             className={`w-3 h-3 rounded-full ${
-              isActive ? 'bg-white' : 'bg-[var(--enjoy-gray-500)]'
+              isCurrentTier ? 'bg-white' : 'bg-[var(--enjoy-gray-500)]'
             }`}
           />
         </div>
 
-        {isActive && (
+        {isCurrentTier && (
           <>
             <div className="absolute -top-2 -left-2 w-7 h-7 bg-[var(--enjoy-primary)] rounded-full flex items-center justify-center">
               <FaRegStar className="w-3 h-3 text-white fill-white" />
@@ -65,12 +74,14 @@ const TierBadge: React.FC<TierBadgeProps> = ({
 
       <h3
         className={`text-[12px] font-medium mb-1 ${
-          isActive ? 'text-enjoy-primary' : 'text-[var(--enjoy-gray-600)]'
+          isCurrentTier ? 'text-enjoy-primary' : 'text-[var(--enjoy-gray-600)]'
         }`}
       >
         {name}
       </h3>
-      <p className="text-[15px] text-[var(--enjoy-gray-500)]">1 عائد لكل عملية</p>
+      <p className="text-[15px] text-[var(--enjoy-gray-500)]">
+        1 عائد لكل عملية
+      </p>
     </div>
   );
 };

@@ -19,6 +19,7 @@ import { PATHS } from './paths';
 import { IoMdHelpCircleOutline } from 'react-icons/io';
 import { FiAward, FiTrendingUp } from 'react-icons/fi';
 import { Sparkles, Wallet } from 'lucide-react';
+import { RewardTier } from '@/interfaces';
 
 export const digitalStores = [
   {
@@ -1143,27 +1144,36 @@ export const tiers = [
     id: 1,
     name: 'دليل جونيور',
     icon: FaRegGem,
+    percentage: 0.2,
     isActive: true,
   },
   {
     id: 2,
     name: 'دليل نشط',
     icon: FaCrown,
+    percentage: 0.4,
+    isActive: false,
   },
   {
     id: 3,
     name: 'دليل محترف',
     icon: FaRegStar,
+    percentage: 0.6,
+    isActive: false,
   },
   {
     id: 4,
     name: 'دليل خبير',
     icon: FiAward,
+    percentage: 0.8,
+    isActive: false,
   },
   {
     id: 5,
     name: 'دليل مميز',
     icon: FaDiamond,
+    percentage: 1,
+    isActive: false,
   },
 ];
 
@@ -1293,4 +1303,12 @@ export const inviteStepsData = [
     footerType: 'none',
     order: 'left',
   },
+];
+
+export const mockApiData: RewardTier[] = [
+  { id: 1, name: 'البرونزية', percentage: 0.3, isActive: true },
+  { id: 2, name: 'الفضية', percentage: 0.4, isActive: false },
+  { id: 3, name: 'الذهبية', percentage: 0.5, isActive: false },
+  { id: 4, name: 'البلاتينيوم', percentage: 0.6, isActive: false },
+  { id: 5, name: 'VIP', percentage: 0.7, isActive: false },
 ];

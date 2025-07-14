@@ -11,6 +11,7 @@ const WalletSection = () => {
         {cardsData.map((card) => (
           <WalletCard
             key={card.id}
+            pathName={card.link}
             title={card.title}
             value={card.value}
             unit={card.unit}
