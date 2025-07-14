@@ -1231,10 +1231,10 @@ export const faqData = [
   },
 ];
 
-export const cardsData = [
+export const WalletSectionData = [
   {
     id: 1,
-    link: PATHS.MAX_PROGRAM,
+    link: PATHS.WALLET.link,
     title: 'محفظتي',
     value: '0',
     unit: 'saudi_riyal',
@@ -1244,7 +1244,7 @@ export const cardsData = [
   },
   {
     id: 2,
-    link: PATHS.MAX_PROGRAM,
+    link: PATHS.STARS.link,
     title: 'دليل ستارز',
     value: '0',
     unit: 'نقطة',
@@ -1254,7 +1254,7 @@ export const cardsData = [
   },
   {
     id: 3,
-    link: PATHS.MAX_PROGRAM,
+    link: PATHS.MAX_PROGRAM.link,
     title: 'دليل مكسب',
     value: '0',
     unit: 'saudi_riyal',
@@ -1311,4 +1311,28 @@ export const mockApiData: RewardTier[] = [
   { id: 3, name: 'الذهبية', percentage: 0.5, isActive: false },
   { id: 4, name: 'البلاتينيوم', percentage: 0.6, isActive: false },
   { id: 5, name: 'VIP', percentage: 0.7, isActive: false },
+];
+
+export const rewardsPrograms = [
+  {
+    id: 1,
+    title: 'برامج المكافآت',
+    type: 'earnings',
+  },
+  {
+    id: 2,
+    title: 'برنامج مكسب',
+    type: 'earnings',
+    amount: 0,
+    currency: 'ريال',
+    description: 'أرباحك القابلة للسحب',
+  },
+  {
+    id: 3,
+    title: 'نقاط دليل ستارز',
+    type: 'points',
+    amount: 0,
+    currency: 'نقطة',
+    description: 'نقاطك القابلة للتحويل',
+  },
 ];
