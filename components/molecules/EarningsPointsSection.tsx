@@ -1,18 +1,8 @@
 import Button from '@/components/atomic/Button';
 import CardWrapper from '@/components/atomic/CardWrapper';
+import { EarningsPointsSectionProps } from '@/interfaces';
 import Image from 'next/image';
-import React, { JSX } from 'react';
-
-interface EarningsPointsSectionProps {
-  variant: 'earnings' | 'points';
-  totalAmount: number;
-  withdrawableAmount: number;
-  conversionRate?: string;
-  starPoints?: number;
-  lastWithdrawalText: JSX.Element | string;
-  firstButtonHref?: string;
-  secondButtonHref?: string;
-}
+import React from 'react';
 
 const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   variant,
