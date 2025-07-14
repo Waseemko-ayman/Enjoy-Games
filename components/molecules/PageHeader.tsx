@@ -1,6 +1,5 @@
 'use client';
 
-import { FC } from 'react';
 import { usePathname } from 'next/navigation';
 import {
   Breadcrumb,
@@ -11,7 +10,7 @@ import {
 import Container from '../organism/Container';
 import { PATHS } from '@/data/paths';
 
-const PageHeader: FC = () => {
+const PageHeader = ({ showTitle = true }: { showTitle?: boolean }) => {
   const pathname = usePathname();
 
   // Split the pathname and remove empty parts
@@ -61,9 +60,11 @@ const PageHeader: FC = () => {
               </div>
             ))}
           </Breadcrumb>
-          <h1 className="text-2xl md:text-3xl font-semibold mt-5 mb-7">
-            {title}
-          </h1>
+          {showTitle && (
+            <h1 className="text-2xl md:text-3xl font-semibold mt-5 mb-7">
+              {title}
+            </h1>
+          )}
         </div>
       </Container>
     </div>
