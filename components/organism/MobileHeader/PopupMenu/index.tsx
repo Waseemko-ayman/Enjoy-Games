@@ -1,11 +1,16 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import PopupHeader from './Sections/PopupHeader';
 import { PopupMenuProps } from '@/interfaces';
 import AuthButtons from './Sections/AuthButtons';
 import Information from './Sections/Information';
 import MenuLists from './Sections/MenuLists';
+import CardWrapper from '@/components/atomic/CardWrapper';
+import { FiLogOut } from 'react-icons/fi';
+import { IoIosArrowBack } from 'react-icons/io';
 
 const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
+  const [isLogin] = useState(true);
   return (
     <div
       className={`fixed inset-0 bg-[#f8f9ff] z-[1000] ${
@@ -16,9 +21,21 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
     >
       <PopupHeader onClose={onClose} />
       <div className="px-4 mt-4">
-        <AuthButtons />
+        {!isLogin && <AuthButtons />}
         <Information />
         <MenuLists />
+        {isLogin && (
+          <CardWrapper
+            bgColor="bg-white"
+            className="py-5 px-5 shadow-[0_8.293px_37.319px_4.147px_rgba(0,0,0,0.08)] mt-8 flex items-center justify-between"
+          >
+            <div className="flex items-center gap-3 text-[var(--enjoy-error)]">
+              <FiLogOut />
+              <h4 className="text-[15px] font-normal">تسجيل خروج </h4>
+            </div>
+            <IoIosArrowBack className="text-[var(--enjoy-error)]" />
+          </CardWrapper>
+        )}
       </div>
     </div>
   );

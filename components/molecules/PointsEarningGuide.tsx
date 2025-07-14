@@ -1,5 +1,5 @@
 import React from 'react';
-import { PiStarFourFill } from 'react-icons/pi';
+import { PiSparkleFill } from 'react-icons/pi';
 import { featuresData } from '@/data';
 import FeatureCard from './FeatureCard';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ const PointsEarningGuide = ({ isLogin = true }: { isLogin?: boolean }) => {
     <div>
       <div className="text-center mb-3 sm:mb-8 p-3 rounded-2xl border border-gray-200">
         <h2 className="text-lg font-semibold text-[var(--enjoy-secondary)] flex items-center justify-center gap-2">
-          <PiStarFourFill className="w-6 h-6" />
+          <PiSparkleFill className="w-6 h-6" />
           كلما اشتريت أكثر، كلما كسبت أكثر!
         </h2>
       </div>

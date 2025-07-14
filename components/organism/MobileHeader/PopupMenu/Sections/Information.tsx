@@ -4,7 +4,7 @@ import CardWrapper from '@/components/atomic/CardWrapper';
 import { Wallet } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { PiStarFourFill } from 'react-icons/pi';
+import { PiSparkleFill } from 'react-icons/pi';
 
 const Information = () => {
   const [accountAdvance] = useState(20);
@@ -50,7 +50,7 @@ const Information = () => {
       </div>
 
       <div className={`text-[var(--enjoy-secondary))] ${infoStyle}`}>
-        <PiStarFourFill size={18} />
+        <PiSparkleFill size={18} />
         <div className="flex items-center gap-2">
           <span>0</span>
           <span>نقاط دليل ستارز</span>

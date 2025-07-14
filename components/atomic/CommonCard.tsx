@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Avatar from './Avatar';
-import { PiStarFourFill } from 'react-icons/pi';
+import { PiSparkleFill } from 'react-icons/pi';
 import Button from './Button';
 import { CommonCardProps } from '@/interfaces';
 import CardWrapper from './CardWrapper';
@@ -91,11 +91,11 @@ const CommonCard: React.FC<CommonCardProps> = ({
                   {variant === 'row' ? (
                     <>
                       <h5>{ratings}</h5>
-                      <PiStarFourFill />
+                      <PiSparkleFill />
                     </>
                   ) : (
                     <>
-                      <PiStarFourFill />
+                      <PiSparkleFill />
                       <h5>{ratings}</h5>
                     </>
                   )}

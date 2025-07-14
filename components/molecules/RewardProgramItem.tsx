@@ -17,7 +17,7 @@ const RewardProgramItem = ({ program, isSelected }: RewardProgramItemProps) => {
         <h4 className="font-semibold text-base">{program.title}</h4>
       </div>
       {program.description && (
-        <p className="text-[12px] sm:text-sm text-gray-600 bg-[var(--enjoy-gray-100)] py-2.5 px-2 rounded-lg">
+        <p className="text-xs sm:text-sm text-gray-600 bg-[var(--enjoy-gray-100)] py-2.5 px-2 rounded-lg">
           {program.description}:{' '}
           <span className="text-[var(--enjoy-success)]">
             {program.amount}

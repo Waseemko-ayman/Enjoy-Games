@@ -53,7 +53,7 @@ const Profits = () => {
                 bgColor="bg-enjoy-secondary-soft"
                 className="p-3.5 !shadow-none w-full"
               >
-                <h5 className="text-[12px] font-semibold mb-4">
+                <h5 className="text-xs font-semibold mb-4">
                   إجمالي الأرباح (منذ البداية)
                 </h5>
                 <div className="flex items-center justify-between">
@@ -71,7 +71,7 @@ const Profits = () => {
                 bgColor="bg-enjoy-primary-soft"
                 className="p-3.5 !shadow-none w-full"
               >
-                <h5 className="text-[12px] font-semibold mb-4">
+                <h5 className="text-xs font-semibold mb-4">
                   مستخدمون اشتروا من خلالك
                 </h5>
                 <span className="text-lg font-semibold">0</span>

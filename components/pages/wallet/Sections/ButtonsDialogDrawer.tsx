@@ -49,7 +49,7 @@ const ButtonsDialogDrawer = () => {
             iconClassName="text-red-500"
             variant="secondary"
             otherClassNameContainer="!border !border-gray-300 !rounded-lg"
-            otherClassName="placeholder:text-enjoy-primary-deep placeholder:text-[12px] placeholder:font-bold"
+            otherClassName="placeholder:text-enjoy-primary-deep placeholder:text-xs placeholder:font-bold"
           />
           <Button otherClassName="py-3.5 text-sm w-full mt-6">
             أضف القسيمة

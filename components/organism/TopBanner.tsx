@@ -44,7 +44,7 @@ const TopBanner = () => {
           />
         </ResponsiveDialogDrawer>
 
-        <span className="text-[12px] text-[var(--enjoy-primary-deep)] bg-[var(--enjoy-lime-yellow)] rounded-4xl px-1.5 order-1 sm:order-2">
+        <span className="text-xs text-[var(--enjoy-primary-deep)] bg-[var(--enjoy-lime-yellow)] rounded-4xl px-1.5 order-1 sm:order-2">
           جديد
         </span>
       </div>

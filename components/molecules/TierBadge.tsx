@@ -73,7 +73,7 @@ const TierBadge: React.FC<ExtendedTierBadgeProps> = ({
       </div>
 
       <h3
-        className={`text-[12px] font-medium mb-1 ${
+        className={`text-xs font-medium mb-1 ${
           isCurrentTier ? 'text-enjoy-primary' : 'text-[var(--enjoy-gray-600)]'
         }`}
       >

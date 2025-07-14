@@ -3,21 +3,35 @@ import {
   FaCrown,
   FaDiamond,
   FaFacebook,
+  FaFlag,
   FaGift,
+  FaHeart,
   FaInstagram,
+  FaLink,
   FaLinkedin,
+  FaRegFlag,
   FaRegGem,
   FaRegHeart,
   FaRegStar,
   FaSackDollar,
   FaTwitter,
+  FaUser,
+  FaWallet,
 } from 'react-icons/fa6';
-import { IoArrowRedoOutline, IoGameControllerOutline } from 'react-icons/io5';
+import {
+  IoArrowRedoOutline,
+  IoGameControllerOutline,
+  IoWalletOutline,
+} from 'react-icons/io5';
 import { MdMoreHoriz, MdOutlineEmail } from 'react-icons/md';
-import { PiShoppingCartLight, PiSquaresFourLight } from 'react-icons/pi';
+import {
+  PiShoppingCartLight,
+  PiSparkleFill,
+  PiSquaresFourLight,
+} from 'react-icons/pi';
 import { PATHS } from './paths';
-import { IoMdHelpCircleOutline } from 'react-icons/io';
-import { FiAward, FiTrendingUp } from 'react-icons/fi';
+import { IoMdHelpCircleOutline, IoMdPricetag } from 'react-icons/io';
+import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
 import { Sparkles, Wallet } from 'lucide-react';
 import { RewardTier } from '@/interfaces';
 
@@ -1065,12 +1079,18 @@ export const menuLists = [
     linksItem: [
       {
         id: 1,
-        title: 'دليل إنجوي',
+        title: 'دليل ستارز',
         icon: IoArrowRedoOutline,
-        link: '#',
+        link: PATHS.STARS.link,
       },
       {
         id: 2,
+        title: 'المحفظة',
+        link: PATHS.WALLET.link,
+        icon: IoWalletOutline,
+      },
+      {
+        id: 3,
         title: 'الإهتمامات',
         icon: FaRegHeart,
         link: '#',
@@ -1082,12 +1102,18 @@ export const menuLists = [
     linksItem: [
       {
         id: 1,
+        title: 'تذاكر الدعم الفني',
+        link: '#',
+        icon: FaRegFlag,
+      },
+      {
+        id: 2,
         title: 'التحدث مع خدمة العملاء',
         icon: MdOutlineEmail,
         link: '#',
       },
       {
-        id: 2,
+        id: 3,
         title: 'الأسئلة الشائعة',
         icon: IoMdHelpCircleOutline,
         link: '#',
@@ -1098,34 +1124,66 @@ export const menuLists = [
 
 export const userList = [
   {
-    id: 1,
-    title: 'برنامج مكسب',
-    link: PATHS.MAX_PROGRAM.link,
+    section: 'account',
+    items: [
+      { id: 1, title: 'حسابي', link: '#', icon: FaUser },
+      {
+        id: 2,
+        title: 'طلباتي',
+        link: '#',
+        icon: IoMdPricetag,
+      },
+      {
+        id: 3,
+        title: 'تذاكر الدعم الفني',
+        link: '#',
+        icon: FaFlag,
+      },
+    ],
   },
   {
-    id: 2,
-    title: 'دليل إنجوي',
-    link: PATHS.STARS.link,
+    section: 'rank',
+    rank: {
+      level: 1,
+      title: 'الرتبة الحالية لحسابك',
+      subtitle: 'زيادة الرتبة تعني زيادة العائد لكل عملية',
+    },
   },
   {
-    id: 3,
-    title: 'المحفظة',
-    link: PATHS.WALLET.link,
+    section: 'general',
+    items: [
+      {
+        id: 4,
+        title: 'برنامج مكسب',
+        link: PATHS.MAX_PROGRAM.link,
+        icon: FaLink,
+      },
+      { id: 5, title: 'دليل ستارز', link: PATHS.STARS.link, icon: FaFlag },
+      { id: 7, title: 'الإهتمامات', link: '#', icon: FaHeart },
+    ],
   },
   {
-    id: 4,
-    title: 'الإهتمامات',
-    link: '#',
+    section: 'wallet',
+    items: [
+      {
+        id: 8,
+        title: 'المحفظة',
+        link: PATHS.WALLET.link,
+        icon: FaWallet,
+        badge: '#0',
+      },
+      {
+        id: 9,
+        title: 'نقاط دليل ستارز',
+        link: '#',
+        icon: PiSparkleFill,
+        badge: '0',
+      },
+    ],
   },
   {
-    id: 5,
-    title: 'التحدث مع خدمة العملاء',
-    link: '#',
-  },
-  {
-    id: 6,
-    title: 'الأسئلة الشائعة',
-    link: '#',
+    section: 'logout',
+    items: [{ id: 10, title: 'تسجيل خروج', link: '#', icon: FiLogOut }],
   },
 ];
 

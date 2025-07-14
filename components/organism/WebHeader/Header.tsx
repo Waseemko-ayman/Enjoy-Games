@@ -1,6 +1,6 @@
 import Input from '@/components/atomic/Input';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Container from '../Container';
 import { FiUser } from 'react-icons/fi';
 import Link from 'next/link';
@@ -15,10 +15,25 @@ import NavItem from '@/components/atomic/NavItem';
 const Header = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [productsCount] = useState(0);
   const [isLogin] = useState(true);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const iconsStyle = 'w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer';
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="bg-white" dir="ltr">
@@ -42,27 +57,67 @@ const Header = () => {
             <Link href="#" className="relative">
               <MdOutlineShoppingCart className={iconsStyle} />
               {productsCount > 0 && (
-                <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-[12px] w-4 h-4 rounded-[50%]">
+                <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-xs w-4 h-4 rounded-[50%]">
                   <span>{productsCount}</span>
                 </div>
               )}
             </Link>
             {isLogin ? (
-              <div className="relative group">
-                <FiUser className={iconsStyle} />
-                <CardWrapper className="absolute top-full -left-4/5 z-50 hidden group-hover:block bg-white py-2 px-1">
-                  <ul dir="rtl">
-                    {userList.map((item) => (
-                      <li key={item.id} className="w-[150px]">
-                        <NavItem
-                          text={item.title}
-                          linkPath={item.link}
-                          otherClassName="!py-2 !px-0 !text-base !font-medium"
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                </CardWrapper>
+              <div className="relative" ref={menuRef}>
+                <FiUser
+                  className={iconsStyle}
+                  onClick={() => setIsOpen((prev) => !prev)}
+                />
+                {isOpen && (
+                  <CardWrapper className="absolute top-[120%] left-0 z-50 bg-white p-2 w-[212px]">
+                    <ul dir="rtl">
+                      {userList.map((section, index) => {
+                        if (section.section === 'rank') {
+                          return (
+                            <div
+                              key={index}
+                              className="border-b border-b-gray-200 px-2 py-3"
+                            >
+                              <div>
+                                <div className="flex items-center justify-between gap-2 mb-1">
+                                  <h5 className="font-semibold text-sm">
+                                    {section.rank?.title}
+                                  </h5>
+                                  <div className="bg-enjoy-primary text-white w-5 h-5 text-xs flex items-center justify-center rounded-full">
+                                    {section.rank?.level}
+                                  </div>
+                                </div>
+                                <p className="text-xs text-enjoy-primary font-medium">
+                                  {section.rank?.subtitle}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <div
+                            key={index}
+                            className="border-b border-b-gray-200 pb-2 last:border-0"
+                          >
+                            {section.items?.map((item) => (
+                              <li key={item.id} className="w-full">
+                                <NavItem
+                                  Icon={item.icon}
+                                  text={item.title}
+                                  otherClassNameIcon="text-gray-500 text-sm"
+                                  otherClassName="!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg"
+                                  linkPath={item.link}
+                                  // badge={item.badge}
+                                />
+                              </li>
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </ul>
+                  </CardWrapper>
+                )}
               </div>
             ) : (
               <Link href={PATHS.LOGIN}>

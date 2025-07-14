@@ -3,7 +3,7 @@ import CardWrapper from '@/components/atomic/CardWrapper';
 import { EarningsPointsSectionProps } from '@/interfaces';
 import Image from 'next/image';
 import React from 'react';
-import { PiStarFourFill } from 'react-icons/pi';
+import { PiSparkleFill } from 'react-icons/pi';
 
 const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   variant,
@@ -22,7 +22,7 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
         className="px-5 flex items-center justify-between"
       >
         <div className="text-center mx-auto">
-          <PiStarFourFill
+          <PiSparkleFill
             className="mx-auto mb-1 text-enjoy-secondary"
             size={40}
           />
@@ -66,7 +66,7 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
             bgColor="bg-enjoy-secondary-soft"
             className="p-3.5 !shadow-none w-full"
           >
-            <h5 className="text-[12px] font-semibold mb-4">
+            <h5 className="text-xs font-semibold mb-4">
               {variant === 'earnings'
                 ? 'إجمالي الأرباح (منذ البداية)'
                 : 'معدل تحويل النقاط الى ريال'}
@@ -110,7 +110,7 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
             bgColor="bg-enjoy-primary-soft"
             className="p-3.5 !shadow-none w-full"
           >
-            <h5 className="text-[12px] font-semibold mb-4">
+            <h5 className="text-xs font-semibold mb-4">
               {variant === 'earnings'
                 ? 'مستخدمون اشتروا من خلالك'
                 : 'إجمالي النقاط المكتسبة'}
