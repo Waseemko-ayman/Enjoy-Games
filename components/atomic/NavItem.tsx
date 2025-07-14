@@ -65,11 +65,15 @@ const NavItem: React.FC<NavItemProps> = ({
                 : ''
             }
           >
-            <Icon
-              className={`text-lg text-[var(--enjoy-primary)] ${
-                isMobile ? 'max-[991px]:text-primary' : 'max-[991px]:text-white'
-              } ${otherClassNameIcon}`}
-            />
+            {Icon && (
+              <Icon
+                className={`text-lg text-[var(--enjoy-primary)] ${
+                  isMobile
+                    ? 'max-[991px]:text-primary'
+                    : 'max-[991px]:text-white'
+                } ${otherClassNameIcon}`}
+              />
+            )}
           </div>
         )}
         <span>{text}</span>

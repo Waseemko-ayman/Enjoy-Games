@@ -1096,6 +1096,39 @@ export const menuLists = [
   },
 ];
 
+export const userList = [
+  {
+    id: 1,
+    title: 'برنامج مكسب',
+    link: PATHS.MAX_PROGRAM.link,
+  },
+  {
+    id: 2,
+    title: 'دليل إنجوي',
+    link: PATHS.STARS.link,
+  },
+  {
+    id: 3,
+    title: 'المحفظة',
+    link: PATHS.WALLET.link,
+  },
+  {
+    id: 4,
+    title: 'الإهتمامات',
+    link: '#',
+  },
+  {
+    id: 5,
+    title: 'التحدث مع خدمة العملاء',
+    link: '#',
+  },
+  {
+    id: 6,
+    title: 'الأسئلة الشائعة',
+    link: '#',
+  },
+];
+
 export const countries = [
   { name: 'السعودية', currency: 'الريال السعودي', img: 'saudi-arabia' },
   { name: 'الإمارات', currency: 'درهم إماراتي', img: 'united-arab-emirates' },

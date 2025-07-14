@@ -21,7 +21,6 @@ const Upgrade = () => {
       connectionLineWidth={connectionLineWidth}
       progress={currentPercentage.toFixed(1)}
       progressFooter={{ type: 'text', text: 'تبقى لترقيتك 100 مستخدم' }}
-      // posotionLine="top-full"
     >
       {updatedTiers.map((tier) => (
         <TierBadge

@@ -90,7 +90,7 @@ export interface PopupMenuProps {
 export interface ImageProps extends BaseClassNameProps {
   imgSrc: string;
   imgAlt: string;
-  imgTitle: string;
+  imgTitle?: string;
   width?: number;
   height?: number;
 }
@@ -126,6 +126,7 @@ export interface LinkItem extends BaseIconProps {
   id: number;
   title: string;
   link: string;
+  icon: React.ElementType | string;
 }
 
 export interface SectionTypeCardProps extends BaseClassNameProps {

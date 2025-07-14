@@ -7,13 +7,16 @@ import Link from 'next/link';
 import { IoSearch } from 'react-icons/io5';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { PATHS } from '@/data/paths';
-import { countries } from '@/data';
+import { countries, userList } from '@/data';
 import CountryDialog from '@/components/molecules/CountryDialog';
+import CardWrapper from '@/components/atomic/CardWrapper';
+import NavItem from '@/components/atomic/NavItem';
 
 const Header = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [open, setOpen] = useState(false);
   const [productsCount] = useState(0);
+  const [isLogin] = useState(true);
 
   const iconsStyle = 'w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer';
 
@@ -21,7 +24,6 @@ const Header = () => {
     <header className="bg-white" dir="ltr">
       <Container>
         <div className="flex items-center justify-between gap-10">
-          {/* Language and Country */}
           <div className="flex items-center rounded-full py-2.5 px-4 border border-gray-300 overflow-hidden text-base font-semibold text-[var(--enjoy-primary-deep)]">
             <button className="cursor-pointer transition-opacity hover:opacity-70 text-sm">
               English
@@ -36,7 +38,6 @@ const Header = () => {
             />
           </div>
 
-          {/* Icons */}
           <div className="flex items-center gap-5">
             <Link href="#" className="relative">
               <MdOutlineShoppingCart className={iconsStyle} />
@@ -46,9 +47,28 @@ const Header = () => {
                 </div>
               )}
             </Link>
-            <Link href={PATHS.LOGIN}>
-              <FiUser className={iconsStyle} />
-            </Link>
+            {isLogin ? (
+              <div className="relative group">
+                <FiUser className={iconsStyle} />
+                <CardWrapper className="absolute top-full -left-4/5 z-50 hidden group-hover:block bg-white py-2 px-1">
+                  <ul dir="rtl">
+                    {userList.map((item) => (
+                      <li key={item.id} className="w-[150px]">
+                        <NavItem
+                          text={item.title}
+                          linkPath={item.link}
+                          otherClassName="!py-2 !px-0 !text-base !font-medium"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </CardWrapper>
+              </div>
+            ) : (
+              <Link href={PATHS.LOGIN}>
+                <FiUser className={iconsStyle} />
+              </Link>
+            )}
           </div>
 
           <form className="flex-1">

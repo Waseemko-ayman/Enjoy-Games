@@ -12,7 +12,6 @@ const TierProgressWrapper: React.FC<TierProgressWrapperProps> = ({
   connectionLineWidth,
   progress,
   progressFooter,
-  // posotionLine,
 }) => {
   return (
     <Layer otherClassName="bg-enjoy-gray-light pt-16 pb-36 px-4">

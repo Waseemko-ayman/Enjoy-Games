@@ -25,7 +25,7 @@ export const PATHS = {
 
 export const navBarLinks = [
   { id: 1, icon: IoHomeOutline, title: 'الرئيسية', link: PATHS.HOME.link },
-  { id: 2, icon: IoSearch, title: 'المتجر', link: PATHS.STORE },
+  { id: 2, icon: IoSearch, title: 'المتجر', link: PATHS.STORE.link },
   { id: 3, icon: MdOutlineAssignment, title: 'طلباتي', link: '#' },
   { id: 4, icon: FiUser, title: 'سجّل الآن', link: PATHS.LOGIN },
 ];

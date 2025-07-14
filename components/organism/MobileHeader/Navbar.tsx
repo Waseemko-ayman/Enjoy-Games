@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import Container from '../Container';
 import { MdMoreHoriz } from 'react-icons/md';
 import Link from 'next/link';
-import PopupMenu from './PopupMenu';
 import { navBarLinks } from '@/data/paths';
+import PopupMenu from './PopupMenu';
 
 const MobileNavbar = () => {
   const [showMore, setShowMore] = useState(false);
