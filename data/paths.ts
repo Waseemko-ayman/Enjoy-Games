@@ -15,11 +15,12 @@ export const PATHS = {
   SHOP_CARDS: { name: 'بطاقات تسوّق متنوعة', link: '/category/shop-cards' },
   LOGIN: 'login',
   SIGN_UP: '/signup',
-  STORE: '/store',
+  STORE: { name: "المتجر", link: '/store' },
   STARS: { name: 'دليل ستارز', link: '/stars' },
   OTP: '/otp',
-  MAX_PROGRAM: '/maxup-program',
+  MAX_PROGRAM: { name: 'مكسب', link: '/maxup-program' },
   STARS_GIFTS: '/stars-gifts',
+  WALLET: { name: 'محفظتي', link: '/wallet' },
 };
 
 export const navBarLinks = [
