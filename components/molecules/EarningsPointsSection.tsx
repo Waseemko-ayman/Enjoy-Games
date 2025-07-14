@@ -10,6 +10,8 @@ interface EarningsPointsSectionProps {
   conversionRate?: string;
   starPoints?: number;
   lastWithdrawalText: JSX.Element | string;
+  firstButtonHref?: string;
+  secondButtonHref?: string;
 }
 
 const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
@@ -19,6 +21,8 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   conversionRate,
   starPoints,
   lastWithdrawalText,
+  firstButtonHref,
+  secondButtonHref,
 }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
@@ -43,8 +47,15 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
             )}
           </div>
           <div className="flex items-center justify-center gap-4">
-            <Button otherClassName="p-4 text-sm">تحويل لمحفظتي</Button>
-            <Button variant="forth" otherClassName="p-4 !bg-white text-sm">
+            <Button href={firstButtonHref} otherClassName="p-4 text-sm">
+              تحويل لمحفظتي
+            </Button>
+
+            <Button
+              href={secondButtonHref}
+              variant="forth"
+              otherClassName="p-4 !bg-white text-sm"
+            >
               {variant === 'earnings' ? 'تحويل بنكي' : 'استبدل نقاطك'}
             </Button>
           </div>

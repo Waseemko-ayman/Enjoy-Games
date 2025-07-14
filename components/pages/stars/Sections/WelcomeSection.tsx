@@ -5,6 +5,7 @@ import SectionTitle from '@/components/atomic/SectionTitle';
 import EarningsPointsSection from '@/components/molecules/EarningsPointsSection';
 import PointsEarningGuide from '@/components/molecules/PointsEarningGuide';
 import Container from '@/components/organism/Container';
+import { PATHS } from '@/data/paths';
 import React, { useState } from 'react';
 import { MdWavingHand } from 'react-icons/md';
 
@@ -26,6 +27,7 @@ const WelcomeSection = () => {
             conversionRate="1600 نقطة"
             starPoints={0}
             lastWithdrawalText="لا توجد عمليات سحب بعد"
+            secondButtonHref={PATHS.STARS_GIFTS}
           />
         ) : (
           <CardWrapper className="py-6 px-8 mb-8 max-w-5/6 mx-auto">
