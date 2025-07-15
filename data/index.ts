@@ -7,7 +7,6 @@ import {
   FaGift,
   FaHeart,
   FaInstagram,
-  FaLink,
   FaLinkedin,
   FaRegFlag,
   FaRegGem,
@@ -1152,14 +1151,14 @@ export const userList = [
   {
     section: 'general',
     items: [
-      {
-        id: 4,
-        title: 'برنامج مكسب',
-        link: PATHS.MAX_PROGRAM.link,
-        icon: FaLink,
-      },
-      { id: 5, title: 'دليل ستارز', link: PATHS.STARS.link, icon: FaFlag },
-      { id: 7, title: 'الإهتمامات', link: '#', icon: FaHeart },
+      // {
+      //   id: 4,
+      //   title: 'برنامج مكسب',
+      //   link: PATHS.MAX_PROGRAM.link,
+      //   icon: FaLink,
+      // },
+      { id: 4, title: 'دليل ستارز', link: PATHS.STARS.link, icon: FaFlag },
+      { id: 5, title: 'الإهتمامات', link: '#', icon: FaHeart },
     ],
   },
   {
@@ -1410,16 +1409,16 @@ export const rewardsPrograms = [
     title: 'برامج المكافآت',
     type: 'earnings',
   },
+  // {
+  //   id: 2,
+  //   title: 'برنامج مكسب',
+  //   type: 'earnings',
+  //   amount: 0,
+  //   currency: 'ريال',
+  //   description: 'أرباحك القابلة للسحب',
+  // },
   {
     id: 2,
-    title: 'برنامج مكسب',
-    type: 'earnings',
-    amount: 0,
-    currency: 'ريال',
-    description: 'أرباحك القابلة للسحب',
-  },
-  {
-    id: 3,
     title: 'نقاط دليل ستارز',
     type: 'points',
     amount: 0,
