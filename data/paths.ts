@@ -12,7 +12,7 @@ export const PATHS = {
   STORE: { name: 'المتجر', link: '/store' },
   STARS: { name: 'دليل ستارز', link: '/stars' },
   OTP: '/otp',
-  MAX_PROGRAM: { name: 'مكسب', link: '/maxup-program' },
+  // MAX_PROGRAM: { name: 'مكسب', link: '/maxup-program' },
   STARS_GIFTS: '/stars-gifts',
   WALLET: { name: 'محفظتي', link: '/wallet' },
   MY_PURCHASES: { name: 'طلباتي', link: '/my-purchases' },
