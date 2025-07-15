@@ -67,14 +67,14 @@ export default function HeroBanner() {
         ))}
       </div>
       {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-0.5 sm:h-1 bg-white/20 z-10">
+      {/* <div className="absolute bottom-0 left-0 right-0 h-0.5 sm:h-1 bg-white/20 z-10">
         <div
           className="h-full bg-enjoy-primary transition-all duration-300 ease-linear"
           style={{
             width: `${((currentSlide + 1) / HeroSlides.length) * 100}%`,
           }}
         />
-      </div>
+      </div> */}
     </div>
   );
 }

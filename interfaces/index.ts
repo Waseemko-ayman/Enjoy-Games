@@ -157,6 +157,7 @@ export interface BannerProps {
 }
 
 export interface CardItem {
+  id: string;
   Icon: string;
   label: string;
   banner?: string;

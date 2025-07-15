@@ -4,10 +4,16 @@ import { MdOutlineAssignment } from 'react-icons/md';
 
 export const PATHS = {
   HOME: { name: 'الرئيسية', link: '/' },
-  APP_STORES: { name: 'بطاقات المتاجر الرقمية', link: '/category/app-stores' },
-  GAMES_CARDS: { name: 'بطاقات ألعاب', link: '/category/games-cards' },
-  SERVICES: { name: 'بطاقات الخدمات والإشتراكات', link: '/category/services' },
-  SHOP_CARDS: { name: 'بطاقات تسوّق متنوعة', link: '/category/shop-cards' },
+  APP_STORES: {
+    name: 'بطاقات المتاجر الرقمية',
+    link: '/categories/digital-stores',
+  },
+  GAMES_CARDS: { name: 'بطاقات ألعاب', link: '/categories/games-platforms' },
+  SERVICES: {
+    name: 'بطاقات الخدمات والإشتراكات',
+    link: '/categories/services',
+  },
+  SHOP_CARDS: { name: 'بطاقات تسوّق متنوعة', link: '/categories/shop-cards' },
   LOGIN: 'login',
   STORE: { name: 'المتجر', link: '/store' },
   STARS: { name: 'دليل ستارز', link: '/stars' },
