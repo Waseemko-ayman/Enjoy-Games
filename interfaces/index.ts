@@ -30,6 +30,8 @@ export interface ButtonProps extends BaseClassNameProps, WithChildren {
   Icon?: React.ElementType;
   iconPosition?: ButtonIconPosition;
   disabled?: boolean;
+  bgColor?: string;
+  hoverBgColor?: string;
 }
 
 export interface CommonCardProps extends BaseIconProps {
@@ -308,4 +310,14 @@ export interface EmptyStateBoxProps {
   title: string;
   buttonText: string;
   btnlink: string;
+}
+
+export interface CartItemData {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+  storeLabel: string;
+  currencyImage: string;
 }
