@@ -54,7 +54,7 @@ const Header = () => {
           </div>
 
           <div className="flex items-center gap-5">
-            <Link href={PATHS.CART.link} className="relative">
+            <Link href={PATHS.MY_CART.link} className="relative">
               <MdOutlineShoppingCart className={iconsStyle} />
               {productsCount > 0 && (
                 <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-xs w-4 h-4 rounded-[50%]">

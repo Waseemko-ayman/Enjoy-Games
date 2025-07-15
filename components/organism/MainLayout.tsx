@@ -14,7 +14,7 @@ import CartHeader from './CartHeader';
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const isStorePage = pathname === '/store';
-  const isCartPage = pathname === '/cart';
+  const isCartPage = pathname === '/my-cart';
 
   const isMobile = useIsMobile();
 
@@ -37,7 +37,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       )}
       {children}
-      <Footer />
+      {!isCartPage && <Footer />}
     </>
   );
 };

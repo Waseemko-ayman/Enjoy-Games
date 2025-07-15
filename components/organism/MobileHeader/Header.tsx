@@ -39,7 +39,7 @@ const MobileHeader = () => {
         <h5 className="text-center text-lg font-bold w-full overflow-hidden whitespace-nowrap">
           {title}
         </h5>
-        <Link href={PATHS.CART.link}>
+        <Link href={PATHS.MY_CART.link}>
           <MdOutlineShoppingCart className="text-2xl cursor-pointer text-enjoy-primary" />
         </Link>
       </Container>

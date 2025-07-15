@@ -22,7 +22,7 @@ export const PATHS = {
   STARS_GIFTS: '/stars-gifts',
   WALLET: { name: 'محفظتي', link: '/wallet' },
   MY_PURCHASES: { name: 'طلباتي', link: '/my-purchases' },
-  CART: { name: 'السلة', link: '/cart' },
+  MY_CART: { name: 'سلتي', link: '/my-cart' },
 };
 
 export const navBarLinks = [
