@@ -18,6 +18,8 @@ const Button = forwardRef<
       iconPosition = 'left',
       disabled = false,
       href,
+      bgColor,
+      hoverBgColor,
       ...props
     },
     ref
@@ -33,6 +35,14 @@ const Button = forwardRef<
         ? 'bg-enjoy-glass hover:bg-enjoy-gray-light text-enjoy-primary-deep'
         : variant === 'fifth'
         ? 'bg-amber-100 border border-amber-300 text-enjoy-primary-deep'
+        : variant === 'ghost'
+        ? 'bg-transparent text-enjoy-primary hover:text-enjoy-primary-light'
+        : variant === 'circle'
+        ? `rounded-full p-2 ${bgColor || 'bg-enjoy-primary'} ${
+            hoverBgColor
+              ? `hover:${hoverBgColor}`
+              : 'hover:bg-enjoy-primary-light'
+          }`
         : ''
     } ${otherClassName}`;
 
