@@ -162,6 +162,7 @@ export interface CardItem {
   label: string;
   banner?: string;
   href?: string;
+  requiresAccount?: boolean;
 }
 
 export interface CategoryPageProps {
