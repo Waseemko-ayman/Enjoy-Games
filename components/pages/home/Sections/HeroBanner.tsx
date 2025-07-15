@@ -1,18 +1,7 @@
 'use client';
-
+import { HeroSlides } from '@/data';
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react';
-
-interface BannerSlide {
-  id: number;
-  image: string;
-}
-
-const slides: BannerSlide[] = [
-  { id: 1, image: '/assets/banners/banner1.webp' },
-  { id: 2, image: '/assets/banners/banner2.webp' },
-  { id: 3, image: '/assets/banners/banner3.webp' },
-];
 
 export default function HeroBanner() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -30,7 +19,7 @@ export default function HeroBanner() {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      setCurrentSlide((prev) => (prev + 1) % HeroSlides.length);
       setIsTransitioning(false);
     }, 300);
   };
@@ -48,7 +37,7 @@ export default function HeroBanner() {
     <div className="relative w-full h-[40vh] overflow-hidden rounded-lg my-10">
       {/* Background Images */}
       <div className="absolute inset-0">
-        {slides.map((slide, index) => (
+        {HeroSlides.map((slide, index) => (
           <div
             key={slide.id}
             className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
@@ -66,7 +55,7 @@ export default function HeroBanner() {
 
       {/* Slide Indicators */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
-        {slides.map((_, index) => (
+        {HeroSlides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
@@ -84,7 +73,7 @@ export default function HeroBanner() {
         <div
           className="h-full bg-enjoy-primary transition-all duration-300 ease-linear"
           style={{
-            width: `${((currentSlide + 1) / slides.length) * 100}%`,
+            width: `${((currentSlide + 1) / HeroSlides.length) * 100}%`,
           }}
         />
       </div>

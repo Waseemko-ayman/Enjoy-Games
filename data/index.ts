@@ -33,7 +33,7 @@ import { PATHS } from './paths';
 import { IoMdHelpCircleOutline, IoMdPricetag } from 'react-icons/io';
 import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
 import { Sparkles, Wallet } from 'lucide-react';
-import { RewardTier } from '@/interfaces';
+import { BannerSlide, RewardTier } from '@/interfaces';
 
 export const digitalStores = [
   {
@@ -1426,4 +1426,10 @@ export const rewardsPrograms = [
     currency: 'نقطة',
     description: 'نقاطك القابلة للتحويل',
   },
+];
+
+export const HeroSlides: BannerSlide[] = [
+  { id: 1, image: '/assets/banners/banner1.webp' },
+  { id: 2, image: '/assets/banners/banner2.webp' },
+  { id: 3, image: '/assets/banners/banner3.webp' },
 ];

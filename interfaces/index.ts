@@ -321,3 +321,8 @@ export interface CartItemData {
   storeLabel: string;
   currencyImage: string;
 }
+
+export interface BannerSlide {
+  id: number;
+  image: string;
+}
