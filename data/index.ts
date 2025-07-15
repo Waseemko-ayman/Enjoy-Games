@@ -1342,16 +1342,16 @@ export const WalletSectionData = [
     bgColor: 'bg-orange-300',
     textColor: 'text-[#060919]',
   },
-  {
-    id: 3,
-    link: PATHS.MAX_PROGRAM.link,
-    title: 'دليل مكسب',
-    value: '0',
-    unit: 'saudi_riyal',
-    icon: Wallet,
-    bgColor: 'bg-amber-50',
-    textColor: 'text-[#060919]',
-  },
+  // {
+  //   id: 3,
+  //   link: PATHS.MAX_PROGRAM.link,
+  //   title: 'دليل مكسب',
+  //   value: '0',
+  //   unit: 'saudi_riyal',
+  //   icon: Wallet,
+  //   bgColor: 'bg-amber-50',
+  //   textColor: 'text-[#060919]',
+  // },
 ];
 
 export const inviteStepsData = [
