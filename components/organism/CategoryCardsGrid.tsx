@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import Container from '@/components/organism/Container';
-import Layer from '@/components/atomic/Layer';
 import { CategoryPageProps } from '@/interfaces';
 import CategoryCard from '../molecules/CategoryCard';
+import GridWrapper from '../molecules/GridWrapper';
 
 const CategoryCardsGrid: FC<CategoryPageProps> = ({ cards }) => {
   return (
     <Container>
-      <Layer otherClassName="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <GridWrapper otherClassName="gap-8 mt-12">
         {cards.map((card, index) => (
           <CategoryCard
             key={index}
@@ -16,7 +16,7 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({ cards }) => {
             label={card.label}
           />
         ))}
-      </Layer>
+      </GridWrapper>
     </Container>
   );
 };

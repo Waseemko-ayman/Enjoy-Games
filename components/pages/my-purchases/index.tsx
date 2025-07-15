@@ -1,0 +1,63 @@
+import EmptyStateBox from '@/components/molecules/EmptyStateBox';
+import PageHeader from '@/components/molecules/PageHeader';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import React from 'react';
+
+const MyPurchasesTypes = [
+  {
+    id: 1,
+    label: 'الكل',
+  },
+  {
+    id: 2,
+    label: 'المكتملة',
+  },
+  {
+    id: 3,
+    label: 'قيد التجهيز والمراجعة',
+  },
+  {
+    id: 4,
+    label: 'الملغية والمسترجعة',
+  },
+];
+
+const MyPurchasesPage = () => {
+  return (
+    <div>
+      <PageHeader>
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="الكل" />
+          </SelectTrigger>
+          <SelectContent>
+            {MyPurchasesTypes.map((item) => (
+              <SelectItem
+                key={item.id}
+                value={item.label}
+                className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
+              >
+                {item.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </PageHeader>
+      <EmptyStateBox
+        imageSrc="/assets/empty-status.png"
+        alt="empty-status"
+        title="طلباتك تقول لك: وينك؟ يلا تسوق!"
+        buttonText="ابدأ بالتسوق الأن"
+        btnlink="#"
+      />
+    </div>
+  );
+};
+
+export default MyPurchasesPage;

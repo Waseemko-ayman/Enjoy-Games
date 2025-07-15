@@ -47,7 +47,11 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
             />
           </li>
           <li>
-            <NavItem Icon={IoSearch} text="المتجر" linkPath={PATHS.STORE} />
+            <NavItem
+              Icon={IoSearch}
+              text="المتجر"
+              linkPath={PATHS.STORE.link}
+            />
           </li>
         </ul>
       </Container>

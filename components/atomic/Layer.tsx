@@ -13,7 +13,7 @@ const Layer = ({
 >) => {
   return (
     <section
-      className={`relative my-20 ${otherClassName ? otherClassName : ''}`}
+      className={`relative my-10 sm:my-20 ${otherClassName ? otherClassName : ''}`}
       dir="rtl"
       {...props}
     >

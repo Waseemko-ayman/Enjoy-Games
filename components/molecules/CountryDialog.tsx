@@ -1,16 +1,9 @@
 import React from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../ui/dialog';
 import { IoIosArrowBack } from 'react-icons/io';
 import Image from 'next/image';
 import CountrySelectorContent from './CountrySelectorContent';
 import { Country } from '@/interfaces';
+import CustomDialog from './CustomDialog';
 
 interface CountryDrawerProps {
   countries: Country[];
@@ -28,39 +21,35 @@ const CountryDialog: React.FC<CountryDrawerProps> = ({
   setOpen,
 }) => {
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <CustomDialog
+      open={open}
+      setOpen={setOpen}
+      title="تغيير الدولة - العملة"
+      description="اختر الدولة والعملة المناسبة لك من القائمة أدناه."
+      trigger={
         <button className="flex items-center justify-between w-full gap-2 cursor-pointer">
           <IoIosArrowBack />
-          <div className="flex items-center gap-3">
-            <h4 className="text-lg font-normal">
+          <div className="flex items-center gap-3 font-semibold">
+            <h4 className="text-sm">
               {selectedCountry.name} - {selectedCountry.currency}
             </h4>
             <Image
               src={`/assets/flags/${selectedCountry.img}.png`}
               alt={`${selectedCountry.name} - ${selectedCountry.currency}`}
-              width={22}
-              height={16}
+              width={25}
+              height={23}
             />
           </div>
         </button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle className="sr-only">تغيير الدولة - العملة</DialogTitle>
-          <DialogDescription className="sr-only">
-            اختر الدولة والعملة المناسبة لك من القائمة أدناه.
-          </DialogDescription>
-        </DialogHeader>
-
-        <CountrySelectorContent
-          countries={countries}
-          selectedCountry={selectedCountry}
-          setSelectedCountry={setSelectedCountry}
-          closeHandler={() => setOpen(false)}
-        />
-      </DialogContent>
-    </Dialog>
+      }
+    >
+      <CountrySelectorContent
+        countries={countries}
+        selectedCountry={selectedCountry}
+        setSelectedCountry={setSelectedCountry}
+        closeHandler={() => setOpen(false)}
+      />
+    </CustomDialog>
   );
 };
 

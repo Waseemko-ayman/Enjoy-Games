@@ -11,6 +11,7 @@ const SectionTypeCard: React.FC<SectionTypeCardProps> = ({
   imgTitle,
   width,
   height,
+  otherClassName,
 }) => {
   return (
     <Link href={path}>
@@ -20,9 +21,9 @@ const SectionTypeCard: React.FC<SectionTypeCardProps> = ({
         imgTitle={imgTitle}
         width={width}
         height={height}
-        otherClassName="mx-auto"
+        otherClassName={`mx-auto ${otherClassName}`}
       />
-      <h4 className="text-lg text-center mt-4 font-bold">{title}</h4>
+      <h4 className="text-sm sm:text-lg text-center mt-4 font-bold">{title}</h4>
     </Link>
   );
 };

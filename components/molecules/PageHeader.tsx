@@ -1,6 +1,5 @@
 'use client';
 
-import { FC } from 'react';
 import { usePathname } from 'next/navigation';
 import {
   Breadcrumb,
@@ -10,9 +9,14 @@ import {
 } from '@/components/ui/breadcrumb';
 import Container from '../organism/Container';
 import { PATHS } from '@/data/paths';
-import Link from 'next/link';
 
-const PageHeader: FC = () => {
+const PageHeader = ({
+  showTitle = true,
+  children,
+}: {
+  showTitle?: boolean;
+  children?: React.ReactNode;
+}) => {
   const pathname = usePathname();
 
   // Split the pathname and remove empty parts
@@ -42,7 +46,7 @@ const PageHeader: FC = () => {
     { label: 'الرئيسية', href: '/' },
     {
       label: title,
-      href: undefined, // No link since it's the final item
+      href: pathname, // No link since it's the final item
     },
   ];
 
@@ -54,7 +58,10 @@ const PageHeader: FC = () => {
             {breadcrumbs.map((crumb, index) => (
               <div key={index} className="flex items-center">
                 <BreadcrumbItem>
-                  <BreadcrumbLink href={crumb.href}>
+                  <BreadcrumbLink
+                    href={crumb.href}
+                    className={index === 1 ? 'text-enjoy-primary-deep' : ''}
+                  >
                     {crumb.label}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
@@ -62,12 +69,12 @@ const PageHeader: FC = () => {
               </div>
             ))}
           </Breadcrumb>
-          <Link
-            href={pathname}
-            className="text-3xl md:text-4xl font-bold mt-5 mb-7"
-          >
-            {title}
-          </Link>
+          {showTitle && (
+            <div className="flex items-center justify-between mt-5 mb-7 gap-4 flex-wrap">
+              <h1 className="text-2xl md:text-3xl font-semibold">{title}</h1>
+              {children}
+            </div>
+          )}
         </div>
       </Container>
     </div>

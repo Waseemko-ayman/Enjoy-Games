@@ -1,3 +1,4 @@
+import ProgressCircle from '@/components/molecules/ProgressCircle';
 import {
   ButtonIconPosition,
   ButtonMainVarinats,
@@ -7,6 +8,62 @@ import {
   footerListsName,
   NavbarLayout,
 } from '@/utils/type';
+import { JSX } from 'react';
+
+interface BaseIconProps {
+  Icon?: React.ElementType | string;
+}
+
+interface BaseClassNameProps {
+  otherClassName?: string;
+}
+
+interface WithChildren {
+  children: React.ReactNode;
+}
+
+export interface ButtonProps extends BaseClassNameProps, WithChildren {
+  variant?: ButtonVarinats;
+  borderRadius?: string;
+  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: ButtonTypes;
+  Icon?: React.ElementType;
+  iconPosition?: ButtonIconPosition;
+  disabled?: boolean;
+  bgColor?: string;
+  hoverBgColor?: string;
+}
+
+export interface CommonCardProps extends BaseIconProps {
+  title: string;
+  titleIsLink?: boolean;
+  productLink?: string;
+  description?: boolean;
+  imgSrc: string;
+  imgAlt: string;
+  imgTitle: string;
+  price?: number;
+  storeName?: string;
+  storeFlagImg?: string;
+  variant?: CommonCardVariant;
+  cardLinkPath?: string;
+  ratings?: string;
+  tall?: boolean;
+  showBtn?: boolean;
+  btnVariant?: ButtonMainVarinats;
+  btnText?: string;
+  otherClassNameBtn?: string;
+}
+
+export interface NavItemProps extends BaseIconProps, BaseClassNameProps {
+  text: string;
+  linkPath?: string;
+  otherClassNameIcon?: string;
+  showArrow?: boolean;
+  onClick?: () => void;
+  layout?: NavbarLayout;
+  isMobile?: boolean;
+}
 
 export interface NavbarProps {
   layout?: NavbarLayout;
@@ -32,110 +89,60 @@ export interface PopupMenuProps {
   onClose: () => void;
 }
 
-export interface ImageProps {
+export interface ImageProps extends BaseClassNameProps {
   imgSrc: string;
   imgAlt: string;
-  imgTitle: string;
-  width: number;
-  height: number;
-  otherClassName?: string;
+  imgTitle?: string;
+  width?: number;
+  height?: number;
 }
 
-export interface ButtonProps {
-  children: React.ReactNode;
-  variant?: ButtonVarinats;
-  borderRadius?: string;
-  otherClassName?: string;
-  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  type?: ButtonTypes;
-  Icon?: React.ElementType;
-  iconPosition?: ButtonIconPosition;
-}
-
-export interface CommonCardProps {
+export interface SectionComponentProps extends WithChildren {
   title: string;
-  titleIsLink?: boolean;
-  productLink?: string;
-  description?: boolean;
-  imgSrc: string;
-  imgAlt: string;
-  imgTitle: string;
-  price?: number;
-  storeName?: string;
-  storeFlagImg?: string;
-  variant?: CommonCardVariant;
-  cardLinkPath?: string;
-  ratings?: string;
-  tall?: boolean;
-  showBtn?: boolean;
-  btnVariant?: ButtonMainVarinats;
-  btnText?: string;
-  otherClassNameBtn?: string;
-  Icon?: React.ElementType;
 }
 
-export interface NavItemProps {
-  Icon: React.ElementType | string;
-  text: string;
-  linkPath?: string;
-  otherClassName?: string;
-  otherClassNameIcon?: string;
-  showArrow?: boolean;
-  onClick?: () => void;
-  layout?: NavbarLayout;
-  isMobile?: boolean;
-}
-
-export interface SectionComponentProps {
-  title: string;
-  children: React.ReactNode;
-}
-
-export interface ContactInfoProps {
+export interface ContactInfoProps extends BaseIconProps {
   label: string;
   email: string;
-  Icon: React.ElementType;
 }
 
-export interface SubMenuItem {
+export interface SubMenuItem extends BaseIconProps {
   label: string;
-  Icon: React.ElementType | string;
   submenu?: SubMenuItem[];
   path?: string;
 }
 
-export interface DropdownNavItemProps {
+export interface DropdownNavItemProps extends BaseIconProps {
   text: string;
-  Icon: React.ElementType | string;
   submenu?: SubMenuItem[];
   isMainMenu?: boolean;
 }
 
-export interface FooterLinksProps {
+export interface FooterLinksProps extends BaseClassNameProps {
   secTitle: string;
   listClassName?: string;
   listName: footerListsName;
-  otherClassName?: string;
 }
 
-export interface LinkItem {
+export interface LinkItem extends BaseIconProps {
   id: number;
   title: string;
-  icon: React.ElementType;
   link: string;
+  icon: React.ElementType | string;
 }
 
-export interface SectionTypeCardProps {
+export interface SectionTypeCardProps extends BaseClassNameProps {
   path: string;
   title: string;
   imgSrc: string;
   imgAlt: string;
   imgTitle: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
+  otherClassName?: string;
 }
 
-export interface ServiceCardProps {
+export interface ServiceCardProps extends BaseClassNameProps {
   image: string;
   imgAlt: string;
   title: string;
@@ -171,4 +178,151 @@ export interface CountrySelectorContentProps {
   selectedCountry: Country;
   setSelectedCountry: (country: Country) => void;
   closeHandler: () => void;
+}
+
+export interface SectionTitleProps extends BaseIconProps {
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  className?: string;
+  titleClassName?: string;
+}
+
+export interface FeatureCardProps extends BaseIconProps {
+  title: string;
+  description: string;
+  bgColor: string;
+  textColor?: string;
+}
+
+export interface TierBadgeProps extends BaseIconProps {
+  name: string;
+  isActive?: boolean;
+}
+
+export interface ResponsiveDialogDrawerProps extends WithChildren {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  isMobile?: boolean;
+  trigger: React.ReactNode;
+  contentClassName?: string;
+  headerClassName?: string;
+}
+
+export interface CustomDialogDrawerProps extends ResponsiveDialogDrawerProps {
+  title?: string;
+  description?: string;
+}
+
+export interface TopBannerDrawerContentProps {
+  isMobile: boolean;
+  onClose: () => void;
+  onDiscover: () => void;
+}
+
+export interface GridWrapperProps extends BaseClassNameProps, WithChildren {
+  isScrollable?: boolean;
+  gridCols?: string;
+  itemClassName?: string;
+}
+
+export interface AuthLayoutProps extends SectionComponentProps {
+  btnText: string;
+  description: string;
+  showFooterText?: boolean;
+  isSubmitDisabled?: boolean;
+  onSubmit?: () => void;
+}
+
+export interface WalletCardProps extends BaseIconProps {
+  title: string;
+  value: string;
+  unit: string;
+  bgColor: string;
+  textColor: string;
+  pathName: string;
+}
+
+export interface RewardTier {
+  id: number;
+  name: string;
+  percentage: number;
+  isActive: boolean;
+}
+
+export interface EarnMoreDrawerCardProps {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt?: string;
+  order?: 'left' | 'right';
+  footerType?: 'button' | 'social' | 'none';
+  onCopyLink?: () => void;
+  socialLinks?: React.ReactNode;
+  otherClassName?: string;
+}
+
+export interface TierProgressWrapperProps extends WithChildren {
+  title: string;
+  connectionLineWidth: number;
+  progress: string;
+  progressFooter: React.ComponentProps<typeof ProgressCircle>['footer'];
+}
+
+export interface EarningsPointsSectionProps {
+  variant: 'earnings' | 'points';
+  totalAmount: number;
+  withdrawableAmount: number;
+  conversionRate?: string;
+  starPoints?: number;
+  lastWithdrawalText: JSX.Element | string;
+  firstButtonHref?: string;
+  secondButtonHref?: string;
+}
+
+interface RewardProgram {
+  id: number;
+  title: string;
+  type: string;
+  amount?: number;
+  currency?: string;
+  description?: string;
+}
+
+export interface RewardProgramItemProps {
+  program: RewardProgram;
+  isSelected: boolean;
+}
+
+export interface SelectableListProps<T> {
+  items: T[];
+  selectedItem: T;
+  getKey: (item: T) => React.Key;
+  onSelect: (item: T) => void;
+  renderContent: (item: T, isSelected: boolean) => React.ReactNode;
+  className?: string;
+  listClassName?: string;
+}
+
+export interface EmptyStateBoxProps {
+  imageSrc: string;
+  alt: string;
+  title: string;
+  buttonText: string;
+  btnlink: string;
+}
+
+export interface CartItemData {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+  storeLabel: string;
+  currencyImage: string;
+}
+
+export interface BannerSlide {
+  id: number;
+  image: string;
 }

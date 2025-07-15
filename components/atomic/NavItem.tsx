@@ -38,8 +38,8 @@ const NavItem: React.FC<NavItemProps> = ({
           layout === 'store'
             ? isMobile
               ? 'px-2'
-              : 'text-lg'
-            : 'w-full text-xl justify-between px-[36px]'
+              : 'text-base'
+            : 'w-full text-lg font-semibold justify-between px-[36px]'
         }
         ${otherClassName}
       `}
@@ -65,11 +65,15 @@ const NavItem: React.FC<NavItemProps> = ({
                 : ''
             }
           >
-            <Icon
-              className={`text-xl text-[var(--enjoy-primary)] ${
-                isMobile ? 'max-[991px]:text-primary' : 'max-[991px]:text-white'
-              } ${otherClassNameIcon}`}
-            />
+            {Icon && (
+              <Icon
+                className={`text-lg text-[var(--enjoy-primary)] ${
+                  isMobile
+                    ? 'max-[991px]:text-primary'
+                    : 'max-[991px]:text-white'
+                } ${otherClassNameIcon}`}
+              />
+            )}
           </div>
         )}
         <span>{text}</span>

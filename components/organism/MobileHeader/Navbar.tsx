@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import Container from '../Container';
 import { MdMoreHoriz } from 'react-icons/md';
 import Link from 'next/link';
-import PopupMenu from './PopupMenu';
 import { navBarLinks } from '@/data/paths';
+import PopupMenu from './PopupMenu';
 
 const MobileNavbar = () => {
   const [showMore, setShowMore] = useState(false);
@@ -30,9 +30,12 @@ const MobileNavbar = () => {
                 key={item.id}
                 className="text-[var(--enjoy-gray-650)] font-medium"
               >
-                <Link href={item.link} className="flex flex-col items-center">
+                <Link
+                  href={item.link}
+                  className="flex flex-col items-center font-medium"
+                >
                   <item.icon className="text-2xl" />
-                  <h5 className="text-lg">{item.title}</h5>
+                  <h5 className="text-base mt-2">{item.title}</h5>
                 </Link>
               </li>
             ))}
@@ -42,7 +45,7 @@ const MobileNavbar = () => {
             >
               <div className="flex flex-col items-center">
                 <MdMoreHoriz className="text-2xl" />
-                <h5 className="text-lg">المزيد</h5>
+                <h5 className="text-base mt-2">المزيد</h5>
               </div>
             </li>
           </ul>

@@ -1,15 +1,38 @@
 import {
+  FaChartBar,
+  FaCrown,
+  FaDiamond,
   FaFacebook,
+  FaFlag,
+  FaGift,
+  FaHeart,
   FaInstagram,
   FaLinkedin,
+  FaRegFlag,
+  FaRegGem,
   FaRegHeart,
+  FaRegStar,
+  FaSackDollar,
   FaTwitter,
+  FaUser,
+  FaWallet,
 } from 'react-icons/fa6';
-import { IoArrowRedoOutline, IoGameControllerOutline } from 'react-icons/io5';
-import { MdMoreHoriz, MdOutlineEmail, MdRestaurant, MdSignalCellularAlt } from 'react-icons/md';
-import { PiShoppingCartLight, PiSquaresFourLight } from 'react-icons/pi';
+import {
+  IoArrowRedoOutline,
+  IoGameControllerOutline,
+  IoWalletOutline,
+} from 'react-icons/io5';
+import { MdMoreHoriz, MdOutlineEmail } from 'react-icons/md';
+import {
+  PiShoppingCartLight,
+  PiSparkleFill,
+  PiSquaresFourLight,
+} from 'react-icons/pi';
 import { PATHS } from './paths';
-import { IoMdHelpCircleOutline } from 'react-icons/io';
+import { IoMdHelpCircleOutline, IoMdPricetag } from 'react-icons/io';
+import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
+import { Sparkles, Wallet } from 'lucide-react';
+import { BannerSlide, RewardTier } from '@/interfaces';
 
 export const digitalStores = [
   {
@@ -249,94 +272,6 @@ export const gamingPlatforms = [
     label: 'كاندي كراش سـاغـا',
     Icon: 'games-logos/candy-crush-logo.webp',
     banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-];
-
-export const contactAndData = [
-  {
-    label: 'شحن سوا',
-    Icon: 'Communication-data-logos/stc-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'شحن موبايلي',
-    Icon: 'Communication-data-logos/mobily-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'شحن ليبارا',
-    Icon: 'Communication-data-logos/Lebara-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'فيرجن موبايل',
-    Icon: 'Communication-data-logos/virgin-mobile-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'كويك نت',
-    Icon: 'Communication-data-logos/stc-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'فرندي موبايل',
-    Icon: 'Communication-data-logos/friendi-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'فرندي نت',
-    Icon: 'Communication-data-logos/friendi-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'زين نت',
-    Icon: 'Communication-data-logos/zain-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'زين فليكس',
-    Icon: 'Communication-data-logos/zain-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'زين شباب',
-    Icon: 'Communication-data-logos/zain-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'شحن زين',
-    Icon: 'Communication-data-logos/zain-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'موبايلي نت',
-    Icon: 'Communication-data-logos/mobily-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'باقات سوا',
-    Icon: 'Communication-data-logos/stc-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'سلام',
-    Icon: 'Communication-data-logos/salam-mobile-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'ليبارا نت',
-    Icon: 'Communication-data-logos/Lebara-logo.png',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'ريد بل داتا',
-    Icon: 'Communication-data-logos/red-bull-mobile-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
-  },
-  {
-    label: 'إيـوا',
-    Icon: 'Communication-data-logos/aywa-logo.jpg',
-    banner: 'Communication-data-banners/stc-banner.webp',
   },
 ];
 
@@ -886,144 +821,6 @@ export const servicesAndSubscriptions = [
   },
 ];
 
-export const restaurants = [
-  {
-    label: 'وشنة (Washna)',
-    Icon: 'restaurants-logos/washna-logo.jpeg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'فينور (Venor)',
-    Icon: 'restaurants-logos/venor-logo.webp',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'صبحي كابر (Sobhy Kaber)',
-    Icon: 'restaurants-logos/sobhy-kaber-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'سراي (Seray)',
-    Icon: 'restaurants-logos/seray-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'ميموز (Memos)',
-    Icon: 'restaurants-logos/memos-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'هابرا (HABRA beef canteen)',
-    Icon: 'restaurants-logos/habra-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'في قلبك (Figalbak)',
-    Icon: 'restaurants-logos/figalbak-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'بلاك تاب (Black Tap Craft Burgers)',
-    Icon: 'restaurants-logos/black-tap-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'عسيب (Aseeb)',
-    Icon: 'restaurants-logos/aseeb-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'ميز (Meez)',
-    Icon: 'restaurants-logos/meez-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'أوڤن (Ovun)',
-    Icon: 'restaurants-logos/ovun-logo.jpeg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'مدموزيل (Mlle)',
-    Icon: 'restaurants-logos/mlle-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'ال كامينو (El Camino)',
-    Icon: 'restaurants-logos/elcamino-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'دار العوجا (Daralauja)',
-    Icon: 'restaurants-logos/daralauja-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'اركومي (Arcomi)',
-    Icon: 'restaurants-logos/arcomi-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'شاركوزا (Charcoza)',
-    Icon: 'restaurants-logos/charcoza-logo.jpeg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'الكوفية (Alkofeia)',
-    Icon: 'restaurants-logos/alkofeia-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'سنشري برجر (Century Burger)',
-    Icon: 'restaurants-logos/century-burger-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'لاڤاش (Lavash)',
-    Icon: 'restaurants-logos/lavash-logo.jpeg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'أوف وايت (Offwhite)',
-    Icon: 'restaurants-logos/offwhite-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'بيت عمر (Beit Omar)',
-    Icon: 'restaurants-logos/beit-omar-logo.jpeg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'ميسور (Maysore)',
-    Icon: 'restaurants-logos/maysore-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'كرزة (Karazah)',
-    Icon: 'restaurants-logos/karazah-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'Section-B',
-    Icon: 'restaurants-logos/section-b-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'باكو (Baco)',
-    Icon: 'restaurants-logos/baco-logo.jpg',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'أرمين (Armin)',
-    Icon: 'restaurants-logos/armin-logo.webp',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-  {
-    label: 'ياواتشا',
-    Icon: 'restaurants-logos/yawatsha-logo.png',
-    banner: 'restaurants-banners/alkofeia-banner.webp',
-  },
-];
-
 export const subMenuItems = [
   {
     id: 1,
@@ -1043,14 +840,6 @@ export const subMenuItems = [
   },
   {
     id: 3,
-    label: 'الإتصال والبيانات',
-    Icon: MdSignalCellularAlt,
-    submenu: contactAndData,
-    src: '/assets/contactAndData.webp',
-    path: PATHS.RECHARGE_CARDS.link,
-  },
-  {
-    id: 4,
     label: 'بطاقات تسوق',
     Icon: PiShoppingCartLight,
     submenu: shoppingCarts,
@@ -1064,14 +853,6 @@ export const subMenuItems = [
     submenu: servicesAndSubscriptions,
     src: '/assets/servicesAndSubscriptions.webp',
     path: PATHS.SERVICES.link,
-  },
-  {
-    id: 6,
-    label: 'مطاعم',
-    Icon: MdRestaurant,
-    submenu: restaurants,
-    src: '/assets/restaurants.webp',
-    path: PATHS.RESTAURANT.link,
   },
 ];
 
@@ -1297,12 +1078,18 @@ export const menuLists = [
     linksItem: [
       {
         id: 1,
-        title: 'دليل إنجوي',
+        title: 'دليل ستارز',
         icon: IoArrowRedoOutline,
-        link: '#',
+        link: PATHS.STARS.link,
       },
       {
         id: 2,
+        title: 'المحفظة',
+        link: PATHS.WALLET.link,
+        icon: IoWalletOutline,
+      },
+      {
+        id: 3,
         title: 'الإهتمامات',
         icon: FaRegHeart,
         link: '#',
@@ -1314,17 +1101,88 @@ export const menuLists = [
     linksItem: [
       {
         id: 1,
+        title: 'تذاكر الدعم الفني',
+        link: '#',
+        icon: FaRegFlag,
+      },
+      {
+        id: 2,
         title: 'التحدث مع خدمة العملاء',
         icon: MdOutlineEmail,
         link: '#',
       },
       {
-        id: 2,
+        id: 3,
         title: 'الأسئلة الشائعة',
         icon: IoMdHelpCircleOutline,
         link: '#',
       },
     ],
+  },
+];
+
+export const userList = [
+  {
+    section: 'account',
+    items: [
+      { id: 1, title: 'حسابي', link: '#', icon: FaUser },
+      {
+        id: 2,
+        title: 'طلباتي',
+        link: PATHS.MY_PURCHASES.link,
+        icon: IoMdPricetag,
+      },
+      {
+        id: 3,
+        title: 'تذاكر الدعم الفني',
+        link: '#',
+        icon: FaFlag,
+      },
+    ],
+  },
+  {
+    section: 'rank',
+    rank: {
+      level: 1,
+      title: 'الرتبة الحالية لحسابك',
+      subtitle: 'زيادة الرتبة تعني زيادة العائد لكل عملية',
+    },
+  },
+  {
+    section: 'general',
+    items: [
+      // {
+      //   id: 4,
+      //   title: 'برنامج مكسب',
+      //   link: PATHS.MAX_PROGRAM.link,
+      //   icon: FaLink,
+      // },
+      { id: 4, title: 'دليل ستارز', link: PATHS.STARS.link, icon: FaFlag },
+      { id: 5, title: 'الإهتمامات', link: '#', icon: FaHeart },
+    ],
+  },
+  {
+    section: 'wallet',
+    items: [
+      {
+        id: 8,
+        title: 'المحفظة',
+        link: PATHS.WALLET.link,
+        icon: FaWallet,
+        badge: '#0',
+      },
+      {
+        id: 9,
+        title: 'نقاط دليل ستارز',
+        link: '#',
+        icon: PiSparkleFill,
+        badge: '0',
+      },
+    ],
+  },
+  {
+    section: 'logout',
+    items: [{ id: 10, title: 'تسجيل خروج', link: '#', icon: FiLogOut }],
   },
 ];
 
@@ -1337,4 +1195,240 @@ export const countries = [
   { name: 'عمان', currency: 'الدينار العماني', img: 'oman' },
   { name: 'العراق', currency: 'الدينار العراقي', img: 'iraq' },
   { name: 'الأردن', currency: 'الدينار الأردني', img: 'jordan' },
+];
+
+export const featuresData = [
+  {
+    id: 1,
+    title: 'اجمع النقاط',
+    description: 'احصل على نقاط مع كل عملية شراء',
+    bgColor: 'bg-enjoy-primary-deep',
+    textColor: 'text-white',
+    icon: FiTrendingUp,
+  },
+  {
+    id: 2,
+    title: 'ضاعف مكافآتك ',
+    description: 'ارتقِ بالمستويات للحصول على مزايا أكثر.',
+    bgColor: 'bg-enjoy-secondary-soft',
+    icon: FaGift,
+  },
+  {
+    id: 3,
+    title: 'راقب تقدمك ',
+    description: 'تابع نقاطك وتاريخ معاملاتك في حسابك.',
+    bgColor: 'bg-enjoy-glass',
+    icon: FaChartBar,
+  },
+  {
+    id: 4,
+    title: 'استبدل النقاط',
+    description: 'استبدلها ببطاقات رقمية أو حوّلها إلى نقاط نقدي',
+    bgColor: 'bg-enjoy-primary-soft',
+    icon: FaSackDollar,
+  },
+];
+
+export const tiers = [
+  {
+    id: 1,
+    name: 'دليل جونيور',
+    icon: FaRegGem,
+    percentage: 0.2,
+    isActive: true,
+  },
+  {
+    id: 2,
+    name: 'دليل نشط',
+    icon: FaCrown,
+    percentage: 0.4,
+    isActive: false,
+  },
+  {
+    id: 3,
+    name: 'دليل محترف',
+    icon: FaRegStar,
+    percentage: 0.6,
+    isActive: false,
+  },
+  {
+    id: 4,
+    name: 'دليل خبير',
+    icon: FiAward,
+    percentage: 0.8,
+    isActive: false,
+  },
+  {
+    id: 5,
+    name: 'دليل مميز',
+    icon: FaDiamond,
+    percentage: 1,
+    isActive: false,
+  },
+];
+
+export const faqData = [
+  {
+    id: 1,
+    question: '1️⃣ ما هو إنجوي قيمز ؟',
+    answer:
+      'إنجوي قيمز هو رنامج نقاط الولاء الذي يمكنك من كسب النقاط مع كل عملية شراء داخل إنجوي قيمز، ثم استبدالها بـ رصيد في محفظتك أو بطاقات رقمية مثل آيتونز، يلا لودو، وغيرها.',
+  },
+  {
+    id: 2,
+    question: '2️⃣ كيف يمكنني كسب النقاط ؟',
+    answer:
+      'يمكنك كسب النقاط عند إتمام عمليات الشراء داخل إنجوي قيمز. كل عملية شراء تمنحك عددًا معينًا من النقاط، والتي يمكنك استبدالها لاحقًا.',
+  },
+  {
+    id: 3,
+    question: '3️⃣ كيف أستبدل النقاط ؟',
+    answer: [
+      'عند تجميع نقاط كافية، يمكنك استبدالها بـ:',
+      'رصيد يُضاف إلى محفظتك داخل إنجوي قيمز.',
+      'بطاقات رقمية متنوعة مثل آيتونز، يلا لودو، وغيرها.',
+    ],
+  },
+  {
+    id: 4,
+    question: '4️⃣ هل هناك حد معين لاستخدام النقاط ؟',
+    answer:
+      'لا، يمكنك استبدال النقاط في أي وقت طالما لديك الرصيد الكافي، ولكن بعض البطاقات قد تتطلب حدًا أدنى معينًا من النقاط للاستبدال.',
+  },
+  {
+    id: 5,
+    question: '5️⃣ هل يمكنني تحويل نقاطي لشخص آخر ؟',
+    answer:
+      'حاليًا، لا يمكن تحويل النقاط بين الحسابات، ولكن يمكنك استخدامها لشراء بطاقات رقمية وإهدائها لأي شخص.',
+  },
+  {
+    id: 6,
+    question: '6️⃣ هل تنتهي صلاحية النقاط ؟ ',
+    answer:
+      'لا يوجد هناك تاريخ محدد لانتهاء النقاط ويمكنك استخدامها واستبدالها في أي وقت.',
+  },
+  {
+    id: 7,
+    question: '7️⃣ كيف يمكنني معرفة عدد النقاط التي أملكها ؟',
+    answer:
+      'يمكنك الاطلاع على رصيد نقاطك في أي وقت عبر حسابك في إنجوي قيمز، حيث ستجد سجل جميع عمليات الكسب والاستبدال.',
+  },
+  {
+    id: 8,
+    question: '8️⃣ ماذا أفعل إذا لم يصلني الرصيد أو البطاقة بعد الاستبدال ؟',
+    answer:
+      'إذا واجهت أي مشكلة، يمكنك التواصل مع الدعم الفني، وسنساعدك في حل المشكلة بأسرع وقت ممكن.',
+  },
+];
+
+export const WalletSectionData = [
+  {
+    id: 1,
+    link: PATHS.WALLET.link,
+    title: 'محفظتي',
+    value: '0',
+    unit: 'saudi_riyal',
+    icon: Wallet,
+    bgColor: 'bg-violet-600',
+    textColor: 'text-white',
+  },
+  {
+    id: 2,
+    link: PATHS.STARS.link,
+    title: 'دليل ستارز',
+    value: '0',
+    unit: 'نقطة',
+    icon: Sparkles,
+    bgColor: 'bg-orange-300',
+    textColor: 'text-[#060919]',
+  },
+  {
+    id: 3,
+    link: PATHS.MAX_PROGRAM.link,
+    title: 'دليل مكسب',
+    value: '0',
+    unit: 'saudi_riyal',
+    icon: Wallet,
+    bgColor: 'bg-amber-50',
+    textColor: 'text-[#060919]',
+  },
+];
+
+export const inviteStepsData = [
+  {
+    id: 1,
+    title: 'انسخ رابط الدعوة',
+    description:
+      'تقوم بداية بنسخ رابط الدعوة الفريد الخاص بك لتستطيع مشاركته مع أصدقائك ومعارفك',
+    image: 'character-2',
+    footerType: 'button',
+  },
+  {
+    id: 2,
+    title: 'شارك الرابط مع الأصدقاء',
+    description:
+      'أرسل رابط الدعوة لأصدقائك ومعارفك عبر الواتساب، تويتر، أو حتى الحمام الزاجل. كلما زاد عدد المشاركين، زادت أرباحك.',
+    image: 'character-3',
+    footerType: 'social',
+    socialLinks: [
+      { icon: '/icons/whatsapp.svg', href: '#' },
+      { icon: '/icons/twitter.svg', href: '#' },
+      { icon: '/icons/pigeon.svg', href: '#' },
+    ],
+    order: 'left',
+  },
+  {
+    id: 3,
+    title: 'اربح 0.7% على كل عملية',
+    description:
+      'كل مرة يشتري أحد أصدقائك عبر رابط الدعوة الخاص بك، تربح 0.7% تضاف إلى محفظتك بكل سهولة!',
+    image: 'character-4',
+    footerType: 'none',
+  },
+  {
+    id: 4,
+    title: 'انتقل للمستوى التالي',
+    description: 'دليل تتيح لك 5 مستويات بنسبة عائد تصل الى 0.7%',
+    image: 'character-5',
+    footerType: 'none',
+    order: 'left',
+  },
+];
+
+export const mockApiData: RewardTier[] = [
+  { id: 1, name: 'البرونزية', percentage: 0.3, isActive: true },
+  { id: 2, name: 'الفضية', percentage: 0.4, isActive: false },
+  { id: 3, name: 'الذهبية', percentage: 0.5, isActive: false },
+  { id: 4, name: 'البلاتينيوم', percentage: 0.6, isActive: false },
+  { id: 5, name: 'VIP', percentage: 0.7, isActive: false },
+];
+
+export const rewardsPrograms = [
+  {
+    id: 1,
+    title: 'برامج المكافآت',
+    type: 'earnings',
+  },
+  // {
+  //   id: 2,
+  //   title: 'برنامج مكسب',
+  //   type: 'earnings',
+  //   amount: 0,
+  //   currency: 'ريال',
+  //   description: 'أرباحك القابلة للسحب',
+  // },
+  {
+    id: 2,
+    title: 'نقاط دليل ستارز',
+    type: 'points',
+    amount: 0,
+    currency: 'نقطة',
+    description: 'نقاطك القابلة للتحويل',
+  },
+];
+
+export const HeroSlides: BannerSlide[] = [
+  { id: 1, image: '/assets/banners/banner1.webp' },
+  { id: 2, image: '/assets/banners/banner2.webp' },
+  { id: 3, image: '/assets/banners/banner3.webp' },
 ];
