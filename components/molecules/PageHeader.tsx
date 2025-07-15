@@ -10,7 +10,13 @@ import {
 import Container from '../organism/Container';
 import { PATHS } from '@/data/paths';
 
-const PageHeader = ({ showTitle = true }: { showTitle?: boolean }) => {
+const PageHeader = ({
+  showTitle = true,
+  children,
+}: {
+  showTitle?: boolean;
+  children?: React.ReactNode;
+}) => {
   const pathname = usePathname();
 
   // Split the pathname and remove empty parts
@@ -52,7 +58,10 @@ const PageHeader = ({ showTitle = true }: { showTitle?: boolean }) => {
             {breadcrumbs.map((crumb, index) => (
               <div key={index} className="flex items-center">
                 <BreadcrumbItem>
-                  <BreadcrumbLink href={crumb.href}>
+                  <BreadcrumbLink
+                    href={crumb.href}
+                    className={index === 1 ? 'text-enjoy-primary-deep' : ''}
+                  >
                     {crumb.label}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
@@ -61,9 +70,10 @@ const PageHeader = ({ showTitle = true }: { showTitle?: boolean }) => {
             ))}
           </Breadcrumb>
           {showTitle && (
-            <h1 className="text-2xl md:text-3xl font-semibold mt-5 mb-7">
-              {title}
-            </h1>
+            <div className="flex items-center justify-between mt-5 mb-7 gap-4 flex-wrap">
+              <h1 className="text-2xl md:text-3xl font-semibold">{title}</h1>
+              {children}
+            </div>
           )}
         </div>
       </Container>

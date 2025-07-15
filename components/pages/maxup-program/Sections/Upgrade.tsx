@@ -25,7 +25,7 @@ const Upgrade = () => {
             <div
               className={`w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 transition-all duration-500 ${
                 isCurrentTier
-                  ? 'bg-purple-600 shadow-lg scale-110 ring-4 ring-purple-200'
+                  ? 'bg-enjoy-primary shadow-lg scale-110 ring-4 ring-purple-200'
                   : isReached
                   ? 'bg-purple-500'
                   : 'bg-gray-400'
@@ -36,7 +36,7 @@ const Upgrade = () => {
 
             <h3
               className={`text-lg font-semibold mb-2 transition-colors duration-300 ${
-                isReached ? 'text-purple-600' : 'text-gray-600'
+                isReached ? 'text-enjoy-primary' : 'text-gray-600'
               }`}
             >
               {tier.name}

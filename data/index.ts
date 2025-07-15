@@ -1130,7 +1130,7 @@ export const userList = [
       {
         id: 2,
         title: 'طلباتي',
-        link: '#',
+        link: PATHS.MY_PURCHASES.link,
         icon: IoMdPricetag,
       },
       {

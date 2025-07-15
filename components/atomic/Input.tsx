@@ -7,7 +7,7 @@ type InputProps = {
   otherClassName?: string;
   otherClassNameContainer?: string;
   inputName: string;
-  options?: { value: string; label: string }[];
+  options?: { id: number; label: string }[];
   Icon?: React.ElementType;
   iconClassName?: string;
 } & React.HTMLAttributes<HTMLElement>;
@@ -34,7 +34,7 @@ const Input = ({
       <select name={inputName} className={inputClasses} {...props}>
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
+          <option key={opt.id} value={opt.label}>
             {opt.label}
           </option>
         ))}

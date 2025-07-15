@@ -301,3 +301,11 @@ export interface SelectableListProps<T> {
   className?: string;
   listClassName?: string;
 }
+
+export interface EmptyStateBoxProps {
+  imageSrc: string;
+  alt: string;
+  title: string;
+  buttonText: string;
+  btnlink: string;
+}

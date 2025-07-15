@@ -6,6 +6,7 @@ import { MdOutlineShoppingCart } from 'react-icons/md';
 import NavbarSheet from '@/components/molecules/NavbarSheet';
 import { usePathname } from 'next/navigation';
 import { PATHS } from '@/data/paths';
+import Link from 'next/link';
 
 const MobileHeader = () => {
   const pathname = usePathname();
@@ -38,7 +39,9 @@ const MobileHeader = () => {
         <h5 className="text-center text-lg font-bold w-full overflow-hidden whitespace-nowrap">
           {title}
         </h5>
-        <MdOutlineShoppingCart className="text-3xl cursor-pointer text-enjoy-primary" />
+        <Link href={PATHS.CART.link}>
+          <MdOutlineShoppingCart className="text-2xl cursor-pointer text-enjoy-primary" />
+        </Link>
       </Container>
     </header>
   );

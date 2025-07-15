@@ -9,27 +9,26 @@ import SearchHeader from './MobileHeader/SearchHeader';
 import MobileNavbar from './MobileHeader/Navbar';
 import { usePathname } from 'next/navigation';
 import useIsMobile from '@/hook/useIsMobile';
+import CartHeader from './CartHeader';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const isStorePage = pathname === '/store';
+  const isCartPage = pathname === '/cart';
 
   const isMobile = useIsMobile();
 
   return (
     <>
-      <TopBanner />
-      {isMobile ? (
+      {!isCartPage && <TopBanner />}
+      {isCartPage ? (
+        <CartHeader />
+      ) : isMobile ? (
         <>
           <MobileHeader />
           <SearchHeader />
           <MobileNavbar />
-          {isStorePage && (
-            <Navbar
-              layout={isStorePage ? 'store' : 'default'}
-              isMobile={isMobile}
-            />
-          )}
+          {isStorePage && <Navbar layout="store" isMobile />}
         </>
       ) : (
         <div className="shadow-header">
