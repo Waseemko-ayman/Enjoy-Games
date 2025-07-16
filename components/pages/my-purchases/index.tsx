@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { PATHS } from '@/data/paths';
 import React from 'react';
 
 const MyPurchasesTypes = [
@@ -54,7 +55,7 @@ const MyPurchasesPage = () => {
         alt="empty-status"
         title="طلباتك تقول لك: وينك؟ يلا تسوق!"
         buttonText="ابدأ بالتسوق الأن"
-        btnlink="#"
+        btnlink={PATHS.STORE.link}
       />
     </div>
   );

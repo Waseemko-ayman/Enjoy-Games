@@ -11,7 +11,7 @@ const BestSellers = () => {
         {BestSellersData.map((card) => (
           <CommonCard
             key={card.id}
-            imgSrc={`/assets/best-sellers/${card.src}.webp`}
+            imgSrc={card.src}
             imgAlt={card.title}
             imgTitle={card.title}
             title={card.title}

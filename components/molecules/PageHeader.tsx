@@ -19,18 +19,12 @@ const PageHeader = ({
 }) => {
   const pathname = usePathname();
 
-  // Split the pathname and remove empty parts
   const pathParts = pathname.split('/').filter(Boolean);
 
-  // Extract only the page name (last part of the path)
-  const pageName = pathParts[pathParts.length - 1] || '';
-
-  // Create a map of path names using values from PATHS
   const pathNameMap = Object.entries(PATHS).reduce<Record<string, string>>(
     (acc, [, value]) => {
       if (typeof value === 'object' && value.link && value.name) {
-        // Extract the page key (last part of the link)
-        const pathKey = value.link.split('/').pop() || '';
+        const pathKey = value.link.split('/').filter(Boolean).pop() || '';
         acc[pathKey] = value.name;
       }
       return acc;
@@ -38,17 +32,48 @@ const PageHeader = ({
     {}
   );
 
-  // Get the page title from the map
-  const title = pathNameMap[pageName] || 'الرئيسية';
+  const breadcrumbs = [{ label: 'الرئيسية', href: '/' }];
+  let accumulatedPath = '';
 
-  // Create breadcrumbs with only two items (Home + current page)
-  const breadcrumbs = [
-    { label: 'الرئيسية', href: '/' },
-    {
-      label: title,
-      href: pathname, // No link since it's the final item
-    },
-  ];
+  for (let i = 0; i < pathParts.length; i++) {
+    const part = pathParts[i];
+
+    // Ignore 'bundles' from Breadcrumbs but add it in accumulatedPath
+    if (part === 'bundles') {
+      accumulatedPath += `/${part}`;
+      continue;
+    }
+
+    if (part === 'categories' && pathParts[i + 1]) {
+      const categoryType = pathParts[i + 1];
+      accumulatedPath += `/categories/${categoryType}`;
+      const label = pathNameMap[categoryType] || formatPart(categoryType);
+      breadcrumbs.push({ label, href: accumulatedPath });
+      i++; // Skip next
+      continue;
+    }
+
+    accumulatedPath += `/${part}`;
+    const isLast = i === pathParts.length - 1;
+    const isSecondLast = i === pathParts.length - 2;
+
+    const label = pathNameMap[part] || formatPart(part);
+    breadcrumbs.push({
+      label,
+      href: isLast || isSecondLast ? '' : accumulatedPath,
+    });
+  }
+
+  const cleanParts = pathParts.filter((p) => p !== 'categories');
+  const lastPart = cleanParts[cleanParts.length - 1] || '';
+  const secondLastPart = cleanParts[cleanParts.length - 2] || '';
+
+  let currentTitle = breadcrumbs[breadcrumbs.length - 1]?.label || 'الرئيسية';
+
+  if (lastPart === 'bundles') {
+    const itemIdFormatted = formatPart(secondLastPart);
+    currentTitle = `بطاقات ${itemIdFormatted}`;
+  }
 
   return (
     <div className="bg-enjoy-gray-light py-6 md:py-8 px-4 md:px-8 rounded-md">
@@ -58,20 +83,24 @@ const PageHeader = ({
             {breadcrumbs.map((crumb, index) => (
               <div key={index} className="flex items-center">
                 <BreadcrumbItem>
-                  <BreadcrumbLink
-                    href={crumb.href}
-                    className={index === 1 ? 'text-enjoy-primary-deep' : ''}
-                  >
-                    {crumb.label}
-                  </BreadcrumbLink>
+                  {crumb.href ? (
+                    <BreadcrumbLink href={crumb.href}>
+                      {crumb.label}
+                    </BreadcrumbLink>
+                  ) : (
+                    <span className="text-enjoy-primary">{crumb.label}</span>
+                  )}
                 </BreadcrumbItem>
                 {index < breadcrumbs.length - 1 && <BreadcrumbSeparator />}
               </div>
             ))}
           </Breadcrumb>
+
           {showTitle && (
             <div className="flex items-center justify-between mt-5 mb-7 gap-4 flex-wrap">
-              <h1 className="text-2xl md:text-3xl font-semibold">{title}</h1>
+              <h1 className="text-2xl md:text-3xl font-semibold">
+                {currentTitle}
+              </h1>
               {children}
             </div>
           )}
@@ -80,5 +109,11 @@ const PageHeader = ({
     </div>
   );
 };
+
+function formatPart(str: string) {
+  return decodeURIComponent(str)
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
 
 export default PageHeader;

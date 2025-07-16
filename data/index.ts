@@ -34,792 +34,234 @@ import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
 import { Sparkles, Wallet } from 'lucide-react';
 import { BannerSlide, RewardTier } from '@/interfaces';
 
+const shiddats = [
+  {
+    id: 1,
+    title: 'بطاقة شحن جواكر 70,000 توكن',
+    src: '/assets/play-station.webp',
+    price: 77.36,
+    newPrice: 88.36,
+    storeFlagImg: 'british-flag.png',
+    storeName: 'المتجر البريطاني',
+    ratings: '1996',
+  },
+  {
+    id: 2,
+    title: 'بطاقة شحن جواكر 70,000 توكن',
+    src: '/assets/play-station.webp',
+    price: 77.36,
+    newPrice: 88.36,
+    storeFlagImg: 'british-flag.png',
+    storeName: 'المتجر البريطاني',
+    ratings: '1996',
+  },
+  {
+    id: 3,
+    title: 'بطاقة شحن جواكر 70,000 توكن',
+    src: '/assets/play-station.webp',
+    price: 77.36,
+    newPrice: 88.36,
+    storeFlagImg: 'british-flag.png',
+    storeName: 'المتجر البريطاني',
+    ratings: '1996',
+  },
+  {
+    id: 4,
+    title: 'بطاقة شحن جواكر 70,000 توكن',
+    src: '/assets/play-station.webp',
+    price: 77.36,
+    newPrice: 88.36,
+    storeFlagImg: 'british-flag.png',
+    storeName: 'المتجر البريطاني',
+    ratings: '1996',
+  },
+  {
+    id: 5,
+    title: 'بطاقة شحن جواكر 70,000 توكن',
+    src: '/assets/play-station.webp',
+    price: 77.36,
+    newPrice: 88.36,
+    storeFlagImg: 'british-flag.png',
+    storeName: 'المتجر البريطاني',
+    ratings: '1996',
+  },
+  {
+    id: 6,
+    title: 'بطاقة شحن جواكر 70,000 توكن',
+    src: '/assets/play-station.webp',
+    price: 77.36,
+    newPrice: 88.36,
+    storeFlagImg: 'british-flag.png',
+    storeName: 'المتجر البريطاني',
+    ratings: '1996',
+  },
+];
+
 export const digitalStores = [
   {
+    id: 'itunes',
     label: 'آيتونز',
-    Icon: 'digitals-stores/itunes.png',
-    banner: 'digitals-stores/apple-store-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    requiresAccount: true,
+    shiddatData: shiddats,
   },
   {
+    id: 'google-play',
     label: 'قوقل بلاي',
-    Icon: 'digitals-stores/google-play-logo.png',
-    banner: 'digitals-stores/google-play-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    requiresAccount: false,
+    shiddatData: shiddats,
   },
   {
+    id: 'huawei',
     label: 'هواوي',
-    Icon: 'digitals-stores/huawei-logo.png',
-    banner: 'digitals-stores/huawei-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    requiresAccount: true,
+    shiddatData: shiddats,
   },
 ];
 
 export const gamingPlatforms = [
   {
+    id: 'playstation',
     label: 'بلاي ستيشن',
-    Icon: 'games-logos/playstation-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'xbox',
     label: 'إكس بوكس',
-    Icon: 'games-logos/xbox-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'steam',
     label: 'ستيم',
-    Icon: 'games-logos/steam-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'pubg',
     label: 'بيبجي',
-    Icon: 'games-logos/pubg-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'jawaker',
     label: 'جواكر',
-    Icon: 'games-logos/jawaker-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'yalla-ludo',
     label: 'يلا لودو',
-    Icon: 'games-logos/yalla-ludo-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'روبلوكس',
-    Icon: 'games-logos/roblox-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'فري فاير',
-    Icon: 'games-logos/free-fire-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'موبايل ليجندز',
-    Icon: 'games-logos/mobile-legends-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'بليزارد',
-    Icon: 'games-logos/blizzard_entertainment-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'دومينو كافيه',
-    Icon: 'games-logos/domino-cafe-logo.webp',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'لودو كلوب',
-    Icon: 'games-logos/ludo-club-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'فالورنت',
-    Icon: 'games-logos/valorant-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'نيكسون',
-    Icon: 'games-logos/nexon-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'فاينل فانتسي',
-    Icon: 'games-logos/final-fantasy-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'يلا فزعة',
-    Icon: 'games-logos/yalla-fazaa-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'جراند ثفت أوتو',
-    Icon: 'games-logos/grand-theft-auto-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'كـاروم جـولد',
-    Icon: 'games-logos/carrom-gold-logo.jpeg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'بلاك كلوفر موبايل',
-    Icon: 'games-logos/black-clouer-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'NBA 2K24',
-    Icon: 'games-logos/nba-2k24-logo.jpeg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'R2 Games',
-    Icon: 'games-logos/R2games-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'بارشيس لودو',
-    Icon: 'games-logos/parchios-club-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'Madden NFL أيه 25',
-    Icon: 'games-logos/madden-NFL25-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'نينتندو',
-    Icon: 'games-logos/nintendo-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'نداء الحرب',
-    Icon: 'games-logos/nidaa-al-harb-logo.webp',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'فورتنايت',
-    Icon: 'games-logos/fortnite-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'آي آي إف سي 25',
-    Icon: 'games-logos/fc25-logo.webp',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'كملنا',
-    Icon: 'games-logos/kamlna-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'ليج أوف ليجندز',
-    Icon: 'games-logos/league-of-legends-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'EA Play',
-    Icon: 'games-logos/EA-play-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'جينشين إمباكت',
-    Icon: 'games-logos/genshin-logo.webp',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'Riot Access',
-    Icon: 'games-logos/riot-access-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'تين باي جولد',
-    Icon: 'games-logos/teen-patti-gold-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'أبيكس ليجندز',
-    Icon: 'games-logos/apex-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'أنداون',
-    Icon: 'games-logos/undawn-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'آونر أوف كينجز',
-    Icon: 'games-logos/honor-of-kings-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'أرينا بريكوت',
-    Icon: 'games-logos/arena-brenkout-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'PUBG NewState',
-    Icon: 'games-logos/pubg-new-state-logo.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'سي أوف ثيفز',
-    Icon: 'games-logos/sea-of-thieves-emblem-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'كول أوف ديوتي',
-    Icon: 'games-logos/call-of-duty.jpg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'ماين كرافت',
-    Icon: 'games-logos/minecraft-logo.jpeg',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'آي آي إف سي 24',
-    Icon: 'games-logos/fc24-logo.webp',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'فـاينل فانتسي',
-    Icon: 'games-logos/final-fantasy-logo.png',
-    banner: 'games-banners/arena-brenkout-banner.webp',
-  },
-  {
-    label: 'كاندي كراش سـاغـا',
-    Icon: 'games-logos/candy-crush-logo.webp',
-    banner: 'games-banners/arena-brenkout-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
 ];
 
 export const shoppingCarts = [
   {
+    id: 'amazon',
     label: 'أمازون',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'ebay',
     label: 'إيباي',
-    Icon: 'shopping-carts/shopping-carts-logos/ebay-logo.png',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'razer-gold',
     label: 'ريزر جولد',
-    Icon: 'shopping-carts/shopping-carts-logos/razer-gold-logo.png',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'paysafecard',
     label: 'باي سيف كارد',
-    Icon: 'shopping-carts/shopping-carts-logos/paysafecard-logo.png',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'noon',
     label: 'نون',
-    Icon: 'shopping-carts/shopping-carts-logos/noon-logo.jpeg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'home-center',
     label: 'هوم سنتر',
-    Icon: 'shopping-carts/shopping-carts-logos/home-center-logo.jpeg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'سبلاش',
-    Icon: 'shopping-carts/shopping-carts-logos/splash-logo.png',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'لولو هايبرماركت',
-    Icon: 'shopping-carts/shopping-carts-logos/lulu-logo.png',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'باتشي',
-    Icon: 'shopping-carts/shopping-carts-logos/patchi-logo.jpeg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'النهدي',
-    Icon: 'shopping-carts/shopping-carts-logos/nahdi-logo.png',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'ڤوكس سينما',
-    Icon: 'shopping-carts/shopping-carts-logos/vox-logo.png',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'ساكو',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أسواق التميمي',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'ماكس',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'نايس ون',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'جرير',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'ستايلي',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'سنتربوينت',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'بيبي شوب',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'شو مارت',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'لايف ستايل',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'هوم بوكس',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'آني وداني',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'جمعية حجر الخيرية',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'شي إن',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'شو إكسبريس',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'المنيع',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'بنده',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'نمشي',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'شكراً',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'كروكس',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أنجلوت',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'بيبي فتيحي',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أسواق المزرعة',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'القثمي',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'المسافر',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'تويز آر آص',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'فوغا كلوسيت',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'الشايع للساعات',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'البداح للعود',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'Qidz',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أسواق عبدالله العثيم',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'د.كيف كافيه',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: '',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'جو سبا',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'زهرة الربيع',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'دولار بلس',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'سكيتشرز',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'الأربش للذهب والمجوهرات',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'شوكولاتة روشة',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'مجوهرات داماس',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'فلاي إن',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'سويتر',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'جمعية نافع لسقيا الماء - بطاقة تبرع',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'بن داود',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'نباتاتي',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'فلورينا',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'دكتور ام',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'الدبلومات',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'إيتالي',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'مغربي',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'ناتشيرلايزر',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أورجانيك',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'جوي الوكاس',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'الماس الجوري',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أو دو تواليت',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'حدائق نورا',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'تافولا',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أثليتس كو',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'سي سي سي',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'كور',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'إيرلاينجيفت',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'برغرفيول',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'إنسباير',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'ميرميد سبا',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
-  },
-  {
-    label: 'أردين',
-    Icon: 'shopping-carts/shopping-carts-logos/amazon-logo.jpg',
-    banner: 'shopping-carts/shopping-carts-banners/amazon-banner.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
 ];
 
 export const servicesAndSubscriptions = [
   {
+    id: 'hungerstation',
     label: 'هنقرستيشن',
-    Icon: 'services-subscriptions/hunger-station.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'nana',
     label: 'نعناع',
-    Icon: 'services-subscriptions/nana-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'mcafee',
     label: 'مكافي',
-    Icon: 'services-subscriptions/mcafee-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'noon-mintes',
     label: 'نون مينتس',
-    Icon: 'services-subscriptions/noon-mintes-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'marsool',
     label: 'مرسول',
-    Icon: 'services-subscriptions/marsool-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
   {
+    id: 'discord',
     label: 'ديسكورد',
-    Icon: 'services-subscriptions/discord-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
-  },
-  {
-    label: 'ستوري تل',
-    Icon: 'services-subscriptions/storytel-logo.webp',
-    banner: 'services-subscriptions/microsoft-logo.webp',
-  },
-  {
-    label: 'سوبر مول',
-    Icon: 'services-subscriptions/super-mall-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
-  },
-  {
-    label: 'تويتش',
-    Icon: 'services-subscriptions/twitch-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
-  },
-  {
-    label: 'مايكروسفت أوفيس',
-    Icon: 'services-subscriptions/microsoft-logo.webp',
-    banner: 'services-subscriptions/microsoft-logo.webp',
-  },
-  {
-    label: 'أجيبه',
-    Icon: 'services-subscriptions/ajeebh-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
-  },
-  {
-    label: 'ناو ناو',
-    Icon: 'services-subscriptions/now-now-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
-  },
-  {
-    label: 'شاهد | رياضة',
-    Icon: 'services-subscriptions/shahid-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
-  },
-  {
-    label: 'كاسبرسكي',
-    Icon: 'services-subscriptions/kaspersky-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
-  },
-  {
-    label: 'نون فود',
-    Icon: 'services-subscriptions/noon-food-logo.png',
-    banner: 'services-subscriptions/microsoft-logo.webp',
+    Icon: '/assets/play-station.webp',
+    banner: '/assets/play-station.webp',
+    shiddatData: shiddats,
   },
 ];
+
+// -----------------------------------------------
+// -----------------------------------------------
+// -----------------------------------------------
 
 export const subMenuItems = [
   {
@@ -859,22 +301,22 @@ export const subMenuItems = [
 export const BestSellersData = [
   {
     id: 1,
-    src: 'itunes',
+    src: '/assets/best-sellers/itunes.webp',
     title: 'قسائم إنجوي قيمز',
   },
   {
     id: 2,
-    src: 'itunes',
+    src: '/assets/best-sellers/itunes.webp',
     title: 'آيتونز',
   },
   {
     id: 3,
-    src: 'sawa',
+    src: '/assets/best-sellers/sawa.webp',
     title: 'شحن سوا',
   },
   {
     id: 4,
-    src: 'yalla-ludo',
+    src: '/assets/best-sellers/yalla-ludo.webp',
     title: 'يلا لودو',
   },
 ];
@@ -882,22 +324,22 @@ export const BestSellersData = [
 export const SuggestedProdData = [
   {
     id: 1,
-    src: 'discord',
+    src: '/assets/play-station.webp',
     title: 'ديسكورد',
   },
   {
     id: 2,
-    src: 'discord',
+    src: '/assets/play-station.webp',
     title: 'أجيبه',
   },
   {
     id: 3,
-    src: 'discord',
+    src: '/assets/play-station.webp',
     title: 'باكو (Baco)',
   },
   {
     id: 4,
-    src: 'discord',
+    src: '/assets/play-station.webp',
     title: 'ستيم',
   },
 ];
@@ -905,8 +347,8 @@ export const SuggestedProdData = [
 export const NewlyArrivedData = [
   {
     id: 1,
-    src: 'play-station',
-    storeFlagImgSrc: 'british-flag',
+    src: '/assets/play-station.webp',
+    storeFlagImg: 'british-flag.png',
     title: 'بلايستيشن 40 جنيه استرليني',
     price: 189.64,
     storeName: 'المتجر البريطاني',
@@ -914,8 +356,8 @@ export const NewlyArrivedData = [
   },
   {
     id: 2,
-    src: 'play-station',
-    storeFlagImgSrc: 'saudi-arabia-flag',
+    src: '/assets/play-station.webp',
+    storeFlagImg: 'saudi-arabia-flag.png',
     title: 'سوبر مول 200 ريال',
     price: 189.64,
     storeName: 'المتجر السعودي',
@@ -923,8 +365,8 @@ export const NewlyArrivedData = [
   },
   {
     id: 3,
-    src: 'play-station',
-    storeFlagImgSrc: 'saudi-arabia-flag',
+    src: '/assets/play-station.webp',
+    storeFlagImg: 'saudi-arabia-flag.png',
     title: 'نون مينتس 500 ريال',
     price: 189.64,
     storeName: 'المتجر السعودي',
@@ -932,8 +374,8 @@ export const NewlyArrivedData = [
   },
   {
     id: 4,
-    src: 'play-station',
-    storeFlagImgSrc: 'europe-flag',
+    src: '/assets/play-station.webp',
+    storeFlagImg: 'europe-flag.png',
     title: 'ستيم 30 يورو',
     price: 189.64,
     storeName: 'المتجر الأوروبي',
@@ -1342,16 +784,16 @@ export const WalletSectionData = [
     bgColor: 'bg-orange-300',
     textColor: 'text-[#060919]',
   },
-  // {
-  //   id: 3,
-  //   link: PATHS.MAX_PROGRAM.link,
-  //   title: 'دليل مكسب',
-  //   value: '0',
-  //   unit: 'saudi_riyal',
-  //   icon: Wallet,
-  //   bgColor: 'bg-amber-50',
-  //   textColor: 'text-[#060919]',
-  // },
+  {
+    id: 3,
+    link: '#',
+    title: 'دليل مكسب',
+    value: '0',
+    unit: 'saudi_riyal',
+    icon: Wallet,
+    bgColor: 'bg-amber-50',
+    textColor: 'text-[#060919]',
+  },
 ];
 
 export const inviteStepsData = [

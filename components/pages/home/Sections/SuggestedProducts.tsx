@@ -11,7 +11,7 @@ const SuggestedProducts = () => {
         {SuggestedProdData.map((card) => (
           <CommonCard
             key={card.id}
-            imgSrc={`/assets/suggested-products/${card.src}.jpg`}
+            imgSrc={card.src}
             imgAlt={card.title}
             imgTitle={card.title}
             title={card.title}

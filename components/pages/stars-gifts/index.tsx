@@ -21,13 +21,11 @@ const StarsGiftsPage = () => {
               key={card.id}
               imgAlt={card.title}
               imgTitle={card.title}
-              imgSrc={`/assets/newly-arrived/${card.src}.webp`}
-              storeFlagImg={`/assets/flags/${card.storeFlagImgSrc}.png`}
+              imgSrc={card.src}
               description
-              variant="column"
-              showBtn
-              btnVariant="secondary"
-              btnText="ليس لديك نقاط كافية"
+              showBtn={true}
+              btnVariant="primary"
+              btnText="إشترِ الآن"
               Icon={PiShoppingCartLight}
               {...card}
             />

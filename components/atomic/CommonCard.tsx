@@ -14,6 +14,7 @@ const CommonCard: React.FC<CommonCardProps> = ({
   imgAlt,
   imgTitle,
   price,
+  newPrice,
   storeName = '',
   storeFlagImg = '',
   variant = 'row',
@@ -52,9 +53,24 @@ const CommonCard: React.FC<CommonCardProps> = ({
           {title}
         </h3>
         {description && (
-          <div className="mb-3 text-sm">
+          <div className="mb-3 text-sm mt-2">
             {price && (
-              <h4 className="font-semibold mb-2 text-[15px]">${price}</h4>
+              <div className="flex items-center justify-between gap-2">
+                {newPrice && (
+                  <h4 className="font-semibold mb-2 text-[15px]">
+                    ${newPrice}
+                  </h4>
+                )}
+                <h4
+                  className={`font-semibold mb-2 ${
+                    newPrice
+                      ? 'line-through text-gray-400 text-sm'
+                      : 'text-[15px]'
+                  }`}
+                >
+                  ${price}
+                </h4>
+              </div>
             )}
 
             <div
@@ -62,45 +78,49 @@ const CommonCard: React.FC<CommonCardProps> = ({
                 variant === 'row' ? 'items-center justify-between' : 'flex-col'
               } gap-2`}
             >
-              <div
-                className={`flex items-center gap-1 ${
-                  variant === 'row' ? 'order-1' : 'order-2'
-                }`}
-              >
-                <Avatar
-                  imgSrc={storeFlagImg}
-                  imgAlt={storeName}
-                  imgTitle={storeName}
-                  width={19}
-                  height={19}
-                />
-                <p
-                  className={`${
-                    variant === 'row' ? 'text-[15px]' : 'text-sm'
-                  } font-bold`}
+              {storeFlagImg && (
+                <div
+                  className={`flex items-center gap-1 ${
+                    variant === 'row' ? 'order-1' : 'order-2'
+                  }`}
                 >
-                  {storeName}
-                </p>
-              </div>
-              <div
-                className={`text-[var(--enjoy-secondary))] ${
-                  variant === 'row' ? 'text-sm order-2' : 'text-2xl order-1'
-                }`}
-              >
-                <div className="flex items-center gap-0.5">
-                  {variant === 'row' ? (
-                    <>
-                      <h5>{ratings}</h5>
-                      <PiSparkleFill />
-                    </>
-                  ) : (
-                    <>
-                      <PiSparkleFill />
-                      <h5>{ratings}</h5>
-                    </>
-                  )}
+                  <Avatar
+                    imgSrc={`/assets/flags/${storeFlagImg}`}
+                    imgAlt={storeName}
+                    imgTitle={storeName}
+                    width={19}
+                    height={19}
+                  />
+                  <p
+                    className={`${
+                      variant === 'row' ? 'text-[15px]' : 'text-sm'
+                    } font-bold`}
+                  >
+                    {storeName}
+                  </p>
                 </div>
-              </div>
+              )}
+              {ratings && (
+                <div
+                  className={`text-[var(--enjoy-secondary))] ${
+                    variant === 'row' ? 'text-sm order-2' : 'text-2xl order-1'
+                  }`}
+                >
+                  <div className="flex items-center gap-0.5">
+                    {variant === 'row' ? (
+                      <>
+                        <h5>{ratings}</h5>
+                        <PiSparkleFill />
+                      </>
+                    ) : (
+                      <>
+                        <PiSparkleFill />
+                        <h5>{ratings}</h5>
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}

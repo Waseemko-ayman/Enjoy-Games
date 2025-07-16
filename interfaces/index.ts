@@ -34,20 +34,24 @@ export interface ButtonProps extends BaseClassNameProps, WithChildren {
   hoverBgColor?: string;
 }
 
-export interface CommonCardProps extends BaseIconProps {
+export interface cardProps {
   title: string;
+  price?: number;
+  newPrice?: number;
+  storeName?: string;
+  storeFlagImg?: string;
+  ratings?: number | string;
+}
+
+export interface CommonCardProps extends BaseIconProps, cardProps {
   titleIsLink?: boolean;
   productLink?: string;
   description?: boolean;
   imgSrc: string;
   imgAlt: string;
   imgTitle: string;
-  price?: number;
-  storeName?: string;
-  storeFlagImg?: string;
   variant?: CommonCardVariant;
   cardLinkPath?: string;
-  ratings?: string;
   tall?: boolean;
   showBtn?: boolean;
   btnVariant?: ButtonMainVarinats;
@@ -156,11 +160,19 @@ export interface BannerProps {
   }[];
 }
 
+export interface shiddaItem extends cardProps {
+  id: number;
+  src: string;
+}
+
 export interface CardItem {
+  id: string;
   Icon: string;
   label: string;
   banner?: string;
   href?: string;
+  requiresAccount?: boolean;
+  shiddatData: shiddaItem[];
 }
 
 export interface CategoryPageProps {
