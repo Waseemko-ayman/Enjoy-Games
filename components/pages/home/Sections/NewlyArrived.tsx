@@ -13,8 +13,7 @@ const NewlyArrived = () => {
             key={card.id}
             imgAlt={card.title}
             imgTitle={card.title}
-            imgSrc={`/assets/newly-arrived/${card.src}.webp`}
-            storeFlagImg={`/assets/flags/${card.storeFlagImgSrc}.png`}
+            imgSrc={card.src}
             description
             showBtn={true}
             btnVariant="primary"

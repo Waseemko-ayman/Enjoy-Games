@@ -18,9 +18,9 @@ export const getCategoryData = (category: string) => {
 };
 
 export const getItemData = (
-  categorySlug: string,
+  category: string,
   itemId: string
 ): CardItem | undefined => {
-  const items = getCategoryData(categorySlug);
+  const items = getCategoryData(category);
   return items.find((item) => item.id === itemId);
 };

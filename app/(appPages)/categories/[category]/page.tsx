@@ -10,7 +10,8 @@ export default async function CategoryPageWrapper({
   params: { category: string };
 }) {
   // Get data from mockData (will be replaced by API later)
-  const categoryData = await getCategoryData(params.category);
+  // const categoryData = await getCategoryData(params.category);
+  const categoryData = getCategoryData(params.category);
 
   return <CategoryPage cards={categoryData} />;
 }

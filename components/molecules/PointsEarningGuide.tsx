@@ -38,7 +38,7 @@ const PointsEarningGuide = ({ isLogin = true }: { isLogin?: boolean }) => {
         ) : (
           <>
             <Link
-              href={PATHS.SIGN_UP}
+              href={PATHS.LOGIN}
               className="text-enjoy-primary hover:text-enjoy-primary-soft transition-all duration-300"
             >
               سجل الآن
