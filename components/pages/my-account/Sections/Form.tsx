@@ -13,10 +13,12 @@ const PhoneInput = dynamic(() => import('react-phone-number-input'), {
   ssr: false,
 });
 import 'react-phone-number-input/style.css';
-
 interface FormProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   errors: FieldErrors<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any>;
 }
 
