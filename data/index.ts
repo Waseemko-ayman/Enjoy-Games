@@ -571,7 +571,7 @@ export const userList = [
   {
     section: 'account',
     items: [
-      { id: 1, title: 'حسابي', link: PATHS.MY_ACCOUNT.link, icon: FaUser },
+      { id: 1, title: 'حسابي', link: PATHS.MY_ACCOUNT.ROOT.link, icon: FaUser },
       {
         id: 2,
         title: 'طلباتي',
@@ -581,7 +581,7 @@ export const userList = [
       {
         id: 3,
         title: 'تذاكر الدعم الفني',
-        link: '#',
+        link: PATHS.TICKETS.ROOT.link,
         icon: FaFlag,
       },
     ],
@@ -604,7 +604,12 @@ export const userList = [
       //   icon: FaLink,
       // },
       { id: 4, title: 'دليل ستارز', link: PATHS.STARS.link, icon: FaFlag },
-      { id: 5, title: 'الإهتمامات', link: PATHS.INTERESTS.link, icon: FaHeart },
+      {
+        id: 5,
+        title: 'الإهتمامات',
+        link: PATHS.MY_ACCOUNT.INTERESTS.link,
+        icon: FaHeart,
+      },
     ],
   },
   {
@@ -968,5 +973,39 @@ export const InterestsData = [
     src: '/assets/contactAndData.webp',
     alt: 'هدايا',
     title: 'هدايا',
+  },
+];
+
+export const ticketsInputsTypes = [
+  {
+    id: 1,
+    name: 'subject',
+    placeholder: 'عنوان التذكرة',
+  },
+  {
+    id: 2,
+    type: 'select',
+    name: 'ticketType',
+    placeholder: 'حدد نوع التذكرة',
+    options: [
+      {
+        id: 1,
+        label: 'مشكلة بأحد الطلبات',
+      },
+      {
+        id: 2,
+        label: 'مشكلة بالدفع والتحويل',
+      },
+      {
+        id: 3,
+        label: 'اقتراح او شيء اخر',
+      },
+    ],
+  },
+  {
+    id: 3,
+    type: 'textarea',
+    name: 'details',
+    placeholder: 'يرجي كتابة وصف لمساعتدك بشكل أدق',
   },
 ];

@@ -51,9 +51,6 @@ const Content = () => {
 
   const methods = useForm<FormValues>({
     resolver: yupResolver(formSchema),
-    defaultValues: {
-      options: [false, false, false, false],
-    },
   });
 
   const {
@@ -70,7 +67,15 @@ const Content = () => {
 
     setTimeout(() => {
       setIsSubmittingLocal(false);
-      reset();
+      reset({
+        username: data.username,
+        email: data.email,
+        phone: data.phone,
+        birthDate: data.birthDate,
+        gender: data.gender,
+        options: data.options || [false, false, false, false],
+        avatar: data.avatar?.[0]?.name || '',
+      });
     }, 2000);
   };
 

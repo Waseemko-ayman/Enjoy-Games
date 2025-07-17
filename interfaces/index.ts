@@ -353,7 +353,7 @@ export interface FormValues {
   email: string;
   phone: string;
   birthDate: string;
-  gender: string;
+  gender: 'ذكر' | 'أنثى';
   options: boolean[];
   avatar: FileList;
 }

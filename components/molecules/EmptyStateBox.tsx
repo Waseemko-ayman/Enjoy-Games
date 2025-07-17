@@ -21,12 +21,12 @@ const EmptyStateBox = ({
             <Image
               src={imageSrc}
               alt={alt}
-              width={200}
-              height={200}
+              width={150}
+              height={150}
               className="mx-auto"
             />
             <div className="text-center mt-5">
-              <h5 className="text-lg text-[var(--enjoy-gray-400)] font-normal mb-5">
+              <h5 className="text-lg text-[var(--enjoy-gray-650)] font-normal mb-5">
                 {title}
               </h5>
               <Button href={btnlink} otherClassName="py-3 w-full mx-auto">

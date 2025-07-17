@@ -21,16 +21,23 @@ const PageHeader = ({
 
   const pathParts = pathname.split('/').filter(Boolean);
 
-  const pathNameMap = Object.entries(PATHS).reduce<Record<string, string>>(
-    (acc, [, value]) => {
-      if (typeof value === 'object' && value.link && value.name) {
-        const pathKey = value.link.split('/').filter(Boolean).pop() || '';
-        acc[pathKey] = value.name;
+  function extractPaths(obj: any, map: Record<string, string> = {}) {
+    for (const key in obj) {
+      const value = obj[key];
+      console.log(value);
+      if (value && typeof value === 'object') {
+        if ('link' in value && 'name' in value) {
+          const pathKey = value.link.split('/').filter(Boolean).pop() || '';
+          map[pathKey] = value.name;
+        } else {
+          extractPaths(value, map);
+        }
       }
-      return acc;
-    },
-    {}
-  );
+    }
+    return map;
+  }
+
+  const pathNameMap = extractPaths(PATHS);
 
   const breadcrumbs = [{ label: 'الرئيسية', href: '/' }];
   let accumulatedPath = '';
@@ -55,12 +62,12 @@ const PageHeader = ({
 
     accumulatedPath += `/${part}`;
     const isLast = i === pathParts.length - 1;
-    const isSecondLast = i === pathParts.length - 2;
 
     const label = pathNameMap[part] || formatPart(part);
+
     breadcrumbs.push({
       label,
-      href: isLast || isSecondLast ? '' : accumulatedPath,
+      href: isLast ? '' : accumulatedPath,
     });
   }
 
@@ -83,12 +90,12 @@ const PageHeader = ({
             {breadcrumbs.map((crumb, index) => (
               <div key={index} className="flex items-center">
                 <BreadcrumbItem>
-                  {crumb.href ? (
+                  {index === breadcrumbs.length - 1 ? (
+                    <span className="text-gray-700">{crumb.label}</span>
+                  ) : (
                     <BreadcrumbLink href={crumb.href}>
                       {crumb.label}
                     </BreadcrumbLink>
-                  ) : (
-                    <span className="text-enjoy-primary">{crumb.label}</span>
                   )}
                 </BreadcrumbItem>
                 {index < breadcrumbs.length - 1 && <BreadcrumbSeparator />}

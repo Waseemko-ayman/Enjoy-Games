@@ -24,7 +24,7 @@ const stats = [
     id: 3,
     icon: FaHeart,
     title: 'الإهتمامات',
-    href: PATHS.INTERESTS.link,
+    href: PATHS.MY_ACCOUNT.INTERESTS.link,
   },
 ];
 
@@ -39,7 +39,9 @@ const Stats = () => {
         </div>
         {item.account !== undefined && (
           <div className="flex items-center justify-center gap-2 bg-[var(--enjoy-gray-200)] p-2 rounded-full">
-            <span className="text-enjoy-primary text-xs font-bold">{item.account}</span>
+            <span className="text-enjoy-primary text-xs font-bold">
+              {item.account}
+            </span>
             {item.currency && (
               <Image src={item.currency} alt="ريال" width={12} height={12} />
             )}

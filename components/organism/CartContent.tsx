@@ -117,7 +117,7 @@ const CartContent: React.FC<CartContentProps> = ({ items }) => {
             <Button otherClassName="w-full py-3">إتمام الدفع</Button>
             <Button
               variant="forth"
-              href={PATHS.INTERESTS.link}
+              href={PATHS.MY_ACCOUNT.INTERESTS.link}
               otherClassName="w-full py-3"
               Icon={Gift}
             >

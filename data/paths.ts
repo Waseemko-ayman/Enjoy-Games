@@ -14,17 +14,29 @@ export const PATHS = {
     link: '/categories/services',
   },
   SHOP_CARDS: { name: 'بطاقات تسوّق متنوعة', link: '/categories/shop-cards' },
-  LOGIN: 'login',
   STORE: { name: 'المتجر', link: '/store' },
   STARS: { name: 'دليل ستارز', link: '/stars' },
-  OTP: '/otp',
   // MAX_PROGRAM: { name: 'مكسب', link: '/maxup-program' },
   STARS_GIFTS: '/stars-gifts',
   WALLET: { name: 'محفظتي', link: '/wallet' },
   MY_PURCHASES: { name: 'طلباتي', link: '/my-purchases' },
   MY_CART: { name: 'سلتي', link: '/my-cart' },
-  MY_ACCOUNT: { name: 'حسابي', link: '/my-account' },
-  INTERESTS: { name: 'الإهتمامات', link: '/my-account/interests' },
+
+  MY_ACCOUNT: {
+    ROOT: { name: 'حسابي', link: '/my-account' },
+    INTERESTS: { name: 'الإهتمامات', link: '/my-account/interests' },
+  },
+
+  TICKETS: {
+    ROOT: { name: 'تذاكر الدعم الفني', link: '/tickets' },
+    CREATE: { name: 'إضافة تذكرة جديدة', link: '/tickets/create' },
+  },
+  FAQ: {
+    name: 'الأسئلة الشائعة',
+    link: '/faq',
+  },
+  LOGIN: 'login',
+  OTP: '/otp',
 };
 
 export const navBarLinks = [

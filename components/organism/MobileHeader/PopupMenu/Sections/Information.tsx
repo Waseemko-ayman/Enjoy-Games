@@ -16,7 +16,7 @@ const Information = () => {
       bgColor="bg-white"
       className="py-3 px-5 shadow-[0_8.293px_37.319px_4.147px_rgba(0,0,0,0.08)] mt-8"
     >
-      <Link href={PATHS.MY_ACCOUNT.link}>
+      <Link href={PATHS.MY_ACCOUNT.ROOT.link}>
         <div className="flex items-center gap-3">
           <Avatar
             imgSrc="/assets/user-avatar.png"
