@@ -21,6 +21,6 @@ export const getItemData = async (
   category: string,
   itemId: string
 ): Promise<CardItem | undefined> => {
-  const items = await getCategoryData(category);
+  const items = getCategoryData(category);
   return items.find((item) => item.id === itemId);
 };
