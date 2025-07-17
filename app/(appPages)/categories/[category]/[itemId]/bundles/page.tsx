@@ -1,4 +1,3 @@
-import React from 'react';
 import { getItemData } from '@/lib/mockData';
 import BundlesPage from '@/components/pages/BundlesPage';
 
@@ -7,7 +6,7 @@ export default async function BundlesWrapper({
 }: {
   params: { category: string; itemId: string };
 }) {
-  const item = await getItemData(params.category, params.itemId);
+  const item = getItemData(params.category, params.itemId);
 
   if (!item) return <div>العنصر غير موجود.</div>;
 

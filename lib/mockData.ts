@@ -17,10 +17,10 @@ export const getCategoryData = (category: string) => {
   return dataMap[category] || [];
 };
 
-export const getItemData = async (
+export const getItemData = (
   category: string,
   itemId: string
-): Promise<CardItem | undefined> => {
+): CardItem | undefined => {
   const items = getCategoryData(category);
   return items.find((item) => item.id === itemId);
 };

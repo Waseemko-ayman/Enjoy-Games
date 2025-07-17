@@ -9,6 +9,7 @@ import { Gift, Minus, Trash2 } from 'lucide-react';
 import { FaPlus, FaStar } from 'react-icons/fa6';
 import SubCartHeader from '../molecules/SubCartHeader';
 import { CartItemData } from '@/interfaces';
+import { PATHS } from '@/data/paths';
 
 interface CartContentProps {
   items: CartItemData[];
@@ -116,7 +117,7 @@ const CartContent: React.FC<CartContentProps> = ({ items }) => {
             <Button otherClassName="w-full py-3">إتمام الدفع</Button>
             <Button
               variant="forth"
-              href="#"
+              href={PATHS.INTERESTS.link}
               otherClassName="w-full py-3"
               Icon={Gift}
             >
