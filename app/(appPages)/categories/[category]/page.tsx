@@ -1,7 +1,7 @@
 import { getCategoryData } from '@/lib/mockData';
 import CategoryPage from '@/template/CategoryPage';
 
-export default async function CategoryPageWrapper({
+export default function CategoryPageWrapper({
   params,
 }: {
   params: { category: string };
