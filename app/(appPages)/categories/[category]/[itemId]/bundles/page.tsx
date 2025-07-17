@@ -1,8 +1,7 @@
-import React from 'react';
 import { getItemData } from '@/lib/mockData';
 import BundlesPage from '@/components/pages/BundlesPage';
 
-export default function BundlesWrapper({
+export default async function BundlesWrapper({
   params,
 }: {
   params: { category: string; itemId: string };
