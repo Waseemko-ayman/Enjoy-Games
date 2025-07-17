@@ -1,6 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import { FormValues } from '@/interfaces';
+import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FaCheck } from 'react-icons/fa6';
 
 const options = [
@@ -11,14 +13,13 @@ const options = [
 ];
 
 const AccountOptions = () => {
-  const [checked, setChecked] = useState<boolean[]>(
-    Array(options.length).fill(false)
-  );
+  const { setValue, watch } = useFormContext<FormValues>();
+  const checked = watch('options') || Array(options.length).fill(false);
 
   const handleChange = (index: number) => {
-    const newChecked = [...checked];
-    newChecked[index] = !newChecked[index];
-    setChecked(newChecked);
+    const updated = [...checked];
+    updated[index] = !updated[index];
+    setValue('options', updated);
   };
 
   return (
