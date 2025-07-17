@@ -1,18 +1,22 @@
 'use client';
 import Avatar from '@/components/atomic/Avatar';
 import useIsMobile from '@/hook/useIsMobile';
+import { FormValues } from '@/interfaces';
 import React, { useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 const ProfilePicture = () => {
   const isMobile = useIsMobile();
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const { setValue } = useFormContext<FormValues>();
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && e.target.files) {
-      setAvatarPreview(URL.createObjectURL(file));
-      // setValue('avatar', e.target.files); // Update the value in the model
+    const files = e.target.files;
+    if (files && files.length) {
+      setAvatarPreview(URL.createObjectURL(files[0]));
+      setValue('avatar', files);
     }
   };
   return (

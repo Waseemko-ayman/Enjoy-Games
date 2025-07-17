@@ -884,30 +884,35 @@ export const inputData = [
     id: 1,
     label: 'الإسم',
     icon: FaUser,
+    name: 'username',
   },
   {
     id: 2,
     label: 'البريد الإلكتروني',
     type: 'email',
     icon: MdOutlineAlternateEmail,
+    name: 'email',
   },
   {
     id: 3,
     type: 'number',
     label: 'رقم الجوال',
     placeholder: 'xxxxxxxxx',
+    name: 'phone',
   },
   {
     id: 4,
     label: 'تاريخ الميلاد',
     type: 'date',
     placeholder: '--/--/----',
+    name: 'birthDate',
   },
   {
     id: 5,
     label: 'الجنس',
     type: 'select',
     placeholder: 'حدد الجنس',
+    name: 'gender',
     options: [
       {
         id: 1,
@@ -918,5 +923,50 @@ export const inputData = [
         label: 'أنثى',
       },
     ],
+  },
+];
+
+export const InterestsData = [
+  {
+    id: 1,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 2,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 3,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 4,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 5,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 6,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 7,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
   },
 ];

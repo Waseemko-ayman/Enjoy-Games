@@ -1,14 +1,13 @@
 import React from 'react';
 import { getItemData } from '@/lib/mockData';
-import dynamic from 'next/dynamic';
-const BundlesPage = dynamic(() => import('@/components/pages/BundlesPage'));
+import BundlesPage from '@/components/pages/BundlesPage';
 
-export default function BundlesWrapper({
+export default async function BundlesWrapper({
   params,
 }: {
   params: { category: string; itemId: string };
 }) {
-  const item = getItemData(params.category, params.itemId);
+  const item = await getItemData(params.category, params.itemId);
 
   if (!item) return <div>العنصر غير موجود.</div>;
 

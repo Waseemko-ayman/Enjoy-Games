@@ -347,3 +347,13 @@ export interface myAccountStatsProps {
   account?: number;
   href?: string;
 }
+
+export interface FormValues {
+  username: string;
+  email: string;
+  phone: string;
+  birthDate: string;
+  gender: string;
+  options: boolean[];
+  avatar: FileList;
+}
