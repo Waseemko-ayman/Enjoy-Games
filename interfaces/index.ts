@@ -8,7 +8,7 @@ import {
   footerListsName,
   NavbarLayout,
 } from '@/utils/type';
-import { JSX } from 'react';
+import { ElementType, JSX } from 'react';
 
 interface BaseIconProps {
   Icon?: React.ElementType | string;
@@ -337,4 +337,13 @@ export interface CartItemData {
 export interface BannerSlide {
   id: number;
   image: string;
+}
+
+export interface myAccountStatsProps {
+  id: number;
+  icon: ElementType;
+  title: string;
+  currency?: string;
+  account?: number;
+  href?: string;
 }

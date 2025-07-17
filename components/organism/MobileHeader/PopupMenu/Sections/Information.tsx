@@ -1,8 +1,10 @@
 'use client';
 import Avatar from '@/components/atomic/Avatar';
 import CardWrapper from '@/components/atomic/CardWrapper';
+import { PATHS } from '@/data/paths';
 import { Wallet } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { PiSparkleFill } from 'react-icons/pi';
 
@@ -14,15 +16,17 @@ const Information = () => {
       bgColor="bg-white"
       className="py-3 px-5 shadow-[0_8.293px_37.319px_4.147px_rgba(0,0,0,0.08)] mt-8"
     >
-      <div className="flex items-center gap-3">
-        <Avatar
-          imgSrc="/assets/user-avatar.png"
-          imgAlt="character"
-          width={30}
-          height={30}
-        />
-        <h5 className="text-base font-semibold">أكمل بيانات حسابك الآن</h5>
-      </div>
+      <Link href={PATHS.MY_ACCOUNT.link}>
+        <div className="flex items-center gap-3">
+          <Avatar
+            imgSrc="/assets/user-avatar.png"
+            imgAlt="character"
+            width={30}
+            height={30}
+          />
+          <h5 className="text-base font-semibold">أكمل بيانات حسابك الآن</h5>
+        </div>
+      </Link>
 
       <div className="flex items-center justify-between gap-2 mb-3">
         {/* Background Line */}

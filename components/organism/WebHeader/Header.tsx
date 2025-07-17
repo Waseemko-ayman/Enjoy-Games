@@ -108,7 +108,6 @@ const Header = () => {
                                   otherClassNameIcon="text-gray-500 text-sm"
                                   otherClassName="!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg"
                                   linkPath={item.link}
-                                  // badge={item.badge}
                                 />
                               </li>
                             ))}
