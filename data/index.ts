@@ -443,22 +443,22 @@ export const FOOTER_LINKS_DATA = {
     {
       id: 2,
       text: 'الأسئلة الشائعة',
-      url: 'https://twitter.com/waseemabdalhady',
+      url: PATHS.FAQ.link,
     },
     {
       id: 3,
       text: 'سياسة الخصوصية',
-      url: 'https://www.linkedin.com/in/waseem-abd-elhadi-1b293624b/',
+      url: "#",
     },
     {
       id: 4,
       text: 'سياسة الإسترجاع',
-      url: 'https://www.instagram.com/waseem.abdalhady/',
+      url: "#",
     },
     {
       id: 5,
       text: 'سياسة الخدمة',
-      url: 'https://t.me/waseem_abdalhady',
+      url: "#",
     },
   ],
   works: [
