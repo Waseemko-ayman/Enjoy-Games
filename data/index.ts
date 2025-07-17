@@ -920,3 +920,48 @@ export const inputData = [
     ],
   },
 ];
+
+export const InterestsData = [
+  {
+    id: 1,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 2,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 3,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 4,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 5,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 6,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+  {
+    id: 7,
+    src: '/assets/contactAndData.webp',
+    alt: 'هدايا',
+    title: 'هدايا',
+  },
+];
