@@ -44,14 +44,14 @@ const FooterLinks = ({
                     : ''
                 }`}
               >
-                <Link href={item.url} target="_blank" className="block text-sm">
+                <Link href={item.url} className="block text-sm">
                   {/* By type guard To check if an item is of a type that contains icon or text */}
                   {'icon' in item ? (
                     <div className="flex items-center justify-center bg-white rounded-sm p-2 cursor-pointer">
                       <item.icon className="text-enjoy-primary-deep group-hover:text-[var(--enjoy-primary)] transition-all duration-300" />
                     </div>
                   ) : (
-                    item.text
+                    item?.text
                   )}
                 </Link>
               </li>

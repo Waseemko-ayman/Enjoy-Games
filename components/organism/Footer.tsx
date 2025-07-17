@@ -21,9 +21,11 @@ const Footer = () => {
             height={120}
           />
           <div className="flex items-start justify-between flex-wrap gap-5 w-full">
-            <FooterLinks secTitle="أعرف المزيد عنا" listName="followUs" />
-            <FooterLinks secTitle="الأعمال والحلول" listName="works" />
-            <FooterLinks secTitle="الأعمال والحلول" listName="works2" />
+            <FooterLinks secTitle="أعرف المزيد عنا" listName="LearnMore" />
+            <FooterLinks
+              secTitle="الأعمال والحلول"
+              listName="BusinessAndSolutions"
+            />
             <FooterLinks secTitle="تسوق عالتطبيق" listName="shop_app" />
             <FooterLinks secTitle="تواصل معنا" listName="socialMedia" />
           </div>

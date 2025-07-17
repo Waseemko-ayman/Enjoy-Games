@@ -31,6 +31,10 @@ export const PATHS = {
     ROOT: { name: 'تذاكر الدعم الفني', link: '/tickets' },
     CREATE: { name: 'إضافة تذكرة جديدة', link: '/tickets/create' },
   },
+  TERMS_OF_USER: { name: 'سياسة الإستخدام', link: '/terms-of-use' },
+  REFUND_POLICY: { name: 'سياسة الإسترجاع', link: '/refund-policy' },
+  PRIVACY_POLICY: { name: 'سياسة الخصوصية', link: '/privacy-policy' },
+  ABOUT: { name: 'من نحن', link: '/about' },
   FAQ: {
     name: 'الأسئلة الشائعة',
     link: '/faq',

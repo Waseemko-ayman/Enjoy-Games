@@ -434,11 +434,11 @@ export const ServiceData = [
 ];
 
 export const FOOTER_LINKS_DATA = {
-  followUs: [
+  LearnMore: [
     {
       id: 1,
       text: 'من نحن',
-      url: 'https://github.com/Waseemko-ayman',
+      url: PATHS.ABOUT.link,
     },
     {
       id: 2,
@@ -448,27 +448,20 @@ export const FOOTER_LINKS_DATA = {
     {
       id: 3,
       text: 'سياسة الخصوصية',
-      url: "#",
+      url: PATHS.PRIVACY_POLICY.link,
     },
     {
       id: 4,
       text: 'سياسة الإسترجاع',
-      url: "#",
+      url: PATHS.REFUND_POLICY.link,
     },
     {
       id: 5,
       text: 'سياسة الخدمة',
-      url: "#",
+      url: PATHS.TERMS_OF_USER.link,
     },
   ],
-  works: [
-    {
-      id: 1,
-      text: 'أنضم للتجار',
-      url: '#',
-    },
-  ],
-  works2: [
+  BusinessAndSolutions: [
     {
       id: 1,
       text: 'الأخبار',
@@ -477,6 +470,11 @@ export const FOOTER_LINKS_DATA = {
     {
       id: 2,
       text: 'مركز المساعدة',
+      url: '#',
+    },
+    {
+      id: 3,
+      text: 'أنضم للتجار',
       url: '#',
     },
   ],

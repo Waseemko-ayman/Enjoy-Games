@@ -10,9 +10,8 @@ export type ButtonTypes = 'submit' | 'button' | 'reset';
 export type ButtonIconPosition = 'left' | 'right';
 export type CommonCardVariant = 'row' | 'column';
 export type footerListsName =
-  | 'followUs'
-  | 'works'
-  | 'works2'
+  | 'LearnMore'
+  | 'BusinessAndSolutions'
   | 'shop_app'
   | 'socialMedia';
 
