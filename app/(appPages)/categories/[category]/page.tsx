@@ -1,8 +1,5 @@
 import { getCategoryData } from '@/lib/mockData';
-import dynamic from 'next/dynamic';
-
-// Import the dynamic component while preserving your existing components
-const CategoryPage = dynamic(() => import('@/template/CategoryPage'));
+import CategoryPage from '@/template/CategoryPage';
 
 export default async function CategoryPageWrapper({
   params,
