@@ -22,7 +22,11 @@ import {
   IoGameControllerOutline,
   IoWalletOutline,
 } from 'react-icons/io5';
-import { MdMoreHoriz, MdOutlineEmail } from 'react-icons/md';
+import {
+  MdMoreHoriz,
+  MdOutlineAlternateEmail,
+  MdOutlineEmail,
+} from 'react-icons/md';
 import {
   PiShoppingCartLight,
   PiSparkleFill,
@@ -567,7 +571,7 @@ export const userList = [
   {
     section: 'account',
     items: [
-      { id: 1, title: 'حسابي', link: '#', icon: FaUser },
+      { id: 1, title: 'حسابي', link: PATHS.MY_ACCOUNT.link, icon: FaUser },
       {
         id: 2,
         title: 'طلباتي',
@@ -600,7 +604,7 @@ export const userList = [
       //   icon: FaLink,
       // },
       { id: 4, title: 'دليل ستارز', link: PATHS.STARS.link, icon: FaFlag },
-      { id: 5, title: 'الإهتمامات', link: '#', icon: FaHeart },
+      { id: 5, title: 'الإهتمامات', link: PATHS.INTERESTS.link, icon: FaHeart },
     ],
   },
   {
@@ -873,4 +877,46 @@ export const HeroSlides: BannerSlide[] = [
   { id: 1, image: '/assets/banners/banner1.webp' },
   { id: 2, image: '/assets/banners/banner2.webp' },
   { id: 3, image: '/assets/banners/banner3.webp' },
+];
+
+export const inputData = [
+  {
+    id: 1,
+    label: 'الإسم',
+    icon: FaUser,
+  },
+  {
+    id: 2,
+    label: 'البريد الإلكتروني',
+    type: 'email',
+    icon: MdOutlineAlternateEmail,
+  },
+  {
+    id: 3,
+    type: 'number',
+    label: 'رقم الجوال',
+    placeholder: 'xxxxxxxxx',
+  },
+  {
+    id: 4,
+    label: 'تاريخ الميلاد',
+    type: 'date',
+    placeholder: '--/--/----',
+  },
+  {
+    id: 5,
+    label: 'الجنس',
+    type: 'select',
+    placeholder: 'حدد الجنس',
+    options: [
+      {
+        id: 1,
+        label: 'ذكر',
+      },
+      {
+        id: 2,
+        label: 'أنثى',
+      },
+    ],
+  },
 ];

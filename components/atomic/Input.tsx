@@ -1,7 +1,7 @@
 import React from 'react';
 
 type InputProps = {
-  type: 'text' | 'email' | 'search' | 'textarea' | 'select';
+  type: 'text' | 'email' | 'search' | 'select' | 'number' | 'date' | 'checkbox';
   placeholder?: string;
   variant?: 'primary' | 'secondary';
   otherClassName?: string;
@@ -10,10 +10,11 @@ type InputProps = {
   options?: { id: number; label: string }[];
   Icon?: React.ElementType;
   iconClassName?: string;
+  label?: string;
 } & React.HTMLAttributes<HTMLElement>;
 
 const Input = ({
-  type,
+  type = 'text',
   variant = 'primary',
   placeholder,
   otherClassName,
@@ -22,6 +23,7 @@ const Input = ({
   options = [],
   Icon,
   iconClassName,
+  label,
   ...props
 }: React.PropsWithChildren<InputProps>) => {
   const inputClasses = `w-full h-[46px] px-2 rounded-9xl border-none outline-none ${otherClassName}`;
@@ -51,21 +53,28 @@ const Input = ({
     );
 
   return (
-    <div
-      className={`flex items-center px-3 ${
-        variant === 'primary'
-          ? 'flex-row rounded-4xl bg-[var(--enjoy-glass-lavender)]'
-          : 'flex-row-reverse rounded-sm bg-white'
-      } ${otherClassNameContainer}`}
-    >
-      {iconBeforeInput && (
-        <Icon className={`${iconClassName} text-2xl cursor-pointer`} />
+    <>
+      {label && (
+        <label className="block text-sm font-semibold text-gray-400 mb-2">
+          {label}
+        </label>
       )}
-      {InputElement}
-      {iconAfterInput && (
-        <Icon className={`${iconClassName} text-2xl cursor-pointer`} />
-      )}
-    </div>
+      <div
+        className={`flex items-center px-3 ${
+          variant === 'primary'
+            ? 'flex-row rounded-4xl bg-[var(--enjoy-glass-lavender)]'
+            : 'flex-row-reverse rounded-lg border border-gray-300 focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)] bg-white'
+        } ${otherClassNameContainer}`}
+      >
+        {iconBeforeInput && (
+          <Icon className={`${iconClassName} text-2xl cursor-pointer`} />
+        )}
+        {InputElement}
+        {iconAfterInput && (
+          <Icon className={`${iconClassName} text-2xl cursor-pointer`} />
+        )}
+      </div>
+    </>
   );
 };
 

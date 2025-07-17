@@ -23,6 +23,8 @@ export const PATHS = {
   WALLET: { name: 'محفظتي', link: '/wallet' },
   MY_PURCHASES: { name: 'طلباتي', link: '/my-purchases' },
   MY_CART: { name: 'سلتي', link: '/my-cart' },
+  MY_ACCOUNT: { name: 'حسابي', link: '/my-account' },
+  INTERESTS: { name: 'الإهتمامات', link: '/my-account/interests' },
 };
 
 export const navBarLinks = [

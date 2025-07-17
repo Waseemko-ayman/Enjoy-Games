@@ -214,3 +214,18 @@ a {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.react-phone-number-input__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.react-phone-number-input__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.react-phone-number-input__country {
+  margin-right: 0.5rem; 
+}
