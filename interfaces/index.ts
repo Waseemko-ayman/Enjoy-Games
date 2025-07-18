@@ -43,7 +43,7 @@ export interface cardProps {
   ratings?: number | string;
 }
 
-export interface CommonCardProps extends BaseIconProps, cardProps {
+export interface ProductCardProps extends BaseIconProps, cardProps {
   titleIsLink?: boolean;
   productLink?: string;
   description?: boolean;
@@ -356,4 +356,58 @@ export interface FormValues {
   gender: 'ذكر' | 'أنثى';
   options: boolean[];
   avatar: FileList;
+}
+
+export interface paramsProps {
+  category: string;
+  itemId: string;
+}
+
+export interface BundlesPageProps {
+  item: CardItem;
+  params: paramsProps;
+}
+
+export interface ReviewData {
+  overallRating: number;
+  totalReviews: number;
+  ratingBreakdown: {
+    excellent: number;
+    good: number;
+    average: number;
+    poor: number;
+    bad: number;
+  };
+}
+
+export interface Review {
+  id: string;
+  userId: string;
+  userName: string;
+  rating: number;
+  comment: string;
+  createdAt: Date;
+  verified?: boolean;
+}
+
+export interface ReviewApiResponse {
+  success: boolean;
+  data: ReviewData;
+  reviews: Review[];
+}
+
+export interface ReviewData {
+  overallRating: number;
+  totalReviews: number;
+  ratingBreakdown: {
+    excellent: number;
+    good: number;
+    average: number;
+    poor: number;
+    bad: number;
+  };
+}
+
+export interface ReviewSectionProps {
+  data?: ReviewData;
 }

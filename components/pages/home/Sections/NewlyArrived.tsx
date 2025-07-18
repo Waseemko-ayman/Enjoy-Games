@@ -1,4 +1,4 @@
-import CommonCard from '@/components/atomic/CommonCard';
+import ProductCard from '@/components/atomic/ProductCard';
 import SectionComponent from '@/components/atomic/SectionComponent';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import { NewlyArrivedData } from '@/data';
@@ -9,7 +9,7 @@ const NewlyArrived = () => {
     <SectionComponent title="وصل حديثًا">
       <GridWrapper otherClassName="gap-5" isScrollable>
         {NewlyArrivedData.map((card) => (
-          <CommonCard
+          <ProductCard
             key={card.id}
             imgAlt={card.title}
             imgTitle={card.title}

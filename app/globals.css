@@ -178,6 +178,10 @@
     background-color: var(--enjoy-primary-dark);
   }
 
+  .hover\:bg-enjoy-primary-soft:hover {
+    background-color: var(--enjoy-primary-soft);
+  }
+
   .hover\:bg-enjoy-primary-light:hover {
     background-color: var(--enjoy-primary-light);
   }
@@ -231,5 +235,5 @@ a {
 }
 
 .react-phone-number-input__country {
-  margin-right: 0.5rem; 
+  margin-right: 0.5rem;
 }

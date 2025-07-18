@@ -21,7 +21,7 @@ const NoOffers: React.FC<NoOffersProps> = ({ itemId }) => {
   return (
     <Layer otherClassName="!my-12">
       <Container>
-        <CardWrapper bgColor="bg-white" className="py-[60px] text-center">
+        <CardWrapper className="py-[60px] text-center">
           <svg
             className="w-16 h-16 mb-4 text-gray-400 mx-auto"
             fill="none"

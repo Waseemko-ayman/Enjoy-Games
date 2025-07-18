@@ -1,4 +1,4 @@
-import CommonCard from '@/components/atomic/CommonCard';
+import ProductCard from '@/components/atomic/ProductCard';
 import Layer from '@/components/atomic/Layer';
 import SectionTitle from '@/components/atomic/SectionTitle';
 import GridWrapper from '@/components/molecules/GridWrapper';
@@ -17,7 +17,7 @@ const StarsGiftsPage = () => {
         />
         <GridWrapper otherClassName="mt-3">
           {NewlyArrivedData.map((card) => (
-            <CommonCard
+            <ProductCard
               key={card.id}
               imgAlt={card.title}
               imgTitle={card.title}

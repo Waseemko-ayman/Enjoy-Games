@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
+
 import React from 'react';
 import {
   Select,
@@ -6,17 +9,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import { FaCheck } from 'react-icons/fa6';
+import { InputTypes } from '@/utils/type';
 
 type InputProps = {
-  type:
-    | 'text'
-    | 'email'
-    | 'search'
-    | 'select'
-    | 'number'
-    | 'date'
-    | 'checkbox'
-    | 'textarea';
+  type: InputTypes;
   placeholder?: string;
   variant?: 'primary' | 'secondary';
   otherClassName?: string;
@@ -26,6 +23,9 @@ type InputProps = {
   Icon?: React.ElementType;
   iconClassName?: string;
   label?: string;
+  checked?: boolean;
+  value?: string | number;
+  onChange?: (e: React.ChangeEvent<any>) => void;
 } & React.HTMLAttributes<HTMLElement>;
 
 const Input = ({
@@ -39,10 +39,12 @@ const Input = ({
   Icon,
   iconClassName,
   label,
+  value,
+  onChange,
   ...props
 }: React.PropsWithChildren<InputProps>) => {
   const inputClasses = `w-full ${
-    type !== 'textarea' ? 'h-[46px]' : 'min-h-[120px] py-2'
+    type !== 'textarea' ? 'h-[46px]' : 'min-h-[120px]'
   } px-2 rounded-9xl border-none outline-none resize-none ${otherClassName}`;
 
   const iconBeforeInput = variant === 'primary' && Icon;
@@ -52,8 +54,7 @@ const Input = ({
     type === 'select' ? (
       <Select
         onValueChange={(val) =>
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          props?.onChange?.({ target: { name: inputName, value: val } } as any)
+          onChange?.({ target: { name: inputName, value: val } } as any)
         }
       >
         <SelectTrigger
@@ -78,21 +79,45 @@ const Input = ({
         name={inputName}
         placeholder={placeholder}
         className={inputClasses}
-        {...props}
+        onChange={onChange}
+        value={value}
         dir="rtl"
       />
+    ) : type === 'checkbox' ? (
+      <label className="flex items-center cursor-pointer select-none gap-3">
+        <input
+          type="checkbox"
+          name={inputName}
+          checked={props.checked}
+          onChange={onChange}
+          className="peer sr-only"
+        />
+        <div className="w-6 h-6 rounded-lg border border-gray-300 peer-checked:bg-green-600 flex items-center justify-center transition-colors">
+          {props.checked && <FaCheck className="w-3 h-3 text-white" />}
+        </div>
+        <span
+          className={`text-sm transition-colors ${
+            props.checked ? 'text-gray-700' : 'text-gray-400'
+          }`}
+        >
+          {placeholder}
+        </span>
+      </label>
     ) : (
       <input
         type={type}
         name={inputName}
         placeholder={placeholder}
         className={inputClasses}
-        {...props}
+        onChange={onChange}
+        value={value}
         dir="rtl"
       />
     );
 
-  return (
+  return type === 'checkbox' ? (
+    InputElement
+  ) : (
     <>
       {label && (
         <label className="block text-sm font-semibold text-gray-400 mb-2">

@@ -24,7 +24,7 @@ const CreateForm = () => {
   };
 
   return (
-    <CardWrapper bgColor="bg-white" className="p-6 mt-7">
+    <CardWrapper className="p-6 mt-7">
       <form>
         <div className="space-y-7">
           {ticketsInputsTypes.map((input) => (

@@ -1,4 +1,4 @@
-import CommonCard from '@/components/atomic/CommonCard';
+import ProductCard from '@/components/atomic/ProductCard';
 import Layer from '@/components/atomic/Layer';
 import SectionTitle from '@/components/atomic/SectionTitle';
 import Container from '@/components/organism/Container';
@@ -18,7 +18,7 @@ const EnjoyGamesGifts = () => {
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3">
           {NewlyArrivedData.map((card) => (
-            <CommonCard
+            <ProductCard
               key={card.id}
               imgAlt={card.title}
               imgTitle={card.title}

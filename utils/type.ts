@@ -16,3 +16,12 @@ export type footerListsName =
   | 'socialMedia';
 
 export type NavbarLayout = 'default' | 'store';
+export type InputTypes =
+  | 'text'
+  | 'email'
+  | 'search'
+  | 'select'
+  | 'number'
+  | 'date'
+  | 'checkbox'
+  | 'textarea';

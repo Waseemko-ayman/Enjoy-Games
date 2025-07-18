@@ -1,10 +1,11 @@
+import { paramsProps } from '@/interfaces';
 import { getCategoryData } from '@/lib/mockData';
 import CategoryPage from '@/template/CategoryPage';
 
 export default async function CategoryPageWrapper({
   params,
 }: {
-  params: { category: string };
+  params: paramsProps;
 }) {
   // Get data from mockData (will be replaced by API later)
   // const categoryData = await getCategoryData(params.category);

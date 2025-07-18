@@ -24,7 +24,6 @@ const PageHeader = ({
   function extractPaths(obj: any, map: Record<string, string> = {}) {
     for (const key in obj) {
       const value = obj[key];
-      console.log(value);
       if (value && typeof value === 'object') {
         if ('link' in value && 'name' in value) {
           const pathKey = value.link.split('/').filter(Boolean).pop() || '';

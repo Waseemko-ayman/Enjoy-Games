@@ -16,7 +16,7 @@ const EmptyStateBox = ({
   return (
     <Layer otherClassName="!my-12">
       <Container>
-        <CardWrapper bgColor="bg-white" className="py-[60px]">
+        <CardWrapper className="py-[60px]">
           <div className="mx-auto max-w-[300px]">
             <Image
               src={imageSrc}

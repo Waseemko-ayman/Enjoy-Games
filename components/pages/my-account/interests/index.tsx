@@ -23,7 +23,7 @@ const InterestsPage = () => {
     <Layer otherClassName="!my-10">
       <Container>
         <div className="w-full max-w-4xl mx-auto">
-          <CardWrapper bgColor="bg-white" className="py-5 px-5 sm:px-10">
+          <CardWrapper className="py-5 px-5 sm:px-10">
             <h2 className="text-base font-semibold mb-7">
               وش أكثر شي تحب تشتريه؟ 🎯
             </h2>

@@ -1,4 +1,4 @@
-import CommonCard from '@/components/atomic/CommonCard';
+import ProductCard from '@/components/atomic/ProductCard';
 import SectionComponent from '@/components/atomic/SectionComponent';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import { BestSellersData } from '@/data';
@@ -9,7 +9,7 @@ const BestSellers = () => {
     <SectionComponent title="البطاقات الأكثر مبيعًا">
       <GridWrapper isScrollable>
         {BestSellersData.map((card) => (
-          <CommonCard
+          <ProductCard
             key={card.id}
             imgSrc={card.src}
             imgAlt={card.title}

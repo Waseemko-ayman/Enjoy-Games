@@ -1,17 +1,13 @@
-import CommonCard from '@/components/atomic/CommonCard';
+import ProductCard from '@/components/atomic/ProductCard';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import NoOffers from '@/components/molecules/NoOffers';
 import PageHeader from '@/components/molecules/PageHeader';
 import Container from '@/components/organism/Container';
-import { CardItem } from '@/interfaces';
+import { BundlesPageProps } from '@/interfaces';
 import React from 'react';
 import { PiShoppingCartLight } from 'react-icons/pi';
 
-interface BundlesPageProps {
-  item: CardItem;
-}
-
-const BundlesPage: React.FC<BundlesPageProps> = ({ item }) => {
+const BundlesPage: React.FC<BundlesPageProps> = ({ item, params }) => {
   const itemId = item?.id || '';
 
   if (!item?.shiddatData || item.shiddatData.length === 0) {
@@ -22,9 +18,9 @@ const BundlesPage: React.FC<BundlesPageProps> = ({ item }) => {
     <div>
       <PageHeader />
       <Container otherClassName="mt-12">
-        <GridWrapper otherClassName="gap-5" isScrollable>
+        <GridWrapper otherClassName="gap-5">
           {item.shiddatData.map((card) => (
-            <CommonCard
+            <ProductCard
               key={card.id}
               imgAlt={card.title}
               imgTitle={card.title}
@@ -35,6 +31,7 @@ const BundlesPage: React.FC<BundlesPageProps> = ({ item }) => {
               btnVariant="primary"
               btnText="أضف للسلة"
               Icon={PiShoppingCartLight}
+              cardLinkPath={`/categories/${params.category}/${params.itemId}/bundles/${card.id}`}
               {...card}
             />
           ))}

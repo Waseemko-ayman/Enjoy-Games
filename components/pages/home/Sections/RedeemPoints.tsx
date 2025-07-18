@@ -1,4 +1,4 @@
-import CommonCard from '@/components/atomic/CommonCard';
+import ProductCard from '@/components/atomic/ProductCard';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import ResponsiveWrapper from '@/components/molecules/ResponsiveWrapper';
 import { NewlyArrivedData } from '@/data';
@@ -20,7 +20,7 @@ const RedeemPoints = () => {
         </div>
         <GridWrapper otherClassName="mt-3 !py-0 px-5 sm:px-10" isScrollable>
           {NewlyArrivedData.map((card) => (
-            <CommonCard
+            <ProductCard
               key={card.id}
               imgAlt={card.title}
               imgTitle={card.title}

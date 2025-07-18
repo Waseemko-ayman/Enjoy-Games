@@ -1,9 +1,6 @@
-import React from 'react'
+import BundlesDetails from '@/components/pages/BundlesPage/BundlesDetails';
+import React from 'react';
 
-const page = () => {
-  return (
-    <div>bundles item</div>
-  )
-}
+const page = () => <BundlesDetails />;
 
-export default page
+export default page;

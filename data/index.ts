@@ -38,7 +38,7 @@ import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
 import { Sparkles, Wallet } from 'lucide-react';
 import { BannerSlide, RewardTier } from '@/interfaces';
 
-const shiddats = [
+export const shiddats = [
   {
     id: 1,
     title: 'بطاقة شحن جواكر 70,000 توكن',
