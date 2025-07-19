@@ -1,4 +1,3 @@
-'use client';
 import EmptyStateBox from '@/components/molecules/EmptyStateBox';
 import PageHeader from '@/components/molecules/PageHeader';
 import { PATHS } from '@/data/paths';

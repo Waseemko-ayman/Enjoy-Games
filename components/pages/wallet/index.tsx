@@ -1,4 +1,3 @@
-'use client';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import Layer from '@/components/atomic/Layer';
 import PageHeader from '@/components/molecules/PageHeader';

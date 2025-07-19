@@ -1,5 +1,12 @@
-import TermsOfUsePage from '@/components/pages/terms-of-use';
 import React from 'react';
+import dynamic from 'next/dynamic';
+
+const TermsOfUsePage = dynamic(
+  () => import('@/components/pages/terms-of-use'),
+  {
+    ssr: false,
+  }
+);
 
 const TermsOfUse = () => <TermsOfUsePage />;
 

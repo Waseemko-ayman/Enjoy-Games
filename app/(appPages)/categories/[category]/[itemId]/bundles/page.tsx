@@ -1,8 +1,16 @@
+import dynamic from 'next/dynamic';
 import { getItemData } from '@/lib/mockData';
-import BundlesPage from '@/components/pages/BundlesPage';
 import { paramsProps } from '@/interfaces';
 
-export default async function BundlesWrapper({ params }: { params: paramsProps }) {
+const BundlesPage = dynamic(() => import('@/components/pages/BundlesPage'), {
+  ssr: false,
+});
+
+export default async function BundlesWrapper({
+  params,
+}: {
+  params: paramsProps;
+}) {
   const item = getItemData(params.category, params.itemId);
 
   if (!item) return <div>العنصر غير موجود.</div>;

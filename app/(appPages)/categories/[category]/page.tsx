@@ -1,6 +1,10 @@
+import dynamic from 'next/dynamic';
 import { paramsProps } from '@/interfaces';
 import { getCategoryData } from '@/lib/mockData';
-import CategoryPage from '@/template/CategoryPage';
+
+const CategoryPage = dynamic(() => import('@/template/CategoryPage'), {
+  ssr: false,
+});
 
 export default async function CategoryPageWrapper({
   params,

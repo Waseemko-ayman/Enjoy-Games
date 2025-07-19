@@ -1,4 +1,3 @@
-'use client';
 import Button from '@/components/atomic/Button';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import Input from '@/components/atomic/Input';
