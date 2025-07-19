@@ -919,10 +919,12 @@ export const inputData = [
     options: [
       {
         id: 1,
+        value: 'male',
         label: 'ذكر',
       },
       {
         id: 2,
+        value: 'female',
         label: 'أنثى',
       },
     ],
@@ -989,14 +991,17 @@ export const ticketsInputsTypes = [
       {
         id: 1,
         label: 'مشكلة بأحد الطلبات',
+        value: 'order-issue',
       },
       {
         id: 2,
         label: 'مشكلة بالدفع والتحويل',
+        value: 'payment-issue',
       },
       {
         id: 3,
         label: 'اقتراح او شيء اخر',
+        value: 'suggestion-or-other',
       },
     ],
   },
@@ -1005,5 +1010,45 @@ export const ticketsInputsTypes = [
     type: 'textarea',
     name: 'details',
     placeholder: 'يرجي كتابة وصف لمساعتدك بشكل أدق',
+  },
+];
+
+export const inputsViaEntry = [
+  {
+    id: 1,
+    inputName: 'quantity',
+    label: 'طريقة الدخول',
+    type: 'select',
+    optios: [
+      { id: 1, value: 'phone', label: 'رقم الهاتف' },
+      { id: 2, value: 'email', label: 'البريد' },
+      { id: 3, value: 'twitter', label: 'تويتر' },
+      { id: 4, value: 'facebook', label: 'فيس بوك' },
+    ],
+  },
+  {
+    id: 2,
+    inputName: 'phone_number',
+    label: 'رقم الجوال أو الإيميل',
+    type: 'text',
+  },
+  {
+    id: 3,
+    inputName: 'password',
+    label: 'كلمة المرور',
+    type: 'password',
+  },
+  {
+    id: 4,
+    inputName: 'id_number',
+    label: 'رقم الايدي',
+    type: 'text',
+  },
+  {
+    id: 4,
+    inputName: 'checkbox',
+    label: 'قد قمت بالغاء القفل من الحساب',
+    type: 'checkbox',
+    placeholder: 'تم الإلغاء',
   },
 ];

@@ -98,14 +98,14 @@ const CartContent: React.FC<CartContentProps> = ({ items }) => {
               <p>
                 بالانتقال الى الدفع فانت تتوافق على{' '}
                 <Link
-                  href="#"
+                  href={PATHS.TERMS_OF_USER.link}
                   className="text-enjoy-primary underline cursor-pointer"
                 >
                   سياسة الاستخدام
                 </Link>{' '}
                 و{' '}
                 <Link
-                  href="#"
+                  href={PATHS.PRIVACY_POLICY.link}
                   className="text-enjoy-primary underline cursor-pointer"
                 >
                   سياسة الخصوصية

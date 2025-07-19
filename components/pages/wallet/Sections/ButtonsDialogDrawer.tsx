@@ -45,7 +45,6 @@ const ButtonsDialogDrawer = () => {
             type="text"
             placeholder="أكتب كود القسيم هنا..."
             inputName="coupon_code"
-            // Icon={IoIosWarning}
             iconClassName="text-red-500"
             variant="secondary"
             otherClassNameContainer="!border !border-gray-300 !rounded-lg"

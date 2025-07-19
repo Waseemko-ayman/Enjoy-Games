@@ -88,7 +88,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             <p className="text-xs text-[var(--enjoy-gray-650)] font-normal text-center  leading-relaxed mt-4">
               بإنشاء حساب جديد؛ أنت توافق ضمنيًا على{' '}
               <Link
-                href="#"
+                href={PATHS.PRIVACY_POLICY.link}
                 className="text-enjoy-primary font-semibold hover:text-enjoy-primary-soft transition-colors duration-300"
               >
                 سياسة الخصوصية

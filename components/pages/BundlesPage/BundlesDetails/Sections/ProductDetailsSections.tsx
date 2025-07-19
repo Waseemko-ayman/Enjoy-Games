@@ -2,11 +2,24 @@
 import Button from '@/components/atomic/Button';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import Input from '@/components/atomic/Input';
-import { FOOTER_LINKS_DATA } from '@/data';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { FOOTER_LINKS_DATA, inputsViaEntry } from '@/data';
 import Image from 'next/image';
 import React from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { MdAdd, MdAddShoppingCart } from 'react-icons/md';
+
+const inputQuantityOptions = [
+  { id: 1, label: '1' },
+  { id: 2, label: '2' },
+  { id: 3, label: '3' },
+  { id: 4, label: '4' },
+];
 
 const ProductDetailsSections = () => {
   return (
@@ -81,19 +94,33 @@ const ProductDetailsSections = () => {
           <div>
             <Input
               variant="secondary"
-              type="text"
+              type="select"
               inputName="quantity"
               label="الكمية"
+              options={inputQuantityOptions}
             />
           </div>
-          <div>
-            <Input
-              variant="secondary"
-              type="text"
-              inputName="id_number"
-              label="رقم الايدي"
-            />
-          </div>
+          <Accordion type="single" collapsible>
+            <AccordionItem value="extra-options">
+              <AccordionTrigger className="mb-4 cursor-pointer border-b border-gray-200 pb-2">
+                خيارات إضافية
+              </AccordionTrigger>
+              <AccordionContent className="space-y-4">
+                {inputsViaEntry.map((input) => (
+                  <Input
+                    key={input.id}
+                    variant="secondary"
+                    type={input.type}
+                    inputName={input.inputName}
+                    label={input.label}
+                    options={input.optios}
+                    placeholder={input.placeholder}
+                    isRequired
+                  />
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
           <Button otherClassName="py-3 px-5 w-full" Icon={MdAddShoppingCart}>
             أضف للسلة
           </Button>

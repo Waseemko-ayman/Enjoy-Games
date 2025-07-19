@@ -1,92 +1,84 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
-import { FaLink, FaX } from 'react-icons/fa6';
+import React, { useState } from 'react';
 import Button from '@/components/atomic/Button';
 import Input from '@/components/atomic/Input';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import { ticketsInputsTypes } from '@/data';
-import Image from 'next/image';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import ButtonLoading from '@/components/atomic/ButtonLoading';
+import AttachmentsUploader from '@/components/molecules/AttachmentsPreview';
+import { FormData } from '@/interfaces';
+
+const schema = Yup.object().shape({
+  subject: Yup.string().required('العنوان مطلوب'),
+  ticketType: Yup.string().required('نوع التذكرة مطلوب'),
+  details: Yup.string().required('الوصف مطلوب'),
+});
 
 const CreateForm = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      setAttachments((prev) => [...prev, ...Array.from(files)]);
-    }
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
 
-  const removeAttachment = (index: number) => {
-    setAttachments((prev) => prev.filter((_, i) => i !== index));
+  const onSubmit = (data: FormData) => {
+    setIsSubmittingLocal(true);
+    const finalData = { ...data, attachments };
+
+    setTimeout(() => {
+      setIsSubmittingLocal(false);
+      console.log('Form Data:', finalData);
+      reset();
+      setAttachments([]);
+      // Here you bind finalData to the API later
+    }, 1000);
   };
 
   return (
     <CardWrapper className="p-6 mt-7">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-7">
-          {ticketsInputsTypes.map((input) => (
-            <Input
-              key={input.id}
-              variant="secondary"
-              type={input.type || 'text'}
-              placeholder={input.placeholder}
-              options={input.options}
-            />
-          ))}
+          {ticketsInputsTypes.map((input) => {
+            const fieldName = input.name as keyof FormData;
+            return (
+              <div key={input.id}>
+                <Input
+                  variant="secondary"
+                  type={input.type || 'text'}
+                  inputName={input.name}
+                  placeholder={input.placeholder}
+                  options={input.options}
+                  {...register(fieldName)}
+                />
+                {errors[fieldName] && (
+                  <p className="text-red-600 mt-1">
+                    {errors[fieldName]?.message}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
 
-        {/* File Upload Trigger */}
-        <div
-          className="font-semibold text-base cursor-pointer flex items-center gap-2 mt-5 hover:text-enjoy-primary transition-colors duration-300"
-          onClick={() => fileInputRef.current?.click()}
-        >
-          <FaLink />
-          <h3>أضف مرفقات للتذكرة (غير إلزامي)</h3>
-        </div>
-
-        <input
-          type="file"
-          ref={fileInputRef}
-          multiple
-          className="hidden"
-          onChange={handleFileSelect}
+        <AttachmentsUploader
+          attachments={attachments}
+          setAttachments={setAttachments}
+          variant="ticket"
         />
 
-        {/* Preview Attachments */}
-        {attachments.length > 0 && (
-          <div className="flex flex-wrap gap-4 mt-4">
-            {attachments.map((file, index) => (
-              <div key={index} className="relative overflow-hidden group">
-                {file.type.startsWith('image') ? (
-                  <Image
-                    src={URL.createObjectURL(file)}
-                    alt="attachment"
-                    width={80}
-                    height={80}
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-xs text-center p-2 bg-gray-100">
-                    {file.name}
-                  </div>
-                )}
-                <Button
-                  type="button"
-                  variant="circle"
-                  handleClick={() => removeAttachment(index)}
-                  bgColor="bg-red-500"
-                  otherClassName="absolute top-0 right-0 text-white w-6 h-6 flex items-center justify-center hover:!bg-red-500"
-                >
-                  <FaX />
-                </Button>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <Button otherClassName="w-full py-3 px-3 mt-7">إرسال التذكرة</Button>
+        <Button otherClassName="w-full py-3 px-3 mt-7" type="submit">
+          {isSubmittingLocal ? <ButtonLoading /> : 'إرسال التذكرة'}
+        </Button>
       </form>
     </CardWrapper>
   );

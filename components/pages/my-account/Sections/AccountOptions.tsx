@@ -4,7 +4,6 @@ import Input from '@/components/atomic/Input';
 import { FormValues } from '@/interfaces';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FaCheck } from 'react-icons/fa6';
 
 const options = [
   'إرسال كود البطاقة إلى البريد الإلكتروني',

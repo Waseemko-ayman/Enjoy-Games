@@ -411,3 +411,9 @@ export interface ReviewData {
 export interface ReviewSectionProps {
   data?: ReviewData;
 }
+
+export interface FormData {
+  subject: string;
+  ticketType: string;
+  details: string;
+}

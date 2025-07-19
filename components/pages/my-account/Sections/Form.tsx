@@ -46,12 +46,16 @@ const Form: React.FC<FormProps> = ({ register, errors, control }) => {
                       value={value}
                       onChange={onChange}
                       placeholder={input.placeholder || ''}
-                      className="px-4 py-3 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)]"
+                      className={`px-4 py-3 bg-white rounded-lg border ${
+                        errors[input.name]
+                          ? 'border-red-500'
+                          : 'border-gray-300'
+                      } focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)]`}
                     />
                   )}
                 />
                 {errors[input.name] && (
-                  <p className="text-red-600 border-red-600">
+                  <p className="text-red-600 mt-1">
                     {errors[input.name]?.message as string}
                   </p>
                 )}
@@ -60,13 +64,16 @@ const Form: React.FC<FormProps> = ({ register, errors, control }) => {
               <div>
                 <Input
                   variant="secondary"
-                  type={input.type || 'text'}
+                  type={input.type}
                   label={input.label}
                   placeholder={input.placeholder}
                   Icon={input.icon}
                   iconClassName="h-4 w-4 text-gray-400"
                   inputName={input.name}
                   options={input.options}
+                  otherClassNameContainer={
+                    errors[input.name] ? 'border-red-500' : ''
+                  }
                   {...register(input.name)}
                 />
                 {errors[input.name] && (
