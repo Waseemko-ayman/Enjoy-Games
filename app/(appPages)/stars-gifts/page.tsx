@@ -1,10 +1,6 @@
+import StarsGiftsPage from '@/components/pages/stars-gifts';
 import React from 'react';
-import dynamic from 'next/dynamic';
 
-const TermsOfUsePage = dynamic(() => import('@/components/pages/stars-gifts'), {
-  ssr: false,
-});
-
-const StarsGifts = () => <TermsOfUsePage />;
+const StarsGifts = () => <StarsGiftsPage />;
 
 export default StarsGifts;

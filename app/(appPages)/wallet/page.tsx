@@ -1,9 +1,5 @@
-import dynamic from 'next/dynamic';
+import WalletPage from '@/components/pages/wallet';
 import React from 'react';
-
-const WalletPage = dynamic(() => import('@/components/pages/wallet'), {
-  ssr: false,
-});
 
 const Wallet = () => <WalletPage />;
 

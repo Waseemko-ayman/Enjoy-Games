@@ -1,9 +1,5 @@
-import dynamic from 'next/dynamic';
+import TicketsPage from '@/components/pages/tickets';
 import React from 'react';
-
-const TicketsPage = dynamic(() => import('@/components/pages/tickets'), {
-  ssr: false,
-});
 
 const Tickets = () => <TicketsPage />;
 
