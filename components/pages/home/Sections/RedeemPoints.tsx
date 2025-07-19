@@ -2,6 +2,7 @@ import ProductCard from '@/components/atomic/ProductCard';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import ResponsiveWrapper from '@/components/molecules/ResponsiveWrapper';
 import { NewlyArrivedData } from '@/data';
+import { PATHS } from '@/data/paths';
 import Link from 'next/link';
 import React from 'react';
 import { PiShoppingCartLight } from 'react-icons/pi';
@@ -14,7 +15,7 @@ const RedeemPoints = () => {
           <h2 className="text-xl px-3 lg:px-0 font-semibold my-3 inline-block">
             استبدل نقاطك
           </h2>
-          <Link href="#" className="text-base">
+          <Link href={PATHS.STARS_GIFTS} className="text-base">
             عرض الكل
           </Link>
         </div>
