@@ -334,6 +334,22 @@ export interface CartItemData {
   currencyImage: string;
 }
 
+export interface CartContentProps {
+  items: CartItemData[];
+  onProceedToPayment: () => void;
+  quantity: number;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  // onSendAsGift: () => void;
+}
+
+export interface PaymentStepProps {
+  onPaymentComplete: () => void;
+  onBackToCart: () => void;
+  totalAmount: number;
+  items: CartItemData[];
+  quantity: number;
+}
+
 export interface BannerSlide {
   id: number;
   image: string;

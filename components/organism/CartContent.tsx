@@ -1,27 +1,32 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/atomic/Button';
 import CardWrapper from '@/components/atomic/CardWrapper';
-import { Gift, Minus, Trash2 } from 'lucide-react';
+import { Minus, Trash2 } from 'lucide-react';
 import { FaPlus, FaStar } from 'react-icons/fa6';
 import SubCartHeader from '../molecules/SubCartHeader';
-import { CartItemData } from '@/interfaces';
+import { CartContentProps } from '@/interfaces';
 import { PATHS } from '@/data/paths';
+import Layer from '../atomic/Layer';
+import InvoiceSummary from '../molecules/InvoiceSummary';
+import Container from './Container';
 
-interface CartContentProps {
-  items: CartItemData[];
-}
-
-const CartContent: React.FC<CartContentProps> = ({ items }) => {
-  const [quantity, setQuantity] = useState(items[0]?.quantity || 1);
-
+const CartContent: React.FC<CartContentProps> = ({
+  items,
+  onProceedToPayment,
+  quantity,
+  setQuantity,
+  // onSendAsGift,
+}) => {
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-6xl mx-auto">
-        <SubCartHeader />
+    <Layer otherClassName="!my-12">
+      <Container>
+        <SubCartHeader
+          title="ملخص السلة"
+          href={PATHS.STORE.link}
+          btnText="العودة للتسوق"
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
@@ -114,49 +119,25 @@ const CartContent: React.FC<CartContentProps> = ({ items }) => {
               </p>
             </div>
 
-            <Button otherClassName="w-full py-3">إتمام الدفع</Button>
             <Button
+              otherClassName="w-full py-3"
+              handleClick={onProceedToPayment}
+            >
+              إتمام الدفع
+            </Button>
+            {/* <Button
               variant="forth"
-              href={PATHS.MY_ACCOUNT.INTERESTS.link}
               otherClassName="w-full py-3"
               Icon={Gift}
+              iconPosition="right"
+              handleClick={onSendAsGift}
             >
-              أرسل كهدية
-            </Button>
+              أرسلها كهدية
+            </Button> */}
           </div>
 
           <div className="space-y-6">
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h2 className="text-lg font-bold mb-6">ملخص الفاتورة</h2>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center text-gray-500 font-bold border-b border-dotted border-gray-300 pb-4">
-                  <span>الإجمالي الفرعي:</span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{items[0].price * quantity}</span>
-                    <Image
-                      src={`/assets/${items[0].currencyImage}`}
-                      alt="ريال سعودي"
-                      width={18}
-                      height={18}
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-between items-center font-bold">
-                  <span>إجمالي المبلغ:</span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg font-bold">
-                      {items[0].price * quantity}
-                    </span>
-                    <Image
-                      src={`/assets/${items[0].currencyImage}`}
-                      alt="ريال سعودي"
-                      width={18}
-                      height={18}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <InvoiceSummary item={items[0]} quantity={quantity} />
 
             <CardWrapper
               bgColor="bg-enjoy-secondary-soft"
@@ -189,15 +170,8 @@ const CartContent: React.FC<CartContentProps> = ({ items }) => {
             </CardWrapper>
           </div>
         </div>
-      </div>
-
-      {/* Chat Button */}
-      <div className="fixed bottom-6 left-6">
-        <button className="w-14 h-14 bg-enjoy-primary rounded-full flex items-center justify-center shadow-lg hover:bg-purple-700 transition-colors">
-          <span className="text-white text-2xl">💬</span>
-        </button>
-      </div>
-    </div>
+      </Container>
+    </Layer>
   );
 };
 

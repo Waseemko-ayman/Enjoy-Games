@@ -9,7 +9,6 @@ import SearchHeader from './MobileHeader/SearchHeader';
 import MobileNavbar from './MobileHeader/Navbar';
 import { usePathname } from 'next/navigation';
 import useIsMobile from '@/hook/useIsMobile';
-import CartHeader from './CartHeader';
 import { FloatingChatWidget } from './FloatingChatWidget';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
@@ -23,7 +22,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       {!isCartPage && <TopBanner />}
       {isCartPage ? (
-        <CartHeader />
+        <></>
       ) : isMobile ? (
         <>
           <MobileHeader />
