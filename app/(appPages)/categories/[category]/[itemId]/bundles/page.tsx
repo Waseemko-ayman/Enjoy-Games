@@ -21,7 +21,7 @@ export default async function BundlesWrapper({
 }: {
   params: paramsProps;
 }) {
-  const item = getItemData(params.category, params.itemId);
+  const item = await getItemData(params.category, params.itemId);
 
   if (!item) return <div>العنصر غير موجود.</div>;
 
