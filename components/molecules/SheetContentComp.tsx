@@ -1,6 +1,8 @@
+'use client';
 import React, { useState } from 'react';
 import NavItem from '../atomic/NavItem';
 import { subMenuItems } from '@/data';
+import { motion } from 'framer-motion';
 
 const SheetContentComp = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -13,7 +15,13 @@ const SheetContentComp = () => {
         const isLastTwoItems = index >= subMenuItems.length - 2;
 
         return (
-          <div key={index} className="relative">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            key={index}
+          >
             <NavItem
               key={index}
               Icon={item.Icon}
@@ -48,7 +56,7 @@ const SheetContentComp = () => {
                 ))}
               </div>
             )}
-          </div>
+          </motion.div>
         );
       })}
     </div>

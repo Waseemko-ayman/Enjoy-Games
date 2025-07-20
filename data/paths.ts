@@ -1,6 +1,6 @@
 import { FiUser } from 'react-icons/fi';
 import { IoHomeOutline, IoSearch } from 'react-icons/io5';
-import { MdOutlineAssignment } from 'react-icons/md';
+import { MdMoreHoriz, MdOutlineAssignment } from 'react-icons/md';
 
 export const PATHS = {
   HOME: { name: 'الرئيسية', link: '/' },
@@ -53,4 +53,5 @@ export const navBarLinks = [
     link: PATHS.MY_PURCHASES.link,
   },
   { id: 4, icon: FiUser, title: 'سجّل الآن', link: PATHS.LOGIN },
+  { id: 5, icon: MdMoreHoriz, title: 'المزيد', onClick: true },
 ];

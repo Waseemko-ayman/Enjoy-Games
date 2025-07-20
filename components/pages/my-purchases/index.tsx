@@ -1,3 +1,4 @@
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import EmptyStateBox from '@/components/molecules/EmptyStateBox';
 import PageHeader from '@/components/molecules/PageHeader';
 import {
@@ -38,14 +39,15 @@ const MyPurchasesPage = () => {
             <SelectValue placeholder="الكل" />
           </SelectTrigger>
           <SelectContent>
-            {MyPurchasesTypes.map((item) => (
-              <SelectItem
-                key={item.id}
-                value={item.label}
-                className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
-              >
-                {item.label}
-              </SelectItem>
+            {MyPurchasesTypes.map((item, index) => (
+              <AnimatedWrapper key={item.id} custom={index}>
+                <SelectItem
+                  value={item.label}
+                  className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
+                >
+                  {item.label}
+                </SelectItem>
+              </AnimatedWrapper>
             ))}
           </SelectContent>
         </Select>

@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Container from '../Container';
 import { PiSquaresFourLight } from 'react-icons/pi';
@@ -7,27 +8,43 @@ import DropdownNavItem from '@/components/molecules/DropdownMenuItem';
 import { subMenuItems } from '@/data';
 import { PATHS } from '@/data/paths';
 import { NavbarProps } from '@/interfaces';
+import { motion } from 'framer-motion';
 
 const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
   if (layout === 'store') {
     return (
       <nav className={`${!isMobile ? 'bg-white' : 'pt-2 mt-4'}`} dir="rtl">
         <Container>
-          <ul
-            className={`flex items-center ${
-              isMobile ? 'justify-center flex-wrap gap-4' : 'gap-7'
-            }`}
-          >
-            {subMenuItems.map((item) => (
-              <NavItem
-                key={item.label}
-                Icon={item.Icon}
-                text={item.label}
-                linkPath={item.path}
-                layout={layout}
-                isMobile={isMobile}
-              />
-            ))}
+          <ul className="flex items-center space-x-1 overflow-hidden">
+            <li className="overflow-hidden relative">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.5 }}
+              >
+                <DropdownNavItem
+                  text="جميع الأقسام"
+                  Icon={PiSquaresFourLight}
+                  submenu={subMenuItems}
+                  isMainMenu={true}
+                />
+              </motion.div>
+            </li>
+            <li className="overflow-hidden">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <NavItem
+                  Icon={IoSearch}
+                  text="المتجر"
+                  linkPath={PATHS.STORE.link}
+                />
+              </motion.div>
+            </li>
           </ul>
         </Container>
       </nav>
@@ -38,21 +55,32 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
     <nav className="bg-white" dir="rtl">
       <Container>
         <ul className="flex items-center space-x-1">
-          <li className="relative">
+          <motion.li
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.5 }}
+            className="relative"
+          >
             <DropdownNavItem
               text="جميع الأقسام"
               Icon={PiSquaresFourLight}
               submenu={subMenuItems}
               isMainMenu={true}
             />
-          </li>
-          <li>
+          </motion.li>
+          <motion.li
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <NavItem
               Icon={IoSearch}
               text="المتجر"
               linkPath={PATHS.STORE.link}
             />
-          </li>
+          </motion.li>
         </ul>
       </Container>
     </nav>

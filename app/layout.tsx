@@ -16,6 +16,8 @@ export default function RootLayout({
     <html lang="en" dir="rtl">
       <head>
         <link rel="icon" href="/assets/logo.png" sizes="any" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic&display=swap"
           rel="stylesheet"

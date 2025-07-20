@@ -6,6 +6,7 @@ import Container from '@/components/organism/Container';
 import { NewlyArrivedData } from '@/data';
 import React from 'react';
 import { PiShoppingCartLight } from 'react-icons/pi';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 
 const StarsGiftsPage = () => {
   return (
@@ -16,19 +17,20 @@ const StarsGiftsPage = () => {
           subtitle="يمكنك استبدال البطاقات بنقاط دليل ستارز!"
         />
         <GridWrapper otherClassName="mt-3">
-          {NewlyArrivedData.map((card) => (
-            <ProductCard
-              key={card.id}
-              imgAlt={card.title}
-              imgTitle={card.title}
-              imgSrc={card.src}
-              description
-              showBtn={true}
-              btnVariant="primary"
-              btnText="إشترِ الآن"
-              Icon={PiShoppingCartLight}
-              {...card}
-            />
+          {NewlyArrivedData.map((card, index) => (
+            <AnimatedWrapper key={card.id} custom={index}>
+              <ProductCard
+                imgAlt={card.title}
+                imgTitle={card.title}
+                imgSrc={card.src}
+                description
+                showBtn={true}
+                btnVariant="primary"
+                btnText="إشترِ الآن"
+                Icon={PiShoppingCartLight}
+                {...card}
+              />
+            </AnimatedWrapper>
           ))}
         </GridWrapper>
       </Container>

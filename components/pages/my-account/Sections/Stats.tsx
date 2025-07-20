@@ -1,3 +1,4 @@
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { PATHS } from '@/data/paths';
 import { myAccountStatsProps } from '@/interfaces';
 import { Wallet } from 'lucide-react';
@@ -54,13 +55,15 @@ const Stats = () => {
   return (
     <ul className="border-b border-gray-300 pb-7 space-y-2">
       {stats.map((item) => (
-        <li key={item.id} className="w-full flex items-center justify-between">
-          {item.href ? (
-            <Link href={item.href}>{contents(item)}</Link>
-          ) : (
-            contents(item)
-          )}
-        </li>
+        <AnimatedWrapper key={item.id}>
+          <li className="w-full flex items-center justify-between">
+            {item.href ? (
+              <Link href={item.href}>{contents(item)}</Link>
+            ) : (
+              contents(item)
+            )}
+          </li>
+        </AnimatedWrapper>
       ))}
     </ul>
   );

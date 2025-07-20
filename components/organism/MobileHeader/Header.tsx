@@ -7,6 +7,7 @@ import NavbarSheet from '@/components/molecules/NavbarSheet';
 import { usePathname } from 'next/navigation';
 import { PATHS } from '@/data/paths';
 import Link from 'next/link';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 
 const MobileHeader = () => {
   const pathname = usePathname();
@@ -35,13 +36,19 @@ const MobileHeader = () => {
   return (
     <header className="h-[60px] bg-enjoy-gray-light flex items-center">
       <Container otherClassName="w-full flex items-center justify-between gap-4">
-        <NavbarSheet />
-        <h5 className="text-center text-lg font-bold w-full overflow-hidden whitespace-nowrap">
-          {title}
-        </h5>
-        <Link href={PATHS.MY_CART.link}>
-          <MdOutlineShoppingCart className="text-2xl cursor-pointer text-enjoy-primary" />
-        </Link>
+        <AnimatedWrapper>
+          <NavbarSheet />
+        </AnimatedWrapper>
+        <AnimatedWrapper direction="y" distance={-40}>
+          <h5 className="text-center text-lg font-bold w-full overflow-hidden whitespace-nowrap">
+            {title}
+          </h5>
+        </AnimatedWrapper>
+        <AnimatedWrapper direction="y" distance={-40}>
+          <Link href={PATHS.MY_CART.link}>
+            <MdOutlineShoppingCart className="text-2xl cursor-pointer text-enjoy-primary" />
+          </Link>
+        </AnimatedWrapper>
       </Container>
     </header>
   );

@@ -106,6 +106,7 @@ export interface SectionComponentProps extends WithChildren {
 }
 
 export interface ContactInfoProps extends BaseIconProps {
+  id: number;
   label: string;
   email: string;
 }
@@ -432,4 +433,12 @@ export interface FormData {
   subject: string;
   ticketType: string;
   details: string;
+}
+
+export interface DiscoverEarnMoreCardProps extends WithChildren {
+  title: string;
+  description: string;
+  imageSrc: string;
+  cardClassName?: string;
+  triggerClassName?: string;
 }

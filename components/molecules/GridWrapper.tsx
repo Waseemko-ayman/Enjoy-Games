@@ -9,14 +9,14 @@ const GridWrapper = ({
   itemClassName,
 }: GridWrapperProps) => {
   const baseClass = isScrollable
-    ? `flex max-sm:overflow-x-auto max-sm:scroll-smooth max-sm:px-2 py-4 scrollbar-none sm:grid sm:grid-cols-2 md:grid-cols-3 ${gridCols}`
+    ? `flex max-md:overflow-x-auto max-md:scroll-smooth max-md:px-2 py-4 scrollbar-none md:grid md:grid-cols-2 md:grid-cols-3 ${gridCols}`
     : `grid sm:grid-cols-2 md:grid-cols-3 ${gridCols}`;
 
   return (
     <div className={`gap-5 ${baseClass} ${otherClassName ?? ''}`}>
       {isScrollable
         ? React.Children.map(children, (child) => (
-            <div className={`max-sm:min-w-[250px] shrink-0 ${itemClassName}`}>
+            <div className={`max-md:min-w-[250px] shrink-0 ${itemClassName}`}>
               {child}
             </div>
           ))

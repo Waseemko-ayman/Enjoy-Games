@@ -4,6 +4,7 @@ import { featuresData } from '@/data';
 import FeatureCard from './FeatureCard';
 import Link from 'next/link';
 import { PATHS } from '@/data/paths';
+import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
 
 const PointsEarningGuide = ({ isLogin = true }: { isLogin?: boolean }) => {
   return (
@@ -26,7 +27,9 @@ const PointsEarningGuide = ({ isLogin = true }: { isLogin?: boolean }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         {featuresData.map((feature, index) => (
-          <FeatureCard key={index} {...feature} />
+          <AnimatedWrapper key={index} custom={index}>
+            <FeatureCard {...feature} />
+          </AnimatedWrapper>
         ))}
       </div>
 

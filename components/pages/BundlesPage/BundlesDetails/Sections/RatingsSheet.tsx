@@ -18,6 +18,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import AttachmentsUploader from '@/components/molecules/AttachmentsPreview';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
 
 const formSchema = Yup.object().shape({
   comment: Yup.string()
@@ -65,22 +67,23 @@ const RatingsSheet = () => {
       console.log('Form Data:', finalData);
       reset();
       setAttachments([]);
-      // Here you bind finalData to the API later
     }, 1000);
   };
 
   return (
     <div className="flex items-center justify-between gap-2 border-b border-gray-200 pb-4 mt-2">
       <Sheet>
-        <SheetTrigger asChild>
-          <Button
-            variant="forth"
-            otherClassName="py-2 px-4 text-xs"
-            Icon={IoIosArrowBack}
-          >
-            أضف التقييم
-          </Button>
-        </SheetTrigger>
+        <AnimatedWrapper direction="x" distance={-40}>
+          <SheetTrigger asChild>
+            <Button
+              variant="forth"
+              otherClassName="py-2 px-4 text-xs"
+              Icon={IoIosArrowBack}
+            >
+              أضف التقييم
+            </Button>
+          </SheetTrigger>
+        </AnimatedWrapper>
         <SheetContent
           className=" bg-white"
           closePosition="left"
@@ -90,75 +93,97 @@ const RatingsSheet = () => {
           <SheetDescription className="sr-only">
             هنا قائمة بأقسام البطاقات المتوفرة للتصفح والاختيار.
           </SheetDescription>
-          <h4 className="text-xl font-semibold mb-5">تقييم المنتج</h4>
+
+          <MotionSection index={0}>
+            <h4 className="text-xl font-semibold mb-5">تقييم المنتج</h4>
+          </MotionSection>
+
           <div className="max-h-[800px] overflow-y-auto scrollbar-none">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <h3 className="text-2xl mb-3 text-center">أضف التقييم</h3>
-              <div className="flex items-center justify-center gap-2 text-secondary mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <FaStar key={i} className="text-enjoy-secondary" size={20} />
-                ))}
-              </div>
-              <div>
-                <Input
-                  type="textarea"
-                  variant="secondary"
-                  inputName="comment"
-                  label="اترك تعليق"
-                  placeholder="أكتب تعليقك هنا"
-                  otherClassNameContainer={
-                    errors.comment || isLimitReached ? '!border-red-500' : ''
-                  }
-                  onChange={handleCommentChange}
-                  value={commentValue}
-                />
-                {errors.comment && (
-                  <p className="text-red-500 text-base font-medium mt-2 mb-3">
-                    {errors.comment.message}
-                  </p>
-                )}
-                {isLimitReached && !errors.comment && (
-                  <p className="text-red-500 text-sm mt-2 mb-3">
-                    لقد وصلت إلى الحد الأقصى من الأحرف.
-                  </p>
-                )}
-                <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
-                  <span>عدد الاحرف المتبقية :</span>
-                  <span className={isLimitReached ? 'text-red-500' : ''}>
-                    {remainingChars}
-                  </span>
+              <MotionSection index={1}>
+                <h3 className="text-2xl mb-3 text-center">أضف التقييم</h3>
+              </MotionSection>
+
+              <MotionSection index={2}>
+                <div className="flex items-center justify-center gap-2 text-secondary mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <AnimatedWrapper key={i} custom={i}>
+                      <FaStar className="text-enjoy-secondary" size={20} />
+                    </AnimatedWrapper>
+                  ))}
                 </div>
-              </div>
+              </MotionSection>
 
-              <div className="my-4">
-                <Input
-                  type="checkbox"
-                  inputName="checkbox"
-                  placeholder="لا تظهر اسمى فى قائمة العملاء"
-                  {...register('checkbox')}
+              <MotionSection index={3}>
+                <div>
+                  <Input
+                    type="textarea"
+                    variant="secondary"
+                    inputName="comment"
+                    label="اترك تعليق"
+                    placeholder="أكتب تعليقك هنا"
+                    otherClassNameContainer={
+                      errors.comment || isLimitReached ? '!border-red-500' : ''
+                    }
+                    onChange={handleCommentChange}
+                    value={commentValue}
+                  />
+                  {errors.comment && (
+                    <p className="text-red-500 text-base font-medium mt-2 mb-3">
+                      {errors.comment.message}
+                    </p>
+                  )}
+                  {isLimitReached && !errors.comment && (
+                    <p className="text-red-500 text-sm mt-2 mb-3">
+                      لقد وصلت إلى الحد الأقصى من الأحرف.
+                    </p>
+                  )}
+                  <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
+                    <span>عدد الاحرف المتبقية :</span>
+                    <span className={isLimitReached ? 'text-red-500' : ''}>
+                      {remainingChars}
+                    </span>
+                  </div>
+                </div>
+              </MotionSection>
+
+              <MotionSection index={4}>
+                <div className="my-4">
+                  <Input
+                    type="checkbox"
+                    inputName="checkbox"
+                    placeholder="لا تظهر اسمى فى قائمة العملاء"
+                    {...register('checkbox')}
+                  />
+                </div>
+              </MotionSection>
+
+              <MotionSection index={5}>
+                <AttachmentsUploader
+                  attachments={attachments}
+                  setAttachments={setAttachments}
+                  variant="rating"
                 />
-              </div>
+              </MotionSection>
 
-              <AttachmentsUploader
-                attachments={attachments}
-                setAttachments={setAttachments}
-                variant="rating"
-              />
-
-              <Button
-                type="submit"
-                otherClassName="w-full p-2 mt-7"
-                Icon={IoIosSend}
-              >
-                {isSubmittingLocal ? <ButtonLoading /> : 'ارسال تقييم'}
-              </Button>
+              <MotionSection index={6}>
+                <Button
+                  type="submit"
+                  otherClassName="w-full p-2 mt-7"
+                  Icon={IoIosSend}
+                >
+                  {isSubmittingLocal ? <ButtonLoading /> : 'ارسال تقييم'}
+                </Button>
+              </MotionSection>
             </form>
           </div>
         </SheetContent>
       </Sheet>
-      <h4 className="text-sm sm:text-base font-semibold">
-        التقييمات و اراء الزبائن
-      </h4>
+      <AnimatedWrapper direction="x">
+        <h4 className="text-sm sm:text-base font-semibold">
+          التقييمات و اراء الزبائن
+        </h4>
+      </AnimatedWrapper>
     </div>
   );
 };

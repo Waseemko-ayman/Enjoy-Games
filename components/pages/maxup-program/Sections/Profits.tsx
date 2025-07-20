@@ -13,7 +13,7 @@ const Profits = () => {
     <Layer>
       <Container>
         <SectionTitle
-          title="أهلًا بك في مكسب من دليل ستور!"
+          title="أهلًا بك في مكسب من إنجوي قيمز!"
           subtitle="اربح نسبة من كل عملية شراء يقوم بها أصدقاؤك، وكل ما شاركت أكثر، زاد مكسبك!"
           Icon={MdWavingHand}
           className="!mb-5"

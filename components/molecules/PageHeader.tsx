@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/breadcrumb';
 import Container from '../organism/Container';
 import { PATHS } from '@/data/paths';
+import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
 
 const PageHeader = ({
   showTitle = true,
@@ -21,6 +22,7 @@ const PageHeader = ({
 
   const pathParts = pathname.split('/').filter(Boolean);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function extractPaths(obj: any, map: Record<string, string> = {}) {
     for (const key in obj) {
       const value = obj[key];
@@ -85,29 +87,40 @@ const PageHeader = ({
     <div className="bg-enjoy-gray-light py-6 md:py-8 px-4 md:px-8 rounded-md">
       <Container>
         <div className="flex flex-col space-y-2">
-          <Breadcrumb className="flex items-center">
+          <Breadcrumb className="flex items-center flex-wrap">
             {breadcrumbs.map((crumb, index) => (
-              <div key={index} className="flex items-center">
-                <BreadcrumbItem>
-                  {index === breadcrumbs.length - 1 ? (
-                    <span className="text-gray-700">{crumb.label}</span>
-                  ) : (
-                    <BreadcrumbLink href={crumb.href}>
-                      {crumb.label}
-                    </BreadcrumbLink>
-                  )}
-                </BreadcrumbItem>
-                {index < breadcrumbs.length - 1 && <BreadcrumbSeparator />}
-              </div>
+              <AnimatedWrapper
+                key={index}
+                custom={index}
+                direction="x"
+                distance={40}
+              >
+                <div className="flex items-center">
+                  <BreadcrumbItem>
+                    {index === breadcrumbs.length - 1 ? (
+                      <span className="text-gray-700">{crumb.label}</span>
+                    ) : (
+                      <BreadcrumbLink href={crumb.href}>
+                        {crumb.label}
+                      </BreadcrumbLink>
+                    )}
+                  </BreadcrumbItem>
+                  {index < breadcrumbs.length - 1 && <BreadcrumbSeparator />}
+                </div>
+              </AnimatedWrapper>
             ))}
           </Breadcrumb>
 
           {showTitle && (
             <div className="flex items-center justify-between mt-5 mb-7 gap-4 flex-wrap">
-              <h1 className="text-2xl md:text-3xl font-semibold">
-                {currentTitle}
-              </h1>
-              {children}
+              <AnimatedWrapper direction="x" distance={40}>
+                <h1 className="text-2xl md:text-3xl font-semibold">
+                  {currentTitle}
+                </h1>
+              </AnimatedWrapper>
+              <AnimatedWrapper direction="x" distance={-40}>
+                {children}
+              </AnimatedWrapper>
             </div>
           )}
         </div>

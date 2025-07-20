@@ -1,6 +1,7 @@
 'use client';
 
 import Input from '@/components/atomic/Input';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { FormValues } from '@/interfaces';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -24,19 +25,25 @@ const AccountOptions = () => {
 
   return (
     <div>
-      <h3 className="text-2xl font-medium text-gray-500 mb-7">خيارات الحساب</h3>
+      <AnimatedWrapper>
+        <h3 className="text-2xl font-medium text-gray-500 mb-7">
+          خيارات الحساب
+        </h3>
+      </AnimatedWrapper>
 
       <ul className="space-y-3">
         {options.map((text, index) => (
-          <li key={index} className="flex items-center gap-3">
-            <Input
-              type="checkbox"
-              placeholder={text}
-              inputName={`options[${index}]`}
-              checked={checked[index]}
-              onChange={() => handleChange(index)}
-            />
-          </li>
+          <AnimatedWrapper key={index} custom={index}>
+            <li className="flex items-center gap-3">
+              <Input
+                type="checkbox"
+                placeholder={text}
+                inputName={`options[${index}]`}
+                checked={checked[index]}
+                onChange={() => handleChange(index)}
+              />
+            </li>
+          </AnimatedWrapper>
         ))}
       </ul>
     </div>

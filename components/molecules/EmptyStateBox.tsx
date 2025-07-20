@@ -5,6 +5,7 @@ import CardWrapper from '@/components/atomic/CardWrapper';
 import Image from 'next/image';
 import Button from '@/components/atomic/Button';
 import { EmptyStateBoxProps } from '@/interfaces';
+import MotionSection from './FramerMotion/MotionSection';
 
 const EmptyStateBox = ({
   imageSrc,
@@ -18,20 +19,26 @@ const EmptyStateBox = ({
       <Container>
         <CardWrapper className="py-[60px]">
           <div className="mx-auto max-w-[300px]">
-            <Image
-              src={imageSrc}
-              alt={alt}
-              width={150}
-              height={150}
-              className="mx-auto"
-            />
+            <MotionSection index={0}>
+              <Image
+                src={imageSrc}
+                alt={alt}
+                width={150}
+                height={150}
+                className="mx-auto"
+              />
+            </MotionSection>
             <div className="text-center mt-5">
-              <h5 className="text-lg text-[var(--enjoy-gray-650)] font-normal mb-5">
-                {title}
-              </h5>
-              <Button href={btnlink} otherClassName="py-3 w-full mx-auto">
-                {buttonText}
-              </Button>
+              <MotionSection index={1}>
+                <h5 className="text-lg text-[var(--enjoy-gray-650)] font-normal mb-5">
+                  {title}
+                </h5>
+              </MotionSection>
+              <MotionSection index={2}>
+                <Button href={btnlink} otherClassName="py-3 w-full mx-auto">
+                  {buttonText}
+                </Button>
+              </MotionSection>
             </div>
           </div>
         </CardWrapper>

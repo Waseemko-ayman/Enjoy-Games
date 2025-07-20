@@ -10,6 +10,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import Image from 'next/image';
 import { Country } from '@/interfaces';
 import CountrySelectorContent from './CountrySelectorContent';
+import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
 
 interface CountryDrawerProps {
   countries: Country[];
@@ -28,22 +29,24 @@ const CountryDrawer: React.FC<CountryDrawerProps> = ({
 }) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <button className="flex items-center justify-between w-full gap-2 cursor-pointer">
-          <div className="flex items-center gap-3">
-            <Image
-              src={`/assets/flags/${selectedCountry.img}.png`}
-              alt={`${selectedCountry.name} - ${selectedCountry.currency}`}
-              width={22}
-              height={16}
-            />
-            <h4 className="text-base font-normal">
-              {selectedCountry.name} - {selectedCountry.currency}
-            </h4>
-          </div>
-          <IoIosArrowBack />
-        </button>
-      </DrawerTrigger>
+      <AnimatedWrapper>
+        <DrawerTrigger asChild>
+          <button className="flex items-center justify-between w-full gap-2 cursor-pointer">
+            <div className="flex items-center gap-3">
+              <Image
+                src={`/assets/flags/${selectedCountry.img}.png`}
+                alt={`${selectedCountry.name} - ${selectedCountry.currency}`}
+                width={22}
+                height={16}
+              />
+              <h4 className="text-base font-normal">
+                {selectedCountry.name} - {selectedCountry.currency}
+              </h4>
+            </div>
+            <IoIosArrowBack />
+          </button>
+        </DrawerTrigger>
+      </AnimatedWrapper>
       <DrawerContent>
         <DrawerTitle className="sr-only">تغيير الدولة - العملة</DrawerTitle>
         <DrawerDescription className="sr-only">

@@ -1,0 +1,52 @@
+'use client';
+import { motion, Variants, Transition, easeOut } from 'framer-motion';
+import React, { ReactNode } from 'react';
+
+interface AnimatedWrapperProps {
+  children: ReactNode;
+  custom?: number;
+  variants?: Variants;
+  direction?: 'x' | 'y';
+  distance?: number;
+  duration?: number;
+}
+
+const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({
+  children,
+  custom = 0,
+  variants,
+  direction = 'y',
+  distance = 40,
+  duration = 1,
+}) => {
+  const dynamicVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      ...(direction === 'x' ? { x: distance } : { y: distance }),
+    },
+    visible: (i: number) => ({
+      opacity: 1,
+      ...(direction === 'x' ? { x: 0 } : { y: 0 }),
+      transition: {
+        delay: i * 0.1,
+        duration,
+        ease: easeOut,
+      } as Transition,
+    }),
+  };
+
+  return (
+    <motion.div
+      style={{ overflow: 'visible' }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={variants ?? dynamicVariants}
+      custom={custom}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+export default AnimatedWrapper;

@@ -4,6 +4,7 @@ import TierProgressWrapper from '@/components/organism/TierProgressWrapper';
 import TierBadge from '@/components/molecules/TierBadge';
 import { tiers } from '@/data';
 import { useRewardProgress } from '@/hook/useRewardProgress';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 
 const Upgrade = () => {
   const targetPercentage = 0.7;
@@ -22,15 +23,16 @@ const Upgrade = () => {
       progress={currentPercentage.toFixed(1)}
       progressFooter={{ type: 'text', text: 'تبقى لترقيتك 100 مستخدم' }}
     >
-      {updatedTiers.map((tier) => (
-        <TierBadge
-          key={tier.id}
-          Icon={tier.icon}
-          name={tier.name}
-          isActive={tier.isActive}
-          progress={currentPercentage}
-          requiredProgress={tier.percentage}
-        />
+      {updatedTiers.map((tier, index) => (
+        <AnimatedWrapper key={tier.id} custom={index}>
+          <TierBadge
+            Icon={tier.icon}
+            name={tier.name}
+            isActive={tier.isActive}
+            progress={currentPercentage}
+            requiredProgress={tier.percentage}
+          />
+        </AnimatedWrapper>
       ))}
     </TierProgressWrapper>
   );

@@ -1,6 +1,20 @@
 import { paramsProps } from '@/interfaces';
 import { getCategoryData } from '@/lib/mockData';
 import CategoryPage from '@/template/CategoryPage';
+import { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: paramsProps;
+}): Promise<Metadata> {
+  const categoryName = params.category;
+
+  return {
+    title: `إنجوي قيمز | ${categoryName}`,
+    description: `تصفح المنتجات في فئة ${categoryName} على موقعنا.`,
+  };
+}
 
 export default async function CategoryPageWrapper({
   params,

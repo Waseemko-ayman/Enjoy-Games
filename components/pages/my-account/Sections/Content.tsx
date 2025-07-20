@@ -18,9 +18,9 @@ import { FormProvider, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { FormValues } from '@/interfaces';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 
 const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{2,}$/;
-// const phoneRegex = /^[0-9]{9,15}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const formSchema = Yup.object({
@@ -87,6 +87,7 @@ const Content = () => {
             {/* Left Side - Form */}
             <form className="flex-1" onSubmit={handleSubmit(onSubmit)}>
               {isMobile && <ProfilePicture />}
+
               <div className="space-y-6 max-[991px]:mt-3">
                 {/* Account Information */}
                 <Form register={register} errors={errors} control={control} />
@@ -97,22 +98,24 @@ const Content = () => {
                 {/* Account Options */}
                 <AccountOptions />
 
-                <Button
-                  type="submit"
-                  otherClassName="py-3 px-8 mt-10 flex items-center"
-                  Icon={MdSave}
-                  iconPosition="right"
-                  disabled={isSubmittingLocal}
-                >
-                  {isSubmittingLocal ? (
-                    <>
-                      جاري الحفظ
-                      <ButtonLoading />
-                    </>
-                  ) : (
-                    'حفظ'
-                  )}
-                </Button>
+                <AnimatedWrapper>
+                  <Button
+                    type="submit"
+                    otherClassName="py-3 px-8 mt-10 flex items-center"
+                    Icon={MdSave}
+                    iconPosition="right"
+                    disabled={isSubmittingLocal}
+                  >
+                    {isSubmittingLocal ? (
+                      <>
+                        جاري الحفظ
+                        <ButtonLoading />
+                      </>
+                    ) : (
+                      'حفظ'
+                    )}
+                  </Button>
+                </AnimatedWrapper>
               </div>
             </form>
 

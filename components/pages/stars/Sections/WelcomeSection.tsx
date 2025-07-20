@@ -2,6 +2,7 @@
 import CardWrapper from '@/components/atomic/CardWrapper';
 import Layer from '@/components/atomic/Layer';
 import SectionTitle from '@/components/atomic/SectionTitle';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import EarningsPointsSection from '@/components/molecules/EarningsPointsSection';
 import PointsEarningGuide from '@/components/molecules/PointsEarningGuide';
 import Container from '@/components/organism/Container';
@@ -15,7 +16,7 @@ const WelcomeSection = () => {
     <Layer>
       <Container>
         <SectionTitle
-          title="أهلًا بك في إنجوي قيمز"
+          title="أهلًا بك في دليل ستارز"
           subtitle="اشتري أكثر واكسب الضعف واستبدل نقاطك ببطاقات!"
           Icon={MdWavingHand}
         />
@@ -30,9 +31,11 @@ const WelcomeSection = () => {
             secondButtonHref={PATHS.STARS_GIFTS}
           />
         ) : (
-          <CardWrapper className="py-6 px-8 mb-8 max-w-5/6 mx-auto">
-            <PointsEarningGuide isLogin={false} />
-          </CardWrapper>
+          <AnimatedWrapper>
+            <CardWrapper className="py-6 px-8 mb-8 max-w-5/6 mx-auto">
+              <PointsEarningGuide isLogin={false} />
+            </CardWrapper>
+          </AnimatedWrapper>
         )}
       </Container>
     </Layer>

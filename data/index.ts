@@ -472,11 +472,11 @@ export const FOOTER_LINKS_DATA = {
       text: 'مركز المساعدة',
       url: '#',
     },
-    {
-      id: 3,
-      text: 'أنضم للتجار',
-      url: '#',
-    },
+    // {
+    //   id: 3,
+    //   text: 'أنضم للتجار',
+    //   url: '#',
+    // },
   ],
   shop_app: [
     {
@@ -623,7 +623,7 @@ export const userList = [
       {
         id: 9,
         title: 'نقاط دليل ستارز',
-        link: '#',
+        link: PATHS.STARS.link,
         icon: PiSparkleFill,
         badge: '0',
       },
