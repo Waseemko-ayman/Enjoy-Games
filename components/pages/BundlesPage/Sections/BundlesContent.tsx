@@ -4,10 +4,12 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Container from '@/components/organism/Container';
 import { BundlesPageProps } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { PiShoppingCartLight } from 'react-icons/pi';
 
 const BundlesContent: React.FC<BundlesPageProps> = ({ item, params }) => {
+  const btnTxts = useTranslations('BtnTexts');
   return (
     <Container otherClassName="mt-12">
       <GridWrapper otherClassName="gap-5">
@@ -22,7 +24,7 @@ const BundlesContent: React.FC<BundlesPageProps> = ({ item, params }) => {
               description
               showBtn={true}
               btnVariant="primary"
-              btnText="أضف للسلة"
+              btnText={btnTxts('addToCart')}
               Icon={PiShoppingCartLight}
               cardLinkPath={`/categories/${params.category}/${params.itemId}/bundles/${card.id}`}
               {...card}

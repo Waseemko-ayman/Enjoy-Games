@@ -1,6 +1,7 @@
 import React from 'react';
 import NavItem from '@/components/atomic/NavItem';
 import { DropdownNavItemProps } from '@/interfaces';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
   text,
@@ -8,6 +9,7 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
   submenu,
   isMainMenu = false,
 }) => {
+  const { isArabic } = useToggleLocale();
   return (
     <div className="relative group">
       <NavItem Icon={Icon} text={text} />
@@ -33,7 +35,9 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
 
               {item.submenu && (
                 <div
-                  className={`absolute right-full top-0 ml-2 border border-gray-100 rounded-xl shadow-lg bg-white transition-all duration-200 ease-out
+                  className={`absolute ${
+                    isArabic ? 'right-full' : 'left-full'
+                  } top-0 ml-2 border border-gray-100 rounded-xl shadow-lg bg-white transition-all duration-200 ease-out
                   ${
                     item.submenu.length > 3
                       ? 'invisible opacity-0 pointer-events-none group-hover/sub:visible group-hover/sub:opacity-100 group-hover/sub:pointer-events-auto w-[800px] p-3 grid grid-cols-4 gap-1'

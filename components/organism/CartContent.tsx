@@ -13,6 +13,7 @@ import InvoiceSummary from '../molecules/InvoiceSummary';
 import Container from './Container';
 import AnimatedWrapper from '../molecules/FramerMotion/AnimatedWrapper';
 import MotionSection from '../molecules/FramerMotion/MotionSection';
+import { useTranslations } from 'next-intl';
 
 const CartContent: React.FC<CartContentProps> = ({
   items,
@@ -21,13 +22,17 @@ const CartContent: React.FC<CartContentProps> = ({
   setQuantity,
   // onSendAsGift,
 }) => {
+  const t = useTranslations('MyCart');
+  const btnTexts = useTranslations('BtnTexts');
+  const points = 1000;
+
   return (
     <Layer otherClassName="!my-12">
       <Container>
         <SubCartHeader
-          title="ملخص السلة"
+          title={t('basketSummary')}
           href={PATHS.STORE.link}
-          btnText="العودة للتسوق"
+          btnText={btnTexts('BackToShopping')}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -108,21 +113,24 @@ const CartContent: React.FC<CartContentProps> = ({
             <MotionSection index={0}>
               <div className="text-sm font-semibold leading-relaxed">
                 <p>
-                  بالانتقال الى الدفع فانت تتوافق على{' '}
-                  <Link
-                    href={PATHS.TERMS_OF_USER.link}
-                    className="text-enjoy-primary underline cursor-pointer"
-                  >
-                    سياسة الاستخدام
-                  </Link>{' '}
-                  و{' '}
-                  <Link
-                    href={PATHS.PRIVACY_POLICY.link}
-                    className="text-enjoy-primary underline cursor-pointer"
-                  >
-                    سياسة الخصوصية
-                  </Link>{' '}
-                  لـ دليل ستور
+                  {t.rich('termsAndPrivacyAgreement', {
+                    termsLink: (chunks) => (
+                      <Link
+                        href={PATHS.TERMS_OF_USER.link}
+                        className="text-enjoy-primary underline cursor-pointer"
+                      >
+                        {chunks}
+                      </Link>
+                    ),
+                    privacyLink: (chunks) => (
+                      <Link
+                        href={PATHS.PRIVACY_POLICY.link}
+                        className="text-enjoy-primary underline cursor-pointer"
+                      >
+                        {chunks}
+                      </Link>
+                    ),
+                  })}
                 </p>
               </div>
             </MotionSection>
@@ -132,7 +140,7 @@ const CartContent: React.FC<CartContentProps> = ({
                 otherClassName="w-full py-3"
                 handleClick={onProceedToPayment}
               >
-                إتمام الدفع
+                {btnTexts('CompletePayment')}
               </Button>
             </MotionSection>
 
@@ -143,7 +151,7 @@ const CartContent: React.FC<CartContentProps> = ({
               iconPosition="right"
               handleClick={onSendAsGift}
             >
-              أرسلها كهدية
+              {btnTexts('SendAsGift')}
             </Button> */}
           </div>
 
@@ -158,7 +166,7 @@ const CartContent: React.FC<CartContentProps> = ({
                 className="text-enjoy-secondary flex items-center justify-between gap-2 p-4 !shadow-none"
               >
                 <p className="text-sm font-semibold">
-                  أكمل الشراء واكسب 1000 نقطة في دليل ستارز
+                  {t('rewards.pointsEarned', { points })}
                 </p>
                 <FaStar className="w-5 h-5" />
               </CardWrapper>
@@ -175,11 +183,10 @@ const CartContent: React.FC<CartContentProps> = ({
                   </div>
                   <div>
                     <h3 className="font-semibold mb-2">
-                      سيتم التبرع بجزء من أرباحنا لهذا الطلب
+                      {t('rewards.donation.title')}
                     </h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
-                      من منطلق المسؤولية الاجتماعية ومشاركتنا الأجر, تم تخصيص
-                      جزء من أرباحنا لدعم مشاريع جمعية حجر الخيرية
+                      {t('rewards.donation.description')}
                     </p>
                   </div>
                 </div>

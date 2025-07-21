@@ -4,6 +4,7 @@ import OrderCompleteStep from '@/components/molecules/OrderCompleteStep';
 import PaymentStep from '@/components/molecules/PaymentStep';
 import StepIndicator from '@/components/molecules/StepIndicator';
 import CartContent from '@/components/organism/CartContent';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
 interface CartItemData {
@@ -86,6 +87,9 @@ const MyCartPage = () => {
     0
   );
 
+  const t = useTranslations('MyCart');
+  const btnTexts = useTranslations('BtnTexts');
+
   return (
     <div>
       {/* Step Indicator */}
@@ -106,8 +110,8 @@ const MyCartPage = () => {
             <EmptyStateBox
               imageSrc="/assets/empty-status.png"
               alt="empty-status"
-              title="سلتك جاهزة وتناديك للتسوق"
-              buttonText="ابدأ بالتسوق الأن"
+              title={t('emptyStateTitle')}
+              buttonText={btnTexts('StartMarketingNow')}
               btnlink="/store"
             />
           )}

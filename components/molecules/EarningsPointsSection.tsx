@@ -6,18 +6,8 @@ import Image from 'next/image';
 import React from 'react';
 import { PiSparkleFill } from 'react-icons/pi';
 import { motion } from 'framer-motion';
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.2,
-      duration: 0.5,
-    },
-  }),
-};
+import { useTranslations } from 'next-intl';
+import { cardVariants } from '@/lib/context';
 
 const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   variant,
@@ -28,7 +18,11 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   lastWithdrawalText,
   firstButtonHref,
   secondButtonHref,
+  btnTexts,
 }) => {
+  const starsTxt = useTranslations('Stars');
+  const maxupTxt = useTranslations('MaxupProgram');
+  const sharedTexts = useTranslations('Shared');
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
       <motion.div
@@ -48,8 +42,8 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
             />
             <h5 className="text-sm font-bold">
               {variant === 'earnings'
-                ? 'الأرباح القابلة للسحب'
-                : 'نقاط دليل ستار'}
+                ? maxupTxt('earnings.title')
+                : starsTxt('actions.starPoints')}
             </h5>
             <div className="flex items-center justify-center gap-1 mt-2 mb-5">
               <h2 className="text-3xl font-bold">
@@ -66,7 +60,7 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
             </div>
             <div className="flex items-center justify-center gap-4">
               <Button href={firstButtonHref} otherClassName="p-4 text-sm">
-                تحويل لمحفظتي
+                {btnTexts('TransferToMyWallet')}
               </Button>
 
               <Button
@@ -74,7 +68,9 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
                 variant="forth"
                 otherClassName="p-4 !bg-white text-sm"
               >
-                {variant === 'earnings' ? 'تحويل بنكي' : 'استبدل نقاطك'}
+                {variant === 'earnings'
+                  ? btnTexts('BankTransfer')
+                  : btnTexts('RedeemPoints')}
               </Button>
             </div>
           </div>
@@ -96,8 +92,8 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
             >
               <h5 className="text-xs font-semibold mb-4">
                 {variant === 'earnings'
-                  ? 'إجمالي الأرباح (منذ البداية)'
-                  : 'معدل تحويل النقاط الى ريال'}
+                  ? maxupTxt('pointSystem.header.totalEarnings')
+                  : starsTxt('conversionInfo.title', { currency: 'ريال' })}
               </h5>
               <div
                 className={`flex items-center ${
@@ -144,13 +140,15 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
             >
               <h5 className="text-xs font-semibold mb-4">
                 {variant === 'earnings'
-                  ? 'مستخدمون اشتروا من خلالك'
-                  : 'إجمالي النقاط المكتسبة'}
+                  ? maxupTxt('pointSystem.header.title')
+                  : starsTxt('pointsSystem.pointsSummary.title')}
               </h5>
               {variant === 'earnings' ? (
                 <span className="text-lg font-semibold">0</span>
               ) : (
-                <span className="text-lg font-semibold">0 نقطة</span>
+                <span className="text-lg font-semibold">
+                  {starsTxt('pointsSystem.pointsSummary.value', { points: 0 })}
+                </span>
               )}
             </CardWrapper>
           </motion.div>
@@ -163,7 +161,9 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
           custom={3}
         >
           <h5 className="text-base font-bold mb-3.5">
-            {variant === 'earnings' ? 'سجل آخر عملية سحب' : 'سجل عمليات السحب'}
+            {variant === 'earnings'
+              ? sharedTexts('Shared.procedures.last')
+              : sharedTexts('Shared.procedures.default')}
           </h5>
           <CardWrapper
             bgColor="bg-white"

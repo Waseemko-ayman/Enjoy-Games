@@ -5,6 +5,7 @@ import * as SheetPrimitive from '@radix-ui/react-dialog';
 import { XIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;
@@ -47,8 +48,8 @@ function SheetOverlay({
 function SheetContent({
   className,
   children,
-  side = 'right',
-  closePosition = 'right',
+  side,
+  closePosition,
   closeTextColor = 'text-white',
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Content> & {
@@ -56,6 +57,11 @@ function SheetContent({
   closePosition?: 'right' | 'left';
   closeTextColor?: string;
 }) {
+  const { isArabic } = useToggleLocale();
+
+  const computedSide = side || (isArabic ? 'right' : 'left');
+  const computedClosePosition = closePosition || (isArabic ? 'right' : 'left');
+
   return (
     <SheetPortal>
       <SheetOverlay />
@@ -63,9 +69,9 @@ function SheetContent({
         data-slot="sheet-content"
         className={cn(
           'bg-enjoy-primary data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 p-4',
-          side === 'right' &&
+          computedSide === 'right' &&
             'data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm',
-          side === 'left' &&
+          computedSide === 'left' &&
             'data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm',
           'z-[2222]',
           className
@@ -77,7 +83,7 @@ function SheetContent({
           className={cn(
             closeTextColor,
             'ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none cursor-pointer',
-            closePosition === 'right' ? 'right-4' : 'left-4'
+            computedClosePosition === 'right' ? 'left-4' : 'right-4'
           )}
         >
           <XIcon className="size-7" />

@@ -3,9 +3,10 @@ import GridWrapper from '@/components/molecules/GridWrapper';
 import WalletCard from '@/components/molecules/WalletCard';
 import Container from '@/components/organism/Container';
 import { WalletSectionData } from '@/data';
+import { TranslationFunction } from '@/interfaces';
 import React from 'react';
 
-const WalletSection = () => {
+const WalletSection = ({ t }: { t: TranslationFunction }) => {
   return (
     <Container otherClassName="mt-10">
       <GridWrapper gridCols="grid-cols-1">
@@ -13,12 +14,17 @@ const WalletSection = () => {
           <AnimatedWrapper key={card.id} custom={index}>
             <WalletCard
               pathName={card.link}
-              title={card.title}
+              title={t(`walletSections.${card.title}`)}
               value={card.value}
-              unit={card.unit}
+              unit={
+                card.isUnitTranslatable
+                  ? t(`walletSections.${card.unit}`)
+                  : card.unit
+              }
               Icon={card.icon}
               bgColor={card.bgColor}
               textColor={card.textColor}
+              isUnitTranslatable={card.isUnitTranslatable}
             />
           </AnimatedWrapper>
         ))}

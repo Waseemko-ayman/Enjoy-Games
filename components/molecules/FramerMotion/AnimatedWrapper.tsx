@@ -1,15 +1,7 @@
 'use client';
+import { AnimatedWrapperProps } from '@/interfaces';
 import { motion, Variants, Transition, easeOut } from 'framer-motion';
-import React, { ReactNode } from 'react';
-
-interface AnimatedWrapperProps {
-  children: ReactNode;
-  custom?: number;
-  variants?: Variants;
-  direction?: 'x' | 'y';
-  distance?: number;
-  duration?: number;
-}
+import React from 'react';
 
 const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({
   children,
@@ -17,7 +9,7 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({
   variants,
   direction = 'y',
   distance = 40,
-  duration = 1,
+  duration = 0.7,
 }) => {
   const dynamicVariants: Variants = {
     hidden: {

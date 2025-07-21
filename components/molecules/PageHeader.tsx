@@ -10,6 +10,7 @@ import {
 import Container from '../organism/Container';
 import { PATHS } from '@/data/paths';
 import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
 
 const PageHeader = ({
   showTitle = true,
@@ -19,10 +20,14 @@ const PageHeader = ({
   children?: React.ReactNode;
 }) => {
   const pathname = usePathname();
+  const tPages = useTranslations('PagesHeaderTitles');
 
-  const pathParts = pathname.split('/').filter(Boolean);
+  const pathParts = pathname
+    .split('/')
+    .filter(Boolean)
+    .filter((part, index) => !(index === 0 && ['en', 'ar'].includes(part)));
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // Extract route map from PATHS
   function extractPaths(obj: any, map: Record<string, string> = {}) {
     for (const key in obj) {
       const value = obj[key];
@@ -40,13 +45,13 @@ const PageHeader = ({
 
   const pathNameMap = extractPaths(PATHS);
 
-  const breadcrumbs = [{ label: 'الرئيسية', href: '/' }];
+  const breadcrumbs = [{ label: tPages('home'), href: '/' }];
   let accumulatedPath = '';
 
   for (let i = 0; i < pathParts.length; i++) {
     const part = pathParts[i];
 
-    // Ignore 'bundles' from Breadcrumbs but add it in accumulatedPath
+    // Ignore 'bundles' in breadcrumbs but add them in the accumulated path
     if (part === 'bundles') {
       accumulatedPath += `/${part}`;
       continue;
@@ -55,16 +60,16 @@ const PageHeader = ({
     if (part === 'categories' && pathParts[i + 1]) {
       const categoryType = pathParts[i + 1];
       accumulatedPath += `/categories/${categoryType}`;
-      const label = pathNameMap[categoryType] || formatPart(categoryType);
+      const label = getLabel(categoryType, pathNameMap, tPages);
       breadcrumbs.push({ label, href: accumulatedPath });
-      i++; // Skip next
+      i++; // Skip the next one because it was added
       continue;
     }
 
     accumulatedPath += `/${part}`;
     const isLast = i === pathParts.length - 1;
 
-    const label = pathNameMap[part] || formatPart(part);
+    const label = getLabel(part, pathNameMap, tPages);
 
     breadcrumbs.push({
       label,
@@ -76,7 +81,8 @@ const PageHeader = ({
   const lastPart = cleanParts[cleanParts.length - 1] || '';
   const secondLastPart = cleanParts[cleanParts.length - 2] || '';
 
-  let currentTitle = breadcrumbs[breadcrumbs.length - 1]?.label || 'الرئيسية';
+  let currentTitle =
+    breadcrumbs[breadcrumbs.length - 1]?.label || tPages('home');
 
   if (lastPart === 'bundles') {
     const itemIdFormatted = formatPart(secondLastPart);
@@ -128,6 +134,20 @@ const PageHeader = ({
     </div>
   );
 };
+
+// Helper function to get the label, with smart fallback for translation or name from map or format
+function getLabel(
+  part: string,
+  pathNameMap: Record<string, string>,
+  tPages: (key: string) => string
+): string {
+  const translated = tPages(part);
+  if (translated === part) {
+    // Translation not found
+    return pathNameMap[part] || formatPart(part);
+  }
+  return translated;
+}
 
 function formatPart(str: string) {
   return decodeURIComponent(str)

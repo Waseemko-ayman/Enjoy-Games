@@ -11,6 +11,7 @@ const FooterLinks = ({
   secTitle,
   listName,
   otherClassName,
+  t,
 }: FooterLinksProps) => {
   return (
     <div className="flex flex-col">
@@ -25,15 +26,17 @@ const FooterLinks = ({
             return (
               <AnimatedWrapper key={item.id} custom={index}>
                 <li className="mb-5">
-                  <Link href={item.url}>
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      width={150}
-                      height={150}
-                      className="rounded-sm"
-                    />
-                  </Link>
+                  {'src' in item ? (
+                    <Link href={item.url}>
+                      <Image
+                        src={item.src}
+                        alt={item.alt}
+                        width={150}
+                        height={150}
+                        className="rounded-sm"
+                      />
+                    </Link>
+                  ) : null}
                 </li>
               </AnimatedWrapper>
             );
@@ -56,7 +59,7 @@ const FooterLinks = ({
                         <item.icon className="text-enjoy-primary-deep group-hover:text-[var(--enjoy-primary)] transition-all duration-300" />
                       </div>
                     ) : (
-                      item?.text
+                      t(`${listName}.${'key' in item ? item.key : ''}`)
                     )}
                   </Link>
                 </li>

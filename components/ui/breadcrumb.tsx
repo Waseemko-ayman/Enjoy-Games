@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { ChevronLeft, MoreHorizontal } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 function Breadcrumb({ ...props }: React.ComponentProps<'nav'>) {
   return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />;
@@ -73,6 +74,7 @@ function BreadcrumbSeparator({
   className,
   ...props
 }: React.ComponentProps<'li'>) {
+  const { isArabic } = useToggleLocale();
   return (
     <span
       data-slot="breadcrumb-separator"
@@ -84,7 +86,7 @@ function BreadcrumbSeparator({
       )}
       {...props}
     >
-      {children ?? <ChevronLeft />}
+      {children ?? isArabic ? <ChevronLeft /> : <ChevronRight />}
     </span>
   );
 }

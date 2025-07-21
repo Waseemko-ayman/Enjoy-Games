@@ -14,6 +14,8 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { FOOTER_LINKS_DATA, inputsViaEntry } from '@/data';
+import { useToggleLocale } from '@/hook/useToggleLocale';
+import { useTranslations } from 'next-intl';
 import React, { lazy, Suspense } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { MdAdd, MdAddShoppingCart } from 'react-icons/md';
@@ -26,6 +28,10 @@ const inputQuantityOptions = [
 ];
 
 const ProductDetailsSections = () => {
+  const t = useTranslations('productDetails');
+  const inputsTxt = useTranslations('Inputs');
+  const btnTxt = useTranslations('BtnTexts');
+  const { isArabic } = useToggleLocale();
   return (
     <CardWrapper className="flex flex-col md:flex-row gap-7 p-4 md:p-10">
       <MotionSection index={0}>
@@ -40,7 +46,7 @@ const ProductDetailsSections = () => {
         </Suspense>
         <div className="flex items-center justify-between flex-wrap gap-2 mt-5">
           <h4 className="text-base md:text-lg font-semibold">
-            شارك الرابط عبر:
+            {t('shareLinkWith')}
           </h4>
           <div className="flex items-center gap-2">
             {FOOTER_LINKS_DATA.socialMedia.map((item, index) => {
@@ -78,7 +84,7 @@ const ProductDetailsSections = () => {
                 bgColor="bg-red-500"
                 className="py-0.5 px-2 flex items-center justify-center"
               >
-                <span className="text-white text-xs">خصم 9%</span>
+                <span className="text-white text-xs">{t('rival')} 9%</span>
               </CardWrapper>
             </div>
           </div>
@@ -86,15 +92,21 @@ const ProductDetailsSections = () => {
 
         <MotionSection index={3}>
           <div className="flex item-center justify-between gap-2 mt-4 border border-gray-400 rounded-lg p-3">
-            <div className="flex items-center gap-2">
+            <div
+              className={`flex items-center ${
+                !isArabic ? 'items-start sm:items-center' : ''
+              } gap-2`}
+            >
               <div className="flex items-center">
                 <MdAdd className="font-bold" />
                 <span className="text-enjoy-primary text-base font-bold">
                   4
                 </span>
               </div>
-              <h3 className="text-base font-medium">
-                نقطة مكتسبة بشرائك هذا المنتج
+              <h3
+                className={`${isArabic ? 'text-base' : 'text-sm'} font-medium`}
+              >
+                {t('earnedPointsOnPurchase')}
               </h3>
             </div>
             <FaStar className="text-enjoy-secondary" size={20} />
@@ -103,7 +115,9 @@ const ProductDetailsSections = () => {
 
         <div className="mt-7">
           <MotionSection index={4}>
-            <h3 className="text-lg font-semibold mb-2">لمحة عن المنتج</h3>
+            <h3 className="text-lg font-semibold mb-2">
+              {t('productOverview')}
+            </h3>
           </MotionSection>
           <MotionSection index={5}>
             <p className="text-[15px] text-gray-500">
@@ -121,7 +135,7 @@ const ProductDetailsSections = () => {
               variant="secondary"
               type="select"
               inputName="quantity"
-              label="الكمية"
+              label={inputsTxt('labels.quantity')}
               options={inputQuantityOptions}
             />
           </MotionSection>
@@ -130,7 +144,7 @@ const ProductDetailsSections = () => {
             <Accordion type="single" collapsible>
               <AccordionItem value="extra-options">
                 <AccordionTrigger className="mb-4 cursor-pointer border-b border-gray-200 pb-2">
-                  خيارات إضافية
+                  {t('additionalOptions')}
                 </AccordionTrigger>
                 <AccordionContent className="space-y-4">
                   {inputsViaEntry.map((input, index) => (
@@ -139,9 +153,18 @@ const ProductDetailsSections = () => {
                         variant="secondary"
                         type={input.type}
                         inputName={input.inputName}
-                        label={input.label}
-                        options={input.optios}
-                        placeholder={input.placeholder}
+                        label={
+                          input.label || inputsTxt(`labels.${input.labelKey}`)
+                        }
+                        options={input.options?.map((opt) => ({
+                          ...opt,
+                          label: inputsTxt(`labels.${opt.labelKey}`),
+                        }))}
+                        placeholder={
+                          input.inputName === 'checkbox'
+                            ? inputsTxt(`placeHolders.Cancelled`)
+                            : ''
+                        }
                         isRequired
                       />
                     </AnimatedWrapper>
@@ -153,7 +176,7 @@ const ProductDetailsSections = () => {
 
           <MotionSection index={8}>
             <Button otherClassName="py-3 px-5 w-full" Icon={MdAddShoppingCart}>
-              أضف للسلة
+              {btnTxt('addToCart')}
             </Button>
           </MotionSection>
         </form>

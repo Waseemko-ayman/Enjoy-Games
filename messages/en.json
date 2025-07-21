@@ -1,6 +1,451 @@
 {
+  "Layout": {
+    "header": {
+      "topBanner": {
+        "title": "Buy More, Earn Double, and Redeem Your Points for Cards!",
+        "new": "New",
+        "popup": {
+          "title": "Stars Guide by Enjoy Games",
+          "desc": "Enjoy Games is a loyalty system that grants you points with every purchase, which you can redeem for digital cards or convert into wallet credit."
+        }
+      },
+      "navBar": {
+        "allCategories": "All Categories",
+        "store": "Store"
+      }
+    },
+    "HelpSection": {
+      "title": "Need Help?",
+      "email": "Email",
+      "helpCenter": "Help Center"
+    },
+    "footer": {
+      "LearnMore": {
+        "title": "Learn More About Us",
+        "about": "About Us",
+        "faq": "Frequently Asked Questions",
+        "privacyPolicy": "Privacy Policy",
+        "refundPolicy": "Refund Policy",
+        "termsOfUser": "Terms of Service"
+      },
+      "BusinessAndSolutions": {
+        "title": "Business & Solutions",
+        "news": "News",
+        "helpCenter": "Help Center"
+      },
+      "applyShopping": "Shop via App",
+      "connectWithUs": "Connect with Us",
+      "footerBanner": {
+        "taxRegisterationNum": "Tax Registration Number",
+        "desc": "Enjoy Games IT is a sole proprietorship company"
+      }
+    }
+  },
+  "PagesHeaderTitles": {
+    "home": "Home",
+    "my-account": "My Account",
+    "my-purchases": "My Orders",
+    "tickets": "Support Tickets",
+    "stars": "Stars Guide",
+    "interests": "Interests",
+    "wallet": "My Wallet",
+    "starsPoints": "Stars Guide Points",
+    "store": "Store",
+    "create": "Add New Ticket"
+  },
+  "SectionsTitles": {
+    "Stars": {
+      "title": "Welcome to Stars Guide",
+      "desc": "Buy More, Earn Double, and Redeem Your Points for Cards!"
+    },
+    "Gifts": {
+      "title": "Enjoy Games Gifts",
+      "desc": "You can redeem cards with Enjoy Games points!"
+    },
+    "Maxup": {
+      "title": "Welcome to Enjoy Games’ Maxup!",
+      "desc": "Earn a percentage from every purchase made by your friends, and the more you share, the more you earn!"
+    },
+    "Interests": "What do you love to buy the most?",
+    "faq": "Frequently Asked Questions"
+  },
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "walletSections": {
+      "wallet": "My Wallet",
+      "stars": "Stars Guide",
+      "maxup": "Maxup Guide",
+      "point": "Point"
+    },
+    "sectionsTitles": {
+      "bestSellers": "Best Selling Cards",
+      "suggestedProducts": "Suggested Products",
+      "newlyArrived": "New Arrivals",
+      "redeemPoints": {
+        "title": "Redeem Your Points",
+        "showAll": "Show All"
+      },
+      "enjoyWinWin": {
+        "title": "Everyone Wins with Enjoy Games",
+        "participateAndWin": {
+          "title": "Participate and Win",
+          "desc": "You are one of our partners, share your referral link and earn from every order through you"
+        },
+        "enjoyGames": {
+          "title": "Enjoy Games",
+          "desc": "Earn Enjoy Games points with every purchase that you can redeem for rewards you like"
+        }
+      },
+      "serviceAdvantages": {
+        "paperPlane": {
+          "title": "Get Your Card Instantly",
+          "desc": "Once you buy a card from Enjoy Games, it will be sent automatically and instantly to your email"
+        },
+        "creditCard": {
+          "title": "Secure and Diverse Payment Methods",
+          "desc": "Enjoy Games offers diverse and secure payment methods to suit all your needs without waiting or complications"
+        },
+        "phone": {
+          "title": "High Performance Apps",
+          "desc": "Download Enjoy Games apps on iPhone and Android and enjoy a unique shopping experience"
+        }
+      }
+    }
+  },
+  "MyAccount": {
+    "AccountInfo": "Account Information",
+    "AccountOptions": "Account Options",
+    "ProfileImage": {
+      "title": "Profile Picture",
+      "desc": "Click on the picture to add or change it"
+    },
+    "CopyLink": "Copy Referral Link",
+    "AccountDelete": "Do you want to <deleteSpan>delete your account</deleteSpan>?",
+    "resendActivation": "To resend activation email <resendSpan>click here</resendSpan>",
+    "rank": {
+      "title": "Your Current Rank",
+      "subtitle": "Increasing rank means higher return per transaction",
+      "current": "Your current upgrade",
+      "commission": "{percentage} per transaction"
+    },
+    "statsTitles": {
+      "balance": "My Balance",
+      "currentLevel": "You currently have",
+      "interests": "Interests"
+    },
+    "accountOptions": {
+      "sendCardCodeToEmail": "Send card code to email",
+      "getUpdates": "Stay updated with news and additions.",
+      "specialOccasions": "Occasions and holidays (may include exclusive services)",
+      "interestsInfo": "Interest to know what matters to you and what you may need."
+    }
+  },
+  "MyPurchases": {
+    "ُemptyStateMsg": "Your orders are saying: Where are you? Go shop!",
+    "all": "All",
+    "completed": "Completed",
+    "inProgress": "In Progress and Under Review",
+    "cancelled": "Cancelled and Refunded"
+  },
+  "Stars": {
+    "pointsSystem": {
+      "pointsSummary": {
+        "title": "Total Points Earned",
+        "value": "{points} Point"
+      },
+      "conversionInfo": {
+        "title": "Convert Points to {currency}",
+        "rule": "After {minPoints} points = 1 card",
+        "action": "Withdrawal History",
+        "emptyState": "No withdrawals yet"
+      },
+      "actions": {
+        "starPoints": "Stars Guide Points",
+        "convertPoints": "Convert Points",
+        "redeemPoints": "Redeem Your Points"
+      }
+    },
+    "Upgrade": {
+      "title": "Buy More and Double Your Points",
+      "benefitText": "{number} return per transaction",
+      "levels": {
+        "junior": "Junior Guide",
+        "active": "Active Guide",
+        "pro": "Professional Guide",
+        "expert": "Expert Guide",
+        "vip": "VIP Guide"
+      },
+      "percentageSection": {
+        "title": "Return per transaction",
+        "note": "{note} users left to upgrade"
+      }
+    },
+    "ReferralProgram": {
+      "title": "Learn About Stars Guide System",
+      "description": "Learn how to earn and level up with Stars Guide",
+      "EnjoyGames": {
+        "mainTitle": "The more you buy, the more you earn!",
+        "howItWorksTitle": "How Enjoy Games Works?",
+        "description": "Enjoy Games is a loyalty system that grants you points with every purchase, which you can redeem for digital cards or convert into wallet credit.",
+        "features": {
+          "feature1": {
+            "title": "Collect Points",
+            "description": "Earn points with every purchase"
+          },
+          "feature2": {
+            "title": "Double Your Rewards",
+            "description": "Level up to get more benefits"
+          },
+          "feature3": {
+            "title": "Track Your Progress",
+            "description": "Follow your points and transaction history in your account"
+          },
+          "feature4": {
+            "title": "Redeem Points",
+            "description": "Redeem them for digital cards or convert to cash points"
+          }
+        },
+        "cta": "Get the most out of your purchases!",
+        "registerNow": "Register Now",
+        "startNow": "Start Now"
+      }
+    }
+  },
+  "MaxupProgram": {
+    "pointSystem": {
+      "header": {
+        "title": "Users Who Purchased Through You",
+        "totalEarnings": "Total Earnings (Since Start)"
+      },
+      "earnings": {
+        "title": "Withdrawable Earnings"
+      }
+    },
+    "Upgrade": {
+      "title": "Share More, Earn More",
+      "benefitText": "{number} return per transaction",
+      "levels": ["Bronze", "Silver", "Gold", "Platinum", "VIP"],
+      "percentageSection": {
+        "title": "Return per transaction",
+        "note": "{note} users left to upgrade"
+      }
+    },
+    "ReferralProgram": {
+      "title": "Discover Maxup Now",
+      "description": "Learn how to increase your earnings and level up!",
+      "steps": {
+        "step1": {
+          "title": "Copy Your Referral Link",
+          "description": "Start by copying your unique referral link to share it with friends and acquaintances",
+          "actionText": "Click to copy your personal link!"
+        },
+        "step2": {
+          "title": "Share the Link with Friends",
+          "description": "Send your referral link via WhatsApp, Twitter, or any other means. The more participants, the higher your earnings."
+        },
+        "step3": {
+          "title": "Earn 0.7% on Every Purchase",
+          "description": "Every time one of your friends buys through your referral link, you earn 0.7% credited easily to your wallet!"
+        },
+        "step4": {
+          "title": "Move to the Next Level",
+          "description": "The guide offers you 5 levels with returns up to 0.7%"
+        }
+      }
+    }
+  },
+  "Wallet": {
+    "title": "My Current Balance",
+    "RedeemPoints": {
+      "title": "Choose Your Preferred Redemption Method",
+      "subTitle": "Rewards Programs"
+    },
+    "addCoupon": {
+      "title": "Add Coupon",
+      "subTitle": "Easily add credit to your wallet using a Store Guide coupon."
+    },
+    "rewardsPrograms": {
+      "bonusesPrograms": "Rewards Programs",
+      "maxupProgram": "Maxup Program",
+      "starsPoints": "Stars Guide Points",
+      "profiledProfits": "Your Withdrawable Earnings",
+      "convertiblePoints": "Your Convertible Points"
+    }
+  },
+  "MyCart": {
+    "basketSummary": "Basket Summary",
+    "choosePaymentMethod": "Choose Payment Method",
+    "emptyStateTitle": "Your basket is ready and waiting for you to shop",
+    "termsAndPrivacyAgreement": "By proceeding to payment you agree to <termsLink>Terms of Use</termsLink> and <privacyLink>Privacy Policy</privacyLink> of Store Guide",
+    "discountCoupon": "Discount Coupon:",
+    "cartSummary": "Shopping Cart Summary",
+    "rewards": {
+      "pointsEarned": "Complete purchase and earn {points} Stars Guide points",
+      "donation": {
+        "title": "A portion of our profits from this order will be donated",
+        "description": "Out of social responsibility and shared reward, part of our profits is dedicated to support Hajer Charity Association projects"
+      }
+    },
+    "order": {
+      "orderCompleteMessage": "Your order has been completed successfully!",
+      "orderCompleteThanks": "Thank you for your trust. Order details will be sent to your email",
+      "orderNumberLabel": "Order Number:",
+      "orderStatusLabel": "Order Status:",
+      "deliveryMethodLabel": "Delivery Method:",
+      "pointsAddedMessage": "{points} points have been added to your account!",
+      "pointsUsageInfo": "You can use points in upcoming purchases"
+    }
+  },
+  "Tickets": {
+    "emptyStateTitle": "No support tickets yet...",
+    "searchFaqPrompt": "Have you searched your question in the FAQ?",
+    "addAttachments": "Add attachments to the ticket (optional)",
+    "attachmentsDescription": "Attach images with comments, or upload files"
+  },
+  "productDetails": {
+    "shareLinkWith": "Share the link via:",
+    "rival": "Rival",
+    "earnedPointsOnPurchase": "Point earned by purchasing this product",
+    "productOverview": "Product Overview",
+    "quantity": "Quantity",
+    "additionalOptions": "Additional Options",
+    "ratingsTab": "Ratings",
+    "productDetailsTab": "Product Details",
+    "addRating": "Add Rating",
+    "productRating": "Product Rating",
+    "productRatingDesc": "Here is a list of product ratings.",
+    "addYourRating": "Add Your Rating",
+    "customerReviewsTitle": "Customer Ratings and Reviews",
+    "noRatingsYet": "No ratings yet",
+    "beFirstToRate": "Be the first to rate this product and share your experience by clicking the Add Rating button",
+    "rating": "Rating",
+    "excellent": "Excellent",
+    "good": "Very Good",
+    "average": "Good",
+    "poor": "Didn't Like It",
+    "bad": "Bad",
+    "relatedProducts": "Related Products"
+  },
+  "Shared": {
+    "procedures": {
+      "default": "Withdrawal History",
+      "last": "Last Withdrawal Record"
+    },
+    "emptyState": "No withdrawals found",
+    "point": "Point"
+  },
+  "Invoice": {
+    "summary": {
+      "title": "Invoice Summary",
+      "subtotal": {
+        "label": "Subtotal:",
+        "value": "{subtotal}"
+      },
+      "vat": {
+        "label": "VAT:",
+        "value": "{vat}"
+      },
+      "total": {
+        "label": "Total Amount:",
+        "value": "{total}"
+      }
+    }
+  },
+  "BtnTexts": {
+    "save": "Save",
+    "Saving": "Saving",
+    "StartMarketingNow": "Start Shopping Now",
+    "GetItNow": "Get It Now",
+    "BuyNow": "Buy Now",
+    "FindItNow": "Find It Now!",
+    "TransferToMyWallet": "Transfer to My Wallet",
+    "RedeemPoints": "Redeem Points",
+    "BankTransfer": "Bank Transfer",
+    "CopyYourLink": "Click to copy your personal link!",
+    "CopyMyLink": "Copy My Link",
+    "KnowYourProfit": "Know Your Profit",
+    "SaveChanges": "Save Changes",
+    "RechargeNow": "Recharge Now",
+    "BackToShopping": "Back to Shopping",
+    "GoBack": "Go Back",
+    "CompletePayment": "Complete Payment",
+    "SendAsGift": "Send as Gift",
+    "Pay": "Pay",
+    "apply": "Apply",
+    "DownloadInvoice": "Download Invoice",
+    "BackToStore": "Back to Store",
+    "logout": "Logout",
+    "MoreAboutParticipateAndWin": "More About Participate and Win",
+    "MoreAboutEnjoyGames": "More About Enjoy Games",
+    "AddTicket": "Add Ticket",
+    "faq": "FAQ",
+    "sendTicket": "Send Ticket",
+    "LearnMore": "Learn More",
+    "continue": "Continue",
+    "addCoupon": "Add Coupon",
+    "addToCart": "Add to cart",
+    "submitRating": "Submit Rating"
+  },
+  "Inputs": {
+    "labels": {
+      "username": "Name",
+      "email": "Email",
+      "password": "Password",
+      "gender": "Gender",
+      "phone": "Mobile Number",
+      "birthDate": "Birth Date",
+      "quantity": "Quantity",
+      "twitter": "Twitter",
+      "facebook": "Facebook",
+      "idNumber": "ID Number",
+      "unlockAccount": "I have unlocked the account",
+      "comment": "Leave a comment",
+      "hideMyName": "Hide my name in the customer list"
+    },
+    "placeHolders": {
+      "haveCoupon": "Do you have a discount coupon?",
+      "cardAndOffersSearch": "Search for cards and offers",
+      "subject": "Ticket Title",
+      "ticketType": "Select Ticket Type",
+      "details": "Please write a detailed description of your issue",
+      "username": "",
+      "email": "",
+      "phone": "xxxxxxxxx",
+      "birthDate": "--/--/----",
+      "gender": "Select Gender",
+      "writeCouponHere": "Enter coupon code here...",
+      "Choose": "Choose...",
+      "Cancelled": "Cancelled",
+      "comment": "Write your comment here"
+    },
+    "options": {
+      "gender": {
+        "male": "Male",
+        "female": "Female"
+      }
+    },
+    "errorsMsgs": {
+      "commentLimitReached": "You have reached the character limit.",
+      "remainingCharacters": "Remaining characters",
+      "paymentRequired": "Payment method is required",
+      "maxChars": "Maximum {number} characters",
+      "commentRequired": "Comment is required",
+      "usernameInvalid": "Name must contain only letters or numbers and be at least two characters long",
+      "usernameRequired": "Name is required",
+      "emailInvalid": "Invalid email address",
+      "emailPatternInvalid": "Email format is incorrect",
+      "emailRequired": "Email is required",
+      "phoneRequired": "Phone number is required",
+      "birthDateRequired": "Birth date is required",
+      "genderOneOf": "Please select a gender",
+      "genderRequired": "Gender is required",
+      "avatarRequired": "Image is required",
+      "subjectRequired": "Subject is required",
+      "ticketTypeRequired": "Ticket type is required",
+      "detailsRequired": "Description is required"
+    }
+  },
+  "Languages": {
+    "english": "English",
+    "arabic": "Arabic"
   }
 }

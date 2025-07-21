@@ -2,20 +2,14 @@
 
 import Input from '@/components/atomic/Input';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
-import { FormValues } from '@/interfaces';
+import { accountOptions } from '@/data';
+import { FormValues, TranslationFunction } from '@/interfaces';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-const options = [
-  'إرسال كود البطاقة إلى البريد الإلكتروني',
-  'أعرف جديدا من تحديثات وإضافات.',
-  'المناسبات والأعياد (قد تتضمن خدمات حصرية لمستلمها)',
-  'الاهتمال الذي معرفة ما يهمك وما قد تحتاجه.',
-];
-
-const AccountOptions = () => {
+const AccountOptions = ({ t }: { t: TranslationFunction }) => {
   const { setValue, watch } = useFormContext<FormValues>();
-  const checked = watch('options') || Array(options.length).fill(false);
+  const checked = watch('options') || Array(AccountOptions.length).fill(false);
 
   const handleChange = (index: number) => {
     const updated = [...checked];
@@ -27,24 +21,26 @@ const AccountOptions = () => {
     <div>
       <AnimatedWrapper>
         <h3 className="text-2xl font-medium text-gray-500 mb-7">
-          خيارات الحساب
+          {t('AccountOptions')}
         </h3>
       </AnimatedWrapper>
 
       <ul className="space-y-3">
-        {options.map((text, index) => (
-          <AnimatedWrapper key={index} custom={index}>
-            <li className="flex items-center gap-3">
-              <Input
-                type="checkbox"
-                placeholder={text}
-                inputName={`options[${index}]`}
-                checked={checked[index]}
-                onChange={() => handleChange(index)}
-              />
-            </li>
-          </AnimatedWrapper>
-        ))}
+        {accountOptions.map((text, index) => {
+          return (
+            <AnimatedWrapper key={index} custom={index}>
+              <li className="flex items-center gap-3">
+                <Input
+                  type="checkbox"
+                  placeholder={t(text)}
+                  inputName={`options[${index}]`}
+                  checked={checked[index]}
+                  onChange={() => handleChange(index)}
+                />
+              </li>
+            </AnimatedWrapper>
+          );
+        })}
       </ul>
     </div>
   );

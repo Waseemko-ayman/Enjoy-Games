@@ -12,13 +12,7 @@ import InvoiceSummary from './InvoiceSummary';
 import { PaymentStepProps } from '@/interfaces';
 import Input from '../atomic/Input';
 import MotionSection from './FramerMotion/MotionSection';
-
-const paymentSchema = yup.object({
-  paymentMethod: yup.string().required('يجب اختيار طريقة الدفع'),
-  couponCode: yup.string(),
-});
-
-type PaymentFormData = yup.InferType<typeof paymentSchema>;
+import { useTranslations } from 'next-intl';
 
 const PaymentStep: React.FC<PaymentStepProps> = ({
   onPaymentComplete,
@@ -26,6 +20,15 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
   items,
   quantity,
 }) => {
+  type PaymentFormData = yup.InferType<typeof paymentSchema>;
+
+  const t = useTranslations('Inputs.errorsMsgs');
+
+  const paymentSchema = yup.object({
+    paymentMethod: yup.string().required(t('paymentRequired')),
+    couponCode: yup.string(),
+  });
+
   const {
     register,
     handleSubmit,
@@ -40,13 +43,17 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
     }, 2000);
   };
 
+  const t = useTranslations('MyCart');
+  const btnTexts = useTranslations('BtnTexts');
+  const inputsTexts = useTranslations('Inputs');
+
   return (
     <Layer otherClassName="!my-12 max-sm:!mb-24">
       <Container>
         <SubCartHeader
-          title="اختر وسيلة الدفع"
+          title={t('choosePaymentMethod')}
           handleClick={onBackToCart}
-          btnText="العودة للخلف"
+          btnText={btnTexts('GoBack')}
         />
 
         <form
@@ -88,12 +95,14 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
 
             <MotionSection index={1}>
               <CardWrapper className="p-6 mt-5">
-                <h3 className="text-lg font-bold mb-4">كوبون الخصم:</h3>
+                <h3 className="text-lg font-bold mb-4">
+                  {t('discountCoupon')}
+                </h3>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Input
                     type="text"
                     variant="secondary"
-                    placeholder="هل لديك كوبون خصم؟"
+                    placeholder={inputsTexts('placeHolders.haveCoupon')}
                     otherClassNameContainer="flex-1 focus:ring-2 focus:ring-purple-500"
                     inputName="couponCode"
                     {...register('couponCode')}
@@ -103,7 +112,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
                     variant="secondary"
                     otherClassName="py-3 sm:px-6 max-sm:w-full"
                   >
-                    تطبيق
+                    {btnTexts('apply')}
                   </Button>
                 </div>
               </CardWrapper>
@@ -111,7 +120,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
 
             <MotionSection index={2}>
               <Button type="submit" otherClassName="w-full py-3">
-                ادفع
+                {btnTexts('Pay')}
               </Button>
             </MotionSection>
           </div>
@@ -119,7 +128,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
           <div className="space-y-6">
             <MotionSection index={3}>
               <CardWrapper className="p-6">
-                <h2 className="text-lg font-bold mb-6">ملخص سلة التسوق</h2>
+                <h2 className="text-lg font-bold mb-6">{t('cartSummary')}</h2>
                 <div className="flex items-center gap-4 mb-4">
                   <Image
                     src="/assets/games-banners/fc24-banner.webp"

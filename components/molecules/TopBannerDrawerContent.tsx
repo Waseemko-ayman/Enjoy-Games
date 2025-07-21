@@ -3,12 +3,15 @@ import Button from '../atomic/Button';
 import Image from 'next/image';
 import { FaX } from 'react-icons/fa6';
 import { TopBannerDrawerContentProps } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 
 const TopBannerDrawerContent: React.FC<TopBannerDrawerContentProps> = ({
   isMobile,
   onClose,
   onDiscover,
 }) => {
+  const t = useTranslations('Layout.header.topBanner');
+  const btnTxts = useTranslations('BtnTexts');
   return (
     <>
       <div className="relative bg-enjoy-secondary-light text-white h-80 rounded-t-3xl flex items-start justify-center overflow-hidden">
@@ -28,20 +31,17 @@ const TopBannerDrawerContent: React.FC<TopBannerDrawerContentProps> = ({
         </Button>
 
         <div className="text-center mb-8">
-          <h2 className="text-lg font-semibold my-4">
-            إنجوي قيمز من إنجوي قيمز
-          </h2>
+          <h2 className="text-lg font-semibold my-4">{t('popup.title')}</h2>
           <h3 className="text-[28px] font-bold text-enjoy-primary mb-4">
-            إشتري أكثر وإكسب الضعف وإستبدل نقاطك ببطاقات!
+            {t('title')}
           </h3>
           <p className="text-gray-600 text-sm leading-relaxed font-medium mb-3">
-            إنجوي قيمز هو نظام ولاء يمنحك نقاطًا عند كل عملية شراء، والتي يمكنك
-            استبدالها ببطاقات رقمية أو تحويلها إلى رصيد في محفظتك.
+            {t('popup.desc')}
           </p>
         </div>
 
         <Button otherClassName="w-full p-3" handleClick={onDiscover}>
-          إكتشفه الآن!
+          {btnTxts('FindItNow')}
         </Button>
       </div>
     </>

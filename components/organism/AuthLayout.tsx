@@ -23,10 +23,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
   const isOTPPage = pathname.includes('otp');
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-br from-purple-100 via-purple-50 to-white relative overflow-hidden"
-      dir="ltr"
-    >
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-purple-50 to-white relative overflow-hidden">
       {/* Background Circles */}
       <BackgroundCircles />
 

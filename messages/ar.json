@@ -1,0 +1,451 @@
+{
+  "Layout": {
+    "header": {
+      "topBanner": {
+        "title": "إشتري أكثر وإكسب الضعف وإستبدل نقاطك ببطاقات!",
+        "new": "جديد",
+        "popup": {
+          "title": "دليل ستارز من إنجوي قيمز",
+          "desc": "إنجوي قيمز هو نظام ولاء يمنحك نقاطًا عند كل عملية شراء، والتي يمكنك استبدالها ببطاقات رقمية أو تحويلها إلى رصيد في محفظتك."
+        }
+      },
+      "navBar": {
+        "allCategories": "جميع الأقسام",
+        "store": "المتجر"
+      }
+    },
+    "HelpSection": {
+      "title": "هل تحتاج مساعدة ؟",
+      "email": "البريد الإلكتروني",
+      "helpCenter": "مركز المساعدة"
+    },
+    "footer": {
+      "LearnMore": {
+        "title": "أعرف المزيد عنا",
+        "about": "من نحن",
+        "faq": "الأسئلة الشائعة",
+        "privacyPolicy": "ساسة الخصوصية",
+        "refundPolicy": "سياسة الإسترجاع",
+        "termsOfUser": "سياسة الخدمة"
+      },
+      "BusinessAndSolutions": {
+        "title": "الأعمال والحلول",
+        "news": "الأخبار",
+        "helpCenter": "مركز المساعدة"
+      },
+      "applyShopping": "تسوق عالتطبيق",
+      "connectWithUs": "تواصل معنا",
+      "footerBanner": {
+        "taxRegisterationNum": "رقم التسجيل الضريبي",
+        "desc": "إنجوي قيمز لتقنية المعلومات شركة شخص واحد"
+      }
+    }
+  },
+  "PagesHeaderTitles": {
+    "home": "الرئيسية",
+    "my-account": "حسابي",
+    "my-purchases": "طلباتي",
+    "tickets": "تذاكر الدعم الفني",
+    "stars": "دليل ستارز",
+    "interests": "الإهتمامات",
+    "wallet": "محفظتي",
+    "starsPoints": "نقاط دليل ستارز",
+    "store": "المتجر",
+    "create": "إضافة تذكرة جديدة"
+  },
+  "SectionsTitles": {
+    "Stars": {
+      "title": "أهلًا بك في دليل ستارز",
+      "desc": "اشتري أكثر واكسب الضعف واستبدل نقاطك ببطاقات!"
+    },
+    "Gifts": {
+      "title": "هدايا إنجوي قيمز",
+      "desc": "يمكنك استبدال البطاقات بنقاط إنجوي قيمز!"
+    },
+    "Maxup": {
+      "title": "أهلًا بك في مكسب من إنجوي قيمز!",
+      "desc": "اربح نسبة من كل عملية شراء يقوم بها أصدقاؤك، وكل ما شاركت أكثر، زاد مكسبك!"
+    },
+    "Interests": "وش أكثر شي تحب تشتريه؟",
+    "faq": "الأسئلة الشائعة"
+  },
+  "HomePage": {
+    "walletSections": {
+      "wallet": "محفظتي",
+      "stars": "دليل ستارز",
+      "maxup": "دليل مكسب",
+      "point": "نقطة"
+    },
+    "sectionsTitles": {
+      "bestSellers": "البطاقات الأكثر مبيعًا",
+      "suggestedProducts": "منتجات مقترحة",
+      "newlyArrived": "وصل حديثًا",
+      "redeemPoints": {
+        "title": "استبدل نقاطك",
+        "showAll": "عرض الكل"
+      },
+      "enjoyWinWin": {
+        "title": "الكل رابح مع إنجوي قيمز",
+        "participateAndWin": {
+          "title": "شارك وأربح",
+          "desc": "أنت أحد شركاؤنا, حيث يمكنك يمكنك مشاركة رابط الدعوة وستربح من كل طلب عن طريقك"
+        },
+        "enjoyGames": {
+          "title": "إنجوي قيمز",
+          "desc": "عند الشراء تحصل على نقاط إنجوي قيمز يمكنك إستبدالها بما يناسبك من المكافآت"
+        }
+      },
+      "serviceAdvantages": {
+        "paperPlane": {
+          "title": "أستلم بطاقتك بشكل فوري",
+          "desc": "بمجرد شرائك بطاقة من موقع إنجوي قيمز، ستصلك بشكل تلقائي على البريد الإلكتروني، وبشكل فوري"
+        },
+        "creditCard": {
+          "title": "طرق دفع آمنة ومتنوعة",
+          "desc": "إنجوي قيمز يتيح طرق دفع متنوعة ، وآمنة وتناسب كافة احتياجاتكم ورغباتكم، دون إنتظار أو تعقيدات"
+        },
+        "phone": {
+          "title": "تطبيقات تعمل بكفاءة عالية",
+          "desc": "يمكنك تحميل تطبيقات إنجوي قيمز على الايفون، و الأندرويد والإستمتاع بتجربة مميزة، وفريدة في تسوق بطاقاتك"
+        }
+      }
+    }
+  },
+  "MyAccount": {
+    "AccountInfo": "معلومات الحساب",
+    "AccountOptions": "خيارات الحساب",
+    "ProfileImage": {
+      "title": "الصورة الشخصية",
+      "desc": "انقر على الصورة لإضافتها أو تغييرها"
+    },
+    "CopyLink": "نسخ رابط الدعوة",
+    "AccountDelete": "هل تريد <deleteSpan>حذف الحساب</deleteSpan>",
+    "resendActivation": "لإعادة إرسال بريد التفعيل <resendSpan>إضغط هنا</resendSpan>",
+    "rank": {
+      "title": "الرتبة الحالية لحسابك",
+      "subtitle": "زيادة الرتبة تعني زيادة العائد لكل عملية",
+      "current": "الترقية الحالية لحسابك",
+      "commission": "{percentage} لكل عملية"
+    },
+    "statsTitles": {
+      "balance": "رصيدي",
+      "currentLevel": "لديك حاليا",
+      "interests": "الإهتمامات"
+    },
+    "accountOptions": {
+      "sendCardCodeToEmail": "إرسال كود البطاقة إلى البريد الإلكتروني",
+      "getUpdates": "أعرف جديدا من تحديثات وإضافات.",
+      "specialOccasions": "المناسبات والأعياد (قد تتضمن خدمات حصرية لمستلمها)",
+      "interestsInfo": "الاهتمال الذي معرفة ما يهمك وما قد تحتاجه."
+    }
+  },
+  "MyPurchases": {
+    "ُemptyStateMsg": "طلباتك تقول لك: وينك؟ يلا تسوق!",
+    "all": "الكل",
+    "completed": "المكتملة",
+    "inProgress": "قيد التجهيز والمراجعة",
+    "cancelled": "الملغية والمسترجعة"
+  },
+  "Stars": {
+    "pointsSystem": {
+      "pointsSummary": {
+        "title": "إجمالي نقاط المكتسبة",
+        "value": "نقطة {points}"
+      },
+      "conversionInfo": {
+        "title": "تحويل نقاط إلى {currency}",
+        "rule": "بعد {minPoints} نقطة = بطاقة",
+        "action": "سجل عمليات السحب",
+        "emptyState": "لا توجد عمليات سحب بعد"
+      },
+      "actions": {
+        "starPoints": "نقاط دليل ستار",
+        "convertPoints": "تحويل نقاط",
+        "redeemPoints": "استبدل نقاطك"
+      }
+    },
+    "Upgrade": {
+      "title": "إشتري أكثر وضاعف نقاطك",
+      "benefitText": "{number} عائد لكل عملية",
+      "levels": {
+        "junior": "دليل جونيور",
+        "active": "دليل نشط",
+        "pro": "دليل محترف",
+        "expert": "دليل خبير",
+        "vip": "دليل مميز"
+      },
+      "percentageSection": {
+        "title": "عائد لكل عملية",
+        "note": "تبقى لترقيتك {note} مستخدم"
+      }
+    },
+    "ReferralProgram": {
+      "title": "تعرف على نظام دليل ستارز",
+      "description": "تعرف كيف تكسب تترقى مع دليل ستارز",
+      "EnjoyGames": {
+        "mainTitle": "كلما اشتريت أكثر، كلما كسبت أكثر!",
+        "howItWorksTitle": "كيف يعمل إنجوي قيمز؟",
+        "description": "إنجوي قيمز هو نظام ولاء يمنحك نقاطاً عند كل عملية شراء، والتي يمكنك استبدالها ببطاقات رقمية أو تحويلها إلى نقاط في محفظتك.",
+        "features": {
+          "feature1": {
+            "title": "اجمع النقاط",
+            "description": "احصل على نقاط مع كل عملية شراء"
+          },
+          "feature2": {
+            "title": "ضاعف مكافآتك",
+            "description": "ارتفع بالمستويات للحصول على مزايا أكثر"
+          },
+          "feature3": {
+            "title": "راقب تقدمك",
+            "description": "تابع نقاطك وتاريخ معاملاتك في حسابك"
+          },
+          "feature4": {
+            "title": "استبدل النقاط",
+            "description": "استبدلها ببطاقات رقمية أو حولها إلى نقاط نقدي"
+          }
+        },
+        "cta": "وحقق أقصى استفادة من مشترياتك!",
+        "registerNow": "سجل الآن",
+        "startNow": "إبدأ الآن"
+      }
+    }
+  },
+  "MaxupProgram": {
+    "pointSystem": {
+      "header": {
+        "title": "مستخدمين إشتروا من خلالك",
+        "totalEarnings": "إجمالي الأرباح (منذ البداية)"
+      },
+      "earnings": {
+        "title": "الأرباح القابلة للسحب"
+      }
+    },
+    "Upgrade": {
+      "title": "شارك أكثر، واكسب أكثر",
+      "benefitText": "{number} عائد لكل عملية",
+      "levels": ["البرونزية", "الفضية", "الذهبية", "البلاتينيوم", "VIP"],
+      "percentageSection": {
+        "title": "عائد لكل عملية",
+        "note": "تبقى لترقيتك {note} مستخدم"
+      }
+    },
+    "ReferralProgram": {
+      "title": "اكتشف مكسب الآن",
+      "description": "تعرف كيف تزيد مكسبك وترتقي في المستويات!",
+      "steps": {
+        "step1": {
+          "title": "انسخ رابط الدعوة",
+          "description": "تقوم بداية بنسخ رابط الدعوة الفريد الخاص بك لتستطيع مشاركته مع أصدقائك ومعارفك",
+          "actionText": "اضغط لنسخ رابطك الخاص!"
+        },
+        "step2": {
+          "title": "شارك الرابط مع الأصدقاء",
+          "description": "أرسل رابط الدعوة لأصدقائك ومعارفك عبر الواتساب، تويتر، أو أي وسيلة أخرى. كلما زاد عدد المشاركين، زادت أرباحك."
+        },
+        "step3": {
+          "title": "اربح %0.7 على كل عملية",
+          "description": "كل مرة يشترى أحد أصدقائك عبر رابط الدعوة الخاص بك، تربح %0.7 تضاف إلى محفظتك بكل سهولة!"
+        },
+        "step4": {
+          "title": "انتقل للمستوى التالي",
+          "description": "دليل تتيح لك 5 مستويات بنسبة عائد تصل إلى %0.7"
+        }
+      }
+    }
+  },
+  "Wallet": {
+    "title": "رصيدي الحالي",
+    "RedeemPoints": {
+      "title": "اختر طريقة الاستبدال اللي تناسبك",
+      "subTitle": "برامج المكافآت"
+    },
+    "addCoupon": {
+      "title": "أضف قسيمة",
+      "subTitle": "ضيف رصيد لمحفظتك بسهولة باستخدام قسيمة دليل ستور."
+    },
+    "rewardsPrograms": {
+      "bonusesPrograms": "برامج المكافآت",
+      "maxupProgram": "برنامج مكسب",
+      "starsPoints": "نقاط دليل ستارز",
+      "profiledProfits": "أرباحك القابلة للسحب",
+      "convertiblePoints": "نقاطك القابلة للتحويل"
+    }
+  },
+  "MyCart": {
+    "basketSummary": "ملخص السلة",
+    "choosePaymentMethod": "اختر وسيلة الدفع",
+    "emptyStateTitle": "سلتك جاهزة وتناديك للتسوق",
+    "termsAndPrivacyAgreement": "بالانتقال الى الدفع فانت تتوافق على <termsLink>سياسة الاستخدام</termsLink> و <privacyLink>سياسة الخصوصية</privacyLink> لـ دليل ستور",
+    "discountCoupon": "كوبون الخصم:",
+    "cartSummary": "ملخص سلة التسوق",
+    "rewards": {
+      "pointsEarned": "أكمل الشراء وأكسب {points} نقطة في دليل ستارز",
+      "donation": {
+        "title": "سيتّم التبرع بجزء من أرباحنا لهذا الطلب",
+        "description": "من منطلق المسؤولية الاجتماعية ومشاركتنا الأجر، تم تخصيص جزء من أرباحنا لدعم مشاريع جمعية حجر الخيرية"
+      }
+    },
+    "order": {
+      "orderCompleteMessage": "تم إتمام طلبك بنجاح!",
+      "orderCompleteThanks": "شكراً لك على ثقتك بنا. سيتم إرسال تفاصيل الطلب على بريدك الإلكتروني",
+      "orderNumberLabel": "رقم الطلب:",
+      "orderStatusLabel": "حالة الطلب:",
+      "deliveryMethodLabel": "طريقة التسليم:",
+      "pointsAddedMessage": "تم إضافة {points} نقطة لحسابك!",
+      "pointsUsageInfo": "يمكنك استخدام النقاط في عمليات الشراء القادمة"
+    }
+  },
+  "Tickets": {
+    "emptyStateTitle": "لا يوجد تذاكر دعم فني حتى الآن...",
+    "searchFaqPrompt": "هل بحثت عن سؤالك في الأسئلة الشائعة",
+    "addAttachments": "أضف مرفقات للتذكرة (غير إلزامي)",
+    "attachmentsDescription": "ارفاق صور مع التعليق، أو بتحميل الملفات"
+  },
+  "productDetails": {
+    "shareLinkWith": "شارك الرابط عبر:",
+    "rival": "خصم",
+    "earnedPointsOnPurchase": "نقطة مكتسبة بشرائك هذا المنتج",
+    "productOverview": "لمحة عن المنتج",
+    "quantity": "الكمية",
+    "additionalOptions": "خيارات إضافية",
+    "ratingsTab": "التقييمات",
+    "productDetailsTab": "تفاصيل المنتج",
+    "addRating": "أضف التقييم",
+    "productRating": "تقييم المنتج",
+    "productRatingDesc": "هنا قائمة لتقييم المنتج.",
+    "addYourRating": "أضف التقييم",
+    "customerReviewsTitle": "التقييمات و اراء الزبائن",
+    "noRatingsYet": "لا يوجد تقييمات حتى اللحظة",
+    "beFirstToRate": "كن أول من يقيم المنتج و أخبرنا تجربتك له من خلال الضغط على زر إضافة تقييم",
+    "rating": "تقييم",
+    "excellent": "رائع",
+    "good": "ممتاز",
+    "average": "جيد",
+    "poor": "لم يعجبني",
+    "bad": "سيء",
+    "relatedProducts": "منتجات مشابهة"
+  },
+  "Shared": {
+    "procedures": {
+      "default": "سجل عمليات السحب",
+      "last": "سجل آخر عملية سحب"
+    },
+    "emptyState": "لا توجد عمليات سحب",
+    "point": "نقطة"
+  },
+  "Invoice": {
+    "summary": {
+      "title": "ملخص الفاتورة",
+      "subtotal": {
+        "label": "الإجمالي الفرعي:",
+        "value": "{subtotal}"
+      },
+      "vat": {
+        "label": "ضريبة القيمة المضافة:",
+        "value": "{vat}"
+      },
+      "total": {
+        "label": "إجمالي المبلغ:",
+        "value": "{total}"
+      }
+    }
+  },
+  "BtnTexts": {
+    "save": "حفظ",
+    "Saving": "جاري الحفظ",
+    "StartMarketingNow": "إبدأ بالتسوق الآن",
+    "GetItNow": "احصل عليه الآن",
+    "BuyNow": "إشترِ الآن",
+    "FindItNow": "إكتشفه الآن !",
+    "TransferToMyWallet": "تحويل لمحفظتي",
+    "RedeemPoints": "إستبدل نقاطك",
+    "BankTransfer": "تحويل بنكي",
+    "CopyYourLink": "اضغط لنسخ رابطك الخاص!",
+    "CopyMyLink": "نسخ الرابط الخاص بي",
+    "KnowYourProfit": "تعرف على مكسب",
+    "SaveChanges": "حفظ التغييرات",
+    "RechargeNow": "إشحن رصيدك الآن",
+    "BackToShopping": "العودة للتسوق",
+    "GoBack": "العودة للخلف",
+    "CompletePayment": "إتمام الدفع",
+    "SendAsGift": "أرسلها كهدية",
+    "Pay": "ادفع",
+    "apply": "تطبيق",
+    "DownloadInvoice": "تحميل الفاتورة",
+    "BackToStore": "العودة للمتجر",
+    "logout": "تسجيل خروج",
+    "MoreAboutParticipateAndWin": "المزيد عن شارك وإربح",
+    "MoreAboutEnjoyGames": "المزيد عن إنجوي قيمز",
+    "AddTicket": "أضف تذكرة",
+    "faq": "الأسئلة الشائعة",
+    "sendTicket": "إرسال التذكرة",
+    "LearnMore": "تعرف على المزيد",
+    "continue": "استمر",
+    "addCoupon": "أضف القسيمة",
+    "addToCart": "أضف للسلة",
+    "submitRating": "ارسال تقييم"
+  },
+  "Inputs": {
+    "labels": {
+      "username": "الإسم",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "gender": "الجنس",
+      "phone": "رقم الجوال",
+      "birthDate": "تاريخ الميلاد",
+      "quantity": "الكمية",
+      "twitter": "تويتر",
+      "facebook": "فيس بوك",
+      "idNumber": "رقم الآيدي",
+      "unlockAccount": "قد قمت بالغاء القفل من الحساب",
+      "comment": "اترك تعليق",
+      "hideMyName": "لا تظهر إسمي فى قائمة العملاء"
+    },
+    "placeHolders": {
+      "haveCoupon": "هل لديك كوبون خصم؟",
+      "cardAndOffersSearch": "إبحث عن بطاقة وعروض",
+      "subject": "عنوان التذكرة",
+      "ticketType": "حدد نوع التذكرة",
+      "details": "يرجي كتابة وصف لمساعتدك بشكل أدق",
+      "username": "",
+      "email": "",
+      "phone": "xxxxxxxxx",
+      "birthDate": "--/--/----",
+      "gender": "حدد الجنس",
+      "writeCouponHere": "أكتب كود القسيم هنا...",
+      "Choose": "اختر...",
+      "Cancelled": "تم الإلغاء",
+      "comment": "أكتب تعليقك هنا"
+    },
+    "options": {
+      "gender": {
+        "male": "ذكر",
+        "female": "أنثى"
+      }
+    },
+    "errorsMsgs": {
+      "commentLimitReached": "لقد وصلت إلى الحد الأقصى من الأحرف.",
+      "remainingCharacters": "عدد الاحرف المتبقية",
+      "paymentRequired": "يجب اختيار طريقة الدفع",
+      "maxChars": "الحد الأقصى {number} حرفًا",
+      "commentRequired": "التعليق مطلوب",
+      "usernameInvalid": "الاسم يجب أن يحتوي على حروف أو أرقام فقط ويكون طوله على الأقل حرفين",
+      "usernameRequired": "الاسم مطلوب",
+      "emailInvalid": "البريد الإلكتروني غير صالح",
+      "emailPatternInvalid": "الإيميل غير صالح",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "phoneRequired": "رقم الجوال مطلوب",
+      "birthDateRequired": "تاريخ الميلاد مطلوب",
+      "genderOneOf": "الرجاء اختيار الجنس",
+      "genderRequired": "الجنس مطلوب",
+      "avatarRequired": "الصورة مطلوبة",
+      "subjectRequired": "العنوان مطلوب",
+      "ticketTypeRequired": "نوع التذكرة مطلوب",
+      "detailsRequired": "الوصف مطلوب"
+    }
+  },
+  "Languages": {
+    "english": "إنجليزي",
+    "arabic": "عربي"
+  }
+}

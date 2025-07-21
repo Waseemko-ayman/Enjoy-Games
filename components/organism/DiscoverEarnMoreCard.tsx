@@ -3,11 +3,12 @@ import CardWrapper from '@/components/atomic/CardWrapper';
 import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import Container from './Container';
 import useIsMobile from '@/hook/useIsMobile';
 import AnimatedWrapper from '../molecules/FramerMotion/AnimatedWrapper';
 import { DiscoverEarnMoreCardProps } from '@/interfaces';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const DiscoverEarnMoreCard: React.FC<DiscoverEarnMoreCardProps> = ({
   title,
@@ -19,6 +20,7 @@ const DiscoverEarnMoreCard: React.FC<DiscoverEarnMoreCardProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const isMobile = useIsMobile();
+  const { isArabic } = useToggleLocale();
   return (
     <Container>
       <AnimatedWrapper>
@@ -42,7 +44,7 @@ const DiscoverEarnMoreCard: React.FC<DiscoverEarnMoreCardProps> = ({
                   className={`text-sm sm:text-base text-enjoy-primary font-semibold flex items-center justify-between gap-1 cursor-pointer ${triggerClassName}`}
                 >
                   <p>{description}</p>
-                  <IoIosArrowBack />
+                  {isArabic ? <IoIosArrowBack /> : <IoIosArrowForward />}
                 </div>
               }
             >

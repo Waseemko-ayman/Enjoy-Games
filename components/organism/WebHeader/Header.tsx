@@ -7,11 +7,13 @@ import Link from 'next/link';
 import { IoSearch } from 'react-icons/io5';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { PATHS } from '@/data/paths';
-import { countries, userList } from '@/data';
+import { countries } from '@/data';
 import CountryDialog from '@/components/molecules/CountryDialog';
-import CardWrapper from '@/components/atomic/CardWrapper';
-import NavItem from '@/components/atomic/NavItem';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import UserPopup from './UserPopup';
+import { useToggleLocale } from '@/hook/useToggleLocale';
+import Button from '@/components/atomic/Button';
+import { useTranslations } from 'next-intl';
 
 const Header = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
@@ -20,6 +22,9 @@ const Header = () => {
   const [productsCount] = useState(0);
   const [isLogin] = useState(true);
   const menuRef = useRef<HTMLDivElement>(null);
+  const { toggleLocale, isArabic } = useToggleLocale();
+  const t = useTranslations('Inputs.placeHolders');
+  const langTexts = useTranslations('Languages');
 
   const iconsStyle = 'w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer';
 
@@ -37,116 +42,10 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-white" dir="ltr">
+    <header className="bg-white">
       <Container>
         <div className="flex items-center justify-between gap-10">
-          <AnimatedWrapper>
-            <div className="flex items-center rounded-full py-2.5 px-4 border border-gray-300 overflow-hidden text-base font-semibold text-[var(--enjoy-primary-deep)]">
-              <button className="cursor-pointer transition-opacity hover:opacity-70 text-sm">
-                English
-              </button>
-              <span className="h-6 w-px bg-gray-200 mx-2"></span>
-              <CountryDialog
-                countries={countries}
-                selectedCountry={selectedCountry}
-                setSelectedCountry={setSelectedCountry}
-                open={open}
-                setOpen={setOpen}
-              />
-            </div>
-          </AnimatedWrapper>
-
-          <div className="flex items-center gap-5">
-            <AnimatedWrapper direction="y" distance={-40}>
-              <Link href={PATHS.MY_CART.link} className="relative">
-                <MdOutlineShoppingCart className={iconsStyle} />
-                {productsCount > 0 && (
-                  <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-xs w-4 h-4 rounded-[50%]">
-                    <span>{productsCount}</span>
-                  </div>
-                )}
-              </Link>
-            </AnimatedWrapper>
-            {isLogin ? (
-              <div className="relative" ref={menuRef}>
-                <AnimatedWrapper direction="y" distance={40}>
-                  <FiUser
-                    className={iconsStyle}
-                    onClick={() => setIsOpen((prev) => !prev)}
-                  />
-                </AnimatedWrapper>
-                {isOpen && (
-                  <CardWrapper className="absolute top-[120%] left-0 z-50 bg-white p-2 w-[212px]">
-                    <ul dir="rtl">
-                      {userList.map((section, index) => {
-                        if (section.section === 'rank') {
-                          return (
-                            <AnimatedWrapper key={index} custom={index}>
-                              <div className="border-b border-b-gray-200 px-2 py-3">
-                                <div>
-                                  <div className="flex items-center justify-between gap-2 mb-1">
-                                    <h5 className="font-semibold text-sm">
-                                      {section.rank?.title}
-                                    </h5>
-                                    <div className="bg-enjoy-primary text-white w-5 h-5 text-xs flex items-center justify-center rounded-full">
-                                      {section.rank?.level}
-                                    </div>
-                                  </div>
-                                  <p className="text-xs text-enjoy-primary font-medium">
-                                    {section.rank?.subtitle}
-                                  </p>
-                                </div>
-                              </div>
-                            </AnimatedWrapper>
-                          );
-                        }
-
-                        return (
-                          <div
-                            key={index}
-                            className="border-b border-b-gray-200 pb-2 last:border-0"
-                          >
-                            {section.items?.map((item, index) => (
-                              <AnimatedWrapper key={item.id} custom={index}>
-                                <li className="w-full">
-                                  <NavItem
-                                    Icon={item.icon}
-                                    text={item.title}
-                                    otherClassNameIcon="text-gray-500 text-sm"
-                                    otherClassName="!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg"
-                                    linkPath={item.link}
-                                  />
-                                </li>
-                              </AnimatedWrapper>
-                            ))}
-                          </div>
-                        );
-                      })}
-                    </ul>
-                  </CardWrapper>
-                )}
-              </div>
-            ) : (
-              <AnimatedWrapper direction="y" distance={40}>
-                <Link href={PATHS.LOGIN}>
-                  <FiUser className={iconsStyle} />
-                </Link>
-              </AnimatedWrapper>
-            )}
-          </div>
-
-          <form className="flex-1">
-            <AnimatedWrapper direction="y" distance={-40}>
-              <Input
-                type="text"
-                inputName="search"
-                placeholder="إبحث عن بطاقة وعروض"
-                Icon={IoSearch}
-              />
-            </AnimatedWrapper>
-          </form>
-
-          {/* Right side - Logo and Icons */}
+          {/* Logo */}
           <AnimatedWrapper direction="y" distance={-40}>
             <Link href={PATHS.HOME.link}>
               <Image
@@ -157,6 +56,67 @@ const Header = () => {
                 height={100}
               />
             </Link>
+          </AnimatedWrapper>
+
+          <form className="flex-1">
+            <AnimatedWrapper direction="y" distance={-40}>
+              <Input
+                type="text"
+                inputName="search"
+                placeholder={t('cardAndOffersSearch')}
+                Icon={IoSearch}
+              />
+            </AnimatedWrapper>
+          </form>
+
+          <div className="flex items-center gap-5">
+            {isLogin ? (
+              <div className="relative" ref={menuRef}>
+                <AnimatedWrapper direction="y" distance={40}>
+                  <FiUser
+                    className={iconsStyle}
+                    onClick={() => setIsOpen((prev) => !prev)}
+                  />
+                </AnimatedWrapper>
+                {isOpen && <UserPopup />}
+              </div>
+            ) : (
+              <AnimatedWrapper direction="y" distance={40}>
+                <Link href={PATHS.LOGIN}>
+                  <FiUser className={iconsStyle} />
+                </Link>
+              </AnimatedWrapper>
+            )}
+            <AnimatedWrapper direction="y" distance={-40}>
+              <Link href={PATHS.MY_CART.link} className="relative">
+                <MdOutlineShoppingCart className={iconsStyle} />
+                {productsCount > 0 && (
+                  <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-xs w-4 h-4 rounded-[50%]">
+                    <span>{productsCount}</span>
+                  </div>
+                )}
+              </Link>
+            </AnimatedWrapper>
+          </div>
+
+          <AnimatedWrapper>
+            <div className="flex items-center rounded-full py-2.5 px-4 border border-gray-300 overflow-hidden text-base font-semibold text-[var(--enjoy-primary-deep)]">
+              <CountryDialog
+                countries={countries}
+                selectedCountry={selectedCountry}
+                setSelectedCountry={setSelectedCountry}
+                open={open}
+                setOpen={setOpen}
+              />
+              <span className="h-6 w-px bg-gray-200 mx-2"></span>
+              <Button
+                handleClick={toggleLocale}
+                variant="ghost"
+                otherClassName="text-enjoy-primary-deep transition-opacity hover:opacity-70 text-sm"
+              >
+                {isArabic ? langTexts('english') : langTexts('arabic')}
+              </Button>
+            </div>
           </AnimatedWrapper>
         </div>
       </Container>

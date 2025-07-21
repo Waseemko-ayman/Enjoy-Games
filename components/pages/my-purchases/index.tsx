@@ -10,44 +10,28 @@ import {
 } from '@/components/ui/select';
 import { PATHS } from '@/data/paths';
 import React from 'react';
-
-const MyPurchasesTypes = [
-  {
-    id: 1,
-    label: 'الكل',
-  },
-  {
-    id: 2,
-    label: 'المكتملة',
-  },
-  {
-    id: 3,
-    label: 'قيد التجهيز والمراجعة',
-  },
-  {
-    id: 4,
-    label: 'الملغية والمسترجعة',
-  },
-];
+import { MyPurchasesTypes } from '@/data';
+import { useTranslations } from 'next-intl';
 
 const MyPurchasesPage = () => {
+  const t = useTranslations('MyPurchases');
+  const btnTexts = useTranslations('BtnTexts');
   return (
     <div>
       <PageHeader>
         <Select>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="الكل" />
+            <SelectValue placeholder={t('all')} />
           </SelectTrigger>
           <SelectContent>
-            {MyPurchasesTypes.map((item, index) => (
-              <AnimatedWrapper key={item.id} custom={index}>
-                <SelectItem
-                  value={item.label}
-                  className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
-                >
-                  {item.label}
-                </SelectItem>
-              </AnimatedWrapper>
+            {MyPurchasesTypes.map((item) => (
+              <SelectItem
+                key={item.id}
+                value={item.labelKey}
+                className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
+              >
+                {t(item.labelKey)}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -55,8 +39,8 @@ const MyPurchasesPage = () => {
       <EmptyStateBox
         imageSrc="/assets/empty-status.png"
         alt="empty-status"
-        title="طلباتك تقول لك: وينك؟ يلا تسوق!"
-        buttonText="ابدأ بالتسوق الأن"
+        title={t('ُemptyStateMsg')}
+        buttonText={btnTexts('StartMarketingNow')}
         btnlink={PATHS.STORE.link}
       />
     </div>

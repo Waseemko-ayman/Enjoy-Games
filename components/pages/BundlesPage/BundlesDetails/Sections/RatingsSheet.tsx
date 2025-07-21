@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/sheet';
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa6';
-import { IoIosArrowBack, IoIosSend } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward, IoIosSend } from 'react-icons/io';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -20,18 +20,27 @@ import AttachmentsUploader from '@/components/molecules/AttachmentsPreview';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
-
-const formSchema = Yup.object().shape({
-  comment: Yup.string()
-    .max(255, 'الحد الأقصى 255 حرفًا')
-    .required('التعليق مطلوب'),
-  checkbox: Yup.boolean(),
-});
+import { useTranslations } from 'next-intl';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const RatingsSheet = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
   const [, setFormData] = useState(null);
   const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
+  const t = useTranslations('productDetails');
+  const errosTxt = useTranslations('Inputs.errorsMsgs');
+  const inputTxts = useTranslations('Inputs');
+  const btnTxts = useTranslations('BtnTexts');
+  const { isArabic } = useToggleLocale();
+
+  const maxCharsLength = 255;
+
+  const formSchema = Yup.object().shape({
+    comment: Yup.string()
+      .max(maxCharsLength, errosTxt('maxChars', { number: maxCharsLength }))
+      .required(errosTxt('commentRequired')),
+    checkbox: Yup.boolean(),
+  });
 
   const {
     register,
@@ -71,37 +80,40 @@ const RatingsSheet = () => {
   };
 
   return (
-    <div className="flex items-center justify-between gap-2 border-b border-gray-200 pb-4 mt-2">
+    <div
+      className={`flex items-center justify-between ${
+        !isArabic ? 'flex-col' : ''
+      } gap-2 border-b border-gray-200 pb-4 mt-2`}
+      dir={isArabic ? 'ltr' : 'rtl'}
+    >
       <Sheet>
         <AnimatedWrapper direction="x" distance={-40}>
           <SheetTrigger asChild>
             <Button
               variant="forth"
               otherClassName="py-2 px-4 text-xs"
-              Icon={IoIosArrowBack}
+              Icon={isArabic ? IoIosArrowBack : IoIosArrowForward}
             >
-              أضف التقييم
+              {t('addRating')}
             </Button>
           </SheetTrigger>
         </AnimatedWrapper>
-        <SheetContent
-          className=" bg-white"
-          closePosition="left"
-          closeTextColor="text-black"
-        >
-          <SheetTitle className="sr-only">أقسام البطاقات</SheetTitle>
+        <SheetContent className=" bg-white" closeTextColor="text-black">
+          <SheetTitle className="sr-only">{t('productRating')}</SheetTitle>
           <SheetDescription className="sr-only">
-            هنا قائمة بأقسام البطاقات المتوفرة للتصفح والاختيار.
+            {t('productRatingDesc')}
           </SheetDescription>
 
           <MotionSection index={0}>
-            <h4 className="text-xl font-semibold mb-5">تقييم المنتج</h4>
+            <h4 className="text-xl font-semibold mb-5">{t('productRating')}</h4>
           </MotionSection>
 
           <div className="max-h-[800px] overflow-y-auto scrollbar-none">
             <form onSubmit={handleSubmit(onSubmit)}>
               <MotionSection index={1}>
-                <h3 className="text-2xl mb-3 text-center">أضف التقييم</h3>
+                <h3 className="text-2xl mb-3 text-center">
+                  {t('addYourRating')}
+                </h3>
               </MotionSection>
 
               <MotionSection index={2}>
@@ -120,8 +132,8 @@ const RatingsSheet = () => {
                     type="textarea"
                     variant="secondary"
                     inputName="comment"
-                    label="اترك تعليق"
-                    placeholder="أكتب تعليقك هنا"
+                    label={inputTxts('labels.comment')}
+                    placeholder={inputTxts('placeHolders.comment')}
                     otherClassNameContainer={
                       errors.comment || isLimitReached ? '!border-red-500' : ''
                     }
@@ -135,11 +147,11 @@ const RatingsSheet = () => {
                   )}
                   {isLimitReached && !errors.comment && (
                     <p className="text-red-500 text-sm mt-2 mb-3">
-                      لقد وصلت إلى الحد الأقصى من الأحرف.
+                      {inputTxts('errorsMsgs.commentLimitReached')}
                     </p>
                   )}
                   <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
-                    <span>عدد الاحرف المتبقية :</span>
+                    <span>{inputTxts('errorsMsgs.remainingCharacters')} :</span>
                     <span className={isLimitReached ? 'text-red-500' : ''}>
                       {remainingChars}
                     </span>
@@ -152,7 +164,7 @@ const RatingsSheet = () => {
                   <Input
                     type="checkbox"
                     inputName="checkbox"
-                    placeholder="لا تظهر اسمى فى قائمة العملاء"
+                    placeholder={inputTxts('labels.hideMyName')}
                     {...register('checkbox')}
                   />
                 </div>
@@ -172,7 +184,11 @@ const RatingsSheet = () => {
                   otherClassName="w-full p-2 mt-7"
                   Icon={IoIosSend}
                 >
-                  {isSubmittingLocal ? <ButtonLoading /> : 'ارسال تقييم'}
+                  {isSubmittingLocal ? (
+                    <ButtonLoading />
+                  ) : (
+                    btnTxts('submitRating')
+                  )}
                 </Button>
               </MotionSection>
             </form>
@@ -181,7 +197,7 @@ const RatingsSheet = () => {
       </Sheet>
       <AnimatedWrapper direction="x">
         <h4 className="text-sm sm:text-base font-semibold">
-          التقييمات و اراء الزبائن
+          {t('customerReviewsTitle')}
         </h4>
       </AnimatedWrapper>
     </div>

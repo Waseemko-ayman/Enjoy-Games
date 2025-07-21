@@ -4,8 +4,10 @@ import Container from './Container';
 import Image from 'next/image';
 import FooterLinks from '../molecules/FooterLinks';
 import FooterBanner from './FooterBanner';
+import { useTranslations } from 'next-intl';
 
 const Footer = () => {
+  const t = useTranslations('Layout.footer');
   return (
     <footer className="relative bg-enjoy-primary-deep mt-40 md:mt-32">
       <Container otherClassName="relative">
@@ -21,13 +23,26 @@ const Footer = () => {
             height={120}
           />
           <div className="flex items-start justify-between flex-wrap gap-5 w-full">
-            <FooterLinks secTitle="أعرف المزيد عنا" listName="LearnMore" />
             <FooterLinks
-              secTitle="الأعمال والحلول"
-              listName="BusinessAndSolutions"
+              secTitle={t('LearnMore.title')}
+              listName="LearnMore"
+              t={t}
             />
-            <FooterLinks secTitle="تسوق عالتطبيق" listName="shop_app" />
-            <FooterLinks secTitle="تواصل معنا" listName="socialMedia" />
+            <FooterLinks
+              secTitle={t('BusinessAndSolutions.title')}
+              listName="BusinessAndSolutions"
+              t={t}
+            />
+            <FooterLinks
+              secTitle={t('applyShopping')}
+              t={t}
+              listName="shop_app"
+            />
+            <FooterLinks
+              secTitle={t('connectWithUs')}
+              t={t}
+              listName="socialMedia"
+            />
           </div>
         </div>
         <FooterBanner />

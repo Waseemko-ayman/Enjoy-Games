@@ -9,6 +9,7 @@ import {
 } from '../ui/select';
 import { FaCheck } from 'react-icons/fa6';
 import { InputTypes } from '@/utils/type';
+import { useTranslations } from 'next-intl';
 
 type InputProps = {
   type: InputTypes;
@@ -60,6 +61,8 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
 
     const [localChecked, setLocalChecked] = useState(!!checked);
 
+    const inputsTxt = useTranslations('Inputs.placeHolders');
+
     useEffect(() => {
       if (typeof checked === 'boolean') setLocalChecked(checked);
     }, [checked]);
@@ -75,7 +78,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
           <SelectTrigger
             className={`text-gray-500 text-right ${inputClasses} !h-[46px] bg-white focus:ring-0 focus:outline-none`}
           >
-            <SelectValue placeholder={placeholder || 'اختر...'} />
+            <SelectValue placeholder={placeholder || inputsTxt('Choose')} />
           </SelectTrigger>
           <SelectContent>
             {options.map((opt) => (
@@ -97,7 +100,6 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
           className={inputClasses}
           onChange={onChange}
           value={value}
-          dir="rtl"
           {...rest}
         />
       ) : type === 'checkbox' ? (
@@ -134,7 +136,6 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
           className={inputClasses}
           onChange={onChange}
           value={value}
-          dir="rtl"
           {...rest}
         />
       );
@@ -162,11 +163,11 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
                 : 'flex-row-reverse rounded-lg border border-gray-300 focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)] bg-white'
             } ${otherClassNameContainer}`}
           >
-            {iconBeforeInput && (
+            {iconAfterInput && (
               <Icon className={`${iconClassName} text-2xl cursor-pointer`} />
             )}
             {InputElement}
-            {iconAfterInput && (
+            {iconBeforeInput && (
               <Icon className={`${iconClassName} text-2xl cursor-pointer`} />
             )}
           </div>
@@ -176,6 +177,6 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
   }
 );
 
-Input.displayName = 'Input'; // مهم مع forwardRef
+Input.displayName = 'Input';
 
 export default Input;

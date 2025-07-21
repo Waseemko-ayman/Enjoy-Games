@@ -4,8 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { WalletCardProps } from '@/interfaces';
 
-const imageUnits = ['saudi_riyal'];
-
 const WalletCard: React.FC<WalletCardProps> = ({
   title,
   value,
@@ -14,9 +12,8 @@ const WalletCard: React.FC<WalletCardProps> = ({
   bgColor,
   textColor,
   pathName,
+  isUnitTranslatable = false,
 }) => {
-  const isImageUnit = imageUnits.includes(unit);
-
   return (
     <Link
       href={pathName}
@@ -28,15 +25,10 @@ const WalletCard: React.FC<WalletCardProps> = ({
       </div>
       <div className="text-xl font-bold flex items-center gap-1 mt-2.5">
         <span>{value}</span>
-        {isImageUnit ? (
-          <Image
-            src={`/assets/${unit}.png`}
-            alt={unit}
-            width={20}
-            height={20}
-          />
-        ) : (
+        {isUnitTranslatable ? (
           <span className="text-sm">{unit}</span>
+        ) : (
+          <Image src={unit} alt={unit} width={20} height={20} />
         )}
       </div>
     </Link>

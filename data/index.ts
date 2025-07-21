@@ -13,6 +13,7 @@ import {
   FaRegHeart,
   FaRegStar,
   FaSackDollar,
+  FaStar,
   FaTwitter,
   FaUser,
   FaWallet,
@@ -23,6 +24,7 @@ import {
   IoWalletOutline,
 } from 'react-icons/io5';
 import {
+  MdEmail,
   MdMoreHoriz,
   MdOutlineAlternateEmail,
   MdOutlineEmail,
@@ -33,10 +35,14 @@ import {
   PiSquaresFourLight,
 } from 'react-icons/pi';
 import { PATHS } from './paths';
-import { IoMdHelpCircleOutline, IoMdPricetag } from 'react-icons/io';
+import {
+  IoMdHelpCircle,
+  IoMdHelpCircleOutline,
+  IoMdPricetag,
+} from 'react-icons/io';
 import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
 import { Sparkles, Wallet } from 'lucide-react';
-import { BannerSlide, RewardTier } from '@/interfaces';
+import { BannerSlide, InputItem, RewardTier } from '@/interfaces';
 
 export const shiddats = [
   {
@@ -390,19 +396,17 @@ export const NewlyArrivedData = [
 export const EnjoyWinWinData = [
   {
     id: 1,
-    title: 'شارك وأربح',
-    description:
-      'أنت أحد شركاؤنا, حيث يمكنك يمكنك مشاركة رابط الدعوة وستربح من كل طلب عن طريقك',
+    translationKey: 'participateAndWin',
+    buttonTextKey: 'MoreAboutParticipateAndWin',
     image: '/assets/coin.gif',
-    buttonText: 'المزيد عن شارك وإربح',
+    href: '#',
   },
   {
     id: 2,
-    title: 'إنجوي قيمز',
-    description:
-      'عند الشراء تحصل على نقاط إنجوي قيمز يمكنك إستبدالها بما يناسبك من المكافآت',
+    translationKey: 'enjoyGames',
+    buttonTextKey: 'MoreAboutEnjoyGames',
     image: '/assets/coin.gif',
-    buttonText: 'المزيد عن إنجوي قيمز',
+    href: PATHS.STARS.link,
   },
 ];
 
@@ -411,25 +415,34 @@ export const ServiceData = [
     id: 1,
     image: 'paper-plane',
     alt: 'paper-plane',
-    title: 'أستلم بطاقتك بشكل فوري',
-    description:
-      'بمجرد شرائك بطاقة من موقع إنجوي قيمز، ستصلك بشكل تلقائي على البريد الإلكتروني، وبشكل فوري',
+    translationKey: 'paperPlane',
   },
   {
     id: 2,
     image: 'credit-card',
     alt: 'credit-card',
-    title: 'طرق دفع آمنة ومتنوعة',
-    description:
-      'إنجوي قيمز يتيح طرق دفع متنوعة ، وآمنة وتناسب كافة احتياجاتكم ورغباتكم، دون إنتظار أو تعقيدات',
+    translationKey: 'creditCard',
   },
   {
     id: 3,
     image: 'phone',
     alt: 'phone',
-    title: 'تطبيقات تعمل بكفاءة عالية',
-    description:
-      'يمكنك تحميل تطبيقات إنجوي قيمز على الايفون، و الأندرويد والإستمتاع بتجربة مميزة، وفريدة في تسوق بطاقاتك',
+    translationKey: 'phone',
+  },
+];
+
+export const contactData = [
+  {
+    id: 1,
+    label: 'email',
+    email: 'contact@enjoygames.com',
+    icon: MdEmail,
+  },
+  {
+    id: 2,
+    label: 'helpCenter',
+    email: 'help.enjoygames.com',
+    icon: IoMdHelpCircle,
   },
 ];
 
@@ -437,44 +450,44 @@ export const FOOTER_LINKS_DATA = {
   LearnMore: [
     {
       id: 1,
-      text: 'من نحن',
+      key: 'about',
       url: PATHS.ABOUT.link,
     },
     {
       id: 2,
-      text: 'الأسئلة الشائعة',
+      key: 'faq',
       url: PATHS.FAQ.link,
     },
     {
       id: 3,
-      text: 'سياسة الخصوصية',
+      key: 'privacyPolicy',
       url: PATHS.PRIVACY_POLICY.link,
     },
     {
       id: 4,
-      text: 'سياسة الإسترجاع',
+      key: 'refundPolicy',
       url: PATHS.REFUND_POLICY.link,
     },
     {
       id: 5,
-      text: 'سياسة الخدمة',
+      key: 'termsOfUser',
       url: PATHS.TERMS_OF_USER.link,
     },
   ],
   BusinessAndSolutions: [
     {
       id: 1,
-      text: 'الأخبار',
+      key: 'news',
       url: '#',
     },
     {
       id: 2,
-      text: 'مركز المساعدة',
+      key: 'helpCenter',
       url: '#',
     },
     // {
     //   id: 3,
-    //   text: 'أنضم للتجار',
+    //   key: 'أنضم للتجار',
     //   url: '#',
     // },
   ],
@@ -649,30 +662,26 @@ export const countries = [
 export const featuresData = [
   {
     id: 1,
-    title: 'اجمع النقاط',
-    description: 'احصل على نقاط مع كل عملية شراء',
+    key: 'feature1',
     bgColor: 'bg-enjoy-primary-deep',
     textColor: 'text-white',
     icon: FiTrendingUp,
   },
   {
     id: 2,
-    title: 'ضاعف مكافآتك ',
-    description: 'ارتقِ بالمستويات للحصول على مزايا أكثر.',
+    key: 'feature2',
     bgColor: 'bg-enjoy-secondary-soft',
     icon: FaGift,
   },
   {
     id: 3,
-    title: 'راقب تقدمك ',
-    description: 'تابع نقاطك وتاريخ معاملاتك في حسابك.',
+    key: 'feature3',
     bgColor: 'bg-enjoy-glass',
     icon: FaChartBar,
   },
   {
     id: 4,
-    title: 'استبدل النقاط',
-    description: 'استبدلها ببطاقات رقمية أو حوّلها إلى نقاط نقدي',
+    key: 'feature4',
     bgColor: 'bg-enjoy-primary-soft',
     icon: FaSackDollar,
   },
@@ -681,35 +690,35 @@ export const featuresData = [
 export const tiers = [
   {
     id: 1,
-    name: 'دليل جونيور',
+    key: 'junior',
     icon: FaRegGem,
     percentage: 0.2,
     isActive: true,
   },
   {
     id: 2,
-    name: 'دليل نشط',
+    key: 'active',
     icon: FaCrown,
     percentage: 0.4,
     isActive: false,
   },
   {
     id: 3,
-    name: 'دليل محترف',
+    key: 'pro',
     icon: FaRegStar,
     percentage: 0.6,
     isActive: false,
   },
   {
     id: 4,
-    name: 'دليل خبير',
+    key: 'expert',
     icon: FiAward,
     percentage: 0.8,
     isActive: false,
   },
   {
     id: 5,
-    name: 'دليل مميز',
+    key: 'vip',
     icon: FaDiamond,
     percentage: 1,
     isActive: false,
@@ -774,32 +783,35 @@ export const WalletSectionData = [
   {
     id: 1,
     link: PATHS.WALLET.link,
-    title: 'محفظتي',
+    title: 'wallet',
     value: '0',
-    unit: 'saudi_riyal',
+    unit: '/assets/saudi_riyal.png',
     icon: Wallet,
     bgColor: 'bg-violet-600',
     textColor: 'text-white',
+    isUnitTranslatable: false,
   },
   {
     id: 2,
     link: PATHS.STARS.link,
-    title: 'دليل ستارز',
+    title: 'stars',
     value: '0',
-    unit: 'نقطة',
+    unit: 'point',
     icon: Sparkles,
     bgColor: 'bg-orange-300',
     textColor: 'text-[#060919]',
+    isUnitTranslatable: true,
   },
   {
     id: 3,
     link: '#',
-    title: 'دليل مكسب',
+    title: 'maxup',
     value: '0',
-    unit: 'saudi_riyal',
+    unit: '/assets/saudi_riyal.png',
     icon: Wallet,
     bgColor: 'bg-amber-50',
     textColor: 'text-[#060919]',
+    isUnitTranslatable: false,
   },
 ];
 
@@ -845,34 +857,34 @@ export const inviteStepsData = [
 ];
 
 export const mockApiData: RewardTier[] = [
-  { id: 1, name: 'البرونزية', percentage: 0.3, isActive: true },
-  { id: 2, name: 'الفضية', percentage: 0.4, isActive: false },
-  { id: 3, name: 'الذهبية', percentage: 0.5, isActive: false },
-  { id: 4, name: 'البلاتينيوم', percentage: 0.6, isActive: false },
-  { id: 5, name: 'VIP', percentage: 0.7, isActive: false },
+  { id: 1, key: 'البرونزية', percentage: 0.3, isActive: true },
+  { id: 2, key: 'الفضية', percentage: 0.4, isActive: false },
+  { id: 3, key: 'الذهبية', percentage: 0.5, isActive: false },
+  { id: 4, key: 'البلاتينيوم', percentage: 0.6, isActive: false },
+  { id: 5, key: 'VIP', percentage: 0.7, isActive: false },
 ];
 
 export const rewardsPrograms = [
   {
     id: 1,
-    title: 'برامج المكافآت',
+    key: 'bonusesPrograms',
     type: 'earnings',
   },
-  // {
-  //   id: 2,
-  //   title: 'برنامج مكسب',
-  //   type: 'earnings',
-  //   amount: 0,
-  //   currency: 'ريال',
-  //   description: 'أرباحك القابلة للسحب',
-  // },
   {
     id: 2,
-    title: 'نقاط دليل ستارز',
-    type: 'points',
+    key: 'maxupProgram',
+    type: 'earnings',
     amount: 0,
-    currency: 'نقطة',
-    description: 'نقاطك القابلة للتحويل',
+    currency: 'ريال',
+    description: 'profiledProfits',
+  },
+  {
+    id: 3,
+    key: 'starsPoints',
+    type: 'point',
+    amount: 0,
+    currency: 'point',
+    description: 'convertiblePoints',
   },
 ];
 
@@ -1013,42 +1025,78 @@ export const ticketsInputsTypes = [
   },
 ];
 
-export const inputsViaEntry = [
+export const inputsViaEntry: InputItem[] = [
   {
     id: 1,
     inputName: 'quantity',
-    label: 'طريقة الدخول',
+    labelKey: 'quantity',
     type: 'select',
-    optios: [
-      { id: 1, value: 'phone', label: 'رقم الهاتف' },
-      { id: 2, value: 'email', label: 'البريد' },
-      { id: 3, value: 'twitter', label: 'تويتر' },
-      { id: 4, value: 'facebook', label: 'فيس بوك' },
+    options: [
+      { id: 1, value: 'phone', labelKey: 'phone' },
+      { id: 2, value: 'email', labelKey: 'email' },
+      { id: 3, value: 'twitter', labelKey: 'twitter' },
+      { id: 4, value: 'facebook', labelKey: 'facebook' },
     ],
   },
   {
     id: 2,
     inputName: 'phone_number',
-    label: 'رقم الجوال أو الإيميل',
+    labelKey: 'phone',
     type: 'text',
   },
   {
     id: 3,
     inputName: 'password',
-    label: 'كلمة المرور',
+    labelKey: 'password',
     type: 'password',
   },
   {
     id: 4,
     inputName: 'id_number',
-    label: 'رقم الايدي',
+    labelKey: 'idNumber',
     type: 'text',
   },
   {
-    id: 4,
+    id: 5,
     inputName: 'checkbox',
-    label: 'قد قمت بالغاء القفل من الحساب',
+    labelKey: 'unlockAccount',
     type: 'checkbox',
     placeholder: 'تم الإلغاء',
   },
+];
+
+export const stats = [
+  {
+    id: 1,
+    icon: Wallet,
+    titleKey: 'balance',
+    currency: '/assets/saudi_riyal.png',
+    account: 0,
+  },
+  {
+    id: 2,
+    icon: FaStar,
+    titleKey: 'currentLevel',
+    account: 0,
+  },
+  {
+    id: 3,
+    icon: FaHeart,
+    titleKey: 'interests',
+    href: PATHS.MY_ACCOUNT.INTERESTS.link,
+  },
+];
+
+export const accountOptions = [
+  'accountOptions.sendCardCodeToEmail',
+  'accountOptions.getUpdates',
+  'accountOptions.specialOccasions',
+  'accountOptions.interestsInfo',
+];
+
+export const MyPurchasesTypes = [
+  { id: 1, labelKey: 'all' },
+  { id: 2, labelKey: 'completed' },
+  { id: 3, labelKey: 'inProgress' },
+  { id: 4, labelKey: 'cancelled' },
 ];

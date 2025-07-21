@@ -2,14 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import Button from '../atomic/Button';
 import { FaArrowLeftLong } from 'react-icons/fa6';
-
-type RewardCardProps = {
-  title: string;
-  description: string;
-  image: string;
-  buttonText: string;
-  onClick?: () => void;
-};
+import { RewardCardProps } from '@/interfaces';
 
 const RewardCard = ({
   title,
@@ -17,6 +10,7 @@ const RewardCard = ({
   image,
   buttonText,
   onClick,
+  href,
 }: RewardCardProps) => {
   return (
     <div className="flex items-end gap-4 max-sm:flex-col max-sm:items-center max-sm:justify-center max-sm:text-center">
@@ -29,6 +23,7 @@ const RewardCard = ({
         </p>
         <Button
           variant="third"
+          href={href}
           handleClick={onClick}
           Icon={FaArrowLeftLong}
           otherClassName="py-2 px-5 gap-5 max-sm:mx-auto"
@@ -43,6 +38,7 @@ const RewardCard = ({
         width={112}
         height={112}
         className="max-sm:order-1"
+        unoptimized
       />
     </div>
   );

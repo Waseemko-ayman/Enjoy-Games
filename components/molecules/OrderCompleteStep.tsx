@@ -6,6 +6,7 @@ import Layer from '../atomic/Layer';
 import Container from '../organism/Container';
 import MotionSection from './FramerMotion/MotionSection';
 import { PATHS } from '@/data/paths';
+import { useTranslations } from 'next-intl';
 
 interface OrderCompleteStepProps {
   onReturnToStore: () => void;
@@ -16,6 +17,10 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
   onReturnToStore,
   orderNumber,
 }) => {
+  const t = useTranslations('MyCart.order');
+  const btnTexts = useTranslations('BtnTexts');
+  const points = 1000;
+
   return (
     <Layer otherClassName="!my-9 sm:!my-12">
       <Container>
@@ -27,11 +32,10 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
                   <Check className="w-10 h-10 text-white" />
                 </div>
                 <h1 className="text-xl sm:text-2xl font-bold mb-2">
-                  تم إتمام طلبك بنجاح!
+                  {t('orderCompleteMessage')}
                 </h1>
                 <p className="text-gray-600 text-sm sm:text-base">
-                  شكراً لك على ثقتك بنا. سيتم إرسال تفاصيل الطلب على بريدك
-                  الإلكتروني
+                  {t('orderCompleteThanks')}
                 </p>
               </div>
             </MotionSection>
@@ -39,17 +43,19 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
             <MotionSection index={1}>
               <div className="bg-gray-50 rounded-lg p-6 mb-6">
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-gray-600">رقم الطلب:</span>
+                  <span className="text-gray-600">{t('orderNumberLabel')}</span>
                   <span className="font-bold text-base sm:text-lg">
                     #{orderNumber}
                   </span>
                 </div>
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-gray-600">حالة الطلب:</span>
+                  <span className="text-gray-600">{t('orderStatusLabel')}</span>
                   <span className="text-green-600 font-semibold">مؤكد</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">طريقة التسليم:</span>
+                  <span className="text-gray-600">
+                    {t('deliveryMethodLabel')}
+                  </span>
                   <span className="font-semibold">فوري (رقمياً)</span>
                 </div>
               </div>
@@ -62,7 +68,7 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
                   Icon={Download}
                   iconPosition="left"
                 >
-                  تحميل الفاتورة
+                  {btnTexts('DownloadInvoice')}
                 </Button>
 
                 <Button
@@ -73,7 +79,7 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
                   iconPosition="left"
                   handleClick={onReturnToStore}
                 >
-                  العودة للمتجر
+                  {btnTexts('BackToStore')}
                 </Button>
               </div>
             </MotionSection>
@@ -83,12 +89,10 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
                 <div className="flex items-center justify-center gap-2 text-enjoy-primary mb-2">
                   <span className="text-2xl">⭐</span>
                   <span className="font-semibold">
-                    تم إضافة 1000 نقطة لحسابك!
+                    {t('pointsAddedMessage', { points })}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600">
-                  يمكنك استخدام النقاط في عمليات الشراء القادمة
-                </p>
+                <p className="text-sm text-gray-600">{t('pointsUsageInfo')}</p>
               </div>
             </MotionSection>
           </CardWrapper>

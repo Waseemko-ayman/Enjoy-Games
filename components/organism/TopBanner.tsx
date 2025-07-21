@@ -1,15 +1,20 @@
+'use client';
 import React, { useState } from 'react';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import ResponsiveDialogDrawer from './ResponsiveDialogDrawer';
 import { PATHS } from '@/data/paths';
 import { useRouter } from 'next/navigation';
 import TopBannerDrawerContent from '../molecules/TopBannerDrawerContent';
 import useIsMobile from '@/hook/useIsMobile';
 import AnimatedWrapper from '../molecules/FramerMotion/AnimatedWrapper';
+import { useToggleLocale } from '@/hook/useToggleLocale';
+import { useTranslations } from 'next-intl';
 
 const TopBanner = () => {
   const [open, setOpen] = useState(false);
   const isMobile = useIsMobile();
+  const { isArabic } = useToggleLocale();
+  const t = useTranslations('Layout.header.topBanner');
 
   const router = useRouter();
 
@@ -23,7 +28,7 @@ const TopBanner = () => {
       <AnimatedWrapper direction="x" distance={40}>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
           <span className="text-xs text-[var(--enjoy-primary-deep)] bg-[var(--enjoy-lime-yellow)] rounded-4xl px-1.5 order-2 sm:order-1">
-            جديد
+            {t('new')}
           </span>
           <ResponsiveDialogDrawer
             contentClassName="p-0"
@@ -32,10 +37,8 @@ const TopBanner = () => {
             isMobile={isMobile}
             trigger={
               <button className="flex items-center gap-2 order-2 sm:order-1 cursor-pointer">
-                <span className="text-sm">
-                  إشتري أكثر وإكسب الضعف وإستبدل نقاطك ببطاقات! 🎉
-                </span>
-                <IoIosArrowBack />
+                <span className="text-sm">{t('title')} 🎉</span>
+                {isArabic ? <IoIosArrowBack /> : <IoIosArrowForward />}
               </button>
             }
           >

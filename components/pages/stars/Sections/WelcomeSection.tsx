@@ -9,15 +9,19 @@ import Container from '@/components/organism/Container';
 import { PATHS } from '@/data/paths';
 import React, { useState } from 'react';
 import { MdWavingHand } from 'react-icons/md';
+import { useTranslations } from 'next-intl';
 
 const WelcomeSection = () => {
-  const [isLogin] = useState(true);
+  const [isLogin] = useState(false);
+  const secTexts = useTranslations('SectionsTitles.Stars');
+  const sharedTexts = useTranslations('Shared');
+  const btnTexts = useTranslations('BtnTexts');
   return (
     <Layer>
       <Container>
         <SectionTitle
-          title="أهلًا بك في دليل ستارز"
-          subtitle="اشتري أكثر واكسب الضعف واستبدل نقاطك ببطاقات!"
+          title={secTexts('title')}
+          subtitle={secTexts('desc')}
           Icon={MdWavingHand}
         />
         {isLogin ? (
@@ -25,10 +29,11 @@ const WelcomeSection = () => {
             variant="points"
             totalAmount={0}
             withdrawableAmount={0}
-            conversionRate="1600 نقطة"
+            conversionRate={`1600 ${sharedTexts('point')}`}
             starPoints={0}
-            lastWithdrawalText="لا توجد عمليات سحب بعد"
+            lastWithdrawalText={sharedTexts('emptyState')}
             secondButtonHref={PATHS.STARS_GIFTS}
+            btnTexts={btnTexts}
           />
         ) : (
           <AnimatedWrapper>

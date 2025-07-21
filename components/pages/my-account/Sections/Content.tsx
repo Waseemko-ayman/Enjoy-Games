@@ -19,35 +19,48 @@ import * as Yup from 'yup';
 import { FormValues } from '@/interfaces';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
 
 const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{2,}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const formSchema = Yup.object({
-  username: Yup.string()
-    .matches(
-      alphanumericWithArabicRegex,
-      'الاسم يجب أن يحتوي على حروف أو أرقام فقط ويكون طوله على الأقل حرفين'
-    )
-    .required('الاسم مطلوب'),
-  email: Yup.string()
-    .email('البريد الإلكتروني غير صالح')
-    .matches(emailRegex, 'الإيميل غير صالح')
-    .required('البريد الإلكتروني مطلوب'),
-  phone: Yup.string()
-    // .matches(phoneRegex, 'رقم الجوال غير صالح')
-    .required('رقم الجوال مطلوب'),
-  birthDate: Yup.string().required('تاريخ الميلاد مطلوب'),
-  gender: Yup.string()
-    .oneOf(['ذكر', 'أنثى'], 'الرجاء اختيار الجنس')
-    .required('الجنس مطلوب'),
-  options: Yup.array().of(Yup.boolean()),
-  avatar: Yup.mixed().required('الصورة مطلوبة'),
-});
-
 const Content = () => {
   const isMobile = useIsMobile();
   const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
+  const t = useTranslations('MyAccount');
+  const btnTexts = useTranslations('BtnTexts');
+
+  const errorsTxts = useTranslations('Inputs.errorsMsgs');
+
+  const formSchema = Yup.object({
+    username: Yup.string()
+      .matches(
+        alphanumericWithArabicRegex,
+        errorsTxts('usernameInvalid') ||
+          'الاسم يجب أن يحتوي على حروف أو أرقام فقط ويكون طوله على الأقل حرفين'
+      )
+      .required(errorsTxts('usernameRequired') || 'الاسم مطلوب'),
+    email: Yup.string()
+      .email(errorsTxts('emailInvalid') || 'البريد الإلكتروني غير صالح')
+      .matches(emailRegex, errorsTxts('emailInvalid') || 'الإيميل غير صالح')
+      .required(errorsTxts('emailRequired') || 'البريد الإلكتروني مطلوب'),
+    phone: Yup.string()
+      // .matches(phoneRegex, errorsTxts('phoneInvalid') || 'رقم الجوال غير صالح')
+      .required(errorsTxts('phoneRequired') || 'رقم الجوال مطلوب'),
+    birthDate: Yup.string().required(
+      errorsTxts('birthDateRequired') || 'تاريخ الميلاد مطلوب'
+    ),
+    gender: Yup.string()
+      .oneOf(
+        ['ذكر', 'أنثى'],
+        errorsTxts('genderInvalid') || 'الرجاء اختيار الجنس'
+      )
+      .required(errorsTxts('genderRequired') || 'الجنس مطلوب'),
+    options: Yup.array().of(Yup.boolean()),
+    avatar: Yup.mixed().required(
+      errorsTxts('avatarRequired') || 'الصورة مطلوبة'
+    ),
+  });
 
   const methods = useForm<FormValues>({
     resolver: yupResolver(formSchema),
@@ -86,17 +99,22 @@ const Content = () => {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left Side - Form */}
             <form className="flex-1" onSubmit={handleSubmit(onSubmit)}>
-              {isMobile && <ProfilePicture />}
+              {isMobile && <ProfilePicture t={t} />}
 
               <div className="space-y-6 max-[991px]:mt-3">
                 {/* Account Information */}
-                <Form register={register} errors={errors} control={control} />
+                <Form
+                  register={register}
+                  errors={errors}
+                  control={control}
+                  t={t}
+                />
 
                 {/* Warning Message */}
-                <WarningMessage />
+                <WarningMessage t={t} />
 
                 {/* Account Options */}
-                <AccountOptions />
+                <AccountOptions t={t} />
 
                 <AnimatedWrapper>
                   <Button
@@ -108,11 +126,11 @@ const Content = () => {
                   >
                     {isSubmittingLocal ? (
                       <>
-                        جاري الحفظ
+                        {btnTexts('Saving')}
                         <ButtonLoading />
                       </>
                     ) : (
-                      'حفظ'
+                      btnTexts('save')
                     )}
                   </Button>
                 </AnimatedWrapper>
@@ -123,19 +141,19 @@ const Content = () => {
             {!isMobile && (
               <div className="space-y-6">
                 {/* Profile Picture Section */}
-                <ProfilePicture />
+                <ProfilePicture t={t} />
 
                 {/* Step Indicator */}
-                <StepIndicator />
+                <StepIndicator t={t} />
 
                 {/* Stats */}
-                <Stats />
+                <Stats t={t} />
 
                 {/* Invitation Link */}
-                <InvitationLink />
+                <InvitationLink t={t} />
 
                 {/* Delete Account */}
-                <DeleteAccount />
+                <DeleteAccount t={t} />
               </div>
             )}
           </div>

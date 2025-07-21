@@ -9,11 +9,14 @@ import { subMenuItems } from '@/data';
 import { PATHS } from '@/data/paths';
 import { NavbarProps } from '@/interfaces';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
+  const t = useTranslations('Layout.header.navBar');
+
   if (layout === 'store') {
     return (
-      <nav className={`${!isMobile ? 'bg-white' : 'pt-2 mt-4'}`} dir="rtl">
+      <nav className={`${!isMobile ? 'bg-white' : 'pt-2 mt-4'}`}>
         <Container>
           <ul className="flex items-center space-x-1 overflow-hidden">
             <li className="overflow-hidden relative">
@@ -24,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
                 transition={{ duration: 0.5 }}
               >
                 <DropdownNavItem
-                  text="جميع الأقسام"
+                  text={t('allCategories')}
                   Icon={PiSquaresFourLight}
                   submenu={subMenuItems}
                   isMainMenu={true}
@@ -40,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
               >
                 <NavItem
                   Icon={IoSearch}
-                  text="المتجر"
+                  text={t('store')}
                   linkPath={PATHS.STORE.link}
                 />
               </motion.div>
@@ -52,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
   }
 
   return (
-    <nav className="bg-white" dir="rtl">
+    <nav className="bg-white">
       <Container>
         <ul className="flex items-center space-x-1">
           <motion.li
@@ -63,7 +66,7 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
             className="relative"
           >
             <DropdownNavItem
-              text="جميع الأقسام"
+              text={t('allCategories')}
               Icon={PiSquaresFourLight}
               submenu={subMenuItems}
               isMainMenu={true}
@@ -77,7 +80,7 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
           >
             <NavItem
               Icon={IoSearch}
-              text="المتجر"
+              text={t('store')}
               linkPath={PATHS.STORE.link}
             />
           </motion.li>

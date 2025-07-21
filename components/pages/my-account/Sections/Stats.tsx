@@ -1,42 +1,18 @@
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
-import { PATHS } from '@/data/paths';
-import { myAccountStatsProps } from '@/interfaces';
-import { Wallet } from 'lucide-react';
+import { stats } from '@/data';
+import { myAccountStatsProps, TranslationFunction } from '@/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FaHeart, FaStar } from 'react-icons/fa6';
 
-const stats = [
-  {
-    id: 1,
-    icon: Wallet,
-    title: 'رصيدي',
-    currency: '/assets/saudi_riyal.png',
-    account: 0,
-  },
-  {
-    id: 2,
-    icon: FaStar,
-    title: 'لديك حاليا',
-    account: 0,
-  },
-  {
-    id: 3,
-    icon: FaHeart,
-    title: 'الإهتمامات',
-    href: PATHS.MY_ACCOUNT.INTERESTS.link,
-  },
-];
-
-const Stats = () => {
+const Stats = ({ t }: { t: TranslationFunction }) => {
   const contents = (item: myAccountStatsProps) => {
     const Icon = item.icon;
     return (
       <>
         <div className="flex items-center gap-2">
           {Icon && <Icon className="text-gray-500" size={12} />}
-          <h4 className="text-base">{item.title}</h4>
+          <h4 className="text-base">{t(`statsTitles.${item.titleKey}`)}</h4>
         </div>
         {item.account !== undefined && (
           <div className="flex items-center justify-center gap-2 bg-[var(--enjoy-gray-200)] p-2 rounded-full">

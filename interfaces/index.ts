@@ -8,7 +8,9 @@ import {
   footerListsName,
   NavbarLayout,
 } from '@/utils/type';
-import { ElementType, JSX } from 'react';
+import { Variants } from 'framer-motion';
+import { Messages, useTranslations } from 'next-intl';
+import { ElementType, JSX, ReactNode } from 'react';
 
 interface BaseIconProps {
   Icon?: React.ElementType | string;
@@ -127,6 +129,7 @@ export interface FooterLinksProps extends BaseClassNameProps {
   secTitle: string;
   listClassName?: string;
   listName: footerListsName;
+  t: TranslationFunction;
 }
 
 export interface LinkItem extends BaseIconProps {
@@ -253,11 +256,12 @@ export interface WalletCardProps extends BaseIconProps {
   bgColor: string;
   textColor: string;
   pathName: string;
+  isUnitTranslatable?: boolean;
 }
 
 export interface RewardTier {
   id: number;
-  name: string;
+  key: string;
   percentage: number;
   isActive: boolean;
 }
@@ -291,11 +295,12 @@ export interface EarningsPointsSectionProps {
   lastWithdrawalText: JSX.Element | string;
   firstButtonHref?: string;
   secondButtonHref?: string;
+  btnTexts: TranslationFunction;
 }
 
 interface RewardProgram {
   id: number;
-  title: string;
+  key: string;
   type: string;
   amount?: number;
   currency?: string;
@@ -359,7 +364,7 @@ export interface BannerSlide {
 export interface myAccountStatsProps {
   id: number;
   icon: ElementType;
-  title: string;
+  titleKey: string;
   currency?: string;
   account?: number;
   href?: string;
@@ -441,4 +446,42 @@ export interface DiscoverEarnMoreCardProps extends WithChildren {
   imageSrc: string;
   cardClassName?: string;
   triggerClassName?: string;
+}
+
+export type TranslationFunction = ReturnType<
+  typeof useTranslations<keyof Messages>
+>;
+
+export interface RewardCardProps {
+  title: string;
+  description: string;
+  image: string;
+  buttonText: string;
+  onClick?: () => void;
+  href: string;
+}
+
+export interface AnimatedWrapperProps {
+  children: ReactNode;
+  custom?: number;
+  variants?: Variants;
+  direction?: 'x' | 'y';
+  distance?: number;
+  duration?: number;
+}
+
+type InputOption = {
+  id: number;
+  value: string;
+  labelKey: string;
+};
+
+export interface InputItem {
+  id: number;
+  inputName: string;
+  type: string;
+  labelKey?: string;
+  label?: string;
+  placeholder?: string;
+  options?: InputOption[];
 }

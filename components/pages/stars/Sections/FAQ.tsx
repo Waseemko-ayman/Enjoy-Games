@@ -14,15 +14,17 @@ import CardWrapper from '@/components/atomic/CardWrapper';
 import Container from '@/components/organism/Container';
 import SectionTitle from '@/components/atomic/SectionTitle';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
 
 const FAQ = () => {
   const [activeItem, setActiveItem] = useState<string | null>(null);
+  const t = useTranslations('SectionsTitles');
 
   return (
     <Layer>
       <Container>
         <SectionTitle
-          title="الأسئلة الشائعة"
+          title={t('faq')}
           className="!mb-3"
           titleClassName="!text-2xl"
         />

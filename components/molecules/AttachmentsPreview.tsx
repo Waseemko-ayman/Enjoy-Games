@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Button from '@/components/atomic/Button';
 import { FaX, FaLink } from 'react-icons/fa6';
 import { FiUploadCloud } from 'react-icons/fi';
+import { useTranslations } from 'next-intl';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 type AttachmentsUploaderProps = {
   attachments: File[];
@@ -19,6 +21,8 @@ const AttachmentsUploader = ({
   variant = 'rating',
 }: AttachmentsUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const t = useTranslations('Tickets');
+  const { isArabic } = useToggleLocale();
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -39,7 +43,7 @@ const AttachmentsUploader = ({
           onClick={() => fileInputRef.current?.click()}
         >
           <FaLink />
-          <h3>أضف مرفقات للتذكرة (غير إلزامي)</h3>
+          <h3>{t('addAttachments')}</h3>
         </div>
       );
     }
@@ -50,8 +54,12 @@ const AttachmentsUploader = ({
         onClick={() => fileInputRef.current?.click()}
       >
         <FiUploadCloud className="mx-auto text-4xl text-black mb-4" />
-        <p className="text-base font-bold text-black select-none">
-          ارفاق صور مع التعليق، أو بتحميل الملفات
+        <p
+          className={`${
+            isArabic ? 'text-base' : 'text-sm'
+          } font-bold text-black select-none`}
+        >
+          {t('attachmentsDescription')}
         </p>
       </div>
     );

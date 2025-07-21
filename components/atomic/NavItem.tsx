@@ -1,8 +1,9 @@
+import { useToggleLocale } from '@/hook/useToggleLocale';
 import { NavItemProps } from '@/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const NavItem: React.FC<NavItemProps> = ({
   Icon,
@@ -15,6 +16,7 @@ const NavItem: React.FC<NavItemProps> = ({
   layout,
   isMobile,
 }) => {
+  const { isArabic } = useToggleLocale();
   return (
     <Link
       href={linkPath}
@@ -79,7 +81,13 @@ const NavItem: React.FC<NavItemProps> = ({
         <span>{text}</span>
       </div>
 
-      {showArrow && <IoIosArrowBack className="text-2xl" />}
+      {showArrow ? (
+        isArabic ? (
+          <IoIosArrowBack className="text-2xl" />
+        ) : (
+          <IoIosArrowForward className="text-2xl" />
+        )
+      ) : null}
     </Link>
   );
 };

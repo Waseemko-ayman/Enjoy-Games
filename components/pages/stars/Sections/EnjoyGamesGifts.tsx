@@ -7,14 +7,17 @@ import React from 'react';
 import { MdWavingHand } from 'react-icons/md';
 import { PiShoppingCartLight } from 'react-icons/pi';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
 
 const EnjoyGamesGifts = () => {
+  const secTexts = useTranslations('SectionsTitles.Gifts');
+  const btnTexts = useTranslations('BtnTexts');
   return (
     <Layer>
       <Container>
         <SectionTitle
-          title="هدايا إنجوي قيمز"
-          subtitle="يمكنك استبدال البطاقات بنقاط إنجوي قيمز!"
+          title={secTexts('title')}
+          subtitle={secTexts('desc')}
           Icon={MdWavingHand}
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3">
@@ -29,7 +32,7 @@ const EnjoyGamesGifts = () => {
                 variant="column"
                 showBtn
                 btnVariant="secondary"
-                btnText="إحصل عليها الآن"
+                btnText={btnTexts('GetItNow')}
                 Icon={PiShoppingCartLight}
                 {...card}
               />

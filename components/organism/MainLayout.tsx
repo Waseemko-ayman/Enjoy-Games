@@ -13,8 +13,10 @@ import { FloatingChatWidget } from './FloatingChatWidget';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const isStorePage = pathname === '/store';
-  const isCartPage = pathname === '/my-cart';
+  const pathWithoutLocale = pathname.split('/').slice(2).join('/');
+
+  const isStorePage = pathWithoutLocale === 'store';
+  const isCartPage = pathWithoutLocale === 'my-cart';
 
   const isMobile = useIsMobile();
 

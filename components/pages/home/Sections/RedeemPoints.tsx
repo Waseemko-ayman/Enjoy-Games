@@ -10,9 +10,12 @@ import { PATHS } from '@/data/paths';
 import useIsMobile from '@/hook/useIsMobile';
 import Link from 'next/link';
 import { PiShoppingCartLight } from 'react-icons/pi';
+import { useTranslations } from 'next-intl';
+import { TranslationFunction } from '@/interfaces';
 
-const RedeemPoints = () => {
+const RedeemPoints = ({ t }: { t: TranslationFunction }) => {
   const isMobile = useIsMobile();
+  const btnText = useTranslations('BtnTexts');
   return (
     <ResponsiveWrapper>
       <div
@@ -23,12 +26,12 @@ const RedeemPoints = () => {
         <div className="flex items-center justify-between gap-1 px-5 sm:px-10">
           <AnimatedWrapper direction="x">
             <h2 className="text-xl font-semibold my-3 inline-block">
-              استبدل نقاطك
+              {t('sectionsTitles.redeemPoints.title')}
             </h2>
           </AnimatedWrapper>
           <AnimatedWrapper direction="x" distance={-40}>
             <Link href={PATHS.STARS_GIFTS} className="text-base">
-              عرض الكل
+              {t('sectionsTitles.redeemPoints.showAll')}
             </Link>
           </AnimatedWrapper>
         </div>
@@ -47,7 +50,7 @@ const RedeemPoints = () => {
                   variant="column"
                   showBtn
                   btnVariant="secondary"
-                  btnText="أحصل عليها الآن"
+                  btnText={btnText('GetItNow')}
                   Icon={PiShoppingCartLight}
                   {...card}
                 />

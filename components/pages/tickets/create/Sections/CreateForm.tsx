@@ -11,16 +11,23 @@ import * as Yup from 'yup';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import AttachmentsUploader from '@/components/molecules/AttachmentsPreview';
 import { FormData } from '@/interfaces';
-
-const schema = Yup.object().shape({
-  subject: Yup.string().required('العنوان مطلوب'),
-  ticketType: Yup.string().required('نوع التذكرة مطلوب'),
-  details: Yup.string().required('الوصف مطلوب'),
-});
+import { useTranslations } from 'next-intl';
 
 const CreateForm = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
   const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
+  const placeholders = useTranslations('Inputs.placeHolders');
+  const btnTexts = useTranslations('BtnTexts');
+
+  const t = useTranslations('Inputs.errorsMsgs');
+
+  const schema = Yup.object().shape({
+    subject: Yup.string().required(t('subjectRequired') || 'العنوان مطلوب'),
+    ticketType: Yup.string().required(
+      t('ticketTypeRequired') || 'نوع التذكرة مطلوب'
+    ),
+    details: Yup.string().required(t('detailsRequired') || 'الوصف مطلوب'),
+  });
 
   const {
     register,
@@ -56,7 +63,7 @@ const CreateForm = () => {
                   variant="secondary"
                   type={input.type || 'text'}
                   inputName={input.name}
-                  placeholder={input.placeholder}
+                  placeholder={placeholders(input.name)}
                   options={input.options}
                   {...register(fieldName)}
                 />
@@ -77,7 +84,7 @@ const CreateForm = () => {
         />
 
         <Button otherClassName="w-full py-3 px-3 mt-7" type="submit">
-          {isSubmittingLocal ? <ButtonLoading /> : 'إرسال التذكرة'}
+          {isSubmittingLocal ? <ButtonLoading /> : btnTexts('sendTicket')}
         </Button>
       </form>
     </CardWrapper>

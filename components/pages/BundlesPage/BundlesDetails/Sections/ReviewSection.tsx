@@ -1,10 +1,15 @@
+'use client';
 import React from 'react';
 import { Star } from 'lucide-react';
 import { ReviewData, ReviewSectionProps } from '@/interfaces';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
+import { useTranslations } from 'next-intl';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const ReviewSection: React.FC<ReviewSectionProps> = ({ data }) => {
+  const t = useTranslations('productDetails');
+  const { isArabic } = useToggleLocale();
   // Mock data - will be replaced with API data
   const mockData: ReviewData = {
     overallRating: 0.0,
@@ -34,21 +39,33 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ data }) => {
   const ratingLabels = [
     {
       id: 'excellent',
-      label: 'رائع',
+      label: t('excellent'),
       value: reviewData.ratingBreakdown.excellent,
     },
-    { id: 'good', label: 'ممتاز', value: reviewData.ratingBreakdown.good },
+    {
+      id: 'good',
+      label: t('good'),
+      value: reviewData.ratingBreakdown.good,
+    },
     {
       id: 'average',
-      label: 'جيد',
+      label: t('average'),
       value: reviewData.ratingBreakdown.average,
     },
-    { id: 'poor', label: 'لم يعجبني', value: reviewData.ratingBreakdown.poor },
-    { id: 'bad', label: 'سيء', value: reviewData.ratingBreakdown.bad },
+    {
+      id: 'poor',
+      label: t('poor'),
+      value: reviewData.ratingBreakdown.poor,
+    },
+    {
+      id: 'bad',
+      label: t('bad'),
+      value: reviewData.ratingBreakdown.bad,
+    },
   ];
 
   return (
-    <div className="mt-5">
+    <div className="mt-5" dir={isArabic ? 'ltr' : 'rtl'}>
       <div className="flex items-start justify-between max-[991px]:flex-col max-[991px]:text-center max-[991px]:justify-center gap-2 md:gap-8">
         {/* No reviews message */}
         {reviewData.totalReviews === 0 && (
@@ -63,15 +80,12 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ data }) => {
 
             <MotionSection index={2}>
               <h3 className="text-lg font-semibold text-gray-700 mb-2">
-                لا يوجد تقييمات حتى اللحظة
+                {t('noRatingsYet')}
               </h3>
             </MotionSection>
 
             <MotionSection index={3}>
-              <p className="text-gray-500 text-sm">
-                كن أول من يقيم المنتج و أخبرنا تجربتك له من خلال الضغط على زر
-                إضافة تقييم
-              </p>
+              <p className="text-gray-500 text-sm">{t('beFirstToRate')}</p>
             </MotionSection>
           </div>
         )}
@@ -91,7 +105,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ data }) => {
 
             <MotionSection index={3}>
               <div className="text-sm text-gray-500">
-                تقييم {reviewData.totalReviews}
+                {t('rating')} {reviewData.totalReviews}
               </div>
             </MotionSection>
           </div>
@@ -99,9 +113,9 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ data }) => {
           <div className="space-y-2">
             {ratingLabels.map((item, index) => (
               <AnimatedWrapper key={item.id} custom={index}>
-                <div className="flex items-center gap-2 text-sm w-full">
+                <div className="flex items-center gap-3 text-sm w-full">
                   <span className="text-gray-500 text-xs whitespace-nowrap w-[38px] text-left">
-                    {item.value} تقييم
+                    {item.value} {t('rating')}
                   </span>
 
                   <div className="flex-1">
@@ -120,7 +134,11 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ data }) => {
                     </div>
                   </div>
 
-                  <span className="text-gray-700 font-medium whitespace-nowrap w-[50px] text-end">
+                  <span
+                    className={`text-gray-700 font-medium whitespace-nowrap ${
+                      isArabic ? 'w-[50px] text-end' : 'w-[80px] text-end'
+                    }`}
+                  >
                     {item.label}
                   </span>
                 </div>
