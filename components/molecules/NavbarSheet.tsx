@@ -11,9 +11,11 @@ import { PiSquaresFourLight } from 'react-icons/pi';
 import SheetContentComp from './SheetContentComp';
 import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
 import { useTranslations } from 'next-intl';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const NavbarSheet = () => {
   const t = useTranslations('Layout.header.navBar');
+  const { isArabic } = useToggleLocale();
   return (
     <Sheet>
       <SheetTrigger>
@@ -24,7 +26,7 @@ const NavbarSheet = () => {
         <SheetDescription className="sr-only">
           {t('cardSectionsDescription')}
         </SheetDescription>
-        <AnimatedWrapper direction="x" distance={70}>
+        <AnimatedWrapper direction="x" distance={isArabic ? 70 : -70}>
           <h4 className="text-white text-2xl font-semibold mb-5">
             {t('CardSections')}
           </h4>
