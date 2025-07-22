@@ -8,30 +8,29 @@ import { usePathname } from 'next/navigation';
 import { PATHS } from '@/data/paths';
 import Link from 'next/link';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
 
 const MobileHeader = () => {
   const pathname = usePathname();
+  const t = useTranslations('PagesHeaderTitles');
 
   // Split the pathname and remove empty parts
   const pathParts = pathname.split('/').filter(Boolean);
 
-  // Extract only the page name (last part of the path)
-  const pageKey = pathParts[pathParts.length - 1] || '';
+  // Extract the last part of the path
+  const pageKey = pathParts[pathParts.length - 1] || 'home';
 
-  // Create a map of path names using values from PATHS
-  const pathNameMap = Object.entries(PATHS).reduce<Record<string, string>>(
-    (acc, [, value]) => {
-      if (typeof value === 'object' && value.link && value.name) {
-        // Extract the page key (last part of the link)
-        const key = value.link.split('/').pop() || '';
-        acc[key] = value.name;
-      }
-      return acc;
-    },
-    {}
-  );
+  // Optional: fallback to parent segment if no translation found
+  const fallbackKey =
+    pathParts.length > 1 ? pathParts[pathParts.length - 2] : 'home';
 
-  const title = pathNameMap[pageKey] || 'الرئيسية';
+  // Get translation or fallback to home
+  const title =
+    t(pageKey) !== pageKey
+      ? t(pageKey)
+      : t(fallbackKey) !== fallbackKey
+      ? t(fallbackKey)
+      : t('home');
 
   return (
     <header className="h-[60px] bg-enjoy-gray-light flex items-center">

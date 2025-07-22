@@ -18,36 +18,21 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
     return (
       <nav className={`${!isMobile ? 'bg-white' : 'pt-2 mt-4'}`}>
         <Container>
-          <ul className="flex items-center gap-3 overflow-hidden">
-            <li className="overflow-hidden relative">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.5 }}
-              >
-                <DropdownNavItem
-                  text={t('allCategories')}
-                  Icon={PiSquaresFourLight}
-                  submenu={subMenuItems}
-                  isMainMenu={true}
-                />
-              </motion.div>
-            </li>
-            <li className="overflow-hidden">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                <NavItem
-                  Icon={IoSearch}
-                  text={t('store')}
-                  linkPath={PATHS.STORE.link}
-                />
-              </motion.div>
-            </li>
+          <ul
+            className={`flex items-center ${
+              isMobile ? 'justify-center flex-wrap gap-4' : 'gap-7'
+            }`}
+          >
+            {subMenuItems.map((item) => (
+              <NavItem
+                key={item.label}
+                Icon={item.Icon}
+                text={item.label}
+                linkPath={item.path}
+                layout={layout}
+                isMobile={isMobile}
+              />
+            ))}
           </ul>
         </Container>
       </nav>
