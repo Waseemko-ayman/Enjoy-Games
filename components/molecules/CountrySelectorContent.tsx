@@ -4,16 +4,21 @@ import Button from '../atomic/Button';
 import { FiLogIn } from 'react-icons/fi';
 import { CountrySelectorContentProps } from '@/interfaces';
 import SelectableList from './SelectableList';
+import { useTranslations } from 'next-intl';
 
 const CountrySelectorContent: React.FC<CountrySelectorContentProps> = ({
   countries,
   selectedCountry,
   setSelectedCountry,
   closeHandler,
+  t,
 }) => {
+  const btnTxts = useTranslations('BtnTexts');
   return (
     <>
-      <h5 className="text-lg font-bold mb-5">تغيير الدولة - العملة</h5>
+      <h5 className="text-lg font-bold mb-5">
+        {t('ChangeCountryCurrencyTitle')}
+      </h5>
       <div className="max-h-[400px] overflow-y-auto space-y-4 mb-5 px-2 scrollbar-none">
         <SelectableList
           items={countries}
@@ -50,14 +55,14 @@ const CountrySelectorContent: React.FC<CountrySelectorContentProps> = ({
 
       <div className="flex items-center justify-between gap-2 px-2">
         <Button otherClassName="w-full py-2" iconPosition="left" Icon={FiLogIn}>
-          حفظ
+          {btnTxts('save')}
         </Button>
         <Button
           variant="forth"
           otherClassName="w-full py-2"
           handleClick={closeHandler}
         >
-          إلغاء
+          {btnTxts('cancel')}
         </Button>
       </div>
     </>

@@ -21,11 +21,14 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
   quantity,
 }) => {
   type PaymentFormData = yup.InferType<typeof paymentSchema>;
-
-  const t = useTranslations('Inputs.errorsMsgs');
+  const t = useTranslations('MyCart');
+  const btnTexts = useTranslations('BtnTexts');
+  const inputsTexts = useTranslations('Inputs');
 
   const paymentSchema = yup.object({
-    paymentMethod: yup.string().required(t('paymentRequired')),
+    paymentMethod: yup
+      .string()
+      .required(inputsTexts('errorsMsgs.paymentRequired')),
     couponCode: yup.string(),
   });
 
@@ -42,10 +45,6 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
       onPaymentComplete();
     }, 2000);
   };
-
-  const t = useTranslations('MyCart');
-  const btnTexts = useTranslations('BtnTexts');
-  const inputsTexts = useTranslations('Inputs');
 
   return (
     <Layer otherClassName="!my-12 max-sm:!mb-24">

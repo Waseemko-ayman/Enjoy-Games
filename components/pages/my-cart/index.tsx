@@ -4,18 +4,9 @@ import OrderCompleteStep from '@/components/molecules/OrderCompleteStep';
 import PaymentStep from '@/components/molecules/PaymentStep';
 import StepIndicator from '@/components/molecules/StepIndicator';
 import CartContent from '@/components/organism/CartContent';
+import { CartItemData } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
-
-interface CartItemData {
-  id: number;
-  title: string;
-  price: number;
-  quantity: number;
-  image: string;
-  currencyImage: string;
-  storeLabel: string;
-}
 
 const STEPS = {
   CART: 1,
@@ -31,8 +22,8 @@ const MyCartPage = () => {
       title: 'إيتالي 100',
       price: 100,
       quantity: 1,
-      image: 'games-banners/fc24-banner.webp',
-      currencyImage: 'saudi_riyal.png',
+      image: '/assets/play-station.webp',
+      currencyImage: '/assets/saudi_riyal.png',
       storeLabel: 'المتجر السعودي',
     },
   ]);
@@ -42,19 +33,19 @@ const MyCartPage = () => {
   const steps = [
     {
       id: 1,
-      title: 'سلة التسوق',
+      key: 'cart',
       isCompleted: currentStep > STEPS.CART,
       isCurrent: currentStep === STEPS.CART,
     },
     {
       id: 2,
-      title: 'الدفع',
+      key: 'payment',
       isCompleted: currentStep > STEPS.PAYMENT,
       isCurrent: currentStep === STEPS.PAYMENT,
     },
     {
       id: 3,
-      title: 'إتمام الطلب',
+      key: 'complete',
       isCompleted: currentStep > STEPS.COMPLETE,
       isCurrent: currentStep === STEPS.COMPLETE,
     },

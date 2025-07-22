@@ -7,18 +7,24 @@ import { PATHS } from '@/data/paths';
 import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
 import { useTranslations } from 'next-intl';
 
-const PointsEarningGuide = ({ isLogin = true }: { isLogin?: boolean }) => {
+const PointsEarningGuide = ({
+  isLogin = true,
+  descClassName,
+}: {
+  isLogin?: boolean;
+  descClassName?: string;
+}) => {
   const t = useTranslations('Stars.ReferralProgram.EnjoyGames');
   return (
     <div>
       <div className="text-center mb-3 sm:mb-8 p-3 rounded-2xl border border-gray-200">
-        <h2 className="text-lg font-semibold text-[var(--enjoy-secondary)] flex items-center justify-center gap-2">
+        <h2 className="text-base sm:text-lg font-semibold text-[var(--enjoy-secondary)] flex items-center justify-center gap-2">
           <PiSparkleFill className="w-6 h-6" />
           {t('mainTitle')}
         </h2>
       </div>
 
-      <p className="text-center mb-3 leading-relaxed text-base">
+      <p className="text-center mb-3 leading-relaxed text-sm sm:text-base">
         {t('description')}
       </p>
 
@@ -30,15 +36,18 @@ const PointsEarningGuide = ({ isLogin = true }: { isLogin?: boolean }) => {
         {featuresData.map((feature, index) => (
           <AnimatedWrapper key={index} custom={index}>
             <FeatureCard
-              {...feature}
+              key={feature.id}
               title={t(`features.${feature.key}.title`)}
               description={t(`features.${feature.key}.description`)}
+              bgColor={feature.bgColor}
+              textColor={feature.textColor}
+              descClassName={descClassName}
             />
           </AnimatedWrapper>
         ))}
       </div>
 
-      <div className="text-center flex items-center gap-1 justify-center text-base font-bold">
+      <div className="text-center flex items-center gap-1 justify-center text-xs sm:text-base font-bold">
         {isLogin ? (
           <>
             <p>

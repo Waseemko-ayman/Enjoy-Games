@@ -5,6 +5,7 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 function Select({
   ...props
@@ -32,6 +33,7 @@ function SelectTrigger({
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: 'sm' | 'default';
 }) {
+  const { isArabic } = useToggleLocale();
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
@@ -41,6 +43,7 @@ function SelectTrigger({
         className
       )}
       {...props}
+      dir={isArabic ? 'rtl' : 'ltr'}
     >
       {children}
       <SelectPrimitive.Icon asChild>
@@ -56,6 +59,7 @@ function SelectContent({
   position = 'popper',
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Content>) {
+  const { isArabic } = useToggleLocale();
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
@@ -68,6 +72,7 @@ function SelectContent({
         )}
         position={position}
         {...props}
+        dir={isArabic ? 'rtl' : 'ltr'}
       >
         <SelectScrollUpButton />
         <SelectPrimitive.Viewport

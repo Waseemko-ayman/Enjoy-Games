@@ -1,5 +1,7 @@
+import { useToggleLocale } from '@/hook/useToggleLocale';
+import { useTranslations } from 'next-intl';
 import React from 'react';
-import { IoIosArrowForward } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 
 const PopupHeader = ({ onClose }: { onClose: () => void }) => {
@@ -8,16 +10,26 @@ const PopupHeader = ({ onClose }: { onClose: () => void }) => {
 
   const iconStyle = 'cursor-pointer';
 
+  const { isArabic } = useToggleLocale();
+  const t = useTranslations('PagesHeaderTitles');
+
   return (
     <div className="h-[60px] bg-enjoy-glass flex items-center justify-between gap-2 px-3">
       <div className={`${circularButtonContainerStyle} !bg-gray-300`}>
-        <IoIosArrowForward
-          className={`${iconStyle} text-sm`}
-          onClick={onClose}
-        />
+        {isArabic ? (
+          <IoIosArrowForward
+            className={`${iconStyle} text-sm`}
+            onClick={onClose}
+          />
+        ) : (
+          <IoIosArrowBack
+            className={`${iconStyle} text-sm`}
+            onClick={onClose}
+          />
+        )}
       </div>
       <h5 className="text-center text-lg font-bold w-full overflow-hidden whitespace-nowrap">
-        المزيد
+        {t('more')}
       </h5>
       <div
         className={`${circularButtonContainerStyle} border border-[var(--enjoy-gray-300)]`}

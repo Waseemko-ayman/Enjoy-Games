@@ -12,7 +12,7 @@ import { MdWavingHand } from 'react-icons/md';
 import { useTranslations } from 'next-intl';
 
 const WelcomeSection = () => {
-  const [isLogin] = useState(false);
+  const [isLogin] = useState(true);
   const secTexts = useTranslations('SectionsTitles.Stars');
   const sharedTexts = useTranslations('Shared');
   const btnTexts = useTranslations('BtnTexts');
@@ -37,7 +37,7 @@ const WelcomeSection = () => {
           />
         ) : (
           <AnimatedWrapper>
-            <CardWrapper className="py-6 px-8 mb-8 max-w-5/6 mx-auto">
+            <CardWrapper className="py-6 px-5 sm:px-8 mb-8 w-full sm:max-w-5/6 mx-auto">
               <PointsEarningGuide isLogin={false} />
             </CardWrapper>
           </AnimatedWrapper>

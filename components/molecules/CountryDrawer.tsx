@@ -6,9 +6,9 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '../ui/drawer';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import Image from 'next/image';
-import { Country } from '@/interfaces';
+import { Country, TranslationFunction } from '@/interfaces';
 import CountrySelectorContent from './CountrySelectorContent';
 import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
 
@@ -18,6 +18,8 @@ interface CountryDrawerProps {
   setSelectedCountry: (country: Country) => void;
   open: boolean;
   setOpen: (open: boolean) => void;
+  t: TranslationFunction;
+  isArabic: boolean;
 }
 
 const CountryDrawer: React.FC<CountryDrawerProps> = ({
@@ -26,6 +28,8 @@ const CountryDrawer: React.FC<CountryDrawerProps> = ({
   setSelectedCountry,
   open,
   setOpen,
+  t,
+  isArabic,
 }) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -43,20 +47,23 @@ const CountryDrawer: React.FC<CountryDrawerProps> = ({
                 {selectedCountry.name} - {selectedCountry.currency}
               </h4>
             </div>
-            <IoIosArrowBack />
+            {isArabic ? <IoIosArrowBack /> : <IoIosArrowForward />}
           </button>
         </DrawerTrigger>
       </AnimatedWrapper>
       <DrawerContent>
-        <DrawerTitle className="sr-only">تغيير الدولة - العملة</DrawerTitle>
+        <DrawerTitle className="sr-only">
+          {t('ChangeCountryCurrencyTitle')}
+        </DrawerTitle>
         <DrawerDescription className="sr-only">
-          اختر الدولة والعملة المناسبة لك من القائمة أدناه.
+          {t('ChangeCountryCurrencyDescription')}
         </DrawerDescription>
         <CountrySelectorContent
           countries={countries}
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
           closeHandler={() => setOpen(false)}
+          t={t}
         />
       </DrawerContent>
     </Drawer>

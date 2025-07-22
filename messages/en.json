@@ -11,7 +11,17 @@
       },
       "navBar": {
         "allCategories": "All Categories",
-        "store": "Store"
+        "store": "Store",
+        "CardSections": "Card Sections",
+        "cardSectionsDescription": "Here is a list of available card sections to browse and choose from."
+      },
+      "account": {
+        "completeAccountData": "Complete your account details now"
+      },
+      "navBarPopup": {
+        "ChangeTheLanguage": "Change the language",
+        "ChangeCountryCurrencyTitle": "Change Country - Currency",
+        "ChangeCountryCurrencyDescription": "Select your preferred country and currency from the list below."
       }
     },
     "HelpSection": {
@@ -51,7 +61,11 @@
     "wallet": "My Wallet",
     "starsPoints": "Stars Guide Points",
     "store": "Store",
-    "create": "Add New Ticket"
+    "create": "Add New Ticket",
+    "TalkToCustomerService": "Talk to customer service",
+    "faq": "Frequently Asked Questions",
+    "RegisterNow": "Register now",
+    "more": "More"
   },
   "SectionsTitles": {
     "Stars": {
@@ -293,6 +307,11 @@
       "deliveryMethodLabel": "Delivery Method:",
       "pointsAddedMessage": "{points} points have been added to your account!",
       "pointsUsageInfo": "You can use points in upcoming purchases"
+    },
+    "stepsTitles": {
+      "cart": "Shopping Cart",
+      "payment": "Payment",
+      "complete": "Order Complete"
     }
   },
   "Tickets": {
@@ -337,22 +356,20 @@
     "summary": {
       "title": "Invoice Summary",
       "subtotal": {
-        "label": "Subtotal:",
-        "value": "{subtotal}"
+        "label": "Subtotal"
       },
       "vat": {
-        "label": "VAT:",
-        "value": "{vat}"
+        "label": "VAT"
       },
       "total": {
-        "label": "Total Amount:",
-        "value": "{total}"
+        "label": "Total Amount"
       }
     }
   },
   "BtnTexts": {
     "save": "Save",
     "Saving": "Saving",
+    "cancel": "Cancel",
     "StartMarketingNow": "Start Shopping Now",
     "GetItNow": "Get It Now",
     "BuyNow": "Buy Now",
@@ -373,6 +390,8 @@
     "apply": "Apply",
     "DownloadInvoice": "Download Invoice",
     "BackToStore": "Back to Store",
+    "login": "Login",
+    "createAccount": "Create an Account",
     "logout": "Logout",
     "MoreAboutParticipateAndWin": "More About Participate and Win",
     "MoreAboutEnjoyGames": "More About Enjoy Games",
@@ -415,7 +434,8 @@
       "writeCouponHere": "Enter coupon code here...",
       "Choose": "Choose...",
       "Cancelled": "Cancelled",
-      "comment": "Write your comment here"
+      "comment": "Write your comment here",
+      "writeWhatYouWant": "Search anything you want"
     },
     "options": {
       "gender": {

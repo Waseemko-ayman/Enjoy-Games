@@ -14,6 +14,7 @@ import Container from './Container';
 import AnimatedWrapper from '../molecules/FramerMotion/AnimatedWrapper';
 import MotionSection from '../molecules/FramerMotion/MotionSection';
 import { useTranslations } from 'next-intl';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const CartContent: React.FC<CartContentProps> = ({
   items,
@@ -25,6 +26,7 @@ const CartContent: React.FC<CartContentProps> = ({
   const t = useTranslations('MyCart');
   const btnTexts = useTranslations('BtnTexts');
   const points = 1000;
+  const { isArabic } = useToggleLocale();
 
   return (
     <Layer otherClassName="!my-12">
@@ -43,17 +45,17 @@ const CartContent: React.FC<CartContentProps> = ({
                   <div className="flex items-end justify-between gap-4 mb-4 max-sm:flex-col sm:items-start">
                     <div className="flex max-sm:w-full max-sm:flex-col gap-2 sm:gap-4">
                       <Image
-                        src={`/assets/${item.image}`}
+                        src={item.image}
                         alt={item.title}
-                        width={150}
-                        height={150}
+                        width={170}
+                        height={170}
                         className="rounded-xl max-sm:w-full"
                       />
                       <div className="flex sm:flex-col justify-between py-2">
                         <div className="flex items-center gap-2">
                           <h3 className="font-semibold">{item.title}</h3>
                           <Image
-                            src={`/assets/${item.currencyImage}`}
+                            src={item.currencyImage}
                             alt="ريال سعودي"
                             width={18}
                             height={18}
@@ -99,7 +101,7 @@ const CartContent: React.FC<CartContentProps> = ({
                         {item.price * quantity}
                       </span>
                       <Image
-                        src={`/assets/${item.currencyImage}`}
+                        src={item.currencyImage}
                         alt="ريال سعودي"
                         width={18}
                         height={18}
@@ -182,7 +184,11 @@ const CartContent: React.FC<CartContentProps> = ({
                     <span className="text-enjoy-primary text-xl">🤝</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-2">
+                    <h3
+                      className={`font-semibold mb-2 ${
+                        isArabic ? 'text-base' : 'text-sm'
+                      }`}
+                    >
                       {t('rewards.donation.title')}
                     </h3>
                     <p className="text-sm text-gray-600 leading-relaxed">

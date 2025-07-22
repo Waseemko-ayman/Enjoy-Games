@@ -13,7 +13,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
     <AnimatedWrapper>
       <div className={`text-center mb-10 ${className}`}>
         <h1
-          className={`text-xl md:text-[32px] font-bold ${
+          className={`text-2xl md:text-[32px] font-bold ${
             subtitle ? 'mb-2' : ''
           } ${
             Icon ? 'flex items-center justify-center gap-2' : ''

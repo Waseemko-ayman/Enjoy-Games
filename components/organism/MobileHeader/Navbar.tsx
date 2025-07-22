@@ -6,10 +6,14 @@ import Link from 'next/link';
 import { navBarLinks } from '@/data/paths';
 import PopupMenu from './PopupMenu';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const MobileNavbar = () => {
   const [showMore, setShowMore] = useState(false);
   const [animateClose, setAnimateClose] = useState(false);
+  const t = useTranslations('PagesHeaderTitles');
+  const { isArabic } = useToggleLocale();
 
   const handleOpen = () => {
     setShowMore(true);
@@ -38,7 +42,11 @@ const MobileNavbar = () => {
                       className="flex flex-col items-center font-medium"
                     >
                       <item.icon className="text-2xl" />
-                      <h5 className="text-base mt-2">{item.title}</h5>
+                      <h5
+                        className={`${isArabic ? 'text-base' : 'text-sm'} mt-2`}
+                      >
+                        {t(item.titleKey)}
+                      </h5>
                     </Link>
                   </li>
                 ) : (
@@ -48,7 +56,11 @@ const MobileNavbar = () => {
                   >
                     <div className="flex flex-col items-center">
                       <MdMoreHoriz className="text-2xl" />
-                      <h5 className="text-base mt-2">المزيد</h5>
+                      <h5
+                        className={`${isArabic ? 'text-base' : 'text-sm'} mt-2`}
+                      >
+                        {t('more')}
+                      </h5>
                     </div>
                   </li>
                 )}

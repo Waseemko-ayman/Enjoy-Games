@@ -32,7 +32,7 @@ const ProfilePicture = ({ t }: { t: TranslationFunction }) => {
             <Avatar
               imgSrc={avatarPreview || '/assets/user-vector.jpg'}
               imgAlt="Profile"
-              otherClassName="w-20 h-20"
+              otherClassName="w-20 h-20 shadow-lg"
               width={20}
               height={20}
             />

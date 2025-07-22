@@ -34,14 +34,18 @@ const DiscoverEarnMoreCard: React.FC<DiscoverEarnMoreCardProps> = ({
             height={90}
           />
           <div className="w-full">
-            <h3 className="text-xl mb-2.5">{title}</h3>
+            <h3 className={`${isArabic ? 'text-xl' : 'text-lg'} mb-2.5`}>
+              {title}
+            </h3>
             <ResponsiveDialogDrawer
               open={open}
               setOpen={setOpen}
               isMobile={isMobile}
               trigger={
                 <div
-                  className={`text-sm sm:text-base text-enjoy-primary font-semibold flex items-center justify-between gap-1 cursor-pointer ${triggerClassName}`}
+                  className={`text-sm ${
+                    isArabic ? 'sm:text-base' : ''
+                  } text-enjoy-primary font-semibold flex items-center justify-between gap-1 cursor-pointer ${triggerClassName}`}
                 >
                   <p>{description}</p>
                   {isArabic ? <IoIosArrowBack /> : <IoIosArrowForward />}

@@ -40,7 +40,7 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
                   } top-0 ml-2 border border-gray-100 rounded-xl shadow-lg bg-white transition-all duration-200 ease-out
                   ${
                     item.submenu.length > 3
-                      ? 'invisible opacity-0 pointer-events-none group-hover/sub:visible group-hover/sub:opacity-100 group-hover/sub:pointer-events-auto w-[800px] p-3 grid grid-cols-4 gap-1'
+                      ? 'invisible opacity-0 pointer-events-none group-hover/sub:visible group-hover/sub:opacity-100 group-hover/sub:pointer-events-auto w-[600px] grid grid-cols-4 gap-1 p-3'
                       : 'hidden group-hover/sub:block w-[240px] py-2 pr-3 pl-2'
                   }`}
                 >

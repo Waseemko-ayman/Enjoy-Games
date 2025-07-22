@@ -7,6 +7,7 @@ import SelectableList from '@/components/molecules/SelectableList';
 import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
 import { rewardsPrograms } from '@/data';
 import useIsMobile from '@/hook/useIsMobile';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 import { TranslationFunction } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
@@ -18,6 +19,7 @@ const ButtonsDialogDrawer = ({ t }: { t: TranslationFunction }) => {
   const isMobile = useIsMobile();
   const btnTxts = useTranslations('BtnTexts');
   const inputsTxt = useTranslations('Inputs.placeHolders');
+  const { isArabic } = useToggleLocale();
 
   const handleProgramSelect = (id: number) => {
     setSelectedProgram(selectedProgram === id ? null : id);
@@ -37,7 +39,9 @@ const ButtonsDialogDrawer = ({ t }: { t: TranslationFunction }) => {
         setOpen={setOpenFirst}
         isMobile={isMobile}
         trigger={
-          <Button otherClassName="py-4 px-7 text-sm">
+          <Button
+            otherClassName={`${!isArabic ? 'p-3' : ''} sm:py-4 sm:px-7 text-sm`}
+          >
             {btnTxts('RechargeNow')}
           </Button>
         }
@@ -70,7 +74,12 @@ const ButtonsDialogDrawer = ({ t }: { t: TranslationFunction }) => {
         setOpen={setOpenSecond}
         isMobile={isMobile}
         trigger={
-          <Button variant="forth" otherClassName="py-4 px-7 !bg-white text-sm">
+          <Button
+            variant="forth"
+            otherClassName={`${
+              !isArabic ? 'p-3' : ''
+            } sm:py-4 sm:px-7 text-sm !bg-white`}
+          >
             {btnTxts('RedeemPoints')}
           </Button>
         }

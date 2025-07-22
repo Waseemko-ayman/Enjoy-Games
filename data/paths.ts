@@ -44,14 +44,14 @@ export const PATHS = {
 };
 
 export const navBarLinks = [
-  { id: 1, icon: IoHomeOutline, title: 'الرئيسية', link: PATHS.HOME.link },
-  { id: 2, icon: IoSearch, title: 'المتجر', link: PATHS.STORE.link },
+  { id: 1, icon: IoHomeOutline, titleKey: 'home', link: PATHS.HOME.link },
+  { id: 2, icon: IoSearch, titleKey: 'store', link: PATHS.STORE.link },
   {
     id: 3,
     icon: MdOutlineAssignment,
-    title: 'طلباتي',
+    titleKey: 'my-purchases',
     link: PATHS.MY_PURCHASES.link,
   },
-  { id: 4, icon: FiUser, title: 'سجّل الآن', link: PATHS.LOGIN },
-  { id: 5, icon: MdMoreHoriz, title: 'المزيد', onClick: true },
+  { id: 4, icon: FiUser, titleKey: 'RegisterNow', link: PATHS.LOGIN },
+  { id: 5, icon: MdMoreHoriz, titleKey: 'more', onClick: true },
 ];

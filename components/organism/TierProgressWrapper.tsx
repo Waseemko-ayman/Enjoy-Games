@@ -15,7 +15,7 @@ const TierProgressWrapper: React.FC<TierProgressWrapperProps> = ({
   progressFooter,
 }) => {
   return (
-    <Layer otherClassName="bg-enjoy-gray-light pt-16 pb-36 px-4">
+    <Layer otherClassName="bg-enjoy-gray-light pt-16 pb-36">
       <Container>
         <div className="max-w-6xl mx-auto relative">
           <AnimatedWrapper>
@@ -27,7 +27,7 @@ const TierProgressWrapper: React.FC<TierProgressWrapperProps> = ({
           </AnimatedWrapper>
 
           <AnimatedWrapper>
-            <div className="relative z-20 w-full max-sm:overflow-x-auto max-sm:scroll-smooth scrollbar-none">
+            <div className="relative z-20 w-full max-[991px]:overflow-x-auto max-[991px]:scroll-smooth scrollbar-none">
               <div className="min-w-max">
                 {/* Scrollable children */}
                 <div className="flex justify-between items-center pt-10 max-sm:pt-7 space-x-9 px-5 sm:px-0">

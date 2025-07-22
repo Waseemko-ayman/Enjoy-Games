@@ -533,47 +533,17 @@ export const menuLists = [
   {
     id: 1,
     linksItem: [
-      {
-        id: 1,
-        title: 'دليل ستارز',
-        icon: IoArrowRedoOutline,
-        link: PATHS.STARS.link,
-      },
-      {
-        id: 2,
-        title: 'المحفظة',
-        link: PATHS.WALLET.link,
-        icon: IoWalletOutline,
-      },
-      {
-        id: 3,
-        title: 'الإهتمامات',
-        icon: FaRegHeart,
-        link: '#',
-      },
+      { id: 1, key: 'stars', icon: IoArrowRedoOutline, link: PATHS.STARS.link },
+      { id: 2, key: 'wallet', icon: IoWalletOutline, link: PATHS.WALLET.link },
+      { id: 3, key: 'interests', icon: FaRegHeart, link: '#' },
     ],
   },
   {
     id: 2,
     linksItem: [
-      {
-        id: 1,
-        title: 'تذاكر الدعم الفني',
-        link: '#',
-        icon: FaRegFlag,
-      },
-      {
-        id: 2,
-        title: 'التحدث مع خدمة العملاء',
-        icon: MdOutlineEmail,
-        link: '#',
-      },
-      {
-        id: 3,
-        title: 'الأسئلة الشائعة',
-        icon: IoMdHelpCircleOutline,
-        link: '#',
-      },
+      { id: 1, key: 'tickets', icon: FaRegFlag, link: '#' },
+      { id: 2, key: 'TalkToCustomerService', icon: MdOutlineEmail, link: '#' },
+      { id: 3, key: 'faq', icon: IoMdHelpCircleOutline, link: '#' },
     ],
   },
 ];

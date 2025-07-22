@@ -30,12 +30,12 @@ const NavItem: React.FC<NavItemProps> = ({
         transition cursor-pointer
         py-[19px]
         hover:text-[var(--enjoy-primary)]
-        max-[991px]:!py-3
-        max-[991px]:!pl-0
-        max-[991px]:!pr-1
-        max-[991px]:hover:bg-[#f4f4ff]
-        max-[991px]:hover:!text-[var(--enjoy-primary)]
-        max-[991px]:rounded-lg
+        max-md:!py-3
+        max-md:!pl-0
+        max-md:!pr-1
+        max-md:hover:bg-[#f4f4ff]
+        max-md:hover:!text-[var(--enjoy-primary)]
+        max-md:rounded-lg
         ${
           layout === 'store'
             ? isMobile
@@ -70,9 +70,7 @@ const NavItem: React.FC<NavItemProps> = ({
             {Icon && (
               <Icon
                 className={`text-lg text-[var(--enjoy-primary)] ${
-                  isMobile
-                    ? 'max-[991px]:text-primary'
-                    : 'max-[991px]:text-white'
+                  isMobile ? 'max-md:text-primary' : 'max-md:text-white'
                 } ${otherClassNameIcon}`}
               />
             )}

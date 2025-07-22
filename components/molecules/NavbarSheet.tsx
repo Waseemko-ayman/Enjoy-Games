@@ -10,21 +10,23 @@ import {
 import { PiSquaresFourLight } from 'react-icons/pi';
 import SheetContentComp from './SheetContentComp';
 import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
 
 const NavbarSheet = () => {
+  const t = useTranslations('Layout.header.navBar');
   return (
     <Sheet>
       <SheetTrigger>
         <PiSquaresFourLight className="text-3xl cursor-pointer text-enjoy-primary" />
       </SheetTrigger>
       <SheetContent className="pt-20">
-        <SheetTitle className="sr-only">أقسام البطاقات</SheetTitle>
+        <SheetTitle className="sr-only">{t('CardSections')}</SheetTitle>
         <SheetDescription className="sr-only">
-          هنا قائمة بأقسام البطاقات المتوفرة للتصفح والاختيار.
+          {t('cardSectionsDescription')}
         </SheetDescription>
         <AnimatedWrapper direction="x" distance={70}>
           <h4 className="text-white text-2xl font-semibold mb-5">
-            أقسام البطاقات
+            {t('CardSections')}
           </h4>
         </AnimatedWrapper>
         {/* Sheet Content */}

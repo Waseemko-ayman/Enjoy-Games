@@ -55,7 +55,7 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
               <div className="relative">
                 {input.type === 'number' ? (
                   <div>
-                    <label className="block text-right text-gray-700 font-normal text-sm mb-2">
+                    <label className="block text-gray-700 font-normal text-sm mb-2">
                       {label}
                     </label>
                     <Controller

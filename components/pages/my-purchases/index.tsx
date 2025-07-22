@@ -1,4 +1,3 @@
-import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import EmptyStateBox from '@/components/molecules/EmptyStateBox';
 import PageHeader from '@/components/molecules/PageHeader';
 import {

@@ -11,7 +11,17 @@
       },
       "navBar": {
         "allCategories": "جميع الأقسام",
-        "store": "المتجر"
+        "store": "المتجر",
+        "CardSections": "أقسام البطاقات",
+        "cardSectionsDescription": "هنا قائمة بأقسام البطاقات المتوفرة للتصفح والاختيار."
+      },
+      "account": {
+        "completeAccountData": "أكمل بيانات حسابك الآن"
+      },
+      "navBarPopup": {
+        "ChangeTheLanguage": "غير اللغة",
+        "ChangeCountryCurrencyTitle": "تغيير الدولة - العملة",
+        "ChangeCountryCurrencyDescription": "اختر الدولة والعملة المناسبة لك من القائمة أدناه."
       }
     },
     "HelpSection": {
@@ -51,7 +61,11 @@
     "wallet": "محفظتي",
     "starsPoints": "نقاط دليل ستارز",
     "store": "المتجر",
-    "create": "إضافة تذكرة جديدة"
+    "create": "إضافة تذكرة جديدة",
+    "TalkToCustomerService": "التحدث مع خدمة العملاء",
+    "faq": "الأسئلة الشائعة",
+    "RegisterNow": "سجل الآن",
+    "more": "المزيد"
   },
   "SectionsTitles": {
     "Stars": {
@@ -293,6 +307,11 @@
       "deliveryMethodLabel": "طريقة التسليم:",
       "pointsAddedMessage": "تم إضافة {points} نقطة لحسابك!",
       "pointsUsageInfo": "يمكنك استخدام النقاط في عمليات الشراء القادمة"
+    },
+    "stepsTitles": {
+      "cart": "سلة التسوق",
+      "payment": "الدفع",
+      "complete": "إتمام الطلب"
     }
   },
   "Tickets": {
@@ -337,22 +356,20 @@
     "summary": {
       "title": "ملخص الفاتورة",
       "subtotal": {
-        "label": "الإجمالي الفرعي:",
-        "value": "{subtotal}"
+        "label": "الإجمالي الفرعي"
       },
       "vat": {
-        "label": "ضريبة القيمة المضافة:",
-        "value": "{vat}"
+        "label": "ضريبة القيمة المضافة"
       },
       "total": {
-        "label": "إجمالي المبلغ:",
-        "value": "{total}"
+        "label": "إجمالي المبلغ"
       }
     }
   },
   "BtnTexts": {
     "save": "حفظ",
     "Saving": "جاري الحفظ",
+    "cancel": "إلغاء",
     "StartMarketingNow": "إبدأ بالتسوق الآن",
     "GetItNow": "احصل عليه الآن",
     "BuyNow": "إشترِ الآن",
@@ -373,6 +390,8 @@
     "apply": "تطبيق",
     "DownloadInvoice": "تحميل الفاتورة",
     "BackToStore": "العودة للمتجر",
+    "login": "تسجيل الدخول",
+    "createAccount": "أنشىء حساب",
     "logout": "تسجيل خروج",
     "MoreAboutParticipateAndWin": "المزيد عن شارك وإربح",
     "MoreAboutEnjoyGames": "المزيد عن إنجوي قيمز",
@@ -415,7 +434,8 @@
       "writeCouponHere": "أكتب كود القسيم هنا...",
       "Choose": "اختر...",
       "Cancelled": "تم الإلغاء",
-      "comment": "أكتب تعليقك هنا"
+      "comment": "أكتب تعليقك هنا",
+      "writeWhatYouWant": "اكتب اللي تبغاه، وخلّنا نلقاه لك"
     },
     "options": {
       "gender": {
@@ -436,7 +456,7 @@
       "emailRequired": "البريد الإلكتروني مطلوب",
       "phoneRequired": "رقم الجوال مطلوب",
       "birthDateRequired": "تاريخ الميلاد مطلوب",
-      "genderOneOf": "الرجاء اختيار الجنس",
+      "genderInvalid": "الرجاء اختيار الجنس",
       "genderRequired": "الجنس مطلوب",
       "avatarRequired": "الصورة مطلوبة",
       "subjectRequired": "العنوان مطلوب",

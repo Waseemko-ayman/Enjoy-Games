@@ -8,6 +8,7 @@ import { PiSparkleFill } from 'react-icons/pi';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { cardVariants } from '@/lib/context';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   variant,
@@ -20,9 +21,11 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   secondButtonHref,
   btnTexts,
 }) => {
-  const starsTxt = useTranslations('Stars');
-  const maxupTxt = useTranslations('MaxupProgram');
+  const starsTxt = useTranslations('Stars.pointsSystem');
+  const maxupTxt = useTranslations('MaxupProgram.pointSystem');
   const sharedTexts = useTranslations('Shared');
+  const { isArabic } = useToggleLocale();
+  const btnStyled = `${isArabic ? 'p-4' : 'py-3 px-2.5'} text-sm`;
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
       <motion.div
@@ -59,14 +62,14 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
               )}
             </div>
             <div className="flex items-center justify-center gap-4">
-              <Button href={firstButtonHref} otherClassName="p-4 text-sm">
+              <Button href={firstButtonHref} otherClassName={`${btnStyled}`}>
                 {btnTexts('TransferToMyWallet')}
               </Button>
 
               <Button
                 href={secondButtonHref}
                 variant="forth"
-                otherClassName="p-4 !bg-white text-sm"
+                otherClassName={`${btnStyled} !bg-white`}
               >
                 {variant === 'earnings'
                   ? btnTexts('BankTransfer')
@@ -78,7 +81,7 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
       </motion.div>
 
       <div>
-        <div className="flex items-center gap-5 mb-5">
+        <div className="flex items-center flex-col sm:flex-row gap-5 mb-5">
           <motion.div
             variants={cardVariants}
             initial="hidden"
@@ -92,7 +95,7 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
             >
               <h5 className="text-xs font-semibold mb-4">
                 {variant === 'earnings'
-                  ? maxupTxt('pointSystem.header.totalEarnings')
+                  ? maxupTxt('header.totalEarnings')
                   : starsTxt('conversionInfo.title', { currency: 'ريال' })}
               </h5>
               <div
@@ -141,13 +144,13 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
               <h5 className="text-xs font-semibold mb-4">
                 {variant === 'earnings'
                   ? maxupTxt('pointSystem.header.title')
-                  : starsTxt('pointsSystem.pointsSummary.title')}
+                  : starsTxt('pointsSummary.title')}
               </h5>
               {variant === 'earnings' ? (
                 <span className="text-lg font-semibold">0</span>
               ) : (
                 <span className="text-lg font-semibold">
-                  {starsTxt('pointsSystem.pointsSummary.value', { points: 0 })}
+                  {starsTxt('pointsSummary.value', { points: 0 })}
                 </span>
               )}
             </CardWrapper>
@@ -162,8 +165,8 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
         >
           <h5 className="text-base font-bold mb-3.5">
             {variant === 'earnings'
-              ? sharedTexts('Shared.procedures.last')
-              : sharedTexts('Shared.procedures.default')}
+              ? sharedTexts('procedures.last')
+              : sharedTexts('procedures.default')}
           </h5>
           <CardWrapper
             bgColor="bg-white"

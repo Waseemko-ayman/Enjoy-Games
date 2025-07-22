@@ -134,7 +134,7 @@ export interface FooterLinksProps extends BaseClassNameProps {
 
 export interface LinkItem extends BaseIconProps {
   id: number;
-  title: string;
+  key: string;
   link: string;
   icon: React.ElementType | string;
 }
@@ -194,6 +194,7 @@ export interface CountrySelectorContentProps {
   selectedCountry: Country;
   setSelectedCountry: (country: Country) => void;
   closeHandler: () => void;
+  t: TranslationFunction;
 }
 
 export interface SectionTitleProps extends BaseIconProps {
@@ -208,6 +209,7 @@ export interface FeatureCardProps extends BaseIconProps {
   description: string;
   bgColor: string;
   textColor?: string;
+  descClassName?: string;
 }
 
 export interface TierBadgeProps extends BaseIconProps {
@@ -484,4 +486,15 @@ export interface InputItem {
   label?: string;
   placeholder?: string;
   options?: InputOption[];
+}
+
+interface Step {
+  id: number;
+  key: string;
+  isCompleted: boolean;
+  isCurrent: boolean;
+}
+
+export interface StepIndicatorProps {
+  steps: Step[];
 }

@@ -8,22 +8,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PATHS } from '@/data/paths';
 import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
-
-interface Step {
-  id: number;
-  title: string;
-  isCompleted: boolean;
-  isCurrent: boolean;
-}
-
-interface StepIndicatorProps {
-  steps: Step[];
-}
+import { StepIndicatorProps } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 
 const StepIndicator: React.FC<StepIndicatorProps> = ({ steps }) => {
   const totalSteps = steps.length;
   const completedCount = steps.filter((s) => s.isCompleted).length;
   const progressPercentage = (completedCount / (totalSteps - 1)) * 100;
+  const t = useTranslations('MyCart.stepsTitles');
 
   return (
     <Layer otherClassName="bg-white pb-4 md:pb-6 md:px-8 !my-0">
@@ -75,7 +67,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({ steps }) => {
                             : 'text-gray-600'
                         }`}
                       >
-                        {step.title}
+                        {t(step.key)}
                       </h3>
                     </div>
                   </AnimatedWrapper>

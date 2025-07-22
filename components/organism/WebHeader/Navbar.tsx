@@ -18,7 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
     return (
       <nav className={`${!isMobile ? 'bg-white' : 'pt-2 mt-4'}`}>
         <Container>
-          <ul className="flex items-center space-x-1 overflow-hidden">
+          <ul className="flex items-center gap-3 overflow-hidden">
             <li className="overflow-hidden relative">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}

@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
 import Button from '../atomic/Button';
-import { FaArrowLeftLong } from 'react-icons/fa6';
+import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
 import { RewardCardProps } from '@/interfaces';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const RewardCard = ({
   title,
@@ -12,6 +13,7 @@ const RewardCard = ({
   onClick,
   href,
 }: RewardCardProps) => {
+  const { isArabic } = useToggleLocale();
   return (
     <div className="flex items-end gap-4 max-sm:flex-col max-sm:items-center max-sm:justify-center max-sm:text-center">
       <div className="mt-10 max-sm:order-2">
@@ -25,7 +27,7 @@ const RewardCard = ({
           variant="third"
           href={href}
           handleClick={onClick}
-          Icon={FaArrowLeftLong}
+          Icon={isArabic ? FaArrowLeftLong : FaArrowRightLong}
           otherClassName="py-2 px-5 gap-5 max-sm:mx-auto"
           iconPosition="right"
         >

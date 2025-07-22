@@ -3,6 +3,7 @@ import Avatar from '@/components/atomic/Avatar';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import { PATHS } from '@/data/paths';
 import { Wallet } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -11,6 +12,8 @@ import { PiSparkleFill } from 'react-icons/pi';
 const Information = () => {
   const [accountAdvance] = useState(20);
   const infoStyle = 'flex items-center gap-2 text-sm font-semibold';
+  const t = useTranslations('Layout.header.account');
+  const titleTxts = useTranslations('PagesHeaderTitles');
   return (
     <CardWrapper
       bgColor="bg-white"
@@ -24,7 +27,9 @@ const Information = () => {
             width={30}
             height={30}
           />
-          <h5 className="text-base font-semibold">أكمل بيانات حسابك الآن</h5>
+          <h5 className="text-base font-semibold">
+            {t('completeAccountData')}
+          </h5>
         </div>
       </Link>
 
@@ -57,7 +62,7 @@ const Information = () => {
         <PiSparkleFill size={18} />
         <div className="flex items-center gap-2">
           <span>0</span>
-          <span>نقاط دليل ستارز</span>
+          <span>{titleTxts('starsPoints')}</span>
         </div>
       </div>
     </CardWrapper>
