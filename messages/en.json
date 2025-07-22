@@ -27,7 +27,8 @@
     "HelpSection": {
       "title": "Need Help?",
       "email": "Email",
-      "helpCenter": "Help Center"
+      "helpCenter": "Help Center",
+      "OnlineNow": "Online now"
     },
     "footer": {
       "LearnMore": {
@@ -435,7 +436,8 @@
       "Choose": "Choose...",
       "Cancelled": "Cancelled",
       "comment": "Write your comment here",
-      "writeWhatYouWant": "Search anything you want"
+      "writeWhatYouWant": "Search anything you want",
+      "describeIssue": "Please describe your issue or inquiry in detail"
     },
     "options": {
       "gender": {

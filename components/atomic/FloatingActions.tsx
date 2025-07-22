@@ -1,0 +1,83 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { FaWhatsapp, FaArrowUp, FaPlus, FaTimes } from 'react-icons/fa';
+import Button from './Button';
+import { useToggleLocale } from '@/hook/useToggleLocale';
+
+interface FloatingActionsProps {
+  phone: string;
+}
+
+const FloatingActions: React.FC<FloatingActionsProps> = ({ phone }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrollVisible, setIsScrollVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrollVisible(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsOpen(false);
+  };
+
+  const openWhatsApp = () => {
+    window.open(`https://wa.me/${phone}`, '_blank');
+    setIsOpen(false);
+  };
+
+  const { isArabic } = useToggleLocale();
+
+  return (
+    <div
+      className={`fixed z-50 bottom-24 md:bottom-6 ${
+        isArabic ? 'left-6' : 'right-6'
+      } flex flex-col items-center space-y-3`}
+    >
+      {isOpen && (
+        <>
+          <Button
+            variant="circle"
+            handleClick={openWhatsApp}
+            bgColor="bg-green-500"
+            hoverBgColor="bg-green-600"
+            otherClassName="text-white p-3 shadow-lg hover:scale-105"
+            aria-label="WhatsApp"
+          >
+            <FaWhatsapp size={22} />
+          </Button>
+
+          {isScrollVisible && (
+            <Button
+              variant="circle"
+              handleClick={scrollToTop}
+              bgColor="bg-gray-800"
+              hoverBgColor="bg-gray-700"
+              otherClassName="text-white p-3 shadow-lg hover:scale-105"
+              aria-label="Scroll to Top"
+            >
+              <FaArrowUp size={20} />
+            </Button>
+          )}
+        </>
+      )}
+
+      <Button
+        variant="circle"
+        handleClick={() => setIsOpen(!isOpen)}
+        hoverBgColor="bg-primary/90"
+        otherClassName="text-white p-4 shadow-xl hover:rotate-45 transition-transform"
+        aria-label="Toggle Floating Menu"
+      >
+        {isOpen ? <FaTimes size={20} /> : <FaPlus size={20} />}
+      </Button>
+    </div>
+  );
+};
+
+export default FloatingActions;

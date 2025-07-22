@@ -10,6 +10,7 @@ import MobileNavbar from './MobileHeader/Navbar';
 import { usePathname } from 'next/navigation';
 import useIsMobile from '@/hook/useIsMobile';
 import { FloatingChatWidget } from './FloatingChatWidget';
+import FloatingActions from '../atomic/FloatingActions';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -41,6 +42,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       {children}
       {!isCartPage && <Footer />}
       <FloatingChatWidget />
+      <FloatingActions phone="+972592164680" />
     </>
   );
 };

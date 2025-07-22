@@ -27,7 +27,8 @@
     "HelpSection": {
       "title": "هل تحتاج مساعدة ؟",
       "email": "البريد الإلكتروني",
-      "helpCenter": "مركز المساعدة"
+      "helpCenter": "مركز المساعدة",
+      "OnlineNow": "متصل الآن"
     },
     "footer": {
       "LearnMore": {
@@ -435,7 +436,8 @@
       "Choose": "اختر...",
       "Cancelled": "تم الإلغاء",
       "comment": "أكتب تعليقك هنا",
-      "writeWhatYouWant": "اكتب اللي تبغاه، وخلّنا نلقاه لك"
+      "writeWhatYouWant": "اكتب اللي تبغاه، وخلّنا نلقاه لك",
+      "describeIssue": "فضلًا أوصف لنا مشكلتك أو إستفسارك بشكل مفصل"
     },
     "options": {
       "gender": {
