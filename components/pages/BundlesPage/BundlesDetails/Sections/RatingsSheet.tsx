@@ -82,7 +82,7 @@ const RatingsSheet = () => {
   return (
     <div
       className={`flex items-center justify-between ${
-        !isArabic ? 'flex-col' : ''
+        !isArabic ? 'flex-col sm:flex-row' : ''
       } gap-2 border-b border-gray-200 pb-4 mt-2`}
       dir={isArabic ? 'ltr' : 'rtl'}
     >
