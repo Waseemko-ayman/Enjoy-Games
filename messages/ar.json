@@ -35,7 +35,7 @@
         "title": "أعرف المزيد عنا",
         "about": "من نحن",
         "faq": "الأسئلة الشائعة",
-        "privacyPolicy": "ساسة الخصوصية",
+        "privacyPolicy": "سياسة الخصوصية",
         "refundPolicy": "سياسة الإسترجاع",
         "termsOfUser": "سياسة الخدمة"
       },
@@ -410,6 +410,7 @@
       "username": "الإسم",
       "email": "البريد الإلكتروني",
       "password": "كلمة المرور",
+      "repassword": "تأكيد كلمة المرور",
       "gender": "الجنس",
       "phone": "رقم الجوال",
       "birthDate": "تاريخ الميلاد",
@@ -437,7 +438,10 @@
       "Cancelled": "تم الإلغاء",
       "comment": "أكتب تعليقك هنا",
       "writeWhatYouWant": "اكتب اللي تبغاه، وخلّنا نلقاه لك",
-      "describeIssue": "فضلًا أوصف لنا مشكلتك أو إستفسارك بشكل مفصل"
+      "describeIssue": "فضلًا أوصف لنا مشكلتك أو إستفسارك بشكل مفصل",
+      "writeYorEmail": "أكتب إيميلك...",
+      "yourPassword": "كلمة المرور الخاصة بك",
+      "repassword": "تأكيد كلمة المرور"
     },
     "options": {
       "gender": {
@@ -465,6 +469,14 @@
       "ticketTypeRequired": "نوع التذكرة مطلوب",
       "detailsRequired": "الوصف مطلوب"
     }
+  },
+  "Auth": {
+    "loginDesc": "سجّل دخولك بحسابك المسجّل في إنجوي قيمز",
+    "signupTitle": "أهلا بك في إنجوي قيمز",
+    "signupDesc": "أنشئ حسابًا جديدا",
+    "dontHabeAccount": "لا تمتلك حساب؟",
+    "registerationReq": "بإنشاء حساب جديد؛ أنت توافق ضمنيًا على",
+    "termsAndConditions": "الشروط والأحكام"
   },
   "Languages": {
     "english": "إنجليزي",

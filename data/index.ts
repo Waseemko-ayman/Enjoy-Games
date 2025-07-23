@@ -1070,3 +1070,31 @@ export const MyPurchasesTypes = [
   { id: 3, labelKey: 'inProgress' },
   { id: 4, labelKey: 'cancelled' },
 ];
+
+export const loginInputs = [
+  {
+    id: 1,
+    type: 'email',
+    label: 'email',
+    name: 'email',
+    placeholder: 'writeYorEmail',
+  },
+  {
+    id: 2,
+    type: 'password',
+    label: 'password',
+    name: 'password',
+    placeholder: 'yourPassword',
+  },
+];
+
+export const signupInputs = [
+  ...loginInputs,
+  {
+    id: 3,
+    type: 'password',
+    label: 'repassword',
+    name: 'repassword',
+    placeholder: 'repassword',
+  },
+];

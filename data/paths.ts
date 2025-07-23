@@ -39,7 +39,8 @@ export const PATHS = {
     name: 'الأسئلة الشائعة',
     link: '/faq',
   },
-  LOGIN: 'login',
+  LOGIN: '/login',
+  SIGNUP: '/signup',
   OTP: '/otp',
 };
 

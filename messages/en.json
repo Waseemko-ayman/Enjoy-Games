@@ -410,6 +410,7 @@
       "username": "Name",
       "email": "Email",
       "password": "Password",
+      "repassword": "Confirm password",
       "gender": "Gender",
       "phone": "Mobile Number",
       "birthDate": "Birth Date",
@@ -437,7 +438,10 @@
       "Cancelled": "Cancelled",
       "comment": "Write your comment here",
       "writeWhatYouWant": "Search anything you want",
-      "describeIssue": "Please describe your issue or inquiry in detail"
+      "describeIssue": "Please describe your issue or inquiry in detail",
+      "writeYorEmail": "write your email...",
+      "yourPassword": "your password",
+      "repassword": "Confirm password"
     },
     "options": {
       "gender": {
@@ -465,6 +469,14 @@
       "ticketTypeRequired": "Ticket type is required",
       "detailsRequired": "Description is required"
     }
+  },
+  "Auth": {
+    "loginDesc": "Login with your registered accouunt in EnjoyGames",
+    "signupTitle": "Welcome to EnjoyGames",
+    "signupDesc": "Create New Account",
+    "dontHabeAccount": "Don't have an account?",
+    "registerationReq": "Create an new account; You implicitly agreed on",
+    "termsAndConditions": "Terms and Conditions"
   },
   "Languages": {
     "english": "English",

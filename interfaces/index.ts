@@ -246,7 +246,6 @@ export interface GridWrapperProps extends BaseClassNameProps, WithChildren {
 export interface AuthLayoutProps extends SectionComponentProps {
   btnText: string;
   description: string;
-  showFooterText?: boolean;
   isSubmitDisabled?: boolean;
   onSubmit?: () => void;
 }
