@@ -16,6 +16,7 @@ import 'react-phone-number-input/style.css';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { TranslationFunction } from '@/interfaces';
 import { useTranslations } from 'next-intl';
+import FormError from '@/components/atomic/FormError';
 interface FormProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
@@ -77,9 +78,9 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                       )}
                     />
                     {errors[input.name] && (
-                      <p className="text-red-600 mt-1">
-                        {errors[input.name]?.message as string}
-                      </p>
+                      <FormError
+                        message={errors[input.name]?.message as string}
+                      />
                     )}
                   </div>
                 ) : (
@@ -99,9 +100,9 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                       {...register(input.name)}
                     />
                     {errors[input.name] && (
-                      <p className="text-red-600 mt-1 text-sm">
-                        {errors[input.name]?.message as string}
-                      </p>
+                      <FormError
+                        message={errors[input.name]?.message as string}
+                      />
                     )}
                   </div>
                 )}

@@ -497,3 +497,12 @@ interface Step {
 export interface StepIndicatorProps {
   steps: Step[];
 }
+
+export interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+export interface signupFormData extends LoginFormData {
+  repassword: string;
+}

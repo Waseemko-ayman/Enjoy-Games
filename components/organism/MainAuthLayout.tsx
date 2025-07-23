@@ -7,7 +7,7 @@ import { FaX } from 'react-icons/fa6';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const MainAuthLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
@@ -36,7 +36,11 @@ const MainAuthLayout = ({ children }: { children: ReactNode }) => {
             className="text-gray-400 bg-white hover:text-white hover:bg-enjoy-primary border border-[var(--enjoy-gray-400)] hover:border-[var(--enjoy-primary)] w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300"
           >
             {isSignupPage ? (
-              <IoIosArrowBack className="w-3 h-3" />
+              isArabic ? (
+                <IoIosArrowBack className="w-3 h-3" />
+              ) : (
+                <IoIosArrowForward className="w-3 h-3" />
+              )
             ) : (
               <FaX className="w-3 h-3" />
             )}

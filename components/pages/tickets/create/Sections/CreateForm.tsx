@@ -12,6 +12,7 @@ import ButtonLoading from '@/components/atomic/ButtonLoading';
 import AttachmentsUploader from '@/components/molecules/AttachmentsPreview';
 import { FormData } from '@/interfaces';
 import { useTranslations } from 'next-intl';
+import FormError from '@/components/atomic/FormError';
 
 const CreateForm = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
@@ -65,12 +66,13 @@ const CreateForm = () => {
                   inputName={input.name}
                   placeholder={placeholders(input.name)}
                   options={input.options}
+                  otherClassNameContainer={
+                    errors[fieldName]?.message ? 'border-red-500' : ''
+                  }
                   {...register(fieldName)}
                 />
                 {errors[fieldName] && (
-                  <p className="text-red-600 mt-1">
-                    {errors[fieldName]?.message}
-                  </p>
+                  <FormError message={errors[fieldName]?.message} />
                 )}
               </div>
             );
