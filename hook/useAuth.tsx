@@ -6,7 +6,7 @@ import { AUTH_ACTIONS, AUTH_API_PATHS } from '@/constants/auth';
 import { useRouter } from 'next/navigation';
 import { PATHS } from '@/data/paths';
 import { AUTH_API_URL } from '@/config/api';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import { LoginFormData, signupFormData } from '@/interfaces';
 
 interface User {
@@ -101,21 +101,21 @@ const useAuth = () => {
 
       dispatch({ type: AUTH_ACTIONS.AUTHORIZE, payload: data.user || body });
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Logged in Successfully',
-        showConfirmButton: false,
-        timer: 2000,
-      });
+      // Swal.fire({
+      //   icon: 'success',
+      //   title: 'Logged in Successfully',
+      //   showConfirmButton: false,
+      //   timer: 2000,
+      // });
 
       router.replace(PATHS.HOME.link);
     } catch (error: any) {
-      Swal.fire({
-        icon: 'error',
-        title: 'The data is incorrect!',
-        showConfirmButton: false,
-        timer: 2000,
-      });
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'The data is incorrect!',
+      //   showConfirmButton: false,
+      //   timer: 2000,
+      // });
       dispatch({ type: AUTH_ACTIONS.SET_ERROR, payload: error.message });
     }
   };
@@ -137,21 +137,21 @@ const useAuth = () => {
 
       dispatch({ type: AUTH_ACTIONS.AUTHORIZE, payload: data.user || body });
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Registered Successfully',
-        showConfirmButton: false,
-        timer: 2000,
-      });
+      // Swal.fire({
+      //   icon: 'success',
+      //   title: 'Registered Successfully',
+      //   showConfirmButton: false,
+      //   timer: 2000,
+      // });
 
       router.replace(PATHS.LOGIN);
     } catch (error: any) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Registration failed!',
-        showConfirmButton: false,
-        timer: 2000,
-      });
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Registration failed!',
+      //   showConfirmButton: false,
+      //   timer: 2000,
+      // });
       dispatch({ type: AUTH_ACTIONS.SET_ERROR, payload: error.message });
     }
   };
@@ -163,12 +163,12 @@ const useAuth = () => {
       dispatch({ type: AUTH_ACTIONS.LOGOUT });
       router.replace(PATHS.LOGIN);
     } catch {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error logging out',
-        showConfirmButton: false,
-        timer: 2000,
-      });
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Error logging out',
+      //   showConfirmButton: false,
+      //   timer: 2000,
+      // });
     }
   };
 
