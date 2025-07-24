@@ -11,20 +11,25 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import { useTranslations } from 'next-intl';
 
 const MobileHeader = () => {
-  const pathname = usePathname();
-  const t = useTranslations('PagesHeaderTitles');
+  const pathname = usePathname(); // e.g., "/en/about"
+  const t = useTranslations('PagesHeaderTitles'); // Translations for page titles
 
-  // Split the pathname and remove empty parts
+  // Split the pathname into parts: "/en/about" → ['en', 'about']
   const pathParts = pathname.split('/').filter(Boolean);
 
-  // Extract the last part of the path
-  const pageKey = pathParts[pathParts.length - 1] || 'home';
+  // Remove the first part if it's a locale (e.g., 'en' or 'ar')
+  const filteredParts = pathParts.filter(
+    (part, index) => !(index === 0 && ['en', 'ar'].includes(part))
+  );
 
-  // Optional: fallback to parent segment if no translation found
+  // Get the last segment after removing locale — this is our primary translation key
+  const pageKey = filteredParts[filteredParts.length - 1] || 'home';
+
+  // Fallback to the previous segment if needed
   const fallbackKey =
-    pathParts.length > 1 ? pathParts[pathParts.length - 2] : 'home';
+    filteredParts.length > 1 ? filteredParts[filteredParts.length - 2] : 'home';
 
-  // Get translation or fallback to home
+  // Try translating pageKey first; if it fails, try fallbackKey; otherwise use 'home'
   const title =
     t(pageKey) !== pageKey
       ? t(pageKey)

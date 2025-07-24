@@ -6,22 +6,29 @@ import { Metadata } from 'next';
 export async function generateMetadata({
   params,
 }: {
-  params: paramsProps;
+  params: Promise<paramsProps>;
 }): Promise<Metadata> {
-  const categoryName = params.category;
+  const resolvedParams = await params;
+  const categoryName = resolvedParams.category;
 
   return {
-    title: `إنجوي قيمز | ${categoryName} | ${params.itemId}`,
+    title: `إنجوي قيمز | ${categoryName} | ${resolvedParams.itemId}`,
     description: `تصفح المنتجات في فئة ${categoryName} على موقعنا.`,
   };
 }
 
 export default async function BundlesWrapper({
   params,
+  searchParams,
 }: {
   params: paramsProps;
+  searchParams?: { account?: string };
 }) {
-  const item = await getItemData(params.category, params.itemId);
+  const item = await getItemData(
+    params.category,
+    params.itemId,
+    searchParams?.account
+  );
 
   if (!item) return <div>العنصر غير موجود.</div>;
 

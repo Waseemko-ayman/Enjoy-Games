@@ -1,18 +1,17 @@
 import { CategoryCardProps } from '@/interfaces';
 import Image from 'next/image';
-import Link from 'next/link';
 import React, { Suspense } from 'react';
 import Loading from './loading';
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
-  href = '#',
+  onClick,
   banner = '#',
   label,
 }) => {
   return (
-    <Link
-      href={href}
-      className="text-center hover:opacity-80 transition-all duration-300"
+    <div
+      onClick={onClick}
+      className="text-center hover:opacity-80 transition-all duration-300 cursor-pointer"
     >
       <Suspense fallback={<Loading />}>
         <div className="overflow-hidden rounded-2xl shadow-lg">
@@ -22,7 +21,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
       <h2 className="text-xl font-bold text-[var(--enjoy-gray-650)] mt-2.5">
         {label}
       </h2>
-    </Link>
+    </div>
   );
 };
 

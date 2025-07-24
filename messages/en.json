@@ -345,6 +345,9 @@
     "bad": "Bad",
     "relatedProducts": "Related Products"
   },
+  "errorBoundary": {
+    "title": "Oops! Something Went Wrong"
+  },
   "Shared": {
     "procedures": {
       "default": "Withdrawal History",
@@ -403,7 +406,10 @@
     "continue": "Continue",
     "addCoupon": "Add Coupon",
     "addToCart": "Add to cart",
-    "submitRating": "Submit Rating"
+    "submitRating": "Submit Rating",
+    "LetsTryAgain": "Let's Try Again",
+    "check": "Check",
+    "sendEmail": "email"
   },
   "Inputs": {
     "labels": {
@@ -477,9 +483,12 @@
     "loginDesc": "Login with your registered accouunt in EnjoyGames",
     "signupTitle": "Welcome to EnjoyGames",
     "signupDesc": "Create New Account",
+    "otpDesc": "You have received a message with a verification code via email.",
     "dontHabeAccount": "Don't have an account?",
     "registerationReq": "Create an new account; You implicitly agreed on",
-    "termsAndConditions": "Terms and Conditions"
+    "termsAndConditions": "Terms and Conditions",
+    "sendNewCode": "Send a new code after",
+    "notGetCode": "Didn't receive the code? Resend it via"
   },
   "Languages": {
     "english": "English",

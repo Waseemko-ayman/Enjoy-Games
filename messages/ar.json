@@ -345,6 +345,9 @@
     "bad": "سيء",
     "relatedProducts": "منتجات مشابهة"
   },
+  "errorBoundary": {
+    "title": "عفواً! حدث خطأ ما"
+  },
   "Shared": {
     "procedures": {
       "default": "سجل عمليات السحب",
@@ -403,7 +406,10 @@
     "continue": "استمر",
     "addCoupon": "أضف القسيمة",
     "addToCart": "أضف للسلة",
-    "submitRating": "ارسال تقييم"
+    "submitRating": "ارسال تقييم",
+    "LetsTryAgain": "دعونا نحاول مرة أخرى",
+    "check": "تحقق",
+    "sendEmail": "الإيميل"
   },
   "Inputs": {
     "labels": {
@@ -476,10 +482,13 @@
   "Auth": {
     "loginDesc": "سجّل دخولك بحسابك المسجّل في إنجوي قيمز",
     "signupTitle": "أهلا بك في إنجوي قيمز",
-    "signupDesc": "أنشئ حسابًا جديدا",
+    "signupDesc": "أنشئ حساب جديد",
+    "otpDesc": "وصلتك رسالة برمز تحقق على الإيميل",
     "dontHabeAccount": "لا تمتلك حساب؟",
     "registerationReq": "بإنشاء حساب جديد؛ أنت توافق ضمنيًا على",
-    "termsAndConditions": "الشروط والأحكام"
+    "termsAndConditions": "الشروط والأحكام",
+    "sendNewCode": "إرسال رمز جديد بعد",
+    "notGetCode": "لم يصلك الرمز؟ أعد إرساله عبر"
   },
   "Languages": {
     "english": "إنجليزي",

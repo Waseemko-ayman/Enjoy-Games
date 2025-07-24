@@ -4,6 +4,8 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import './globals.css';
+import AuthProvider from '@/context/AuthContext';
+import ErrorBoundary from './ErrorBoundary';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -37,7 +39,11 @@ export default async function RootLayout({
         />
       </head>
       <body className={`antialiased`}>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <ErrorBoundary>
+          <AuthProvider>
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          </AuthProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

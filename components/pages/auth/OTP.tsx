@@ -1,14 +1,18 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { FaMessage } from 'react-icons/fa6';
 import AuthLayout from '@/components/organism/AuthLayout';
 import Button from '@/components/atomic/Button';
+import { useTranslations } from 'next-intl';
+import { MdOutlineAlternateEmail } from 'react-icons/md';
 
 const OTPPage = () => {
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(6);
   const [otp, setOtp] = useState(['', '', '', '']);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const authTxts = useTranslations('Auth');
+  const btnTxts = useTranslations('BtnTexts');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (timeLeft > 0) {
@@ -59,14 +63,22 @@ const OTPPage = () => {
     inputRefs.current[Math.min(pastedData.length, 3)]?.focus();
   };
 
+  const handleSubmit = () => {
+    setIsSubmitting(true);
+    setTimeout(() => {
+      console.log('Submit OTP:', otp.join(''));
+      setIsSubmitting(false);
+    }, 2000);
+  };
+
   return (
     <AuthLayout
-      title="أنشئ حساب جديد"
-      description="وصلتك رسالة واتساب برمز تحقق على الرقم +970592164680"
-      btnText="تحقق"
-      showFooterText
+      title={authTxts('signupDesc')}
+      description={authTxts('otpDesc')}
+      btnText={btnTxts('check')}
       isSubmitDisabled={otp.some((digit) => !digit)}
-      onSubmit={() => console.log('Submit OTP:', otp.join(''))}
+      isSubmitting={isSubmitting}
+      onSubmit={handleSubmit}
     >
       <div className="flex gap-3 justify-center mb-6">
         {otp.map((digit, index) => (
@@ -89,19 +101,19 @@ const OTPPage = () => {
 
       {timeLeft > 0 ? (
         <div className="bg-gray-200 rounded-lg w-fit mx-auto py-2 px-3 text-center text-gray-400 text-sm mb-3">
-          إرسال رمز جديد بعد {formatTime(timeLeft)}
+          {authTxts('sendNewCode')} {formatTime(timeLeft)}
         </div>
       ) : (
         <div className="flex items-center justify-between flex-wrap gap-2 mt-4">
+          <h4 className="text-sm font-normal">{authTxts('notGetCode')}</h4>
           <Button
-            variant="fifth"
-            type="button"
-            Icon={FaMessage}
+            // variant="fifth"
+            type="submit"
+            Icon={MdOutlineAlternateEmail}
             otherClassName="text-[11px] py-1 px-6"
           >
-            (SMS) رسالة نصيّة
+            {btnTxts('sendEmail')}
           </Button>
-          <h4 className="text-sm font-normal">لم يصلك الرمز؟ أعد إرساله عبر</h4>
         </div>
       )}
     </AuthLayout>

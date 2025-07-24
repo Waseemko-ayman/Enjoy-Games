@@ -52,7 +52,8 @@ const LoginPage = () => {
       description={authTxts('loginDesc')}
       btnText={btnTxts('login')}
       onSubmit={handleSubmit(onSubmit)}
-      isSubmitDisabled={isSubmittingLocal}
+      isSubmitDisabled={false}
+      isSubmitting={isSubmittingLocal}
     >
       {loginInputs.map((input) => {
         const label = inputsTxts(`labels.${input.name}`);

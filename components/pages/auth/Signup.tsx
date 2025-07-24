@@ -12,9 +12,11 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { signupFormData } from '@/interfaces';
 import FormError from '@/components/atomic/FormError';
+import { useRouter } from 'next/navigation';
 
 const SignupPage = () => {
   const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
+  const router = useRouter();
 
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
@@ -50,6 +52,7 @@ const SignupPage = () => {
       console.log('Signup Data:', data);
       reset();
       setIsSubmittingLocal(false);
+      router.push(PATHS.OTP);
     }, 1000);
   };
 
@@ -59,7 +62,8 @@ const SignupPage = () => {
       description={authTxts('signupDesc')}
       btnText={btnTxts('createAccount')}
       onSubmit={handleSubmit(onSubmit)}
-      isSubmitDisabled={isSubmittingLocal}
+      isSubmitDisabled={false}
+      isSubmitting={isSubmittingLocal}
     >
       {signupInputs.map((input) => {
         const label = inputsTxts(`labels.${input.name}`);

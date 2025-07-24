@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from './Form';
 import Container from '@/components/organism/Container';
 import Layer from '@/components/atomic/Layer';
@@ -12,7 +12,6 @@ import Stats from './Stats';
 import InvitationLink from './InvitationLink';
 import DeleteAccount from './DeleteAccount';
 import ProfilePicture from './ProfilePicture';
-import useIsMobile from '@/hook/useIsMobile';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -25,7 +24,7 @@ const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{2,}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Content = () => {
-  const isMobile = useIsMobile();
+  const [isMobile, setIsMobile] = useState(false);
   const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
   const t = useTranslations('MyAccount');
   const btnTexts = useTranslations('BtnTexts');
@@ -76,10 +75,8 @@ const Content = () => {
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmittingLocal(true);
-    console.log(data);
-
     setTimeout(() => {
-      setIsSubmittingLocal(false);
+      console.log(data);
       reset({
         username: data.username,
         email: data.email,
@@ -89,19 +86,38 @@ const Content = () => {
         options: data.options || [false, false, false, false],
         avatar: data.avatar?.[0]?.name || '',
       });
+      setIsSubmittingLocal(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 991) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <FormProvider {...methods}>
       <Layer>
         <Container>
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div
+            className={`flex flex-col lg:flex-row ${
+              isMobile ? 'gap-1' : 'gap-8'
+            }`}
+          >
             {/* Left Side - Form */}
-            <form className="flex-1" onSubmit={handleSubmit(onSubmit)}>
-              {isMobile && <ProfilePicture t={t} />}
-
-              <div className="space-y-6 max-[991px]:mt-3">
+            <form
+              className={`flex-1 ${isMobile ? 'order-2' : ''}`}
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <div className={`space-y-6 ${isMobile ? 'mt-3' : ''}`}>
                 {/* Account Information */}
                 <Form
                   register={register}
@@ -120,7 +136,7 @@ const Content = () => {
                   <Button
                     type="submit"
                     otherClassName="py-3 px-8 mt-10 flex items-center"
-                    Icon={MdSave}
+                    Icon={!isSubmittingLocal ? MdSave : undefined}
                     iconPosition="right"
                     disabled={isSubmittingLocal}
                   >
@@ -138,24 +154,25 @@ const Content = () => {
             </form>
 
             {/* Right Side - Profile Section */}
-            {!isMobile && (
-              <div className="space-y-6">
-                {/* Profile Picture Section */}
-                <ProfilePicture t={t} />
+            <div className={isMobile ? 'order-1' : 'space-y-6'}>
+              {/* Profile Picture Section */}
+              <ProfilePicture t={t} />
+              {!isMobile && (
+                <>
+                  {/* Step Indicator */}
+                  <StepIndicator t={t} />
 
-                {/* Step Indicator */}
-                <StepIndicator t={t} />
+                  {/* Stats */}
+                  <Stats t={t} />
 
-                {/* Stats */}
-                <Stats t={t} />
+                  {/* Invitation Link */}
+                  <InvitationLink t={t} />
 
-                {/* Invitation Link */}
-                <InvitationLink t={t} />
-
-                {/* Delete Account */}
-                <DeleteAccount t={t} />
-              </div>
-            )}
+                  {/* Delete Account */}
+                  <DeleteAccount t={t} />
+                </>
+              )}
+            </div>
           </div>
         </Container>
       </Layer>

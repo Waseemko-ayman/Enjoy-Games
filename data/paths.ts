@@ -39,9 +39,9 @@ export const PATHS = {
     name: 'الأسئلة الشائعة',
     link: '/faq',
   },
-  LOGIN: '/login',
-  SIGNUP: '/signup',
-  OTP: '/otp',
+  LOGIN: '/auth/login',
+  SIGNUP: '/auth/signup',
+  OTP: '/auth/otp',
 };
 
 export const navBarLinks = [

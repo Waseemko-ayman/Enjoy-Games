@@ -19,8 +19,25 @@ export const getCategoryData = (category: string) => {
 
 export const getItemData = (
   category: string,
-  itemId: string
+  itemId: string,
+  accountId?: string
 ): CardItem | undefined => {
   const items = getCategoryData(category);
-  return items.find((item) => item.id === itemId);
+  const item = items.find((item) => item.id === itemId);
+
+  if (!item) return undefined;
+
+  if (accountId && 'accounts' in item && Array.isArray(item.accounts)) {
+    const account = item.accounts.find((acc) => acc.id === accountId);
+    if (account) {
+      return {
+        ...item,
+        ...account,
+        accountId,
+      };
+    }
+  }
+
+  return item;
 };
+

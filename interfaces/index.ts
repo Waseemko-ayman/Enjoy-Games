@@ -169,14 +169,31 @@ export interface shiddaItem extends cardProps {
   src: string;
 }
 
+export interface AccountItem {
+  id: string;
+  label: string;
+  banner: string;
+  shiddatData: shiddaItem[];
+}
+
 export interface CardItem {
   id: string;
   Icon: string;
   label: string;
   banner?: string;
   href?: string;
+  onClick?: () => void;
   requiresAccount?: boolean;
   shiddatData: shiddaItem[];
+  children_count: number;
+  accounts?: AccountItem[];
+  accountId?: string;
+  bundles?: {
+    id: string;
+    title: string;
+    price: number;
+    accountId: string;
+  }[];
 }
 
 export interface CategoryPageProps {
@@ -184,7 +201,7 @@ export interface CategoryPageProps {
 }
 
 export interface CategoryCardProps {
-  href?: string;
+  onClick: () => void;
   banner?: string;
   label: string;
 }
@@ -247,6 +264,7 @@ export interface AuthLayoutProps extends SectionComponentProps {
   btnText: string;
   description: string;
   isSubmitDisabled?: boolean;
+  isSubmitting?: boolean;
   onSubmit?: () => void;
 }
 
@@ -505,4 +523,14 @@ export interface LoginFormData {
 
 export interface signupFormData extends LoginFormData {
   repassword: string;
+}
+
+type Account = {
+  id: string;
+  label: string;
+  banner: string;
+};
+
+export interface SelectAccountPageProps {
+  accounts: Account[];
 }

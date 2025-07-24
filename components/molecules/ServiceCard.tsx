@@ -23,8 +23,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         />
       </div>
       <div>
-        <h4 className="text-lg mb-1 font-semibold">{title}</h4>
-        <p className="text-base font-medium text-[var(--enjoy-gray-650)]">
+        <h4 className="text-base mb-1 font-semibold">{title}</h4>
+        <p className={`text-sm font-medium text-[var(--enjoy-gray-650)]`}>
           {description}
         </p>
       </div>

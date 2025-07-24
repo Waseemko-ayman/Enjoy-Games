@@ -115,6 +115,7 @@ export const digitalStores = [
     banner: '/assets/play-station.webp',
     requiresAccount: true,
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'google-play',
@@ -123,6 +124,33 @@ export const digitalStores = [
     banner: '/assets/play-station.webp',
     requiresAccount: false,
     shiddatData: shiddats,
+    children_count: 1,
+    accounts: [
+      {
+        id: 'حساب سعودي',
+        label: 'حساب سعودي',
+        banner: '/assets/play-station.webp',
+        shiddatData: [shiddats[0], shiddats[1]],
+      },
+      {
+        id: 'حساب أمريكي',
+        label: 'حساب أمريكي',
+        banner: '/assets/play-station.webp',
+        shiddatData: [shiddats[2], shiddats[3]],
+      },
+      {
+        id: 'حساب فرنسي',
+        label: 'حساب فرنسي',
+        banner: '/assets/play-station.webp',
+        shiddatData: [shiddats[2], shiddats[3]],
+      },
+      {
+        id: 'حساب إماراتي',
+        label: 'حساب إماراتي',
+        banner: '/assets/play-station.webp',
+        shiddatData: [shiddats[2], shiddats[3]],
+      },
+    ],
   },
   {
     id: 'huawei',
@@ -131,6 +159,7 @@ export const digitalStores = [
     banner: '/assets/play-station.webp',
     requiresAccount: true,
     shiddatData: shiddats,
+    children_count: 0,
   },
 ];
 
@@ -141,6 +170,21 @@ export const gamingPlatforms = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 1,
+    accounts: [
+      {
+        id: 'account1',
+        label: 'حساب سعودي',
+        banner: '/assets/play-station.webp',
+        shiddatData: [shiddats[0], shiddats[1]],
+      },
+      {
+        id: 'account2',
+        label: 'حساب أمريكي',
+        banner: '/assets/play-station.webp',
+        shiddatData: [shiddats[2], shiddats[3]],
+      },
+    ],
   },
   {
     id: 'xbox',
@@ -148,6 +192,21 @@ export const gamingPlatforms = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 1,
+    accounts: [
+      {
+        id: 'حساب سعودي',
+        label: 'حساب سعودي',
+        banner: '/assets/play-station.webp',
+        shiddatData: [shiddats[0], shiddats[1]],
+      },
+      {
+        id: 'حساب أمريكي',
+        label: 'حساب أمريكي',
+        banner: '/assets/play-station.webp',
+        shiddatData: [shiddats[2], shiddats[3]],
+      },
+    ],
   },
   {
     id: 'steam',
@@ -155,6 +214,7 @@ export const gamingPlatforms = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'pubg',
@@ -162,6 +222,7 @@ export const gamingPlatforms = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'jawaker',
@@ -169,6 +230,7 @@ export const gamingPlatforms = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'yalla-ludo',
@@ -176,6 +238,7 @@ export const gamingPlatforms = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
 ];
 
@@ -186,6 +249,7 @@ export const shoppingCarts = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'ebay',
@@ -193,6 +257,7 @@ export const shoppingCarts = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'razer-gold',
@@ -200,6 +265,7 @@ export const shoppingCarts = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'paysafecard',
@@ -207,6 +273,7 @@ export const shoppingCarts = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'noon',
@@ -214,6 +281,7 @@ export const shoppingCarts = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'home-center',
@@ -221,6 +289,7 @@ export const shoppingCarts = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
 ];
 
@@ -231,6 +300,7 @@ export const servicesAndSubscriptions = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'nana',
@@ -238,6 +308,7 @@ export const servicesAndSubscriptions = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'mcafee',
@@ -245,6 +316,7 @@ export const servicesAndSubscriptions = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'noon-mintes',
@@ -252,6 +324,7 @@ export const servicesAndSubscriptions = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'marsool',
@@ -259,6 +332,7 @@ export const servicesAndSubscriptions = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
   {
     id: 'discord',
@@ -266,6 +340,7 @@ export const servicesAndSubscriptions = [
     Icon: '/assets/play-station.webp',
     banner: '/assets/play-station.webp',
     shiddatData: shiddats,
+    children_count: 0,
   },
 ];
 

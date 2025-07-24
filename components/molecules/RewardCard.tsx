@@ -40,7 +40,6 @@ const RewardCard = ({
         width={112}
         height={112}
         className="max-sm:order-1"
-        unoptimized
       />
     </div>
   );

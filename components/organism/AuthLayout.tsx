@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Button from '../atomic/Button';
 import { AuthLayoutProps } from '@/interfaces';
+import ButtonLoading from '../atomic/ButtonLoading';
 
 const AuthLayout: React.FC<AuthLayoutProps> = ({
   children,
@@ -11,6 +12,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
   title,
   description,
   isSubmitDisabled,
+  isSubmitting,
   onSubmit,
 }) => {
   return (
@@ -21,6 +23,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
         width={150}
         height={150}
         className="pb-3"
+        priority
       />
 
       {/* Title & Description */}
@@ -29,7 +32,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
         <p className="text-base font-normal mt-2.5">{description}</p>
       </div>
 
-      <form>
+      <form onSubmit={onSubmit}>
         {/* Children Content */}
         <div className="w-full mb-6">
           <div className="space-y-3">{children}</div>
@@ -38,11 +41,10 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
         {/* Submit Button */}
         <Button
           type="submit"
-          handleClick={onSubmit}
-          disabled={isSubmitDisabled}
+          disabled={isSubmitDisabled || isSubmitting}
           otherClassName="w-full py-3 px-6 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {btnText}
+          {isSubmitting ? <ButtonLoading /> : btnText}
         </Button>
       </form>
     </div>
