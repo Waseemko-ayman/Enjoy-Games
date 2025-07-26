@@ -32,9 +32,9 @@ const PageHeader = ({
   const categorySlug =
     categoryIndex !== -1 && pathParts[categoryIndex + 1]
       ? pathParts[categoryIndex + 1]
-      : null;
-  const categoryLabel = categorySlug ? useCategoryTitle(categorySlug) : null;
+      : '';
 
+  const categoryLabel = useCategoryTitle(categorySlug); // ✅ always called
   const pathNameMap = extractPaths(PATHS);
   const breadcrumbs = [{ label: tPages('home'), href: '/' }];
   let accumulatedPath = '';
@@ -50,7 +50,7 @@ const PageHeader = ({
     if (part === 'categories' && pathParts[i + 1]) {
       accumulatedPath += `/categories/${categorySlug}`;
       breadcrumbs.push({ label: categoryLabel || '', href: accumulatedPath });
-      i++; // Skip the slug because it's already handled here
+      i++;
       continue;
     }
 
@@ -138,7 +138,9 @@ function getLabel(
   return translated;
 }
 
-function extractPaths(obj: any, map: Record<string, string> = {}) {
+type PathNode = { link: string; name: string } | Record<string, PathNode>;
+
+function extractPaths(obj: PathNode, map: Record<string, string> = {}) {
   for (const key in obj) {
     const value = obj[key];
     if (value && typeof value === 'object') {
