@@ -413,10 +413,10 @@
   },
   "Inputs": {
     "labels": {
-      "username": "الإسم",
+      "name": "الإسم",
       "email": "البريد الإلكتروني",
       "password": "كلمة المرور",
-      "repassword": "تأكيد كلمة المرور",
+      "password_confirmation": "تأكيد كلمة المرور",
       "gender": "الجنس",
       "phone": "رقم الجوال",
       "birthDate": "تاريخ الميلاد",
@@ -434,7 +434,7 @@
       "subject": "عنوان التذكرة",
       "ticketType": "حدد نوع التذكرة",
       "details": "يرجي كتابة وصف لمساعتدك بشكل أدق",
-      "username": "",
+      "name": "",
       "email": "",
       "phone": "xxxxxxxxx",
       "birthDate": "--/--/----",
@@ -445,6 +445,7 @@
       "comment": "أكتب تعليقك هنا",
       "writeWhatYouWant": "اكتب اللي تبغاه، وخلّنا نلقاه لك",
       "describeIssue": "فضلًا أوصف لنا مشكلتك أو إستفسارك بشكل مفصل",
+      "writeYorName": "أكتب إسمك...",
       "writeYorEmail": "أكتب إيميلك...",
       "yourPassword": "كلمة المرور الخاصة بك",
       "repassword": "تأكيد كلمة المرور"
@@ -470,7 +471,7 @@
       "birthDateRequired": "تاريخ الميلاد مطلوب",
       "genderInvalid": "الرجاء اختيار الجنس",
       "passwordRequired": "كلمة المرور مطلوبة",
-      "repasswordRequired": "تأكيد كلمة المرور مطلوب",
+      "repasswordRequired": "يجب تأكيد كلمة المرور",
       "repasswordNotMatch": "كلمة المرور غير متطابقة",
       "genderRequired": "الجنس مطلوب",
       "avatarRequired": "الصورة مطلوبة",
@@ -488,7 +489,14 @@
     "registerationReq": "بإنشاء حساب جديد؛ أنت توافق ضمنيًا على",
     "termsAndConditions": "الشروط والأحكام",
     "sendNewCode": "إرسال رمز جديد بعد",
-    "notGetCode": "لم يصلك الرمز؟ أعد إرساله عبر"
+    "notGetCode": "لم يصلك الرمز؟ أعد إرساله عبر",
+    "emailNotFound": "لم يتم العثور على البريد الإلكتروني، يرجى إعادة المحاولة",
+    "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بياناتك.",
+    "registerSuccessed": "تم إنشاء الحساب، وتم إرسال رمز التحقق إلى بريدك.",
+    "verificationFailedCode": "رمز التحقق غير صحيح",
+    "verifiedSuccessfullyCode": "تم التحقق من الرمز بنجاح!",
+    "verificationCode": "تم إرسال رمز التحقق إلى بريدك.",
+    "logoutSuccess": "تم تسجيل الخروج بنجاح"
   },
   "Languages": {
     "english": "إنجليزي",

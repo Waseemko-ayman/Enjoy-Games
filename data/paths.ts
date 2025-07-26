@@ -53,6 +53,12 @@ export const navBarLinks = [
     titleKey: 'my-purchases',
     link: PATHS.MY_PURCHASES.link,
   },
-  { id: 4, icon: FiUser, titleKey: 'RegisterNow', link: PATHS.LOGIN },
+  {
+    id: 4,
+    icon: FiUser,
+    titleKey: 'RegisterNow',
+    link: PATHS.LOGIN,
+    hideWhenAuth: true,
+  },
   { id: 5, icon: MdMoreHoriz, titleKey: 'more', onClick: true },
 ];

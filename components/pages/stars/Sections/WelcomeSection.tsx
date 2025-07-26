@@ -7,12 +7,13 @@ import EarningsPointsSection from '@/components/molecules/EarningsPointsSection'
 import PointsEarningGuide from '@/components/molecules/PointsEarningGuide';
 import Container from '@/components/organism/Container';
 import { PATHS } from '@/data/paths';
-import React, { useState } from 'react';
+import React from 'react';
 import { MdWavingHand } from 'react-icons/md';
 import { useTranslations } from 'next-intl';
+import { useAuthContext } from '@/context/AuthContext';
 
 const WelcomeSection = () => {
-  const [isLogin] = useState(true);
+  const { token } = useAuthContext();
   const secTexts = useTranslations('SectionsTitles.Stars');
   const sharedTexts = useTranslations('Shared');
   const btnTexts = useTranslations('BtnTexts');
@@ -22,9 +23,9 @@ const WelcomeSection = () => {
         <SectionTitle
           title={secTexts('title')}
           subtitle={secTexts('desc')}
-          Icon={MdWavingHand}
+          icon={MdWavingHand}
         />
-        {isLogin ? (
+        {token ? (
           <EarningsPointsSection
             variant="points"
             totalAmount={0}
@@ -38,7 +39,7 @@ const WelcomeSection = () => {
         ) : (
           <AnimatedWrapper>
             <CardWrapper className="py-6 px-5 sm:px-8 mb-8 w-full sm:max-w-5/6 mx-auto">
-              <PointsEarningGuide isLogin={false} />
+              <PointsEarningGuide />
             </CardWrapper>
           </AnimatedWrapper>
         )}

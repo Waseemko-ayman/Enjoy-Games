@@ -10,9 +10,12 @@ import ServiceAdvantages from './Sections/ServiceAdvantages';
 import WalletSection from './Sections/WalletSection';
 import HeroBanner from './Sections/HeroBanner';
 import { useTranslations } from 'next-intl';
+// import CookieManager from '@/utils/CookieManager';
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
+  // const token = CookieManager.getToken();
+  // if (token) console.log(token);
   return (
     <>
       <HeroBanner />

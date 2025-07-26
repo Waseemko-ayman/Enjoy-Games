@@ -14,7 +14,13 @@ function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
 function SheetTrigger({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Trigger>) {
-  return <SheetPrimitive.Trigger data-slot="sheet-trigger" {...props} />;
+  return (
+    <SheetPrimitive.Trigger
+      data-slot="sheet-trigger"
+      aria-haspopup="dialog"
+      {...props}
+    />
+  );
 }
 
 function SheetClose({

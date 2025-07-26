@@ -11,7 +11,7 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const MainAuthLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
-  const pathWithoutLocale = pathname.split('/').slice(2).join('/');
+  const pathWithoutLocale = pathname.split('/').slice(3).join('/');
   const isSignupPage = pathWithoutLocale === 'signup';
 
   const { toggleLocale, isArabic } = useToggleLocale();

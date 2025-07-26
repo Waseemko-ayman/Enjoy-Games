@@ -44,7 +44,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps> {
                 <Button
                   handleClick={this.handleClick}
                   Icon={FaArrowsRotate}
-                  otherClassName="py-2 px-8"
+                  otherClassName="py-2 px-8 mx-auto"
                 >
                   {btnTxts('LetsTryAgain')}
                 </Button>

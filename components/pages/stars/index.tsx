@@ -1,19 +1,20 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import WelcomeSection from './Sections/WelcomeSection';
 import EnjoyGamesGifts from './Sections/EnjoyGamesGifts';
 import Upgrade from './Sections/Upgrade';
 import FAQ from './Sections/FAQ';
 import EarnMore from './Sections/EarnMore';
+import { useAuthContext } from '@/context/AuthContext';
 
 const StarsPage = () => {
-  const [isLogin] = useState(true);
+  const { token } = useAuthContext();
   return (
     <>
       <WelcomeSection />
       <EnjoyGamesGifts />
       <Upgrade />
-      {isLogin && <EarnMore />}
+      {token && <EarnMore />}
       <FAQ />
     </>
   );

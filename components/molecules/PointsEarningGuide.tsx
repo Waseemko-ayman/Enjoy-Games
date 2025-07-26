@@ -6,15 +6,11 @@ import Link from 'next/link';
 import { PATHS } from '@/data/paths';
 import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
 import { useTranslations } from 'next-intl';
+import { useAuthContext } from '@/context/AuthContext';
 
-const PointsEarningGuide = ({
-  isLogin = true,
-  descClassName,
-}: {
-  isLogin?: boolean;
-  descClassName?: string;
-}) => {
+const PointsEarningGuide = ({ descClassName }: { descClassName?: string }) => {
   const t = useTranslations('Stars.ReferralProgram.EnjoyGames');
+  const { token } = useAuthContext();
   return (
     <div>
       <div className="text-center mb-3 sm:mb-8 p-3 rounded-2xl border border-gray-200">
@@ -48,7 +44,7 @@ const PointsEarningGuide = ({
       </div>
 
       <div className="text-center flex items-center gap-1 justify-center text-xs sm:text-base font-bold">
-        {isLogin ? (
+        {token ? (
           <>
             <p>
               {t('startNow')} {t('cta')} 🔥

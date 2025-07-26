@@ -14,13 +14,14 @@ import UserPopup from './UserPopup';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import Button from '@/components/atomic/Button';
 import { useTranslations } from 'next-intl';
+import { useAuthContext } from '@/context/AuthContext';
 
 const Header = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [productsCount] = useState(0);
-  const [isLogin] = useState(true);
+  const { token } = useAuthContext();
   const menuRef = useRef<HTMLDivElement>(null);
   const { toggleLocale, isArabic } = useToggleLocale();
   const t = useTranslations('Inputs.placeHolders');
@@ -70,7 +71,7 @@ const Header = () => {
           </form>
 
           <div className="flex items-center gap-5">
-            {isLogin ? (
+            {token ? (
               <div className="relative" ref={menuRef}>
                 <AnimatedWrapper direction="y" distance={40}>
                   <FiUser

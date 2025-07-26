@@ -1,25 +1,26 @@
 'use client';
 
-import { ROLES } from '@/constants';
 import { useAuthContext } from '@/context/AuthContext';
 import { PATHS } from '@/data/paths';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const LayoutAuth = () => {
-  const { role } = useAuthContext();
+  const { isLoading, data } = useAuthContext();
   const router = useRouter();
 
   useEffect(() => {
-    if (role === ROLES.USER || role === ROLES.ADMIN) {
+    if (isLoading) return;
+
+    if (data?.data?.token) {
       router.replace(PATHS.HOME.link);
-    } else if (role === ROLES.GUEST) {
+    } else {
       router.replace(PATHS.LOGIN);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoading]);
 
-  return;
+  return null;
 };
 
 export default LayoutAuth;

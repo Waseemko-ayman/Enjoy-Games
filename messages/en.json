@@ -413,10 +413,10 @@
   },
   "Inputs": {
     "labels": {
-      "username": "Name",
+      "name": "Name",
       "email": "Email",
       "password": "Password",
-      "repassword": "Confirm password",
+      "password_confirmation": "Confirm password",
       "gender": "Gender",
       "phone": "Mobile Number",
       "birthDate": "Birth Date",
@@ -434,7 +434,7 @@
       "subject": "Ticket Title",
       "ticketType": "Select Ticket Type",
       "details": "Please write a detailed description of your issue",
-      "username": "",
+      "name": "",
       "email": "",
       "phone": "xxxxxxxxx",
       "birthDate": "--/--/----",
@@ -445,6 +445,7 @@
       "comment": "Write your comment here",
       "writeWhatYouWant": "Search anything you want",
       "describeIssue": "Please describe your issue or inquiry in detail",
+      "writeYorName": "write your name...",
       "writeYorEmail": "write your email...",
       "yourPassword": "your password",
       "repassword": "Confirm password"
@@ -488,7 +489,14 @@
     "registerationReq": "Create an new account; You implicitly agreed on",
     "termsAndConditions": "Terms and Conditions",
     "sendNewCode": "Send a new code after",
-    "notGetCode": "Didn't receive the code? Resend it via"
+    "notGetCode": "Didn't receive the code? Resend it via",
+    "emailNotFound": "Email not found, please try again",
+    "loginFailed": "Login failed. Please check your details.",
+    "registerSuccessed": "The account has been created, and the verification code has been sent to your email.",
+    "verificationFailedCode": "Invalid verification code",
+    "verifiedSuccessfullyCode": "Verified successfully code!",
+    "verificationCode": "A verification code has been sent to your email.",
+    "logoutSuccess": "Successfully logged out."
   },
   "Languages": {
     "english": "English",

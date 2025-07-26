@@ -12,8 +12,8 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({ cards }) => {
         {cards.map((card, index) => (
           <AnimatedWrapper key={card.id} custom={index}>
             <CategoryCard
-              banner={card.banner}
-              label={card.label}
+              image={card.image}
+              name={card.name}
               onClick={card.onClick}
             />
           </AnimatedWrapper>

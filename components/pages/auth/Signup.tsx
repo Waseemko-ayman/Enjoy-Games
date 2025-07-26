@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -12,27 +12,30 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { signupFormData } from '@/interfaces';
 import FormError from '@/components/atomic/FormError';
-import { useRouter } from 'next/navigation';
+import { InputTypes } from '@/utils/type';
+import { useAuthContext } from '@/context/AuthContext';
 
 const SignupPage = () => {
-  const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
-  const router = useRouter();
-
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const authTxts = useTranslations('Auth');
   const btnTxts = useTranslations('BtnTexts');
   const reqTxts = useTranslations('Layout.footer.LearnMore');
+  const { signup, isLoading } = useAuthContext();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{5,}$/;
 
   const schema = Yup.object().shape({
+    name: Yup.string()
+      .matches(alphanumericWithArabicRegex, errorsMsgs('usernameInvalid'))
+      .required('usernameRequired'),
     email: Yup.string()
       .email()
       .matches(emailRegex, errorsMsgs('emailPatternInvalid'))
       .required(errorsMsgs('emailRequired')),
     password: Yup.string().required(errorsMsgs('passwordRequired')),
-    repassword: Yup.string()
+    password_confirmation: Yup.string()
       .oneOf([Yup.ref('password')], errorsMsgs('repasswordNotMatch'))
       .required(errorsMsgs('repasswordRequired')),
   });
@@ -47,13 +50,9 @@ const SignupPage = () => {
   });
 
   const onSubmit = (data: signupFormData) => {
-    setIsSubmittingLocal(true);
-    setTimeout(() => {
-      console.log('Signup Data:', data);
-      reset();
-      setIsSubmittingLocal(false);
-      router.push(PATHS.OTP);
-    }, 1000);
+    console.log('Sending signup data:', data);
+    signup(data);
+    reset();
   };
 
   return (
@@ -63,7 +62,7 @@ const SignupPage = () => {
       btnText={btnTxts('createAccount')}
       onSubmit={handleSubmit(onSubmit)}
       isSubmitDisabled={false}
-      isSubmitting={isSubmittingLocal}
+      isSubmitting={isLoading}
     >
       {signupInputs.map((input) => {
         const label = inputsTxts(`labels.${input.name}`);
@@ -73,7 +72,8 @@ const SignupPage = () => {
             <Input
               key={input.id}
               variant="secondary"
-              type={input.type}
+              type={input.type as InputTypes}
+              inputName={input.name}
               label={label}
               placeholder={placeholder}
               otherClassNameContainer={

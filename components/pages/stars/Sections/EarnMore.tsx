@@ -14,10 +14,7 @@ const EarnMore = () => {
       description={t('description')}
       imageSrc="character.png"
     >
-      <PointsEarningGuide
-        isLogin={false}
-        descClassName={isArabic ? 'text-sm' : 'text-xs'}
-      />
+      <PointsEarningGuide descClassName={isArabic ? 'text-sm' : 'text-xs'} />
     </DiscoverEarnMoreCard>
   );
 };

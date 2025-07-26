@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ProgressCircle from '@/components/molecules/ProgressCircle';
 import {
   ButtonIconPosition,
@@ -13,7 +14,7 @@ import { Messages, useTranslations } from 'next-intl';
 import { ElementType, JSX, ReactNode } from 'react';
 
 interface BaseIconProps {
-  Icon?: React.ElementType | string;
+  icon?: React.ElementType | string | any;
 }
 
 interface BaseClassNameProps {
@@ -62,7 +63,7 @@ export interface ProductCardProps extends BaseIconProps, cardProps {
 }
 
 export interface NavItemProps extends BaseIconProps, BaseClassNameProps {
-  text: string;
+  name: string;
   linkPath?: string;
   otherClassNameIcon?: string;
   showArrow?: boolean;
@@ -114,13 +115,13 @@ export interface ContactInfoProps extends BaseIconProps {
 }
 
 export interface SubMenuItem extends BaseIconProps {
-  label: string;
-  submenu?: SubMenuItem[];
+  name: string;
+  sub_categories?: SubMenuItem[];
   path?: string;
 }
 
 export interface DropdownNavItemProps extends BaseIconProps {
-  text: string;
+  name: string;
   submenu?: SubMenuItem[];
   isMainMenu?: boolean;
 }
@@ -141,7 +142,7 @@ export interface LinkItem extends BaseIconProps {
 
 export interface SectionTypeCardProps extends BaseClassNameProps {
   path: string;
-  title: string;
+  name: string;
   imgSrc: string;
   imgAlt: string;
   imgTitle: string;
@@ -177,23 +178,25 @@ export interface AccountItem {
 }
 
 export interface CardItem {
-  id: string;
-  Icon: string;
-  label: string;
-  banner?: string;
+  id: number;
+  category_id: number;
+  slug: null;
+  parent_id: null;
+  icon: string;
+  name: string;
+  image?: string;
   href?: string;
   onClick?: () => void;
-  requiresAccount?: boolean;
-  shiddatData: shiddaItem[];
   children_count: number;
-  accounts?: AccountItem[];
-  accountId?: string;
-  bundles?: {
-    id: string;
-    title: string;
-    price: number;
-    accountId: string;
-  }[];
+  // shiddatData: shiddaItem[];
+  // accounts?: AccountItem[];
+  // accountId?: string;
+  // bundles?: {
+  //   id: string;
+  //   title: string;
+  //   price: number;
+  //   accountId: string;
+  // }[];
 }
 
 export interface CategoryPageProps {
@@ -201,9 +204,9 @@ export interface CategoryPageProps {
 }
 
 export interface CategoryCardProps {
-  onClick: () => void;
-  banner?: string;
-  label: string;
+  onClick?: () => void;
+  image?: string;
+  name: string;
 }
 
 export interface CountrySelectorContentProps {
@@ -390,7 +393,7 @@ export interface myAccountStatsProps {
 }
 
 export interface FormValues {
-  username: string;
+  name: string;
   email: string;
   phone: string;
   birthDate: string;
@@ -522,7 +525,8 @@ export interface LoginFormData {
 }
 
 export interface signupFormData extends LoginFormData {
-  repassword: string;
+  name: string;
+  password_confirmation: string;
 }
 
 type Account = {

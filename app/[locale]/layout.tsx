@@ -6,6 +6,8 @@ import { routing } from '@/i18n/routing';
 import './globals.css';
 import AuthProvider from '@/context/AuthContext';
 import ErrorBoundary from './ErrorBoundary';
+import 'react-toastify/dist/ReactToastify.css';
+import BodyWrapper from '@/components/organism/layouts/BodyWrapper';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -39,11 +41,13 @@ export default async function RootLayout({
         />
       </head>
       <body className={`antialiased`}>
-        <ErrorBoundary>
-          <AuthProvider>
-            <NextIntlClientProvider>{children}</NextIntlClientProvider>
-          </AuthProvider>
-        </ErrorBoundary>
+        <NextIntlClientProvider>
+          <ErrorBoundary>
+            <AuthProvider>
+              <BodyWrapper>{children}</BodyWrapper>
+            </AuthProvider>
+          </ErrorBoundary>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

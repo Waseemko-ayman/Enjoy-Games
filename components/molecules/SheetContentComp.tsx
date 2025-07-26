@@ -11,7 +11,7 @@ const SheetContentComp = () => {
     <div>
       {subMenuItems.map((item, index) => {
         const isOpen = openIndex === index;
-        const hasSubmenu = !!item.submenu;
+        const hasSubmenu = !!item.sub_categories;
         const isLastTwoItems = index >= subMenuItems.length - 2;
 
         return (
@@ -24,10 +24,10 @@ const SheetContentComp = () => {
           >
             <NavItem
               key={index}
-              Icon={item.Icon}
-              text={item.label}
+              icon={item.icon}
+              name={item.name}
               otherClassName="text-white"
-              showArrow={!!item.submenu}
+              showArrow={!!item.sub_categories}
               onClick={() => setOpenIndex(isOpen ? null : index)}
             />
 
@@ -35,7 +35,7 @@ const SheetContentComp = () => {
               <div
                 className={`z-50 mt-2 border border-gray-100 rounded-xl shadow-lg bg-white scrollbar-none
                 ${
-                  item.submenu.length > 3
+                  item.sub_categories.length > 3
                     ? 'max-h-[300px] overflow-y-auto p-3 grid grid-cols-2 gap-2'
                     : 'p-2'
                 }
@@ -46,11 +46,11 @@ const SheetContentComp = () => {
                     : 'lg:absolute lg:right-full lg:top-0 lg:ml-2 lg:w-[320px]'
                 }`}
               >
-                {item.submenu.map((subItem, subIndex) => (
+                {item.sub_categories.map((subItem, index) => (
                   <NavItem
-                    key={subIndex}
-                    Icon={subItem.Icon}
-                    text={subItem.label}
+                    key={index}
+                    icon={subItem.icon}
+                    name={subItem.name}
                     otherClassName="!py-2 !px-0 !text-base !font-medium"
                   />
                 ))}

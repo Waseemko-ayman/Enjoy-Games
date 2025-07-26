@@ -19,11 +19,13 @@ import { FormValues } from '@/interfaces';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { useTranslations } from 'next-intl';
+import { useAuthContext } from '@/context/AuthContext';
 
 const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{2,}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Content = () => {
+  const { user } = useAuthContext();
   const [isMobile, setIsMobile] = useState(false);
   const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
   const t = useTranslations('MyAccount');
@@ -32,7 +34,7 @@ const Content = () => {
   const errorsTxts = useTranslations('Inputs.errorsMsgs');
 
   const formSchema = Yup.object({
-    username: Yup.string()
+    name: Yup.string()
       .matches(
         alphanumericWithArabicRegex,
         errorsTxts('usernameInvalid') ||
@@ -43,22 +45,27 @@ const Content = () => {
       .email(errorsTxts('emailInvalid') || 'البريد الإلكتروني غير صالح')
       .matches(emailRegex, errorsTxts('emailInvalid') || 'الإيميل غير صالح')
       .required(errorsTxts('emailRequired') || 'البريد الإلكتروني مطلوب'),
-    phone: Yup.string()
-      // .matches(phoneRegex, errorsTxts('phoneInvalid') || 'رقم الجوال غير صالح')
-      .required(errorsTxts('phoneRequired') || 'رقم الجوال مطلوب'),
-    birthDate: Yup.string().required(
-      errorsTxts('birthDateRequired') || 'تاريخ الميلاد مطلوب'
-    ),
-    gender: Yup.string()
-      .oneOf(
-        ['ذكر', 'أنثى'],
-        errorsTxts('genderInvalid') || 'الرجاء اختيار الجنس'
-      )
-      .required(errorsTxts('genderRequired') || 'الجنس مطلوب'),
-    options: Yup.array().of(Yup.boolean()),
-    avatar: Yup.mixed().required(
-      errorsTxts('avatarRequired') || 'الصورة مطلوبة'
-    ),
+    phone: Yup.string().notRequired(),
+    birthDate: Yup.string().notRequired(),
+    gender: Yup.string().oneOf(['ذكر', 'أنثى']).notRequired(),
+    options: Yup.array().of(Yup.boolean()).notRequired(),
+    avatar: Yup.mixed().notRequired(),
+    // phone: Yup.string()
+    //   // .matches(phoneRegex, errorsTxts('phoneInvalid') || 'رقم الجوال غير صالح')
+    //   .required(errorsTxts('phoneRequired') || 'رقم الجوال مطلوب'),
+    // birthDate: Yup.string().required(
+    //   errorsTxts('birthDateRequired') || 'تاريخ الميلاد مطلوب'
+    // ),
+    // gender: Yup.string()
+    //   .oneOf(
+    //     ['ذكر', 'أنثى'],
+    //     errorsTxts('genderInvalid') || 'الرجاء اختيار الجنس'
+    //   )
+    //   .required(errorsTxts('genderRequired') || 'الجنس مطلوب'),
+    // options: Yup.array().of(Yup.boolean()),
+    // avatar: Yup.mixed().required(
+    //   errorsTxts('avatarRequired') || 'الصورة مطلوبة'
+    // ),
   });
 
   const methods = useForm<FormValues>({
@@ -78,7 +85,7 @@ const Content = () => {
     setTimeout(() => {
       console.log(data);
       reset({
-        username: data.username,
+        name: data.name,
         email: data.email,
         phone: data.phone,
         birthDate: data.birthDate,
@@ -89,6 +96,20 @@ const Content = () => {
       setIsSubmittingLocal(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    if (user) {
+      reset({
+        name: user.name || '',
+        email: user.email || '',
+        // phone: (user as any).phone || '', // إذا الحقل موجود بالـ user
+        // birthDate: (user as any).birthDate || '',
+        // gender: (user as any).gender || '',
+        // options: (user as any).options || [false, false, false, false],
+        // avatar: (user as any).avatar || '',
+      });
+    }
+  }, [user, reset]);
 
   useEffect(() => {
     const handleResize = () => {

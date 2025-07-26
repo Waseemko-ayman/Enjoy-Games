@@ -12,10 +12,10 @@ const SectionsTypes = () => {
           <AnimatedWrapper key={item.id} custom={index}>
             <SectionTypeCard
               path={item.path}
-              title={item.label}
-              imgSrc={item.src}
-              imgAlt={item.label}
-              imgTitle={item.label}
+              name={item.name}
+              imgSrc={item.image}
+              imgAlt={item.name}
+              imgTitle={item.name}
               width={90}
               height={90}
               otherClassName="w-[90px] h-[90px] sm:w-[120px] sm:h-[120px]"

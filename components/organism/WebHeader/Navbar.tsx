@@ -14,6 +14,13 @@ import { useTranslations } from 'next-intl';
 const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
   const t = useTranslations('Layout.header.navBar');
 
+  // const dispatch = useDispatch();
+  // const { categories, isLoading } = useSelector((state) => state.products);
+
+  // useEffect(() => {
+  //   dispatch(getAllProductsAction());
+  // }, []);
+
   if (layout === 'store') {
     return (
       <nav className={`${!isMobile ? 'bg-white' : 'pt-2 mt-4'}`}>
@@ -25,9 +32,9 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
           >
             {subMenuItems.map((item) => (
               <NavItem
-                key={item.label}
-                Icon={item.Icon}
-                text={item.label}
+                key={item.name}
+                icon={item.icon}
+                name={item.name}
                 linkPath={item.path}
                 layout={layout}
                 isMobile={isMobile}
@@ -51,8 +58,8 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
             className="relative"
           >
             <DropdownNavItem
-              text={t('allCategories')}
-              Icon={PiSquaresFourLight}
+              name={t('allCategories')}
+              icon={PiSquaresFourLight}
               submenu={subMenuItems}
               isMainMenu={true}
             />
@@ -64,8 +71,8 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <NavItem
-              Icon={IoSearch}
-              text={t('store')}
+              icon={IoSearch}
+              name={t('store')}
               linkPath={PATHS.STORE.link}
             />
           </motion.li>

@@ -1,6 +1,7 @@
 import CardWrapper from '@/components/atomic/CardWrapper';
 import NavItem from '@/components/atomic/NavItem';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useAuthContext } from '@/context/AuthContext';
 import { userList } from '@/data';
 import { useTranslations } from 'next-intl';
 import React from 'react';
@@ -8,6 +9,11 @@ import React from 'react';
 const UserPopup = () => {
   const t = useTranslations();
   const rankT = useTranslations('MyAccount.rank');
+  const { logout } = useAuthContext();
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <CardWrapper className="absolute top-[120%] left-0 z-50 bg-white p-2 w-[212px]">
@@ -46,11 +52,14 @@ const UserPopup = () => {
                   <AnimatedWrapper key={item.id} custom={index}>
                     <li className="w-full">
                       <NavItem
-                        Icon={item.icon}
-                        text={t(`${namespace}.${key}`)}
+                        icon={item.icon}
+                        name={t(`${namespace}.${key}`)}
                         otherClassNameIcon="text-gray-500 text-sm"
                         otherClassName="!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg"
                         linkPath={item.link}
+                        onClick={
+                          item.title === 'تسجيل خروج' ? handleLogout : undefined
+                        }
                       />
                     </li>
                   </AnimatedWrapper>

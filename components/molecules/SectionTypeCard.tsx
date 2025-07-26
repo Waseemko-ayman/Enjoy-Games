@@ -5,7 +5,7 @@ import { SectionTypeCardProps } from '@/interfaces';
 
 const SectionTypeCard: React.FC<SectionTypeCardProps> = ({
   path,
-  title,
+  name,
   imgSrc,
   imgAlt,
   imgTitle,
@@ -23,7 +23,7 @@ const SectionTypeCard: React.FC<SectionTypeCardProps> = ({
         height={height}
         otherClassName={`mx-auto ${otherClassName}`}
       />
-      <h4 className="text-sm sm:text-lg text-center mt-4 font-bold">{title}</h4>
+      <h4 className="text-sm sm:text-lg text-center mt-4 font-bold">{name}</h4>
     </Link>
   );
 };

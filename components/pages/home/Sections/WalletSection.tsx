@@ -9,7 +9,7 @@ import React from 'react';
 const WalletSection = ({ t }: { t: TranslationFunction }) => {
   return (
     <Container otherClassName="mt-10">
-      <GridWrapper gridCols="grid-cols-1">
+      <GridWrapper gridCols="grid-cols-1 md:!grid-cols-2">
         {WalletSectionData.map((card, index) => (
           <AnimatedWrapper key={card.id} custom={index}>
             <WalletCard

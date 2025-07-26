@@ -15,7 +15,7 @@ const AuthButtons = ({ t }: { t: TranslationFunction }) => {
           {t('login')}
         </Button>
       </Link>
-      <Link href={'#'} className="w-full">
+      <Link href={PATHS.SIGNUP} className="w-full">
         <Button variant="forth" otherClassName={btnStyle}>
           {t('createAccount')}
         </Button>

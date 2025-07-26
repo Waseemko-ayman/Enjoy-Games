@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -12,14 +12,15 @@ import Link from 'next/link';
 import { PATHS } from '@/data/paths';
 import { LoginFormData } from '@/interfaces';
 import FormError from '@/components/atomic/FormError';
+import { useAuthContext } from '@/context/AuthContext';
+import { InputTypes } from '@/utils/type';
 
 const LoginPage = () => {
-  const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
-
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const authTxts = useTranslations('Auth');
   const btnTxts = useTranslations('BtnTexts');
+  const { login, isLoading } = useAuthContext();
 
   const schema = Yup.object().shape({
     email: Yup.string()
@@ -38,12 +39,8 @@ const LoginPage = () => {
   });
 
   const onSubmit = (data: LoginFormData) => {
-    setIsSubmittingLocal(true);
-    setTimeout(() => {
-      console.log('Login Data:', data);
-      reset();
-      setIsSubmittingLocal(false);
-    }, 1000);
+    login(data);
+    reset();
   };
 
   return (
@@ -53,7 +50,7 @@ const LoginPage = () => {
       btnText={btnTxts('login')}
       onSubmit={handleSubmit(onSubmit)}
       isSubmitDisabled={false}
-      isSubmitting={isSubmittingLocal}
+      isSubmitting={isLoading}
     >
       {loginInputs.map((input) => {
         const label = inputsTxts(`labels.${input.name}`);
@@ -62,7 +59,8 @@ const LoginPage = () => {
           <div key={input.id}>
             <Input
               variant="secondary"
-              type={input.type}
+              type={input.type as InputTypes}
+              inputName={input.name}
               label={label}
               placeholder={placeholder}
               otherClassNameContainer={

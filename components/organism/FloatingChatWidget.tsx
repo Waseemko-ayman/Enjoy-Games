@@ -26,6 +26,7 @@ export function FloatingChatWidget() {
       >
         <button
           onClick={handleOpen}
+          name='chat_button'
           className={`
             relative group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700
             text-white rounded-full p-4 shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer

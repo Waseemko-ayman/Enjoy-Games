@@ -5,8 +5,8 @@ import Loading from './loading';
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
   onClick,
-  banner = '#',
-  label,
+  image = '#',
+  name,
 }) => {
   return (
     <div
@@ -15,11 +15,11 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
     >
       <Suspense fallback={<Loading />}>
         <div className="overflow-hidden rounded-2xl shadow-lg">
-          <Image src={banner} alt={label} width={500} height={500} />
+          <Image src={image} alt={name} width={500} height={500} />
         </div>
       </Suspense>
       <h2 className="text-xl font-bold text-[var(--enjoy-gray-650)] mt-2.5">
-        {label}
+        {name}
       </h2>
     </div>
   );
