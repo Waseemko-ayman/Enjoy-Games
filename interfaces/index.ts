@@ -403,6 +403,7 @@ export interface FormValues {
 }
 
 export interface paramsProps {
+  locale: string;
   category: string;
   itemId: string;
 }
