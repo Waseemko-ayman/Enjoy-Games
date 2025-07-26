@@ -9,6 +9,8 @@ import { useAuthContext } from '@/context/AuthContext';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { PATHS } from '@/data/paths';
+import { useRouter } from 'next/navigation';
 
 const otpSchema = yup.object({
   otp: yup.string().required(),
@@ -17,11 +19,13 @@ const otpSchema = yup.object({
 type OtpFormData = yup.InferType<typeof otpSchema>;
 
 const OTPPage = () => {
-  const [timeLeft, setTimeLeft] = React.useState(10);
+  const [timeLeft, setTimeLeft] = React.useState(300);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
   const authTxts = useTranslations('Auth');
   const btnTxts = useTranslations('BtnTexts');
-  const { verifyOtp, isLoading, login } = useAuthContext();
+  const { verifyOtp, isLoading, login, token } = useAuthContext();
+
+  const router = useRouter();
 
   const {
     register,
@@ -119,8 +123,18 @@ const OTPPage = () => {
     if (!email || !password) return;
 
     login({ email, password });
-    setTimeLeft(10);
+    setTimeLeft(300);
   };
+
+  useEffect(() => {
+    const otpEmail = sessionStorage.getItem('otp_email');
+
+    if (token) {
+      router.replace(PATHS.HOME.link);
+    } else if (!otpEmail) {
+      router.replace(PATHS.LOGIN);
+    }
+  }, [token, router]);
 
   return (
     <AuthLayout

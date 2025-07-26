@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -14,13 +14,15 @@ import { LoginFormData } from '@/interfaces';
 import FormError from '@/components/atomic/FormError';
 import { useAuthContext } from '@/context/AuthContext';
 import { InputTypes } from '@/utils/type';
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const authTxts = useTranslations('Auth');
   const btnTxts = useTranslations('BtnTexts');
-  const { login, isLoading } = useAuthContext();
+  const { login, isLoading, token } = useAuthContext();
+  const router = useRouter();
 
   const schema = Yup.object().shape({
     email: Yup.string()
@@ -42,6 +44,16 @@ const LoginPage = () => {
     login(data);
     reset();
   };
+
+  useEffect(() => {
+    const otpEmail = sessionStorage.getItem('otp_email');
+
+    if (token) {
+      router.replace(PATHS.HOME.link);
+    } else if (otpEmail) {
+      router.replace(PATHS.OTP);
+    }
+  }, [token, router]);
 
   return (
     <AuthLayout
