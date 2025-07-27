@@ -13,7 +13,7 @@ const FooterBanner = () => {
         <Image src="/assets/pay/pay.png" alt="pay" width={200} height={200} />
       </AnimatedWrapper>
       <AnimatedWrapper direction="x" distance={-40}>
-        <div className="flex flex-col md:flex-row items-center gap-3 text-sm font-semibold">
+        <div className="flex flex-col md:flex-row items-center text-center gap-3 text-sm font-semibold">
           <p>{t('taxRegisterationNum')}: 311192285200003</p>
           <p className="hidden md:block">|</p>
           <p>
