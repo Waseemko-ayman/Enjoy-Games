@@ -56,7 +56,7 @@ const UserPopup = () => {
                         name={t(`${namespace}.${key}`)}
                         otherClassNameIcon="text-gray-500 text-sm"
                         otherClassName="!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg"
-                        linkPath={item.link}
+                        {...('link' in item ? { linkPath: item.link } : {})}
                         onClick={
                           item.title === 'تسجيل خروج' ? handleLogout : undefined
                         }
@@ -95,7 +95,7 @@ function getTranslationKey(title: string): {
     case 'تسجيل خروج':
       return { key: 'logout', namespace: 'BtnTexts' };
     default:
-      return { key: title, namespace: 'PagesHeaderTitles' }; // fallback
+      return { key: title, namespace: 'PagesHeaderTitles' };
   }
 }
 

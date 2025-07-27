@@ -8,7 +8,7 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 const NavItem: React.FC<NavItemProps> = ({
   icon,
   name,
-  linkPath = '#',
+  linkPath,
   otherClassName,
   otherClassNameIcon,
   showArrow = false,
@@ -28,9 +28,9 @@ const NavItem: React.FC<NavItemProps> = ({
       />
     );
   };
-  return (
-    <Link
-      href={linkPath}
+
+  const content = (
+    <div
       onClick={onClick}
       className={`
         flex
@@ -91,8 +91,10 @@ const NavItem: React.FC<NavItemProps> = ({
           <IoIosArrowForward className="text-2xl" />
         )
       ) : null}
-    </Link>
+    </div>
   );
+
+  return linkPath ? <Link href={linkPath}>{content}</Link> : content;
 };
 
 export default NavItem;
