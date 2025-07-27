@@ -1,6 +1,6 @@
 'use client';
 import React, { ReactNode } from 'react';
-import BackgroundCircles from '../molecules/BackgroundCircles';
+import BackgroundCircles from '../../molecules/BackgroundCircles';
 import Link from 'next/link';
 import { PATHS } from '@/data/paths';
 import { FaX } from 'react-icons/fa6';

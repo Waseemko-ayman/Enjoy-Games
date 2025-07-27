@@ -1,16 +1,16 @@
 'use client';
 import React from 'react';
-import TopBanner from './TopBanner';
-import Header from './WebHeader/Header';
-import Navbar from './WebHeader/Navbar';
-import Footer from './Footer';
-import MobileHeader from './MobileHeader/Header';
-import SearchHeader from './MobileHeader/SearchHeader';
-import MobileNavbar from './MobileHeader/Navbar';
+import TopBanner from '../TopBanner';
+import Header from '../WebHeader/Header';
+import Navbar from '../WebHeader/Navbar';
+import Footer from '../Footer';
+import MobileHeader from '../MobileHeader/Header';
+import SearchHeader from '../MobileHeader/SearchHeader';
+import MobileNavbar from '../MobileHeader/Navbar';
 import { usePathname } from 'next/navigation';
 import useIsMobile from '@/hook/useIsMobile';
-import { FloatingChatWidget } from './FloatingChatWidget';
-import FloatingActions from '../atomic/FloatingActions';
+import { FloatingChatWidget } from '../FloatingChatWidget';
+import FloatingActions from '../../atomic/FloatingActions';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();

@@ -2,9 +2,9 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Button from '../atomic/Button';
+import Button from '../../atomic/Button';
 import { AuthLayoutProps } from '@/interfaces';
-import ButtonLoading from '../atomic/ButtonLoading';
+import ButtonLoading from '../../atomic/ButtonLoading';
 
 const AuthLayout: React.FC<AuthLayoutProps> = ({
   children,

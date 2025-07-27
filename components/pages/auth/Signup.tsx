@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Input from '@/components/atomic/Input';
-import AuthLayout from '@/components/organism/AuthLayout';
+import AuthLayout from '@/components/organism/layouts/AuthLayout';
 import { signupInputs } from '@/data';
 import { PATHS } from '@/data/paths';
 import { useTranslations } from 'next-intl';

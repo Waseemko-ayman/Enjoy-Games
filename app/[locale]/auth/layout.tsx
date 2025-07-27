@@ -1,4 +1,4 @@
-import MainAuthLayout from '@/components/organism/MainAuthLayout';
+import MainAuthLayout from '@/components/organism/layouts/MainAuthLayout';
 import { ReactNode } from 'react';
 
 const AuthLayout = ({ children }: { children: ReactNode }) => {

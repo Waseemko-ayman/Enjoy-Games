@@ -1,4 +1,4 @@
-import MainLayout from '@/components/organism/MainLayout';
+import MainLayout from '@/components/organism/layouts/MainLayout';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return <MainLayout>{children}</MainLayout>;

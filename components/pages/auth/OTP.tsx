@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import AuthLayout from '@/components/organism/AuthLayout';
+import AuthLayout from '@/components/organism/layouts/AuthLayout';
 import Button from '@/components/atomic/Button';
 import { useTranslations } from 'next-intl';
 import { MdOutlineAlternateEmail } from 'react-icons/md';

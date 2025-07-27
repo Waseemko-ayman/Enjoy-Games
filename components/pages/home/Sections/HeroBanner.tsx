@@ -1,6 +1,7 @@
 'use client';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { HeroSlides } from '@/data';
+import Image from 'next/image';
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react';
 
@@ -47,14 +48,16 @@ export default function HeroBanner({ sliders }: { sliders: Sliders }) {
           {HeroSlides.map((slide, index) => (
             <div
               key={slide.id}
-              className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+              className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <img
+              <Image
                 src={slide.image}
                 alt={`slide-${slide.id}`}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="100vw"
               />
             </div>
           ))}
