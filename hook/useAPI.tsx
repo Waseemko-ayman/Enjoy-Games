@@ -79,11 +79,7 @@ const reduce = <T,>(state: State<T>, action: Action<T>): State<T> => {
   }
 };
 
-const useAPI = <T,>(
-  url: string,
-  config?: AxiosRequestConfig,
-  isSingleObject = false // ← الإضافة الجديدة هنا
-) => {
+const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
   const [state, dispatch] = useReducer(reduce<T>, initialState);
 
   const get = async (getConfig?: AxiosRequestConfig) => {
