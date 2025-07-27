@@ -45,11 +45,7 @@ interface MobileMainContent {
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
-  const { get, data } = useAPI<MobileMainContent>(
-    'mobile-main-content',
-    {},
-    true
-  );
+  const { get, data } = useAPI<MobileMainContent>('mobile-main-content', {});
 
   useEffect(() => {
     get();

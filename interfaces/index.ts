@@ -126,13 +126,13 @@ export interface Category {
   name: string;
   icon: string;
   image: string;
-  sub_categories: CardItem[];
+  sub_categories: SubCategories[];
   path: string;
 }
 
 export interface DropdownNavItemProps extends BaseIconProps {
   name: string;
-  submenu?: SubMenuItem[];
+  categories?: Category[];
   isMainMenu?: boolean;
 }
 
@@ -187,7 +187,7 @@ export interface AccountItem {
   shiddatData: shiddaItem[];
 }
 
-export interface CardItem {
+export interface SubCategories {
   id: number;
   category_id: number;
   slug: null;
@@ -210,7 +210,7 @@ export interface CardItem {
 }
 
 export interface CategoryPageProps {
-  cards: CardItem[];
+  cards: SubCategories[];
 }
 
 export interface CategoryCardProps {
@@ -419,7 +419,7 @@ export interface paramsProps {
 }
 
 export interface BundlesPageProps {
-  item: CardItem;
+  item: SubCategories;
   params: paramsProps;
 }
 

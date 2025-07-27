@@ -57,7 +57,7 @@ export const digitalStores = [
     name: 'آيتونز',
     icon: '/assets/play-station.webp',
     image: '/assets/play-station.webp',
-    children_count: 1,
+    children_count: 0,
     // shiddatData: shiddats,
     // accounts: [
     //   {
@@ -79,7 +79,7 @@ export const gamingPlatforms = [
     name: 'بلاي ستيشن',
     icon: '/assets/play-station.webp',
     image: '/assets/play-station.webp',
-    children_count: 1,
+    children_count: 0,
     // accounts: [
     //   {
     //     id: 'account1',
@@ -100,7 +100,7 @@ export const shoppingCarts = [
     name: 'أمازون',
     icon: '/assets/play-station.webp',
     image: '/assets/play-station.webp',
-    children_count: 1,
+    children_count: 0,
   },
 ];
 
@@ -113,7 +113,7 @@ export const servicesAndSubscriptions = [
     name: 'هنقرستيشن',
     icon: '/assets/play-station.webp',
     image: '/assets/play-station.webp',
-    children_count: 1,
+    children_count: 0,
   },
 ];
 

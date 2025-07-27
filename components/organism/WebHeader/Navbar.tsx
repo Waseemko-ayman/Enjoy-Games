@@ -63,7 +63,7 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
             <DropdownNavItem
               name={t('allCategories')}
               icon={PiSquaresFourLight}
-              submenu={subMenuItems}
+              categories={subMenuItems}
               isMainMenu={true}
             />
           </motion.li>
