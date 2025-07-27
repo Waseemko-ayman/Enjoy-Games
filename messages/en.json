@@ -486,7 +486,7 @@
     "signupTitle": "Welcome to EnjoyGames",
     "signupDesc": "Create New Account",
     "otpDesc": "You have received a message with a verification code via email.",
-    "dontHabeAccount": "Don't have an account?",
+    "dontHaveAccount": "Don't have an account?",
     "registerationReq": "Create an new account; You implicitly agreed on",
     "termsAndConditions": "Terms and Conditions",
     "sendNewCode": "Send a new code after",

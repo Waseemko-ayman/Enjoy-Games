@@ -94,7 +94,7 @@ const LoginPage = () => {
       })}
 
       <p className="text-xs text-[var(--enjoy-gray-650)] font-normal text-center mt-4">
-        {authTxts('dontHabeAccount')}{' '}
+        {authTxts('dontHaveAccount')}{' '}
         <Link
           href={PATHS.SIGNUP}
           className="text-enjoy-primary font-semibold hover:text-enjoy-primary-soft transition-colors duration-500"

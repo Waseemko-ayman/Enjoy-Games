@@ -486,7 +486,7 @@
     "signupTitle": "أهلا بك في إنجوي قيمز",
     "signupDesc": "أنشئ حساب جديد",
     "otpDesc": "وصلتك رسالة برمز تحقق على الإيميل",
-    "dontHabeAccount": "لا تمتلك حساب؟",
+    "dontHaveAccount": "لا تمتلك حساب؟",
     "registerationReq": "بإنشاء حساب جديد؛ أنت توافق ضمنيًا على",
     "termsAndConditions": "الشروط والأحكام",
     "sendNewCode": "إرسال رمز جديد بعد",
