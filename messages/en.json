@@ -506,6 +506,23 @@
     "title": "Page Not Found",
     "description": "Sorry, we couldn't find the page you're looking for."
   },
+  "ariaLabels": {
+    "links": {
+      "myCartPage": "My cart page",
+      "linkedin": "LinkedIn account",
+      "twitter": "Twitter account",
+      "instagram": "Instagram account",
+      "facebook": "Facebook account",
+      "googlePlayApp": "Google Play App",
+      "appStoreApp": "App Store App"
+    },
+    "btns": {
+      "menuTrigger": "Open menu",
+      "goToSlide_en": "Go to slide number {number}",
+      "openChatWindow": "Open chat window",
+      "selectPurchaseType": "Filter your purchases by type"
+    }
+  },
   "Languages": {
     "english": "English",
     "arabic": "Arabic"

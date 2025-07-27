@@ -347,14 +347,16 @@ export const FOOTER_LINKS_DATA = {
     {
       id: 1,
       src: '/assets/digitals-stores/play.jpg',
-      alt: 'google play',
+      alt: 'Google Play Logo',
       url: '#',
+      ariaLabel: "googlePlayApp",
     },
     {
       id: 2,
       src: '/assets/digitals-stores/app.jpg',
-      alt: 'app store',
+      alt: 'App Store Logo',
       url: '#',
+      ariaLabel: "appStoreApp",
     },
   ],
   socialMedia: [
@@ -362,21 +364,25 @@ export const FOOTER_LINKS_DATA = {
       id: 1,
       url: '#',
       icon: FaFacebook,
+      ariaLabel: 'facebook',
     },
     {
       id: 2,
       url: '#',
       icon: FaTwitter,
+      ariaLabel: 'twitter',
     },
     {
       id: 3,
       url: '#',
       icon: FaInstagram,
+      ariaLabel: 'instagram',
     },
     {
       id: 4,
       url: '#',
       icon: FaLinkedin,
+      ariaLabel: 'linkedin',
     },
   ],
 };

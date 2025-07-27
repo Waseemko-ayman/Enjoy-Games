@@ -14,12 +14,16 @@ import { useTranslations } from 'next-intl';
 
 const MyPurchasesPage = () => {
   const t = useTranslations('MyPurchases');
+  const ariaTxts = useTranslations('ariaLabels.btns');
   const btnTexts = useTranslations('BtnTexts');
   return (
     <div>
       <PageHeader>
         <Select>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger
+            className="w-[180px]"
+            aria-label={ariaTxts('selectPurchaseType')}
+          >
             <SelectValue placeholder={t('all')} />
           </SelectTrigger>
           <SelectContent>

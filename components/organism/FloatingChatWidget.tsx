@@ -3,6 +3,7 @@ import { MessageCircle, Sparkles } from 'lucide-react';
 import { ChatModal } from '../molecules/ChatModal';
 import useIsMobile from '@/hook/useIsMobile';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import { useTranslations } from 'next-intl';
 
 export function FloatingChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,7 @@ export function FloatingChatWidget() {
 
   const isMobile = useIsMobile();
   const { isArabic } = useToggleLocale();
+  const ariaTxts = useTranslations('ariaLabels.btns');
 
   return (
     <>
@@ -26,7 +28,8 @@ export function FloatingChatWidget() {
       >
         <button
           onClick={handleOpen}
-          name='chat_button'
+          aria-label={ariaTxts('openChatWindow')}
+          name="chat_button"
           className={`
             relative group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700
             text-white rounded-full p-4 shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer

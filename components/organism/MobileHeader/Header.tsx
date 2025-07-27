@@ -13,6 +13,7 @@ import { useTranslations } from 'next-intl';
 const MobileHeader = () => {
   const pathname = usePathname(); // e.g., "/en/about"
   const t = useTranslations('PagesHeaderTitles'); // Translations for page titles
+  const ariaTxts = useTranslations('ariaLabels.links');
 
   // Split the pathname into parts: "/en/about" → ['en', 'about']
   const pathParts = pathname.split('/').filter(Boolean);
@@ -49,7 +50,7 @@ const MobileHeader = () => {
           </h5>
         </AnimatedWrapper>
         <AnimatedWrapper direction="y" distance={-40}>
-          <Link href={PATHS.MY_CART.link}>
+          <Link href={PATHS.MY_CART.link} aria-label={ariaTxts('myCartPage')}>
             <MdOutlineShoppingCart className="text-2xl cursor-pointer text-enjoy-primary" />
           </Link>
         </AnimatedWrapper>

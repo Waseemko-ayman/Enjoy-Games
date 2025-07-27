@@ -17,7 +17,7 @@ const Footer = () => {
         <div className="pt-32 md:pt-28 text-white flex flex-col items-center md:items-start md:flex-row max-md:text-center gap-5">
           <Image
             src="/assets/logo.png"
-            alt="Enjoy Games"
+            alt="Enjoy Games Logo"
             title="Enjoy Games"
             width={120}
             height={120}

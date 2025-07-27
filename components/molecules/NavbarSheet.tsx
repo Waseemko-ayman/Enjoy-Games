@@ -15,10 +15,11 @@ import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const NavbarSheet = () => {
   const t = useTranslations('Layout.header.navBar');
+  const ariaTxts = useTranslations('ariaLabels.btns');
   const { isArabic } = useToggleLocale();
   return (
     <Sheet>
-      <SheetTrigger>
+      <SheetTrigger aria-label={ariaTxts('menuTrigger')}>
         <PiSquaresFourLight className="text-3xl cursor-pointer text-enjoy-primary" />
       </SheetTrigger>
       <SheetContent className="pt-20">

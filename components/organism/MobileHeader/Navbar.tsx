@@ -35,12 +35,12 @@ const MobileNavbar = () => {
             {navBarLinks
               .filter((item) => !(item.hideWhenAuth && token))
               .map((item, index) => (
-                <AnimatedWrapper key={item.id} custom={index}>
-                  {item.link ? (
-                    <li
-                      key={item.id}
-                      className="text-[var(--enjoy-gray-650)] font-medium"
-                    >
+                <li
+                  key={item.id}
+                  className="text-[var(--enjoy-gray-650)] font-medium"
+                >
+                  <AnimatedWrapper custom={index}>
+                    {item.link ? (
                       <Link
                         href={item.link}
                         className="flex flex-col items-center font-medium"
@@ -54,13 +54,11 @@ const MobileNavbar = () => {
                           {t(item.titleKey)}
                         </h5>
                       </Link>
-                    </li>
-                  ) : (
-                    <li
-                      className="text-[var(--enjoy-gray-650)] font-medium !cursor-pointer"
-                      onClick={handleOpen}
-                    >
-                      <div className="flex flex-col items-center">
+                    ) : (
+                      <div
+                        className="flex flex-col items-center !cursor-pointer"
+                        onClick={handleOpen}
+                      >
                         <MdMoreHoriz className="text-2xl" />
                         <h5
                           className={`${
@@ -70,9 +68,9 @@ const MobileNavbar = () => {
                           {t('more')}
                         </h5>
                       </div>
-                    </li>
-                  )}
-                </AnimatedWrapper>
+                    )}
+                  </AnimatedWrapper>
+                </li>
               ))}
           </ul>
         </Container>

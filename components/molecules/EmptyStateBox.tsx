@@ -30,9 +30,9 @@ const EmptyStateBox = ({
             </MotionSection>
             <div className="text-center mt-5">
               <MotionSection index={1}>
-                <h5 className="text-lg text-[var(--enjoy-gray-650)] font-normal mb-5">
+                <h2 className="text-lg text-[var(--enjoy-gray-650)] font-normal mb-5">
                   {title}
-                </h5>
+                </h2>
               </MotionSection>
               <MotionSection index={2}>
                 <Button href={btnlink} otherClassName="py-3 w-full mx-auto">

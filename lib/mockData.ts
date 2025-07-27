@@ -8,7 +8,6 @@ export const getCategoryData = async (
       `${process.env.NEXT_PUBLIC_BASE_URL}/categories-subcategories`,
       {
         method: 'GET',
-        cache: 'no-store',
         next: { revalidate: 3600 },
       }
     );

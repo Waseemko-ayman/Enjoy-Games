@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from 'next';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
@@ -8,6 +7,13 @@ import AuthProvider from '@/context/AuthContext';
 import ErrorBoundary from './ErrorBoundary';
 import 'react-toastify/dist/ReactToastify.css';
 import BodyWrapper from '@/components/organism/layouts/BodyWrapper';
+import { IBM_Plex_Sans_Arabic } from 'next/font/google';
+
+const ibmArabic = IBM_Plex_Sans_Arabic({
+  subsets: ['arabic'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -33,14 +39,8 @@ export default async function RootLayout({
     <html lang={locale} dir={isArabic ? 'rtl' : 'ltr'}>
       <head>
         <link rel="icon" href="/assets/logo.png" sizes="any" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className={`antialiased`}>
+      <body className={`${ibmArabic.className} antialiased`}>
         <NextIntlClientProvider>
           <ErrorBoundary>
             <AuthProvider>

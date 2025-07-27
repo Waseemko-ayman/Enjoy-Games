@@ -26,7 +26,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({ steps }) => {
               <div className="relative w-[90px] sm:w-[130px] aspect-square">
                 <Image
                   src="/assets/logo.png"
-                  alt="Enjoy Games"
+                  alt="Enjoy Games Logo"
                   title="Enjoy Games"
                   fill
                   className="object-contain"

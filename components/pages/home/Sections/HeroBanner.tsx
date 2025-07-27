@@ -1,6 +1,7 @@
 'use client';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { HeroSlides } from '@/data';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react';
@@ -13,6 +14,7 @@ interface Sliders {
 export default function HeroBanner({ sliders }: { sliders: Sliders }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const ariaTxts = useTranslations('ariaLabels.btns');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,6 +71,7 @@ export default function HeroBanner({ sliders }: { sliders: Sliders }) {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
+                aria-label={ariaTxts('goToSlide', { number: index + 1 })}
                 className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                   index === currentSlide
                     ? 'bg-enjoy-primary scale-110 sm:scale-125'

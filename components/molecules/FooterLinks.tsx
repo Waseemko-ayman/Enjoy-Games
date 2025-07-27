@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { FooterLinksProps } from '@/interfaces';
 import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import { useTranslations } from 'next-intl';
 
 const FooterLinks = ({
   secTitle,
@@ -15,6 +16,7 @@ const FooterLinks = ({
   t,
 }: FooterLinksProps) => {
   const { isArabic } = useToggleLocale();
+  const ariaTxts = useTranslations('ariaLabels.links');
   return (
     <div className="flex flex-col">
       <FooterTitle title={secTitle} />
@@ -30,10 +32,10 @@ const FooterLinks = ({
         {FOOTER_LINKS_DATA[listName].map((item, index) => {
           if (listName === 'shop_app') {
             return (
-              <AnimatedWrapper key={item.id} custom={index}>
-                <li className="mb-5">
+              <li key={item.id} className="mb-5">
+                <AnimatedWrapper custom={index}>
                   {'src' in item ? (
-                    <Link href={item.url}>
+                    <Link href={item.url} aria-label={ariaTxts(item.ariaLabel)}>
                       <Image
                         src={item.src}
                         alt={item.alt}
@@ -43,25 +45,31 @@ const FooterLinks = ({
                       />
                     </Link>
                   ) : null}
-                </li>
-              </AnimatedWrapper>
+                </AnimatedWrapper>
+              </li>
             );
           } else {
             return (
-              <AnimatedWrapper key={item.id} custom={index}>
-                <li
-                  className={`group font-bold cursor-pointer rounded-lg py-2 ${
-                    otherClassName ? otherClassName : ''
-                  } ${
-                    listName !== 'socialMedia'
-                      ? `${
-                          isArabic ? 'hover:pr-2' : 'hover:pl-2'
-                        } hover:bg-[var(--enjoy-primary-deep-soft)] transition-all duration-400`
-                      : ''
-                  }`}
-                >
-                  <Link href={item.url} className="block text-sm">
-                    {/* By type guard To check if an item is of a type that contains icon or text */}
+              <li
+                key={item.id}
+                className={`group font-bold cursor-pointer rounded-lg py-2 ${
+                  otherClassName ? otherClassName : ''
+                } ${
+                  listName !== 'socialMedia'
+                    ? `${
+                        isArabic ? 'hover:pr-2' : 'hover:pl-2'
+                      } hover:bg-[var(--enjoy-primary-deep-soft)] transition-all duration-400`
+                    : ''
+                }`}
+              >
+                <AnimatedWrapper custom={index}>
+                  <Link
+                    href={item.url}
+                    aria-label={
+                      'ariaLabel' in item ? ariaTxts(item.ariaLabel) : undefined
+                    }
+                    className="block text-sm"
+                  >
                     {'icon' in item ? (
                       <div className="flex items-center justify-center bg-white rounded-sm p-2 cursor-pointer">
                         <item.icon
@@ -73,8 +81,8 @@ const FooterLinks = ({
                       t(`${listName}.${'key' in item ? item.key : ''}`)
                     )}
                   </Link>
-                </li>
-              </AnimatedWrapper>
+                </AnimatedWrapper>
+              </li>
             );
           }
         })}

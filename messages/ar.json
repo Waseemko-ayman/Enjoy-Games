@@ -506,6 +506,23 @@
     "title": "الصفحة غير موجودة",
     "description": "عذرًا، لم نتمكن من العثور على الصفحة التي تبحث عنها."
   },
+  "ariaLabels": {
+    "links": {
+      "myCartPage": "صفحة سلتي",
+      "linkedin": "حساب لينكدإن",
+      "twitter": "حساب تويتر",
+      "instagram": "حساب الإنستغرام",
+      "facebook": "حساب فيس بوك",
+      "googlePlayApp": "تطبيق جوجل بلاي",
+      "appStoreApp": "تطبيق اب ستور"
+    },
+    "btns": {
+      "menuTrigger": "فتح القائمة",
+      "goToSlide": "اذهب إلى الشريحة رقم {number}",
+      "openChatWindow": "فتح نافذة الدردشة",
+      "selectPurchaseType": "تصفية مشترياتك حسب النوع"
+    }
+  },
   "Languages": {
     "english": "إنجليزي",
     "arabic": "عربي"

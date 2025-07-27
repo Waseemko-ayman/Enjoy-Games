@@ -51,7 +51,7 @@ const Header = () => {
             <Link href={PATHS.HOME.link}>
               <Image
                 src="/assets/logo.png"
-                alt="Enjoy Games"
+                alt="Enjoy Games Logo"
                 title="Enjoy Games"
                 width={100}
                 height={100}

@@ -5,6 +5,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import Container from '../organism/Container';
@@ -84,15 +85,15 @@ const PageHeader = ({
     <div className="bg-enjoy-gray-light py-6 md:py-8 px-4 md:px-8 rounded-md">
       <Container>
         <div className="flex flex-col space-y-2">
-          <Breadcrumb className="flex items-center flex-wrap">
-            {breadcrumbs.map((crumb, index) => (
-              <AnimatedWrapper
-                key={index}
-                custom={index}
-                direction="x"
-                distance={40}
-              >
-                <div className="flex items-center">
+          <Breadcrumb>
+            <BreadcrumbList className="flex items-center flex-wrap">
+              {breadcrumbs.map((crumb, index) => (
+                <AnimatedWrapper
+                  key={index}
+                  custom={index}
+                  direction="x"
+                  distance={40}
+                >
                   <BreadcrumbItem>
                     {index === breadcrumbs.length - 1 ? (
                       <span className="text-gray-700">{crumb.label}</span>
@@ -101,11 +102,11 @@ const PageHeader = ({
                         {crumb.label}
                       </BreadcrumbLink>
                     )}
+                    {index < breadcrumbs.length - 1 && <BreadcrumbSeparator />}
                   </BreadcrumbItem>
-                  {index < breadcrumbs.length - 1 && <BreadcrumbSeparator />}
-                </div>
-              </AnimatedWrapper>
-            ))}
+                </AnimatedWrapper>
+              ))}
+            </BreadcrumbList>
           </Breadcrumb>
 
           {showTitle && (
