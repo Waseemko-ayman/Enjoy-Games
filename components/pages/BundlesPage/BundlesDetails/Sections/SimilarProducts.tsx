@@ -21,14 +21,14 @@ const SimilarProducts = () => {
           <AnimatedWrapper key={card.id} custom={index}>
             <ProductCard
               key={card.id}
-              imgAlt={card.title}
-              imgTitle={card.title}
-              imgSrc={card.src}
+              imgAlt={card.name}
+              imgTitle={card.name}
+              imgSrc={card.image}
               description
               showBtn={true}
               btnVariant="primary"
               btnText={btnTxts('addToCart')}
-              Icon={PiShoppingCartLight}
+              icon={PiShoppingCartLight}
               // cardLinkPath={`/categories/${params.category}/${params.itemId}/bundles/${card.id}`}
               {...card}
             />

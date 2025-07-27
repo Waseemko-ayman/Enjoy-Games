@@ -7,7 +7,19 @@ import { SuggestedProdData } from '@/data';
 import { TranslationFunction } from '@/interfaces';
 import React, { lazy, Suspense } from 'react';
 
-const SuggestedProducts = ({ t }: { t: TranslationFunction }) => {
+interface SimpleProduct {
+  id: number;
+  image: string;
+  name: string;
+}
+
+const SuggestedProducts = ({
+  t,
+  suggestedProducts,
+}: {
+  t: TranslationFunction;
+  suggestedProducts: SimpleProduct;
+}) => {
   return (
     <SectionComponent title={t('sectionsTitles.suggestedProducts')}>
       <GridWrapper isScrollable>
@@ -15,10 +27,10 @@ const SuggestedProducts = ({ t }: { t: TranslationFunction }) => {
           <AnimatedWrapper key={card.id} custom={index}>
             <Suspense fallback={<Loading />}>
               <ProductCard
-                imgSrc={card.src}
-                imgAlt={card.title}
-                imgTitle={card.title}
-                title={card.title}
+                imgSrc={card.image}
+                imgAlt={card.name}
+                imgTitle={card.name}
+                name={card.name}
               />
             </Suspense>
           </AnimatedWrapper>

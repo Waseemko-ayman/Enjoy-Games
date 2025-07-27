@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from '../Container';
 import { PiSquaresFourLight } from 'react-icons/pi';
 import NavItem from '@/components/atomic/NavItem';
@@ -10,16 +11,18 @@ import { PATHS } from '@/data/paths';
 import { NavbarProps } from '@/interfaces';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import useAPI from '@/hook/useAPI';
 
 const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
   const t = useTranslations('Layout.header.navBar');
 
-  // const dispatch = useDispatch();
-  // const { categories, isLoading } = useSelector((state) => state.products);
+  const { get, data: categories } = useAPI(`categories-subcategories`);
 
-  // useEffect(() => {
-  //   dispatch(getAllProductsAction());
-  // }, []);
+  console.log(categories);
+
+  useEffect(() => {
+    get();
+  }, []);
 
   if (layout === 'store') {
     return (

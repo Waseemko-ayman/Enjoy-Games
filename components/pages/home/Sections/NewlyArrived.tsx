@@ -8,7 +8,23 @@ import { TranslationFunction } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import React, { lazy, Suspense } from 'react';
 
-const NewlyArrived = ({ t }: { t: TranslationFunction }) => {
+interface CardProps {
+  id: number;
+  name: string;
+  price?: number;
+  newPrice?: number;
+  storeName?: string;
+  storeFlagImg?: string;
+  ratings?: number | string;
+}
+
+const NewlyArrived = ({
+  t,
+  newlyArrived,
+}: {
+  t: TranslationFunction;
+  newlyArrived: CardProps;
+}) => {
   const btnText = useTranslations('BtnTexts');
 
   return (
@@ -18,9 +34,9 @@ const NewlyArrived = ({ t }: { t: TranslationFunction }) => {
           <AnimatedWrapper key={card.id} custom={index}>
             <Suspense fallback={<Loading />}>
               <ProductCard
-                imgAlt={card.title}
-                imgTitle={card.title}
-                imgSrc={card.src}
+                imgSrc={card.image}
+                imgAlt={card.name}
+                imgTitle={card.name}
                 description
                 showBtn={true}
                 btnVariant="primary"

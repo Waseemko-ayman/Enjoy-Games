@@ -43,15 +43,15 @@ const RedeemPoints = ({ t }: { t: TranslationFunction }) => {
             <AnimatedWrapper key={card.id} custom={index}>
               <Suspense fallback={<Loading />}>
                 <ProductCard
-                  imgAlt={card.title}
-                  imgTitle={card.title}
-                  imgSrc={card.src}
+                  imgSrc={card.image}
+                  imgAlt={card.name}
+                  imgTitle={card.name}
                   description
                   variant="column"
                   showBtn
                   btnVariant="secondary"
                   btnText={btnText('GetItNow')}
-                  Icon={PiShoppingCartLight}
+                  icon={PiShoppingCartLight}
                   {...card}
                 />
               </Suspense>

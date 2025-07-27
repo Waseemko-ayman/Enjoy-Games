@@ -4,7 +4,12 @@ import { HeroSlides } from '@/data';
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react';
 
-export default function HeroBanner() {
+interface Sliders {
+  id: number;
+  image: string;
+}
+
+export default function HeroBanner({ sliders }: { sliders: Sliders }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 

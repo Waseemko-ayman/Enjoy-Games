@@ -38,7 +38,7 @@ export interface ButtonProps extends BaseClassNameProps, WithChildren {
 }
 
 export interface cardProps {
-  title: string;
+  name: string;
   price?: number;
   newPrice?: number;
   storeName?: string;
@@ -118,6 +118,16 @@ export interface SubMenuItem extends BaseIconProps {
   name: string;
   sub_categories?: SubMenuItem[];
   path?: string;
+}
+
+export interface Category {
+  id: number;
+  slug: string | null;
+  name: string;
+  icon: string;
+  image: string;
+  sub_categories: CardItem[];
+  path: string;
 }
 
 export interface DropdownNavItemProps extends BaseIconProps {

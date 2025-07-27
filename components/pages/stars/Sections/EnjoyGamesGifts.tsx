@@ -18,22 +18,22 @@ const EnjoyGamesGifts = () => {
         <SectionTitle
           title={secTexts('title')}
           subtitle={secTexts('desc')}
-          Icon={MdWavingHand}
+          icon={MdWavingHand}
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3">
           {NewlyArrivedData.map((card, index) => (
             <AnimatedWrapper key={card.id} custom={index}>
               <ProductCard
                 key={card.id}
-                imgAlt={card.title}
-                imgTitle={card.title}
-                imgSrc={card.src}
+                imgSrc={card.image}
+                imgAlt={card.name}
+                imgTitle={card.name}
                 description
                 variant="column"
                 showBtn
                 btnVariant="secondary"
                 btnText={btnTexts('GetItNow')}
-                Icon={PiShoppingCartLight}
+                icon={PiShoppingCartLight}
                 {...card}
               />
             </AnimatedWrapper>

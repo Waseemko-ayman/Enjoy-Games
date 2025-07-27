@@ -8,7 +8,7 @@ import { ProductCardProps } from '@/interfaces';
 import CardWrapper from './CardWrapper';
 
 const ProductCard: React.FC<ProductCardProps> = ({
-  title,
+  name,
   description,
   imgSrc,
   imgAlt,
@@ -25,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   btnVariant = 'primary',
   btnText,
   otherClassNameBtn,
-  Icon,
+  icon,
 }) => {
   return (
     <div>
@@ -51,7 +51,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 : 'font-semibold inline-block mb-1.5 text-[15px] text-[var(--enjoy-gray-650)] hover:text-[var(--enjoy-gray-300)] transition-all duration-600'
             }`}
           >
-            {title}
+            {name}
           </h3>
           {description && (
             <div className="mb-3 text-sm mt-2">
@@ -131,7 +131,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         {showBtn && (
           <Button
             variant={btnVariant}
-            Icon={Icon}
+            Icon={icon}
             otherClassName={`${otherClassNameBtn} w-full p-2`}
           >
             {btnText}

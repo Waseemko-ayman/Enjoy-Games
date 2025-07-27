@@ -38,8 +38,8 @@ import { BannerSlide, InputItem, RewardTier } from '@/interfaces';
 export const shiddats = [
   {
     id: 1,
-    title: 'بطاقة شحن جواكر 70,000 توكن',
-    src: '/assets/play-station.webp',
+    name: 'بطاقة شحن جواكر 70,000 توكن',
+    image: '/assets/play-station.webp',
     price: 77.36,
     newPrice: 88.36,
     storeFlagImg: 'british-flag.png',
@@ -163,82 +163,82 @@ export const subMenuItems = [
 export const BestSellersData = [
   {
     id: 1,
-    src: '/assets/best-sellers/itunes.webp',
-    title: 'قسائم إنجوي قيمز',
+    image: '/assets/best-sellers/itunes.webp',
+    name: 'قسائم إنجوي قيمز',
   },
   {
     id: 2,
-    src: '/assets/best-sellers/itunes.webp',
-    title: 'آيتونز',
+    image: '/assets/best-sellers/itunes.webp',
+    name: 'آيتونز',
   },
   {
     id: 3,
-    src: '/assets/best-sellers/sawa.webp',
-    title: 'شحن سوا',
+    image: '/assets/best-sellers/sawa.webp',
+    name: 'شحن سوا',
   },
   {
     id: 4,
-    src: '/assets/best-sellers/yalla-ludo.webp',
-    title: 'يلا لودو',
+    image: '/assets/best-sellers/yalla-ludo.webp',
+    name: 'يلا لودو',
   },
 ];
 
 export const SuggestedProdData = [
   {
     id: 1,
-    src: '/assets/play-station.webp',
-    title: 'ديسكورد',
+    image: '/assets/play-station.webp',
+    name: 'ديسكورد',
   },
   {
     id: 2,
-    src: '/assets/play-station.webp',
-    title: 'أجيبه',
+    image: '/assets/play-station.webp',
+    name: 'أجيبه',
   },
   {
     id: 3,
-    src: '/assets/play-station.webp',
-    title: 'باكو (Baco)',
+    image: '/assets/play-station.webp',
+    name: 'باكو (Baco)',
   },
   {
     id: 4,
-    src: '/assets/play-station.webp',
-    title: 'ستيم',
+    image: '/assets/play-station.webp',
+    name: 'ستيم',
   },
 ];
 
 export const NewlyArrivedData = [
   {
     id: 1,
-    src: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
     storeFlagImg: 'british-flag.png',
-    title: 'بلايستيشن 40 جنيه استرليني',
+    name: 'بلايستيشن 40 جنيه استرليني',
     price: 189.64,
     storeName: 'المتجر البريطاني',
     ratings: '1996',
   },
   {
     id: 2,
-    src: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
     storeFlagImg: 'saudi-arabia-flag.png',
-    title: 'سوبر مول 200 ريال',
+    name: 'سوبر مول 200 ريال',
     price: 189.64,
     storeName: 'المتجر السعودي',
     ratings: '1996',
   },
   {
     id: 3,
-    src: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
     storeFlagImg: 'saudi-arabia-flag.png',
-    title: 'نون مينتس 500 ريال',
+    name: 'نون مينتس 500 ريال',
     price: 189.64,
     storeName: 'المتجر السعودي',
     ratings: '1996',
   },
   {
     id: 4,
-    src: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
     storeFlagImg: 'europe-flag.png',
-    title: 'ستيم 30 يورو',
+    name: 'ستيم 30 يورو',
     price: 189.64,
     storeName: 'المتجر الأوروبي',
     ratings: '1996',
@@ -466,7 +466,7 @@ export const userList = [
   },
   {
     section: 'logout',
-    items: [{ id: 10, title: 'تسجيل خروج', link: '#', icon: FiLogOut }],
+    items: [{ id: 10, title: 'تسجيل خروج', icon: FiLogOut }],
   },
 ];
 

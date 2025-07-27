@@ -20,14 +20,14 @@ const StarsGiftsPage = () => {
           {NewlyArrivedData.map((card, index) => (
             <AnimatedWrapper key={card.id} custom={index}>
               <ProductCard
-                imgAlt={card.title}
-                imgTitle={card.title}
-                imgSrc={card.src}
+                imgSrc={card.image}
+                imgAlt={card.name}
+                imgTitle={card.name}
                 description
                 showBtn={true}
                 btnVariant="primary"
                 btnText="إشترِ الآن"
-                Icon={PiShoppingCartLight}
+                icon={PiShoppingCartLight}
                 {...card}
               />
             </AnimatedWrapper>

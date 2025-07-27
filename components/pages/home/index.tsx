@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import React from 'react';
-import SectionsTypes from './Sections/SectionsTypes';
+import React, { useEffect } from 'react';
+import CategoriesTypes from './Sections/CategoriesTypes';
 import BestSellers from './Sections/BestSellers';
 import SuggestedProducts from './Sections/SuggestedProducts';
 import NewlyArrived from './Sections/NewlyArrived';
@@ -10,20 +11,62 @@ import ServiceAdvantages from './Sections/ServiceAdvantages';
 import WalletSection from './Sections/WalletSection';
 import HeroBanner from './Sections/HeroBanner';
 import { useTranslations } from 'next-intl';
-// import CookieManager from '@/utils/CookieManager';
+import useAPI from '@/hook/useAPI';
+import { Category } from '@/interfaces';
+
+interface Sliders {
+  id: number;
+  image: string;
+}
+
+interface SimpleProduct {
+  id: number;
+  image: string;
+  name: string;
+}
+
+interface CardProps {
+  id: number;
+  name: string;
+  price?: number;
+  newPrice?: number;
+  storeName?: string;
+  storeFlagImg?: string;
+  ratings?: number | string;
+}
+
+interface MobileMainContent {
+  categories: Category[];
+  sliders: Sliders[];
+  best_seller: SimpleProduct[];
+  newly_arrived: CardProps[];
+  suggested_products: SimpleProduct[];
+}
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
-  // const token = CookieManager.getToken();
-  // if (token) console.log(token);
+  const { get, data } = useAPI<MobileMainContent>(
+    'mobile-main-content',
+    {},
+    true
+  );
+
+  useEffect(() => {
+    get();
+  }, []);
+
+  console.log(data);
   return (
     <>
-      <HeroBanner />
-      <SectionsTypes />
+      <HeroBanner sliders={data?.sliders ?? []} />
+      <CategoriesTypes categories={data?.categories ?? []} />
       <WalletSection t={t} />
-      <BestSellers t={t} />
-      <SuggestedProducts t={t} />
-      <NewlyArrived t={t} />
+      <BestSellers t={t} bestSeller={data?.best_seller ?? []} />
+      <SuggestedProducts
+        t={t}
+        suggestedProducts={data?.suggested_products ?? []}
+      />
+      <NewlyArrived t={t} newlyArrived={data?.newly_arrived ?? []} />
       <RedeemPoints t={t} />
       <EnjoyWinWin t={t} />
       <ServiceAdvantages t={t} />

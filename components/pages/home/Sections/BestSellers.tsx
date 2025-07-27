@@ -7,7 +7,19 @@ import Loading from '@/components/molecules/loading';
 import { BestSellersData } from '@/data';
 import { TranslationFunction } from '@/interfaces';
 
-const BestSellers = ({ t }: { t: TranslationFunction }) => {
+interface SimpleProduct {
+  id: number;
+  image: string;
+  name: string;
+}
+
+const BestSellers = ({
+  t,
+  bestSeller,
+}: {
+  t: TranslationFunction;
+  bestSeller: SimpleProduct;
+}) => {
   return (
     <SectionComponent title={t('sectionsTitles.bestSellers')}>
       <GridWrapper isScrollable>
@@ -15,10 +27,10 @@ const BestSellers = ({ t }: { t: TranslationFunction }) => {
           <AnimatedWrapper key={card.id} custom={index}>
             <Suspense fallback={<Loading />}>
               <ProductCard
-                imgSrc={card.src}
-                imgAlt={card.title}
-                imgTitle={card.title}
-                title={card.title}
+                imgSrc={card.image}
+                imgAlt={card.name}
+                imgTitle={card.name}
+                name={card.name}
                 tall
               />
             </Suspense>
