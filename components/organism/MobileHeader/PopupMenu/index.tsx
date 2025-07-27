@@ -34,10 +34,13 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ animateClose, onClose }) => {
     >
       <PopupHeader onClose={onClose} />
       <div className="px-4 mt-4">
-        {!token && <AuthButtons t={t} />}
-        <AnimatedWrapper>
-          <Information />
-        </AnimatedWrapper>
+        {token ? (
+          <AnimatedWrapper>
+            <Information />
+          </AnimatedWrapper>
+        ) : (
+          <AuthButtons t={t} />
+        )}
         <MenuLists />
         {token && (
           <AnimatedWrapper>
