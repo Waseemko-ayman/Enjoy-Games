@@ -2,6 +2,7 @@
 import Avatar from '@/components/atomic/Avatar';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import { PATHS } from '@/data/paths';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 import { Wallet } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -14,6 +15,7 @@ const Information = () => {
   const infoStyle = 'flex items-center gap-2 text-sm font-semibold';
   const t = useTranslations('Layout.header.account');
   const titleTxts = useTranslations('PagesHeaderTitles');
+  const { isArabic } = useToggleLocale();
   return (
     <CardWrapper
       bgColor="bg-white"
@@ -27,7 +29,9 @@ const Information = () => {
             width={30}
             height={30}
           />
-          <h5 className="text-base font-semibold">
+          <h5
+            className={`${isArabic ? 'text-base' : 'text-sm'} font-semibold`}
+          >
             {t('completeAccountData')}
           </h5>
         </div>
