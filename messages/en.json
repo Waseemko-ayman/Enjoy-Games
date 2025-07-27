@@ -409,7 +409,8 @@
     "submitRating": "Submit Rating",
     "LetsTryAgain": "Let's Try Again",
     "check": "Check",
-    "sendEmail": "email"
+    "sendEmail": "email",
+    "backToHome": "Back to Home"
   },
   "Inputs": {
     "labels": {
@@ -497,6 +498,10 @@
     "verifiedSuccessfullyCode": "Verified successfully code!",
     "verificationCode": "A verification code has been sent to your email.",
     "logoutSuccess": "Successfully logged out."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, we couldn't find the page you're looking for."
   },
   "Languages": {
     "english": "English",

@@ -409,7 +409,8 @@
     "submitRating": "ارسال تقييم",
     "LetsTryAgain": "دعونا نحاول مرة أخرى",
     "check": "تحقق",
-    "sendEmail": "الإيميل"
+    "sendEmail": "الإيميل",
+    "backToHome": "العودة إلى الرئيسية"
   },
   "Inputs": {
     "labels": {
@@ -497,6 +498,10 @@
     "verifiedSuccessfullyCode": "تم التحقق من الرمز بنجاح!",
     "verificationCode": "تم إرسال رمز التحقق إلى بريدك.",
     "logoutSuccess": "تم تسجيل الخروج بنجاح"
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "description": "عذرًا، لم نتمكن من العثور على الصفحة التي تبحث عنها."
   },
   "Languages": {
     "english": "إنجليزي",
