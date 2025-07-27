@@ -203,7 +203,7 @@ const useAuth = () => {
     try {
       const token = state.token || localStorage.getItem('token');
 
-      await axios.post(
+      const res = await axios.post(
         `/api/${AUTH_API_PATHS.LOGOUT}`,
         {},
         {
@@ -214,8 +214,8 @@ const useAuth = () => {
         }
       );
       dispatch({ type: AUTH_ACTIONS.LOGOUT });
-      toast.success('تم تسجيل الخروج بنجاح');
-      router.replace(PATHS.LOGIN);
+      toast.success(res?.data?.message || 'تم تسجيل الخروج بنجاح');
+      // router.replace(PATHS.LOGIN);
     } catch (error: any) {
       const errorMsg = error.response?.data?.message || error.message;
       dispatch({

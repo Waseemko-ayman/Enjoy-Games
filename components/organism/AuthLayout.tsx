@@ -16,12 +16,12 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
   onSubmit,
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center px-8 pt-5 pb-12 max-w-lg mx-auto">
+    <div className="flex flex-col items-center justify-center px-8 pb-12 max-w-lg mx-auto">
       <Image
         src="/assets/logo.png"
         alt="Logo"
-        width={150}
-        height={150}
+        width={130}
+        height={130}
         className="pb-3"
         priority
       />

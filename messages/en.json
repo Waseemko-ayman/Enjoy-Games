@@ -410,7 +410,9 @@
     "LetsTryAgain": "Let's Try Again",
     "check": "Check",
     "sendEmail": "email",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithFacebook": "Continue with Facebook"
   },
   "Inputs": {
     "labels": {
@@ -497,7 +499,8 @@
     "verificationFailedCode": "Invalid verification code",
     "verifiedSuccessfullyCode": "Verified successfully code!",
     "verificationCode": "A verification code has been sent to your email.",
-    "logoutSuccess": "Successfully logged out."
+    "logoutSuccess": "Successfully logged out.",
+    "orLoginWith": "Or log in with"
   },
   "notFound": {
     "title": "Page Not Found",

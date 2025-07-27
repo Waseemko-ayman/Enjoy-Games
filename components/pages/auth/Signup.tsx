@@ -14,6 +14,7 @@ import { signupFormData } from '@/interfaces';
 import FormError from '@/components/atomic/FormError';
 import { InputTypes } from '@/utils/type';
 import { useAuthContext } from '@/context/AuthContext';
+import SocialLogin from '@/components/molecules/SocialLogin';
 
 const SignupPage = () => {
   const inputsTxts = useTranslations('Inputs');
@@ -93,6 +94,8 @@ const SignupPage = () => {
           </div>
         );
       })}
+
+      <SocialLogin btnTxts={btnTxts} authTxts={authTxts} />
 
       <p className="text-xs text-[var(--enjoy-gray-650)] font-normal text-center mt-4">
         {authTxts('registerationReq')}{' '}

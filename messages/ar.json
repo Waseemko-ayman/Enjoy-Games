@@ -410,7 +410,9 @@
     "LetsTryAgain": "دعونا نحاول مرة أخرى",
     "check": "تحقق",
     "sendEmail": "الإيميل",
-    "backToHome": "العودة إلى الرئيسية"
+    "backToHome": "العودة إلى الرئيسية",
+    "continueWithGoogle": "المتابعة باستخدام جوجل",
+    "continueWithFacebook": "المتابعة باستخدام فيسبوك"
   },
   "Inputs": {
     "labels": {
@@ -497,7 +499,8 @@
     "verificationFailedCode": "رمز التحقق غير صحيح",
     "verifiedSuccessfullyCode": "تم التحقق من الرمز بنجاح!",
     "verificationCode": "تم إرسال رمز التحقق إلى بريدك.",
-    "logoutSuccess": "تم تسجيل الخروج بنجاح"
+    "logoutSuccess": "تم تسجيل الخروج بنجاح",
+    "orLoginWith": "أو سجّل الدخول بواسطة"
   },
   "notFound": {
     "title": "الصفحة غير موجودة",

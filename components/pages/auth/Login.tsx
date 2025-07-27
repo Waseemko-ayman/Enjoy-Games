@@ -15,6 +15,7 @@ import FormError from '@/components/atomic/FormError';
 import { useAuthContext } from '@/context/AuthContext';
 import { InputTypes } from '@/utils/type';
 import { useRouter } from 'next/navigation';
+import SocialLogin from '@/components/molecules/SocialLogin';
 
 const LoginPage = () => {
   const inputsTxts = useTranslations('Inputs');
@@ -92,6 +93,8 @@ const LoginPage = () => {
           </div>
         );
       })}
+
+      <SocialLogin btnTxts={btnTxts} authTxts={authTxts} />
 
       <p className="text-xs text-[var(--enjoy-gray-650)] font-normal text-center mt-4">
         {authTxts('dontHaveAccount')}{' '}
