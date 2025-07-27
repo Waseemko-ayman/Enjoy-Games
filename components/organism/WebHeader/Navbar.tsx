@@ -35,7 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
                 // icon={item.icon}
                 icon={'/assets/digitalStores.webp'}
                 name={item.name}
-                linkPath={item.path}
+                linkPath={`/categories/${item.slug}`}
                 layout={layout}
                 isMobile={isMobile}
               />
