@@ -37,7 +37,7 @@ const TopBanner = () => {
             isMobile={isMobile}
             trigger={
               <button className="flex items-center gap-2 order-2 sm:order-1 cursor-pointer">
-                <span className="text-sm">{t('title')} 🎉</span>
+                <span className="text-xs min-[426px]:text-sm">{t('title')} 🎉</span>
                 {isArabic ? <IoIosArrowBack /> : <IoIosArrowForward />}
               </button>
             }
