@@ -1,3 +1,4 @@
+// app/categories/[category]/page.tsx
 import { paramsProps } from '@/interfaces';
 import { getCategoryData } from '@/lib/mockData';
 import CategoryPage from '@/template/CategoryPage';
@@ -6,9 +7,11 @@ import { Metadata } from 'next';
 export async function generateMetadata({
   params,
 }: {
-  params: paramsProps;
+  params: Promise<paramsProps>;
 }): Promise<Metadata> {
-  const categoryName = params.category;
+  const resolvedParams = await params;
+
+  const categoryName = resolvedParams.category;
 
   return {
     title: `إنجوي قيمز | ${categoryName}`,
@@ -19,11 +22,11 @@ export async function generateMetadata({
 export default async function CategoryPageWrapper({
   params,
 }: {
-  params: paramsProps;
+  params: Promise<paramsProps>;
 }) {
-  // Get data from mockData (will be replaced by API later)
-  // const categoryData = await getCategoryData(params.category);
-  const categoryData = getCategoryData(params.category);
+  const resolvedParams = await params;
+
+  const categoryData = await getCategoryData(resolvedParams.category);
 
   return <CategoryPage cards={categoryData} />;
 }

@@ -1,19 +1,27 @@
 'use client';
-const ProductCard = lazy(() => import('@/components/atomic/ProductCard'));
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
+import dynamic from 'next/dynamic';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
 import ResponsiveWrapper from '@/components/molecules/ResponsiveWrapper';
-import { NewlyArrivedData } from '@/data';
 import { PATHS } from '@/data/paths';
 import useIsMobile from '@/hook/useIsMobile';
 import Link from 'next/link';
 import { PiShoppingCartLight } from 'react-icons/pi';
 import { useTranslations } from 'next-intl';
-import { TranslationFunction } from '@/interfaces';
+import { CardProps, TranslationFunction } from '@/interfaces';
+const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
+  loading: () => <Loading />,
+});
 
-const RedeemPoints = ({ t }: { t: TranslationFunction }) => {
+const RedeemPoints = ({
+  t,
+  newlyArrived,
+}: {
+  t: TranslationFunction;
+  newlyArrived: CardProps[];
+}) => {
   const isMobile = useIsMobile();
   const btnText = useTranslations('BtnTexts');
   return (
@@ -39,22 +47,21 @@ const RedeemPoints = ({ t }: { t: TranslationFunction }) => {
           otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"
           isScrollable
         >
-          {NewlyArrivedData.map((card, index) => (
+          {newlyArrived.map((card, index) => (
             <AnimatedWrapper key={card.id} custom={index}>
-              <Suspense fallback={<Loading />}>
-                <ProductCard
-                  imgSrc={card.image}
-                  imgAlt={card.name}
-                  imgTitle={card.name}
-                  description
-                  variant="column"
-                  showBtn
-                  btnVariant="secondary"
-                  btnText={btnText('GetItNow')}
-                  icon={PiShoppingCartLight}
-                  {...card}
-                />
-              </Suspense>
+              <ProductCard
+                // imgSrc={card.image}
+                imgSrc={'/assets/play-station.webp'}
+                imgAlt={card.title}
+                imgTitle={card.title}
+                showDesc
+                variant="column"
+                showBtn
+                btnVariant="secondary"
+                btnText={btnText('GetItNow')}
+                icon={PiShoppingCartLight}
+                {...card}
+              />
             </AnimatedWrapper>
           ))}
         </GridWrapper>

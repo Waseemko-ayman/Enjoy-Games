@@ -6,19 +6,15 @@ import { PiSquaresFourLight } from 'react-icons/pi';
 import NavItem from '@/components/atomic/NavItem';
 import { IoSearch } from 'react-icons/io5';
 import DropdownNavItem from '@/components/molecules/DropdownMenuItem';
-import { subMenuItems } from '@/data';
 import { PATHS } from '@/data/paths';
-import { NavbarProps } from '@/interfaces';
+import { Category, NavbarProps } from '@/interfaces';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import useAPI from '@/hook/useAPI';
 
 const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
   const t = useTranslations('Layout.header.navBar');
-
   const { get, data: categories } = useAPI(`categories-subcategories`);
-
-  console.log(categories);
 
   useEffect(() => {
     get();
@@ -33,10 +29,11 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
               isMobile ? 'justify-center flex-wrap gap-4' : 'gap-7'
             }`}
           >
-            {subMenuItems.map((item) => (
+            {categories.map((item: Category) => (
               <NavItem
-                key={item.name}
-                icon={item.icon}
+                key={item.id}
+                // icon={item.icon}
+                icon={'/assets/digitalStores.webp'}
                 name={item.name}
                 linkPath={item.path}
                 layout={layout}
@@ -63,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
             <DropdownNavItem
               name={t('allCategories')}
               icon={PiSquaresFourLight}
-              categories={subMenuItems}
+              categories={categories}
               isMainMenu={true}
             />
           </motion.li>

@@ -13,6 +13,63 @@ import { Variants } from 'framer-motion';
 import { Messages, useTranslations } from 'next-intl';
 import { ElementType, JSX, ReactNode } from 'react';
 
+export interface Category {
+  id: number;
+  slug: string | null;
+  name: string;
+  icon: string;
+  image: string;
+  sub_categories: SubCategories[];
+  path: string;
+}
+
+export interface CardProps {
+  id: number;
+  category_id?: number;
+  sub_category_id?: number;
+  title: string;
+  slug?: string;
+  content?: string;
+  description?: string;
+  image: string;
+  price_before?: number;
+  price?: number;
+  discount?: null;
+  shipping_payment?: string;
+  ratings?: number | string;
+  icon?: React.ElementType | string | any;
+  showDesc?: boolean;
+  variant?: CommonCardVariant;
+  storeName?: string;
+  storeFlagImg?: string;
+  tall?: boolean;
+  btnVariant?: ButtonMainVarinats;
+  btnText?: string;
+  otherClassNameBtn?: string;
+}
+
+export interface SubCategories {
+  id: number;
+  category_id: number;
+  parent_id: null;
+  name: string;
+  slug: string;
+  icon: string;
+  image?: string;
+  children_count: number;
+  href?: string;
+  onClick?: () => void;
+  // shiddatData: shiddaItem[];
+  // accounts?: AccountItem[];
+  // accountId?: string;
+  // bundles?: {
+  //   id: string;
+  //   title: string;
+  //   price: number;
+  //   accountId: string;
+  // }[];
+}
+
 interface BaseIconProps {
   icon?: React.ElementType | string | any;
 }
@@ -38,18 +95,22 @@ export interface ButtonProps extends BaseClassNameProps, WithChildren {
 }
 
 export interface cardProps {
-  name: string;
+  sub_category_id?: number;
+  title: string;
+  price_before?: number;
   price?: number;
-  newPrice?: number;
+  discount?: null;
   storeName?: string;
   storeFlagImg?: string;
   ratings?: number | string;
+  shipping_payment?: string;
 }
 
 export interface ProductCardProps extends BaseIconProps, cardProps {
   titleIsLink?: boolean;
   productLink?: string;
-  description?: boolean;
+  description?: string;
+  showDesc?: boolean;
   imgSrc: string;
   imgAlt: string;
   imgTitle: string;
@@ -120,16 +181,6 @@ export interface SubMenuItem extends BaseIconProps {
   path?: string;
 }
 
-export interface Category {
-  id: number;
-  slug: string | null;
-  name: string;
-  icon: string;
-  image: string;
-  sub_categories: SubCategories[];
-  path: string;
-}
-
 export interface DropdownNavItemProps extends BaseIconProps {
   name: string;
   categories?: Category[];
@@ -151,8 +202,8 @@ export interface LinkItem extends BaseIconProps {
 }
 
 export interface SectionTypeCardProps extends BaseClassNameProps {
-  path: string;
-  name: string;
+  path?: string;
+  title: string;
   imgSrc: string;
   imgAlt: string;
   imgTitle: string;
@@ -185,28 +236,6 @@ export interface AccountItem {
   label: string;
   banner: string;
   shiddatData: shiddaItem[];
-}
-
-export interface SubCategories {
-  id: number;
-  category_id: number;
-  slug: null;
-  parent_id: null;
-  icon: string;
-  name: string;
-  image?: string;
-  href?: string;
-  onClick?: () => void;
-  children_count: number;
-  // shiddatData: shiddaItem[];
-  // accounts?: AccountItem[];
-  // accountId?: string;
-  // bundles?: {
-  //   id: string;
-  //   title: string;
-  //   price: number;
-  //   accountId: string;
-  // }[];
 }
 
 export interface CategoryPageProps {
@@ -542,8 +571,8 @@ export interface signupFormData extends LoginFormData {
 
 type Account = {
   id: string;
-  label: string;
-  banner: string;
+  name: string;
+  image: string;
 };
 
 export interface SelectAccountPageProps {

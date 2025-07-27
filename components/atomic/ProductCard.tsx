@@ -8,19 +8,19 @@ import { ProductCardProps } from '@/interfaces';
 import CardWrapper from './CardWrapper';
 
 const ProductCard: React.FC<ProductCardProps> = ({
-  name,
-  description,
+  title,
   imgSrc,
-  imgAlt,
+  imgAlt = '',
   imgTitle,
+  price_before,
   price,
-  newPrice,
   storeName = '',
   storeFlagImg = '',
   variant = 'row',
   cardLinkPath = '#',
   ratings,
   tall = false,
+  showDesc = false,
   showBtn = false,
   btnVariant = 'primary',
   btnText,
@@ -51,25 +51,23 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 : 'font-semibold inline-block mb-1.5 text-[15px] text-[var(--enjoy-gray-650)] hover:text-[var(--enjoy-gray-300)] transition-all duration-600'
             }`}
           >
-            {name}
+            {title}
           </h3>
-          {description && (
+          {showDesc && (
             <div className="mb-3 text-sm mt-2">
-              {price && (
+              {price_before && (
                 <div className="flex items-center justify-between gap-2">
-                  {newPrice && (
-                    <h4 className="font-semibold mb-2 text-[15px]">
-                      ${newPrice}
-                    </h4>
+                  {price && (
+                    <h4 className="font-semibold mb-2 text-[15px]">${price}</h4>
                   )}
                   <h4
                     className={`font-semibold mb-2 ${
-                      newPrice
+                      price
                         ? 'line-through text-gray-400 text-sm'
                         : 'text-[15px]'
                     }`}
                   >
-                    ${price}
+                    ${price_before}
                   </h4>
                 </div>
               )}

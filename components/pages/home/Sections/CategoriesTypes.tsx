@@ -1,19 +1,30 @@
+import dynamic from 'next/dynamic';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
-import SectionTypeCard from '@/components/molecules/SectionTypeCard';
+import Loading from '@/components/molecules/loading';
 import Container from '@/components/organism/Container';
-import { subMenuItems } from '@/data';
 import { Category } from '@/interfaces';
+const SectionTypeCard = dynamic(
+  () => import('@/components/molecules/SectionTypeCard'),
+  {
+    loading: () => <Loading />,
+  }
+);
 
-const CategoriesTypes = ({ categories }: { categories?: Category }) => {
+const CategoriesTypes = ({ categories }: { categories?: Category[] }) => {
   return (
     <Container>
-      <div className="grid grid-cols-3 lg:grid-cols-4 gap-5">
-        {subMenuItems.map((item, index) => (
+      <div
+        className={`grid grid-cols-3 ${
+          (categories?.length ?? 0) > 4 ? 'lg:grid-cols-5' : 'lg:grid-cols-4'
+        } gap-5`}
+      >
+        {categories?.map((item: Category, index: number) => (
           <AnimatedWrapper key={item.id} custom={index}>
             <SectionTypeCard
-              path={item.path}
-              name={item.name}
-              imgSrc={item.image}
+              path={`/categories/${item.slug}`}
+              // imgSrc={item.image}
+              title={item.name}
+              imgSrc={'/assets/digitalStores.webp'}
               imgAlt={item.name}
               imgTitle={item.name}
               width={90}

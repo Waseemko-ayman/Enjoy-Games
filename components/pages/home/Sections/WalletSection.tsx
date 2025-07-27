@@ -21,7 +21,7 @@ const WalletSection = ({ t }: { t: TranslationFunction }) => {
                   ? t(`walletSections.${card.unit}`)
                   : card.unit
               }
-              Icon={card.icon}
+              icon={card.icon}
               bgColor={card.bgColor}
               textColor={card.textColor}
               isUnitTranslatable={card.isUnitTranslatable}

@@ -33,8 +33,8 @@ export default function SelectAccountPage({
         {accounts.map((account, index) => (
           <AnimatedWrapper key={account.id} custom={index}>
             <CategoryCard
-              banner={account.banner}
-              label={account.label}
+              image={'/assets/play-station.webp'}
+              name={account.name}
               onClick={() => handleSelect(account.id)}
             />
           </AnimatedWrapper>

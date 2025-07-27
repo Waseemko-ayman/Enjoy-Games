@@ -1,18 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavItem from '../atomic/NavItem';
-import { subMenuItems } from '@/data';
 import { motion } from 'framer-motion';
+import useAPI from '@/hook/useAPI';
+import { Category } from '@/interfaces';
 
 const SheetContentComp = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { get, data: categories } = useAPI(`categories-subcategories`);
+
+  useEffect(() => {
+    get();
+  }, []);
 
   return (
     <div>
-      {subMenuItems.map((item, index) => {
+      {categories.map((item: Category, index: number) => {
         const isOpen = openIndex === index;
         const hasSubmenu = !!item.sub_categories;
-        const isLastTwoItems = index >= subMenuItems.length - 2;
+        const isLastTwoItems = index >= categories.length - 2;
 
         return (
           <motion.div
@@ -24,7 +31,8 @@ const SheetContentComp = () => {
           >
             <NavItem
               key={index}
-              icon={item.icon}
+              // icon={item.icon}
+              icon={'/assets/digitalStores.webp'}
               name={item.name}
               otherClassName="text-white"
               showArrow={!!item.sub_categories}
@@ -49,7 +57,8 @@ const SheetContentComp = () => {
                 {item.sub_categories.map((subItem, index) => (
                   <NavItem
                     key={index}
-                    icon={subItem.icon}
+                    // icon={subItem.icon}
+                    icon={'/assets/digitalStores.webp'}
                     name={subItem.name}
                     otherClassName="!py-2 !px-0 !text-base !font-medium"
                   />

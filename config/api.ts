@@ -1,2 +1,1 @@
-export const API_URL = 'http://31.97.36.197/api/categories-subcategories';
-export const AUTH_API_URL = 'http://31.97.36.197/api/';
+export const API_URL = process.env.NEXT_PUBLIC_BASE_URL;

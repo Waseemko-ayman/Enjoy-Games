@@ -51,7 +51,6 @@ const HomePage = () => {
     get();
   }, []);
 
-  console.log(data);
   return (
     <>
       <HeroBanner sliders={data?.sliders ?? []} />
@@ -63,7 +62,7 @@ const HomePage = () => {
         suggestedProducts={data?.suggested_products ?? []}
       />
       <NewlyArrived t={t} newlyArrived={data?.newly_arrived ?? []} />
-      <RedeemPoints t={t} />
+      <RedeemPoints t={t} newlyArrived={data?.newly_arrived ?? []} />
       <EnjoyWinWin t={t} />
       <ServiceAdvantages t={t} />
     </>

@@ -1,7 +1,8 @@
 import React from 'react';
 import NavItem from '@/components/atomic/NavItem';
-import { DropdownNavItemProps } from '@/interfaces';
+import { DropdownNavItemProps, SubCategories } from '@/interfaces';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import { useRouter } from 'next/navigation';
 
 const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
   name,
@@ -10,6 +11,20 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
   isMainMenu = false,
 }) => {
   const { isArabic } = useToggleLocale();
+  const router = useRouter();
+
+  const handleSubCategoryClick = (
+    categorySlug: string,
+    subCategory: SubCategories
+  ) => {
+    const basePath = `/categories/${categorySlug}/${subCategory.slug}`;
+    const path =
+      subCategory.children_count > 0
+        ? `${basePath}/select-account`
+        : `${basePath}/bundles`;
+    router.push(path);
+  };
+
   return (
     <div className="relative group">
       <NavItem icon={icon} name={name} />
@@ -26,11 +41,12 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
             <div key={index} className="relative group/sub">
               <NavItem
                 key={index}
-                icon={category.icon}
+                // icon={category.icon}
+                icon={'/assets/digitalStores.webp'}
                 name={category.name}
                 otherClassName="!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg"
                 showArrow={!!category.sub_categories}
-                linkPath={category.path}
+                linkPath={`/categories/${category.slug}`}
               />
 
               {category.sub_categories && (
@@ -47,9 +63,14 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
                   {category.sub_categories.map((subItem, index) => (
                     <NavItem
                       key={index}
-                      icon={subItem.icon}
+                      // icon={subItem.icon}
+                      icon={'/assets/digitalStores.webp'}
                       name={subItem.name}
                       otherClassName="!py-2 !px-0 !text-base !font-medium"
+                      // linkPath={`/categories/${category.slug}/${subItem.slug}/bundles`}
+                      onClick={() =>
+                        handleSubCategoryClick(subItem.slug, subItem)
+                      }
                     />
                   ))}
                 </div>
