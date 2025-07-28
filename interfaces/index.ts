@@ -554,3 +554,8 @@ type Account = {
 export interface SelectAccountPageProps {
   accounts: Account[];
 }
+
+export interface Sliders {
+  id: number;
+  image: string;
+}
