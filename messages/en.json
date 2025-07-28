@@ -518,7 +518,7 @@
     },
     "btns": {
       "menuTrigger": "Open menu",
-      "goToSlide_en": "Go to slide number {number}",
+      "goToSlide": "Go to slide number {number}",
       "openChatWindow": "Open chat window",
       "selectPurchaseType": "Filter your purchases by type"
     }

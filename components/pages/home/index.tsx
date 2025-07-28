@@ -49,8 +49,6 @@ const HomePage = () => {
   const { categories } = useCategories();
   const { get, data } = useAPI<MobileMainContent>('main-content', {});
 
-  console.log(categories);
-
   useEffect(() => {
     get();
   }, []);
