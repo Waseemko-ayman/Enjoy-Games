@@ -3,15 +3,10 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import { HeroSlides } from '@/data';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-/* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react';
 
-interface Sliders {
-  id: number;
-  image: string;
-}
-
-export default function HeroBanner({ sliders }: { sliders: Sliders }) {
+// export default function HeroBanner({ sliders }: { sliders: Sliders }) {
+export default function HeroBanner() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const ariaTxts = useTranslations('ariaLabels.btns');

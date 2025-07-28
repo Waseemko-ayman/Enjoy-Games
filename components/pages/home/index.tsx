@@ -55,7 +55,8 @@ const HomePage = () => {
 
   return (
     <>
-      <HeroBanner sliders={data?.sliders ?? []} />
+      {/* <HeroBanner sliders={data?.sliders ?? []} /> */}
+      <HeroBanner />
       <CategoriesTypes categories={categories} />
       <WalletSection t={t} />
       <BestSellers t={t} bestSeller={data?.best_seller ?? []} />
