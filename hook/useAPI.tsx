@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosRequestConfig } from 'axios';
 import { useReducer } from 'react';
+import axiosInstance from '@/utils/axiosInstance';
 
 interface State<T> {
-  data: T | T[]; // يمكن أن يكون كائن أو مصفوفة
+  data: T | T[];
   product: T | null;
   isLoading: boolean;
   error: any;
@@ -85,10 +86,11 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
   const get = async (getConfig?: AxiosRequestConfig) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
-      const res = await axios.get<{ data: T | T[] }>(`/api/${url}`, {
+      const res = await axiosInstance.get<{ data: T | T[] }>(`/${url}`, {
         ...config,
         ...getConfig,
       });
+      
       dispatch({ type: API_ACTIONS.GET, payload: res?.data?.data });
     } catch (error) {
       dispatch({ type: API_ACTIONS.ERROR, payload: error });
@@ -101,7 +103,7 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
   ) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
-      const res = await axios.get<{ data: T }>(`/api/${url}/${id}`, {
+      const res = await axiosInstance.get<{ data: T }>(`/${url}/${id}`, {
         ...config,
         ...getConfig,
       });
@@ -114,7 +116,7 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
   const add = async (body: T, postConfig?: AxiosRequestConfig) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
-      const res = await axios.post<{ data: T }>(`/api/${url}`, body, {
+      const res = await axios.post<{ data: T }>(`/${url}`, body, {
         ...config,
         ...postConfig,
       });

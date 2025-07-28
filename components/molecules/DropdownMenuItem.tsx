@@ -18,11 +18,12 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
     subCategory: SubCategories
   ) => {
     const basePath = `/categories/${categorySlug}/${subCategory.slug}`;
-    const path =
-      subCategory.children_count > 0
-        ? `${basePath}/select-account`
-        : `${basePath}/bundles`;
-    router.push(path);
+    setTimeout(() => router.push(basePath), 150);
+    // const path =
+    //   subCategory.children_count > 0
+    //     ? `${basePath}/select-account`
+    //     : `${basePath}/bundles`;
+    // router.push(path);
   };
 
   return (

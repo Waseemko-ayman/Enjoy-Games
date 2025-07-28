@@ -1,4 +1,3 @@
-// app/categories/[category]/page.tsx
 import { paramsProps } from '@/interfaces';
 import { getCategoryData } from '@/lib/mockData';
 import CategoryPage from '@/template/CategoryPage';

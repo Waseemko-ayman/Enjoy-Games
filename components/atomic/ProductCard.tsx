@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+// import Link from 'next/link';
 import React from 'react';
 import Avatar from './Avatar';
 import { PiSparkleFill } from 'react-icons/pi';
@@ -9,7 +9,7 @@ import CardWrapper from './CardWrapper';
 
 const ProductCard: React.FC<ProductCardProps> = ({
   title,
-  imgSrc,
+  image,
   imgAlt = '',
   imgTitle,
   price_before,
@@ -17,7 +17,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
   storeName = '',
   storeFlagImg = '',
   variant = 'row',
-  cardLinkPath = '#',
+  // cardLinkPath = '#',
+  onClick,
+  discount,
   ratings,
   tall = false,
   showDesc = false,
@@ -27,22 +29,40 @@ const ProductCard: React.FC<ProductCardProps> = ({
   otherClassNameBtn,
   icon,
 }) => {
+  const safeImage =
+    image &&
+    typeof image === 'string' &&
+    image.trim() !== '' &&
+    !image.includes(' ')
+      ? image.startsWith('http') || image.startsWith('/')
+        ? image
+        : `/${image}`
+      : '/assets/play-station.webp';
+
   return (
     <div>
       <CardWrapper className="p-3 transform transition-transform duration-300 hover:-translate-y-2">
-        <Link href={cardLinkPath}>
+        <div onClick={onClick} className="cursor-pointer">
           <div
             className={`relative w-full h-0 ${
               tall ? 'pb-[133.33%]' : 'pb-[65%]'
             }`}
           >
-            <Image
-              src={imgSrc}
-              alt={imgAlt}
-              title={imgTitle}
-              fill
-              className="absolute inset-0 object-cover rounded-[6px]"
-            />
+            {safeImage && (
+              <Image
+                src={safeImage}
+                alt={imgAlt}
+                title={imgTitle}
+                fill
+                className="absolute inset-0 object-cover rounded-[6px]"
+              />
+            )}
+            {discount && (
+              <span className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-semibold px-2 py-1 rounded-lg shadow-md z-10">
+                خصم
+                {discount}%
+              </span>
+            )}
           </div>
           <h3
             className={`mt-3.5 ${
@@ -125,7 +145,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               </div>
             </div>
           )}
-        </Link>
+        </div>
         {showBtn && (
           <Button
             variant={btnVariant}

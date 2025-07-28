@@ -1,35 +1,40 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import PageHeader from '@/components/molecules/PageHeader';
-import { CategoryPageProps } from '@/interfaces';
+import { Category, CategoryPageProps, SubCategories } from '@/interfaces';
 import CategoryCardsGrid from '@/components/organism/CategoryCardsGrid';
 import { useParams, useRouter } from 'next/navigation';
 import Loading from '@/components/molecules/loading';
+import useAPI from '@/hook/useAPI';
 
 const CategoryPage: React.FC<CategoryPageProps> = ({ cards }) => {
   const params = useParams();
   const router = useRouter();
-  const [isNavigating, setIsNavigating] = useState(false);
+  const { get, data, isLoading } = useAPI(`category/${params.category}`);
 
   const enhancedCards = useMemo(() => {
-    return cards.map((card) => ({
+    const base =
+      Array.isArray(cards) && cards.length > 0
+        ? cards
+        : Array.isArray((data as Category)?.sub_categories)
+        ? (data as Category).sub_categories
+        : [];
+
+    return base.map((card: SubCategories) => ({
       ...card,
       onClick: () => {
-        setIsNavigating(true);
-        const basePath = `/categories/${params.category}/${
-          card.slug || card.id
-        }`;
-        const path =
-          card.children_count > 0
-            ? `${basePath}/select-account`
-            : `${basePath}/bundles`;
-
-        setTimeout(() => router.push(path), 150);
+        const basePath = `/categories/${params.category}/${card.slug}`;
+        setTimeout(() => router.push(basePath), 150);
       },
     }));
-  }, [cards, params.category, router]);
+  }, [cards, data, params.category, router]);
 
-  if (isNavigating) {
+  useEffect(() => {
+    get();
+  }, []);
+
+  if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-64">
         <Loading />

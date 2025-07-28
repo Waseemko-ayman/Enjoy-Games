@@ -23,31 +23,6 @@ export interface Category {
   path: string;
 }
 
-export interface CardProps {
-  id: number;
-  category_id?: number;
-  sub_category_id?: number;
-  title: string;
-  slug?: string;
-  content?: string;
-  description?: string;
-  image: string;
-  price_before?: number;
-  price?: number;
-  discount?: null;
-  shipping_payment?: string;
-  ratings?: number | string;
-  icon?: React.ElementType | string | any;
-  showDesc?: boolean;
-  variant?: CommonCardVariant;
-  storeName?: string;
-  storeFlagImg?: string;
-  tall?: boolean;
-  btnVariant?: ButtonMainVarinats;
-  btnText?: string;
-  otherClassNameBtn?: string;
-}
-
 export interface SubCategories {
   id: number;
   category_id: number;
@@ -68,6 +43,35 @@ export interface SubCategories {
   //   price: number;
   //   accountId: string;
   // }[];
+}
+
+export interface ProductCardProps {
+  id?: number;
+  category_id?: number;
+  sub_category_id?: number;
+  title: string;
+  slug?: string;
+  content?: string;
+  description?: string;
+  image: string;
+  imgAlt?: string;
+  imgTitle?: string;
+  price_before?: number;
+  price?: number;
+  discount?: null;
+  shipping_payment?: string;
+  ratings?: number | string;
+  icon?: React.ElementType | string | any;
+  showDesc?: boolean;
+  showBtn?: boolean;
+  variant?: CommonCardVariant;
+  storeName?: string;
+  storeFlagImg?: string;
+  tall?: boolean;
+  btnVariant?: ButtonMainVarinats;
+  btnText?: string;
+  otherClassNameBtn?: string;
+  onClick?: () => void;
 }
 
 interface BaseIconProps {
@@ -92,35 +96,6 @@ export interface ButtonProps extends BaseClassNameProps, WithChildren {
   disabled?: boolean;
   bgColor?: string;
   hoverBgColor?: string;
-}
-
-export interface cardProps {
-  sub_category_id?: number;
-  title: string;
-  price_before?: number;
-  price?: number;
-  discount?: null;
-  storeName?: string;
-  storeFlagImg?: string;
-  ratings?: number | string;
-  shipping_payment?: string;
-}
-
-export interface ProductCardProps extends BaseIconProps, cardProps {
-  titleIsLink?: boolean;
-  productLink?: string;
-  description?: string;
-  showDesc?: boolean;
-  imgSrc: string;
-  imgAlt: string;
-  imgTitle: string;
-  variant?: CommonCardVariant;
-  cardLinkPath?: string;
-  tall?: boolean;
-  showBtn?: boolean;
-  btnVariant?: ButtonMainVarinats;
-  btnText?: string;
-  otherClassNameBtn?: string;
 }
 
 export interface NavItemProps extends BaseIconProps, BaseClassNameProps {
@@ -226,7 +201,7 @@ export interface BannerProps {
   }[];
 }
 
-export interface shiddaItem extends cardProps {
+export interface shiddaItem {
   id: number;
   src: string;
 }
@@ -445,6 +420,7 @@ export interface paramsProps {
   locale: string;
   category: string;
   itemId: string;
+  productId: string;
 }
 
 export interface BundlesPageProps {

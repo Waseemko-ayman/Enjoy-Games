@@ -13,6 +13,7 @@ import HeroBanner from './Sections/HeroBanner';
 import { useTranslations } from 'next-intl';
 import useAPI from '@/hook/useAPI';
 import { Category } from '@/interfaces';
+import { useCategories } from '@/context/CategoriesContext';
 
 interface Sliders {
   id: number;
@@ -45,7 +46,10 @@ interface MobileMainContent {
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
-  const { get, data } = useAPI<MobileMainContent>('mobile-main-content', {});
+  const { categories } = useCategories();
+  const { get, data } = useAPI<MobileMainContent>('main-content', {});
+
+  console.log(categories);
 
   useEffect(() => {
     get();
@@ -54,7 +58,7 @@ const HomePage = () => {
   return (
     <>
       <HeroBanner sliders={data?.sliders ?? []} />
-      <CategoriesTypes categories={data?.categories ?? []} />
+      <CategoriesTypes categories={categories} />
       <WalletSection t={t} />
       <BestSellers t={t} bestSeller={data?.best_seller ?? []} />
       <SuggestedProducts

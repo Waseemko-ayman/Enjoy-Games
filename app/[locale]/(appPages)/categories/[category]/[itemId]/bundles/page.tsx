@@ -35,6 +35,10 @@
 // //   return <BundlesPage item={item} params={params} />;
 // // }
 
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+
 // import { getItemData } from '@/lib/mockData';
 // import BundlesPage from '@/components/pages/BundlesPage';
 // import { paramsProps } from '@/interfaces';
@@ -57,7 +61,7 @@
 // // 2. تعريف نوع Props بشكل صريح
 // interface PageProps {
 //   params: paramsProps;
-//   searchParams?: { account?: string };
+//   searchParams?: { account?: string }; 
 // }
 
 // export default async function BundlesWrapper({

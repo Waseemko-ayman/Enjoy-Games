@@ -11,6 +11,7 @@ import { usePathname } from 'next/navigation';
 import useIsMobile from '@/hook/useIsMobile';
 import { FloatingChatWidget } from '../FloatingChatWidget';
 import FloatingActions from '../../atomic/FloatingActions';
+import { CategoriesProvider } from '@/context/CategoriesContext';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -22,7 +23,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const isMobile = useIsMobile();
 
   return (
-    <>
+    <CategoriesProvider>
       {!isCartPage && <TopBanner />}
       {isCartPage ? (
         <></>
@@ -43,7 +44,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       {!isCartPage && <Footer />}
       <FloatingChatWidget />
       <FloatingActions phone="+972592164680" />
-    </>
+    </CategoriesProvider>
   );
 };
 

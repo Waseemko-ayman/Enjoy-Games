@@ -10,7 +10,7 @@ import useIsMobile from '@/hook/useIsMobile';
 import Link from 'next/link';
 import { PiShoppingCartLight } from 'react-icons/pi';
 import { useTranslations } from 'next-intl';
-import { CardProps, TranslationFunction } from '@/interfaces';
+import { ProductCardProps, TranslationFunction } from '@/interfaces';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -20,7 +20,7 @@ const RedeemPoints = ({
   newlyArrived,
 }: {
   t: TranslationFunction;
-  newlyArrived: CardProps[];
+  newlyArrived: ProductCardProps[];
 }) => {
   const isMobile = useIsMobile();
   const btnText = useTranslations('BtnTexts');
@@ -47,23 +47,26 @@ const RedeemPoints = ({
           otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"
           isScrollable
         >
-          {newlyArrived.map((card, index) => (
-            <AnimatedWrapper key={card.id} custom={index}>
-              <ProductCard
-                // imgSrc={card.image}
-                imgSrc={'/assets/play-station.webp'}
-                imgAlt={card.title}
-                imgTitle={card.title}
-                showDesc
-                variant="column"
-                showBtn
-                btnVariant="secondary"
-                btnText={btnText('GetItNow')}
-                icon={PiShoppingCartLight}
-                {...card}
-              />
-            </AnimatedWrapper>
-          ))}
+          {newlyArrived.map((card, index) => {
+            const { image, ...cardWithoutImage } = card;
+            return (
+              <AnimatedWrapper key={card.id} custom={index}>
+                <ProductCard
+                  // imgSrc={card.image}
+                  image={image || '/assets/play-station.webp'}
+                  imgAlt={card.title}
+                  imgTitle={card.title}
+                  showDesc
+                  variant="column"
+                  showBtn
+                  btnVariant="secondary"
+                  btnText={btnText('GetItNow')}
+                  icon={PiShoppingCartLight}
+                  {...cardWithoutImage}
+                />
+              </AnimatedWrapper>
+            );
+          })}
         </GridWrapper>
       </div>
     </ResponsiveWrapper>
