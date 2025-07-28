@@ -7,41 +7,53 @@ import NavbarSheet from '@/components/molecules/NavbarSheet';
 import { usePathname } from 'next/navigation';
 import { PATHS } from '@/data/paths';
 import Link from 'next/link';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
 
 const MobileHeader = () => {
-  const pathname = usePathname();
+  const pathname = usePathname(); // e.g., "/en/about"
+  const t = useTranslations('PagesHeaderTitles'); // Translations for page titles
+  const ariaTxts = useTranslations('ariaLabels.links');
 
-  // Split the pathname and remove empty parts
+  // Split the pathname into parts: "/en/about" → ['en', 'about']
   const pathParts = pathname.split('/').filter(Boolean);
 
-  // Extract only the page name (last part of the path)
-  const pageKey = pathParts[pathParts.length - 1] || '';
-
-  // Create a map of path names using values from PATHS
-  const pathNameMap = Object.entries(PATHS).reduce<Record<string, string>>(
-    (acc, [, value]) => {
-      if (typeof value === 'object' && value.link && value.name) {
-        // Extract the page key (last part of the link)
-        const key = value.link.split('/').pop() || '';
-        acc[key] = value.name;
-      }
-      return acc;
-    },
-    {}
+  // Remove the first part if it's a locale (e.g., 'en' or 'ar')
+  const filteredParts = pathParts.filter(
+    (part, index) => !(index === 0 && ['en', 'ar'].includes(part))
   );
 
-  const title = pathNameMap[pageKey] || 'الرئيسية';
+  // Get the last segment after removing locale — this is our primary translation key
+  const pageKey = filteredParts[filteredParts.length - 1] || 'home';
+
+  // Fallback to the previous segment if needed
+  const fallbackKey =
+    filteredParts.length > 1 ? filteredParts[filteredParts.length - 2] : 'home';
+
+  // Try translating pageKey first; if it fails, try fallbackKey; otherwise use 'home'
+  const title =
+    t(pageKey) !== pageKey
+      ? t(pageKey)
+      : t(fallbackKey) !== fallbackKey
+      ? t(fallbackKey)
+      : t('home');
 
   return (
     <header className="h-[60px] bg-enjoy-gray-light flex items-center">
       <Container otherClassName="w-full flex items-center justify-between gap-4">
-        <NavbarSheet />
-        <h5 className="text-center text-lg font-bold w-full overflow-hidden whitespace-nowrap">
-          {title}
-        </h5>
-        <Link href={PATHS.MY_CART.link}>
-          <MdOutlineShoppingCart className="text-2xl cursor-pointer text-enjoy-primary" />
-        </Link>
+        <AnimatedWrapper>
+          <NavbarSheet />
+        </AnimatedWrapper>
+        <AnimatedWrapper direction="y" distance={-40}>
+          <h5 className="text-center text-lg font-bold w-full overflow-hidden whitespace-nowrap">
+            {title}
+          </h5>
+        </AnimatedWrapper>
+        <AnimatedWrapper direction="y" distance={-40}>
+          <Link href={PATHS.MY_CART.link} aria-label={ariaTxts('myCartPage')}>
+            <MdOutlineShoppingCart className="text-2xl cursor-pointer text-enjoy-primary" />
+          </Link>
+        </AnimatedWrapper>
       </Container>
     </header>
   );

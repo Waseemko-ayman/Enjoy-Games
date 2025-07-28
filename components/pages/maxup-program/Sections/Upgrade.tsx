@@ -3,18 +3,24 @@ import React from 'react';
 import TierProgressWrapper from '@/components/organism/TierProgressWrapper';
 import { useRewardProgress } from '@/hook/useRewardProgress';
 import { mockApiData } from '@/data';
+import { useTranslations } from 'next-intl';
 
 const Upgrade = () => {
   const targetPercentage = 0.4;
   const { currentPercentage, currentTier, connectionLineWidth } =
     useRewardProgress(mockApiData, targetPercentage);
 
+  const t = useTranslations('MaxupProgram.Upgrade');
+
   return (
     <TierProgressWrapper
-      title="شارك أكثر، واكسب أكثر"
+      title={t('title')}
       connectionLineWidth={connectionLineWidth}
       progress={currentPercentage.toFixed(1)}
-      progressFooter={{ type: 'text', text: 'تبقى لترقيتك 100 مستخدم' }}
+      progressFooter={{
+        type: 'text',
+        text: t('percentageSection.note', { note: 100 }),
+      }}
     >
       {mockApiData.map((tier) => {
         const isReached = currentPercentage >= tier.percentage;
@@ -39,14 +45,14 @@ const Upgrade = () => {
                 isReached ? 'text-enjoy-primary' : 'text-gray-600'
               }`}
             >
-              {tier.name}
+              {t(`levels.${tier.id - 1}`)}
             </h3>
 
             <p className="text-sm text-gray-500">
               <span className="text-green-600 font-bold">
                 %{tier.percentage}
               </span>{' '}
-              عائد لكل عملية
+              {t('percentageSection.title')}
             </p>
           </div>
         );

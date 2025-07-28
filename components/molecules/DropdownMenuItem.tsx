@@ -1,18 +1,36 @@
 import React from 'react';
 import NavItem from '@/components/atomic/NavItem';
-import { DropdownNavItemProps } from '@/interfaces';
+import { DropdownNavItemProps, SubCategories } from '@/interfaces';
+import { useToggleLocale } from '@/hook/useToggleLocale';
+import { useRouter } from 'next/navigation';
 
 const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
-  text,
-  Icon,
-  submenu,
+  name,
+  icon,
+  categories,
   isMainMenu = false,
 }) => {
+  const { isArabic } = useToggleLocale();
+  const router = useRouter();
+
+  const handleSubCategoryClick = (
+    categorySlug: string,
+    subCategory: SubCategories
+  ) => {
+    const basePath = `/categories/${categorySlug}/${subCategory.slug}`;
+    setTimeout(() => router.push(basePath), 150);
+    // const path =
+    //   subCategory.children_count > 0
+    //     ? `${basePath}/select-account`
+    //     : `${basePath}/bundles`;
+    // router.push(path);
+  };
+
   return (
     <div className="relative group">
-      <NavItem Icon={Icon} text={text} />
+      <NavItem icon={icon} name={name} />
 
-      {submenu && (
+      {categories && (
         <div
           className={`
           absolute top-full right-6 z-50 hidden group-hover:block bg-white py-2 pr-1 pl-2 rounded-xl shadow-lg border border-gray-100
@@ -20,32 +38,40 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
           transition-all duration-200 ease-out
         `}
         >
-          {submenu.map((item, index) => (
+          {categories.map((category, index) => (
             <div key={index} className="relative group/sub">
               <NavItem
                 key={index}
-                Icon={item.Icon}
-                text={item.label}
+                // icon={category.icon}
+                icon={'/assets/digitalStores.webp'}
+                name={category.name}
                 otherClassName="!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg"
-                showArrow={!!item.submenu}
-                linkPath={item.path}
+                showArrow={!!category.sub_categories}
+                linkPath={`/categories/${category.slug}`}
               />
 
-              {item.submenu && (
+              {category.sub_categories && (
                 <div
-                  className={`absolute right-full top-0 ml-2 border border-gray-100 rounded-xl shadow-lg bg-white transition-all duration-200 ease-out
+                  className={`absolute ${
+                    isArabic ? 'right-full' : 'left-full'
+                  } top-0 ml-2 border border-gray-100 rounded-xl shadow-lg bg-white transition-all duration-200 ease-out
                   ${
-                    item.submenu.length > 3
-                      ? 'invisible opacity-0 pointer-events-none group-hover/sub:visible group-hover/sub:opacity-100 group-hover/sub:pointer-events-auto w-[800px] p-3 grid grid-cols-4 gap-1'
+                    category.sub_categories.length > 3
+                      ? 'invisible opacity-0 pointer-events-none group-hover/sub:visible group-hover/sub:opacity-100 group-hover/sub:pointer-events-auto w-[600px] grid grid-cols-4 gap-1 p-3'
                       : 'hidden group-hover/sub:block w-[240px] py-2 pr-3 pl-2'
                   }`}
                 >
-                  {item.submenu.map((subItem, subIndex) => (
+                  {category.sub_categories.map((subItem, index) => (
                     <NavItem
-                      key={subIndex}
-                      Icon={subItem.Icon}
-                      text={subItem.label}
+                      key={index}
+                      // icon={subItem.icon}
+                      icon={'/assets/digitalStores.webp'}
+                      name={subItem.name}
                       otherClassName="!py-2 !px-0 !text-base !font-medium"
+                      // linkPath={`/categories/${category.slug}/${subItem.slug}/bundles`}
+                      onClick={() =>
+                        handleSubCategoryClick(subItem.slug, subItem)
+                      }
                     />
                   ))}
                 </div>

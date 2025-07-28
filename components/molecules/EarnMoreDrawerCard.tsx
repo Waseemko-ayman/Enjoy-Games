@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Button from '../atomic/Button';
 import { EarnMoreDrawerCardProps } from '@/interfaces';
 import { FaCopy } from 'react-icons/fa6';
+import { useTranslations } from 'next-intl';
 
 const EarnMoreDrawerCard = ({
   id,
@@ -16,6 +17,7 @@ const EarnMoreDrawerCard = ({
   otherClassName,
 }: EarnMoreDrawerCardProps) => {
   const number = id < 10 ? `0${id}` : id;
+  const btnTxt = useTranslations('BtnTexts');
 
   return (
     <div className={`py-2 ${otherClassName}`}>
@@ -47,7 +49,7 @@ const EarnMoreDrawerCard = ({
           handleClick={onCopyLink}
           Icon={FaCopy}
         >
-          اضغط لنسخ رابطك الخاص!
+          {btnTxt('CopyYourLink')}
         </Button>
       )}
 

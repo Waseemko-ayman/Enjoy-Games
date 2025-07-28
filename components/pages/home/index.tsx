@@ -1,5 +1,7 @@
-import React from 'react';
-import SectionsTypes from './Sections/SectionsTypes';
+/* eslint-disable react-hooks/exhaustive-deps */
+'use client';
+import React, { useEffect } from 'react';
+import CategoriesTypes from './Sections/CategoriesTypes';
 import BestSellers from './Sections/BestSellers';
 import SuggestedProducts from './Sections/SuggestedProducts';
 import NewlyArrived from './Sections/NewlyArrived';
@@ -8,19 +10,63 @@ import EnjoyWinWin from './Sections/EnjoyWinWin';
 import ServiceAdvantages from './Sections/ServiceAdvantages';
 import WalletSection from './Sections/WalletSection';
 import HeroBanner from './Sections/HeroBanner';
+import { useTranslations } from 'next-intl';
+import useAPI from '@/hook/useAPI';
+import { Category } from '@/interfaces';
+import { useCategories } from '@/context/CategoriesContext';
+
+interface Sliders {
+  id: number;
+  image: string;
+}
+
+interface SimpleProduct {
+  id: number;
+  image: string;
+  name: string;
+}
+
+interface CardProps {
+  id: number;
+  name: string;
+  price?: number;
+  newPrice?: number;
+  storeName?: string;
+  storeFlagImg?: string;
+  ratings?: number | string;
+}
+
+interface MobileMainContent {
+  categories: Category[];
+  sliders: Sliders[];
+  best_seller: SimpleProduct[];
+  newly_arrived: CardProps[];
+  suggested_products: SimpleProduct[];
+}
 
 const HomePage = () => {
+  const t = useTranslations('HomePage');
+  const { categories } = useCategories();
+  const { get, data } = useAPI<MobileMainContent>('main-content', {});
+
+  useEffect(() => {
+    get();
+  }, []);
+
   return (
     <>
-      <HeroBanner />
-      <SectionsTypes />
-      <WalletSection />
-      <BestSellers />
-      <SuggestedProducts />
-      <NewlyArrived />
-      <RedeemPoints />
-      <EnjoyWinWin />
-      <ServiceAdvantages />
+      <HeroBanner sliders={data?.sliders ?? []} />
+      <CategoriesTypes categories={categories} />
+      <WalletSection t={t} />
+      <BestSellers t={t} bestSeller={data?.best_seller ?? []} />
+      <SuggestedProducts
+        t={t}
+        suggestedProducts={data?.suggested_products ?? []}
+      />
+      <NewlyArrived t={t} newlyArrived={data?.newly_arrived ?? []} />
+      <RedeemPoints t={t} newlyArrived={data?.newly_arrived ?? []} />
+      <EnjoyWinWin t={t} />
+      <ServiceAdvantages t={t} />
     </>
   );
 };

@@ -2,7 +2,9 @@
 import Avatar from '@/components/atomic/Avatar';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import { PATHS } from '@/data/paths';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 import { Wallet } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -11,12 +13,15 @@ import { PiSparkleFill } from 'react-icons/pi';
 const Information = () => {
   const [accountAdvance] = useState(20);
   const infoStyle = 'flex items-center gap-2 text-sm font-semibold';
+  const t = useTranslations('Layout.header.account');
+  const titleTxts = useTranslations('PagesHeaderTitles');
+  const { isArabic } = useToggleLocale();
   return (
     <CardWrapper
       bgColor="bg-white"
       className="py-3 px-5 shadow-[0_8.293px_37.319px_4.147px_rgba(0,0,0,0.08)] mt-8"
     >
-      <Link href={PATHS.MY_ACCOUNT.link}>
+      <Link href={PATHS.MY_ACCOUNT.ROOT.link}>
         <div className="flex items-center gap-3">
           <Avatar
             imgSrc="/assets/user-avatar.png"
@@ -24,7 +29,11 @@ const Information = () => {
             width={30}
             height={30}
           />
-          <h5 className="text-base font-semibold">أكمل بيانات حسابك الآن</h5>
+          <h5
+            className={`${isArabic ? 'text-base' : 'text-sm'} font-semibold`}
+          >
+            {t('completeAccountData')}
+          </h5>
         </div>
       </Link>
 
@@ -57,7 +66,7 @@ const Information = () => {
         <PiSparkleFill size={18} />
         <div className="flex items-center gap-2">
           <span>0</span>
-          <span>نقاط دليل ستارز</span>
+          <span>{titleTxts('starsPoints')}</span>
         </div>
       </div>
     </CardWrapper>

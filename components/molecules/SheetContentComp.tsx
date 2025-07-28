@@ -1,25 +1,41 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+'use client';
+import React, { useEffect, useState } from 'react';
 import NavItem from '../atomic/NavItem';
-import { subMenuItems } from '@/data';
+import { motion } from 'framer-motion';
+import useAPI from '@/hook/useAPI';
+import { Category } from '@/interfaces';
 
 const SheetContentComp = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { get, data: categories } = useAPI(`categories-subcategories`);
+
+  useEffect(() => {
+    get();
+  }, []);
 
   return (
     <div>
-      {subMenuItems.map((item, index) => {
+      {categories.map((item: Category, index: number) => {
         const isOpen = openIndex === index;
-        const hasSubmenu = !!item.submenu;
-        const isLastTwoItems = index >= subMenuItems.length - 2;
+        const hasSubmenu = !!item.sub_categories;
+        const isLastTwoItems = index >= categories.length - 2;
 
         return (
-          <div key={index} className="relative">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            key={index}
+          >
             <NavItem
               key={index}
-              Icon={item.Icon}
-              text={item.label}
+              // icon={item.icon}
+              icon={'/assets/digitalStores.webp'}
+              name={item.name}
               otherClassName="text-white"
-              showArrow={!!item.submenu}
+              showArrow={!!item.sub_categories}
               onClick={() => setOpenIndex(isOpen ? null : index)}
             />
 
@@ -27,7 +43,7 @@ const SheetContentComp = () => {
               <div
                 className={`z-50 mt-2 border border-gray-100 rounded-xl shadow-lg bg-white scrollbar-none
                 ${
-                  item.submenu.length > 3
+                  item.sub_categories.length > 3
                     ? 'max-h-[300px] overflow-y-auto p-3 grid grid-cols-2 gap-2'
                     : 'p-2'
                 }
@@ -38,17 +54,18 @@ const SheetContentComp = () => {
                     : 'lg:absolute lg:right-full lg:top-0 lg:ml-2 lg:w-[320px]'
                 }`}
               >
-                {item.submenu.map((subItem, subIndex) => (
+                {item.sub_categories.map((subItem, index) => (
                   <NavItem
-                    key={subIndex}
-                    Icon={subItem.Icon}
-                    text={subItem.label}
+                    key={index}
+                    // icon={subItem.icon}
+                    icon={'/assets/digitalStores.webp'}
+                    name={subItem.name}
                     otherClassName="!py-2 !px-0 !text-base !font-medium"
                   />
                 ))}
               </div>
             )}
-          </div>
+          </motion.div>
         );
       })}
     </div>

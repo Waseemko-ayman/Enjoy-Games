@@ -1,39 +1,72 @@
-import CommonCard from '@/components/atomic/CommonCard';
-import GridWrapper from '@/components/molecules/GridWrapper';
-import ResponsiveWrapper from '@/components/molecules/ResponsiveWrapper';
-import { NewlyArrivedData } from '@/data';
-import Link from 'next/link';
+'use client';
 import React from 'react';
+import dynamic from 'next/dynamic';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import GridWrapper from '@/components/molecules/GridWrapper';
+import Loading from '@/components/molecules/loading';
+import ResponsiveWrapper from '@/components/molecules/ResponsiveWrapper';
+import { PATHS } from '@/data/paths';
+import useIsMobile from '@/hook/useIsMobile';
+import Link from 'next/link';
 import { PiShoppingCartLight } from 'react-icons/pi';
+import { useTranslations } from 'next-intl';
+import { ProductCardProps, TranslationFunction } from '@/interfaces';
+const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
+  loading: () => <Loading />,
+});
 
-const RedeemPoints = () => {
+const RedeemPoints = ({
+  t,
+  newlyArrived,
+}: {
+  t: TranslationFunction;
+  newlyArrived: ProductCardProps[];
+}) => {
+  const isMobile = useIsMobile();
+  const btnText = useTranslations('BtnTexts');
   return (
     <ResponsiveWrapper>
-      <div className="bg-[var(--enjoy-secondary-light)] rounded-[20px] overflow-hidden pt-5 pb-7 sm:pb-10">
+      <div
+        className={`bg-[var(--enjoy-secondary-light)] overflow-hidden pt-5 pb-7 sm:pb-10 ${
+          isMobile ? '' : 'rounded-[20px]'
+        }`}
+      >
         <div className="flex items-center justify-between gap-1 px-5 sm:px-10">
-          <h2 className="text-xl px-3 lg:px-0 font-semibold my-3 inline-block">
-            استبدل نقاطك
-          </h2>
-          <Link href="#" className="text-base">
-            عرض الكل
-          </Link>
+          <AnimatedWrapper direction="x">
+            <h2 className="text-xl font-semibold my-3 inline-block">
+              {t('sectionsTitles.redeemPoints.title')}
+            </h2>
+          </AnimatedWrapper>
+          <AnimatedWrapper direction="x" distance={-40}>
+            <Link href={PATHS.STARS_GIFTS} className="text-base">
+              {t('sectionsTitles.redeemPoints.showAll')}
+            </Link>
+          </AnimatedWrapper>
         </div>
-        <GridWrapper otherClassName="mt-3 !py-0 px-5 sm:px-10" isScrollable>
-          {NewlyArrivedData.map((card) => (
-            <CommonCard
-              key={card.id}
-              imgAlt={card.title}
-              imgTitle={card.title}
-              imgSrc={card.src}
-              description
-              variant="column"
-              showBtn
-              btnVariant="secondary"
-              btnText="أحصل عليها الآن"
-              Icon={PiShoppingCartLight}
-              {...card}
-            />
-          ))}
+        <GridWrapper
+          otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"
+          isScrollable
+        >
+          {newlyArrived.map((card, index) => {
+            const { image, ...cardWithoutImage } = card;
+            return (
+              <AnimatedWrapper key={card.id} custom={index}>
+                <ProductCard
+                  // imgSrc={card.image}
+                  image={image || '/assets/play-station.webp'}
+                  imgAlt={card.title}
+                  imgTitle={card.title}
+                  showDesc
+                  variant="column"
+                  showBtn
+                  btnVariant="secondary"
+                  btnText={btnText('GetItNow')}
+                  icon={PiShoppingCartLight}
+                  {...cardWithoutImage}
+                />
+              </AnimatedWrapper>
+            );
+          })}
         </GridWrapper>
       </div>
     </ResponsiveWrapper>

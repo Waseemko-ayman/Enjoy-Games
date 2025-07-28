@@ -1,10 +1,11 @@
-import { TierBadgeProps } from '@/interfaces';
+import { TierBadgeProps, TranslationFunction } from '@/interfaces';
 import React from 'react';
 import { FaRegStar } from 'react-icons/fa6';
 
 interface ExtendedTierBadgeProps extends TierBadgeProps {
-  progress?: number; // النسبة الحالية (0-1)
-  requiredProgress?: number; // النسبة المطلوبة للوصول للـ Tier
+  progress?: number;
+  requiredProgress?: number;
+  starsTexts: TranslationFunction;
 }
 
 const TierBadge: React.FC<ExtendedTierBadgeProps> = ({
@@ -13,6 +14,7 @@ const TierBadge: React.FC<ExtendedTierBadgeProps> = ({
   isActive,
   progress = 0,
   requiredProgress = 0,
+  starsTexts,
 }) => {
   const isReached = progress >= requiredProgress;
   const isCurrentTier = isActive ?? isReached;
@@ -80,7 +82,7 @@ const TierBadge: React.FC<ExtendedTierBadgeProps> = ({
         {name}
       </h3>
       <p className="text-[15px] text-[var(--enjoy-gray-500)]">
-        1 عائد لكل عملية
+        1 {starsTexts('percentageSection.title')}
       </p>
     </div>
   );

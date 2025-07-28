@@ -1,9 +1,11 @@
 import React from 'react';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import Image from 'next/image';
 import CountrySelectorContent from './CountrySelectorContent';
 import { Country } from '@/interfaces';
 import CustomDialog from './CustomDialog';
+import { useToggleLocale } from '@/hook/useToggleLocale';
+import { useTranslations } from 'next-intl';
 
 interface CountryDrawerProps {
   countries: Country[];
@@ -20,26 +22,28 @@ const CountryDialog: React.FC<CountryDrawerProps> = ({
   open,
   setOpen,
 }) => {
+  const { isArabic } = useToggleLocale();
+  const t = useTranslations('Layout.header.navBarPopup');
   return (
     <CustomDialog
       open={open}
       setOpen={setOpen}
-      title="تغيير الدولة - العملة"
-      description="اختر الدولة والعملة المناسبة لك من القائمة أدناه."
+      title={t('ChangeCountryCurrencyTitle')}
+      description={t('ChangeCountryCurrencyDescription')}
       trigger={
         <button className="flex items-center justify-between w-full gap-2 cursor-pointer">
-          <IoIosArrowBack />
           <div className="flex items-center gap-3 font-semibold">
-            <h4 className="text-sm">
-              {selectedCountry.name} - {selectedCountry.currency}
-            </h4>
             <Image
               src={`/assets/flags/${selectedCountry.img}.png`}
               alt={`${selectedCountry.name} - ${selectedCountry.currency}`}
               width={25}
               height={23}
             />
+            <h4 className="text-sm">
+              {selectedCountry.name} - {selectedCountry.currency}
+            </h4>
           </div>
+          {isArabic ? <IoIosArrowBack /> : <IoIosArrowForward />}
         </button>
       }
     >
@@ -48,6 +52,7 @@ const CountryDialog: React.FC<CountryDrawerProps> = ({
         selectedCountry={selectedCountry}
         setSelectedCountry={setSelectedCountry}
         closeHandler={() => setOpen(false)}
+        t={t}
       />
     </CustomDialog>
   );

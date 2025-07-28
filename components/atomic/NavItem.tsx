@@ -1,13 +1,14 @@
+import { useToggleLocale } from '@/hook/useToggleLocale';
 import { NavItemProps } from '@/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const NavItem: React.FC<NavItemProps> = ({
-  Icon,
-  text,
-  linkPath = '#',
+  icon,
+  name,
+  linkPath,
   otherClassName,
   otherClassNameIcon,
   showArrow = false,
@@ -15,9 +16,21 @@ const NavItem: React.FC<NavItemProps> = ({
   layout,
   isMobile,
 }) => {
-  return (
-    <Link
-      href={linkPath}
+  const { isArabic } = useToggleLocale();
+
+  const showIcon = (icon: React.ElementType) => {
+    const Icon = icon;
+    return (
+      <Icon
+        className={`text-lg text-[var(--enjoy-primary)] ${
+          isMobile ? 'max-md:text-primary' : 'max-md:text-white'
+        } ${otherClassNameIcon}`}
+      />
+    );
+  };
+
+  const content = (
+    <div
       onClick={onClick}
       className={`
         flex
@@ -28,12 +41,12 @@ const NavItem: React.FC<NavItemProps> = ({
         transition cursor-pointer
         py-[19px]
         hover:text-[var(--enjoy-primary)]
-        max-[991px]:!py-3
-        max-[991px]:!pl-0
-        max-[991px]:!pr-1
-        max-[991px]:hover:bg-[#f4f4ff]
-        max-[991px]:hover:!text-[var(--enjoy-primary)]
-        max-[991px]:rounded-lg
+        max-md:!py-3
+        max-md:!pl-0
+        max-md:!pr-1
+        max-md:hover:bg-[#f4f4ff]
+        max-md:hover:!text-[var(--enjoy-primary)]
+        max-md:rounded-lg
         ${
           layout === 'store'
             ? isMobile
@@ -49,10 +62,10 @@ const NavItem: React.FC<NavItemProps> = ({
           layout === 'store' && isMobile ? 'flex-col' : ''
         }`}
       >
-        {typeof Icon === 'string' ? (
+        {typeof icon === 'string' ? (
           <Image
-            src={`/assets/${Icon}`}
-            alt={text}
+            src={icon}
+            alt={name}
             className={`object-contain rounded-[50%] ${otherClassNameIcon}`}
             width={26}
             height={26}
@@ -65,23 +78,23 @@ const NavItem: React.FC<NavItemProps> = ({
                 : ''
             }
           >
-            {Icon && (
-              <Icon
-                className={`text-lg text-[var(--enjoy-primary)] ${
-                  isMobile
-                    ? 'max-[991px]:text-primary'
-                    : 'max-[991px]:text-white'
-                } ${otherClassNameIcon}`}
-              />
-            )}
+            {icon && showIcon(icon)}
           </div>
         )}
-        <span>{text}</span>
+        <span>{name}</span>
       </div>
 
-      {showArrow && <IoIosArrowBack className="text-2xl" />}
-    </Link>
+      {showArrow ? (
+        isArabic ? (
+          <IoIosArrowBack className="text-2xl" />
+        ) : (
+          <IoIosArrowForward className="text-2xl" />
+        )
+      ) : null}
+    </div>
   );
+
+  return linkPath ? <Link href={linkPath}>{content}</Link> : content;
 };
 
 export default NavItem;

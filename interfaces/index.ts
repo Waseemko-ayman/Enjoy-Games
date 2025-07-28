@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ProgressCircle from '@/components/molecules/ProgressCircle';
 import {
   ButtonIconPosition,
@@ -8,10 +9,73 @@ import {
   footerListsName,
   NavbarLayout,
 } from '@/utils/type';
-import { ElementType, JSX } from 'react';
+import { Variants } from 'framer-motion';
+import { Messages, useTranslations } from 'next-intl';
+import { ElementType, JSX, ReactNode } from 'react';
+
+export interface Category {
+  id: number;
+  slug: string | null;
+  name: string;
+  icon: string;
+  image: string;
+  sub_categories: SubCategories[];
+  path: string;
+}
+
+export interface SubCategories {
+  id: number;
+  category_id: number;
+  parent_id: null;
+  name: string;
+  slug: string;
+  icon: string;
+  image?: string;
+  children_count: number;
+  href?: string;
+  onClick?: () => void;
+  // shiddatData: shiddaItem[];
+  // accounts?: AccountItem[];
+  // accountId?: string;
+  // bundles?: {
+  //   id: string;
+  //   title: string;
+  //   price: number;
+  //   accountId: string;
+  // }[];
+}
+
+export interface ProductCardProps {
+  id?: number;
+  category_id?: number;
+  sub_category_id?: number;
+  title: string;
+  slug?: string;
+  content?: string;
+  description?: string;
+  image: string;
+  imgAlt?: string;
+  imgTitle?: string;
+  price_before?: number;
+  price?: number;
+  discount?: null;
+  shipping_payment?: string;
+  ratings?: number | string;
+  icon?: React.ElementType | string | any;
+  showDesc?: boolean;
+  showBtn?: boolean;
+  variant?: CommonCardVariant;
+  storeName?: string;
+  storeFlagImg?: string;
+  tall?: boolean;
+  btnVariant?: ButtonMainVarinats;
+  btnText?: string;
+  otherClassNameBtn?: string;
+  onClick?: () => void;
+}
 
 interface BaseIconProps {
-  Icon?: React.ElementType | string;
+  icon?: React.ElementType | string | any;
 }
 
 interface BaseClassNameProps {
@@ -34,33 +98,8 @@ export interface ButtonProps extends BaseClassNameProps, WithChildren {
   hoverBgColor?: string;
 }
 
-export interface cardProps {
-  title: string;
-  price?: number;
-  newPrice?: number;
-  storeName?: string;
-  storeFlagImg?: string;
-  ratings?: number | string;
-}
-
-export interface CommonCardProps extends BaseIconProps, cardProps {
-  titleIsLink?: boolean;
-  productLink?: string;
-  description?: boolean;
-  imgSrc: string;
-  imgAlt: string;
-  imgTitle: string;
-  variant?: CommonCardVariant;
-  cardLinkPath?: string;
-  tall?: boolean;
-  showBtn?: boolean;
-  btnVariant?: ButtonMainVarinats;
-  btnText?: string;
-  otherClassNameBtn?: string;
-}
-
 export interface NavItemProps extends BaseIconProps, BaseClassNameProps {
-  text: string;
+  name: string;
   linkPath?: string;
   otherClassNameIcon?: string;
   showArrow?: boolean;
@@ -106,19 +145,20 @@ export interface SectionComponentProps extends WithChildren {
 }
 
 export interface ContactInfoProps extends BaseIconProps {
+  id: number;
   label: string;
   email: string;
 }
 
 export interface SubMenuItem extends BaseIconProps {
-  label: string;
-  submenu?: SubMenuItem[];
+  name: string;
+  sub_categories?: SubMenuItem[];
   path?: string;
 }
 
 export interface DropdownNavItemProps extends BaseIconProps {
-  text: string;
-  submenu?: SubMenuItem[];
+  name: string;
+  categories?: Category[];
   isMainMenu?: boolean;
 }
 
@@ -126,17 +166,18 @@ export interface FooterLinksProps extends BaseClassNameProps {
   secTitle: string;
   listClassName?: string;
   listName: footerListsName;
+  t: TranslationFunction;
 }
 
 export interface LinkItem extends BaseIconProps {
   id: number;
-  title: string;
+  key: string;
   link: string;
   icon: React.ElementType | string;
 }
 
 export interface SectionTypeCardProps extends BaseClassNameProps {
-  path: string;
+  path?: string;
   title: string;
   imgSrc: string;
   imgAlt: string;
@@ -160,29 +201,26 @@ export interface BannerProps {
   }[];
 }
 
-export interface shiddaItem extends cardProps {
+export interface shiddaItem {
   id: number;
   src: string;
 }
 
-export interface CardItem {
+export interface AccountItem {
   id: string;
-  Icon: string;
   label: string;
-  banner?: string;
-  href?: string;
-  requiresAccount?: boolean;
+  banner: string;
   shiddatData: shiddaItem[];
 }
 
 export interface CategoryPageProps {
-  cards: CardItem[];
+  cards: SubCategories[];
 }
 
 export interface CategoryCardProps {
-  href?: string;
-  banner?: string;
-  label: string;
+  onClick?: () => void;
+  image?: string;
+  name: string;
 }
 
 export interface CountrySelectorContentProps {
@@ -190,6 +228,7 @@ export interface CountrySelectorContentProps {
   selectedCountry: Country;
   setSelectedCountry: (country: Country) => void;
   closeHandler: () => void;
+  t: TranslationFunction;
 }
 
 export interface SectionTitleProps extends BaseIconProps {
@@ -204,6 +243,7 @@ export interface FeatureCardProps extends BaseIconProps {
   description: string;
   bgColor: string;
   textColor?: string;
+  descClassName?: string;
 }
 
 export interface TierBadgeProps extends BaseIconProps {
@@ -240,8 +280,8 @@ export interface GridWrapperProps extends BaseClassNameProps, WithChildren {
 export interface AuthLayoutProps extends SectionComponentProps {
   btnText: string;
   description: string;
-  showFooterText?: boolean;
   isSubmitDisabled?: boolean;
+  isSubmitting?: boolean;
   onSubmit?: () => void;
 }
 
@@ -252,11 +292,12 @@ export interface WalletCardProps extends BaseIconProps {
   bgColor: string;
   textColor: string;
   pathName: string;
+  isUnitTranslatable?: boolean;
 }
 
 export interface RewardTier {
   id: number;
-  name: string;
+  key: string;
   percentage: number;
   isActive: boolean;
 }
@@ -290,11 +331,12 @@ export interface EarningsPointsSectionProps {
   lastWithdrawalText: JSX.Element | string;
   firstButtonHref?: string;
   secondButtonHref?: string;
+  btnTexts: TranslationFunction;
 }
 
 interface RewardProgram {
   id: number;
-  title: string;
+  key: string;
   type: string;
   amount?: number;
   currency?: string;
@@ -334,6 +376,22 @@ export interface CartItemData {
   currencyImage: string;
 }
 
+export interface CartContentProps {
+  items: CartItemData[];
+  onProceedToPayment: () => void;
+  quantity: number;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  // onSendAsGift: () => void;
+}
+
+export interface PaymentStepProps {
+  onPaymentComplete: () => void;
+  onBackToCart: () => void;
+  totalAmount: number;
+  items: CartItemData[];
+  quantity: number;
+}
+
 export interface BannerSlide {
   id: number;
   image: string;
@@ -342,18 +400,157 @@ export interface BannerSlide {
 export interface myAccountStatsProps {
   id: number;
   icon: ElementType;
-  title: string;
+  titleKey: string;
   currency?: string;
   account?: number;
   href?: string;
 }
 
 export interface FormValues {
-  username: string;
+  name: string;
   email: string;
   phone: string;
   birthDate: string;
-  gender: string;
+  gender: 'ذكر' | 'أنثى';
   options: boolean[];
   avatar: FileList;
+}
+
+export interface paramsProps {
+  locale: string;
+  category: string;
+  itemId: string;
+  productId: string;
+}
+
+export interface BundlesPageProps {
+  item: SubCategories;
+  params: paramsProps;
+}
+
+export interface ReviewData {
+  overallRating: number;
+  totalReviews: number;
+  ratingBreakdown: {
+    excellent: number;
+    good: number;
+    average: number;
+    poor: number;
+    bad: number;
+  };
+}
+
+export interface Review {
+  id: string;
+  userId: string;
+  userName: string;
+  rating: number;
+  comment: string;
+  createdAt: Date;
+  verified?: boolean;
+}
+
+export interface ReviewApiResponse {
+  success: boolean;
+  data: ReviewData;
+  reviews: Review[];
+}
+
+export interface ReviewData {
+  overallRating: number;
+  totalReviews: number;
+  ratingBreakdown: {
+    excellent: number;
+    good: number;
+    average: number;
+    poor: number;
+    bad: number;
+  };
+}
+
+export interface ReviewSectionProps {
+  data?: ReviewData;
+}
+
+export interface FormData {
+  subject: string;
+  ticketType: string;
+  details: string;
+}
+
+export interface DiscoverEarnMoreCardProps extends WithChildren {
+  title: string;
+  description: string;
+  imageSrc: string;
+  cardClassName?: string;
+  triggerClassName?: string;
+}
+
+export type TranslationFunction = ReturnType<
+  typeof useTranslations<keyof Messages>
+>;
+
+export interface RewardCardProps {
+  title: string;
+  description: string;
+  image: string;
+  buttonText: string;
+  onClick?: () => void;
+  href: string;
+}
+
+export interface AnimatedWrapperProps {
+  children: ReactNode;
+  custom?: number;
+  variants?: Variants;
+  direction?: 'x' | 'y';
+  distance?: number;
+  duration?: number;
+}
+
+type InputOption = {
+  id: number;
+  value: string;
+  labelKey: string;
+};
+
+export interface InputItem {
+  id: number;
+  inputName: string;
+  type: string;
+  labelKey?: string;
+  label?: string;
+  placeholder?: string;
+  options?: InputOption[];
+}
+
+interface Step {
+  id: number;
+  key: string;
+  isCompleted: boolean;
+  isCurrent: boolean;
+}
+
+export interface StepIndicatorProps {
+  steps: Step[];
+}
+
+export interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+export interface signupFormData extends LoginFormData {
+  name: string;
+  password_confirmation: string;
+}
+
+type Account = {
+  id: string;
+  name: string;
+  image: string;
+};
+
+export interface SelectAccountPageProps {
+  accounts: Account[];
 }

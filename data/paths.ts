@@ -1,6 +1,6 @@
 import { FiUser } from 'react-icons/fi';
 import { IoHomeOutline, IoSearch } from 'react-icons/io5';
-import { MdOutlineAssignment } from 'react-icons/md';
+import { MdMoreHoriz, MdOutlineAssignment } from 'react-icons/md';
 
 export const PATHS = {
   HOME: { name: 'الرئيسية', link: '/' },
@@ -14,27 +14,51 @@ export const PATHS = {
     link: '/categories/services',
   },
   SHOP_CARDS: { name: 'بطاقات تسوّق متنوعة', link: '/categories/shop-cards' },
-  LOGIN: 'login',
   STORE: { name: 'المتجر', link: '/store' },
   STARS: { name: 'دليل ستارز', link: '/stars' },
-  OTP: '/otp',
   // MAX_PROGRAM: { name: 'مكسب', link: '/maxup-program' },
   STARS_GIFTS: '/stars-gifts',
   WALLET: { name: 'محفظتي', link: '/wallet' },
   MY_PURCHASES: { name: 'طلباتي', link: '/my-purchases' },
   MY_CART: { name: 'سلتي', link: '/my-cart' },
-  MY_ACCOUNT: { name: 'حسابي', link: '/my-account' },
-  INTERESTS: { name: 'الإهتمامات', link: '/my-account/interests' },
+
+  MY_ACCOUNT: {
+    ROOT: { name: 'حسابي', link: '/my-account' },
+    INTERESTS: { name: 'الإهتمامات', link: '/my-account/interests' },
+  },
+
+  TICKETS: {
+    ROOT: { name: 'تذاكر الدعم الفني', link: '/tickets' },
+    CREATE: { name: 'إضافة تذكرة جديدة', link: '/tickets/create' },
+  },
+  TERMS_OF_USER: { name: 'سياسة الإستخدام', link: '/terms-of-use' },
+  REFUND_POLICY: { name: 'سياسة الإسترجاع', link: '/refund-policy' },
+  PRIVACY_POLICY: { name: 'سياسة الخصوصية', link: '/privacy-policy' },
+  ABOUT: { name: 'من نحن', link: '/about' },
+  FAQ: {
+    name: 'الأسئلة الشائعة',
+    link: '/faq',
+  },
+  LOGIN: '/auth/login',
+  SIGNUP: '/auth/signup',
+  OTP: '/auth/otp',
 };
 
 export const navBarLinks = [
-  { id: 1, icon: IoHomeOutline, title: 'الرئيسية', link: PATHS.HOME.link },
-  { id: 2, icon: IoSearch, title: 'المتجر', link: PATHS.STORE.link },
+  { id: 1, icon: IoHomeOutline, titleKey: 'home', link: PATHS.HOME.link },
+  { id: 2, icon: IoSearch, titleKey: 'store', link: PATHS.STORE.link },
   {
     id: 3,
     icon: MdOutlineAssignment,
-    title: 'طلباتي',
+    titleKey: 'my-purchases',
     link: PATHS.MY_PURCHASES.link,
   },
-  { id: 4, icon: FiUser, title: 'سجّل الآن', link: PATHS.LOGIN },
+  {
+    id: 4,
+    icon: FiUser,
+    titleKey: 'RegisterNow',
+    link: PATHS.LOGIN,
+    hideWhenAuth: true,
+  },
+  { id: 5, icon: MdMoreHoriz, titleKey: 'more', onClick: true },
 ];

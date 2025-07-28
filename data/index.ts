@@ -13,88 +13,35 @@ import {
   FaRegHeart,
   FaRegStar,
   FaSackDollar,
+  FaStar,
   FaTwitter,
   FaUser,
   FaWallet,
 } from 'react-icons/fa6';
+import { IoArrowRedoOutline, IoWalletOutline } from 'react-icons/io5';
 import {
-  IoArrowRedoOutline,
-  IoGameControllerOutline,
-  IoWalletOutline,
-} from 'react-icons/io5';
-import {
-  MdMoreHoriz,
+  MdEmail,
   MdOutlineAlternateEmail,
   MdOutlineEmail,
 } from 'react-icons/md';
-import {
-  PiShoppingCartLight,
-  PiSparkleFill,
-  PiSquaresFourLight,
-} from 'react-icons/pi';
+import { PiSparkleFill } from 'react-icons/pi';
 import { PATHS } from './paths';
-import { IoMdHelpCircleOutline, IoMdPricetag } from 'react-icons/io';
+import {
+  IoMdHelpCircle,
+  IoMdHelpCircleOutline,
+  IoMdPricetag,
+} from 'react-icons/io';
 import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
 import { Sparkles, Wallet } from 'lucide-react';
-import { BannerSlide, RewardTier } from '@/interfaces';
+import { BannerSlide, InputItem, RewardTier } from '@/interfaces';
 
-const shiddats = [
+export const shiddats = [
   {
     id: 1,
-    title: 'بطاقة شحن جواكر 70,000 توكن',
-    src: '/assets/play-station.webp',
-    price: 77.36,
-    newPrice: 88.36,
-    storeFlagImg: 'british-flag.png',
-    storeName: 'المتجر البريطاني',
-    ratings: '1996',
-  },
-  {
-    id: 2,
-    title: 'بطاقة شحن جواكر 70,000 توكن',
-    src: '/assets/play-station.webp',
-    price: 77.36,
-    newPrice: 88.36,
-    storeFlagImg: 'british-flag.png',
-    storeName: 'المتجر البريطاني',
-    ratings: '1996',
-  },
-  {
-    id: 3,
-    title: 'بطاقة شحن جواكر 70,000 توكن',
-    src: '/assets/play-station.webp',
-    price: 77.36,
-    newPrice: 88.36,
-    storeFlagImg: 'british-flag.png',
-    storeName: 'المتجر البريطاني',
-    ratings: '1996',
-  },
-  {
-    id: 4,
-    title: 'بطاقة شحن جواكر 70,000 توكن',
-    src: '/assets/play-station.webp',
-    price: 77.36,
-    newPrice: 88.36,
-    storeFlagImg: 'british-flag.png',
-    storeName: 'المتجر البريطاني',
-    ratings: '1996',
-  },
-  {
-    id: 5,
-    title: 'بطاقة شحن جواكر 70,000 توكن',
-    src: '/assets/play-station.webp',
-    price: 77.36,
-    newPrice: 88.36,
-    storeFlagImg: 'british-flag.png',
-    storeName: 'المتجر البريطاني',
-    ratings: '1996',
-  },
-  {
-    id: 6,
-    title: 'بطاقة شحن جواكر 70,000 توكن',
-    src: '/assets/play-station.webp',
-    price: 77.36,
-    newPrice: 88.36,
+    name: 'بطاقة شحن جواكر 70,000 توكن',
+    image: '/assets/play-station.webp',
+    price_before: 77.36,
+    price: 88.36,
     storeFlagImg: 'british-flag.png',
     storeName: 'المتجر البريطاني',
     ratings: '1996',
@@ -103,163 +50,70 @@ const shiddats = [
 
 export const digitalStores = [
   {
-    id: 'itunes',
-    label: 'آيتونز',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    requiresAccount: true,
-    shiddatData: shiddats,
-  },
-  {
-    id: 'google-play',
-    label: 'قوقل بلاي',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    requiresAccount: false,
-    shiddatData: shiddats,
-  },
-  {
-    id: 'huawei',
-    label: 'هواوي',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    requiresAccount: true,
-    shiddatData: shiddats,
+    id: 1,
+    category_id: 1,
+    slug: null,
+    parent_id: null,
+    name: 'آيتونز',
+    icon: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
+    children_count: 0,
+    // shiddatData: shiddats,
+    // accounts: [
+    //   {
+    //     id: 1,
+    //     label: 'حساب سعودي',
+    //     banner: '/assets/play-station.webp',
+    //     shiddatData: [shiddats[0], shiddats[1]],
+    //   },
+    // ],
   },
 ];
 
 export const gamingPlatforms = [
   {
-    id: 'playstation',
-    label: 'بلاي ستيشن',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'xbox',
-    label: 'إكس بوكس',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'steam',
-    label: 'ستيم',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'pubg',
-    label: 'بيبجي',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'jawaker',
-    label: 'جواكر',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'yalla-ludo',
-    label: 'يلا لودو',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
+    id: 1,
+    category_id: 1,
+    slug: null,
+    parent_id: null,
+    name: 'بلاي ستيشن',
+    icon: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
+    children_count: 0,
+    // accounts: [
+    //   {
+    //     id: 'account1',
+    //     label: 'حساب سعودي',
+    //     banner: '/assets/play-station.webp',
+    //     shiddatData: [shiddats[0], shiddats[1]],
+    //   },
+    // ],
   },
 ];
 
 export const shoppingCarts = [
   {
-    id: 'amazon',
-    label: 'أمازون',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'ebay',
-    label: 'إيباي',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'razer-gold',
-    label: 'ريزر جولد',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'paysafecard',
-    label: 'باي سيف كارد',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'noon',
-    label: 'نون',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'home-center',
-    label: 'هوم سنتر',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
+    id: 1,
+    category_id: 1,
+    slug: null,
+    parent_id: null,
+    name: 'أمازون',
+    icon: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
+    children_count: 0,
   },
 ];
 
 export const servicesAndSubscriptions = [
   {
-    id: 'hungerstation',
-    label: 'هنقرستيشن',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'nana',
-    label: 'نعناع',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'mcafee',
-    label: 'مكافي',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'noon-mintes',
-    label: 'نون مينتس',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'marsool',
-    label: 'مرسول',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
-  },
-  {
-    id: 'discord',
-    label: 'ديسكورد',
-    Icon: '/assets/play-station.webp',
-    banner: '/assets/play-station.webp',
-    shiddatData: shiddats,
+    id: 1,
+    category_id: 1,
+    slug: null,
+    parent_id: null,
+    name: 'هنقرستيشن',
+    icon: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
+    children_count: 0,
   },
 ];
 
@@ -270,34 +124,38 @@ export const servicesAndSubscriptions = [
 export const subMenuItems = [
   {
     id: 1,
-    label: 'متاجر رقمية',
-    Icon: PiSquaresFourLight,
-    submenu: digitalStores,
-    src: '/assets/digitalStores.webp',
+    slug: null,
+    name: 'متاجر رقمية',
+    icon: '/assets/digitalStores.webp',
+    image: '/assets/digitalStores.webp',
+    sub_categories: digitalStores,
     path: PATHS.APP_STORES.link,
   },
   {
     id: 2,
-    label: 'منصات ألعاب',
-    Icon: IoGameControllerOutline,
-    submenu: gamingPlatforms,
-    src: '/assets/gamingPlatforms.webp',
+    slug: null,
+    name: 'منصات ألعاب',
+    icon: '/assets/digitalStores.webp',
+    image: '/assets/digitalStores.webp',
+    sub_categories: gamingPlatforms,
     path: PATHS.GAMES_CARDS.link,
   },
   {
     id: 3,
-    label: 'بطاقات تسوق',
-    Icon: PiShoppingCartLight,
-    submenu: shoppingCarts,
-    src: '/assets/shoppingCarts.webp',
+    slug: null,
+    name: 'بطاقات تسوق',
+    icon: '/assets/digitalStores.webp',
+    image: '/assets/digitalStores.webp',
+    sub_categories: shoppingCarts,
     path: PATHS.SHOP_CARDS.link,
   },
   {
     id: 5,
-    label: 'خدمات وإشتراكات',
-    Icon: MdMoreHoriz,
-    submenu: servicesAndSubscriptions,
-    src: '/assets/servicesAndSubscriptions.webp',
+    slug: null,
+    name: 'خدمات وإشتراكات',
+    icon: '/assets/digitalStores.webp',
+    image: '/assets/digitalStores.webp',
+    sub_categories: servicesAndSubscriptions,
     path: PATHS.SERVICES.link,
   },
 ];
@@ -305,82 +163,82 @@ export const subMenuItems = [
 export const BestSellersData = [
   {
     id: 1,
-    src: '/assets/best-sellers/itunes.webp',
-    title: 'قسائم إنجوي قيمز',
+    image: '/assets/best-sellers/itunes.webp',
+    name: 'قسائم إنجوي قيمز',
   },
   {
     id: 2,
-    src: '/assets/best-sellers/itunes.webp',
-    title: 'آيتونز',
+    image: '/assets/best-sellers/itunes.webp',
+    name: 'آيتونز',
   },
   {
     id: 3,
-    src: '/assets/best-sellers/sawa.webp',
-    title: 'شحن سوا',
+    image: '/assets/best-sellers/sawa.webp',
+    name: 'شحن سوا',
   },
   {
     id: 4,
-    src: '/assets/best-sellers/yalla-ludo.webp',
-    title: 'يلا لودو',
+    image: '/assets/best-sellers/yalla-ludo.webp',
+    name: 'يلا لودو',
   },
 ];
 
 export const SuggestedProdData = [
   {
     id: 1,
-    src: '/assets/play-station.webp',
-    title: 'ديسكورد',
+    image: '/assets/play-station.webp',
+    name: 'ديسكورد',
   },
   {
     id: 2,
-    src: '/assets/play-station.webp',
-    title: 'أجيبه',
+    image: '/assets/play-station.webp',
+    name: 'أجيبه',
   },
   {
     id: 3,
-    src: '/assets/play-station.webp',
-    title: 'باكو (Baco)',
+    image: '/assets/play-station.webp',
+    name: 'باكو (Baco)',
   },
   {
     id: 4,
-    src: '/assets/play-station.webp',
-    title: 'ستيم',
+    image: '/assets/play-station.webp',
+    name: 'ستيم',
   },
 ];
 
 export const NewlyArrivedData = [
   {
     id: 1,
-    src: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
     storeFlagImg: 'british-flag.png',
-    title: 'بلايستيشن 40 جنيه استرليني',
+    name: 'بلايستيشن 40 جنيه استرليني',
     price: 189.64,
     storeName: 'المتجر البريطاني',
     ratings: '1996',
   },
   {
     id: 2,
-    src: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
     storeFlagImg: 'saudi-arabia-flag.png',
-    title: 'سوبر مول 200 ريال',
+    name: 'سوبر مول 200 ريال',
     price: 189.64,
     storeName: 'المتجر السعودي',
     ratings: '1996',
   },
   {
     id: 3,
-    src: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
     storeFlagImg: 'saudi-arabia-flag.png',
-    title: 'نون مينتس 500 ريال',
+    name: 'نون مينتس 500 ريال',
     price: 189.64,
     storeName: 'المتجر السعودي',
     ratings: '1996',
   },
   {
     id: 4,
-    src: '/assets/play-station.webp',
+    image: '/assets/play-station.webp',
     storeFlagImg: 'europe-flag.png',
-    title: 'ستيم 30 يورو',
+    name: 'ستيم 30 يورو',
     price: 189.64,
     storeName: 'المتجر الأوروبي',
     ratings: '1996',
@@ -390,19 +248,17 @@ export const NewlyArrivedData = [
 export const EnjoyWinWinData = [
   {
     id: 1,
-    title: 'شارك وأربح',
-    description:
-      'أنت أحد شركاؤنا, حيث يمكنك يمكنك مشاركة رابط الدعوة وستربح من كل طلب عن طريقك',
+    translationKey: 'participateAndWin',
+    buttonTextKey: 'MoreAboutParticipateAndWin',
     image: '/assets/coin.gif',
-    buttonText: 'المزيد عن شارك وإربح',
+    href: '#',
   },
   {
     id: 2,
-    title: 'إنجوي قيمز',
-    description:
-      'عند الشراء تحصل على نقاط إنجوي قيمز يمكنك إستبدالها بما يناسبك من المكافآت',
+    translationKey: 'enjoyGames',
+    buttonTextKey: 'MoreAboutEnjoyGames',
     image: '/assets/coin.gif',
-    buttonText: 'المزيد عن إنجوي قيمز',
+    href: PATHS.STARS.link,
   },
 ];
 
@@ -411,87 +267,96 @@ export const ServiceData = [
     id: 1,
     image: 'paper-plane',
     alt: 'paper-plane',
-    title: 'أستلم بطاقتك بشكل فوري',
-    description:
-      'بمجرد شرائك بطاقة من موقع إنجوي قيمز، ستصلك بشكل تلقائي على البريد الإلكتروني، وبشكل فوري',
+    translationKey: 'paperPlane',
   },
   {
     id: 2,
     image: 'credit-card',
     alt: 'credit-card',
-    title: 'طرق دفع آمنة ومتنوعة',
-    description:
-      'إنجوي قيمز يتيح طرق دفع متنوعة ، وآمنة وتناسب كافة احتياجاتكم ورغباتكم، دون إنتظار أو تعقيدات',
+    translationKey: 'creditCard',
   },
   {
     id: 3,
     image: 'phone',
     alt: 'phone',
-    title: 'تطبيقات تعمل بكفاءة عالية',
-    description:
-      'يمكنك تحميل تطبيقات إنجوي قيمز على الايفون، و الأندرويد والإستمتاع بتجربة مميزة، وفريدة في تسوق بطاقاتك',
+    translationKey: 'phone',
+  },
+];
+
+export const contactData = [
+  {
+    id: 1,
+    label: 'email',
+    email: 'contact@enjoygames.com',
+    icon: MdEmail,
+  },
+  {
+    id: 2,
+    label: 'helpCenter',
+    email: 'help.enjoygames.com',
+    icon: IoMdHelpCircle,
   },
 ];
 
 export const FOOTER_LINKS_DATA = {
-  followUs: [
+  LearnMore: [
     {
       id: 1,
-      text: 'من نحن',
-      url: 'https://github.com/Waseemko-ayman',
+      key: 'about',
+      url: PATHS.ABOUT.link,
     },
     {
       id: 2,
-      text: 'الأسئلة الشائعة',
-      url: 'https://twitter.com/waseemabdalhady',
+      key: 'faq',
+      url: PATHS.FAQ.link,
     },
     {
       id: 3,
-      text: 'سياسة الخصوصية',
-      url: 'https://www.linkedin.com/in/waseem-abd-elhadi-1b293624b/',
+      key: 'privacyPolicy',
+      url: PATHS.PRIVACY_POLICY.link,
     },
     {
       id: 4,
-      text: 'سياسة الإسترجاع',
-      url: 'https://www.instagram.com/waseem.abdalhady/',
+      key: 'refundPolicy',
+      url: PATHS.REFUND_POLICY.link,
     },
     {
       id: 5,
-      text: 'سياسة الخدمة',
-      url: 'https://t.me/waseem_abdalhady',
+      key: 'termsOfUser',
+      url: PATHS.TERMS_OF_USER.link,
     },
   ],
-  works: [
+  BusinessAndSolutions: [
     {
       id: 1,
-      text: 'أنضم للتجار',
-      url: '#',
-    },
-  ],
-  works2: [
-    {
-      id: 1,
-      text: 'الأخبار',
+      key: 'news',
       url: '#',
     },
     {
       id: 2,
-      text: 'مركز المساعدة',
+      key: 'helpCenter',
       url: '#',
     },
+    // {
+    //   id: 3,
+    //   key: 'أنضم للتجار',
+    //   url: '#',
+    // },
   ],
   shop_app: [
     {
       id: 1,
       src: '/assets/digitals-stores/play.jpg',
-      alt: 'google play',
+      alt: 'Google Play Logo',
       url: '#',
+      ariaLabel: "googlePlayApp",
     },
     {
       id: 2,
       src: '/assets/digitals-stores/app.jpg',
-      alt: 'app store',
+      alt: 'App Store Logo',
       url: '#',
+      ariaLabel: "appStoreApp",
     },
   ],
   socialMedia: [
@@ -499,21 +364,25 @@ export const FOOTER_LINKS_DATA = {
       id: 1,
       url: '#',
       icon: FaFacebook,
+      ariaLabel: 'facebook',
     },
     {
       id: 2,
       url: '#',
       icon: FaTwitter,
+      ariaLabel: 'twitter',
     },
     {
       id: 3,
       url: '#',
       icon: FaInstagram,
+      ariaLabel: 'instagram',
     },
     {
       id: 4,
       url: '#',
       icon: FaLinkedin,
+      ariaLabel: 'linkedin',
     },
   ],
 };
@@ -522,47 +391,17 @@ export const menuLists = [
   {
     id: 1,
     linksItem: [
-      {
-        id: 1,
-        title: 'دليل ستارز',
-        icon: IoArrowRedoOutline,
-        link: PATHS.STARS.link,
-      },
-      {
-        id: 2,
-        title: 'المحفظة',
-        link: PATHS.WALLET.link,
-        icon: IoWalletOutline,
-      },
-      {
-        id: 3,
-        title: 'الإهتمامات',
-        icon: FaRegHeart,
-        link: '#',
-      },
+      { id: 1, key: 'stars', icon: IoArrowRedoOutline, link: PATHS.STARS.link },
+      { id: 2, key: 'wallet', icon: IoWalletOutline, link: PATHS.WALLET.link },
+      { id: 3, key: 'interests', icon: FaRegHeart, link: '#' },
     ],
   },
   {
     id: 2,
     linksItem: [
-      {
-        id: 1,
-        title: 'تذاكر الدعم الفني',
-        link: '#',
-        icon: FaRegFlag,
-      },
-      {
-        id: 2,
-        title: 'التحدث مع خدمة العملاء',
-        icon: MdOutlineEmail,
-        link: '#',
-      },
-      {
-        id: 3,
-        title: 'الأسئلة الشائعة',
-        icon: IoMdHelpCircleOutline,
-        link: '#',
-      },
+      { id: 1, key: 'tickets', icon: FaRegFlag, link: '#' },
+      { id: 2, key: 'TalkToCustomerService', icon: MdOutlineEmail, link: '#' },
+      { id: 3, key: 'faq', icon: IoMdHelpCircleOutline, link: '#' },
     ],
   },
 ];
@@ -571,7 +410,7 @@ export const userList = [
   {
     section: 'account',
     items: [
-      { id: 1, title: 'حسابي', link: PATHS.MY_ACCOUNT.link, icon: FaUser },
+      { id: 1, title: 'حسابي', link: PATHS.MY_ACCOUNT.ROOT.link, icon: FaUser },
       {
         id: 2,
         title: 'طلباتي',
@@ -581,7 +420,7 @@ export const userList = [
       {
         id: 3,
         title: 'تذاكر الدعم الفني',
-        link: '#',
+        link: PATHS.TICKETS.ROOT.link,
         icon: FaFlag,
       },
     ],
@@ -604,7 +443,12 @@ export const userList = [
       //   icon: FaLink,
       // },
       { id: 4, title: 'دليل ستارز', link: PATHS.STARS.link, icon: FaFlag },
-      { id: 5, title: 'الإهتمامات', link: PATHS.INTERESTS.link, icon: FaHeart },
+      {
+        id: 5,
+        title: 'الإهتمامات',
+        link: PATHS.MY_ACCOUNT.INTERESTS.link,
+        icon: FaHeart,
+      },
     ],
   },
   {
@@ -620,7 +464,7 @@ export const userList = [
       {
         id: 9,
         title: 'نقاط دليل ستارز',
-        link: '#',
+        link: PATHS.STARS.link,
         icon: PiSparkleFill,
         badge: '0',
       },
@@ -628,7 +472,7 @@ export const userList = [
   },
   {
     section: 'logout',
-    items: [{ id: 10, title: 'تسجيل خروج', link: '#', icon: FiLogOut }],
+    items: [{ id: 10, title: 'تسجيل خروج', icon: FiLogOut }],
   },
 ];
 
@@ -646,30 +490,26 @@ export const countries = [
 export const featuresData = [
   {
     id: 1,
-    title: 'اجمع النقاط',
-    description: 'احصل على نقاط مع كل عملية شراء',
+    key: 'feature1',
     bgColor: 'bg-enjoy-primary-deep',
     textColor: 'text-white',
     icon: FiTrendingUp,
   },
   {
     id: 2,
-    title: 'ضاعف مكافآتك ',
-    description: 'ارتقِ بالمستويات للحصول على مزايا أكثر.',
+    key: 'feature2',
     bgColor: 'bg-enjoy-secondary-soft',
     icon: FaGift,
   },
   {
     id: 3,
-    title: 'راقب تقدمك ',
-    description: 'تابع نقاطك وتاريخ معاملاتك في حسابك.',
+    key: 'feature3',
     bgColor: 'bg-enjoy-glass',
     icon: FaChartBar,
   },
   {
     id: 4,
-    title: 'استبدل النقاط',
-    description: 'استبدلها ببطاقات رقمية أو حوّلها إلى نقاط نقدي',
+    key: 'feature4',
     bgColor: 'bg-enjoy-primary-soft',
     icon: FaSackDollar,
   },
@@ -678,35 +518,35 @@ export const featuresData = [
 export const tiers = [
   {
     id: 1,
-    name: 'دليل جونيور',
+    key: 'junior',
     icon: FaRegGem,
     percentage: 0.2,
     isActive: true,
   },
   {
     id: 2,
-    name: 'دليل نشط',
+    key: 'active',
     icon: FaCrown,
     percentage: 0.4,
     isActive: false,
   },
   {
     id: 3,
-    name: 'دليل محترف',
+    key: 'pro',
     icon: FaRegStar,
     percentage: 0.6,
     isActive: false,
   },
   {
     id: 4,
-    name: 'دليل خبير',
+    key: 'expert',
     icon: FiAward,
     percentage: 0.8,
     isActive: false,
   },
   {
     id: 5,
-    name: 'دليل مميز',
+    key: 'vip',
     icon: FaDiamond,
     percentage: 1,
     isActive: false,
@@ -771,33 +611,36 @@ export const WalletSectionData = [
   {
     id: 1,
     link: PATHS.WALLET.link,
-    title: 'محفظتي',
+    title: 'wallet',
     value: '0',
-    unit: 'saudi_riyal',
+    unit: '/assets/saudi_riyal.png',
     icon: Wallet,
     bgColor: 'bg-violet-600',
     textColor: 'text-white',
+    isUnitTranslatable: false,
   },
   {
     id: 2,
     link: PATHS.STARS.link,
-    title: 'دليل ستارز',
+    title: 'stars',
     value: '0',
-    unit: 'نقطة',
+    unit: 'point',
     icon: Sparkles,
     bgColor: 'bg-orange-300',
     textColor: 'text-[#060919]',
+    isUnitTranslatable: true,
   },
-  {
-    id: 3,
-    link: '#',
-    title: 'دليل مكسب',
-    value: '0',
-    unit: 'saudi_riyal',
-    icon: Wallet,
-    bgColor: 'bg-amber-50',
-    textColor: 'text-[#060919]',
-  },
+  // {
+  //   id: 3,
+  //   link: '#',
+  //   title: 'maxup',
+  //   value: '0',
+  //   unit: '/assets/saudi_riyal.png',
+  //   icon: Wallet,
+  //   bgColor: 'bg-amber-50',
+  //   textColor: 'text-[#060919]',
+  //   isUnitTranslatable: false,
+  // },
 ];
 
 export const inviteStepsData = [
@@ -842,34 +685,34 @@ export const inviteStepsData = [
 ];
 
 export const mockApiData: RewardTier[] = [
-  { id: 1, name: 'البرونزية', percentage: 0.3, isActive: true },
-  { id: 2, name: 'الفضية', percentage: 0.4, isActive: false },
-  { id: 3, name: 'الذهبية', percentage: 0.5, isActive: false },
-  { id: 4, name: 'البلاتينيوم', percentage: 0.6, isActive: false },
-  { id: 5, name: 'VIP', percentage: 0.7, isActive: false },
+  { id: 1, key: 'البرونزية', percentage: 0.3, isActive: true },
+  { id: 2, key: 'الفضية', percentage: 0.4, isActive: false },
+  { id: 3, key: 'الذهبية', percentage: 0.5, isActive: false },
+  { id: 4, key: 'البلاتينيوم', percentage: 0.6, isActive: false },
+  { id: 5, key: 'VIP', percentage: 0.7, isActive: false },
 ];
 
 export const rewardsPrograms = [
   {
     id: 1,
-    title: 'برامج المكافآت',
+    key: 'bonusesPrograms',
     type: 'earnings',
   },
-  // {
-  //   id: 2,
-  //   title: 'برنامج مكسب',
-  //   type: 'earnings',
-  //   amount: 0,
-  //   currency: 'ريال',
-  //   description: 'أرباحك القابلة للسحب',
-  // },
   {
     id: 2,
-    title: 'نقاط دليل ستارز',
-    type: 'points',
+    key: 'maxupProgram',
+    type: 'earnings',
     amount: 0,
-    currency: 'نقطة',
-    description: 'نقاطك القابلة للتحويل',
+    currency: 'ريال',
+    description: 'profiledProfits',
+  },
+  {
+    id: 3,
+    key: 'starsPoints',
+    type: 'point',
+    amount: 0,
+    currency: 'point',
+    description: 'convertiblePoints',
   },
 ];
 
@@ -884,7 +727,7 @@ export const inputData = [
     id: 1,
     label: 'الإسم',
     icon: FaUser,
-    name: 'username',
+    name: 'name',
   },
   {
     id: 2,
@@ -916,10 +759,12 @@ export const inputData = [
     options: [
       {
         id: 1,
+        value: 'male',
         label: 'ذكر',
       },
       {
         id: 2,
+        value: 'female',
         label: 'أنثى',
       },
     ],
@@ -968,5 +813,167 @@ export const InterestsData = [
     src: '/assets/contactAndData.webp',
     alt: 'هدايا',
     title: 'هدايا',
+  },
+];
+
+export const ticketsInputsTypes = [
+  {
+    id: 1,
+    name: 'subject',
+    placeholder: 'عنوان التذكرة',
+  },
+  {
+    id: 2,
+    type: 'select',
+    name: 'ticketType',
+    placeholder: 'حدد نوع التذكرة',
+    options: [
+      {
+        id: 1,
+        label: 'مشكلة بأحد الطلبات',
+        value: 'order-issue',
+      },
+      {
+        id: 2,
+        label: 'مشكلة بالدفع والتحويل',
+        value: 'payment-issue',
+      },
+      {
+        id: 3,
+        label: 'اقتراح او شيء اخر',
+        value: 'suggestion-or-other',
+      },
+    ],
+  },
+  {
+    id: 3,
+    type: 'textarea',
+    name: 'details',
+    placeholder: 'يرجي كتابة وصف لمساعتدك بشكل أدق',
+  },
+];
+
+export const inputsViaEntry: InputItem[] = [
+  {
+    id: 1,
+    inputName: 'quantity',
+    labelKey: 'quantity',
+    type: 'select',
+    options: [
+      { id: 1, value: 'phone', labelKey: 'phone' },
+      { id: 2, value: 'email', labelKey: 'email' },
+      { id: 3, value: 'twitter', labelKey: 'twitter' },
+      { id: 4, value: 'facebook', labelKey: 'facebook' },
+    ],
+  },
+  {
+    id: 2,
+    inputName: 'phone_number',
+    labelKey: 'phone',
+    type: 'text',
+  },
+  {
+    id: 3,
+    inputName: 'password',
+    labelKey: 'password',
+    type: 'password',
+  },
+  {
+    id: 4,
+    inputName: 'id_number',
+    labelKey: 'idNumber',
+    type: 'text',
+  },
+  {
+    id: 5,
+    inputName: 'checkbox',
+    labelKey: 'unlockAccount',
+    type: 'checkbox',
+    placeholder: 'تم الإلغاء',
+  },
+];
+
+export const stats = [
+  {
+    id: 1,
+    icon: Wallet,
+    titleKey: 'balance',
+    currency: '/assets/saudi_riyal.png',
+    account: 0,
+  },
+  {
+    id: 2,
+    icon: FaStar,
+    titleKey: 'currentLevel',
+    account: 0,
+  },
+  {
+    id: 3,
+    icon: FaHeart,
+    titleKey: 'interests',
+    href: PATHS.MY_ACCOUNT.INTERESTS.link,
+  },
+];
+
+export const accountOptions = [
+  'accountOptions.sendCardCodeToEmail',
+  'accountOptions.getUpdates',
+  'accountOptions.specialOccasions',
+  'accountOptions.interestsInfo',
+];
+
+export const MyPurchasesTypes = [
+  { id: 1, labelKey: 'all' },
+  { id: 2, labelKey: 'completed' },
+  { id: 3, labelKey: 'inProgress' },
+  { id: 4, labelKey: 'cancelled' },
+];
+
+export const loginInputs = [
+  {
+    id: 1,
+    type: 'email',
+    label: 'email',
+    name: 'email',
+    placeholder: 'writeYorEmail',
+  },
+  {
+    id: 2,
+    type: 'password',
+    label: 'password',
+    name: 'password',
+    placeholder: 'yourPassword',
+  },
+];
+
+export const signupInputs = [
+  // ...loginInputs,
+  {
+    id: 1,
+    type: 'text',
+    label: 'name',
+    name: 'name',
+    placeholder: 'writeYorName',
+  },
+  {
+    id: 2,
+    type: 'email',
+    label: 'email',
+    name: 'email',
+    placeholder: 'writeYorEmail',
+  },
+  {
+    id: 3,
+    type: 'password',
+    label: 'password',
+    name: 'password',
+    placeholder: 'yourPassword',
+  },
+  {
+    id: 4,
+    type: 'password',
+    label: 'password_confirmation',
+    name: 'password_confirmation',
+    placeholder: 'repassword',
   },
 ];

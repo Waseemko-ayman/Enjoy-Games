@@ -1,22 +1,35 @@
-import CommonCard from '@/components/atomic/CommonCard';
-import SectionComponent from '@/components/atomic/SectionComponent';
-import GridWrapper from '@/components/molecules/GridWrapper';
-import { BestSellersData } from '@/data';
+import dynamic from 'next/dynamic';
 import React from 'react';
+import SectionComponent from '@/components/atomic/SectionComponent';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import GridWrapper from '@/components/molecules/GridWrapper';
+import { ProductCardProps, TranslationFunction } from '@/interfaces';
+import Loading from '@/components/molecules/loading';
+const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
+  loading: () => <Loading />,
+});
 
-const BestSellers = () => {
+const BestSellers = ({
+  t,
+  bestSeller,
+}: {
+  t: TranslationFunction;
+  bestSeller: ProductCardProps[];
+}) => {
   return (
-    <SectionComponent title="البطاقات الأكثر مبيعًا">
+    <SectionComponent title={t('sectionsTitles.bestSellers')}>
       <GridWrapper isScrollable>
-        {BestSellersData.map((card) => (
-          <CommonCard
-            key={card.id}
-            imgSrc={card.src}
-            imgAlt={card.title}
-            imgTitle={card.title}
-            title={card.title}
-            tall
-          />
+        {bestSeller?.map((card, index) => (
+          <AnimatedWrapper key={card.id} custom={index}>
+            <ProductCard
+              // imgSrc={card.image}
+              image={'/assets/best-sellers/itunes.webp'}
+              imgAlt={card.title}
+              imgTitle={card.title}
+              title={card.title}
+              tall
+            />
+          </AnimatedWrapper>
         ))}
       </GridWrapper>
     </SectionComponent>

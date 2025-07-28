@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { SectionTypeCardProps } from '@/interfaces';
 
 const SectionTypeCard: React.FC<SectionTypeCardProps> = ({
-  path,
+  path = "",
   title,
   imgSrc,
   imgAlt,

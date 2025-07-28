@@ -7,13 +7,19 @@ import SelectableList from '@/components/molecules/SelectableList';
 import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
 import { rewardsPrograms } from '@/data';
 import useIsMobile from '@/hook/useIsMobile';
+import { useToggleLocale } from '@/hook/useToggleLocale';
+import { TranslationFunction } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
-const ButtonsDialogDrawer = () => {
+const ButtonsDialogDrawer = ({ t }: { t: TranslationFunction }) => {
   const [openFirst, setOpenFirst] = useState(false);
   const [openSecond, setOpenSecond] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<number | null>(null);
   const isMobile = useIsMobile();
+  const btnTxts = useTranslations('BtnTexts');
+  const inputsTxt = useTranslations('Inputs.placeHolders');
+  const { isArabic } = useToggleLocale();
 
   const handleProgramSelect = (id: number) => {
     setSelectedProgram(selectedProgram === id ? null : id);
@@ -22,7 +28,7 @@ const ButtonsDialogDrawer = () => {
   const handleContinue = () => {
     if (selectedProgram) {
       const program = rewardsPrograms.find((p) => p.id === selectedProgram);
-      alert(`تم اختيار برنامج: ${program?.title}`);
+      alert(`تم اختيار برنامج: ${program?.key}`);
       setOpenSecond(false);
     }
   };
@@ -33,26 +39,32 @@ const ButtonsDialogDrawer = () => {
         setOpen={setOpenFirst}
         isMobile={isMobile}
         trigger={
-          <Button otherClassName="py-4 px-7 text-sm">إشحن رصيدك الآن</Button>
+          <Button
+            otherClassName={`${!isArabic ? 'p-3' : ''} sm:py-4 sm:px-7 text-sm`}
+          >
+            {btnTxts('RechargeNow')}
+          </Button>
         }
       >
-        <DialogHeader title="أضف قسيمة" onClose={() => setOpenFirst(false)} />
+        <DialogHeader
+          title={t('addCoupon.title')}
+          onClose={() => setOpenFirst(false)}
+        />
         <div>
           <label className="block text-sm font-semibold text-[var(--enjoy-gray-650)] mb-2">
-            ضيف رصيد لمحفظتك بسهولة باستخدام قسيمة دليل ستور.
+            {t('addCoupon.subTitle')}
           </label>
           <Input
             type="text"
-            placeholder="أكتب كود القسيم هنا..."
+            placeholder={inputsTxt('writeCouponHere')}
             inputName="coupon_code"
-            // Icon={IoIosWarning}
             iconClassName="text-red-500"
             variant="secondary"
             otherClassNameContainer="!border !border-gray-300 !rounded-lg"
             otherClassName="placeholder:text-enjoy-primary-deep placeholder:text-xs placeholder:font-bold"
           />
           <Button otherClassName="py-3.5 text-sm w-full mt-6">
-            أضف القسيمة
+            {btnTxts('addCoupon')}
           </Button>
         </div>
       </ResponsiveDialogDrawer>
@@ -62,20 +74,25 @@ const ButtonsDialogDrawer = () => {
         setOpen={setOpenSecond}
         isMobile={isMobile}
         trigger={
-          <Button variant="forth" otherClassName="py-4 px-7 !bg-white text-sm">
-            استبدل نقاطك
+          <Button
+            variant="forth"
+            otherClassName={`${
+              !isArabic ? 'p-3' : ''
+            } sm:py-4 sm:px-7 text-sm !bg-white`}
+          >
+            {btnTxts('RedeemPoints')}
           </Button>
         }
       >
         <DialogHeader
-          title="اختر طريقة الاستبدال اللي تناسبك"
+          title={t('RedeemPoints.title')}
           onClose={() => {
             setOpenSecond(false);
             setSelectedProgram(null);
           }}
         />
         <h6 className="block text-sm font-semibold text-[var(--enjoy-gray-650)] mb-6 sm:mb-2">
-          برامج المكافآت
+          {t('RedeemPoints.subTitle')}
         </h6>
 
         <SelectableList
@@ -97,7 +114,7 @@ const ButtonsDialogDrawer = () => {
           disabled={!selectedProgram}
           handleClick={handleContinue}
         >
-          استمر
+          {btnTxts('continue')}
         </Button>
       </ResponsiveDialogDrawer>
     </div>

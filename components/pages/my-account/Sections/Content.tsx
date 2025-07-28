@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from './Form';
 import Container from '@/components/organism/Container';
 import Layer from '@/components/atomic/Layer';
@@ -12,48 +12,64 @@ import Stats from './Stats';
 import InvitationLink from './InvitationLink';
 import DeleteAccount from './DeleteAccount';
 import ProfilePicture from './ProfilePicture';
-import useIsMobile from '@/hook/useIsMobile';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { FormValues } from '@/interfaces';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
+import { useAuthContext } from '@/context/AuthContext';
 
 const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{2,}$/;
-// const phoneRegex = /^[0-9]{9,15}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const formSchema = Yup.object({
-  username: Yup.string()
-    .matches(
-      alphanumericWithArabicRegex,
-      'الاسم يجب أن يحتوي على حروف أو أرقام فقط ويكون طوله على الأقل حرفين'
-    )
-    .required('الاسم مطلوب'),
-  email: Yup.string()
-    .email('البريد الإلكتروني غير صالح')
-    .matches(emailRegex, 'الإيميل غير صالح')
-    .required('البريد الإلكتروني مطلوب'),
-  phone: Yup.string()
-    // .matches(phoneRegex, 'رقم الجوال غير صالح')
-    .required('رقم الجوال مطلوب'),
-  birthDate: Yup.string().required('تاريخ الميلاد مطلوب'),
-  gender: Yup.string()
-    .oneOf(['ذكر', 'أنثى'], 'الرجاء اختيار الجنس')
-    .required('الجنس مطلوب'),
-  options: Yup.array().of(Yup.boolean()),
-  avatar: Yup.mixed().required('الصورة مطلوبة'),
-});
-
 const Content = () => {
-  const isMobile = useIsMobile();
+  const { user } = useAuthContext();
+  const [isMobile, setIsMobile] = useState(false);
   const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
+  const t = useTranslations('MyAccount');
+  const btnTexts = useTranslations('BtnTexts');
+
+  const errorsTxts = useTranslations('Inputs.errorsMsgs');
+
+  const formSchema = Yup.object({
+    name: Yup.string()
+      .matches(
+        alphanumericWithArabicRegex,
+        errorsTxts('usernameInvalid') ||
+          'الاسم يجب أن يحتوي على حروف أو أرقام فقط ويكون طوله على الأقل حرفين'
+      )
+      .required(errorsTxts('usernameRequired') || 'الاسم مطلوب'),
+    email: Yup.string()
+      .email(errorsTxts('emailInvalid') || 'البريد الإلكتروني غير صالح')
+      .matches(emailRegex, errorsTxts('emailInvalid') || 'الإيميل غير صالح')
+      .required(errorsTxts('emailRequired') || 'البريد الإلكتروني مطلوب'),
+    phone: Yup.string().notRequired(),
+    birthDate: Yup.string().notRequired(),
+    gender: Yup.string().oneOf(['ذكر', 'أنثى']).notRequired(),
+    options: Yup.array().of(Yup.boolean()).notRequired(),
+    avatar: Yup.mixed().notRequired(),
+    // phone: Yup.string()
+    //   // .matches(phoneRegex, errorsTxts('phoneInvalid') || 'رقم الجوال غير صالح')
+    //   .required(errorsTxts('phoneRequired') || 'رقم الجوال مطلوب'),
+    // birthDate: Yup.string().required(
+    //   errorsTxts('birthDateRequired') || 'تاريخ الميلاد مطلوب'
+    // ),
+    // gender: Yup.string()
+    //   .oneOf(
+    //     ['ذكر', 'أنثى'],
+    //     errorsTxts('genderInvalid') || 'الرجاء اختيار الجنس'
+    //   )
+    //   .required(errorsTxts('genderRequired') || 'الجنس مطلوب'),
+    // options: Yup.array().of(Yup.boolean()),
+    // avatar: Yup.mixed().required(
+    //   errorsTxts('avatarRequired') || 'الصورة مطلوبة'
+    // ),
+  });
 
   const methods = useForm<FormValues>({
     resolver: yupResolver(formSchema),
-    defaultValues: {
-      options: [false, false, false, false],
-    },
   });
 
   const {
@@ -66,70 +82,118 @@ const Content = () => {
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmittingLocal(true);
-    console.log(data);
-
     setTimeout(() => {
+      console.log(data);
+      reset({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        birthDate: data.birthDate,
+        gender: data.gender,
+        options: data.options || [false, false, false, false],
+        avatar: data.avatar?.[0]?.name || '',
+      });
       setIsSubmittingLocal(false);
-      reset();
     }, 2000);
   };
+
+  useEffect(() => {
+    if (user) {
+      reset({
+        name: user.name || '',
+        email: user.email || '',
+        // phone: (user as any).phone || '', // إذا الحقل موجود بالـ user
+        // birthDate: (user as any).birthDate || '',
+        // gender: (user as any).gender || '',
+        // options: (user as any).options || [false, false, false, false],
+        // avatar: (user as any).avatar || '',
+      });
+    }
+  }, [user, reset]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 991) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <FormProvider {...methods}>
       <Layer>
         <Container>
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div
+            className={`flex flex-col lg:flex-row ${
+              isMobile ? 'gap-1' : 'gap-8'
+            }`}
+          >
             {/* Left Side - Form */}
-            <form className="flex-1" onSubmit={handleSubmit(onSubmit)}>
-              {isMobile && <ProfilePicture />}
-              <div className="space-y-6 max-[991px]:mt-3">
+            <form
+              className={`flex-1 ${isMobile ? 'order-2' : ''}`}
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <div className={`space-y-6 ${isMobile ? 'mt-3' : ''}`}>
                 {/* Account Information */}
-                <Form register={register} errors={errors} control={control} />
+                <Form
+                  register={register}
+                  errors={errors}
+                  control={control}
+                  t={t}
+                />
 
                 {/* Warning Message */}
-                <WarningMessage />
+                <WarningMessage t={t} />
 
                 {/* Account Options */}
-                <AccountOptions />
+                <AccountOptions t={t} />
 
-                <Button
-                  type="submit"
-                  otherClassName="py-3 px-8 mt-10 flex items-center"
-                  Icon={MdSave}
-                  iconPosition="right"
-                  disabled={isSubmittingLocal}
-                >
-                  {isSubmittingLocal ? (
-                    <>
-                      جاري الحفظ
-                      <ButtonLoading />
-                    </>
-                  ) : (
-                    'حفظ'
-                  )}
-                </Button>
+                <AnimatedWrapper>
+                  <Button
+                    type="submit"
+                    otherClassName="py-3 px-8 mt-10 flex items-center"
+                    Icon={!isSubmittingLocal ? MdSave : undefined}
+                    iconPosition="right"
+                    disabled={isSubmittingLocal}
+                  >
+                    {isSubmittingLocal ? (
+                      <>
+                        {btnTexts('Saving')}
+                        <ButtonLoading />
+                      </>
+                    ) : (
+                      btnTexts('save')
+                    )}
+                  </Button>
+                </AnimatedWrapper>
               </div>
             </form>
 
             {/* Right Side - Profile Section */}
-            {!isMobile && (
-              <div className="space-y-6">
-                {/* Profile Picture Section */}
-                <ProfilePicture />
+            <div className={isMobile ? 'order-1' : 'space-y-6'}>
+              {/* Profile Picture Section */}
+              <ProfilePicture t={t} />
+              {!isMobile && (
+                <>
+                  {/* Step Indicator */}
+                  <StepIndicator t={t} />
 
-                {/* Step Indicator */}
-                <StepIndicator />
+                  {/* Stats */}
+                  <Stats t={t} />
 
-                {/* Stats */}
-                <Stats />
+                  {/* Invitation Link */}
+                  <InvitationLink t={t} />
 
-                {/* Invitation Link */}
-                <InvitationLink />
-
-                {/* Delete Account */}
-                <DeleteAccount />
-              </div>
-            )}
+                  {/* Delete Account */}
+                  <DeleteAccount t={t} />
+                </>
+              )}
+            </div>
           </div>
         </Container>
       </Layer>

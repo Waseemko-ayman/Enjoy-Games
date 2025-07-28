@@ -1,21 +1,34 @@
-import CommonCard from '@/components/atomic/CommonCard';
-import SectionComponent from '@/components/atomic/SectionComponent';
-import GridWrapper from '@/components/molecules/GridWrapper';
-import { SuggestedProdData } from '@/data';
 import React from 'react';
+import dynamic from 'next/dynamic';
+import SectionComponent from '@/components/atomic/SectionComponent';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import GridWrapper from '@/components/molecules/GridWrapper';
+import Loading from '@/components/molecules/loading';
+import { ProductCardProps, TranslationFunction } from '@/interfaces';
+const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
+  loading: () => <Loading />,
+});
 
-const SuggestedProducts = () => {
+const SuggestedProducts = ({
+  t,
+  suggestedProducts,
+}: {
+  t: TranslationFunction;
+  suggestedProducts: ProductCardProps[];
+}) => {
   return (
-    <SectionComponent title="منتجات مقترحة">
+    <SectionComponent title={t('sectionsTitles.suggestedProducts')}>
       <GridWrapper isScrollable>
-        {SuggestedProdData.map((card) => (
-          <CommonCard
-            key={card.id}
-            imgSrc={card.src}
-            imgAlt={card.title}
-            imgTitle={card.title}
-            title={card.title}
-          />
+        {suggestedProducts.map((card, index) => (
+          <AnimatedWrapper key={card.id} custom={index}>
+            <ProductCard
+              // imgSrc={card.image}
+              image={'/assets/play-station.webp'}
+              imgAlt={card.title}
+              imgTitle={card.title}
+              title={card.title}
+            />
+          </AnimatedWrapper>
         ))}
       </GridWrapper>
     </SectionComponent>

@@ -7,6 +7,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   description,
   bgColor,
   textColor,
+  descClassName,
 }) => {
   return (
     <div className={`${bgColor} rounded-xl p-3.5 ${textColor}`}>
@@ -14,7 +15,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
         <h4 className="text-[15px] font-semibold">{title}</h4>
         {Icon && <Icon className="text-sm" />}
       </div>
-      <p className="text-sm">{description}</p>
+      <p className={descClassName}>{description}</p>
     </div>
   );
 };

@@ -1,14 +1,50 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { FaMessage } from 'react-icons/fa6';
-import AuthLayout from '@/components/organism/AuthLayout';
+import React, { useEffect, useRef } from 'react';
+import AuthLayout from '@/components/organism/layouts/AuthLayout';
 import Button from '@/components/atomic/Button';
+import { useTranslations } from 'next-intl';
+import { MdOutlineAlternateEmail } from 'react-icons/md';
+import { useAuthContext } from '@/context/AuthContext';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { PATHS } from '@/data/paths';
+import { useRouter } from 'next/navigation';
+
+const otpSchema = yup.object({
+  otp: yup.string().required(),
+});
+
+type OtpFormData = yup.InferType<typeof otpSchema>;
 
 const OTPPage = () => {
-  const [timeLeft, setTimeLeft] = useState(10);
-  const [otp, setOtp] = useState(['', '', '', '']);
+  const [timeLeft, setTimeLeft] = React.useState(300);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const authTxts = useTranslations('Auth');
+  const btnTxts = useTranslations('BtnTexts');
+  const { verifyOtp, isLoading, login, token } = useAuthContext();
+
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { isValid },
+  } = useForm<OtpFormData>({
+    resolver: yupResolver(otpSchema),
+    mode: 'onChange',
+  });
+
+  const otpValue = watch('otp', '');
+  const otpArray = otpValue.split('').concat(Array(6).fill('')).slice(0, 6);
+
+  // 3. تسجيل الحقول بشكل يدوي
+  useEffect(() => {
+    register('otp');
+  }, [register]);
 
   useEffect(() => {
     if (timeLeft > 0) {
@@ -26,19 +62,27 @@ const OTPPage = () => {
   };
 
   const handleInputChange = (index: number, value: string) => {
-    if (value.length > 1 || (value && !/^\d$/.test(value))) return;
+    if (value && !/^\d$/.test(value)) return;
 
-    const newOtp = [...otp];
+    const newOtp = otpValue.split('');
     newOtp[index] = value;
-    setOtp(newOtp);
+    const joinedOtp = newOtp.slice(0, 6).join('');
 
-    if (value && index < 3) {
-      inputRefs.current[index + 1]?.focus();
+    setValue('otp', joinedOtp, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
+
+    if (value && index < 5) {
+      setTimeout(() => {
+        inputRefs.current[index + 1]?.focus();
+      }, 0);
     }
   };
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
-    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+    if (e.key === 'Backspace' && !otpArray[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };
@@ -48,28 +92,61 @@ const OTPPage = () => {
     const pastedData = e.clipboardData
       .getData('text')
       .replace(/\D/g, '')
-      .slice(0, 4);
-    const newOtp = [...otp];
+      .slice(0, 6);
 
-    for (let i = 0; i < pastedData.length && i < 4; i++) {
-      newOtp[i] = pastedData[i];
-    }
-
-    setOtp(newOtp);
-    inputRefs.current[Math.min(pastedData.length, 3)]?.focus();
+    setValue('otp', pastedData, {
+      shouldValidate: true,
+    });
+    inputRefs.current[Math.min(pastedData.length, 5)]?.focus();
   };
+
+  const isInputEnabled = (index: number) => {
+    return index === 0 || otpArray[index - 1] !== '';
+  };
+
+  const onSubmit = async (data: OtpFormData) => {
+    try {
+      const email = sessionStorage.getItem('otp_email');
+      if (!email) {
+        throw new Error(authTxts('emailNotFound'));
+      }
+      await verifyOtp(email, data.otp);
+    } catch (error) {
+      console.error(`${authTxts('verificationFailedCode')}:`, error);
+    }
+  };
+
+  const handleResendCode = () => {
+    const email = sessionStorage.getItem('otp_email') || '';
+    const password = sessionStorage.getItem('otp_password') || '';
+
+    if (!email || !password) return;
+
+    login({ email, password });
+    setTimeLeft(300);
+  };
+
+  useEffect(() => {
+    const otpEmail = sessionStorage.getItem('otp_email');
+
+    if (token) {
+      router.replace(PATHS.HOME.link);
+    } else if (!otpEmail) {
+      router.replace(PATHS.LOGIN);
+    }
+  }, [token, router]);
 
   return (
     <AuthLayout
-      title="أنشئ حساب جديد"
-      description="وصلتك رسالة واتساب برمز تحقق على الرقم +970592164680"
-      btnText="تحقق"
-      showFooterText
-      isSubmitDisabled={otp.some((digit) => !digit)}
-      onSubmit={() => console.log('Submit OTP:', otp.join(''))}
+      title={authTxts('signupDesc')}
+      description={authTxts('otpDesc')}
+      btnText={btnTxts('check')}
+      isSubmitDisabled={!isValid || otpValue.length < 6}
+      isSubmitting={isLoading}
+      onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="flex gap-3 justify-center mb-6">
-        {otp.map((digit, index) => (
+      <div className="flex gap-3 justify-center mb-6" dir="ltr">
+        {otpArray.map((digit, index) => (
           <input
             key={index}
             ref={(el: HTMLInputElement | null) => {
@@ -82,26 +159,31 @@ const OTPPage = () => {
             onChange={(e) => handleInputChange(index, e.target.value)}
             onKeyDown={(e) => handleKeyDown(index, e)}
             onPaste={handlePaste}
-            className="w-12 h-12 border-2 border-gray-300 rounded-lg text-center text-lg font-semibold focus:border-purple-600 focus:outline-none transition-colors"
+            disabled={!isInputEnabled(index)}
+            className={`w-12 h-12 border-2 rounded-lg text-center text-lg font-semibold focus:outline-none transition-colors ${
+              !isInputEnabled(index)
+                ? 'border-gray-200 bg-gray-100 text-gray-400'
+                : 'border-gray-300 focus:border-purple-600'
+            }`}
           />
         ))}
       </div>
 
       {timeLeft > 0 ? (
         <div className="bg-gray-200 rounded-lg w-fit mx-auto py-2 px-3 text-center text-gray-400 text-sm mb-3">
-          إرسال رمز جديد بعد {formatTime(timeLeft)}
+          {authTxts('sendNewCode')} {formatTime(timeLeft)}
         </div>
       ) : (
         <div className="flex items-center justify-between flex-wrap gap-2 mt-4">
+          <h4 className="text-sm font-normal">{authTxts('notGetCode')}</h4>
           <Button
-            variant="fifth"
             type="button"
-            Icon={FaMessage}
+            Icon={MdOutlineAlternateEmail}
             otherClassName="text-[11px] py-1 px-6"
+            handleClick={handleResendCode}
           >
-            (SMS) رسالة نصيّة
+            {btnTxts('sendEmail')}
           </Button>
-          <h4 className="text-sm font-normal">لم يصلك الرمز؟ أعد إرساله عبر</h4>
         </div>
       )}
     </AuthLayout>

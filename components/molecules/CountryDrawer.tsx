@@ -6,10 +6,11 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '../ui/drawer';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import Image from 'next/image';
-import { Country } from '@/interfaces';
+import { Country, TranslationFunction } from '@/interfaces';
 import CountrySelectorContent from './CountrySelectorContent';
+import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
 
 interface CountryDrawerProps {
   countries: Country[];
@@ -17,6 +18,8 @@ interface CountryDrawerProps {
   setSelectedCountry: (country: Country) => void;
   open: boolean;
   setOpen: (open: boolean) => void;
+  t: TranslationFunction;
+  isArabic: boolean;
 }
 
 const CountryDrawer: React.FC<CountryDrawerProps> = ({
@@ -25,35 +28,42 @@ const CountryDrawer: React.FC<CountryDrawerProps> = ({
   setSelectedCountry,
   open,
   setOpen,
+  t,
+  isArabic,
 }) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <button className="flex items-center justify-between w-full gap-2 cursor-pointer">
-          <div className="flex items-center gap-3">
-            <Image
-              src={`/assets/flags/${selectedCountry.img}.png`}
-              alt={`${selectedCountry.name} - ${selectedCountry.currency}`}
-              width={22}
-              height={16}
-            />
-            <h4 className="text-base font-normal">
-              {selectedCountry.name} - {selectedCountry.currency}
-            </h4>
-          </div>
-          <IoIosArrowBack />
-        </button>
-      </DrawerTrigger>
+      <AnimatedWrapper>
+        <DrawerTrigger asChild>
+          <button className="flex items-center justify-between w-full gap-2 cursor-pointer">
+            <div className="flex items-center gap-3">
+              <Image
+                src={`/assets/flags/${selectedCountry.img}.png`}
+                alt={`${selectedCountry.name} - ${selectedCountry.currency}`}
+                width={22}
+                height={16}
+              />
+              <h4 className="text-base font-normal">
+                {selectedCountry.name} - {selectedCountry.currency}
+              </h4>
+            </div>
+            {isArabic ? <IoIosArrowBack /> : <IoIosArrowForward />}
+          </button>
+        </DrawerTrigger>
+      </AnimatedWrapper>
       <DrawerContent>
-        <DrawerTitle className="sr-only">تغيير الدولة - العملة</DrawerTitle>
+        <DrawerTitle className="sr-only">
+          {t('ChangeCountryCurrencyTitle')}
+        </DrawerTitle>
         <DrawerDescription className="sr-only">
-          اختر الدولة والعملة المناسبة لك من القائمة أدناه.
+          {t('ChangeCountryCurrencyDescription')}
         </DrawerDescription>
         <CountrySelectorContent
           countries={countries}
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
           closeHandler={() => setOpen(false)}
+          t={t}
         />
       </DrawerContent>
     </Drawer>

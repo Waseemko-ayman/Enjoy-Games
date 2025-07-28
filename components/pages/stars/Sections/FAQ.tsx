@@ -13,15 +13,18 @@ import { faqData } from '@/data';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import Container from '@/components/organism/Container';
 import SectionTitle from '@/components/atomic/SectionTitle';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
 
 const FAQ = () => {
   const [activeItem, setActiveItem] = useState<string | null>(null);
+  const t = useTranslations('SectionsTitles');
 
   return (
     <Layer>
       <Container>
         <SectionTitle
-          title="الأسئلة الشائعة"
+          title={t('faq')}
           className="!mb-3"
           titleClassName="!text-2xl"
         />
@@ -40,13 +43,7 @@ const FAQ = () => {
             onValueChange={(value) => setActiveItem(value)}
           >
             {faqData.map((item: any, index: number) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 * index }}
-                viewport={{ once: true }}
-              >
+              <AnimatedWrapper key={item.id} custom={index}>
                 <CardWrapper className="mb-4 px-4 py-2">
                   <AccordionItem value={`item-${index}`}>
                     <AccordionTrigger className="text-black font-normal hover:no-underline transition-colors w-full cursor-pointer">
@@ -69,7 +66,7 @@ const FAQ = () => {
                     </AccordionContent>
                   </AccordionItem>
                 </CardWrapper>
-              </motion.div>
+              </AnimatedWrapper>
             ))}
           </Accordion>
         </motion.div>

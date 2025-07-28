@@ -2,37 +2,46 @@
 import CardWrapper from '@/components/atomic/CardWrapper';
 import Layer from '@/components/atomic/Layer';
 import SectionTitle from '@/components/atomic/SectionTitle';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import EarningsPointsSection from '@/components/molecules/EarningsPointsSection';
 import PointsEarningGuide from '@/components/molecules/PointsEarningGuide';
 import Container from '@/components/organism/Container';
 import { PATHS } from '@/data/paths';
-import React, { useState } from 'react';
+import React from 'react';
 import { MdWavingHand } from 'react-icons/md';
+import { useTranslations } from 'next-intl';
+import { useAuthContext } from '@/context/AuthContext';
 
 const WelcomeSection = () => {
-  const [isLogin] = useState(true);
+  const { token } = useAuthContext();
+  const secTexts = useTranslations('SectionsTitles.Stars');
+  const sharedTexts = useTranslations('Shared');
+  const btnTexts = useTranslations('BtnTexts');
   return (
     <Layer>
       <Container>
         <SectionTitle
-          title="أهلًا بك في إنجوي قيمز"
-          subtitle="اشتري أكثر واكسب الضعف واستبدل نقاطك ببطاقات!"
-          Icon={MdWavingHand}
+          title={secTexts('title')}
+          subtitle={secTexts('desc')}
+          icon={MdWavingHand}
         />
-        {isLogin ? (
+        {token ? (
           <EarningsPointsSection
             variant="points"
             totalAmount={0}
             withdrawableAmount={0}
-            conversionRate="1600 نقطة"
+            conversionRate={`1600 ${sharedTexts('point')}`}
             starPoints={0}
-            lastWithdrawalText="لا توجد عمليات سحب بعد"
+            lastWithdrawalText={sharedTexts('emptyState')}
             secondButtonHref={PATHS.STARS_GIFTS}
+            btnTexts={btnTexts}
           />
         ) : (
-          <CardWrapper className="py-6 px-8 mb-8 max-w-5/6 mx-auto">
-            <PointsEarningGuide isLogin={false} />
-          </CardWrapper>
+          <AnimatedWrapper>
+            <CardWrapper className="py-6 px-5 sm:px-8 mb-8 w-full sm:max-w-5/6 mx-auto">
+              <PointsEarningGuide />
+            </CardWrapper>
+          </AnimatedWrapper>
         )}
       </Container>
     </Layer>

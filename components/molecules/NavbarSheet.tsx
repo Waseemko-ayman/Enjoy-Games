@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   Sheet,
@@ -8,21 +9,29 @@ import {
 } from '@/components/ui/sheet';
 import { PiSquaresFourLight } from 'react-icons/pi';
 import SheetContentComp from './SheetContentComp';
+import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const NavbarSheet = () => {
+  const t = useTranslations('Layout.header.navBar');
+  const ariaTxts = useTranslations('ariaLabels.btns');
+  const { isArabic } = useToggleLocale();
   return (
     <Sheet>
-      <SheetTrigger>
+      <SheetTrigger aria-label={ariaTxts('menuTrigger')}>
         <PiSquaresFourLight className="text-3xl cursor-pointer text-enjoy-primary" />
       </SheetTrigger>
       <SheetContent className="pt-20">
-        <SheetTitle className="sr-only">أقسام البطاقات</SheetTitle>
+        <SheetTitle className="sr-only">{t('CardSections')}</SheetTitle>
         <SheetDescription className="sr-only">
-          هنا قائمة بأقسام البطاقات المتوفرة للتصفح والاختيار.
+          {t('cardSectionsDescription')}
         </SheetDescription>
-        <h4 className="text-white text-2xl font-semibold mb-5">
-          أقسام البطاقات
-        </h4>
+        <AnimatedWrapper direction="x" distance={isArabic ? 70 : -70}>
+          <h4 className="text-white text-2xl font-semibold mb-5">
+            {t('CardSections')}
+          </h4>
+        </AnimatedWrapper>
         {/* Sheet Content */}
         <SheetContentComp />
       </SheetContent>

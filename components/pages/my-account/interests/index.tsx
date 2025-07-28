@@ -6,11 +6,14 @@ import CardWrapper from '@/components/atomic/CardWrapper';
 import Layer from '@/components/atomic/Layer';
 import Container from '@/components/organism/Container';
 import { InterestsData } from '@/data';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 
 const InterestsPage = () => {
   const [selected, setSelected] = useState<{ [key: number]: boolean }>({});
+  const t = useTranslations('SectionsTitles');
+  const btnTexts = useTranslations('BtnTexts');
 
   const handleSelect = (id: number) => {
     setSelected((prev) => ({
@@ -23,10 +26,8 @@ const InterestsPage = () => {
     <Layer otherClassName="!my-10">
       <Container>
         <div className="w-full max-w-4xl mx-auto">
-          <CardWrapper bgColor="bg-white" className="py-5 px-5 sm:px-10">
-            <h2 className="text-base font-semibold mb-7">
-              وش أكثر شي تحب تشتريه؟ 🎯
-            </h2>
+          <CardWrapper className="py-5 px-5 sm:px-10">
+            <h2 className="text-base font-semibold mb-7">{t('Interests')}🎯</h2>
 
             <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-5">
               {InterestsData.map((item) => (
@@ -60,7 +61,9 @@ const InterestsPage = () => {
               ))}
             </div>
           </CardWrapper>
-          <Button otherClassName="py-3 px-12 mt-7">حفظ التغييرات</Button>
+          <Button otherClassName="py-3 px-12 mt-7">
+            {btnTexts('SaveChanges')}
+          </Button>
         </div>
       </Container>
     </Layer>
