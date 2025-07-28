@@ -10,33 +10,31 @@ import Link from 'next/link';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { useTranslations } from 'next-intl';
 
+const decodeTitle = (str: string) => decodeURIComponent(str).replace(/-/g, ' ');
+
 const MobileHeader = () => {
-  const pathname = usePathname(); // e.g., "/en/about"
-  const t = useTranslations('PagesHeaderTitles'); // Translations for page titles
+  const pathname = usePathname();
+  const t = useTranslations('PagesHeaderTitles');
   const ariaTxts = useTranslations('ariaLabels.links');
 
-  // Split the pathname into parts: "/en/about" → ['en', 'about']
   const pathParts = pathname.split('/').filter(Boolean);
-
-  // Remove the first part if it's a locale (e.g., 'en' or 'ar')
   const filteredParts = pathParts.filter(
     (part, index) => !(index === 0 && ['en', 'ar'].includes(part))
   );
 
-  // Get the last segment after removing locale — this is our primary translation key
-  const pageKey = filteredParts[filteredParts.length - 1] || 'home';
+  // Last part of the path - we display it as is (decoded with dashes replaced)
+  const lastPart = filteredParts[filteredParts.length - 1] || 'home';
 
-  // Fallback to the previous segment if needed
-  const fallbackKey =
-    filteredParts.length > 1 ? filteredParts[filteredParts.length - 2] : 'home';
+  // The rest of the path parts (if you want to use them)
+  // const secondLastPart =
+  //   filteredParts.length > 1 ? filteredParts[filteredParts.length - 2] : null;
 
-  // Try translating pageKey first; if it fails, try fallbackKey; otherwise use 'home'
-  const title =
-    t(pageKey) !== pageKey
-      ? t(pageKey)
-      : t(fallbackKey) !== fallbackKey
-      ? t(fallbackKey)
-      : t('home');
+  // We determine whether the last part resembles untranslated text (for example, if it contains numbers or unusual letters).
+  // If it contains numbers or is not an alphabet, we display it as is.
+  // Otherwise, we use the translation.
+  const needsRawDisplay = /[\d\-]/.test(lastPart);
+
+  const title = needsRawDisplay ? decodeTitle(lastPart) : t(lastPart);
 
   return (
     <header className="h-[60px] bg-enjoy-gray-light flex items-center">
