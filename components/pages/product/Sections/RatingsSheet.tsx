@@ -10,7 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { IoIosArrowBack, IoIosArrowForward, IoIosSend } from 'react-icons/io';
 import { useForm } from 'react-hook-form';
@@ -22,16 +22,24 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
 import { useTranslations } from 'next-intl';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import { usePathname } from 'next/navigation';
 
 const RatingsSheet = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
   const [, setFormData] = useState(null);
   const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
+  const [open, setOpen] = useState(false);
   const t = useTranslations('productDetails');
   const errosTxt = useTranslations('Inputs.errorsMsgs');
   const inputTxts = useTranslations('Inputs');
   const btnTxts = useTranslations('BtnTexts');
   const { isArabic } = useToggleLocale();
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   const maxCharsLength = 255;
 
@@ -86,7 +94,7 @@ const RatingsSheet = () => {
       } gap-2 border-b border-gray-200 pb-4 mt-2`}
       dir={isArabic ? 'ltr' : 'rtl'}
     >
-      <Sheet>
+      <Sheet open={open} onOpenChange={setOpen}>
         <AnimatedWrapper direction="x" distance={-40}>
           <SheetTrigger asChild>
             <Button

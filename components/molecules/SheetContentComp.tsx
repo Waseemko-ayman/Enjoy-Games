@@ -4,11 +4,26 @@ import React, { useEffect, useState } from 'react';
 import NavItem from '../atomic/NavItem';
 import { motion } from 'framer-motion';
 import useAPI from '@/hook/useAPI';
-import { Category } from '@/interfaces';
+import { Category, SubCategories } from '@/interfaces';
+import { useRouter } from 'next/navigation';
 
 const SheetContentComp = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const router = useRouter();
   const { get, data: categories } = useAPI(`categories-subcategories`);
+
+  const handleSubCategoryClick = (
+    categorySlug: string,
+    subCategory: SubCategories
+  ) => {
+    const basePath = `/categories/${categorySlug}/${subCategory.slug}`;
+    setTimeout(() => router.push(basePath), 150);
+    // const path =
+    //   subCategory.children_count > 0
+    //     ? `${basePath}/select-account`
+    //     : `${basePath}/bundles`;
+    // router.push(path);
+  };
 
   useEffect(() => {
     get();
@@ -31,11 +46,19 @@ const SheetContentComp = () => {
           >
             <NavItem
               key={index}
-              // icon={item.icon}
-              icon={'/assets/digitalStores.webp'}
-              name={item.name}
+              icon="/assets/digitalStores.webp"
+              name={
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push(`/categories/${item.slug}`);
+                  }}
+                >
+                  {item.name}
+                </span>
+              }
               otherClassName="text-white"
-              showArrow={!!item.sub_categories}
+              showArrow
               onClick={() => setOpenIndex(isOpen ? null : index)}
             />
 
@@ -61,6 +84,9 @@ const SheetContentComp = () => {
                     icon={'/assets/digitalStores.webp'}
                     name={subItem.name}
                     otherClassName="!py-2 !px-0 !text-base !font-medium"
+                    onClick={() =>
+                      handleSubCategoryClick(subItem.slug, subItem)
+                    }
                   />
                 ))}
               </div>

@@ -16,7 +16,7 @@ const GridWrapper = ({
     <div className={`gap-5 ${baseClass} ${otherClassName ?? ''}`}>
       {isScrollable
         ? React.Children.map(children, (child) => (
-            <div className={`max-md:min-w-[250px] shrink-0 ${itemClassName}`}>
+            <div className={`max-md:min-w-[200px] shrink-0 ${itemClassName}`}>
               {child}
             </div>
           ))

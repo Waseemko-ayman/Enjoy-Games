@@ -65,7 +65,7 @@ const NavItem: React.FC<NavItemProps> = ({
         {typeof icon === 'string' ? (
           <Image
             src={icon}
-            alt={name}
+            alt={typeof name === 'string' ? name : 'Nav icon'}
             className={`object-contain rounded-[50%] ${otherClassNameIcon}`}
             width={26}
             height={26}
