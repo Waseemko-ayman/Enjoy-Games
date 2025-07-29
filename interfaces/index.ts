@@ -100,7 +100,7 @@ export interface ButtonProps extends BaseClassNameProps, WithChildren {
 }
 
 export interface NavItemProps extends BaseIconProps, BaseClassNameProps {
-  name: string;
+  name: string | ReactNode;
   linkPath?: string;
   otherClassNameIcon?: string;
   showArrow?: boolean;

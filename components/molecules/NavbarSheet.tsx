@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Sheet,
   SheetTrigger,
@@ -12,13 +12,20 @@ import SheetContentComp from './SheetContentComp';
 import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
 import { useTranslations } from 'next-intl';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import { usePathname } from 'next/navigation';
 
 const NavbarSheet = () => {
+  const [open, setOpen] = useState(false);
   const t = useTranslations('Layout.header.navBar');
   const ariaTxts = useTranslations('ariaLabels.btns');
   const { isArabic } = useToggleLocale();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger aria-label={ariaTxts('menuTrigger')}>
         <PiSquaresFourLight className="text-3xl cursor-pointer text-enjoy-primary" />
       </SheetTrigger>
