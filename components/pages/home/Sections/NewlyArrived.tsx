@@ -4,21 +4,18 @@ import SectionComponent from '@/components/atomic/SectionComponent';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
-import { ProductCardProps, TranslationFunction } from '@/interfaces';
 import { useTranslations } from 'next-intl';
+import { NewlyArrivedProps } from '@/interfaces';
 
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
 
-const NewlyArrived = ({
+const NewlyArrived: React.FC<NewlyArrivedProps> = ({
   t,
-  newlyArrived,
   isLoading,
-}: {
-  t: TranslationFunction;
-  newlyArrived: ProductCardProps[];
-  isLoading: boolean;
+  getSlugs,
+  newlyArrived,
 }) => {
   const btnText = useTranslations('BtnTexts');
 
@@ -30,6 +27,11 @@ const NewlyArrived = ({
         <GridWrapper otherClassName="gap-5" isScrollable>
           {newlyArrived.map((card, index) => {
             const { image, ...cardWithoutImage } = card;
+            const slugs =
+              card.sub_category_id !== undefined
+                ? getSlugs(card.sub_category_id)
+                : null;
+
             return (
               <AnimatedWrapper key={card.id} custom={index}>
                 <ProductCard
@@ -41,6 +43,13 @@ const NewlyArrived = ({
                   btnVariant="primary"
                   btnText={btnText('BuyNow')}
                   showBtn
+                  onClick={() => {
+                    if (slugs) {
+                      const { categorySlug, subCategorySlug } = slugs;
+                      const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
+                      window.location.href = path;
+                    }
+                  }}
                   {...cardWithoutImage}
                 />
               </AnimatedWrapper>

@@ -12,6 +12,7 @@ import HeroBanner from './Sections/HeroBanner';
 import { useTranslations } from 'next-intl';
 import { useCategories } from '@/context/CategoriesContext';
 import { useMainContent } from '@/context/MainContentContext';
+import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
@@ -28,21 +29,33 @@ const HomePage = () => {
         t={t}
         bestSeller={data?.best_seller ?? []}
         isLoading={isLoading}
+        getSlugs={(subCatId) =>
+          getCategoryAndSubCategorySlugs(categories, subCatId)
+        }
       />
       <SuggestedProducts
         t={t}
         suggestedProducts={data?.suggested_products ?? []}
         isLoading={isLoading}
+        getSlugs={(subCatId) =>
+          getCategoryAndSubCategorySlugs(categories, subCatId)
+        }
       />
       <NewlyArrived
         t={t}
         newlyArrived={data?.newly_arrived ?? []}
         isLoading={isLoading}
+        getSlugs={(subCatId) =>
+          getCategoryAndSubCategorySlugs(categories, subCatId)
+        }
       />
       <RedeemPoints
         t={t}
         newlyArrived={data?.newly_arrived ?? []}
         isLoading={isLoading}
+        getSlugs={(subCatId) =>
+          getCategoryAndSubCategorySlugs(categories, subCatId)
+        }
       />
       <EnjoyWinWin t={t} />
       <ServiceAdvantages t={t} />

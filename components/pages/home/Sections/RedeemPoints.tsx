@@ -10,19 +10,16 @@ import useIsMobile from '@/hook/useIsMobile';
 import Link from 'next/link';
 import { PiShoppingCartLight } from 'react-icons/pi';
 import { useTranslations } from 'next-intl';
-import { ProductCardProps, TranslationFunction } from '@/interfaces';
+import { NewlyArrivedProps } from '@/interfaces';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
 
-const RedeemPoints = ({
+const RedeemPoints: React.FC<NewlyArrivedProps> = ({
   t,
   newlyArrived,
   isLoading,
-}: {
-  t: TranslationFunction;
-  newlyArrived: ProductCardProps[];
-  isLoading: boolean;
+  getSlugs,
 }) => {
   const isMobile = useIsMobile();
   const btnText = useTranslations('BtnTexts');
@@ -54,6 +51,10 @@ const RedeemPoints = ({
           >
             {newlyArrived.map((card, index) => {
               const { image, ...cardWithoutImage } = card;
+              const slugs =
+                card.sub_category_id !== undefined
+                  ? getSlugs(card.sub_category_id)
+                  : null;
               return (
                 <AnimatedWrapper key={card.id} custom={index}>
                   <ProductCard
@@ -67,6 +68,13 @@ const RedeemPoints = ({
                     btnVariant="secondary"
                     btnText={btnText('GetItNow')}
                     icon={PiShoppingCartLight}
+                    onClick={() => {
+                      if (slugs) {
+                        const { categorySlug, subCategorySlug } = slugs;
+                        const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
+                        window.location.href = path;
+                      }
+                    }}
                     {...cardWithoutImage}
                   />
                 </AnimatedWrapper>

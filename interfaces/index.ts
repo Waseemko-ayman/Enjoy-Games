@@ -75,6 +75,27 @@ export interface ProductCardProps {
   onClick?: () => void;
 }
 
+export interface HomeSectionsProps {
+  t: TranslationFunction;
+  isLoading: boolean;
+  getSlugs: (subCategoryId: number) => {
+    categorySlug: string;
+    subCategorySlug: string;
+  } | null;
+}
+
+export interface BestSellersProps extends HomeSectionsProps {
+  bestSeller: ProductCardProps[];
+}
+
+export interface SuggestedProductsProps extends HomeSectionsProps {
+  suggestedProducts: ProductCardProps[];
+}
+
+export interface NewlyArrivedProps extends HomeSectionsProps {
+  newlyArrived: ProductCardProps[];
+}
+
 interface BaseIconProps {
   icon?: React.ElementType | string | any;
 }

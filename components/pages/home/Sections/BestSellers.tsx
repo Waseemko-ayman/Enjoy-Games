@@ -3,20 +3,17 @@ import React from 'react';
 import SectionComponent from '@/components/atomic/SectionComponent';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import GridWrapper from '@/components/molecules/GridWrapper';
-import { ProductCardProps, TranslationFunction } from '@/interfaces';
+import { BestSellersProps } from '@/interfaces';
 import Loading from '@/components/molecules/loading';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
 
-const BestSellers = ({
+const BestSellers: React.FC<BestSellersProps> = ({
   t,
   bestSeller,
   isLoading,
-}: {
-  t: TranslationFunction;
-  bestSeller: ProductCardProps[];
-  isLoading: boolean;
+  getSlugs,
 }) => {
   return (
     <SectionComponent title={t('sectionsTitles.bestSellers')}>
@@ -24,18 +21,31 @@ const BestSellers = ({
         <Loading />
       ) : (
         <GridWrapper isScrollable>
-          {bestSeller?.map((card, index) => (
-            <AnimatedWrapper key={card.id} custom={index}>
-              <ProductCard
-                // imgSrc={card.image}
-                image={'/assets/best-sellers/itunes.webp'}
-                imgAlt={card.title}
-                imgTitle={card.title}
-                title={card.title}
-                tall
-              />
-            </AnimatedWrapper>
-          ))}
+          {bestSeller.map((card, index) => {
+            const slugs =
+              card.sub_category_id !== undefined
+                ? getSlugs(card.sub_category_id)
+                : null;
+            return (
+              <AnimatedWrapper key={card.id} custom={index}>
+                <ProductCard
+                  // imgSrc={card.image}
+                  image={'/assets/best-sellers/itunes.webp'}
+                  imgAlt={card.title}
+                  imgTitle={card.title}
+                  title={card.title}
+                  tall
+                  onClick={() => {
+                    if (slugs) {
+                      const { categorySlug, subCategorySlug } = slugs;
+                      const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
+                      window.location.href = path;
+                    }
+                  }}
+                />
+              </AnimatedWrapper>
+            );
+          })}
         </GridWrapper>
       )}
     </SectionComponent>
