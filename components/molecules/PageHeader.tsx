@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -139,21 +140,48 @@ function getLabel(
   return translated;
 }
 
-type PathNode = { link: string; name: string } | Record<string, PathNode>;
+// 1. تحديث تعريف الأنواع لاستيعاب القيم النصية
+interface PathLeaf {
+  name: string;
+  link: string;
+}
 
-function extractPaths(obj: PathNode, map: Record<string, string> = {}) {
+type PathValue = PathLeaf | PathTree | string;
+type PathTree = {
+  [key: string]: PathValue;
+};
+
+// 2. تعديل دالة extractPaths
+function extractPaths(
+  obj: PathTree,
+  map: Record<string, string> = {}
+): Record<string, string> {
   for (const key in obj) {
-    const value = obj[key];
-    if (value && typeof value === 'object') {
-      if ('link' in value && 'name' in value) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+
+      if (typeof value === 'string') {
+        // معالجة القيم النصية مباشرة
+        const pathKey = value.split('/').filter(Boolean).pop() || '';
+        map[pathKey] = key; // أو أي قيمة أخرى مناسبة
+      } else if (isPathLeaf(value)) {
+        // معالجة كائنات PathLeaf
         const pathKey = value.link.split('/').filter(Boolean).pop() || '';
         map[pathKey] = value.name;
       } else {
+        // معالجة الكائنات المتداخلة (PathTree)
         extractPaths(value, map);
       }
     }
   }
   return map;
+}
+
+// 3. تعديل Type Guard
+function isPathLeaf(obj: any): obj is PathLeaf {
+  return (
+    typeof obj === 'object' && obj !== null && 'link' in obj && 'name' in obj
+  );
 }
 
 function formatPart(str: string) {

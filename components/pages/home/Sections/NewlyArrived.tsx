@@ -14,34 +14,40 @@ const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
 const NewlyArrived = ({
   t,
   newlyArrived,
+  isLoading,
 }: {
   t: TranslationFunction;
   newlyArrived: ProductCardProps[];
+  isLoading: boolean;
 }) => {
   const btnText = useTranslations('BtnTexts');
 
   return (
     <SectionComponent title={t('sectionsTitles.newlyArrived')}>
-      <GridWrapper otherClassName="gap-5" isScrollable>
-        {newlyArrived.map((card, index) => {
-          const { image, ...cardWithoutImage } = card;
-          return (
-            <AnimatedWrapper key={card.id} custom={index}>
-              <ProductCard
-                // imgSrc={card.image}
-                image={image || '/assets/play-station.webp'}
-                imgAlt={card.title}
-                imgTitle={card.title}
-                showDesc
-                btnVariant="primary"
-                btnText={btnText('BuyNow')}
-                showBtn
-                {...cardWithoutImage}
-              />
-            </AnimatedWrapper>
-          );
-        })}
-      </GridWrapper>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <GridWrapper otherClassName="gap-5" isScrollable>
+          {newlyArrived.map((card, index) => {
+            const { image, ...cardWithoutImage } = card;
+            return (
+              <AnimatedWrapper key={card.id} custom={index}>
+                <ProductCard
+                  // imgSrc={card.image}
+                  image={image || '/assets/play-station.webp'}
+                  imgAlt={card.title}
+                  imgTitle={card.title}
+                  showDesc
+                  btnVariant="primary"
+                  btnText={btnText('BuyNow')}
+                  showBtn
+                  {...cardWithoutImage}
+                />
+              </AnimatedWrapper>
+            );
+          })}
+        </GridWrapper>
+      )}
     </SectionComponent>
   );
 };

@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import useAPI from '@/hook/useAPI';
 import { Category } from '@/interfaces';
+import { useLocale } from 'next-intl';
 
 interface CategoriesContextType {
   categories: Category[];
@@ -20,31 +21,29 @@ const CategoriesContext = createContext<CategoriesContextType>({
 export const CategoriesProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { get, data: categories } = useAPI<{
+  const {
+    get,
+    data: categories,
+    isLoading,
+  } = useAPI<{
     success: boolean;
     data: Category[];
     message: string;
   }>('categories-subcategories');
-
-  const [loading, setLoading] = useState(true);
+  const locale = useLocale();
 
   useEffect(() => {
     get();
-  }, []);
-
-  useEffect(() => {
-    if (categories?.data) {
-      setLoading(false);
-    }
-  }, [categories]);
+  }, [locale]);
 
   const refresh = () => {
-    setLoading(true);
     get();
   };
 
   return (
-    <CategoriesContext.Provider value={{ categories, loading, refresh }}>
+    <CategoriesContext.Provider
+      value={{ categories, loading: isLoading, refresh }}
+    >
       {children}
     </CategoriesContext.Provider>
   );
