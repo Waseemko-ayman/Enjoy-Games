@@ -5,7 +5,7 @@
         "title": "Buy More, Earn Double, and Redeem Your Points for Cards!",
         "new": "New",
         "popup": {
-          "title": "Stars Guide by Enjoy Games",
+          "title": "Loyalty Enjoy by Enjoy Games",
           "desc": "Enjoy Games is a loyalty system that grants you points with every purchase, which you can redeem for digital cards or convert into wallet credit."
         }
       },
@@ -57,10 +57,10 @@
     "my-account": "My Account",
     "my-purchases": "My Orders",
     "tickets": "Support Tickets",
-    "stars": "Stars Guide",
+    "stars": "Loyalty Enjoy",
     "interests": "Interests",
     "wallet": "My Wallet",
-    "starsPoints": "Stars Guide Points",
+    "starsPoints": "Loyalty Enjoy Points",
     "store": "Store",
     "create": "Add New Ticket",
     "TalkToCustomerService": "Talk to customer service",
@@ -70,7 +70,7 @@
   },
   "SectionsTitles": {
     "Stars": {
-      "title": "Welcome to Stars Guide",
+      "title": "Welcome to Loyalty Enjoy",
       "desc": "Buy More, Earn Double, and Redeem Your Points for Cards!"
     },
     "Gifts": {
@@ -87,7 +87,7 @@
   "HomePage": {
     "walletSections": {
       "wallet": "My Wallet",
-      "stars": "Stars Guide",
+      "stars": "Loyalty Enjoy",
       "maxup": "Maxup Guide",
       "point": "Point"
     },
@@ -174,7 +174,7 @@
         "emptyState": "No withdrawals yet"
       },
       "actions": {
-        "starPoints": "Stars Guide Points",
+        "starPoints": "Loyalty Enjoy Points",
         "convertPoints": "Convert Points",
         "redeemPoints": "Redeem Your Points"
       }
@@ -195,8 +195,8 @@
       }
     },
     "ReferralProgram": {
-      "title": "Learn About Stars Guide System",
-      "description": "Learn how to earn and level up with Stars Guide",
+      "title": "Learn About Loyalty Enjoy System",
+      "description": "Learn how to earn and level up with Loyalty Enjoy",
       "EnjoyGames": {
         "mainTitle": "The more you buy, the more you earn!",
         "howItWorksTitle": "How Enjoy Games Works?",
@@ -281,7 +281,7 @@
     "rewardsPrograms": {
       "bonusesPrograms": "Rewards Programs",
       "maxupProgram": "Maxup Program",
-      "starsPoints": "Stars Guide Points",
+      "starsPoints": "Loyalty Enjoy Points",
       "profiledProfits": "Your Withdrawable Earnings",
       "convertiblePoints": "Your Convertible Points"
     }
@@ -294,7 +294,7 @@
     "discountCoupon": "Discount Coupon:",
     "cartSummary": "Shopping Cart Summary",
     "rewards": {
-      "pointsEarned": "Complete purchase and earn {points} Stars Guide points",
+      "pointsEarned": "Complete purchase and earn {points} Loyalty Enjoy points",
       "donation": {
         "title": "A portion of our profits from this order will be donated",
         "description": "Out of social responsibility and shared reward, part of our profits is dedicated to support Hajer Charity Association projects"
