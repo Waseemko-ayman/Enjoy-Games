@@ -10,10 +10,11 @@ import { Category, NavbarProps } from '@/interfaces';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useCategories } from '@/context/CategoriesContext';
+import Loading from '@/components/molecules/loading';
 
 const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
   const t = useTranslations('Layout.header.navBar');
-  const { categories } = useCategories();
+  const { categories, loading } = useCategories();
 
   if (layout === 'store') {
     return (
@@ -24,17 +25,21 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
               isMobile ? 'justify-center flex-wrap gap-4' : 'gap-7'
             }`}
           >
-            {categories.map((item: Category) => (
-              <NavItem
-                key={item.id}
-                // icon={item.icon}
-                icon={'/assets/digitalStores.webp'}
-                name={item.name}
-                linkPath={`/categories/${item.slug}`}
-                layout={layout}
-                isMobile={isMobile}
-              />
-            ))}
+            {loading ? (
+              <Loading width="w-7" height="h-7" />
+            ) : (
+              categories.map((item: Category) => (
+                <NavItem
+                  key={item.id}
+                  // icon={item.icon}
+                  icon={'/assets/digitalStores.webp'}
+                  name={item.name}
+                  linkPath={`/categories/${item.slug}`}
+                  layout={layout}
+                  isMobile={isMobile}
+                />
+              ))
+            )}
           </ul>
         </Container>
       </nav>

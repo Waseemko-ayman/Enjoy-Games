@@ -12,26 +12,32 @@ const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
 const BestSellers = ({
   t,
   bestSeller,
+  isLoading,
 }: {
   t: TranslationFunction;
   bestSeller: ProductCardProps[];
+  isLoading: boolean;
 }) => {
   return (
     <SectionComponent title={t('sectionsTitles.bestSellers')}>
-      <GridWrapper isScrollable>
-        {bestSeller?.map((card, index) => (
-          <AnimatedWrapper key={card.id} custom={index}>
-            <ProductCard
-              // imgSrc={card.image}
-              image={'/assets/best-sellers/itunes.webp'}
-              imgAlt={card.title}
-              imgTitle={card.title}
-              title={card.title}
-              tall
-            />
-          </AnimatedWrapper>
-        ))}
-      </GridWrapper>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <GridWrapper isScrollable>
+          {bestSeller?.map((card, index) => (
+            <AnimatedWrapper key={card.id} custom={index}>
+              <ProductCard
+                // imgSrc={card.image}
+                image={'/assets/best-sellers/itunes.webp'}
+                imgAlt={card.title}
+                imgTitle={card.title}
+                title={card.title}
+                tall
+              />
+            </AnimatedWrapper>
+          ))}
+        </GridWrapper>
+      )}
     </SectionComponent>
   );
 };

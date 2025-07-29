@@ -1,27 +1,3 @@
-// export function useCategoryTitle(slug: string) {
-//   // This data will later come from the API instead of this map
-//   const mockAPITitles: Record<string, string> = {
-//     playstation: 'بلايستيشن',
-//     xbox: 'اكس بوكس',
-//     pubg: 'شدات ببجي',
-//     fortnite: 'بطاقات فورتنايت',
-//   };
-
-//   /*
-//     // Replace mockAPITitles with fetch or RTK Query.
-//     const { data } = useQuery(['categoryTitle', slug], () => fetchTitleFromAPI(slug));
-//     return data?.title || formatSlug(slug);
-//   */
-
-//   return mockAPITitles[slug] || formatSlug(slug);
-// }
-
-// function formatSlug(slug: string) {
-//   return decodeURIComponent(slug)
-//     .replace(/-/g, ' ')
-//     .replace(/\b\w/g, (c) => c.toUpperCase());
-// }
-
 import { useMemo } from 'react';
 
 const mockAPITitles: Record<string, string> = {
@@ -46,12 +22,14 @@ function formatSlug(slug: string) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-/*
+/* 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '@/utils/axiosInstance';
+import { useLocale } from 'next-intl';
 
 export function useCategoryTitle(slug?: string): string {
   const [title, setTitle] = useState<string>('');
+  const locale = useLocale();
 
   useEffect(() => {
     if (!slug) {
@@ -61,16 +39,23 @@ export function useCategoryTitle(slug?: string): string {
 
     const fetchTitle = async () => {
       try {
-        const response = await axios.get(`/api/categories-subcategories/${slug}`);
-        setTitle(response.data.title || formatSlug(slug));
+        const response = await axiosInstance.get(
+          `/categories-subcategories/${slug}`,
+          {
+            headers: {
+              'Accept-Language': locale, // تمرير اللغة الجديدة مباشرة
+            },
+          }
+        );
+        setTitle(response.data?.name || formatSlug(slug));
       } catch (error) {
-        console.error('Failed to fetch category title:', error);
-        setTitle(formatSlug(slug)); // fallback
+        console.error('فشل في جلب عنوان التصنيف:', error);
+        setTitle(formatSlug(slug));
       }
     };
 
     fetchTitle();
-  }, [slug]);
+  }, [slug, locale]);
 
   return title;
 }
@@ -80,4 +65,5 @@ function formatSlug(slug: string) {
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
+
 */

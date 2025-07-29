@@ -18,9 +18,11 @@ const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
 const RedeemPoints = ({
   t,
   newlyArrived,
+  isLoading,
 }: {
   t: TranslationFunction;
   newlyArrived: ProductCardProps[];
+  isLoading: boolean;
 }) => {
   const isMobile = useIsMobile();
   const btnText = useTranslations('BtnTexts');
@@ -43,31 +45,35 @@ const RedeemPoints = ({
             </Link>
           </AnimatedWrapper>
         </div>
-        <GridWrapper
-          otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"
-          isScrollable
-        >
-          {newlyArrived.map((card, index) => {
-            const { image, ...cardWithoutImage } = card;
-            return (
-              <AnimatedWrapper key={card.id} custom={index}>
-                <ProductCard
-                  // imgSrc={card.image}
-                  image={image || '/assets/play-station.webp'}
-                  imgAlt={card.title}
-                  imgTitle={card.title}
-                  showDesc
-                  variant="column"
-                  showBtn
-                  btnVariant="secondary"
-                  btnText={btnText('GetItNow')}
-                  icon={PiShoppingCartLight}
-                  {...cardWithoutImage}
-                />
-              </AnimatedWrapper>
-            );
-          })}
-        </GridWrapper>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <GridWrapper
+            otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"
+            isScrollable
+          >
+            {newlyArrived.map((card, index) => {
+              const { image, ...cardWithoutImage } = card;
+              return (
+                <AnimatedWrapper key={card.id} custom={index}>
+                  <ProductCard
+                    // imgSrc={card.image}
+                    image={image || '/assets/play-station.webp'}
+                    imgAlt={card.title}
+                    imgTitle={card.title}
+                    showDesc
+                    variant="column"
+                    showBtn
+                    btnVariant="secondary"
+                    btnText={btnText('GetItNow')}
+                    icon={PiShoppingCartLight}
+                    {...cardWithoutImage}
+                  />
+                </AnimatedWrapper>
+              );
+            })}
+          </GridWrapper>
+        )}
       </div>
     </ResponsiveWrapper>
   );

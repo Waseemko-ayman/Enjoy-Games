@@ -46,8 +46,11 @@ interface MobileMainContent {
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
-  const { categories } = useCategories();
-  const { get, data } = useAPI<MobileMainContent>('main-content', {});
+  const { categories, loading } = useCategories();
+  const { get, data, isLoading } = useAPI<MobileMainContent>(
+    'main-content',
+    {}
+  );
 
   useEffect(() => {
     get();
@@ -57,15 +60,28 @@ const HomePage = () => {
     <>
       {/* <HeroBanner sliders={data?.sliders ?? []} /> */}
       <HeroBanner />
-      <CategoriesTypes categories={categories} />
+      <CategoriesTypes categories={categories} loading={loading} />
       <WalletSection t={t} />
-      <BestSellers t={t} bestSeller={data?.best_seller ?? []} />
+      <BestSellers
+        t={t}
+        bestSeller={data?.best_seller ?? []}
+        isLoading={isLoading}
+      />
       <SuggestedProducts
         t={t}
         suggestedProducts={data?.suggested_products ?? []}
+        isLoading={isLoading}
       />
-      <NewlyArrived t={t} newlyArrived={data?.newly_arrived ?? []} />
-      <RedeemPoints t={t} newlyArrived={data?.newly_arrived ?? []} />
+      <NewlyArrived
+        t={t}
+        newlyArrived={data?.newly_arrived ?? []}
+        isLoading={isLoading}
+      />
+      <RedeemPoints
+        t={t}
+        newlyArrived={data?.newly_arrived ?? []}
+        isLoading={isLoading}
+      />
       <EnjoyWinWin t={t} />
       <ServiceAdvantages t={t} />
     </>

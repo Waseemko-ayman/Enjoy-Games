@@ -12,25 +12,31 @@ const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
 const SuggestedProducts = ({
   t,
   suggestedProducts,
+  isLoading,
 }: {
   t: TranslationFunction;
   suggestedProducts: ProductCardProps[];
+  isLoading: boolean;
 }) => {
   return (
     <SectionComponent title={t('sectionsTitles.suggestedProducts')}>
-      <GridWrapper isScrollable>
-        {suggestedProducts.map((card, index) => (
-          <AnimatedWrapper key={card.id} custom={index}>
-            <ProductCard
-              // imgSrc={card.image}
-              image={'/assets/play-station.webp'}
-              imgAlt={card.title}
-              imgTitle={card.title}
-              title={card.title}
-            />
-          </AnimatedWrapper>
-        ))}
-      </GridWrapper>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <GridWrapper isScrollable>
+          {suggestedProducts.map((card, index) => (
+            <AnimatedWrapper key={card.id} custom={index}>
+              <ProductCard
+                // imgSrc={card.image}
+                image={'/assets/play-station.webp'}
+                imgAlt={card.title}
+                imgTitle={card.title}
+                title={card.title}
+              />
+            </AnimatedWrapper>
+          ))}
+        </GridWrapper>
+      )}
     </SectionComponent>
   );
 };
