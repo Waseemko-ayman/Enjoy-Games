@@ -14,7 +14,7 @@ const FloatingActions: React.FC<FloatingActionsProps> = ({ phone }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrollVisible(window.scrollY > 300);
+      setIsScrollVisible(window.scrollY > 600);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -22,10 +22,6 @@ const FloatingActions: React.FC<FloatingActionsProps> = ({ phone }) => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const openWhatsApp = () => {
-    window.open(`https://wa.me/${phone}`, '_blank');
   };
 
   const { isArabic } = useToggleLocale();
@@ -38,7 +34,8 @@ const FloatingActions: React.FC<FloatingActionsProps> = ({ phone }) => {
     >
       <Button
         variant="circle"
-        handleClick={openWhatsApp}
+        href={`https://wa.me/${phone}`}
+        target="_blank"
         bgColor="bg-green-500"
         hoverBgColor="bg-green-600"
         otherClassName="text-white p-3 shadow-lg hover:scale-105"

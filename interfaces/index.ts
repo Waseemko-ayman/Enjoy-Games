@@ -97,6 +97,7 @@ export interface ButtonProps extends BaseClassNameProps, WithChildren {
   disabled?: boolean;
   bgColor?: string;
   hoverBgColor?: string;
+  target?: string;
 }
 
 export interface NavItemProps extends BaseIconProps, BaseClassNameProps {
