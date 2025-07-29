@@ -56,6 +56,7 @@ export interface ProductCardProps {
   image: string;
   imgAlt?: string;
   imgTitle?: string;
+  name?: string;
   price_before?: number;
   price?: number;
   discount?: null;

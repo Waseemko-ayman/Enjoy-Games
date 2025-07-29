@@ -12,6 +12,7 @@ import useIsMobile from '@/hook/useIsMobile';
 import { FloatingChatWidget } from '../FloatingChatWidget';
 import FloatingActions from '../../atomic/FloatingActions';
 import { CategoriesProvider } from '@/context/CategoriesContext';
+import { MainContentProvider } from '@/context/MainContentContext';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -24,26 +25,28 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <CategoriesProvider>
-      {!isCartPage && <TopBanner />}
-      {isCartPage ? (
-        <></>
-      ) : isMobile ? (
-        <>
-          <MobileHeader />
-          <SearchHeader />
-          <MobileNavbar />
-          {isStorePage && <Navbar layout="store" isMobile />}
-        </>
-      ) : (
-        <div className="shadow-header">
-          <Header />
-          <Navbar layout={isStorePage ? 'store' : 'default'} />
-        </div>
-      )}
-      {children}
-      {!isCartPage && <Footer />}
-      <FloatingChatWidget />
-      <FloatingActions phone="+972592164680" />
+      <MainContentProvider>
+        {!isCartPage && <TopBanner />}
+        {isCartPage ? (
+          <></>
+        ) : isMobile ? (
+          <>
+            <MobileHeader />
+            <SearchHeader />
+            <MobileNavbar />
+            {isStorePage && <Navbar layout="store" isMobile />}
+          </>
+        ) : (
+          <div className="shadow-header">
+            <Header />
+            <Navbar layout={isStorePage ? 'store' : 'default'} />
+          </div>
+        )}
+        {children}
+        {!isCartPage && <Footer />}
+        <FloatingChatWidget />
+        <FloatingActions phone="+972592164680" />
+      </MainContentProvider>
     </CategoriesProvider>
   );
 };
