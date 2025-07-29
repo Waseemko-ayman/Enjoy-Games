@@ -523,6 +523,9 @@
       "selectPurchaseType": "تصفية مشترياتك حسب النوع"
     }
   },
+  "Loading": {
+    "loadingMessage": "جاري التحميل..."
+  },
   "Languages": {
     "english": "إنجليزي",
     "arabic": "عربي"

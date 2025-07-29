@@ -75,13 +75,16 @@ export interface ProductCardProps {
   onClick?: () => void;
 }
 
-export interface HomeSectionsProps {
-  t: TranslationFunction;
-  isLoading: boolean;
+export interface getSlugsProps {
   getSlugs: (subCategoryId: number) => {
     categorySlug: string;
     subCategorySlug: string;
   } | null;
+}
+
+export interface HomeSectionsProps extends getSlugsProps {
+  t: TranslationFunction;
+  isLoading: boolean;
 }
 
 export interface BestSellersProps extends HomeSectionsProps {

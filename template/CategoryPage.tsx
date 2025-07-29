@@ -5,12 +5,14 @@ import PageHeader from '@/components/molecules/PageHeader';
 import { Category, CategoryPageProps, SubCategories } from '@/interfaces';
 import CategoryCardsGrid from '@/components/organism/CategoryCardsGrid';
 import { useParams, useRouter } from 'next/navigation';
-import Loading from '@/components/molecules/loading';
 import useAPI from '@/hook/useAPI';
+import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
+import { useTranslations } from 'next-intl';
 
 const CategoryPage: React.FC<CategoryPageProps> = ({ cards }) => {
   const params = useParams();
   const router = useRouter();
+  const t = useTranslations('Loading');
   const { get, data, isLoading } = useAPI(`category/${params.category}`);
 
   const enhancedCards = useMemo(() => {
@@ -35,12 +37,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ cards }) => {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-64">
-        <Loading />
-        <p className="mt-4">جاري التحميل...</p>
-      </div>
-    );
+    return <LoadingPlaceholder message={t('loadingMessage')} />;
   }
 
   return (

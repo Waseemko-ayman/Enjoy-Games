@@ -12,6 +12,7 @@ import { PiShoppingCartLight } from 'react-icons/pi';
 import { useTranslations } from 'next-intl';
 import Loading from '@/components/molecules/loading';
 import { useParams, useRouter } from 'next/navigation';
+import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -20,6 +21,7 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
   const btnTxts = useTranslations('BtnTexts');
   const params = useParams();
   const router = useRouter();
+  const t = useTranslations('Loading');
 
   const { get, data, isLoading } = useAPI(`sub-category/${itemId}`);
 
@@ -41,12 +43,7 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-64">
-        <Loading />
-        <p className="mt-4">جاري التحميل...</p>
-      </div>
-    );
+    return <LoadingPlaceholder message={t('loadingMessage')} />;
   }
 
   return (

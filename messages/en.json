@@ -523,6 +523,9 @@
       "selectPurchaseType": "Filter your purchases by type"
     }
   },
+  "Loading": {
+    "loadingMessage": "Loading..."
+  },
   "Languages": {
     "english": "English",
     "arabic": "Arabic"

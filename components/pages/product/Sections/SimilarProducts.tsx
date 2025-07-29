@@ -1,14 +1,17 @@
 import ProductCard from '@/components/atomic/ProductCard';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import GridWrapper from '@/components/molecules/GridWrapper';
-import { shiddats } from '@/data';
+import Loading from '@/components/molecules/loading';
+import { useMainContent } from '@/context/MainContentContext';
+import { getSlugsProps } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { PiShoppingCartLight } from 'react-icons/pi';
 
-const SimilarProducts = () => {
+const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const t = useTranslations('productDetails');
   const btnTxts = useTranslations('BtnTexts');
+  const { data, loading: isLoading } = useMainContent();
   return (
     <div className="mt-10">
       <AnimatedWrapper>
@@ -16,29 +19,47 @@ const SimilarProducts = () => {
           {t('relatedProducts')}
         </h3>
       </AnimatedWrapper>
-      <GridWrapper otherClassName="gap-5" isScrollable>
-        {shiddats.map((card, index) => {
-          const { image, ...cardWithoutImage } = card;
-          return (
-            <AnimatedWrapper key={card.id} custom={index}>
-              <ProductCard
-                key={card.id}
-                imgAlt={card.name}
-                imgTitle={card.name}
-                image={image || '/assets/play-station.webp'}
-                title={card.name}
-                showDesc
-                showBtn={true}
-                btnVariant="primary"
-                btnText={btnTxts('addToCart')}
-                icon={PiShoppingCartLight}
-                // cardLinkPath={`/categories/${params.category}/${params.itemId}/bundles/${card.id}`}
-                {...cardWithoutImage}
-              />
-            </AnimatedWrapper>
-          );
-        })}
-      </GridWrapper>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <GridWrapper
+          otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"
+          isScrollable
+        >
+          {Array.isArray(data?.newly_arrived) &&
+            data.newly_arrived.map((card, index) => {
+              const { image, ...cardWithoutImage } = card;
+              const slugs =
+                card.sub_category_id !== undefined
+                  ? getSlugs(card.sub_category_id)
+                  : null;
+              return (
+                <AnimatedWrapper key={card.id} custom={index}>
+                  <ProductCard
+                    // imgSrc={card.image}
+                    image={image || '/assets/play-station.webp'}
+                    imgAlt={card.title}
+                    imgTitle={card.title}
+                    showDesc
+                    variant="column"
+                    showBtn
+                    btnVariant="secondary"
+                    btnText={btnTxts('GetItNow')}
+                    icon={PiShoppingCartLight}
+                    onClick={() => {
+                      if (slugs) {
+                        const { categorySlug, subCategorySlug } = slugs;
+                        const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
+                        window.location.href = path;
+                      }
+                    }}
+                    {...cardWithoutImage}
+                  />
+                </AnimatedWrapper>
+              );
+            })}
+        </GridWrapper>
+      )}
     </div>
   );
 };
