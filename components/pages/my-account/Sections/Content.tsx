@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React, { useEffect, useState } from 'react';
 import Form from './Form';
@@ -13,7 +14,7 @@ import InvitationLink from './InvitationLink';
 import DeleteAccount from './DeleteAccount';
 import ProfilePicture from './ProfilePicture';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { FormValues } from '@/interfaces';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
@@ -45,11 +46,17 @@ const Content = () => {
       .email(errorsTxts('emailInvalid') || 'البريد الإلكتروني غير صالح')
       .matches(emailRegex, errorsTxts('emailInvalid') || 'الإيميل غير صالح')
       .required(errorsTxts('emailRequired') || 'البريد الإلكتروني مطلوب'),
-    phone: Yup.string().notRequired(),
-    birthDate: Yup.string().notRequired(),
-    gender: Yup.string().oneOf(['ذكر', 'أنثى']).notRequired(),
-    options: Yup.array().of(Yup.boolean()).notRequired(),
-    avatar: Yup.mixed().notRequired(),
+    phone: Yup.string().nullable().optional(),
+    birthDate: Yup.string().nullable().optional(),
+    gender: Yup.string().oneOf(['ذكر', 'أنثى']).nullable().optional(),
+    options: Yup.array().of(Yup.boolean()).optional(),
+    avatar: Yup.mixed()
+      .test('is-file-or-string', 'الصورة غير صالحة', (value) => {
+        if (!value) return true;
+        return typeof value === 'string' || value instanceof FileList;
+      })
+      .nullable()
+      .optional(),
     // phone: Yup.string()
     //   // .matches(phoneRegex, errorsTxts('phoneInvalid') || 'رقم الجوال غير صالح')
     //   .required(errorsTxts('phoneRequired') || 'رقم الجوال مطلوب'),
@@ -69,7 +76,7 @@ const Content = () => {
   });
 
   const methods = useForm<FormValues>({
-    resolver: yupResolver(formSchema),
+    resolver: yupResolver(formSchema) as any,
   });
 
   const {
@@ -80,21 +87,33 @@ const Content = () => {
     formState: { errors },
   } = methods;
 
-  const onSubmit = async (data: FormValues) => {
+  // const onSubmit = async (data: FormValues) => {
+  //   setIsSubmittingLocal(true);
+  //   setTimeout(() => {
+  //     console.log(data);
+  //     reset({
+  //       name: data.name,
+  //       email: data.email,
+  //       phone: data.phone,
+  //       birthDate: data.birthDate,
+  //       gender: data.gender,
+  //       options: data.options || [false, false, false, false],
+  //       avatar: data.avatar?.[0]?.name || '',
+  //     });
+  //     setIsSubmittingLocal(false);
+  //   }, 2000);
+  // };
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setIsSubmittingLocal(true);
-    setTimeout(() => {
-      console.log(data);
+    try {
       reset({
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        birthDate: data.birthDate,
-        gender: data.gender,
-        options: data.options || [false, false, false, false],
-        avatar: data.avatar?.[0]?.name || '',
+        ...data,
+        avatar: data.avatar instanceof FileList ? data.avatar : null,
       });
+    } finally {
       setIsSubmittingLocal(false);
-    }, 2000);
+    }
   };
 
   useEffect(() => {
@@ -107,6 +126,12 @@ const Content = () => {
         // gender: (user as any).gender || '',
         // options: (user as any).options || [false, false, false, false],
         // avatar: (user as any).avatar || '',
+
+        // phone: user.phone || null,
+        // birthDate: user.birthDate || null,
+        // gender: user.gender || null,
+        // options: user.options || [false, false, false, false],
+        // avatar: user.avatar || null,
       });
     }
   }, [user, reset]);

@@ -27,8 +27,8 @@ const EarnMore = () => {
                 ? 'border-b border-gray-300'
                 : ''
             }
-            footerType={step.footerType}
-            order={step.order}
+            // footerType={step.footerType}
+            // order={step.order}
           />
         );
       })}

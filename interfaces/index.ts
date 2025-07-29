@@ -56,6 +56,7 @@ export interface ProductCardProps {
   image: string;
   imgAlt?: string;
   imgTitle?: string;
+  name?: string;
   price_before?: number;
   price?: number;
   discount?: null;
@@ -409,11 +410,11 @@ export interface myAccountStatsProps {
 export interface FormValues {
   name: string;
   email: string;
-  phone: string;
-  birthDate: string;
-  gender: 'ذكر' | 'أنثى';
+  phone?: string;
+  birthDate?: string;
+  gender?: 'ذكر' | 'أنثى' | null;
   options: boolean[];
-  avatar: FileList;
+  avatar?: FileList | string | null;
 }
 
 export interface paramsProps {
