@@ -20,7 +20,7 @@ const Profits = () => {
         <SectionTitle
           title={secTxts('title')}
           subtitle={secTxts('desc')}
-          Icon={MdWavingHand}
+          icon={MdWavingHand}
           className="!mb-5"
         />
         <div className="flex items-center justify-center gap-4 mb-10">
