@@ -36,7 +36,6 @@ const FloatingActions: React.FC<FloatingActionsProps> = ({ phone }) => {
         isArabic ? 'left-6' : 'right-6'
       } flex flex-col items-center space-y-3`}
     >
-      {/* زر الواتس اب ظاهر دائما */}
       <Button
         variant="circle"
         handleClick={openWhatsApp}
@@ -48,7 +47,6 @@ const FloatingActions: React.FC<FloatingActionsProps> = ({ phone }) => {
         <FaWhatsapp size={22} />
       </Button>
 
-      {/* زر الرجوع للأعلى يظهر عند التمرير فقط */}
       {isScrollVisible && (
         <Button
           variant="circle"
