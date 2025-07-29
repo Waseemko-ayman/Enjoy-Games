@@ -33,7 +33,7 @@ const RewardProgramItem = ({ program, isSelected }: RewardProgramItemProps) => {
                 height={14}
               />
             ) : (
-              <span>{sharedTxt(program.currency)}</span>
+              <span>{program.currency ? sharedTxt(program.currency) : ''}</span>
             )}
           </div>
         </p>
