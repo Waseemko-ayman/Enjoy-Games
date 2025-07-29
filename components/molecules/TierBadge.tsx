@@ -10,7 +10,7 @@ interface ExtendedTierBadgeProps extends TierBadgeProps {
 
 const TierBadge: React.FC<ExtendedTierBadgeProps> = ({
   name,
-  Icon,
+  icon,
   isActive,
   progress = 0,
   requiredProgress = 0,
@@ -34,6 +34,11 @@ const TierBadge: React.FC<ExtendedTierBadgeProps> = ({
     shadow-[0_4px_12px_var(--enjoy-gray-200)]
   `;
 
+  const showIcon = (icon: React.ElementType) => {
+    const Icon = icon;
+    return <Icon className="w-9 h-9 mb-1" />;
+  };
+
   return (
     <div className="text-center">
       <div
@@ -42,7 +47,7 @@ const TierBadge: React.FC<ExtendedTierBadgeProps> = ({
           ${isCurrentTier ? activeStyle : notActiveStyle}
         `}
       >
-        {Icon && <Icon className="w-9 h-9 mb-1" />}
+        {icon && showIcon(icon)}
 
         <div
           className={`

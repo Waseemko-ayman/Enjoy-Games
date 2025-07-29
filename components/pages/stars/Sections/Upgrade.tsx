@@ -32,7 +32,7 @@ const Upgrade = () => {
       {updatedTiers.map((tier, index) => (
         <AnimatedWrapper key={tier.id} custom={index}>
           <TierBadge
-            Icon={tier.icon}
+            icon={tier.icon}
             name={starsTexts(`levels.${tier.key}`)}
             isActive={tier.isActive}
             progress={currentPercentage}
