@@ -16,6 +16,7 @@ import {
 import { FOOTER_LINKS_DATA, inputsViaEntry } from '@/data';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { ProductCardProps } from '@/interfaces';
+import { InputTypes } from '@/utils/type';
 import { useTranslations } from 'next-intl';
 import React, { lazy, Suspense } from 'react';
 import { FaStar } from 'react-icons/fa6';
@@ -149,7 +150,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                     <AnimatedWrapper key={input.id} custom={index}>
                       <Input
                         variant="secondary"
-                        type={input.type}
+                        type={input.type as InputTypes}
                         inputName={input.inputName}
                         label={
                           input.label || inputsTxt(`labels.${input.labelKey}`)

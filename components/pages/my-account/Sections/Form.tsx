@@ -17,6 +17,7 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import { TranslationFunction } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import FormError from '@/components/atomic/FormError';
+import { InputTypes } from '@/utils/type';
 interface FormProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
@@ -87,7 +88,7 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                   <div>
                     <Input
                       variant="secondary"
-                      type={input.type}
+                      type={input.type as InputTypes}
                       label={label}
                       placeholder={placeholder}
                       Icon={input.icon}

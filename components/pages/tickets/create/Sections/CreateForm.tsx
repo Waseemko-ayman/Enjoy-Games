@@ -13,6 +13,7 @@ import AttachmentsUploader from '@/components/molecules/AttachmentsPreview';
 import { FormData } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import FormError from '@/components/atomic/FormError';
+import { InputTypes } from '@/utils/type';
 
 const CreateForm = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
@@ -62,7 +63,7 @@ const CreateForm = () => {
               <div key={input.id}>
                 <Input
                   variant="secondary"
-                  type={input.type || 'text'}
+                  type={input.type as InputTypes}
                   inputName={input.name}
                   placeholder={placeholders(input.name)}
                   options={input.options}
