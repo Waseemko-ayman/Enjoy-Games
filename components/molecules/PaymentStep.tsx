@@ -20,7 +20,6 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
   items,
   quantity,
 }) => {
-  type PaymentFormData = yup.InferType<typeof paymentSchema>;
   const t = useTranslations('MyCart');
   const btnTexts = useTranslations('BtnTexts');
   const inputsTexts = useTranslations('Inputs');
@@ -29,8 +28,13 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
     paymentMethod: yup
       .string()
       .required(inputsTexts('errorsMsgs.paymentRequired')),
-    couponCode: yup.string(),
+    couponCode: yup.string().nullable().default(null),
   });
+
+  type PaymentFormData = {
+    paymentMethod: string;
+    couponCode: string | null;
+  };
 
   const {
     register,
@@ -38,6 +42,10 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
     formState: { errors },
   } = useForm<PaymentFormData>({
     resolver: yupResolver(paymentSchema),
+    defaultValues: {
+      paymentMethod: '',
+      couponCode: null,
+    },
   });
 
   const onSubmit = () => {
