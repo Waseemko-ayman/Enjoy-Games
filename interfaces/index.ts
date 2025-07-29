@@ -295,7 +295,7 @@ export interface WalletCardProps extends BaseIconProps {
   isUnitTranslatable?: boolean;
 }
 
-export interface RewardTier {
+export interface RewardTier extends BaseIconProps {
   id: number;
   key: string;
   percentage: number;
