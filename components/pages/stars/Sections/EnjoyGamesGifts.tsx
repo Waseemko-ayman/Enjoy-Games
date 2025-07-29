@@ -27,7 +27,7 @@ const EnjoyGamesGifts = () => {
           <Loading />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3">
-            {Array.isArray(data?.newly_arrived) ? (
+            {Array.isArray(data?.newly_arrived) &&
               data.newly_arrived.map((card, index) => {
                 const { image, ...cardWithoutImage } = card;
                 return (
@@ -47,12 +47,7 @@ const EnjoyGamesGifts = () => {
                     />
                   </AnimatedWrapper>
                 );
-              })
-            ) : (
-              <p className="text-center col-span-full">
-                لا توجد منتجات متاحة حالياً.
-              </p>
-            )}
+              })}
           </div>
         )}
       </Container>
