@@ -2,17 +2,17 @@
 
 import Image from 'next/image';
 import CardWrapper from '@/components/atomic/CardWrapper';
-import { CartItemData } from '@/interfaces';
 import MotionSection from './FramerMotion/MotionSection';
 import { useTranslations } from 'next-intl';
+import { ProductCardProps } from '@/interfaces';
 
 interface InvoiceSummaryProps {
-  item: CartItemData;
+  item: ProductCardProps;
   quantity: number;
 }
 
 const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ item, quantity }) => {
-  const total = item.price * quantity;
+  const total = (item.price ?? 0) * quantity;
   const t = useTranslations('Invoice.summary');
 
   return (
@@ -25,7 +25,12 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ item, quantity }) => {
           <span>{t('subtotal.label')}:</span>
           <div className="flex items-center gap-2">
             <span className="text-lg">{total}</span>
-            <Image src={item.currencyImage} alt="عملة" width={18} height={18} />
+            <Image
+              src={item.currencyImage ?? ''}
+              alt="عملة"
+              width={18}
+              height={18}
+            />
           </div>
         </div>
         <MotionSection index={1}>
@@ -34,7 +39,7 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ item, quantity }) => {
             <div className="flex items-center gap-2">
               <span className="text-lg">{total}</span>
               <Image
-                src={item.currencyImage}
+                src={item.currencyImage ?? ''}
                 alt="عملة"
                 width={18}
                 height={18}
@@ -48,7 +53,7 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ item, quantity }) => {
             <div className="flex items-center gap-2">
               <span className="text-lg font-bold">{total}</span>
               <Image
-                src={item.currencyImage}
+                src={item.currencyImage ?? ''}
                 alt="عملة"
                 width={18}
                 height={18}

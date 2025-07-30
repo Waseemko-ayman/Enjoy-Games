@@ -527,7 +527,9 @@
     "loadingMessage": "جاري التحميل..."
   },
   "Messages": {
-    "errorMessage": "عفواً! حدث خطأ ما"
+    "errorMessage": "عفواً! حدث خطأ ما",
+    "addedToCart": "تمت الإضافة إلى السلة",
+    "removedFromCart": "تم الحذف من السلة"
   },
   "Languages": {
     "english": "إنجليزي",

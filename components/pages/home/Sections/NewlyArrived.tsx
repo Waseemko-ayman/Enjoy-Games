@@ -5,8 +5,10 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
 import { useTranslations } from 'next-intl';
-import { NewlyArrivedProps } from '@/interfaces';
+import { NewlyArrivedProps, ProductCardProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
+import { toast } from 'react-toastify';
+import { useCartContext } from '@/context/CartContext';
 
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
@@ -20,6 +22,13 @@ const NewlyArrived: React.FC<NewlyArrivedProps> = ({
   error,
 }) => {
   const btnText = useTranslations('BtnTexts');
+  const msgTxts = useTranslations('Messages');
+  const { addToCart } = useCartContext();
+
+  const handleAddToCart = (product: ProductCardProps) => {
+    addToCart(product);
+    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+  };
 
   return (
     <SectionComponent title={t('sectionsTitles.newlyArrived')}>
@@ -53,6 +62,7 @@ const NewlyArrived: React.FC<NewlyArrivedProps> = ({
                       window.location.href = path;
                     }
                   }}
+                  onAddToCart={() => handleAddToCart(card)}
                   {...cardWithoutImage}
                 />
               </AnimatedWrapper>

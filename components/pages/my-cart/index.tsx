@@ -4,7 +4,7 @@ import OrderCompleteStep from '@/components/molecules/OrderCompleteStep';
 import PaymentStep from '@/components/molecules/PaymentStep';
 import StepIndicator from '@/components/molecules/StepIndicator';
 import CartContent from '@/components/organism/CartContent';
-import { CartItemData } from '@/interfaces';
+import { useCartContext } from '@/context/CartContext';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
@@ -15,20 +15,14 @@ const STEPS = {
 };
 
 const MyCartPage = () => {
+  const t = useTranslations('MyCart');
+  const btnTexts = useTranslations('BtnTexts');
+
   const [currentStep, setCurrentStep] = useState(STEPS.CART);
-  const [cartItems, setCartItems] = useState<CartItemData[]>([
-    {
-      id: 1,
-      title: 'إيتالي 100',
-      price: 100,
-      quantity: 1,
-      image: '/assets/play-station.webp',
-      currencyImage: '/assets/saudi_riyal.png',
-      storeLabel: 'المتجر السعودي',
-    },
-  ]);
+  const { cartItems, clearCart } = useCartContext();
+
   const [orderNumber] = useState('DL' + Math.random().toString().substr(2, 8));
-  const [quantity, setQuantity] = useState(cartItems[0]?.quantity || 1);
+  const [quantity, setQuantity] = useState(1);
 
   const steps = [
     {
@@ -60,7 +54,7 @@ const MyCartPage = () => {
   };
 
   const handleOrderComplete = () => {
-    setCartItems([]);
+    clearCart();
     setCurrentStep(STEPS.CART);
   };
 
@@ -74,12 +68,9 @@ const MyCartPage = () => {
   // };
 
   const totalAmount = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + (item.price ?? 0) * item.quantity,
     0
   );
-
-  const t = useTranslations('MyCart');
-  const btnTexts = useTranslations('BtnTexts');
 
   return (
     <div>

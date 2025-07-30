@@ -62,6 +62,8 @@ export interface ProductCardProps {
   price?: number;
   discount?: null;
   shipping_payment?: string;
+  quantity: number;
+  currencyImage?: string;
   ratings?: number | string;
   icon?: React.ElementType | string | any;
   showDesc?: boolean;
@@ -74,6 +76,7 @@ export interface ProductCardProps {
   btnText?: string;
   otherClassNameBtn?: string;
   onClick?: () => void;
+  onAddToCart?: () => void;
 }
 
 export interface getSlugsProps {
@@ -408,7 +411,7 @@ export interface CartItemData {
 }
 
 export interface CartContentProps {
-  items: CartItemData[];
+  items: ProductCardProps[];
   onProceedToPayment: () => void;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
@@ -419,7 +422,7 @@ export interface PaymentStepProps {
   onPaymentComplete: () => void;
   onBackToCart: () => void;
   totalAmount: number;
-  items: CartItemData[];
+  items: ProductCardProps[];
   quantity: number;
 }
 

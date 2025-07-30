@@ -9,8 +9,10 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import { useTranslations } from 'next-intl';
 import { useMainContent } from '@/context/MainContentContext';
 import Loading from '@/components/molecules/loading';
-import { getSlugsProps } from '@/interfaces';
+import { getSlugsProps, ProductCardProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
+import { toast } from 'react-toastify';
+import { useCartContext } from '@/context/CartContext';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -19,6 +21,13 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const secTexts = useTranslations('SectionsTitles.Gifts');
   const btnTexts = useTranslations('BtnTexts');
   const { data, isLoading, error } = useMainContent();
+  const msgTxts = useTranslations('Messages');
+  const { addToCart } = useCartContext();
+
+  const handleAddToCart = (product: ProductCardProps) => {
+    addToCart(product);
+    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+  };
 
   return (
     <Layer>
@@ -61,6 +70,7 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
                           window.location.href = path;
                         }
                       }}
+                      onAddToCart={() => handleAddToCart(card)}
                       {...cardWithoutImage}
                     />
                   </AnimatedWrapper>

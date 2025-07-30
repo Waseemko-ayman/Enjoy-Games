@@ -526,6 +526,11 @@
   "Loading": {
     "loadingMessage": "Loading..."
   },
+  "Messages": {
+    "errorMessage": "Sorry! Something went wrong.",
+    "addedToCart": "Added to cart",
+    "removedFromCart": "Removed from cart"
+  },
   "Languages": {
     "english": "English",
     "arabic": "Arabic"

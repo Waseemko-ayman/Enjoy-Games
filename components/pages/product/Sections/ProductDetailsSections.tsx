@@ -13,6 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { useCartContext } from '@/context/CartContext';
 import { FOOTER_LINKS_DATA, inputsViaEntry } from '@/data';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { ProductCardProps } from '@/interfaces';
@@ -21,6 +22,7 @@ import { useTranslations } from 'next-intl';
 import React, { lazy, Suspense } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { MdAdd, MdAddShoppingCart } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 const inputQuantityOptions = [
   { id: 1, label: '1' },
@@ -33,7 +35,15 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const t = useTranslations('productDetails');
   const inputsTxt = useTranslations('Inputs');
   const btnTxt = useTranslations('BtnTexts');
+  const msgTxts = useTranslations('Messages');
   const { isArabic } = useToggleLocale();
+  const { addToCart } = useCartContext();
+
+  const handleAddToCart = (product: ProductCardProps) => {
+    addToCart(product);
+    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+  };
+
   return (
     <CardWrapper className="flex flex-col md:flex-row gap-7 p-4 md:p-10">
       <MotionSection index={0}>
@@ -128,7 +138,13 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           </MotionSection>
         </div>
 
-        <form className="mt-4 space-y-7">
+        <form
+          className="mt-4 space-y-7"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleAddToCart(product);
+          }}
+        >
           <MotionSection index={6}>
             <Input
               variant="secondary"
@@ -174,7 +190,11 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           </MotionSection>
 
           <MotionSection index={8}>
-            <Button otherClassName="py-3 px-5 w-full" Icon={MdAddShoppingCart}>
+            <Button
+              type="submit"
+              otherClassName="py-3 px-5 w-full"
+              Icon={MdAddShoppingCart}
+            >
               {btnTxt('addToCart')}
             </Button>
           </MotionSection>

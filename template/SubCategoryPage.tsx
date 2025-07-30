@@ -13,6 +13,8 @@ import { useTranslations } from 'next-intl';
 import Loading from '@/components/molecules/loading';
 import { useParams, useRouter } from 'next/navigation';
 import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
+import { useCart } from '@/hook/useCart';
+import { toast } from 'react-toastify';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -22,6 +24,8 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
   const params = useParams();
   const router = useRouter();
   const t = useTranslations('Loading');
+  const msgTxts = useTranslations('Messages');
+  const { addToCart } = useCartContext();
 
   const { get, data, isLoading } = useAPI(`sub-category/${itemId}`);
 
@@ -37,6 +41,11 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
       index,
     }));
   }, [data, itemId, params.category, router]);
+
+  const handleAddToCart = (product: ProductCardProps) => {
+    addToCart(product);
+    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+  };
 
   useEffect(() => {
     get();
@@ -65,7 +74,7 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
                     btnText={btnTxts('addToCart')}
                     icon={PiShoppingCartLight}
                     showDesc
-                    onClick={card.onClick}
+                    onAddToCart={() => handleAddToCart(card)}
                     {...cardWithoutImage}
                   />
                 </AnimatedWrapper>

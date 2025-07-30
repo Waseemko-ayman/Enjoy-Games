@@ -3,16 +3,25 @@ import ErrorFetching from '@/components/molecules/ErrorFetching';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
+import { useCartContext } from '@/context/CartContext';
 import { useMainContent } from '@/context/MainContentContext';
-import { getSlugsProps } from '@/interfaces';
+import { getSlugsProps, ProductCardProps } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { PiShoppingCartLight } from 'react-icons/pi';
+import { toast } from 'react-toastify';
 
 const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const t = useTranslations('productDetails');
   const btnTxts = useTranslations('BtnTexts');
   const { data, isLoading, error } = useMainContent();
+  const msgTxts = useTranslations('Messages');
+  const { addToCart } = useCartContext();
+
+  const handleAddToCart = (product: ProductCardProps) => {
+    addToCart(product);
+    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+  };
   return (
     <div className="mt-10">
       <AnimatedWrapper>
@@ -56,6 +65,7 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
                         window.location.href = path;
                       }
                     }}
+                    onAddToCart={() => handleAddToCart(card)}
                     {...cardWithoutImage}
                   />
                 </AnimatedWrapper>

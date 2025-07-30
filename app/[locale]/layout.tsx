@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import BodyWrapper from '@/components/organism/layouts/BodyWrapper';
 import { IBM_Plex_Sans_Arabic } from 'next/font/google';
 import LocaleSync from '@/components/organism/layouts/LocaleSync';
+import { CartProvider } from '@/context/CartContext';
 
 const ibmArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
@@ -43,10 +44,12 @@ export default async function RootLayout({
       </head>
       <body className={`${ibmArabic.className} antialiased`}>
         <NextIntlClientProvider>
-        <LocaleSync />
+          <LocaleSync />
           <ErrorBoundary>
             <AuthProvider>
-              <BodyWrapper>{children}</BodyWrapper>
+              <CartProvider>
+                <BodyWrapper>{children}</BodyWrapper>
+              </CartProvider>
             </AuthProvider>
           </ErrorBoundary>
         </NextIntlClientProvider>
