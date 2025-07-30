@@ -4,6 +4,7 @@ import React from 'react';
 import Loading from '@/components/molecules/loading';
 import { Category, SubCategories } from '@/interfaces';
 import { useCategories } from '@/context/CategoriesContext';
+import { useRouter } from 'next/navigation';
 const CategoryCardsGrid = dynamic(
   () => import('@/components/organism/CategoryCardsGrid'),
   {
@@ -13,6 +14,7 @@ const CategoryCardsGrid = dynamic(
 
 const StorePage = () => {
   const { categories, isLoading } = useCategories();
+  const router = useRouter();
 
   const shuffleArray = (array: SubCategories[]) => {
     return array
@@ -22,9 +24,25 @@ const StorePage = () => {
   };
 
   const allSubCategories = shuffleArray(
-    categories?.flatMap((cat: Category) => cat.sub_categories) || []
+    categories?.flatMap((cat: Category) =>
+      cat.sub_categories.map((sub) => ({
+        ...sub,
+        categorySlug: cat.slug,
+      }))
+    ) || []
   );
-  return <CategoryCardsGrid cards={allSubCategories} isLoading={isLoading} />;
+
+  const handleCardClick = (categorySlug: string, subSlug: string) => {
+    router.push(`/categories/${categorySlug}/${subSlug}`);
+  };
+
+  return (
+    <CategoryCardsGrid
+      cards={allSubCategories}
+      isLoading={isLoading}
+      onCardClick={handleCardClick}
+    />
+  );
 };
 
 export default StorePage;

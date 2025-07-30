@@ -16,6 +16,7 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({
   cards,
   error,
   isLoading,
+  onCardClick,
 }) => {
   return (
     <Container>
@@ -30,7 +31,9 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({
               <CategoryCard
                 image={'/assets/play-station.webp'}
                 name={card.name}
-                onClick={card.onClick}
+                onClick={() =>
+                  onCardClick?.(card.categorySlug ?? '', card.slug)
+                }
               />
             </AnimatedWrapper>
           ))}

@@ -34,6 +34,7 @@ export interface SubCategories {
   children_count: number;
   href?: string;
   onClick?: () => void;
+  categorySlug?: string | null;
   // shiddatData: shiddaItem[];
   // accounts?: AccountItem[];
   // accountId?: string;
@@ -244,6 +245,7 @@ export interface CategoryPageProps {
   cards: SubCategories[];
   error?: string;
   isLoading?: boolean;
+  onCardClick?: (categorySlug: string, subSlug: string) => void;
 }
 
 export interface CategoryCardProps {
