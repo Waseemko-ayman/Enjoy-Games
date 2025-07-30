@@ -80,6 +80,7 @@ export interface getSlugsProps {
     categorySlug: string;
     subCategorySlug: string;
   } | null;
+  error?: string;
 }
 
 export interface HomeSectionsProps extends getSlugsProps {
@@ -241,6 +242,8 @@ export interface AccountItem {
 
 export interface CategoryPageProps {
   cards: SubCategories[];
+  error?: string;
+  isLoading?: boolean;
 }
 
 export interface CategoryCardProps {

@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { PiShoppingCartLight } from 'react-icons/pi';
 import { useTranslations } from 'next-intl';
 import { NewlyArrivedProps } from '@/interfaces';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -20,6 +21,7 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
   newlyArrived,
   isLoading,
   getSlugs,
+  error,
 }) => {
   const isMobile = useIsMobile();
   const btnText = useTranslations('BtnTexts');
@@ -44,6 +46,8 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
         </div>
         {isLoading ? (
           <Loading />
+        ) : error ? (
+          <ErrorFetching />
         ) : (
           <GridWrapper
             otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"

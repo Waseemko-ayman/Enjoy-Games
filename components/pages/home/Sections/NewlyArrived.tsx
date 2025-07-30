@@ -6,6 +6,7 @@ import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
 import { useTranslations } from 'next-intl';
 import { NewlyArrivedProps } from '@/interfaces';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
@@ -16,6 +17,7 @@ const NewlyArrived: React.FC<NewlyArrivedProps> = ({
   isLoading,
   getSlugs,
   newlyArrived,
+  error,
 }) => {
   const btnText = useTranslations('BtnTexts');
 
@@ -23,6 +25,8 @@ const NewlyArrived: React.FC<NewlyArrivedProps> = ({
     <SectionComponent title={t('sectionsTitles.newlyArrived')}>
       {isLoading ? (
         <Loading />
+      ) : error ? (
+        <ErrorFetching />
       ) : (
         <GridWrapper otherClassName="gap-5" isScrollable>
           {newlyArrived.map((card, index) => {
@@ -31,7 +35,6 @@ const NewlyArrived: React.FC<NewlyArrivedProps> = ({
               card.sub_category_id !== undefined
                 ? getSlugs(card.sub_category_id)
                 : null;
-
             return (
               <AnimatedWrapper key={card.id} custom={index}>
                 <ProductCard

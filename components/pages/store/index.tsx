@@ -1,10 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import dynamic from 'next/dynamic';
-import useAPI from '@/hook/useAPI';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Loading from '@/components/molecules/loading';
 import { Category, SubCategories } from '@/interfaces';
+import { useCategories } from '@/context/CategoriesContext';
 const CategoryCardsGrid = dynamic(
   () => import('@/components/organism/CategoryCardsGrid'),
   {
@@ -13,7 +12,7 @@ const CategoryCardsGrid = dynamic(
 );
 
 const StorePage = () => {
-  const { get, data: categories } = useAPI(`categories-subcategories`);
+  const { categories, isLoading } = useCategories();
 
   const shuffleArray = (array: SubCategories[]) => {
     return array
@@ -25,11 +24,7 @@ const StorePage = () => {
   const allSubCategories = shuffleArray(
     categories?.flatMap((cat: Category) => cat.sub_categories) || []
   );
-
-  useEffect(() => {
-    get();
-  }, []);
-  return <CategoryCardsGrid cards={allSubCategories} />;
+  return <CategoryCardsGrid cards={allSubCategories} isLoading={isLoading} />;
 };
 
 export default StorePage;

@@ -22,20 +22,23 @@ interface MobileMainContent {
 
 interface MainContentContextType {
   data: MobileMainContent | null;
-  loading: boolean;
+  isLoading: boolean;
+  error: string;
   refresh: () => void;
 }
 
 const MainContentContext = createContext<MainContentContextType>({
   data: null,
-  loading: true,
+  isLoading: true,
+  error: '',
   refresh: () => {},
 });
 
 export const MainContentProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { get, data, isLoading } = useAPI<MobileMainContent>('main-content');
+  const { get, data, isLoading, error } =
+    useAPI<MobileMainContent>('main-content');
   const locale = useLocale();
 
   useEffect(() => {
@@ -45,7 +48,7 @@ export const MainContentProvider: React.FC<{ children: React.ReactNode }> = ({
   const refresh = () => get();
 
   return (
-    <MainContentContext.Provider value={{ data, loading: isLoading, refresh }}>
+    <MainContentContext.Provider value={{ data, isLoading, error, refresh }}>
       {children}
     </MainContentContext.Provider>
   );

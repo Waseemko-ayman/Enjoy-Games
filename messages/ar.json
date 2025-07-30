@@ -526,6 +526,9 @@
   "Loading": {
     "loadingMessage": "جاري التحميل..."
   },
+  "Messages": {
+    "errorMessage": "عفواً! حدث خطأ ما"
+  },
   "Languages": {
     "english": "إنجليزي",
     "arabic": "عربي"

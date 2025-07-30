@@ -40,7 +40,9 @@ class ErrorBoundary extends Component<ErrorBoundaryProps> {
                   width={128}
                   height={128}
                 />
-                <h2 className="text-xl mt-5 mb-2">{errorTxts('title')}</h2>
+                <h2 className="text-center text-lg md:text-xl lg:text-2xl mt-5 mb-2">
+                  {errorTxts('title')}
+                </h2>
                 <Button
                   handleClick={this.handleClick}
                   Icon={FaArrowsRotate}

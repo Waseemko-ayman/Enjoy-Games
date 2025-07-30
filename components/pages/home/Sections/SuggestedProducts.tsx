@@ -5,6 +5,7 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
 import { SuggestedProductsProps } from '@/interfaces';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -14,11 +15,14 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({
   suggestedProducts,
   isLoading,
   getSlugs,
+  error,
 }) => {
   return (
     <SectionComponent title={t('sectionsTitles.suggestedProducts')}>
       {isLoading ? (
         <Loading />
+      ) : error ? (
+        <ErrorFetching />
       ) : (
         <GridWrapper isScrollable>
           {suggestedProducts.map((card, index) => {

@@ -8,13 +8,15 @@ import { useLocale } from 'next-intl';
 
 interface CategoriesContextType {
   categories: Category[];
-  loading: boolean;
+  isLoading: boolean;
+  error: boolean;
   refresh: () => void;
 }
 
 const CategoriesContext = createContext<CategoriesContextType>({
   categories: [],
-  loading: true,
+  isLoading: true,
+  error: false,
   refresh: () => {},
 });
 
@@ -25,6 +27,7 @@ export const CategoriesProvider: React.FC<{ children: React.ReactNode }> = ({
     get,
     data: categories,
     isLoading,
+    error,
   } = useAPI<{
     success: boolean;
     data: Category[];
@@ -42,7 +45,7 @@ export const CategoriesProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <CategoriesContext.Provider
-      value={{ categories, loading: isLoading, refresh }}
+      value={{ categories, isLoading, error, refresh }}
     >
       {children}
     </CategoriesContext.Provider>

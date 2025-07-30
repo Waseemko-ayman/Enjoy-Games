@@ -5,6 +5,7 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import GridWrapper from '@/components/molecules/GridWrapper';
 import { BestSellersProps } from '@/interfaces';
 import Loading from '@/components/molecules/loading';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -14,11 +15,14 @@ const BestSellers: React.FC<BestSellersProps> = ({
   bestSeller,
   isLoading,
   getSlugs,
+  error,
 }) => {
   return (
     <SectionComponent title={t('sectionsTitles.bestSellers')}>
       {isLoading ? (
         <Loading />
+      ) : error ? (
+        <ErrorFetching />
       ) : (
         <GridWrapper isScrollable>
           {bestSeller.map((card, index) => {

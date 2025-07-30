@@ -16,19 +16,28 @@ import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
-  const { categories, loading } = useCategories();
-  const { data, loading: isLoading } = useMainContent();
+  const { categories, isLoading: categoriesLoading, error: categoriesError } = useCategories();
+  const {
+    data,
+    isLoading: mainContentLoading,
+    error: mainContentError,
+  } = useMainContent();
 
   return (
     <>
       {/* <HeroBanner sliders={data?.sliders ?? []} /> */}
       <HeroBanner />
-      <CategoriesTypes categories={categories} loading={loading} />
+      <CategoriesTypes
+        categories={categories}
+        loading={categoriesLoading}
+        error={categoriesError}
+      />
       <WalletSection t={t} />
       <BestSellers
         t={t}
         bestSeller={data?.best_seller ?? []}
-        isLoading={isLoading}
+        isLoading={mainContentLoading}
+        error={mainContentError}
         getSlugs={(subCatId) =>
           getCategoryAndSubCategorySlugs(categories, subCatId)
         }
@@ -36,7 +45,8 @@ const HomePage = () => {
       <SuggestedProducts
         t={t}
         suggestedProducts={data?.suggested_products ?? []}
-        isLoading={isLoading}
+        isLoading={mainContentLoading}
+        error={mainContentError}
         getSlugs={(subCatId) =>
           getCategoryAndSubCategorySlugs(categories, subCatId)
         }
@@ -44,7 +54,8 @@ const HomePage = () => {
       <NewlyArrived
         t={t}
         newlyArrived={data?.newly_arrived ?? []}
-        isLoading={isLoading}
+        isLoading={mainContentLoading}
+        error={mainContentError}
         getSlugs={(subCatId) =>
           getCategoryAndSubCategorySlugs(categories, subCatId)
         }
@@ -52,7 +63,8 @@ const HomePage = () => {
       <RedeemPoints
         t={t}
         newlyArrived={data?.newly_arrived ?? []}
-        isLoading={isLoading}
+        isLoading={mainContentLoading}
+        error={mainContentError}
         getSlugs={(subCatId) =>
           getCategoryAndSubCategorySlugs(categories, subCatId)
         }

@@ -6,18 +6,23 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import Loading from '@/components/molecules/loading';
 import Container from '@/components/organism/Container';
 import { Category } from '@/interfaces';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 
 const CategoriesTypes = ({
   categories,
   loading,
+  error,
 }: {
   categories?: Category[];
   loading: boolean;
+  error: boolean;
 }) => {
   return (
     <Container>
       {loading ? (
         <Loading />
+      ) : error ? (
+        <ErrorFetching />
       ) : (
         <div
           className={`grid grid-cols-3 ${

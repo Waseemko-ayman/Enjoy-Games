@@ -13,7 +13,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ cards }) => {
   const params = useParams();
   const router = useRouter();
   const t = useTranslations('Loading');
-  const { get, data, isLoading } = useAPI(`category/${params.category}`);
+  const { get, data, isLoading, error } = useAPI(`category/${params.category}`);
 
   const enhancedCards = useMemo(() => {
     const base =
@@ -43,7 +43,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ cards }) => {
   return (
     <div>
       <PageHeader />
-      <CategoryCardsGrid cards={enhancedCards} />
+      <CategoryCardsGrid cards={enhancedCards} error={error} />
     </div>
   );
 };

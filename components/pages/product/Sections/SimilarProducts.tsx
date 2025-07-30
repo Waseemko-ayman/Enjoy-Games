@@ -1,4 +1,5 @@
 import ProductCard from '@/components/atomic/ProductCard';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
@@ -11,7 +12,7 @@ import { PiShoppingCartLight } from 'react-icons/pi';
 const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const t = useTranslations('productDetails');
   const btnTxts = useTranslations('BtnTexts');
-  const { data, loading: isLoading } = useMainContent();
+  const { data, isLoading, error } = useMainContent();
   return (
     <div className="mt-10">
       <AnimatedWrapper>
@@ -21,6 +22,8 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
       </AnimatedWrapper>
       {isLoading ? (
         <Loading />
+      ) : error ? (
+        <ErrorFetching />
       ) : (
         <GridWrapper
           otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"
