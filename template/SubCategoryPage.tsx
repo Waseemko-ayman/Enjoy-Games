@@ -13,8 +13,8 @@ import { useTranslations } from 'next-intl';
 import Loading from '@/components/molecules/loading';
 import { useParams, useRouter } from 'next/navigation';
 import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
-import { useCart } from '@/hook/useCart';
 import { toast } from 'react-toastify';
+import { useCartContext } from '@/context/CartContext';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
