@@ -62,7 +62,7 @@ export interface ProductCardProps {
   price?: number;
   discount?: null;
   shipping_payment?: string;
-  quantity: number;
+  quantity?: number;
   currencyImage?: string;
   ratings?: number | string;
   icon?: React.ElementType | string | any;

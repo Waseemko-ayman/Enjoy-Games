@@ -68,7 +68,7 @@ const MyCartPage = () => {
   // };
 
   const totalAmount = cartItems.reduce(
-    (total, item) => total + (item.price ?? 0) * item.quantity,
+    (total, item) => total + (item.price ?? 0) * (item.quantity ?? 1),
     0
   );
 
