@@ -7,29 +7,33 @@ import ProductDetailsSections from './Sections/ProductDetailsSections';
 import TabsSection from './Sections/TabsSection';
 import SimilarProducts from './Sections/SimilarProducts';
 import useAPI from '@/hook/useAPI';
-import Loading from '@/components/molecules/loading';
+import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
+import { useCategories } from '@/context/CategoriesContext';
+import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
+import { useTranslations } from 'next-intl';
 
 const ProductDetailsPage = ({ productId }: { productId: string }) => {
+  const { categories } = useCategories();
   const { getSingle, product, isLoading } = useAPI(`product`);
+  const t = useTranslations('Loading');
 
   useEffect(() => {
     getSingle(productId);
   }, [productId]);
 
   if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-64">
-        <Loading />
-        <p className="mt-4">جاري التحميل...</p>
-      </div>
-    );
+    return <LoadingPlaceholder message={t('loadingMessage')} />;
   }
   return (
     <Layer className="mt-5">
       <Container>
         <ProductDetailsSections product={product} />
         <TabsSection product={product} />
-        <SimilarProducts />
+        <SimilarProducts
+          getSlugs={(subCatId) =>
+            getCategoryAndSubCategorySlugs(categories, subCatId)
+          }
+        />
       </Container>
     </Layer>
   );

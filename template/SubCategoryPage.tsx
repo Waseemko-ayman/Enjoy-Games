@@ -12,6 +12,9 @@ import { PiShoppingCartLight } from 'react-icons/pi';
 import { useTranslations } from 'next-intl';
 import Loading from '@/components/molecules/loading';
 import { useParams, useRouter } from 'next/navigation';
+import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
+import { useCart } from '@/hook/useCart';
+import { toast } from 'react-toastify';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -20,6 +23,9 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
   const btnTxts = useTranslations('BtnTexts');
   const params = useParams();
   const router = useRouter();
+  const t = useTranslations('Loading');
+  const msgTxts = useTranslations('Messages');
+  const { addToCart } = useCartContext();
 
   const { get, data, isLoading } = useAPI(`sub-category/${itemId}`);
 
@@ -36,17 +42,17 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
     }));
   }, [data, itemId, params.category, router]);
 
+  const handleAddToCart = (product: ProductCardProps) => {
+    addToCart(product);
+    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+  };
+
   useEffect(() => {
     get();
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-64">
-        <Loading />
-        <p className="mt-4">جاري التحميل...</p>
-      </div>
-    );
+    return <LoadingPlaceholder message={t('loadingMessage')} />;
   }
 
   return (
@@ -68,7 +74,7 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
                     btnText={btnTxts('addToCart')}
                     icon={PiShoppingCartLight}
                     showDesc
-                    onClick={card.onClick}
+                    onAddToCart={() => handleAddToCart(card)}
                     {...cardWithoutImage}
                   />
                 </AnimatedWrapper>

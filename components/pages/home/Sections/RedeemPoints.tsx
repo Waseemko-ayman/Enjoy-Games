@@ -10,22 +10,30 @@ import useIsMobile from '@/hook/useIsMobile';
 import Link from 'next/link';
 import { PiShoppingCartLight } from 'react-icons/pi';
 import { useTranslations } from 'next-intl';
-import { ProductCardProps, TranslationFunction } from '@/interfaces';
+import { NewlyArrivedProps, ProductCardProps } from '@/interfaces';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
+import { toast } from 'react-toastify';
+import { useCartContext } from '@/context/CartContext';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
 
-const RedeemPoints = ({
+const RedeemPoints: React.FC<NewlyArrivedProps> = ({
   t,
   newlyArrived,
   isLoading,
-}: {
-  t: TranslationFunction;
-  newlyArrived: ProductCardProps[];
-  isLoading: boolean;
+  getSlugs,
+  error,
 }) => {
   const isMobile = useIsMobile();
   const btnText = useTranslations('BtnTexts');
+  const msgTxts = useTranslations('Messages');
+  const { addToCart } = useCartContext();
+
+  const handleAddToCart = (product: ProductCardProps) => {
+    addToCart(product);
+    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+  };
   return (
     <ResponsiveWrapper>
       <div
@@ -47,6 +55,8 @@ const RedeemPoints = ({
         </div>
         {isLoading ? (
           <Loading />
+        ) : error ? (
+          <ErrorFetching />
         ) : (
           <GridWrapper
             otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"
@@ -54,6 +64,10 @@ const RedeemPoints = ({
           >
             {newlyArrived.map((card, index) => {
               const { image, ...cardWithoutImage } = card;
+              const slugs =
+                card.sub_category_id !== undefined
+                  ? getSlugs(card.sub_category_id)
+                  : null;
               return (
                 <AnimatedWrapper key={card.id} custom={index}>
                   <ProductCard
@@ -67,6 +81,14 @@ const RedeemPoints = ({
                     btnVariant="secondary"
                     btnText={btnText('GetItNow')}
                     icon={PiShoppingCartLight}
+                    onClick={() => {
+                      if (slugs) {
+                        const { categorySlug, subCategorySlug } = slugs;
+                        const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
+                        window.location.href = path;
+                      }
+                    }}
+                    onAddToCart={() => handleAddToCart(card)}
                     {...cardWithoutImage}
                   />
                 </AnimatedWrapper>

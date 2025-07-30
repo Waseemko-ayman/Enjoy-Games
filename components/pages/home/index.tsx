@@ -12,37 +12,62 @@ import HeroBanner from './Sections/HeroBanner';
 import { useTranslations } from 'next-intl';
 import { useCategories } from '@/context/CategoriesContext';
 import { useMainContent } from '@/context/MainContentContext';
+import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
-  const { categories, loading } = useCategories();
-  const { data, loading: isLoading } = useMainContent();
+  const { categories, isLoading: categoriesLoading, error: categoriesError } = useCategories();
+  const {
+    data,
+    isLoading: mainContentLoading,
+    error: mainContentError,
+  } = useMainContent();
 
   return (
     <>
       {/* <HeroBanner sliders={data?.sliders ?? []} /> */}
       <HeroBanner />
-      <CategoriesTypes categories={categories} loading={loading} />
+      <CategoriesTypes
+        categories={categories}
+        loading={categoriesLoading}
+        error={categoriesError}
+      />
       <WalletSection t={t} />
       <BestSellers
         t={t}
         bestSeller={data?.best_seller ?? []}
-        isLoading={isLoading}
+        isLoading={mainContentLoading}
+        error={mainContentError}
+        getSlugs={(subCatId) =>
+          getCategoryAndSubCategorySlugs(categories, subCatId)
+        }
       />
       <SuggestedProducts
         t={t}
         suggestedProducts={data?.suggested_products ?? []}
-        isLoading={isLoading}
+        isLoading={mainContentLoading}
+        error={mainContentError}
+        getSlugs={(subCatId) =>
+          getCategoryAndSubCategorySlugs(categories, subCatId)
+        }
       />
       <NewlyArrived
         t={t}
         newlyArrived={data?.newly_arrived ?? []}
-        isLoading={isLoading}
+        isLoading={mainContentLoading}
+        error={mainContentError}
+        getSlugs={(subCatId) =>
+          getCategoryAndSubCategorySlugs(categories, subCatId)
+        }
       />
       <RedeemPoints
         t={t}
         newlyArrived={data?.newly_arrived ?? []}
-        isLoading={isLoading}
+        isLoading={mainContentLoading}
+        error={mainContentError}
+        getSlugs={(subCatId) =>
+          getCategoryAndSubCategorySlugs(categories, subCatId)
+        }
       />
       <EnjoyWinWin t={t} />
       <ServiceAdvantages t={t} />

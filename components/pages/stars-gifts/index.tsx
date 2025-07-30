@@ -1,4 +1,5 @@
-import ProductCard from '@/components/atomic/ProductCard';
+'use client';
+import dynamic from 'next/dynamic';
 import Layer from '@/components/atomic/Layer';
 import SectionTitle from '@/components/atomic/SectionTitle';
 import GridWrapper from '@/components/molecules/GridWrapper';
@@ -10,10 +11,27 @@ import { useMainContent } from '@/context/MainContentContext';
 import Loading from '@/components/molecules/loading';
 import { useTranslations } from 'next-intl';
 import { MdWavingHand } from 'react-icons/md';
+import { useCategories } from '@/context/CategoriesContext';
+import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
+import { ProductCardProps } from '@/interfaces';
+import { toast } from 'react-toastify';
+import { useCartContext } from '@/context/CartContext';
+const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
+  loading: () => <Loading />,
+});
 
 const StarsGiftsPage = () => {
   const secTexts = useTranslations('SectionsTitles.Gifts');
-  const { data, loading: isLoading } = useMainContent();
+  const { data, isLoading, error } = useMainContent();
+  const { categories } = useCategories();
+  const msgTxts = useTranslations('Messages');
+  const { addToCart } = useCartContext();
+
+  const handleAddToCart = (product: ProductCardProps) => {
+    addToCart(product);
+    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+  };
   return (
     <Layer>
       <Container>
@@ -24,11 +42,20 @@ const StarsGiftsPage = () => {
         />
         {isLoading ? (
           <Loading />
+        ) : error ? (
+          <ErrorFetching />
         ) : (
           <GridWrapper otherClassName="mt-3">
             {Array.isArray(data?.newly_arrived) &&
               data.newly_arrived.map((card, index) => {
                 const { image, ...cardWithoutImage } = card;
+                const slugs =
+                  card.sub_category_id !== undefined
+                    ? getCategoryAndSubCategorySlugs(
+                        categories,
+                        card.sub_category_id
+                      )
+                    : null;
                 return (
                   <AnimatedWrapper key={card.id} custom={index}>
                     <ProductCard
@@ -40,6 +67,14 @@ const StarsGiftsPage = () => {
                       btnVariant="primary"
                       btnText="إشترِ الآن"
                       icon={PiShoppingCartLight}
+                      onClick={() => {
+                        if (slugs) {
+                          const { categorySlug, subCategorySlug } = slugs;
+                          const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
+                          window.location.href = path;
+                        }
+                      }}
+                      onAddToCart={() => handleAddToCart(card)}
                       {...cardWithoutImage}
                     />
                   </AnimatedWrapper>

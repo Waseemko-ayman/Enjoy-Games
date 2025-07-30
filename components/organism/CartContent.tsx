@@ -55,14 +55,14 @@ const CartContent: React.FC<CartContentProps> = ({
                         <div className="flex items-center gap-2">
                           <h3 className="font-semibold">{item.title}</h3>
                           <Image
-                            src={item.currencyImage}
+                            src={item.currencyImage ?? ''}
                             alt="ريال سعودي"
                             width={18}
                             height={18}
                           />
                         </div>
                         <p className="text-center text-xs sm:text-sm text-gray-600 font-semibold bg-[var(--enjoy-gray-100)] py-2 px-3 rounded-full">
-                          {item.storeLabel}
+                          {item.storeName}
                         </p>
                       </div>
                     </div>
@@ -98,10 +98,10 @@ const CartContent: React.FC<CartContentProps> = ({
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-lg font-bold">
-                        {item.price * quantity}
+                        {(item.price ?? 0) * quantity}
                       </span>
                       <Image
-                        src={item.currencyImage}
+                        src={item.currencyImage ?? ''}
                         alt="ريال سعودي"
                         width={18}
                         height={18}

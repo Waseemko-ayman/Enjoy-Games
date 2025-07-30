@@ -19,6 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   variant = 'row',
   // cardLinkPath = '#',
   onClick,
+  onAddToCart,
   discount,
   ratings,
   tall = false,
@@ -151,6 +152,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             variant={btnVariant}
             Icon={icon}
             otherClassName={`${otherClassNameBtn} w-full p-2`}
+            handleClick={onAddToCart}
           >
             {btnText}
           </Button>

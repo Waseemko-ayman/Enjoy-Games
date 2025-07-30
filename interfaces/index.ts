@@ -34,6 +34,7 @@ export interface SubCategories {
   children_count: number;
   href?: string;
   onClick?: () => void;
+  categorySlug?: string | null;
   // shiddatData: shiddaItem[];
   // accounts?: AccountItem[];
   // accountId?: string;
@@ -61,6 +62,8 @@ export interface ProductCardProps {
   price?: number;
   discount?: null;
   shipping_payment?: string;
+  quantity?: number;
+  currencyImage?: string;
   ratings?: number | string;
   icon?: React.ElementType | string | any;
   showDesc?: boolean;
@@ -73,6 +76,32 @@ export interface ProductCardProps {
   btnText?: string;
   otherClassNameBtn?: string;
   onClick?: () => void;
+  onAddToCart?: () => void;
+}
+
+export interface getSlugsProps {
+  getSlugs: (subCategoryId: number) => {
+    categorySlug: string;
+    subCategorySlug: string;
+  } | null;
+  error?: string;
+}
+
+export interface HomeSectionsProps extends getSlugsProps {
+  t: TranslationFunction;
+  isLoading: boolean;
+}
+
+export interface BestSellersProps extends HomeSectionsProps {
+  bestSeller: ProductCardProps[];
+}
+
+export interface SuggestedProductsProps extends HomeSectionsProps {
+  suggestedProducts: ProductCardProps[];
+}
+
+export interface NewlyArrivedProps extends HomeSectionsProps {
+  newlyArrived: ProductCardProps[];
 }
 
 interface BaseIconProps {
@@ -97,6 +126,7 @@ export interface ButtonProps extends BaseClassNameProps, WithChildren {
   disabled?: boolean;
   bgColor?: string;
   hoverBgColor?: string;
+  target?: string;
 }
 
 export interface NavItemProps extends BaseIconProps, BaseClassNameProps {
@@ -216,6 +246,9 @@ export interface AccountItem {
 
 export interface CategoryPageProps {
   cards: SubCategories[];
+  error?: string;
+  isLoading?: boolean;
+  onCardClick?: (categorySlug: string, subSlug: string) => void;
 }
 
 export interface CategoryCardProps {
@@ -378,7 +411,7 @@ export interface CartItemData {
 }
 
 export interface CartContentProps {
-  items: CartItemData[];
+  items: ProductCardProps[];
   onProceedToPayment: () => void;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
@@ -389,7 +422,7 @@ export interface PaymentStepProps {
   onPaymentComplete: () => void;
   onBackToCart: () => void;
   totalAmount: number;
-  items: CartItemData[];
+  items: ProductCardProps[];
   quantity: number;
 }
 

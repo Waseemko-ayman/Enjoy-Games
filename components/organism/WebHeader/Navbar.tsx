@@ -14,7 +14,7 @@ import Loading from '@/components/molecules/loading';
 
 const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
   const t = useTranslations('Layout.header.navBar');
-  const { categories, loading } = useCategories();
+  const { categories, isLoading } = useCategories();
 
   if (layout === 'store') {
     return (
@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
               isMobile ? 'justify-center flex-wrap gap-4' : 'gap-7'
             }`}
           >
-            {loading ? (
+            {isLoading ? (
               <Loading width="w-7" height="h-7" />
             ) : (
               categories.map((item: Category) => (
