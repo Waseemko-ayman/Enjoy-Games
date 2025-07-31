@@ -11,8 +11,8 @@ import { useMainContent } from '@/context/MainContentContext';
 import Loading from '@/components/molecules/loading';
 import { getSlugsProps, ProductCardProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
-import { toast } from 'react-toastify';
 import { useCartContext } from '@/context/CartContext';
+import { useToast } from '@/lib/toast';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -23,10 +23,11 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const { data, isLoading, error } = useMainContent();
   const msgTxts = useTranslations('Messages');
   const { addToCart } = useCartContext();
+  const { showToast } = useToast();
 
   const handleAddToCart = (product: ProductCardProps) => {
     addToCart(product);
-    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+    showToast(`${product.title} ${msgTxts('addedToCart')}`);
   };
 
   return (

@@ -12,8 +12,8 @@ import { PiShoppingCartLight } from 'react-icons/pi';
 import { useTranslations } from 'next-intl';
 import { NewlyArrivedProps, ProductCardProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
-import { toast } from 'react-toastify';
 import { useCartContext } from '@/context/CartContext';
+import { useToast } from '@/lib/toast';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -29,10 +29,11 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
   const btnText = useTranslations('BtnTexts');
   const msgTxts = useTranslations('Messages');
   const { addToCart } = useCartContext();
+  const { showToast } = useToast();
 
   const handleAddToCart = (product: ProductCardProps) => {
     addToCart(product);
-    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+    showToast(`${product.title} ${msgTxts('addedToCart')}`);
   };
   return (
     <ResponsiveWrapper>

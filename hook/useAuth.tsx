@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { AUTH_ACTIONS, AUTH_API_PATHS } from '@/constants/auth';
 import { PATHS } from '@/data/paths';
 import { LoginFormData, signupFormData } from '@/interfaces';
-import { toast } from 'react-toastify';
 import { useLocale, useTranslations } from 'next-intl';
+import { useToast } from '@/lib/toast';
 
 interface User {
   id: number;
@@ -97,6 +97,7 @@ const useAuth = () => {
   const router = useRouter();
   const authTxts = useTranslations('Auth');
   const locale = useLocale();
+  const { showToast } = useToast();
 
   const config = {
     headers: {
@@ -118,10 +119,10 @@ const useAuth = () => {
         sessionStorage.setItem('otp_email', body.email);
         sessionStorage.setItem('otp_password', body.password);
 
-        toast.success(data?.message, { autoClose: 3000 });
+        showToast(data?.message);
         router.replace(PATHS.OTP);
       } else {
-        toast.error(data?.message, { autoClose: 4000 });
+        showToast(data?.message, 'error');
       }
     } catch (error: any) {
       const errorMsg = error.response?.data?.message || error.message;
@@ -129,7 +130,7 @@ const useAuth = () => {
         type: AUTH_ACTIONS.SET_ERROR,
         payload: { error: errorMsg },
       });
-      toast.error(authTxts('loginFailed'), { autoClose: 4000 });
+      showToast(authTxts('loginFailed'), 'error');
     } finally {
       dispatch({ type: AUTH_ACTIONS.SET_LOADING_FALSE });
     }
@@ -147,12 +148,10 @@ const useAuth = () => {
       if (data?.success) {
         sessionStorage.setItem('otp_email', body.email);
 
-        toast.success(data?.message, {
-          autoClose: 3000,
-        });
+        showToast(data?.message);
         router.replace(PATHS.OTP);
       } else {
-        toast.error(data?.message, { autoClose: 4000 });
+        showToast(data?.message, 'error');
       }
     } catch (error: any) {
       const errorMsg = error.response?.data?.message || error.message;
@@ -160,7 +159,7 @@ const useAuth = () => {
         type: AUTH_ACTIONS.SET_ERROR,
         payload: { error: errorMsg },
       });
-      toast.error(errorMsg, { autoClose: 4000 });
+      showToast(errorMsg, 'error');
     } finally {
       dispatch({ type: AUTH_ACTIONS.SET_LOADING_FALSE });
     }
@@ -182,10 +181,10 @@ const useAuth = () => {
 
         sessionStorage.removeItem('otp_email');
         sessionStorage.removeItem('otp_password');
-        toast.success(data?.message);
+        showToast(data?.message);
         router.replace(PATHS.HOME.link);
       } else {
-        toast.error(authTxts('verificationFailedCode'));
+        showToast(authTxts('verificationFailedCode'));
       }
     } catch (error: any) {
       const errorMsg = error.response?.data?.message || error.message;
@@ -193,7 +192,7 @@ const useAuth = () => {
         type: AUTH_ACTIONS.SET_ERROR,
         payload: { error: errorMsg },
       });
-      toast.error(errorMsg);
+      showToast(errorMsg);
     } finally {
       dispatch({ type: AUTH_ACTIONS.SET_LOADING_FALSE });
     }
@@ -214,7 +213,7 @@ const useAuth = () => {
         }
       );
       dispatch({ type: AUTH_ACTIONS.LOGOUT });
-      toast.success(res?.data?.message || 'تم تسجيل الخروج بنجاح');
+      showToast(res?.data?.message || 'تم تسجيل الخروج بنجاح');
       // router.replace(PATHS.LOGIN);
     } catch (error: any) {
       const errorMsg = error.response?.data?.message || error.message;
@@ -222,7 +221,7 @@ const useAuth = () => {
         type: AUTH_ACTIONS.SET_ERROR,
         payload: { error: errorMsg },
       });
-      toast.error(errorMsg);
+      showToast(errorMsg);
     } finally {
       dispatch({ type: AUTH_ACTIONS.SET_LOADING_FALSE });
     }
