@@ -15,6 +15,7 @@ import AnimatedWrapper from '../molecules/FramerMotion/AnimatedWrapper';
 import MotionSection from '../molecules/FramerMotion/MotionSection';
 import { useTranslations } from 'next-intl';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import { useCartContext } from '@/context/CartContext';
 
 const CartContent: React.FC<CartContentProps> = ({
   items,
@@ -27,6 +28,7 @@ const CartContent: React.FC<CartContentProps> = ({
   const btnTexts = useTranslations('BtnTexts');
   const points = 1000;
   const { isArabic } = useToggleLocale();
+  const { removeFromCart } = useCartContext();
 
   return (
     <Layer otherClassName="!my-12">
@@ -69,6 +71,7 @@ const CartContent: React.FC<CartContentProps> = ({
                     <Button
                       variant="ghost"
                       otherClassName="!text-gray-400 hover:!text-red-500"
+                      handleClick={() => item.id && removeFromCart(item.id)}
                     >
                       <Trash2 className="w-5 h-5" />
                     </Button>
