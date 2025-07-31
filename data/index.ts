@@ -35,6 +35,23 @@ import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
 import { Sparkles, Wallet } from 'lucide-react';
 import { BannerSlide, InputItem, RewardTier } from '@/interfaces';
 
+export const EnjoyWinWinData = [
+  {
+    id: 1,
+    translationKey: 'participateAndWin',
+    buttonTextKey: 'MoreAboutParticipateAndWin',
+    image: '/assets/coin.gif',
+    href: '#',
+  },
+  {
+    id: 2,
+    translationKey: 'enjoyGames',
+    buttonTextKey: 'MoreAboutEnjoyGames',
+    image: '/assets/coin.gif',
+    href: PATHS.STARS.link,
+  },
+];
+
 export const ServiceData = [
   {
     id: 1,
@@ -122,14 +139,14 @@ export const FOOTER_LINKS_DATA = {
       src: '/assets/digitals-stores/play.jpg',
       alt: 'Google Play Logo',
       url: '#',
-      ariaLabel: "googlePlayApp",
+      ariaLabel: 'googlePlayApp',
     },
     {
       id: 2,
       src: '/assets/digitals-stores/app.jpg',
       alt: 'App Store Logo',
       url: '#',
-      ariaLabel: "appStoreApp",
+      ariaLabel: 'appStoreApp',
     },
   ],
   socialMedia: [
