@@ -13,8 +13,8 @@ import { useTranslations } from 'next-intl';
 import Loading from '@/components/molecules/loading';
 import { useParams, useRouter } from 'next/navigation';
 import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
-import { toast } from 'react-toastify';
 import { useCartContext } from '@/context/CartContext';
+import { useToast } from '@/lib/toast';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -26,6 +26,7 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
   const t = useTranslations('Loading');
   const msgTxts = useTranslations('Messages');
   const { addToCart } = useCartContext();
+  const { showToast } = useToast();
 
   const { get, data, isLoading } = useAPI(`sub-category/${itemId}`);
 
@@ -44,7 +45,7 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
 
   const handleAddToCart = (product: ProductCardProps) => {
     addToCart(product);
-    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+    showToast(`${product.title} ${msgTxts('addedToCart')}`);
   };
 
   useEffect(() => {
