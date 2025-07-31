@@ -4,19 +4,8 @@ import { MdMoreHoriz, MdOutlineAssignment } from 'react-icons/md';
 
 export const PATHS = {
   HOME: { name: 'الرئيسية', link: '/' },
-  APP_STORES: {
-    name: 'بطاقات المتاجر الرقمية',
-    link: '/categories/digital-stores',
-  },
-  GAMES_CARDS: { name: 'بطاقات ألعاب', link: '/categories/games-platforms' },
-  SERVICES: {
-    name: 'بطاقات الخدمات والإشتراكات',
-    link: '/categories/services',
-  },
-  SHOP_CARDS: { name: 'بطاقات تسوّق متنوعة', link: '/categories/shop-cards' },
   STORE: { name: 'المتجر', link: '/store' },
   STARS: { name: 'دليل ستارز', link: '/stars' },
-  // MAX_PROGRAM: { name: 'مكسب', link: '/maxup-program' },
   STARS_GIFTS: '/stars-gifts',
   WALLET: { name: 'محفظتي', link: '/wallet' },
   MY_PURCHASES: { name: 'طلباتي', link: '/my-purchases' },
@@ -42,6 +31,7 @@ export const PATHS = {
   LOGIN: '/auth/login',
   SIGNUP: '/auth/signup',
   OTP: '/auth/otp',
+  // MAX_PROGRAM: { name: 'مكسب', link: '/maxup-program' },
 };
 
 export const navBarLinks = [
