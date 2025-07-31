@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -15,8 +15,11 @@ import FormError from '@/components/atomic/FormError';
 import { InputTypes } from '@/utils/type';
 import { useAuthContext } from '@/context/AuthContext';
 import SocialLogin from '@/components/molecules/SocialLogin';
+import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 
 const SignupPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const authTxts = useTranslations('Auth');
@@ -56,6 +59,25 @@ const SignupPage = () => {
     reset();
   };
 
+  const isPasswordField = (name: string) =>
+    name === 'password' || name === 'password_confirmation';
+
+  const getShowState = (name: string) =>
+    name === 'password' ? showPassword : showConfirmPassword;
+
+  const toggleShow = (name: string) =>
+    name === 'password'
+      ? () => setShowPassword((prev) => !prev)
+      : () => setShowConfirmPassword((prev) => !prev);
+
+  const getIcon = (name: string) => {
+    if (!isPasswordField(name)) return undefined;
+    return getShowState(name) ? FaEyeSlash : FaEye;
+  };
+
+  const getInputType = (name: string, defaultType: string) =>
+    isPasswordField(name) && getShowState(name) ? 'text' : defaultType;
+
   return (
     <AuthLayout
       title={authTxts('signupTitle')}
@@ -66,23 +88,25 @@ const SignupPage = () => {
       isSubmitting={isLoading}
     >
       {signupInputs.map((input) => {
+        const { name, type } = input;
         const label = inputsTxts(`labels.${input.name}`);
         const placeholder = inputsTxts(`placeHolders.${input.placeholder}`);
+
         return (
           <div key={input.id}>
             <Input
-              key={input.id}
               variant="secondary"
-              type={input.type as InputTypes}
-              inputName={input.name}
+              type={getInputType(name, type) as InputTypes}
+              inputName={name}
               label={label}
               placeholder={placeholder}
+              Icon={getIcon(name)}
+              onIconClick={isPasswordField(name) ? toggleShow(name) : undefined}
+              iconClassName="text-gray-400"
               otherClassNameContainer={
-                errors[input.name as keyof signupFormData]
-                  ? 'border-red-500'
-                  : ''
+                errors[name as keyof signupFormData] ? 'border-red-500' : ''
               }
-              {...register(input.name as keyof signupFormData)}
+              {...register(name as keyof signupFormData)}
             />
             {errors[input.name as keyof signupFormData] && (
               <FormError
