@@ -1,16 +1,14 @@
 'use client';
-
 import { useLocale } from 'next-intl';
 import { useEffect } from 'react';
+import { setAxiosLocale } from '@/utils/axiosInstance';
 
-const LocaleSync = () => {
+export default function LocaleSync() {
   const locale = useLocale();
 
   useEffect(() => {
-    localStorage.setItem('NEXT_LOCALE', locale);
+    setAxiosLocale(locale);
   }, [locale]);
 
   return null;
-};
-
-export default LocaleSync;
+}
