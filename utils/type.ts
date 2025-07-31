@@ -19,6 +19,7 @@ export type NavbarLayout = 'default' | 'store';
 export type InputTypes =
   | 'text'
   | 'email'
+  | 'password'
   | 'search'
   | 'select'
   | 'number'
