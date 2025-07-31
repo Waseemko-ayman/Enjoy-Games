@@ -9,14 +9,16 @@ export const useToast = () => {
   const { isArabic } = useToggleLocale();
 
   const getBaseConfig = (): ToastOptions => ({
-    position: (isArabic ? 'top-right' : 'top-left') as 'top-right' | 'top-left',
+    position: 'top-left',
     autoClose: 2000,
     closeOnClick: true,
     pauseOnHover: true,
-    className: '!max-w-[95vw] !w-auto !min-w-[300px] !z-[9999]',
+    className:
+      '!max-w-[90vw] !w-auto !min-w-[250px] sm:!min-w-[300px] !z-[9999]',
     style: {
       top: isMobile ? '40px' : undefined,
     },
+    ...(isArabic && { rtl: true }),
   });
 
   const showToast = (message: string, type: ToastType = 'success') => {
