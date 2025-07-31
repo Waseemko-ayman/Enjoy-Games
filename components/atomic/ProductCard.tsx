@@ -151,7 +151,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <Button
             variant={btnVariant}
             Icon={icon}
-            otherClassName={`${otherClassNameBtn} w-full p-2`}
+            otherClassName={`${otherClassNameBtn} w-full p-2 max-sm:!text-sm`}
             handleClick={onAddToCart}
           >
             {btnText}
