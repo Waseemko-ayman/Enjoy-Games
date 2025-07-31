@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import React, { useEffect, useRef } from 'react';
@@ -41,7 +42,6 @@ const OTPPage = () => {
   const otpValue = watch('otp', '');
   const otpArray = otpValue.split('').concat(Array(6).fill('')).slice(0, 6);
 
-  // 3. تسجيل الحقول بشكل يدوي
   useEffect(() => {
     register('otp');
   }, [register]);
@@ -52,6 +52,12 @@ const OTPPage = () => {
       return () => clearTimeout(timer);
     }
   }, [timeLeft]);
+
+  useEffect(() => {
+    if (otpValue.length === 6 && /^\d{6}$/.test(otpValue)) {
+      handleSubmit(onSubmit)();
+    }
+  }, [otpValue, handleSubmit]);
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);

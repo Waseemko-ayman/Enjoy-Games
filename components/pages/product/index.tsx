@@ -29,12 +29,12 @@ const ProductDetailsPage = ({ productId }: { productId: string }) => {
       <Container>
         <ProductDetailsSections product={product} />
         <TabsSection product={product} />
-        <SimilarProducts
-          getSlugs={(subCatId) =>
-            getCategoryAndSubCategorySlugs(categories, subCatId)
-          }
-        />
       </Container>
+      <SimilarProducts
+        getSlugs={(subCatId) =>
+          getCategoryAndSubCategorySlugs(categories, subCatId)
+        }
+      />
     </Layer>
   );
 };

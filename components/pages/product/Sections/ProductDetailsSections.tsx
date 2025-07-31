@@ -17,12 +17,12 @@ import { useCartContext } from '@/context/CartContext';
 import { FOOTER_LINKS_DATA, inputsViaEntry } from '@/data';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { ProductCardProps } from '@/interfaces';
+import { useToast } from '@/lib/toast';
 import { InputTypes } from '@/utils/type';
 import { useTranslations } from 'next-intl';
 import React, { lazy, Suspense } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { MdAdd, MdAddShoppingCart } from 'react-icons/md';
-import { toast } from 'react-toastify';
 
 const inputQuantityOptions = [
   { id: 1, label: '1' },
@@ -38,10 +38,11 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const msgTxts = useTranslations('Messages');
   const { isArabic } = useToggleLocale();
   const { addToCart } = useCartContext();
+  const { showToast } = useToast();
 
   const handleAddToCart = (product: ProductCardProps) => {
     addToCart(product);
-    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+    showToast(`${product.title} ${msgTxts('addedToCart')}`);
   };
 
   return (

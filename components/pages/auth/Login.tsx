@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -16,8 +16,10 @@ import { useAuthContext } from '@/context/AuthContext';
 import { InputTypes } from '@/utils/type';
 import { useRouter } from 'next/navigation';
 import SocialLogin from '@/components/molecules/SocialLogin';
+import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 
 const LoginPage = () => {
+  const [showPass, setShowPass] = useState(false);
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const authTxts = useTranslations('Auth');
@@ -40,6 +42,10 @@ const LoginPage = () => {
   } = useForm<LoginFormData>({
     resolver: yupResolver(schema),
   });
+
+  const hadnleShowPass = () => {
+    setShowPass(!showPass);
+  };
 
   const onSubmit = (data: LoginFormData) => {
     login(data);
@@ -68,14 +74,29 @@ const LoginPage = () => {
       {loginInputs.map((input) => {
         const label = inputsTxts(`labels.${input.name}`);
         const placeholder = inputsTxts(`placeHolders.${input.placeholder}`);
+        const isPasswordField = input.name === 'password';
+        const showPasswordIcon = isPasswordField
+          ? showPass
+            ? FaEyeSlash
+            : FaEye
+          : undefined;
         return (
           <div key={input.id}>
             <Input
               variant="secondary"
-              type={input.type as InputTypes}
+              type={
+                isPasswordField
+                  ? showPass
+                    ? 'text'
+                    : 'password'
+                  : (input.type as InputTypes)
+              }
               inputName={input.name}
               label={label}
               placeholder={placeholder}
+              Icon={showPasswordIcon}
+              onIconClick={hadnleShowPass}
+              iconClassName="text-gray-400"
               otherClassNameContainer={
                 errors[input.name as keyof LoginFormData]
                   ? 'border-red-500'

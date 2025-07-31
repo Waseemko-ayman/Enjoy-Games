@@ -28,6 +28,7 @@ type InputProps = {
   isRequired?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange?: (e: React.ChangeEvent<any>) => void;
+  onIconClick?: () => void;
 } & React.HTMLAttributes<HTMLElement>;
 
 const Input = React.forwardRef<HTMLElement, InputProps>(
@@ -48,6 +49,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
       isRequired = false,
       checked,
       onChange,
+      onIconClick,
       ...rest
     },
     ref
@@ -164,11 +166,17 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
             } ${otherClassNameContainer}`}
           >
             {iconAfterInput && (
-              <Icon className={`${iconClassName} text-2xl cursor-pointer`} />
+              <Icon
+                className={`${iconClassName} text-xl cursor-pointer`}
+                onClick={onIconClick}
+              />
             )}
             {InputElement}
             {iconBeforeInput && (
-              <Icon className={`${iconClassName} text-2xl cursor-pointer`} />
+              <Icon
+                className={`${iconClassName} text-xl cursor-pointer`}
+                onClick={onIconClick}
+              />
             )}
           </div>
         )}

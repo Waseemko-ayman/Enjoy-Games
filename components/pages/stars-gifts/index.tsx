@@ -15,8 +15,8 @@ import { useCategories } from '@/context/CategoriesContext';
 import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import { ProductCardProps } from '@/interfaces';
-import { toast } from 'react-toastify';
 import { useCartContext } from '@/context/CartContext';
+import { useToast } from '@/lib/toast';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -27,10 +27,11 @@ const StarsGiftsPage = () => {
   const { categories } = useCategories();
   const msgTxts = useTranslations('Messages');
   const { addToCart } = useCartContext();
+  const { showToast } = useToast();
 
   const handleAddToCart = (product: ProductCardProps) => {
     addToCart(product);
-    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+    showToast(`${product.title} ${msgTxts('addedToCart')}`);
   };
   return (
     <Layer>

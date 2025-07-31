@@ -25,15 +25,20 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({
       ) : error ? (
         <ErrorFetching />
       ) : (
-        <GridWrapper otherClassName="gap-8 mt-12">
+        <GridWrapper
+          otherClassName={`gap-8 mt-12 ${
+            cards.length > 1 ? 'max-sm:grid-cols-2' : ''
+          }`}
+        >
           {cards.map((card, index) => (
             <AnimatedWrapper key={card.id} custom={index}>
               <CategoryCard
                 image={'/assets/play-station.webp'}
                 name={card.name}
-                onClick={() =>
-                  onCardClick?.(card.categorySlug ?? '', card.slug)
-                }
+                onClick={() => {
+                  onCardClick?.(card.categorySlug ?? '', card.slug);
+                  card.onClick?.();
+                }}
               />
             </AnimatedWrapper>
           ))}

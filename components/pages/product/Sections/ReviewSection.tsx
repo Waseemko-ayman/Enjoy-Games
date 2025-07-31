@@ -29,7 +29,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ data }) => {
     return Array.from({ length: 5 }, (_, index) => (
       <Star
         key={index}
-        className={`w-6 h-6 text-yellow-400 ${
+        className={`w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 ${
           index < Math.floor(rating) ? 'fill-yellow-400' : 'text-gray-300'
         }`}
       />
@@ -93,7 +93,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ data }) => {
         <div className="flex-1 max-[991px]:w-full max-[991px]:order-1">
           <div className="flex flex-col items-end mb-4">
             <MotionSection index={1}>
-              <div className="text-5xl font-bold mb-2">
+              <div className="text-4xl sm:text-5xl font-bold mb-2">
                 {reviewData.overallRating.toFixed(1)}
               </div>
             </MotionSection>

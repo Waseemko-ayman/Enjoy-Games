@@ -1,4 +1,5 @@
 import ProductCard from '@/components/atomic/ProductCard';
+import SectionComponent from '@/components/atomic/SectionComponent';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import GridWrapper from '@/components/molecules/GridWrapper';
@@ -6,10 +7,10 @@ import Loading from '@/components/molecules/loading';
 import { useCartContext } from '@/context/CartContext';
 import { useMainContent } from '@/context/MainContentContext';
 import { getSlugsProps, ProductCardProps } from '@/interfaces';
+import { useToast } from '@/lib/toast';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { PiShoppingCartLight } from 'react-icons/pi';
-import { toast } from 'react-toastify';
 
 const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const t = useTranslations('productDetails');
@@ -17,25 +18,21 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const { data, isLoading, error } = useMainContent();
   const msgTxts = useTranslations('Messages');
   const { addToCart } = useCartContext();
+  const { showToast } = useToast();
 
   const handleAddToCart = (product: ProductCardProps) => {
     addToCart(product);
-    toast.success(`${product.title} ${msgTxts('addedToCart')}`);
+    showToast(`${product.title} ${msgTxts('addedToCart')}`);
   };
   return (
-    <div className="mt-10">
-      <AnimatedWrapper>
-        <h3 className="text-2xl sm:text-3xl font-medium mb-4">
-          {t('relatedProducts')}
-        </h3>
-      </AnimatedWrapper>
+    <SectionComponent title={t('relatedProducts')}>
       {isLoading ? (
         <Loading />
       ) : error ? (
         <ErrorFetching />
       ) : (
         <GridWrapper
-          otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"
+          otherClassName="gap-5"
           isScrollable
         >
           {Array.isArray(data?.newly_arrived) &&
@@ -73,7 +70,7 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
             })}
         </GridWrapper>
       )}
-    </div>
+    </SectionComponent>
   );
 };
 

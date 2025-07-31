@@ -1,28 +1,27 @@
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 
-const mockAPITitles: Record<string, string> = {
-  playstation: 'بلايستيشن',
-  xbox: 'اكس بوكس',
-  pubg: 'شدات ببجي',
-  fortnite: 'بطاقات فورتنايت',
-};
+// const mockAPITitles: Record<string, string> = {
+//   playstation: 'بلايستيشن',
+//   xbox: 'اكس بوكس',
+//   pubg: 'شدات ببجي',
+//   fortnite: 'بطاقات فورتنايت',
+// };
 
-export function useCategoryTitle(slug?: string): string {
-  const title = useMemo(() => {
-    if (!slug) return '';
-    return mockAPITitles[slug] || formatSlug(slug);
-  }, [slug]);
+// export function useCategoryTitle(slug?: string): string {
+//   const title = useMemo(() => {
+//     if (!slug) return '';
+//     return mockAPITitles[slug] || formatSlug(slug);
+//   }, [slug]);
 
-  return title;
-}
+//   return title;
+// }
 
-function formatSlug(slug: string) {
-  return decodeURIComponent(slug)
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, (c) => c.toUpperCase());
-}
+// function formatSlug(slug: string) {
+//   return decodeURIComponent(slug)
+//     .replace(/-/g, ' ')
+//     .replace(/\b\w/g, (c) => c.toUpperCase());
+// }
 
-/* 
 import { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/axiosInstance';
 import { useLocale } from 'next-intl';
@@ -40,12 +39,7 @@ export function useCategoryTitle(slug?: string): string {
     const fetchTitle = async () => {
       try {
         const response = await axiosInstance.get(
-          `/categories-subcategories/${slug}`,
-          {
-            headers: {
-              'Accept-Language': locale, // تمرير اللغة الجديدة مباشرة
-            },
-          }
+          `/categories-subcategories/${slug}`
         );
         setTitle(response.data?.name || formatSlug(slug));
       } catch (error) {
@@ -65,5 +59,3 @@ function formatSlug(slug: string) {
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
-
-*/

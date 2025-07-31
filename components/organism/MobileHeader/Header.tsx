@@ -17,6 +17,14 @@ const MobileHeader = () => {
   const t = useTranslations('PagesHeaderTitles');
   const ariaTxts = useTranslations('ariaLabels.links');
 
+  /*
+    const translatedParts = useTranslatedPathParts(pathname);
+    const title =
+      translatedParts.length > 0
+        ? translatedParts[translatedParts.length - 1]
+        : 'Home';
+  */
+
   const pathParts = pathname.split('/').filter(Boolean);
   const filteredParts = pathParts.filter(
     (part, index) => !(index === 0 && ['en', 'ar'].includes(part))
@@ -25,14 +33,7 @@ const MobileHeader = () => {
   // Last part of the path - we display it as is (decoded with dashes replaced)
   const lastPart = filteredParts[filteredParts.length - 1] || 'home';
 
-  // The rest of the path parts (if you want to use them)
-  // const secondLastPart =
-  //   filteredParts.length > 1 ? filteredParts[filteredParts.length - 2] : null;
-
-  // We determine whether the last part resembles untranslated text (for example, if it contains numbers or unusual letters).
-  // If it contains numbers or is not an alphabet, we display it as is.
-  // Otherwise, we use the translation.
-  const needsRawDisplay = /[\d\-]/.test(lastPart);
+  const needsRawDisplay = /\d/.test(lastPart);
 
   const title = needsRawDisplay ? decodeTitle(lastPart) : t(lastPart);
 
