@@ -60,8 +60,10 @@ export interface ProductCardProps {
   name?: string;
   price_before?: number;
   price?: number;
-  discount?: null;
+  discount?: number;
   shipping_payment?: string;
+  product_id?: number;
+  final_price?: number;
   quantity?: number;
   currencyImage?: string;
   ratings?: number | string;
@@ -78,7 +80,6 @@ export interface ProductCardProps {
   onClick?: () => void;
   onAddToCart?: () => void;
 }
-
 export interface getSlugsProps {
   getSlugs: (subCategoryId: number) => {
     categorySlug: string;
@@ -508,7 +509,7 @@ export interface ReviewSectionProps {
 
 export interface FormData {
   subject: string;
-  ticketType: string;
+  // ticketType: string;
   details: string;
 }
 

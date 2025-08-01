@@ -314,7 +314,9 @@
       "cart": "Shopping Cart",
       "payment": "Payment",
       "complete": "Order Complete"
-    }
+    },
+    "discountSuccess": "The debit transaction was completed successfully.",
+    "discountFaild": "The discount operation failed."
   },
   "Tickets": {
     "emptyStateTitle": "No support tickets yet...",
@@ -364,8 +366,8 @@
       "subtotal": {
         "label": "Subtotal"
       },
-      "vat": {
-        "label": "VAT"
+      "discount": {
+        "label": "Total Discount"
       },
       "total": {
         "label": "Total Amount"
@@ -429,6 +431,7 @@
       "twitter": "Twitter",
       "facebook": "Facebook",
       "idNumber": "ID Number",
+      "shipping_method": "Shipping method",
       "unlockAccount": "I have unlocked the account",
       "comment": "Leave a comment",
       "hideMyName": "Hide my name in the customer list"

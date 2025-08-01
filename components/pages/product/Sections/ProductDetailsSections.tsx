@@ -14,7 +14,13 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { useCartContext } from '@/context/CartContext';
-import { FOOTER_LINKS_DATA, inputsViaEntry } from '@/data';
+import {
+  FOOTER_LINKS_DATA,
+  accessInputs,
+  accountIdInputs,
+  codeInputs,
+  multiIdInputs,
+} from '@/data';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { ProductCardProps } from '@/interfaces';
 import { useToast } from '@/lib/toast';
@@ -41,8 +47,8 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const { addToCart } = useCartContext();
   const { showToast } = useToast();
 
-  // const handleAddToCart = (product: ProductCardProps) => {
   const handleAddToCart = () => {
+    // addToCart({ ...product, quantity: selectedQuantity, formScheme });
     addToCart({ ...product, quantity: selectedQuantity });
     showToast(`${product.title} ${msgTxts('addedToCart')}`);
   };
@@ -170,7 +176,16 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                   {t('additionalOptions')}
                 </AccordionTrigger>
                 <AccordionContent className="space-y-4">
-                  {inputsViaEntry.map((input, index) => (
+                  {(product?.shipping_payment === 'code'
+                    ? codeInputs
+                    : product?.shipping_payment === 'account_id'
+                    ? accountIdInputs
+                    : product?.shipping_payment === 'multi_id'
+                    ? multiIdInputs
+                    : product?.shipping_payment === 'access'
+                    ? accessInputs
+                    : []
+                  ).map((input, index) => (
                     <AnimatedWrapper key={input.id} custom={index}>
                       <Input
                         variant="secondary"
