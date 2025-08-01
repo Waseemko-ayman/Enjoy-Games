@@ -9,6 +9,7 @@ import { PATHS } from '@/data/paths';
 import Link from 'next/link';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { useTranslations } from 'next-intl';
+import { useCartContext } from '@/context/CartContext';
 
 const decodeTitle = (str: string) => decodeURIComponent(str).replace(/-/g, ' ');
 
@@ -37,6 +38,8 @@ const MobileHeader = () => {
 
   const title = needsRawDisplay ? decodeTitle(lastPart) : t(lastPart);
 
+  const { cartItems } = useCartContext();
+
   return (
     <header className="h-[60px] bg-enjoy-gray-light flex items-center">
       <Container otherClassName="w-full flex items-center justify-between gap-4">
@@ -49,8 +52,17 @@ const MobileHeader = () => {
           </h5>
         </AnimatedWrapper>
         <AnimatedWrapper direction="y" distance={-40}>
-          <Link href={PATHS.MY_CART.link} aria-label={ariaTxts('myCartPage')}>
+          <Link
+            href={PATHS.MY_CART.link}
+            aria-label={ariaTxts('myCartPage')}
+            className="relative"
+          >
             <MdOutlineShoppingCart className="text-2xl cursor-pointer text-enjoy-primary" />
+            {cartItems.length > 0 && (
+              <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-xs w-4 h-4 rounded-[50%]">
+                <span className="font-sans">{cartItems.length}</span>
+              </div>
+            )}
           </Link>
         </AnimatedWrapper>
       </Container>
