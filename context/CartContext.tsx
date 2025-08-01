@@ -33,19 +33,45 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
   }, [cartItems]);
 
+  // const addToCart = (item: ProductCardProps) => {
+  //   setCartItems((prev) => {
+  //     const existing = prev.find(
+  //       (i) => i.id === item.id && i.slug === item.slug
+  //     );
+  //     if (existing) {
+  //       return prev.map((i) =>
+  //         i.id === item.id && i.slug === item.slug
+  //           ? { ...i, quantity: (i.quantity ?? 1) + 1 }
+  //           : i
+  //       );
+  //     }
+  //     return [...prev, { ...item, quantity: 1 }];
+  //   });
+  // };
+
   const addToCart = (item: ProductCardProps) => {
+    const quantityToAdd = item.quantity ?? 1;
+
     setCartItems((prev) => {
-      const existing = prev.find(
+      const existingIndex = prev.findIndex(
         (i) => i.id === item.id && i.slug === item.slug
       );
-      if (existing) {
-        return prev.map((i) =>
-          i.id === item.id && i.slug === item.slug
-            ? { ...i, quantity: (i.quantity ?? 1) + 1 }
-            : i
-        );
+
+      if (existingIndex !== -1) {
+        // انسخ الـ prev بالكامل
+        const updatedItems = [...prev];
+        // زيد الكمية للعنصر الموجود
+        const existingItem = updatedItems[existingIndex];
+        const newQuantity = (existingItem.quantity ?? 1) + quantityToAdd;
+        updatedItems[existingIndex] = {
+          ...existingItem,
+          quantity: newQuantity,
+        };
+        return updatedItems;
       }
-      return [...prev, { ...item, quantity: 1 }];
+
+      // المنتج جديد
+      return [...prev, { ...item, quantity: quantityToAdd }];
     });
   };
 
