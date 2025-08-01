@@ -9,7 +9,7 @@ export const useToast = () => {
   const { isArabic } = useToggleLocale();
 
   const getBaseConfig = (): ToastOptions => ({
-    position: 'top-left',
+    position: isMobile ? 'top-left' : 'top-right',
     autoClose: 2000,
     closeOnClick: true,
     pauseOnHover: true,
