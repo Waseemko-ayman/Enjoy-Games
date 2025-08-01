@@ -612,42 +612,42 @@ export const ticketsInputsTypes = [
     name: 'subject',
     placeholder: 'عنوان التذكرة',
   },
+  // {
+  //   id: 2,
+  //   type: 'select',
+  //   name: 'ticketType',
+  //   placeholder: 'حدد نوع التذكرة',
+  //   options: [
+  //     {
+  //       id: 1,
+  //       label: 'مشكلة بأحد الطلبات',
+  //       value: 'order-issue',
+  //     },
+  //     {
+  //       id: 2,
+  //       label: 'مشكلة بالدفع والتحويل',
+  //       value: 'payment-issue',
+  //     },
+  //     {
+  //       id: 3,
+  //       label: 'اقتراح او شيء اخر',
+  //       value: 'suggestion-or-other',
+  //     },
+  //   ],
+  // },
   {
     id: 2,
-    type: 'select',
-    name: 'ticketType',
-    placeholder: 'حدد نوع التذكرة',
-    options: [
-      {
-        id: 1,
-        label: 'مشكلة بأحد الطلبات',
-        value: 'order-issue',
-      },
-      {
-        id: 2,
-        label: 'مشكلة بالدفع والتحويل',
-        value: 'payment-issue',
-      },
-      {
-        id: 3,
-        label: 'اقتراح او شيء اخر',
-        value: 'suggestion-or-other',
-      },
-    ],
-  },
-  {
-    id: 3,
     type: 'textarea',
     name: 'details',
     placeholder: 'يرجي كتابة وصف لمساعتدك بشكل أدق',
   },
 ];
 
-export const inputsViaEntry: InputItem[] = [
+export const accessInputs: InputItem[] = [
   {
     id: 1,
-    inputName: 'quantity',
-    labelKey: 'quantity',
+    inputName: 'shipping_method',
+    labelKey: 'shipping_method',
     type: 'select',
     options: [
       { id: 1, value: 'phone', labelKey: 'phone' },
@@ -680,6 +680,39 @@ export const inputsViaEntry: InputItem[] = [
     labelKey: 'unlockAccount',
     type: 'checkbox',
     placeholder: 'تم الإلغاء',
+  },
+];
+
+export const codeInputs: InputItem[] = [
+  {
+    id: 1,
+    inputName: 'email',
+    labelKey: 'email',
+    type: 'email',
+  },
+];
+
+export const accountIdInputs: InputItem[] = [
+  {
+    id: 1,
+    inputName: 'idNumber',
+    labelKey: 'idNumber',
+    type: 'number',
+  },
+];
+
+export const multiIdInputs: InputItem[] = [
+  {
+    id: 1,
+    inputName: 'id_number_1',
+    labelKey: 'id_number',
+    type: 'number',
+  },
+  {
+    id: 2,
+    inputName: 'id_number_2',
+    labelKey: 'id_number',
+    type: 'number',
   },
 ];
 

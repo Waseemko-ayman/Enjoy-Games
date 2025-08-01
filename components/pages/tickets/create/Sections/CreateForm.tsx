@@ -25,9 +25,9 @@ const CreateForm = () => {
 
   const schema = Yup.object().shape({
     subject: Yup.string().required(t('subjectRequired') || 'العنوان مطلوب'),
-    ticketType: Yup.string().required(
-      t('ticketTypeRequired') || 'نوع التذكرة مطلوب'
-    ),
+    // ticketType: Yup.string().required(
+    //   t('ticketTypeRequired') || 'نوع التذكرة مطلوب'
+    // ),
     details: Yup.string().required(t('detailsRequired') || 'الوصف مطلوب'),
   });
 
@@ -66,7 +66,7 @@ const CreateForm = () => {
                   type={input.type as InputTypes}
                   inputName={input.name}
                   placeholder={placeholders(input.name)}
-                  options={input.options}
+                  // options={input.options}
                   otherClassNameContainer={
                     errors[fieldName]?.message ? 'border-red-500' : ''
                   }
