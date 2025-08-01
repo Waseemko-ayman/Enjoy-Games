@@ -413,8 +413,8 @@ export interface CartItemData {
 export interface CartContentProps {
   items: ProductCardProps[];
   onProceedToPayment: () => void;
-  quantity: number;
-  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  quantity?: number;
+  setQuantity?: React.Dispatch<React.SetStateAction<number>>;
   // onSendAsGift: () => void;
 }
 
@@ -423,7 +423,7 @@ export interface PaymentStepProps {
   onBackToCart: () => void;
   totalAmount: number;
   items: ProductCardProps[];
-  quantity: number;
+  quantity?: number;
 }
 
 export interface BannerSlide {
