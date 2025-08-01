@@ -1,9 +1,9 @@
 'use client';
 import EmptyStateBox from '@/components/molecules/EmptyStateBox';
-import OrderCompleteStep from '@/components/molecules/OrderCompleteStep';
-import PaymentStep from '@/components/molecules/PaymentStep';
+import OrderCompleteStep from '@/components/pages/my-cart/Sections/OrderCompleteStep';
+import PaymentStep from '@/components/pages/my-cart/Sections/PaymentStep';
 import StepIndicator from '@/components/molecules/StepIndicator';
-import CartContent from '@/components/organism/CartContent';
+import CartContent from '@/components/pages/my-cart/Sections/CartContent';
 import { useCartContext } from '@/context/CartContext';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
@@ -22,7 +22,6 @@ const MyCartPage = () => {
   const { cartItems, clearCart } = useCartContext();
 
   const [orderNumber] = useState('DL' + Math.random().toString().substr(2, 8));
-  const [quantity, setQuantity] = useState(1);
 
   const steps = [
     {
@@ -83,10 +82,7 @@ const MyCartPage = () => {
           {cartItems.length > 0 ? (
             <CartContent
               items={cartItems}
-              quantity={quantity}
-              setQuantity={setQuantity}
               onProceedToPayment={handleProceedToPayment}
-              // onSendAsGift={handleSendAsGift}
             />
           ) : (
             <EmptyStateBox
@@ -103,7 +99,6 @@ const MyCartPage = () => {
       {currentStep === STEPS.PAYMENT && (
         <PaymentStep
           items={cartItems}
-          quantity={quantity}
           onPaymentComplete={handlePaymentComplete}
           onBackToCart={handleBackToCart}
           totalAmount={totalAmount}
