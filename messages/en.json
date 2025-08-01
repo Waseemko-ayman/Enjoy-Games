@@ -276,7 +276,7 @@
     },
     "addCoupon": {
       "title": "Add Coupon",
-      "subTitle": "Easily add credit to your wallet using a Store Guide coupon."
+      "subTitle": "Easily add credit to your wallet using a Enjoy Games coupon."
     },
     "rewardsPrograms": {
       "bonusesPrograms": "Rewards Programs",
@@ -300,6 +300,7 @@
         "description": "Out of social responsibility and shared reward, part of our profits is dedicated to support Hajer Charity Association projects"
       }
     },
+    "loginToPay": "Make optional quantity in CartContentProps and PaymentStepProps interfaces",
     "order": {
       "orderCompleteMessage": "Your order has been completed successfully!",
       "orderCompleteThanks": "Thank you for your trust. Order details will be sent to your email",
@@ -343,7 +344,8 @@
     "average": "Good",
     "poor": "Didn't Like It",
     "bad": "Bad",
-    "relatedProducts": "Related Products"
+    "relatedProducts": "Related Products",
+    "productEvaluation": "Your evaluation has been submitted successfully. Thank you very much."
   },
   "errorBoundary": {
     "title": "Oops! Something Went Wrong"
