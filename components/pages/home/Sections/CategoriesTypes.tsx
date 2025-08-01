@@ -2,7 +2,6 @@ const SectionTypeCard = lazy(
   () => import('@/components/molecules/SectionTypeCard')
 );
 import { lazy, Suspense } from 'react';
-import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import Loading from '@/components/molecules/loading';
 import Container from '@/components/organism/Container';
 import { Category } from '@/interfaces';
@@ -29,21 +28,19 @@ const CategoriesTypes = ({
             (categories?.length ?? 0) > 4 ? 'lg:grid-cols-5' : 'lg:grid-cols-4'
           } gap-5`}
         >
-          {categories?.map((item: Category, index: number) => (
+          {categories?.map((item: Category) => (
             <Suspense key={item.id} fallback={<Loading />}>
-              <AnimatedWrapper custom={index}>
-                <SectionTypeCard
-                  path={`/categories/${item.slug}`}
-                  // imgSrc={item.image}
-                  title={item.name}
-                  imgSrc={'/assets/digitalStores.webp'}
-                  imgAlt={item.name}
-                  imgTitle={item.name}
-                  width={90}
-                  height={90}
-                  otherClassName="w-[90px] h-[90px] sm:w-[120px] sm:h-[120px]"
-                />
-              </AnimatedWrapper>
+              <SectionTypeCard
+                path={`/categories/${item.slug}`}
+                // imgSrc={item.image}
+                title={item.name}
+                imgSrc={'/assets/digitalStores.webp'}
+                imgAlt={item.name}
+                imgTitle={item.name}
+                width={90}
+                height={90}
+                otherClassName="w-[90px] h-[90px] sm:w-[120px] sm:h-[120px]"
+              />
             </Suspense>
           ))}
         </div>
