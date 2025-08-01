@@ -97,7 +97,9 @@ const PageHeader = ({
                 >
                   <BreadcrumbItem>
                     {index === breadcrumbs.length - 1 ? (
-                      <span className="text-gray-700">{crumb.label}</span>
+                      <span className="text-gray-700 text-base">
+                        {crumb.label}
+                      </span>
                     ) : (
                       <BreadcrumbLink href={crumb.href}>
                         {crumb.label}
