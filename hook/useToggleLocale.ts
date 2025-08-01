@@ -13,7 +13,7 @@ export function useToggleLocale() {
       pathParts.length > 2 ? pathParts.slice(2).join('/') : '';
 
     const newLocale = isArabic ? 'en' : 'ar';
-    router.push(`/${newLocale}/${pathWithoutLocale}`);
+    router.replace(`/${newLocale}/${pathWithoutLocale}`);
   };
 
   return { toggleLocale, isArabic };

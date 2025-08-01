@@ -20,7 +20,7 @@ import { ProductCardProps } from '@/interfaces';
 import { useToast } from '@/lib/toast';
 import { InputTypes } from '@/utils/type';
 import { useTranslations } from 'next-intl';
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { MdAdd, MdAddShoppingCart } from 'react-icons/md';
 
@@ -32,6 +32,7 @@ const inputQuantityOptions = [
 ];
 
 const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
   const t = useTranslations('productDetails');
   const inputsTxt = useTranslations('Inputs');
   const btnTxt = useTranslations('BtnTexts');
@@ -40,8 +41,9 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const { addToCart } = useCartContext();
   const { showToast } = useToast();
 
-  const handleAddToCart = (product: ProductCardProps) => {
-    addToCart(product);
+  // const handleAddToCart = (product: ProductCardProps) => {
+  const handleAddToCart = () => {
+    addToCart({ ...product, quantity: selectedQuantity });
     showToast(`${product.title} ${msgTxts('addedToCart')}`);
   };
 
@@ -143,16 +145,21 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           className="mt-4 space-y-7"
           onSubmit={(e) => {
             e.preventDefault();
-            handleAddToCart(product);
+            handleAddToCart();
           }}
         >
           <MotionSection index={6}>
             <Input
               variant="secondary"
-              type="select"
+              type="number"
               inputName="quantity"
               label={inputsTxt('labels.quantity')}
               options={inputQuantityOptions}
+              value={selectedQuantity}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                if (value >= 1) setSelectedQuantity(value);
+              }}
             />
           </MotionSection>
 

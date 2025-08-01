@@ -23,6 +23,7 @@ import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
 import { useTranslations } from 'next-intl';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { usePathname } from 'next/navigation';
+import { useToast } from '@/lib/toast';
 
 const RatingsSheet = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
@@ -34,6 +35,7 @@ const RatingsSheet = () => {
   const inputTxts = useTranslations('Inputs');
   const btnTxts = useTranslations('BtnTexts');
   const { isArabic } = useToggleLocale();
+  const { showToast } = useToast();
 
   const pathname = usePathname();
 
@@ -45,8 +47,12 @@ const RatingsSheet = () => {
 
   const formSchema = Yup.object().shape({
     comment: Yup.string()
-      .max(maxCharsLength, errosTxt('maxChars', { number: maxCharsLength }))
-      .required(errosTxt('commentRequired')),
+      .required(errosTxt('commentRequired'))
+      .test(
+        'maxLength',
+        errosTxt('maxChars', { number: maxCharsLength }),
+        (value) => (value ? value.length <= maxCharsLength : true)
+      ),
     checkbox: Yup.boolean(),
   });
 
@@ -68,13 +74,15 @@ const RatingsSheet = () => {
   const isLimitReached = remainingChars <= 0;
 
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = e.target.value;
-    if (newValue.length <= 255) {
-      setValue('comment', newValue, { shouldValidate: true });
-    }
+    setValue('comment', e.target.value, { shouldValidate: true });
   };
 
   const onSubmit = (data: any) => {
+    if (data.comment.length > maxCharsLength) {
+      showToast(errosTxt('maxChars', { number: maxCharsLength }), 'error');
+      return;
+    }
+
     setIsSubmittingLocal(true);
     const finalData = { ...data, attachments };
 
@@ -85,6 +93,7 @@ const RatingsSheet = () => {
       reset();
       setAttachments([]);
     }, 1000);
+    showToast(t('productEvaluation'));
   };
 
   return (
@@ -153,7 +162,7 @@ const RatingsSheet = () => {
                       {errors.comment.message}
                     </p>
                   )}
-                  {isLimitReached && !errors.comment && (
+                  {commentValue.length > maxCharsLength && (
                     <p className="text-red-500 text-sm mt-2 mb-3">
                       {inputTxts('errorsMsgs.commentLimitReached')}
                     </p>

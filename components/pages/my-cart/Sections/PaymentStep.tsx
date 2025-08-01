@@ -3,22 +3,21 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Image from 'next/image';
-import CardWrapper from '../atomic/CardWrapper';
-import Button from '../atomic/Button';
-import SubCartHeader from './SubCartHeader';
-import Layer from '../atomic/Layer';
-import Container from '../organism/Container';
-import InvoiceSummary from './InvoiceSummary';
+import CardWrapper from '../../../atomic/CardWrapper';
+import Button from '../../../atomic/Button';
+import SubCartHeader from '../../../molecules/SubCartHeader';
+import Layer from '../../../atomic/Layer';
+import Container from '../../../organism/Container';
+import InvoiceSummary from '../../../molecules/InvoiceSummary';
 import { PaymentStepProps } from '@/interfaces';
-import Input from '../atomic/Input';
-import MotionSection from './FramerMotion/MotionSection';
+import Input from '../../../atomic/Input';
+import MotionSection from '../../../molecules/FramerMotion/MotionSection';
 import { useTranslations } from 'next-intl';
 
 const PaymentStep: React.FC<PaymentStepProps> = ({
   onPaymentComplete,
   onBackToCart,
   items,
-  quantity,
 }) => {
   const t = useTranslations('MyCart');
   const btnTexts = useTranslations('BtnTexts');
@@ -136,24 +135,38 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
             <MotionSection index={3}>
               <CardWrapper className="p-6">
                 <h2 className="text-lg font-bold mb-6">{t('cartSummary')}</h2>
-                <div className="flex items-center gap-4 mb-4">
-                  <Image
-                    src="/assets/games-banners/fc24-banner.webp"
-                    alt="نينتندو"
-                    width={80}
-                    height={80}
-                    className="rounded-lg"
-                  />
-                  <div>
-                    <h3 className="font-semibold">نينتندو 10 دولار</h3>
-                    <p className="text-sm text-gray-600">المتجر الأمريكي</p>
-                  </div>
+                <div className="max-h-[220px] overflow-y-auto scrollbar-none">
+                  {items.map((item) => (
+                    <div key={item.id} className="flex items-center gap-4 mb-4">
+                      <Image
+                        src="/assets/play-station.webp"
+                        alt="نينتندو"
+                        width={80}
+                        height={80}
+                        className="rounded-lg"
+                      />
+                      <div>
+                        <h3 className="font-semibold">{item?.title}</h3>
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm text-gray-600">{item?.price}</p>
+                          <Image
+                            src={
+                              item.currencyImage ?? '/assets/saudi_riyal.png'
+                            }
+                            alt="ريال سعودي"
+                            width={15}
+                            height={15}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </CardWrapper>
             </MotionSection>
 
             <MotionSection index={4}>
-              <InvoiceSummary item={items[0]} quantity={quantity} />
+              <InvoiceSummary items={items} />
             </MotionSection>
           </div>
         </form>

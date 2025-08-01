@@ -15,17 +15,19 @@ import { useToggleLocale } from '@/hook/useToggleLocale';
 import Button from '@/components/atomic/Button';
 import { useTranslations } from 'next-intl';
 import { useAuthContext } from '@/context/AuthContext';
+import { useCartContext } from '@/context/CartContext';
 
 const Header = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [productsCount] = useState(0);
   const { token } = useAuthContext();
   const menuRef = useRef<HTMLDivElement>(null);
   const { toggleLocale, isArabic } = useToggleLocale();
   const t = useTranslations('Inputs.placeHolders');
   const langTexts = useTranslations('Languages');
+  const ariaTxts = useTranslations('ariaLabels.links');
+  const { cartItems } = useCartContext();
 
   const iconsStyle = 'w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer';
 
@@ -89,11 +91,15 @@ const Header = () => {
               </AnimatedWrapper>
             )}
             <AnimatedWrapper direction="y" distance={-40}>
-              <Link href={PATHS.MY_CART.link} className="relative">
+              <Link
+                href={PATHS.MY_CART.link}
+                aria-label={ariaTxts('myCartPage')}
+                className="relative"
+              >
                 <MdOutlineShoppingCart className={iconsStyle} />
-                {productsCount > 0 && (
+                {cartItems.length > 0 && (
                   <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-xs w-4 h-4 rounded-[50%]">
-                    <span>{productsCount}</span>
+                    <span className="font-sans">{cartItems.length}</span>
                   </div>
                 )}
               </Link>

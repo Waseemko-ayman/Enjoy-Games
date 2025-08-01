@@ -1,12 +1,12 @@
 import React from 'react';
 import { Check, Download, Home } from 'lucide-react';
-import CardWrapper from '../atomic/CardWrapper';
-import Button from '../atomic/Button';
-import Layer from '../atomic/Layer';
-import Container from '../organism/Container';
-import MotionSection from './FramerMotion/MotionSection';
 import { PATHS } from '@/data/paths';
 import { useTranslations } from 'next-intl';
+import Layer from '@/components/atomic/Layer';
+import Container from '@/components/organism/Container';
+import CardWrapper from '@/components/atomic/CardWrapper';
+import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
+import Button from '@/components/atomic/Button';
 
 interface OrderCompleteStepProps {
   onReturnToStore: () => void;

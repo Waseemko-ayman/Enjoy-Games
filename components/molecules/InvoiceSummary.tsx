@@ -7,13 +7,17 @@ import { useTranslations } from 'next-intl';
 import { ProductCardProps } from '@/interfaces';
 
 interface InvoiceSummaryProps {
-  item: ProductCardProps;
-  quantity: number;
+  items: ProductCardProps[];
 }
 
-const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ item, quantity }) => {
-  const total = (item.price ?? 0) * quantity;
+const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
+  const total = items.reduce(
+    (acc, item) => acc + (item.price ?? 0) * (item.quantity ?? 1),
+    0
+  );
   const t = useTranslations('Invoice.summary');
+
+  const currencyImage = items[0]?.currencyImage ?? '/assets/saudi_riyal.png';
 
   return (
     <CardWrapper className="p-6">
@@ -25,39 +29,24 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ item, quantity }) => {
           <span>{t('subtotal.label')}:</span>
           <div className="flex items-center gap-2">
             <span className="text-lg">{total}</span>
-            <Image
-              src={item.currencyImage ?? ''}
-              alt="عملة"
-              width={18}
-              height={18}
-            />
+            <Image src={currencyImage} alt="عملة" width={18} height={18} />
           </div>
         </div>
-        <MotionSection index={1}>
-          <div className="flex justify-between items-center text-gray-500 font-bold border-b border-dotted border-gray-300 pb-4">
+        {/* <MotionSection index={1}>
+          <div className="flex justify-between items-center text-gray-500 font-bold">
             <span>{t('vat.label')}:</span>
             <div className="flex items-center gap-2">
               <span className="text-lg">{total}</span>
-              <Image
-                src={item.currencyImage ?? ''}
-                alt="عملة"
-                width={18}
-                height={18}
-              />
+              <Image src={currencyImage} alt="عملة" width={18} height={18} />
             </div>
           </div>
-        </MotionSection>
+        </MotionSection> */}
         <MotionSection index={2}>
-          <div className="flex justify-between items-center font-bold">
+          <div className="flex justify-between items-center font-bold border-t border-dotted border-gray-300 pt-4">
             <span>{t('total.label')}:</span>
             <div className="flex items-center gap-2">
               <span className="text-lg font-bold">{total}</span>
-              <Image
-                src={item.currencyImage ?? ''}
-                alt="عملة"
-                width={18}
-                height={18}
-              />
+              <Image src={currencyImage} alt="عملة" width={18} height={18} />
             </div>
           </div>
         </MotionSection>

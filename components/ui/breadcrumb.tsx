@@ -48,7 +48,7 @@ function BreadcrumbLink({
     <Comp
       data-slot="breadcrumb-link"
       className={cn(
-        'hover:text-[var(--enjoy-primary-light)] transition-all duration-300 cursor-pointer text-lg font-medium',
+        'hover:text-[var(--enjoy-primary-light)] transition-all duration-300 cursor-pointer text-base font-medium',
         className
       )}
       {...props}
