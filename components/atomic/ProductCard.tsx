@@ -1,11 +1,17 @@
 import Image from 'next/image';
 // import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from './Avatar';
 import { PiSparkleFill } from 'react-icons/pi';
 import Button from './Button';
 import { ProductCardProps } from '@/interfaces';
 import CardWrapper from './CardWrapper';
+import ResponsiveDialogDrawer from '../organism/ResponsiveDialogDrawer';
+import useIsMobile from '@/hook/useIsMobile';
+import { useCartContext } from '@/context/CartContext';
+import { useToast } from '@/lib/toast';
+import { useTranslations } from 'next-intl';
+import ProductDetailsInDialog from '../molecules/ProductDetailsInDialog';
 
 const ProductCard: React.FC<ProductCardProps> = ({
   title,
@@ -19,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   variant = 'row',
   // cardLinkPath = '#',
   onClick,
-  onAddToCart,
+  // onAddToCart,
   discount,
   ratings,
   tall = false,
@@ -29,7 +35,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
   btnText,
   otherClassNameBtn,
   icon,
+  productData,
 }) => {
+  const [open, setOpen] = useState(false);
+  const isMobile = useIsMobile();
+  const { addToCart } = useCartContext();
+  const { showToast } = useToast();
+  const msgTxts = useTranslations('Messages');
+
   const safeImage =
     image &&
     typeof image === 'string' &&
@@ -148,14 +161,32 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
         </div>
         {showBtn && (
-          <Button
-            variant={btnVariant}
-            Icon={icon}
-            otherClassName={`${otherClassNameBtn} w-full p-2 max-sm:!text-sm`}
-            handleClick={onAddToCart}
+          <ResponsiveDialogDrawer
+            trigger={
+              <Button
+                variant={btnVariant}
+                Icon={icon}
+                otherClassName={`${otherClassNameBtn} w-full p-2 max-sm:!text-sm`}
+                handleClick={() => setOpen(true)}
+              >
+                {btnText}
+              </Button>
+            }
+            open={open}
+            setOpen={setOpen}
+            isMobile={isMobile}
           >
-            {btnText}
-          </Button>
+            {open && productData && (
+              <ProductDetailsInDialog
+                product={productData}
+                onAddToCart={(data) => {
+                  addToCart(data);
+                  showToast(`${data.title} ${msgTxts('addedToCart')}`);
+                  setOpen(false);
+                }}
+              />
+            )}
+          </ResponsiveDialogDrawer>
         )}
       </CardWrapper>
     </div>

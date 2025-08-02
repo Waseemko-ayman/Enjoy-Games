@@ -10,10 +10,8 @@ import useIsMobile from '@/hook/useIsMobile';
 import Link from 'next/link';
 import { PiShoppingCartLight } from 'react-icons/pi';
 import { useTranslations } from 'next-intl';
-import { NewlyArrivedProps, ProductCardProps } from '@/interfaces';
+import { NewlyArrivedProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
-import { useCartContext } from '@/context/CartContext';
-import { useToast } from '@/lib/toast';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -27,14 +25,14 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
 }) => {
   const isMobile = useIsMobile();
   const btnText = useTranslations('BtnTexts');
-  const msgTxts = useTranslations('Messages');
-  const { addToCart } = useCartContext();
-  const { showToast } = useToast();
+  // const msgTxts = useTranslations('Messages');
+  // const { addToCart } = useCartContext();
+  // const { showToast } = useToast();
 
-  const handleAddToCart = (product: ProductCardProps) => {
-    addToCart(product);
-    showToast(`${product.title} ${msgTxts('addedToCart')}`);
-  };
+  // const handleAddToCart = (product: ProductCardProps) => {
+  //   addToCart(product);
+  //   showToast(`${product.title} ${msgTxts('addedToCart')}`);
+  // };
   return (
     <ResponsiveWrapper>
       <div
@@ -89,7 +87,8 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
                         window.location.href = path;
                       }
                     }}
-                    onAddToCart={() => handleAddToCart(card)}
+                    // onAddToCart={() => handleAddToCart(card)}
+                    productData={card}
                     {...cardWithoutImage}
                   />
                 </AnimatedWrapper>

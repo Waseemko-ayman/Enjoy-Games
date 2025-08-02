@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 const Image = lazy(() => import('next/image'));
@@ -29,6 +30,10 @@ import { useTranslations } from 'next-intl';
 import React, { lazy, Suspense, useState } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { MdAdd, MdAddShoppingCart } from 'react-icons/md';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import FormError from '@/components/atomic/FormError';
 
 const inputQuantityOptions = [
   { id: 1, label: '1' },
@@ -47,10 +52,51 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const { addToCart } = useCartContext();
   const { showToast } = useToast();
 
-  const handleAddToCart = () => {
-    // addToCart({ ...product, quantity: selectedQuantity, formScheme });
-    addToCart({ ...product, quantity: selectedQuantity });
+  const selectedInputs =
+    product?.shipping_payment === 'code'
+      ? codeInputs
+      : product?.shipping_payment === 'account_id'
+      ? accountIdInputs
+      : product?.shipping_payment === 'multi_id'
+      ? multiIdInputs
+      : product?.shipping_payment === 'access'
+      ? accessInputs
+      : [];
+
+  const dynamicSchemaFields = selectedInputs.reduce((acc, input) => {
+    acc[input.inputName] = yup
+      .string()
+      .required(inputsTxt(`errorsMsgs.${input.errorKey}`));
+    return acc;
+  }, {} as Record<string, yup.StringSchema>);
+
+  const schema = yup.object().shape(dynamicSchemaFields);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const handleAddToCart = (formValues: Record<string, any>) => {
+    addToCart({
+      ...product,
+      quantity: selectedQuantity,
+      formScheme: formValues,
+    });
     showToast(`${product.title} ${msgTxts('addedToCart')}`);
+    setTimeout(() => {
+      reset();
+    }, 3000);
+
+    console.log({
+      ...product,
+      quantity: selectedQuantity,
+      formScheme: formValues,
+    });
   };
 
   return (
@@ -95,11 +141,11 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
         <MotionSection index={2}>
           <div className="flex items-end gap-3 mt-4">
             <h3 className="text-xl sm:text-[28px] font-semibold">
-              {product?.price_before} دإ
+              {product?.price} دإ
             </h3>
             <div className="flex items-center gap-3">
               <span className="line-through text-red-500 text-base">
-                {product?.price} دإ
+                {product?.price_before} دإ
               </span>
               <CardWrapper
                 bgColor="bg-red-500"
@@ -149,10 +195,9 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
 
         <form
           className="mt-4 space-y-7"
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleAddToCart();
-          }}
+          onSubmit={handleSubmit((formValues) => {
+            handleAddToCart(formValues);
+          })}
         >
           <MotionSection index={6}>
             <Input
@@ -176,16 +221,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                   {t('additionalOptions')}
                 </AccordionTrigger>
                 <AccordionContent className="space-y-4">
-                  {(product?.shipping_payment === 'code'
-                    ? codeInputs
-                    : product?.shipping_payment === 'account_id'
-                    ? accountIdInputs
-                    : product?.shipping_payment === 'multi_id'
-                    ? multiIdInputs
-                    : product?.shipping_payment === 'access'
-                    ? accessInputs
-                    : []
-                  ).map((input, index) => (
+                  {selectedInputs.map((input, index) => (
                     <AnimatedWrapper key={input.id} custom={index}>
                       <Input
                         variant="secondary"
@@ -203,8 +239,15 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                             ? inputsTxt(`placeHolders.Cancelled`)
                             : ''
                         }
+                        otherClassNameContainer={
+                          errors[input.inputName] ? 'border-red-500' : ''
+                        }
                         isRequired
+                        {...register(input.inputName)}
                       />
+                      {errors[input.inputName] && (
+                        <FormError message={errors[input.inputName]?.message} />
+                      )}
                     </AnimatedWrapper>
                   ))}
                 </AccordionContent>

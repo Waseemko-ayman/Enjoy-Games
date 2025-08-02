@@ -688,6 +688,7 @@ export const codeInputs: InputItem[] = [
     id: 1,
     inputName: 'email',
     labelKey: 'email',
+    errorKey: 'emailRequired',
     type: 'email',
   },
 ];
@@ -697,6 +698,7 @@ export const accountIdInputs: InputItem[] = [
     id: 1,
     inputName: 'idNumber',
     labelKey: 'idNumber',
+    errorKey: 'idNumberRequired',
     type: 'number',
   },
 ];
@@ -705,13 +707,15 @@ export const multiIdInputs: InputItem[] = [
   {
     id: 1,
     inputName: 'id_number_1',
-    labelKey: 'id_number',
+    labelKey: 'idNumber',
+    errorKey: 'idNumberRequired',
     type: 'number',
   },
   {
     id: 2,
     inputName: 'id_number_2',
-    labelKey: 'id_number',
+    labelKey: 'idNumber',
+    errorKey: 'idNumberRequired',
     type: 'number',
   },
 ];

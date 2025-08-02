@@ -14,9 +14,6 @@ import { MdWavingHand } from 'react-icons/md';
 import { useCategories } from '@/context/CategoriesContext';
 import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
-import { ProductCardProps } from '@/interfaces';
-import { useCartContext } from '@/context/CartContext';
-import { useToast } from '@/lib/toast';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -25,14 +22,14 @@ const StarsGiftsPage = () => {
   const secTexts = useTranslations('SectionsTitles.Gifts');
   const { data, isLoading, error } = useMainContent();
   const { categories } = useCategories();
-  const msgTxts = useTranslations('Messages');
-  const { addToCart } = useCartContext();
-  const { showToast } = useToast();
+  // const msgTxts = useTranslations('Messages');
+  // const { addToCart } = useCartContext();
+  // const { showToast } = useToast();
 
-  const handleAddToCart = (product: ProductCardProps) => {
-    addToCart(product);
-    showToast(`${product.title} ${msgTxts('addedToCart')}`);
-  };
+  // const handleAddToCart = (product: ProductCardProps) => {
+  //   addToCart(product);
+  //   showToast(`${product.title} ${msgTxts('addedToCart')}`);
+  // };
   return (
     <Layer>
       <Container>
@@ -75,7 +72,8 @@ const StarsGiftsPage = () => {
                           window.location.href = path;
                         }
                       }}
-                      onAddToCart={() => handleAddToCart(card)}
+                      // onAddToCart={() => handleAddToCart(card)}
+                      productData={card}
                       {...cardWithoutImage}
                     />
                   </AnimatedWrapper>

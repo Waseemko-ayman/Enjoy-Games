@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 import React from 'react';
 import SectionComponent from '@/components/atomic/SectionComponent';
@@ -5,10 +7,8 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
 import { useTranslations } from 'next-intl';
-import { NewlyArrivedProps, ProductCardProps } from '@/interfaces';
+import { NewlyArrivedProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
-import { useCartContext } from '@/context/CartContext';
-import { useToast } from '@/lib/toast';
 
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
@@ -22,14 +22,14 @@ const NewlyArrived: React.FC<NewlyArrivedProps> = ({
   error,
 }) => {
   const btnText = useTranslations('BtnTexts');
-  const msgTxts = useTranslations('Messages');
-  const { addToCart } = useCartContext();
-  const { showToast } = useToast();
+  // const msgTxts = useTranslations('Messages');
+  // const { addToCart } = useCartContext();
+  // const { showToast } = useToast();
 
-  const handleAddToCart = (product: ProductCardProps) => {
-    addToCart(product);
-    showToast(`${product.title} ${msgTxts('addedToCart')}`);
-  };
+  // const handleAddToCart = (product: ProductCardProps) => {
+  //   addToCart(product);
+  //   showToast(`${product.title} ${msgTxts('addedToCart')}`);
+  // };
 
   return (
     <SectionComponent title={t('sectionsTitles.newlyArrived')}>
@@ -48,7 +48,6 @@ const NewlyArrived: React.FC<NewlyArrivedProps> = ({
             return (
               <AnimatedWrapper key={card.id} custom={index}>
                 <ProductCard
-                  // imgSrc={card.image}
                   image={image || '/assets/play-station.webp'}
                   imgAlt={card.title}
                   imgTitle={card.title}
@@ -63,7 +62,8 @@ const NewlyArrived: React.FC<NewlyArrivedProps> = ({
                       window.location.href = path;
                     }
                   }}
-                  onAddToCart={() => handleAddToCart(card)}
+                  // onAddToCart={() => handleAddToCart(card)}
+                  productData={card}
                   {...cardWithoutImage}
                 />
               </AnimatedWrapper>
