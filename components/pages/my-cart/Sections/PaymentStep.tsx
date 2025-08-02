@@ -67,7 +67,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
     const cartForApi = items.map((item) => ({
       product_id: item.id,
       quantity: item.quantity || 1,
-      shipping_data: { email: 'test@test.com' },
+      shipping_data: item.formScheme,
     }));
 
     try {
@@ -78,6 +78,8 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
       setCouponResponse(responseData);
       showToast(t('discountSuccess'));
       reset();
+
+      console.log(responseData);
     } catch (err) {
       showToast(t('discountFaild'), 'error');
       console.log(err);
@@ -181,7 +183,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
 
                       return (
                         <div
-                          key={item.id}
+                          key={`${item.id}-${index}`}
                           className="flex items-center gap-4 mb-4"
                         >
                           <Image
