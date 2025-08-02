@@ -90,7 +90,7 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
         ...config,
         ...getConfig,
       });
-      
+
       dispatch({ type: API_ACTIONS.GET, payload: res?.data?.data });
     } catch (error) {
       dispatch({ type: API_ACTIONS.ERROR, payload: error });
@@ -116,13 +116,15 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
   const add = async (body: T, postConfig?: AxiosRequestConfig) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
-      const res = await axios.post<{ data: T }>(`/${url}`, body, {
+      const res = await axiosInstance.post<{ data: T }>(`/${url}`, body, {
         ...config,
         ...postConfig,
       });
       dispatch({ type: API_ACTIONS.POST, payload: res?.data?.data });
+      return res.data.data;
     } catch (error) {
       dispatch({ type: API_ACTIONS.ERROR, payload: error });
+      throw error;
     }
   };
 
@@ -133,10 +135,14 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
   ) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
-      const res = await axios.put<{ data: T }>(`/api/${url}/${id}`, body, {
-        ...config,
-        ...putConfig,
-      });
+      const res = await axiosInstance.put<{ data: T }>(
+        `/api/${url}/${id}`,
+        body,
+        {
+          ...config,
+          ...putConfig,
+        }
+      );
       dispatch({ type: API_ACTIONS.PUT, payload: res?.data?.data });
     } catch (error) {
       dispatch({ type: API_ACTIONS.ERROR, payload: error });
