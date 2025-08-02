@@ -124,6 +124,7 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
       return res.data.data;
     } catch (error) {
       dispatch({ type: API_ACTIONS.ERROR, payload: error });
+      throw error;
     }
   };
 

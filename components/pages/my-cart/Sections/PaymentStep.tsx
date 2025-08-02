@@ -79,7 +79,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
       showToast(t('discountSuccess'));
       reset();
     } catch (err) {
-      showToast(t('discountFaild'));
+      showToast(t('discountFaild'), 'error');
       console.log(err);
     }
   };
