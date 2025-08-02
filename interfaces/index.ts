@@ -78,8 +78,9 @@ export interface ProductCardProps {
   btnText?: string;
   otherClassNameBtn?: string;
   onClick?: () => void;
-  onAddToCart?: () => void;
+  // onAddToCart?: () => void;
   formScheme?: Record<string, any>;
+  productData?: ProductCardProps;
 }
 export interface getSlugsProps {
   getSlugs: (subCategoryId: number) => {

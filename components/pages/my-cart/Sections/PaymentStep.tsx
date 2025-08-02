@@ -27,6 +27,8 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
     null
   );
 
+  console.log(items);
+
   const t = useTranslations('MyCart');
   const btnTexts = useTranslations('BtnTexts');
   const inputsTexts = useTranslations('Inputs');

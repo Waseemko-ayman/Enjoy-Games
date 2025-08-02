@@ -70,6 +70,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         return updatedItems;
       }
 
+      /**
+       * slug
+       * quantity
+       */
+
       // المنتج جديد
       return [...prev, { ...item, quantity: quantityToAdd }];
     });

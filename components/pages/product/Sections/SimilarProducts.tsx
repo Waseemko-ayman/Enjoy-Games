@@ -4,10 +4,8 @@ import ErrorFetching from '@/components/molecules/ErrorFetching';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
-import { useCartContext } from '@/context/CartContext';
 import { useMainContent } from '@/context/MainContentContext';
-import { getSlugsProps, ProductCardProps } from '@/interfaces';
-import { useToast } from '@/lib/toast';
+import { getSlugsProps } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { PiShoppingCartLight } from 'react-icons/pi';
@@ -16,14 +14,14 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const t = useTranslations('productDetails');
   const btnTxts = useTranslations('BtnTexts');
   const { data, isLoading, error } = useMainContent();
-  const msgTxts = useTranslations('Messages');
-  const { addToCart } = useCartContext();
-  const { showToast } = useToast();
+  // const msgTxts = useTranslations('Messages');
+  // const { addToCart } = useCartContext();
+  // const { showToast } = useToast();
 
-  const handleAddToCart = (product: ProductCardProps) => {
-    addToCart(product);
-    showToast(`${product.title} ${msgTxts('addedToCart')}`);
-  };
+  // const handleAddToCart = (product: ProductCardProps) => {
+  //   addToCart(product);
+  //   showToast(`${product.title} ${msgTxts('addedToCart')}`);
+  // };
   return (
     <SectionComponent title={t('relatedProducts')}>
       {isLoading ? (
@@ -31,10 +29,7 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
       ) : error ? (
         <ErrorFetching />
       ) : (
-        <GridWrapper
-          otherClassName="gap-5"
-          isScrollable
-        >
+        <GridWrapper otherClassName="gap-5" isScrollable>
           {Array.isArray(data?.newly_arrived) &&
             data.newly_arrived.map((card, index) => {
               const { image, ...cardWithoutImage } = card;
@@ -62,7 +57,8 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
                         window.location.href = path;
                       }
                     }}
-                    onAddToCart={() => handleAddToCart(card)}
+                    // onAddToCart={() => handleAddToCart(card)}
+                    productData={card}
                     {...cardWithoutImage}
                   />
                 </AnimatedWrapper>
