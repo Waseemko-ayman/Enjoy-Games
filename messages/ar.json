@@ -475,6 +475,7 @@
       "emailInvalid": "البريد الإلكتروني غير صالح",
       "emailPatternInvalid": "الإيميل غير صالح",
       "emailRequired": "البريد الإلكتروني مطلوب",
+      "idNumberRequired": "رقم الآيدي مطلوب",
       "phoneRequired": "رقم الجوال مطلوب",
       "birthDateRequired": "تاريخ الميلاد مطلوب",
       "genderInvalid": "الرجاء اختيار الجنس",

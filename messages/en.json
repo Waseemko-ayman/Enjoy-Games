@@ -475,6 +475,7 @@
       "emailInvalid": "Invalid email address",
       "emailPatternInvalid": "Email format is incorrect",
       "emailRequired": "Email is required",
+      "idNumberRequired": "ID Number Required",
       "phoneRequired": "Phone number is required",
       "birthDateRequired": "Birth date is required",
       "genderOneOf": "Please select a gender",
