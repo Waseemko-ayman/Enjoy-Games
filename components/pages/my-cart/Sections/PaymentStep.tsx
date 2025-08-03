@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import React, { useState } from 'react';
@@ -21,6 +22,54 @@ import useAPI from '@/hook/useAPI';
 import { useToast } from '@/lib/toast';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 
+interface CartItem {
+  product_id?: number;
+  quantity: number;
+  shipping_data?: Record<string, any>;
+}
+
+interface CouponItem extends CartItem {
+  price: number;
+  category_id: number;
+  sub_category_id: number;
+  discount: number;
+  final_price: number;
+}
+
+type CouponResponseData = CouponItem[];
+
+interface CouponResponse {
+  success: boolean;
+  data: CouponResponseData;
+  message: string;
+  [key: string]: unknown;
+}
+
+interface OrderRequest {
+  cart: { product_id: number; quantity: number; shipping_data: object }[];
+  coupon_code?: string | null;
+  [key: string]: unknown;
+}
+
+interface OrderResponseData {
+  order_id: number;
+  total_price: number;
+  discount: number;
+  [key: string]: unknown;
+}
+
+interface PaymentRequest {
+  order_id: number;
+  payment_gateway: string;
+  [key: string]: unknown;
+}
+
+interface PaymentResponseData {
+  payment_url?: string;
+  redirect_url?: string;
+  [key: string]: unknown;
+}
+
 // Helper function to parse price with fallback value
 function parsedPriceOrFallback(price?: number, parsedPrice?: number) {
   return parsedPrice ?? price ?? 0;
@@ -31,7 +80,8 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
   const [couponResponse, setCouponResponse] = useState<typeof data | null>(
     null
   );
-  const [, setOrderResponse] = useState<typeof orderData | null>(null);
+  // const [, setOrderResponse] = useState<typeof orderData | null>(null);
+  const [, setOrderResponse] = useState<OrderResponseData | null>(null);
   const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
 
   // Translations hooks
@@ -43,13 +93,22 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
   const { showToast } = useToast();
 
   // API hooks
-  const { add: AddCoupon, data, isLoading } = useAPI('coupon/apply-coupon');
   const {
-    add: orderAdd,
-    data: orderData,
-    isLoading: orderIsLoading,
-  } = useAPI('order/create');
-  const { add: payOrder } = useAPI('order/pay');
+    add: AddCoupon,
+    data,
+    isLoading,
+  } = useAPI<
+    { cart: CartItem[]; coupon_code: string },
+    CouponResponse // كامل الـ response مع success و message
+  >('coupon/apply-coupon');
+  const { add: orderAdd, isLoading: orderIsLoading } = useAPI<
+    OrderRequest,
+    OrderResponseData
+  >('order/create');
+
+  const { add: payOrder } = useAPI<PaymentRequest, PaymentResponseData>(
+    'order/pay'
+  );
 
   // Validation schema
   const paymentSchema = yup.object({
@@ -127,7 +186,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
         coupon_code: couponCodeToSend || null,
       });
 
-      setOrderResponse(responseData);
+      setOrderResponse(responseData.data);
       reset();
 
       if (responseData?.success) {
@@ -142,6 +201,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
           payment_gateway: paymentGateway,
         };
         const paymentData = await payOrder(paymentPayload);
+
         window.open(
           paymentData?.data?.payment_url,
           '_blank',
@@ -149,7 +209,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
         );
       }
     } catch (err) {
-      const apiError = err?.response?.data?.message;
+      const apiError = (err as any)?.response?.data?.message;
       showToast(apiError, 'error');
     }
   };

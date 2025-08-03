@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { useReducer } from 'react';
 import axiosInstance from '@/utils/axiosInstance';
 
@@ -80,13 +81,21 @@ const reduce = <T,>(state: State<T>, action: Action<T>): State<T> => {
   }
 };
 
-const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
-  const [state, dispatch] = useReducer(reduce<T>, initialState);
+const useAPI = <
+  RequestBody extends Record<string, unknown> = Record<string, unknown>,
+  ResponseData extends Record<string, unknown> = Record<string, unknown>
+>(
+  url: string,
+  config?: AxiosRequestConfig
+) => {
+  const [state, dispatch] = useReducer(reduce<ResponseData>, initialState);
 
   const get = async (getConfig?: AxiosRequestConfig) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
-      const res = await axiosInstance.get<{ data: T | T[] }>(`/${url}`, {
+      const res = await axiosInstance.get<{
+        data: ResponseData | ResponseData[];
+      }>(`/${url}`, {
         ...config,
         ...getConfig,
       });
@@ -103,20 +112,28 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
   ) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
-      const res = await axiosInstance.get<{ data: T }>(`/${url}/${id}`, {
-        ...config,
-        ...getConfig,
-      });
-      dispatch({ type: API_ACTIONS.GET_SINGLE, payload: res?.data?.data });
+      const res = await axiosInstance.get<{ data: ResponseData }>(
+        `/${url}/${id}`,
+        {
+          ...config,
+          ...getConfig,
+        }
+      );
+      dispatch({ type: API_ACTIONS.GET_SINGLE, payload: res.data.data });
+      return res.data.data;
     } catch (error) {
       dispatch({ type: API_ACTIONS.ERROR, payload: error });
     }
   };
 
-  const add = async (body: T, postConfig?: AxiosRequestConfig) => {
+  const add = async (body: RequestBody, postConfig?: AxiosRequestConfig) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
-      const res = await axiosInstance.post<{ data: T }>(`/${url}`, body, {
+      const res = await axiosInstance.post<{
+        success: boolean;
+        message: string;
+        data: ResponseData;
+      }>(`/${url}`, body, {
         ...config,
         ...postConfig,
       });
@@ -130,20 +147,21 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
 
   const edit = async (
     id: string | number,
-    body: Partial<T>,
+    body: Partial<RequestBody>,
     putConfig?: AxiosRequestConfig
   ) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
-      const res = await axiosInstance.put<{ data: T }>(
-        `/api/${url}/${id}`,
+      const res = await axiosInstance.put<{ data: ResponseData }>(
+        `/${url}/${id}`,
         body,
         {
           ...config,
           ...putConfig,
         }
       );
-      dispatch({ type: API_ACTIONS.PUT, payload: res?.data?.data });
+      dispatch({ type: API_ACTIONS.PUT, payload: res.data.data });
+      return res.data.data;
     } catch (error) {
       dispatch({ type: API_ACTIONS.ERROR, payload: error });
     }
@@ -155,7 +173,10 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
   ) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
-      await axios.delete(`/api/${url}/${id}`, { ...config, ...deleteConfig });
+      await axiosInstance.delete(`/${url}/${id}`, {
+        ...config,
+        ...deleteConfig,
+      });
       dispatch({ type: API_ACTIONS.DELETE, payload: id });
     } catch (error) {
       dispatch({ type: API_ACTIONS.ERROR, payload: error });
