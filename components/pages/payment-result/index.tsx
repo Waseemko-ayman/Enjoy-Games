@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import StepIndicator from '@/components/molecules/StepIndicator';
 import OrderCompleteStep from '../my-cart/Sections/OrderCompleteStep';
@@ -12,8 +12,8 @@ const PaymentResultPage = () => {
   const orderNumber = searchParams.get('orderNumber') || '';
 
   // لإدارة الخطوات
-  const STEPS = { CART: 1, PAYMENT: 2, COMPLETE: 3 };
-  const [currentStep, setCurrentStep] = useState(STEPS.COMPLETE);
+  // const STEPS = { CART: 1, PAYMENT: 2, COMPLETE: 3 };
+  // const [currentStep, setCurrentStep] = useState(STEPS.COMPLETE);
 
   return (
     <>
