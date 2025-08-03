@@ -25,14 +25,7 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
 }) => {
   const isMobile = useIsMobile();
   const btnText = useTranslations('BtnTexts');
-  // const msgTxts = useTranslations('Messages');
-  // const { addToCart } = useCartContext();
-  // const { showToast } = useToast();
-
-  // const handleAddToCart = (product: ProductCardProps) => {
-  //   addToCart(product);
-  //   showToast(`${product.title} ${msgTxts('addedToCart')}`);
-  // };
+  
   return (
     <ResponsiveWrapper>
       <div
@@ -87,7 +80,6 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
                         window.location.href = path;
                       }
                     }}
-                    // onAddToCart={() => handleAddToCart(card)}
                     productData={card}
                     {...cardWithoutImage}
                   />

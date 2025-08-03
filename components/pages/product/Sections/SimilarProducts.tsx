@@ -14,14 +14,7 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const t = useTranslations('productDetails');
   const btnTxts = useTranslations('BtnTexts');
   const { data, isLoading, error } = useMainContent();
-  // const msgTxts = useTranslations('Messages');
-  // const { addToCart } = useCartContext();
-  // const { showToast } = useToast();
 
-  // const handleAddToCart = (product: ProductCardProps) => {
-  //   addToCart(product);
-  //   showToast(`${product.title} ${msgTxts('addedToCart')}`);
-  // };
   return (
     <SectionComponent title={t('relatedProducts')}>
       {isLoading ? (
@@ -57,7 +50,6 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
                         window.location.href = path;
                       }
                     }}
-                    // onAddToCart={() => handleAddToCart(card)}
                     productData={card}
                     {...cardWithoutImage}
                   />

@@ -22,9 +22,6 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
   const params = useParams();
   const router = useRouter();
   const t = useTranslations('Loading');
-  // const msgTxts = useTranslations('Messages');
-  // const { addToCart } = useCartContext();
-  // const { showToast } = useToast();
 
   const { get, data, isLoading } = useAPI(`sub-category/${itemId}`);
 
@@ -40,11 +37,6 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
       index,
     }));
   }, [data, itemId, params.category, router]);
-
-  // const handleAddToCart = (product: ProductCardProps) => {
-  //   addToCart(product);
-  //   showToast(`${product.title} ${msgTxts('addedToCart')}`);
-  // };
 
   useEffect(() => {
     get();
@@ -73,7 +65,6 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
                     btnText={btnTxts('addToCart')}
                     icon={PiShoppingCartLight}
                     showDesc
-                    // onAddToCart={() => handleAddToCart(card)}
                     productData={card}
                     {...cardWithoutImage}
                   />
