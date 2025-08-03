@@ -316,7 +316,9 @@
       "complete": "Order Complete"
     },
     "discountSuccess": "The debit transaction was completed successfully.",
-    "discountFaild": "The selected coupon code is invalid."
+    "discountFaild": "The selected coupon code is invalid.",
+    "orderSuccess": "Code was stored successfully",
+    "orderFaild": "The selected product id is invalid."
   },
   "Tickets": {
     "emptyStateTitle": "No support tickets yet...",

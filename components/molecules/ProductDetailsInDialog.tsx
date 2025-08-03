@@ -105,10 +105,10 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
 
             <MotionSection index={2}>
               <div className="gap-3 mt-4">
-                <h3 className="text-xl font-semibold">{product?.price} دإ</h3>
+                <h3 className="text-xl font-semibold">{product?.price}</h3>
                 <div className="flex items-center gap-3">
                   <span className="line-through text-red-500 text-base">
-                    {product?.price_before} دإ
+                    {product?.price_before}
                   </span>
                   <CardWrapper
                     bgColor="bg-red-500"

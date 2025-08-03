@@ -53,6 +53,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
         : `/${image}`
       : '/assets/play-station.webp';
 
+  // Calculate average rating if ratings is an array of numbers
+  const averageRating = ratings?.length
+    ? ratings.reduce((sum, r) => sum + r, 0) / ratings.length
+    : null;
+
+  // Or if ratings is array of objects like [{score: number}], use:
+  // const averageRating = ratings.length > 0 ? ratings.reduce((sum, r) => sum + r.score, 0) / ratings.length : null;
+
+  // Function to render stars based on average rating (rounded)
+  const renderStars = (rating: number | null) => {
+    if (rating === null) return null;
+    const stars = [];
+    const rounded = Math.round(rating);
+    for (let i = 0; i < rounded; i++) {
+      stars.push(<PiSparkleFill key={i} className="text-yellow-400" />);
+    }
+    return stars;
+  };
+
   return (
     <div>
       <CardWrapper className="p-3 transform transition-transform duration-300 hover:-translate-y-2">
@@ -92,7 +111,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               {price_before && (
                 <div className="flex items-center justify-between gap-2">
                   {price && (
-                    <h4 className="font-semibold mb-2 text-[15px]">${price}</h4>
+                    <h4 className="font-semibold mb-2 text-[15px]">{price}</h4>
                   )}
                   <h4
                     className={`font-semibold mb-2 ${
@@ -101,7 +120,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                         : 'text-[15px]'
                     }`}
                   >
-                    ${price_before}
+                    {price_before}
                   </h4>
                 </div>
               )}
@@ -135,7 +154,19 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     </p>
                   </div>
                 )}
-                {ratings && (
+                {averageRating !== null && (
+                  <div
+                    className={`text-[var(--enjoy-secondary)] ${
+                      variant === 'row' ? 'text-sm order-2' : 'text-2xl order-1'
+                    } flex items-center gap-1`}
+                  >
+                    {renderStars(averageRating)}
+                    <span className="ml-1 font-semibold">
+                      {averageRating.toFixed(1)}
+                    </span>
+                  </div>
+                )}
+                {/* {ratings && (
                   <div
                     className={`text-[var(--enjoy-secondary))] ${
                       variant === 'row' ? 'text-sm order-2' : 'text-2xl order-1'
@@ -155,7 +186,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                       )}
                     </div>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           )}

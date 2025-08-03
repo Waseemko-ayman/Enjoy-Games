@@ -90,8 +90,8 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
         ...config,
         ...getConfig,
       });
-
       dispatch({ type: API_ACTIONS.GET, payload: res?.data?.data });
+      return res?.data?.data;
     } catch (error) {
       dispatch({ type: API_ACTIONS.ERROR, payload: error });
     }
@@ -121,7 +121,7 @@ const useAPI = <T,>(url: string, config?: AxiosRequestConfig) => {
         ...postConfig,
       });
       dispatch({ type: API_ACTIONS.POST, payload: res?.data?.data });
-      return res.data.data;
+      return res.data;
     } catch (error) {
       dispatch({ type: API_ACTIONS.ERROR, payload: error });
       throw error;

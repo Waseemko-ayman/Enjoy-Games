@@ -1,26 +1,29 @@
-'use client';
-const CardWrapper = lazy(() => import('@/components/atomic/CardWrapper'));
-import { useCartContext } from '@/context/CartContext';
-import { CartContentProps } from '@/interfaces';
-import { useTranslations } from 'next-intl';
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Trash2 } from 'lucide-react';
-import { FaPlus, FaStar } from 'react-icons/fa';
-import { Minus } from 'lucide-react';
-import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
+import { Minus, Trash2 } from 'lucide-react';
+import { FaPlus, FaStar } from 'react-icons/fa6';
+import { useTranslations } from 'next-intl';
+import { PATHS } from '@/data/paths';
+import { useCartContext } from '@/context/CartContext';
+import { useAuthContext } from '@/context/AuthContext';
 import SubCartHeader from '@/components/molecules/SubCartHeader';
-import InvoiceSummary from '@/components/molecules/InvoiceSummary';
-import Button from '@/components/atomic/Button';
 import Container from '@/components/organism/Container';
+import CardWrapper from '@/components/atomic/CardWrapper';
+import Button from '@/components/atomic/Button';
+import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
 import Layer from '@/components/atomic/Layer';
+import { ProductCardProps } from '@/interfaces';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { useToast } from '@/lib/toast';
-import { PATHS } from '@/data/paths';
-import { useAuthContext } from '@/context/AuthContext';
 import AuthButtons from '@/components/organism/MobileHeader/PopupMenu/Sections/AuthButtons';
 import Loading from '@/components/molecules/loading';
+import InvoiceSummary from '@/components/molecules/InvoiceSummary';
+
+interface CartContentProps {
+  items: ProductCardProps[];
+  onProceedToPayment: () => void;
+}
 
 const CartContent: React.FC<CartContentProps> = ({
   items,
@@ -29,17 +32,27 @@ const CartContent: React.FC<CartContentProps> = ({
   const t = useTranslations('MyCart');
   const btnTexts = useTranslations('BtnTexts');
   const msgTxts = useTranslations('Messages');
-  const points = 1000;
   const { isArabic } = useToggleLocale();
-
   const { removeFromCart, updateQuantity } = useCartContext();
   const { showToast } = useToast();
   const { token } = useAuthContext();
+  const points = 1000;
 
   const handleRemoveFromCart = (id: number, title: string) => {
     removeFromCart(id);
     showToast(`${title} ${msgTxts('removedFromCart')}`);
   };
+
+  const processedItems = items.map((item) => {
+    const priceParts = item.price?.toString().match(/^([\d.,]+)\s*(.*)$/);
+    const parsedPrice = parseFloat(priceParts?.[1]?.replace(',', '') || '0');
+    const parsedCurrency = priceParts?.[2] || '';
+    return {
+      ...item,
+      parsedPrice,
+      parsedCurrency,
+    };
+  });
 
   return (
     <Layer otherClassName="!my-12">
@@ -53,7 +66,7 @@ const CartContent: React.FC<CartContentProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <Suspense fallback={<Loading />}>
-              {items.map((item) => (
+              {processedItems.map((item) => (
                 <CardWrapper key={item.id} className="px-6 py-4">
                   <div className="flex items-end justify-between gap-4 mb-4 max-sm:flex-col sm:items-start">
                     <div className="flex max-sm:w-full max-sm:flex-col gap-2 sm:gap-4">
@@ -101,7 +114,6 @@ const CartContent: React.FC<CartContentProps> = ({
                         <Minus className="w-4 h-4 text-gray-600" />
                       </Button>
                       <span className="font-bold">{item.quantity ?? 1}</span>
-
                       <Button
                         variant="circle"
                         handleClick={() => {
@@ -116,21 +128,17 @@ const CartContent: React.FC<CartContentProps> = ({
                         <FaPlus className="w-4 h-4 text-white" />
                       </Button>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg font-bold">
-                        {(item.price ?? 0) * (item.quantity ?? 1)}
-                      </span>
-                      <Image
-                        src={item.currencyImage ?? '/assets/saudi_riyal.png'}
-                        alt="ريال سعودي"
-                        width={18}
-                        height={18}
-                      />
-                    </div>
+                    <span className="text-lg font-bold">
+                      {Number(
+                        item.parsedPrice * (item.quantity ?? 1)
+                      ).toLocaleString()}{' '}
+                      {item.parsedCurrency}
+                    </span>
                   </div>
                 </CardWrapper>
               ))}
             </Suspense>
+
             {token ? (
               <>
                 <MotionSection index={0}>
@@ -179,7 +187,7 @@ const CartContent: React.FC<CartContentProps> = ({
 
           <div className="space-y-6">
             <MotionSection index={0}>
-              <InvoiceSummary items={items} />
+              <InvoiceSummary items={processedItems} />
             </MotionSection>
 
             <MotionSection index={1}>

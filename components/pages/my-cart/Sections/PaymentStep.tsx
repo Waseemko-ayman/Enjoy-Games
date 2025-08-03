@@ -1,40 +1,57 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Image from 'next/image';
-import CardWrapper from '../../../atomic/CardWrapper';
-import Button from '../../../atomic/Button';
-import SubCartHeader from '../../../molecules/SubCartHeader';
-import Layer from '../../../atomic/Layer';
-import Container from '../../../organism/Container';
-import InvoiceSummary from '../../../molecules/InvoiceSummary';
+
+import CardWrapper from '@/components/atomic/CardWrapper';
+import Button from '@/components/atomic/Button';
+import SubCartHeader from '@/components/molecules/SubCartHeader';
+import Layer from '@/components/atomic/Layer';
+import Container from '@/components/organism/Container';
+import InvoiceSummary from '@/components/molecules/InvoiceSummary';
+import Input from '@/components/atomic/Input';
+import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
+
 import { PaymentStepProps, ProductCardProps } from '@/interfaces';
-import Input from '../../../atomic/Input';
-import MotionSection from '../../../molecules/FramerMotion/MotionSection';
 import { useTranslations } from 'next-intl';
 import useAPI from '@/hook/useAPI';
 import { useToast } from '@/lib/toast';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 
-const PaymentStep: React.FC<PaymentStepProps> = ({
-  onPaymentComplete,
-  onBackToCart,
-  items,
-}) => {
+// Helper function to parse price with fallback value
+function parsedPriceOrFallback(price?: number, parsedPrice?: number) {
+  return parsedPrice ?? price ?? 0;
+}
+
+const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
+  // State variables
   const [couponResponse, setCouponResponse] = useState<typeof data | null>(
     null
   );
+  const [, setOrderResponse] = useState<typeof orderData | null>(null);
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
 
-  console.log(items);
-
+  // Translations hooks
   const t = useTranslations('MyCart');
   const btnTexts = useTranslations('BtnTexts');
   const inputsTexts = useTranslations('Inputs');
-  const { add, data, isLoading } = useAPI('coupon/apply-coupon');
+
+  // Toast notifications
   const { showToast } = useToast();
 
+  // API hooks
+  const { add: AddCoupon, data, isLoading } = useAPI('coupon/apply-coupon');
+  const {
+    add: orderAdd,
+    data: orderData,
+    isLoading: orderIsLoading,
+  } = useAPI('order/create');
+  const { add: payOrder } = useAPI('order/pay');
+
+  // Validation schema
   const paymentSchema = yup.object({
     paymentMethod: yup
       .string()
@@ -47,6 +64,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
     couponCode: string | null;
   };
 
+  // React Hook Form setup
   const {
     register,
     handleSubmit,
@@ -61,9 +79,9 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
     },
   });
 
+  // Apply coupon handler
   const onApplyCoupon = async () => {
     const couponCode = watch('couponCode');
-
     if (!couponCode || !couponCode.trim()) return;
 
     const cartForApi = items.map((item) => ({
@@ -73,26 +91,82 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
     }));
 
     try {
-      const responseData = await add({
+      const responseData = await AddCoupon({
         cart: cartForApi,
         coupon_code: couponCode,
       });
-      setCouponResponse(responseData);
+      setCouponResponse(responseData?.data);
+      setAppliedCoupon(couponCode);
       showToast(t('discountSuccess'));
-      reset();
-
-      console.log(responseData);
     } catch (err) {
       showToast(t('discountFaild'), 'error');
-      console.log(err);
+      console.error(err);
     }
   };
 
-  const onSubmit = () => {
-    setTimeout(() => {
-      onPaymentComplete();
-    }, 2000);
+  // Submit payment handler
+  const onSubmit = async (data: PaymentFormData) => {
+    const couponCodeToSend = data?.couponCode || appliedCoupon;
+    const cartSource = couponResponse ?? items;
+    const paymentGateway = data.paymentMethod;
+
+    const cartForApi = cartSource.map(
+      (item: ProductCardProps, index: number) => {
+        const originalItem = items[index];
+        return {
+          product_id: item.product_id || item.id,
+          quantity: item.quantity || 1,
+          shipping_data: item.formScheme ?? originalItem?.formScheme,
+        };
+      }
+    );
+
+    try {
+      const responseData = await orderAdd({
+        cart: cartForApi,
+        coupon_code: couponCodeToSend || null,
+      });
+
+      setOrderResponse(responseData);
+      reset();
+
+      if (responseData?.success) {
+        showToast(responseData?.message || t('orderSuccess'));
+      } else {
+        showToast(responseData?.message || t('orderFaild'), 'error');
+      }
+
+      if (responseData?.data?.order_id) {
+        const paymentPayload = {
+          order_id: responseData?.data?.order_id,
+          payment_gateway: paymentGateway,
+        };
+        const paymentData = await payOrder(paymentPayload);
+        window.open(
+          paymentData?.data?.payment_url,
+          '_blank',
+          'width=500,height=700,top=40,left=400'
+        );
+      }
+    } catch (err) {
+      const apiError = err?.response?.data?.message;
+      showToast(apiError, 'error');
+    }
   };
+
+  // Prepare items for rendering with parsed price and currency
+  const processedItems = (couponResponse ?? items).map(
+    (item: ProductCardProps) => {
+      const priceParts = item.price?.toString().match(/^([\d.,]+)\s*(.*)$/);
+      const parsedPrice = parseFloat(priceParts?.[1]?.replace(',', '') || '0');
+      const parsedCurrency = priceParts?.[2] || 'ر.س.';
+      return {
+        ...item,
+        parsedPrice,
+        parsedCurrency,
+      };
+    }
+  );
 
   return (
     <Layer otherClassName="!my-12 max-sm:!mb-24">
@@ -107,37 +181,36 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
           onSubmit={handleSubmit(onSubmit)}
           className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
+          {/* Left section: Payment options and coupon input */}
           <div className="lg:col-span-2 space-y-6">
             <MotionSection index={0}>
-              <div>
-                <label>
-                  <CardWrapper
-                    className={`p-6 cursor-pointer ${
-                      errors.paymentMethod ? 'border border-red-500' : ''
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-4">
-                      <input
-                        type="radio"
-                        value="apple-pay"
-                        {...register('paymentMethod')}
-                        className="w-4 h-4 text-enjoy-primary"
-                      />
-                      <Image
-                        src="/assets/paymob-logo.png"
-                        alt="Apple Pay"
-                        width={70}
-                        height={70}
-                      />
-                    </div>
-                  </CardWrapper>
-                </label>
-                {errors.paymentMethod && (
-                  <p className="text-red-500 text-sm mt-2">
-                    {errors.paymentMethod.message}
-                  </p>
-                )}
-              </div>
+              <label>
+                <CardWrapper
+                  className={`p-6 cursor-pointer ${
+                    errors.paymentMethod ? 'border border-red-500' : ''
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <input
+                      type="radio"
+                      value="paymob"
+                      {...register('paymentMethod')}
+                      className="w-4 h-4 text-enjoy-primary"
+                    />
+                    <Image
+                      src="/assets/paymob-logo.png"
+                      alt="Apple Pay"
+                      width={70}
+                      height={70}
+                    />
+                  </div>
+                </CardWrapper>
+              </label>
+              {errors.paymentMethod && (
+                <p className="text-red-500 text-sm mt-2">
+                  {errors.paymentMethod.message}
+                </p>
+              )}
             </MotionSection>
 
             <MotionSection index={1}>
@@ -168,17 +241,18 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
 
             <MotionSection index={2}>
               <Button type="submit" otherClassName="w-full py-3">
-                {btnTexts('Pay')}
+                {orderIsLoading ? <ButtonLoading /> : btnTexts('Pay')}
               </Button>
             </MotionSection>
           </div>
 
+          {/* Right section: Order summary */}
           <div className="space-y-6">
             <MotionSection index={3}>
               <CardWrapper className="p-6">
                 <h2 className="text-lg font-bold mb-6">{t('cartSummary')}</h2>
                 <div className="max-h-[220px] overflow-y-auto scrollbar-none">
-                  {(couponResponse ?? items).map(
+                  {processedItems.map(
                     (item: ProductCardProps, index: number) => {
                       const originalItem = items[index];
                       const quantity = item.quantity ?? 1;
@@ -190,7 +264,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
                         >
                           <Image
                             src="/assets/play-station.webp"
-                            alt="نينتندو"
+                            alt="Nintendo"
                             width={80}
                             height={80}
                             className="rounded-lg"
@@ -203,50 +277,24 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
                               {item.final_price &&
                               item.final_price !== item.price ? (
                                 <>
-                                  <div className="flex items-center gap-2">
-                                    <p className="text-gray-500 font-semibold line-through">
-                                      {(item.price ?? 0) * quantity}
-                                    </p>
-                                    <Image
-                                      src={
-                                        item.currencyImage ??
-                                        '/assets/saudi_riyal.png'
-                                      }
-                                      alt="ريال سعودي"
-                                      width={15}
-                                      height={15}
-                                    />
-                                  </div>
-                                  <div className="flex items-center gap-2">
-                                    <p className="font-semibold">
-                                      {item.final_price}
-                                    </p>
-                                    <Image
-                                      src={
-                                        item.currencyImage ??
-                                        '/assets/saudi_riyal.png'
-                                      }
-                                      alt="ريال سعودي"
-                                      width={15}
-                                      height={15}
-                                    />
-                                  </div>
+                                  <p className="text-gray-500 font-semibold line-through">
+                                    {(item.price ?? 0) * quantity}{' '}
+                                    {item.parsedCurrency}
+                                  </p>
+                                  <p className="font-semibold">
+                                    {item.final_price} {item.parsedCurrency}
+                                  </p>
                                 </>
                               ) : (
-                                <div className="flex items-center gap-2">
-                                  <p className="font-semibold">
-                                    {(item.price ?? 0) * quantity}
-                                  </p>
-                                  <Image
-                                    src={
-                                      item.currencyImage ??
-                                      '/assets/saudi_riyal.png'
-                                    }
-                                    alt="ريال سعودي"
-                                    width={15}
-                                    height={15}
-                                  />
-                                </div>
+                                <p className="font-semibold">
+                                  {(
+                                    parsedPriceOrFallback(
+                                      item.price,
+                                      item.parsedPrice
+                                    ) * quantity
+                                  ).toLocaleString()}{' '}
+                                  {item.parsedCurrency}
+                                </p>
                               )}
                             </div>
                           </div>
@@ -259,7 +307,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({
             </MotionSection>
 
             <MotionSection index={4}>
-              <InvoiceSummary items={couponResponse ?? items} />
+              <InvoiceSummary items={processedItems} />
             </MotionSection>
           </div>
         </form>

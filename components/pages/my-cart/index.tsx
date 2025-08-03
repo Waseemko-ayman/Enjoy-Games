@@ -6,7 +6,8 @@ import StepIndicator from '@/components/molecules/StepIndicator';
 import CartContent from '@/components/pages/my-cart/Sections/CartContent';
 import { useCartContext } from '@/context/CartContext';
 import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 const STEPS = {
   CART: 1,
@@ -15,13 +16,20 @@ const STEPS = {
 };
 
 const MyCartPage = () => {
+  // const [currentStep, setCurrentStep] = useState(STEPS.CART);
+  const searchParams = useSearchParams();
+  const status = searchParams.get('status');
+
+  const [currentStep, setCurrentStep] = useState(() =>
+    status === 'paid' ? STEPS.COMPLETE : STEPS.CART
+  );
+
+  const [orderNumber] = useState('DL' + Math.random().toString().substr(2, 8));
+
   const t = useTranslations('MyCart');
   const btnTexts = useTranslations('BtnTexts');
 
-  const [currentStep, setCurrentStep] = useState(STEPS.CART);
   const { cartItems, clearCart } = useCartContext();
-
-  const [orderNumber] = useState('DL' + Math.random().toString().substr(2, 8));
 
   const steps = [
     {
@@ -48,9 +56,9 @@ const MyCartPage = () => {
     setCurrentStep(STEPS.PAYMENT);
   };
 
-  const handlePaymentComplete = () => {
-    setCurrentStep(STEPS.COMPLETE);
-  };
+  // const handlePaymentComplete = () => {
+  //   setCurrentStep(STEPS.COMPLETE);
+  // };
 
   const handleOrderComplete = () => {
     clearCart();
@@ -61,15 +69,16 @@ const MyCartPage = () => {
     setCurrentStep(STEPS.CART);
   };
 
-  // Handle gift flow
-  // const handleSendAsGift = () => {
-  //   console.log('Send as gift functionality');
-  // };
-
   const totalAmount = cartItems.reduce(
     (total, item) => total + (item.price ?? 0) * (item.quantity ?? 1),
     0
   );
+
+  useEffect(() => {
+    if (status === 'paid') {
+      setCurrentStep(STEPS.COMPLETE);
+    }
+  }, [status]);
 
   return (
     <div>
@@ -99,7 +108,7 @@ const MyCartPage = () => {
       {currentStep === STEPS.PAYMENT && (
         <PaymentStep
           items={cartItems}
-          onPaymentComplete={handlePaymentComplete}
+          // onPaymentComplete={handlePaymentComplete}
           onBackToCart={handleBackToCart}
           totalAmount={totalAmount}
         />

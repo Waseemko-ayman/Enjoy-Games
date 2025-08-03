@@ -66,7 +66,9 @@ export interface ProductCardProps {
   final_price?: number;
   quantity?: number;
   currencyImage?: string;
-  ratings?: number | string;
+  ratings?: number[];
+  parsedPrice?: number;
+  parsedCurrency?: string;
   icon?: React.ElementType | string | any;
   showDesc?: boolean;
   showBtn?: boolean;
@@ -82,6 +84,30 @@ export interface ProductCardProps {
   formScheme?: Record<string, any>;
   productData?: ProductCardProps;
 }
+
+// export interface CouponResponse {
+//   success: boolean;
+//   message: string;
+//   data: {
+//     product_id: number;
+//     price: number;
+//     final_price: number;
+//     discount: number;
+//   }[];
+// }
+
+// export interface OrderResponse {
+//   success: boolean;
+//   message: string;
+//   data: {
+//     order_id: number;
+//   };
+// }
+
+// export interface PaymentResponse {
+//   payment_url: string;
+// }
+
 export interface getSlugsProps {
   getSlugs: (subCategoryId: number) => {
     categorySlug: string;
@@ -422,7 +448,7 @@ export interface CartContentProps {
 }
 
 export interface PaymentStepProps {
-  onPaymentComplete: () => void;
+  // onPaymentComplete: () => void;
   onBackToCart: () => void;
   totalAmount: number;
   items: ProductCardProps[];
