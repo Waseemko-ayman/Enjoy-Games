@@ -4,6 +4,7 @@ import { ChatModal } from '../molecules/ChatModal';
 import useIsMobile from '@/hook/useIsMobile';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
 
 export function FloatingChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,14 +18,16 @@ export function FloatingChatWidget() {
   const isMobile = useIsMobile();
   const { isArabic } = useToggleLocale();
   const ariaTxts = useTranslations('ariaLabels.btns');
+  const pathname = usePathname();
+  const isMyCartPage = pathname === '/my-cart';
 
   return (
     <>
       {/* Floating Chat Button */}
       <div
-        className={`fixed bottom-24 md:bottom-6 ${
-          isArabic ? 'right-6' : 'left-6'
-        } z-50`}
+        className={`fixed ${
+          isMyCartPage ? 'bottom-24' : 'bottom-6'
+        } md:bottom-6 ${isArabic ? 'right-6' : 'left-6'} z-50`}
       >
         <button
           onClick={handleOpen}
