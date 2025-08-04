@@ -4,13 +4,10 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import useAPI from '@/hook/useAPI';
-import { Ticket } from '@/interfaces';
+import { APIRequest, Ticket } from '@/interfaces';
 
-interface TicketsContextType {
+interface TicketsContextType extends APIRequest {
   tickets: Ticket[] | null;
-  isLoading: boolean;
-  error: any;
-  refresh: () => void;
   hasUnreadTickets: boolean;
   markTicketsAsRead: () => void;
 }
