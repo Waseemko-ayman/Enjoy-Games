@@ -11,11 +11,14 @@ import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 import { useCategories } from '@/context/CategoriesContext';
 import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
 import { useTranslations } from 'next-intl';
+import ServiceAdvantages from '../home/Sections/ServiceAdvantages';
 
 const ProductDetailsPage = ({ productId }: { productId: string }) => {
   const { categories } = useCategories();
   const { getSingle, product, isLoading } = useAPI(`product`);
+
   const t = useTranslations('Loading');
+  const serviceTxts = useTranslations('HomePage');
 
   useEffect(() => {
     getSingle(productId);
@@ -35,6 +38,7 @@ const ProductDetailsPage = ({ productId }: { productId: string }) => {
           getCategoryAndSubCategorySlugs(categories, subCatId)
         }
       />
+      <ServiceAdvantages t={serviceTxts} />
     </Layer>
   );
 };
