@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, Download, Home } from 'lucide-react';
+import { Check, Home } from 'lucide-react';
 import { PATHS } from '@/data/paths';
 import { useTranslations } from 'next-intl';
 import Layer from '@/components/atomic/Layer';
@@ -75,7 +75,7 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
             </MotionSection>
 
             <MotionSection index={2}>
-              <div className="space-y-4">
+              {/* <div className="space-y-4">
                 <Button
                   otherClassName="w-full py-3"
                   Icon={Download}
@@ -83,18 +83,17 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
                 >
                   {btnTexts('DownloadInvoice')}
                 </Button>
-
-                <Button
-                  variant="secondary"
-                  href={PATHS.STORE.link}
-                  otherClassName="w-full py-3"
-                  Icon={Home}
-                  iconPosition="left"
-                  handleClick={onReturnToStore}
-                >
-                  {btnTexts('BackToStore')}
-                </Button>
-              </div>
+              </div> */}
+              <Button
+                // variant="secondary"
+                href={PATHS.STORE.link}
+                otherClassName="w-full py-3"
+                Icon={Home}
+                iconPosition="left"
+                handleClick={onReturnToStore}
+              >
+                {btnTexts('BackToStore')}
+              </Button>
             </MotionSection>
 
             {/* <MotionSection index={3}>
