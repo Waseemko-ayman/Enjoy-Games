@@ -324,7 +324,9 @@
     "emptyStateTitle": "No support tickets yet...",
     "searchFaqPrompt": "Have you searched your question in the FAQ?",
     "addAttachments": "Add attachments to the ticket (optional)",
-    "attachmentsDescription": "Attach images with comments, or upload files"
+    "attachmentsDescription": "Attach images with comments, or upload files",
+    "by": "By",
+    "createdAt": "Created At"
   },
   "productDetails": {
     "shareLinkWith": "Share the link via:",
