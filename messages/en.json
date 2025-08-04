@@ -304,8 +304,11 @@
     "order": {
       "orderCompleteMessage": "Your order has been completed successfully!",
       "orderCompleteThanks": "Thank you for your trust. Order details will be sent to your email",
+      "paymentFailedTitle": "The payment was not completed!",
+      "paymentFailedNote": "Sorry, an error occurred while processing your order. You can try again.",
       "orderNumberLabel": "Order Number:",
       "orderStatusLabel": "Order Status:",
+      "paymentAmountLabel": "Paid Amount:",
       "deliveryMethodLabel": "Delivery Method:",
       "pointsAddedMessage": "{points} points have been added to your account!",
       "pointsUsageInfo": "You can use points in upcoming purchases"
@@ -313,7 +316,9 @@
     "stepsTitles": {
       "cart": "Shopping Cart",
       "payment": "Payment",
-      "complete": "Order Complete"
+      "complete": "Order Complete",
+      "failed": "Order Faile",
+      "default": "Order Status"
     },
     "discountSuccess": "The debit transaction was completed successfully.",
     "discountFaild": "The selected coupon code is invalid.",
@@ -519,6 +524,7 @@
   "ariaLabels": {
     "links": {
       "myCartPage": "My cart page",
+      "myTicketPage": "Technical Support Tickets Page",
       "linkedin": "LinkedIn account",
       "twitter": "Twitter account",
       "instagram": "Instagram account",

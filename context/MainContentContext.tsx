@@ -5,7 +5,7 @@
 import React, { createContext, useContext, useEffect } from 'react';
 import useAPI from '@/hook/useAPI';
 import { useLocale } from 'next-intl';
-import { Category, ProductCardProps } from '@/interfaces';
+import { APIRequest, Category, ProductCardProps } from '@/interfaces';
 
 interface Sliders {
   id: number;
@@ -21,11 +21,8 @@ interface MobileMainContent {
   [key: string]: unknown;
 }
 
-interface MainContentContextType {
+interface MainContentContextType extends APIRequest {
   data: MobileMainContent | null;
-  isLoading: boolean;
-  error: string;
-  refresh: () => void;
 }
 
 const MainContentContext = createContext<MainContentContextType>({

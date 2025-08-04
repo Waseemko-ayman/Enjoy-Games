@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { FaWhatsapp, FaArrowUp } from 'react-icons/fa';
 import Button from './Button';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import { usePathname } from 'next/navigation';
 
 interface FloatingActionsProps {
   phone: string;
@@ -25,10 +26,12 @@ const FloatingActions: React.FC<FloatingActionsProps> = ({ phone }) => {
   };
 
   const { isArabic } = useToggleLocale();
+  const pathname = usePathname();
+  const isMyCartPage = pathname === '/my-cart';
 
   return (
     <div
-      className={`fixed z-50 bottom-24 md:bottom-6 ${
+      className={`fixed z-50 ${isMyCartPage ? 'bottom-24' : 'bottom-6'} ${
         isArabic ? 'left-6' : 'right-6'
       } flex flex-col items-center space-y-3`}
     >

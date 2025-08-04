@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, Download, Home } from 'lucide-react';
+import { Check, Home } from 'lucide-react';
 import { PATHS } from '@/data/paths';
 import { useTranslations } from 'next-intl';
 import Layer from '@/components/atomic/Layer';
@@ -11,15 +11,19 @@ import Button from '@/components/atomic/Button';
 interface OrderCompleteStepProps {
   onReturnToStore: () => void;
   orderNumber: string;
+  amountCents?: number;
+  currency?: string;
 }
 
 const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
   onReturnToStore,
   orderNumber,
+  amountCents,
+  currency = 'ر.س.',
 }) => {
   const t = useTranslations('MyCart.order');
   const btnTexts = useTranslations('BtnTexts');
-  const points = 1000;
+  // const points = 1000;
 
   return (
     <Layer otherClassName="!my-9 sm:!my-12">
@@ -52,6 +56,15 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
                   <span className="text-gray-600">{t('orderStatusLabel')}</span>
                   <span className="text-green-600 font-semibold">مؤكد</span>
                 </div>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-gray-600">
+                    {t('paymentAmountLabel')}
+                  </span>
+                  <span className="font-semibold">
+                    {amountCents ? (amountCents / 100).toFixed(2) : '0.00'}{' '}
+                    {currency}
+                  </span>
+                </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">
                     {t('deliveryMethodLabel')}
@@ -62,7 +75,7 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
             </MotionSection>
 
             <MotionSection index={2}>
-              <div className="space-y-4">
+              {/* <div className="space-y-4">
                 <Button
                   otherClassName="w-full py-3"
                   Icon={Download}
@@ -70,21 +83,20 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
                 >
                   {btnTexts('DownloadInvoice')}
                 </Button>
-
-                <Button
-                  variant="secondary"
-                  href={PATHS.STORE.link}
-                  otherClassName="w-full py-3"
-                  Icon={Home}
-                  iconPosition="left"
-                  handleClick={onReturnToStore}
-                >
-                  {btnTexts('BackToStore')}
-                </Button>
-              </div>
+              </div> */}
+              <Button
+                // variant="secondary"
+                href={PATHS.STORE.link}
+                otherClassName="w-full py-3"
+                Icon={Home}
+                iconPosition="left"
+                handleClick={onReturnToStore}
+              >
+                {btnTexts('BackToStore')}
+              </Button>
             </MotionSection>
 
-            <MotionSection index={3}>
+            {/* <MotionSection index={3}>
               <div className="mt-6 sm:mt-8 p-4 bg-enjoy-glass rounded-lg">
                 <div className="flex items-center justify-center gap-2 text-enjoy-primary mb-2">
                   <span className="text-2xl">⭐</span>
@@ -94,7 +106,7 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
                 </div>
                 <p className="text-sm text-gray-600">{t('pointsUsageInfo')}</p>
               </div>
-            </MotionSection>
+            </MotionSection> */}
           </CardWrapper>
         </div>
       </Container>

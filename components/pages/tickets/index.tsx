@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import React, { useEffect } from 'react';
@@ -8,43 +7,25 @@ import ErrorFetching from '@/components/molecules/ErrorFetching';
 import Loading from '@/components/molecules/loading';
 import PageHeader from '@/components/molecules/PageHeader';
 import { PATHS } from '@/data/paths';
-import useAPI from '@/hook/useAPI';
 import { useTranslations } from 'next-intl';
-import { TicketMessage } from '@/interfaces';
 import Container from '@/components/organism/Container';
 import Layer from '@/components/atomic/Layer';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useTickets } from '@/context/TicketsContext';
+import { Ticket } from '@/interfaces';
 const CardWrapper = dynamic(() => import('@/components/atomic/CardWrapper'), {
   loading: () => <Loading />,
 });
-
-export interface TicketUser {
-  id: number;
-  name: string;
-  email: string;
-  created_at: string;
-  updated_at: string;
-}
-export interface Ticket {
-  id: number;
-  user_id: number;
-  assigned_to: number | null;
-  subject: string;
-  status: string;
-  created_at: string;
-  updated_at: string;
-  latest_message: TicketMessage;
-  user: TicketUser;
-}
 
 const TicketsPage = () => {
   const t = useTranslations('Tickets');
   const btnTexts = useTranslations('BtnTexts');
 
-  const { get, data: tickets, isLoading, error } = useAPI<any>('tickets');
+  // API Context (Hook)
+  const { tickets, isLoading, error, markTicketsAsRead } = useTickets();
 
   useEffect(() => {
-    get();
+    markTicketsAsRead();
   }, []);
 
   if (isLoading) return <Loading />;

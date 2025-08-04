@@ -1,8 +1,10 @@
+import React from 'react';
 import FAQCom from '@/components/organism/FAQCom';
 import { faqData } from '@/data';
-import React from 'react';
+// import { useFAQS } from '@/context/FaqContext';
 
 const FaqContent = () => {
+  // const { faqs, isLoading } = useFAQS();
   return (
     <div>
       <FAQCom title="الأسئلة الشائعة" faqData={faqData} />

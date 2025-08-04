@@ -1,3 +1,4 @@
+import { useCartContext } from '@/context/CartContext';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { useTranslations } from 'next-intl';
 import React from 'react';
@@ -11,6 +12,8 @@ const PopupHeader = ({ onClose }: { onClose: () => void }) => {
   const iconStyle = 'cursor-pointer';
 
   const { isArabic } = useToggleLocale();
+  const { cartItems } = useCartContext();
+
   const t = useTranslations('PagesHeaderTitles');
 
   return (
@@ -37,6 +40,11 @@ const PopupHeader = ({ onClose }: { onClose: () => void }) => {
         <MdOutlineShoppingCart
           className={`${iconStyle} text-lg text-enjoy-primary`}
         />
+        {cartItems.length > 0 && (
+          <div className="absolute -right-1 -top-2 flex items-center justify-center text-white bg-red-500 text-xs w-4 h-4 rounded-[50%]">
+            <span className="font-sans">{cartItems.length}</span>
+          </div>
+        )}
       </div>
     </div>
   );

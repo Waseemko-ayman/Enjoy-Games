@@ -13,6 +13,12 @@ import { Variants } from 'framer-motion';
 import { Messages, useTranslations } from 'next-intl';
 import { ElementType, JSX, ReactNode } from 'react';
 
+export interface APIRequest {
+  isLoading: boolean;
+  error: any;
+  refresh: () => void;
+}
+
 export interface Category {
   id: number;
   slug: string | null;
@@ -147,7 +153,7 @@ export interface TicketMessage {
   updated_at: string;
 }
 
-export interface Ticket {
+export interface TicketData {
   id: number;
   user_id: number;
   subject: string;
@@ -159,8 +165,28 @@ export interface Ticket {
 export interface TicketResponse {
   success: boolean;
   message: string;
-  data: Ticket;
+  data: TicketData;
   [key: string]: unknown;
+}
+
+export interface TicketUser {
+  id: number;
+  name: string;
+  email: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Ticket {
+  id: number;
+  user_id: number;
+  assigned_to: number | null;
+  subject: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  latest_message: TicketMessage;
+  user: TicketUser;
 }
 
 export interface FormData {
@@ -654,6 +680,7 @@ interface Step {
 
 export interface StepIndicatorProps {
   steps: Step[];
+  success?: boolean;
 }
 
 export interface LoginFormData {

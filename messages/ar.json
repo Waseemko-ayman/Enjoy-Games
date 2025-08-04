@@ -304,8 +304,11 @@
     "order": {
       "orderCompleteMessage": "تم إتمام طلبك بنجاح!",
       "orderCompleteThanks": "شكراً لك على ثقتك بنا. سيتم إرسال تفاصيل الطلب على بريدك الإلكتروني",
+      "paymentFailedTitle": "لم يتم إتمام عملية الدفع!",
+      "paymentFailedNote": "نأسف، حدث خطأ أثناء معالجة الطلب. يمكنك المحاولة مرة أخرى",
       "orderNumberLabel": "رقم الطلب:",
       "orderStatusLabel": "حالة الطلب:",
+      "paymentAmountLabel": "المبلغ المدفوع:",
       "deliveryMethodLabel": "طريقة التسليم:",
       "pointsAddedMessage": "تم إضافة {points} نقطة لحسابك!",
       "pointsUsageInfo": "يمكنك استخدام النقاط في عمليات الشراء القادمة"
@@ -313,7 +316,9 @@
     "stepsTitles": {
       "cart": "سلة التسوق",
       "payment": "الدفع",
-      "complete": "إتمام الطلب"
+      "complete": "إتمام الطلب",
+      "failed": "فشل الطلب",
+      "default": "حالة الطلب"
     },
     "discountSuccess": "تمت عملية الخصم بنجاح.",
     "discountFaild": "رمز الكوبون المحدد غير صالح.",
@@ -519,6 +524,7 @@
   "ariaLabels": {
     "links": {
       "myCartPage": "صفحة سلتي",
+      "myTicketPage": "صفحة تذاكر الدعم الفني",
       "linkedin": "حساب لينكدإن",
       "twitter": "حساب تويتر",
       "instagram": "حساب الإنستغرام",

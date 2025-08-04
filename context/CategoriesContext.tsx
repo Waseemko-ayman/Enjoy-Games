@@ -3,14 +3,11 @@
 
 import React, { createContext, useContext, useEffect } from 'react';
 import useAPI from '@/hook/useAPI';
-import { Category } from '@/interfaces';
+import { APIRequest, Category } from '@/interfaces';
 import { useLocale } from 'next-intl';
 
-interface CategoriesContextType {
+interface CategoriesContextType extends APIRequest {
   categories: Category[];
-  isLoading: boolean;
-  error: boolean;
-  refresh: () => void;
 }
 
 const CategoriesContext = createContext<CategoriesContextType>({
