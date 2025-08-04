@@ -22,7 +22,7 @@ import { IoArrowRedoOutline, IoWalletOutline } from 'react-icons/io5';
 import {
   MdEmail,
   MdOutlineAlternateEmail,
-  MdOutlineEmail,
+  // MdOutlineEmail,
 } from 'react-icons/md';
 import { PiSparkleFill } from 'react-icons/pi';
 import { PATHS } from './paths';
@@ -183,15 +183,15 @@ export const menuLists = [
     linksItem: [
       { id: 1, key: 'stars', icon: IoArrowRedoOutline, link: PATHS.STARS.link },
       { id: 2, key: 'wallet', icon: IoWalletOutline, link: PATHS.WALLET.link },
-      { id: 3, key: 'interests', icon: FaRegHeart, link: '#' },
+      { id: 3, key: 'interests', icon: FaRegHeart, link: PATHS.MY_ACCOUNT.INTERESTS.link },
     ],
   },
   {
     id: 2,
     linksItem: [
-      { id: 1, key: 'tickets', icon: FaRegFlag, link: '#' },
-      { id: 2, key: 'TalkToCustomerService', icon: MdOutlineEmail, link: '#' },
-      { id: 3, key: 'faq', icon: IoMdHelpCircleOutline, link: '#' },
+      { id: 1, key: 'tickets', icon: FaRegFlag, link: PATHS.TICKETS.ROOT.link },
+      { id: 2, key: 'faq', icon: IoMdHelpCircleOutline, link: PATHS.FAQ.link },
+      // { id: 3, key: 'TalkToCustomerService', icon: MdOutlineEmail, link: '#' },
     ],
   },
 ];
