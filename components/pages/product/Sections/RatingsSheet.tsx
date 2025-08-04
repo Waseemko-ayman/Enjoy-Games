@@ -89,7 +89,6 @@ const RatingsSheet = () => {
     setTimeout(() => {
       setIsSubmittingLocal(false);
       setFormData(finalData);
-      console.log('Form Data:', finalData);
       reset();
       setAttachments([]);
     }, 1000);

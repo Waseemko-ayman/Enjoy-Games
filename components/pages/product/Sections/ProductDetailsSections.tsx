@@ -91,12 +91,6 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
     setTimeout(() => {
       reset();
     }, 3000);
-
-    console.log({
-      ...product,
-      quantity: selectedQuantity,
-      formScheme: formValues,
-    });
   };
 
   return (

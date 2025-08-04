@@ -54,7 +54,6 @@ const SignupPage = () => {
   });
 
   const onSubmit = (data: signupFormData) => {
-    console.log('Sending signup data:', data);
     signup(data);
     reset();
   };
