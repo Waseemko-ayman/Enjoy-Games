@@ -1,22 +1,23 @@
-'use client';
-
-import Image from 'next/image';
-import CardWrapper from '@/components/atomic/CardWrapper';
-import MotionSection from './FramerMotion/MotionSection';
+import React from 'react';
 import { useTranslations } from 'next-intl';
+import CardWrapper from '@/components/atomic/CardWrapper';
+import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
 import { ProductCardProps } from '@/interfaces';
 
 interface InvoiceSummaryProps {
-  items: ProductCardProps[];
+  items: (ProductCardProps & {
+    parsedPrice?: number;
+    parsedCurrency?: string;
+  })[];
 }
 
 const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
   const t = useTranslations('Invoice.summary');
 
-
   const total = items.reduce(
     (acc, item) =>
-      acc + (item.final_price ?? (item.price ?? 0) * (item.quantity ?? 1)),
+      acc +
+      (item.final_price ?? (item.parsedPrice ?? 0) * (item.quantity ?? 1)),
     0
   );
 
@@ -25,7 +26,8 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
     0
   );
 
-  const currencyImage = items[0]?.currencyImage ?? '/assets/saudi_riyal.png';
+  // const currencyImage = items[0]?.currencyImage ?? '/assets/saudi_riyal.png';
+  const currency = items[0]?.parsedCurrency ?? '';
 
   return (
     <CardWrapper className="p-6">
@@ -37,14 +39,17 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
         <div className="flex justify-between items-center text-gray-500 font-bold">
           <span>{t('subtotal.label')}:</span>
           <div className="flex items-center gap-2">
-            {/* Total without discount */}
             <span className="text-lg">
-              {items.reduce(
-                (acc, item) => acc + (item.price ?? 0) * (item.quantity ?? 1),
-                0
-              )}
+              {Number(
+                items.reduce(
+                  (acc, item) =>
+                    acc + (item.parsedPrice ?? 0) * (item.quantity ?? 1),
+                  0
+                )
+              ).toLocaleString()}{' '}
+              {currency}
             </span>
-            <Image src={currencyImage} alt="عملة" width={18} height={18} />
+            {/* <Image src={currencyImage} alt="عملة" width={18} height={18} /> */}
           </div>
         </div>
 
@@ -53,8 +58,10 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
             <div className="flex justify-between items-center text-gray-500 font-bold">
               <span>{t('discount.label')}:</span>
               <div className="flex items-center gap-2">
-                <span className="text-lg">-{totalDiscount}</span>
-                <Image src={currencyImage} alt="عملة" width={18} height={18} />
+                <span className="text-lg">
+                  -{Number(totalDiscount).toLocaleString()} {currency}
+                </span>
+                {/* <Image src={currencyImage} alt="عملة" width={18} height={18} /> */}
               </div>
             </div>
           </MotionSection>
@@ -64,8 +71,10 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
           <div className="flex justify-between items-center font-bold border-t border-dotted border-gray-300 pt-4">
             <span>{t('total.label')}:</span>
             <div className="flex items-center gap-2">
-              <span className="text-lg font-bold">{total}</span>
-              <Image src={currencyImage} alt="عملة" width={18} height={18} />
+              <span className="text-lg font-bold">
+                {Number(total).toLocaleString()} {currency}
+              </span>
+              {/* <Image src={currencyImage} alt="عملة" width={18} height={18} /> */}
             </div>
           </div>
         </MotionSection>

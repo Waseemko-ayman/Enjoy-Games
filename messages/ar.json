@@ -316,7 +316,9 @@
       "complete": "إتمام الطلب"
     },
     "discountSuccess": "تمت عملية الخصم بنجاح.",
-    "discountFaild": "رمز الكوبون المحدد غير صالح."
+    "discountFaild": "رمز الكوبون المحدد غير صالح.",
+    "orderSuccess": "تم تخزين Code بنجاح",
+    "orderFaild": "معرف المنتج المحدد غير صالح."
   },
   "Tickets": {
     "emptyStateTitle": "لا يوجد تذاكر دعم فني حتى الآن...",

@@ -19,15 +19,7 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const secTexts = useTranslations('SectionsTitles.Gifts');
   const btnTexts = useTranslations('BtnTexts');
   const { data, isLoading, error } = useMainContent();
-  // const msgTxts = useTranslations('Messages');
-  // const { addToCart } = useCartContext();
-  // const { showToast } = useToast();
-
-  // const handleAddToCart = (product: ProductCardProps) => {
-  //   addToCart(product);
-  //   showToast(`${product.title} ${msgTxts('addedToCart')}`);
-  // };
-
+  
   return (
     <Layer>
       <Container>

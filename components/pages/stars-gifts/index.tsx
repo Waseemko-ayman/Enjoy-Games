@@ -22,14 +22,7 @@ const StarsGiftsPage = () => {
   const secTexts = useTranslations('SectionsTitles.Gifts');
   const { data, isLoading, error } = useMainContent();
   const { categories } = useCategories();
-  // const msgTxts = useTranslations('Messages');
-  // const { addToCart } = useCartContext();
-  // const { showToast } = useToast();
 
-  // const handleAddToCart = (product: ProductCardProps) => {
-  //   addToCart(product);
-  //   showToast(`${product.title} ${msgTxts('addedToCart')}`);
-  // };
   return (
     <Layer>
       <Container>
@@ -72,7 +65,6 @@ const StarsGiftsPage = () => {
                           window.location.href = path;
                         }
                       }}
-                      // onAddToCart={() => handleAddToCart(card)}
                       productData={card}
                       {...cardWithoutImage}
                     />

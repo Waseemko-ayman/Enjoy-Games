@@ -141,11 +141,11 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
         <MotionSection index={2}>
           <div className="flex items-end gap-3 mt-4">
             <h3 className="text-xl sm:text-[28px] font-semibold">
-              {product?.price} دإ
+              {product?.price}
             </h3>
             <div className="flex items-center gap-3">
               <span className="line-through text-red-500 text-base">
-                {product?.price_before} دإ
+                {product?.price_before}
               </span>
               <CardWrapper
                 bgColor="bg-red-500"
