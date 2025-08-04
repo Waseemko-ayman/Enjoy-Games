@@ -58,8 +58,8 @@ export interface ProductCardProps {
   imgAlt?: string;
   imgTitle?: string;
   name?: string;
-  price_before?: number;
-  price?: number;
+  price_before?: string;
+  price?: string;
   discount?: number;
   shipping_payment?: string;
   product_id?: number;
@@ -85,28 +85,58 @@ export interface ProductCardProps {
   productData?: ProductCardProps;
 }
 
-// export interface CouponResponse {
-//   success: boolean;
-//   message: string;
-//   data: {
-//     product_id: number;
-//     price: number;
-//     final_price: number;
-//     discount: number;
-//   }[];
-// }
+export interface CartItem {
+  product_id?: number;
+  quantity: number;
+  shipping_data?: Record<string, any>;
+}
 
-// export interface OrderResponse {
-//   success: boolean;
-//   message: string;
-//   data: {
-//     order_id: number;
-//   };
-// }
+export interface CouponItem extends CartItem {
+  price: number;
+  category_id: number;
+  sub_category_id: number;
+  discount: number;
+  final_price: number;
+}
 
-// export interface PaymentResponse {
-//   payment_url: string;
-// }
+type CouponResponseData = CouponItem[];
+
+export interface CouponResponse {
+  success: boolean;
+  data: CouponResponseData;
+  message: string;
+  [key: string]: unknown;
+}
+
+export interface OrderRequest {
+  cart: { product_id: number; quantity: number; shipping_data: object }[];
+  coupon_code?: string | null;
+  [key: string]: unknown;
+}
+
+export interface OrderResponseData {
+  order_id: number;
+  total_price: number;
+  discount: number;
+  [key: string]: unknown;
+}
+
+export interface PaymentRequest {
+  order_id: number;
+  payment_gateway: string;
+  [key: string]: unknown;
+}
+
+export interface PaymentResponseData {
+  payment_url?: string;
+  redirect_url?: string;
+  [key: string]: unknown;
+}
+
+export interface PaymentFormData {
+  paymentMethod: string;
+  couponCode: string | null;
+}
 
 export interface getSlugsProps {
   getSlugs: (subCategoryId: number) => {

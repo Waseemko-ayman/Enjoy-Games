@@ -5,82 +5,33 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import Image from 'next/image';
 
-import CardWrapper from '@/components/atomic/CardWrapper';
-import Button from '@/components/atomic/Button';
 import SubCartHeader from '@/components/molecules/SubCartHeader';
 import Layer from '@/components/atomic/Layer';
 import Container from '@/components/organism/Container';
-import InvoiceSummary from '@/components/molecules/InvoiceSummary';
-import Input from '@/components/atomic/Input';
-import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
 
-import { PaymentStepProps, ProductCardProps } from '@/interfaces';
+import {
+  CartItem,
+  CouponResponse,
+  OrderRequest,
+  OrderResponseData,
+  PaymentFormData,
+  PaymentRequest,
+  PaymentResponseData,
+  PaymentStepProps,
+  ProductCardProps,
+} from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import useAPI from '@/hook/useAPI';
 import { useToast } from '@/lib/toast';
-import ButtonLoading from '@/components/atomic/ButtonLoading';
-
-interface CartItem {
-  product_id?: number;
-  quantity: number;
-  shipping_data?: Record<string, any>;
-}
-
-interface CouponItem extends CartItem {
-  price: number;
-  category_id: number;
-  sub_category_id: number;
-  discount: number;
-  final_price: number;
-}
-
-type CouponResponseData = CouponItem[];
-
-interface CouponResponse {
-  success: boolean;
-  data: CouponResponseData;
-  message: string;
-  [key: string]: unknown;
-}
-
-interface OrderRequest {
-  cart: { product_id: number; quantity: number; shipping_data: object }[];
-  coupon_code?: string | null;
-  [key: string]: unknown;
-}
-
-interface OrderResponseData {
-  order_id: number;
-  total_price: number;
-  discount: number;
-  [key: string]: unknown;
-}
-
-interface PaymentRequest {
-  order_id: number;
-  payment_gateway: string;
-  [key: string]: unknown;
-}
-
-interface PaymentResponseData {
-  payment_url?: string;
-  redirect_url?: string;
-  [key: string]: unknown;
-}
-
-// Helper function to parse price with fallback value
-function parsedPriceOrFallback(price?: number, parsedPrice?: number) {
-  return parsedPrice ?? price ?? 0;
-}
+import OrderSummary from './OrderSummary';
+import PaymentOptions from './PaymentOptions';
 
 const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
   // State variables
   const [couponResponse, setCouponResponse] = useState<typeof data | null>(
     null
   );
-  // const [, setOrderResponse] = useState<typeof orderData | null>(null);
   const [, setOrderResponse] = useState<OrderResponseData | null>(null);
   const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
 
@@ -97,10 +48,9 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
     add: AddCoupon,
     data,
     isLoading,
-  } = useAPI<
-    { cart: CartItem[]; coupon_code: string },
-    CouponResponse // كامل الـ response مع success و message
-  >('coupon/apply-coupon');
+  } = useAPI<{ cart: CartItem[]; coupon_code: string }, CouponResponse>(
+    'coupon/apply-coupon'
+  );
   const { add: orderAdd, isLoading: orderIsLoading } = useAPI<
     OrderRequest,
     OrderResponseData
@@ -117,11 +67,6 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
       .required(inputsTexts('errorsMsgs.paymentRequired')),
     couponCode: yup.string().nullable().default(null),
   });
-
-  type PaymentFormData = {
-    paymentMethod: string;
-    couponCode: string | null;
-  };
 
   // React Hook Form setup
   const {
@@ -241,135 +186,20 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
           onSubmit={handleSubmit(onSubmit)}
           className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
-          {/* Left section: Payment options and coupon input */}
-          <div className="lg:col-span-2 space-y-6">
-            <MotionSection index={0}>
-              <label>
-                <CardWrapper
-                  className={`p-6 cursor-pointer ${
-                    errors.paymentMethod ? 'border border-red-500' : ''
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <input
-                      type="radio"
-                      value="paymob"
-                      {...register('paymentMethod')}
-                      className="w-4 h-4 text-enjoy-primary"
-                    />
-                    <Image
-                      src="/assets/paymob-logo.png"
-                      alt="Apple Pay"
-                      width={70}
-                      height={70}
-                    />
-                  </div>
-                </CardWrapper>
-              </label>
-              {errors.paymentMethod && (
-                <p className="text-red-500 text-sm mt-2">
-                  {errors.paymentMethod.message}
-                </p>
-              )}
-            </MotionSection>
+          {/* Payment options and coupon input */}
+          <PaymentOptions
+            register={register}
+            errors={errors}
+            onApplyCoupon={onApplyCoupon}
+            isLoading={isLoading}
+            orderIsLoading={orderIsLoading}
+            btnTexts={btnTexts}
+            inputsTexts={inputsTexts}
+            t={t}
+          />
 
-            <MotionSection index={1}>
-              <CardWrapper className="p-6 mt-5">
-                <h3 className="text-lg font-bold mb-4">
-                  {t('discountCoupon')}
-                </h3>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Input
-                    type="text"
-                    variant="secondary"
-                    placeholder={inputsTexts('placeHolders.haveCoupon')}
-                    otherClassNameContainer="flex-1 focus:ring-2 focus:ring-purple-500"
-                    inputName="couponCode"
-                    {...register('couponCode')}
-                  />
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    otherClassName="py-3 sm:px-6 max-sm:w-full"
-                    handleClick={onApplyCoupon}
-                  >
-                    {isLoading ? <ButtonLoading /> : btnTexts('apply')}
-                  </Button>
-                </div>
-              </CardWrapper>
-            </MotionSection>
-
-            <MotionSection index={2}>
-              <Button type="submit" otherClassName="w-full py-3">
-                {orderIsLoading ? <ButtonLoading /> : btnTexts('Pay')}
-              </Button>
-            </MotionSection>
-          </div>
-
-          {/* Right section: Order summary */}
-          <div className="space-y-6">
-            <MotionSection index={3}>
-              <CardWrapper className="p-6">
-                <h2 className="text-lg font-bold mb-6">{t('cartSummary')}</h2>
-                <div className="max-h-[220px] overflow-y-auto scrollbar-none">
-                  {processedItems.map(
-                    (item: ProductCardProps, index: number) => {
-                      const originalItem = items[index];
-                      const quantity = item.quantity ?? 1;
-
-                      return (
-                        <div
-                          key={`${item.id}-${index}`}
-                          className="flex items-center gap-4 mb-4"
-                        >
-                          <Image
-                            src="/assets/play-station.webp"
-                            alt="Nintendo"
-                            width={80}
-                            height={80}
-                            className="rounded-lg"
-                          />
-                          <div className="flex flex-col w-full">
-                            <h3 className="font-semibold">
-                              {originalItem?.title}
-                            </h3>
-                            <div className="flex justify-between w-full text-sm items-center">
-                              {item.final_price &&
-                              item.final_price !== item.price ? (
-                                <>
-                                  <p className="text-gray-500 font-semibold line-through">
-                                    {(item.price ?? 0) * quantity}{' '}
-                                    {item.parsedCurrency}
-                                  </p>
-                                  <p className="font-semibold">
-                                    {item.final_price} {item.parsedCurrency}
-                                  </p>
-                                </>
-                              ) : (
-                                <p className="font-semibold">
-                                  {(
-                                    parsedPriceOrFallback(
-                                      item.price,
-                                      item.parsedPrice
-                                    ) * quantity
-                                  ).toLocaleString()}{' '}
-                                  {item.parsedCurrency}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    }
-                  )}
-                </div>
-              </CardWrapper>
-            </MotionSection>
-
-            <MotionSection index={4}>
-              <InvoiceSummary items={processedItems} />
-            </MotionSection>
-          </div>
+          {/* Order summary */}
+          <OrderSummary processedItems={processedItems} items={items} t={t} />
         </form>
       </Container>
     </Layer>

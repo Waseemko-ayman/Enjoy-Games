@@ -18,6 +18,7 @@ interface MobileMainContent {
   best_seller: ProductCardProps[];
   newly_arrived: ProductCardProps[];
   suggested_products: ProductCardProps[];
+  [key: string]: unknown;
 }
 
 interface MainContentContextType {
