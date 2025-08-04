@@ -638,7 +638,7 @@ export const ticketsInputsTypes = [
   {
     id: 2,
     type: 'textarea',
-    name: 'details',
+    name: 'message',
     placeholder: 'يرجي كتابة وصف لمساعتدك بشكل أدق',
   },
 ];

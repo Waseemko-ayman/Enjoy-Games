@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useState } from 'react';
@@ -10,25 +11,41 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import AttachmentsUploader from '@/components/molecules/AttachmentsPreview';
-import { FormData } from '@/interfaces';
+import { FormData, TicketResponse } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import FormError from '@/components/atomic/FormError';
 import { InputTypes } from '@/utils/type';
+import useAPI from '@/hook/useAPI';
+import { useToast } from '@/lib/toast';
+import { useRouter } from 'next/navigation';
+import { PATHS } from '@/data/paths';
 
 const CreateForm = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
-  const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
+
+  // Router
+  const router = useRouter();
+
+  // Translation
   const placeholders = useTranslations('Inputs.placeHolders');
   const btnTexts = useTranslations('BtnTexts');
-
   const t = useTranslations('Inputs.errorsMsgs');
 
+  // Notifications
+  const { showToast } = useToast();
+
+  // API Hook
+  const { add: addTickets, isLoading } = useAPI<FormData, TicketResponse>(
+    'tickets/create'
+  );
+
+  // Form Schema
   const schema = Yup.object().shape({
     subject: Yup.string().required(t('subjectRequired') || 'العنوان مطلوب'),
     // ticketType: Yup.string().required(
     //   t('ticketTypeRequired') || 'نوع التذكرة مطلوب'
     // ),
-    details: Yup.string().required(t('detailsRequired') || 'الوصف مطلوب'),
+    message: Yup.string().required(t('detailsRequired') || 'الوصف مطلوب'),
   });
 
   const {
@@ -40,17 +57,19 @@ const CreateForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
-    setIsSubmittingLocal(true);
-    const finalData = { ...data, attachments };
-
-    setTimeout(() => {
-      setIsSubmittingLocal(false);
-      console.log('Form Data:', finalData);
-      reset();
-      setAttachments([]);
-      // Here you bind finalData to the API later
-    }, 1000);
+  const onSubmit = async (data: FormData) => {
+    try {
+      const res = await addTickets(data);
+      if (res?.success) {
+        showToast(res.message);
+        reset();
+        setAttachments([]);
+        router.push(PATHS.TICKETS.ROOT.link);
+      }
+    } catch (error) {
+      const apiError = (error as any)?.res?.data?.message;
+      showToast(apiError);
+    }
   };
 
   return (
@@ -59,6 +78,7 @@ const CreateForm = () => {
         <div className="space-y-7">
           {ticketsInputsTypes.map((input) => {
             const fieldName = input.name as keyof FormData;
+            const fieldNameStr = fieldName as string;
             return (
               <div key={input.id}>
                 <Input
@@ -70,7 +90,7 @@ const CreateForm = () => {
                   otherClassNameContainer={
                     errors[fieldName]?.message ? 'border-red-500' : ''
                   }
-                  {...register(fieldName)}
+                  {...register(fieldNameStr)}
                 />
                 {errors[fieldName] && (
                   <FormError message={errors[fieldName]?.message} />
@@ -87,7 +107,7 @@ const CreateForm = () => {
         />
 
         <Button otherClassName="w-full py-3 px-3 mt-7" type="submit">
-          {isSubmittingLocal ? <ButtonLoading /> : btnTexts('sendTicket')}
+          {isLoading ? <ButtonLoading /> : btnTexts('sendTicket')}
         </Button>
       </form>
     </CardWrapper>

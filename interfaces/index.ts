@@ -138,6 +138,39 @@ export interface PaymentFormData {
   couponCode: string | null;
 }
 
+export interface TicketMessage {
+  id: number;
+  ticket_id: number;
+  user_id: number;
+  message: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Ticket {
+  id: number;
+  user_id: number;
+  subject: string;
+  created_at: string;
+  updated_at: string;
+  messages: TicketMessage[];
+}
+
+export interface TicketResponse {
+  success: boolean;
+  message: string;
+  data: Ticket;
+  [key: string]: unknown;
+}
+
+export interface FormData {
+  subject: string;
+  // ticketType: string;
+  message: string;
+  attachments?: File[];
+  [key: string]: unknown;
+}
+
 export interface getSlugsProps {
   getSlugs: (subCategoryId: number) => {
     categorySlug: string;
@@ -563,12 +596,6 @@ export interface ReviewData {
 
 export interface ReviewSectionProps {
   data?: ReviewData;
-}
-
-export interface FormData {
-  subject: string;
-  // ticketType: string;
-  details: string;
 }
 
 export interface DiscoverEarnMoreCardProps extends WithChildren {

@@ -324,7 +324,9 @@
     "emptyStateTitle": "لا يوجد تذاكر دعم فني حتى الآن...",
     "searchFaqPrompt": "هل بحثت عن سؤالك في الأسئلة الشائعة",
     "addAttachments": "أضف مرفقات للتذكرة (غير إلزامي)",
-    "attachmentsDescription": "ارفاق صور مع التعليق، أو بتحميل الملفات"
+    "attachmentsDescription": "ارفاق صور مع التعليق، أو بتحميل الملفات",
+    "by": "بواسطة",
+    "createdAt": "تاريخ الإنشاء"
   },
   "productDetails": {
     "shareLinkWith": "شارك الرابط عبر:",
@@ -443,7 +445,7 @@
       "cardAndOffersSearch": "إبحث عن بطاقة وعروض",
       "subject": "عنوان التذكرة",
       "ticketType": "حدد نوع التذكرة",
-      "details": "يرجي كتابة وصف لمساعتدك بشكل أدق",
+      "message": "يرجي كتابة وصف لمساعتدك بشكل أدق",
       "name": "",
       "email": "",
       "phone": "xxxxxxxxx",
