@@ -11,11 +11,15 @@ import Button from '@/components/atomic/Button';
 interface OrderCompleteStepProps {
   onReturnToStore: () => void;
   orderNumber: string;
+  amountCents?: number;
+  currency?: string;
 }
 
 const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
   onReturnToStore,
   orderNumber,
+  amountCents,
+  currency = 'ر.س.',
 }) => {
   const t = useTranslations('MyCart.order');
   const btnTexts = useTranslations('BtnTexts');
@@ -51,6 +55,15 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-gray-600">{t('orderStatusLabel')}</span>
                   <span className="text-green-600 font-semibold">مؤكد</span>
+                </div>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-gray-600">
+                    {t('paymentAmountLabel')}
+                  </span>
+                  <span className="font-semibold">
+                    {amountCents ? (amountCents / 100).toFixed(2) : '0.00'}{' '}
+                    {currency}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">

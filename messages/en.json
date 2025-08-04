@@ -304,8 +304,11 @@
     "order": {
       "orderCompleteMessage": "Your order has been completed successfully!",
       "orderCompleteThanks": "Thank you for your trust. Order details will be sent to your email",
+      "paymentFailedTitle": "The payment was not completed!",
+      "paymentFailedNote": "Sorry, an error occurred while processing your order. You can try again.",
       "orderNumberLabel": "Order Number:",
       "orderStatusLabel": "Order Status:",
+      "paymentAmountLabel": "Paid Amount:",
       "deliveryMethodLabel": "Delivery Method:",
       "pointsAddedMessage": "{points} points have been added to your account!",
       "pointsUsageInfo": "You can use points in upcoming purchases"

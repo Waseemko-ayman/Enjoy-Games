@@ -304,8 +304,11 @@
     "order": {
       "orderCompleteMessage": "تم إتمام طلبك بنجاح!",
       "orderCompleteThanks": "شكراً لك على ثقتك بنا. سيتم إرسال تفاصيل الطلب على بريدك الإلكتروني",
+      "paymentFailedTitle": "لم يتم إتمام عملية الدفع!",
+      "paymentFailedNote": "نأسف، حدث خطأ أثناء معالجة الطلب. يمكنك المحاولة مرة أخرى",
       "orderNumberLabel": "رقم الطلب:",
       "orderStatusLabel": "حالة الطلب:",
+      "paymentAmountLabel": "المبلغ المدفوع:",
       "deliveryMethodLabel": "طريقة التسليم:",
       "pointsAddedMessage": "تم إضافة {points} نقطة لحسابك!",
       "pointsUsageInfo": "يمكنك استخدام النقاط في عمليات الشراء القادمة"

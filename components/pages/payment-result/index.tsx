@@ -8,12 +8,16 @@ import PaymentFailedStep from '../my-cart/Sections/PaymentFailedStep';
 
 const PaymentResultPage = () => {
   const searchParams = useSearchParams();
-  const status = searchParams.get('status');
-  const orderNumber = searchParams.get('orderNumber') || '';
+  const orderId = searchParams.get('order') || '';
+  const amountCentsStr = searchParams.get('amount_cents') || '0';
+  const currency = searchParams.get('currency') || 'SAR';
+  const success = searchParams.get('success') === 'true';
 
-  // لإدارة الخطوات
-  // const STEPS = { CART: 1, PAYMENT: 2, COMPLETE: 3 };
-  // const [currentStep, setCurrentStep] = useState(STEPS.COMPLETE);
+  // Since keys with dots may not be accessible via get(), parse manually:
+  const urlParams = new URLSearchParams(window.location.search);
+  const message = urlParams.get('data.message') || '';
+
+  const amountCents = parseInt(amountCentsStr, 10);
 
   return (
     <>
@@ -25,13 +29,18 @@ const PaymentResultPage = () => {
         ]}
       />
 
-      {status === 'paid' ? (
+      {success ? (
         <OrderCompleteStep
-          orderNumber={orderNumber}
+          orderNumber={orderId}
+          amountCents={amountCents}
+          currency={currency}
           onReturnToStore={() => (window.location.href = '/store')}
         />
       ) : (
-        <PaymentFailedStep onRetry={() => (window.location.href = '/store')} />
+        <PaymentFailedStep
+          onRetry={() => (window.location.href = '/store')}
+          errorMessage={message}
+        />
       )}
     </>
   );

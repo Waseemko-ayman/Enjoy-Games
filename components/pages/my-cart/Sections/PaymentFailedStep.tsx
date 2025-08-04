@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { XCircle } from 'lucide-react';
+import { Home, XCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Layer from '@/components/atomic/Layer';
 import Container from '@/components/organism/Container';
@@ -12,9 +12,13 @@ import { PATHS } from '@/data/paths';
 
 interface PaymentFailedStepProps {
   onRetry: () => void;
+  errorMessage?: string; // added optional message prop
 }
 
-const PaymentFailedStep: React.FC<PaymentFailedStepProps> = ({ onRetry }) => {
+const PaymentFailedStep: React.FC<PaymentFailedStepProps> = ({
+  onRetry,
+  errorMessage,
+}) => {
   const t = useTranslations('MyCart.order');
   const btnTexts = useTranslations('BtnTexts');
 
@@ -29,19 +33,19 @@ const PaymentFailedStep: React.FC<PaymentFailedStepProps> = ({ onRetry }) => {
                   <XCircle className="w-10 h-10 text-white" />
                 </div>
                 <h1 className="text-xl sm:text-2xl font-bold mb-2 text-red-600">
-                  {t('paymentFailed')}
+                  {t('paymentFailedTitle')}
                 </h1>
                 <p className="text-gray-600 text-sm sm:text-base">
-                  {t('paymentFailedDescription')}
+                  {errorMessage || t('paymentFailedNote')}
                 </p>
               </div>
             </MotionSection>
 
             <MotionSection index={1}>
               <Button
-                variant="secondary"
                 href={PATHS.STORE.link}
                 otherClassName="w-full py-3"
+                Icon={Home}
                 handleClick={onRetry}
               >
                 {btnTexts('BackToStore')}
