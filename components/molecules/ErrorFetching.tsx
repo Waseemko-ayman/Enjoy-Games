@@ -21,13 +21,13 @@ const ErrorFetching = () => {
         width={128}
         height={128}
       />
-      <h2 className="text-center text-lg md:text-xl lg:text-2xl mt-4 mb-2">
+      <h2 className="text-center text-lg md:text-xl lg:text-xl mt-4 mb-2">
         {t('errorMessage')}
       </h2>
       <Button
         handleClick={handleClick}
         Icon={FaArrowsRotate}
-        otherClassName="py-3 px-8 mx-auto"
+        otherClassName="py-2 px-5 mx-auto text-base"
       >
         {btnTxts('LetsTryAgain')}
       </Button>
