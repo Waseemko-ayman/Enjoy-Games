@@ -316,7 +316,9 @@
     "stepsTitles": {
       "cart": "Shopping Cart",
       "payment": "Payment",
-      "complete": "Order Complete"
+      "complete": "Order Complete",
+      "failed": "Order Faile",
+      "default": "Order Status"
     },
     "discountSuccess": "The debit transaction was completed successfully.",
     "discountFaild": "The selected coupon code is invalid.",

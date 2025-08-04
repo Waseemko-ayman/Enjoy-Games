@@ -6,30 +6,51 @@ import StepIndicator from '@/components/molecules/StepIndicator';
 import CartContent from '@/components/pages/my-cart/Sections/CartContent';
 import { useCartContext } from '@/context/CartContext';
 import { useTranslations } from 'next-intl';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import PaymentFailedStep from './Sections/PaymentFailedStep';
 
 const STEPS = {
   CART: 1,
   PAYMENT: 2,
   COMPLETE: 3,
+  FAILED: 4,
 };
 
 const MyCartPage = () => {
-  // const [currentStep, setCurrentStep] = useState(STEPS.CART);
   const searchParams = useSearchParams();
-  const status = searchParams.get('status');
+  const successParam = searchParams.get('success');
+  const success = successParam === 'true';
 
-  const [currentStep, setCurrentStep] = useState(() =>
-    status === 'paid' ? STEPS.COMPLETE : STEPS.CART
-  );
+  const orderId = searchParams.get('order') || '';
+  const amountCents = parseInt(searchParams.get('amount_cents') || '0', 10);
+  const currency = searchParams.get('currency') || 'ر.س.';
 
-  const [orderNumber] = useState('DL' + Math.random().toString().substr(2, 8));
+  const urlParams = new URLSearchParams(window.location.search);
+  const message = urlParams.get('data.message') || '';
+
+  const [currentStep, setCurrentStep] = useState(() => {
+    const hasPaymentParams =
+      searchParams.get('order') &&
+      searchParams.get('amount_cents') &&
+      searchParams.get('currency') &&
+      successParam !== null;
+
+    if (hasPaymentParams && successParam === 'true') return STEPS.COMPLETE;
+    if (hasPaymentParams && successParam === 'false') return STEPS.FAILED;
+    return STEPS.CART;
+  });
 
   const t = useTranslations('MyCart');
   const btnTexts = useTranslations('BtnTexts');
-
   const { cartItems, clearCart } = useCartContext();
+
+  const finalStepKey =
+    successParam === 'true'
+      ? 'complete'
+      : successParam === 'false'
+      ? 'failed'
+      : 'default';
 
   const steps = [
     {
@@ -46,9 +67,10 @@ const MyCartPage = () => {
     },
     {
       id: 3,
-      key: 'complete',
-      isCompleted: currentStep > STEPS.COMPLETE,
-      isCurrent: currentStep === STEPS.COMPLETE,
+      key: finalStepKey,
+      isCompleted:
+        currentStep === STEPS.COMPLETE || currentStep === STEPS.FAILED,
+      isCurrent: currentStep === STEPS.COMPLETE || currentStep === STEPS.FAILED,
     },
   ];
 
@@ -56,17 +78,9 @@ const MyCartPage = () => {
     setCurrentStep(STEPS.PAYMENT);
   };
 
-  // const handlePaymentComplete = () => {
-  //   setCurrentStep(STEPS.COMPLETE);
-  // };
-
   const handleOrderComplete = () => {
     clearCart();
-    setCurrentStep(STEPS.CART);
-  };
-
-  const handleBackToCart = () => {
-    setCurrentStep(STEPS.CART);
+    window.location.href = '/store';
   };
 
   const totalAmount = cartItems.reduce(
@@ -74,50 +88,47 @@ const MyCartPage = () => {
     0
   );
 
-  useEffect(() => {
-    if (status === 'paid') {
-      setCurrentStep(STEPS.COMPLETE);
-    }
-  }, [status]);
-
   return (
     <div>
-      {/* Step Indicator */}
-      <StepIndicator steps={steps} />
+      <StepIndicator steps={steps} success={success} />
 
-      {/* Step Content */}
-      {currentStep === STEPS.CART && (
-        <>
-          {cartItems.length > 0 ? (
-            <CartContent
-              items={cartItems}
-              onProceedToPayment={handleProceedToPayment}
-            />
-          ) : (
-            <EmptyStateBox
-              imageSrc="/assets/empty-status.png"
-              alt="empty-status"
-              title={t('emptyStateTitle')}
-              buttonText={btnTexts('StartMarketingNow')}
-              btnlink="/store"
-            />
-          )}
-        </>
-      )}
+      {currentStep === STEPS.CART &&
+        (cartItems.length > 0 ? (
+          <CartContent
+            items={cartItems}
+            onProceedToPayment={handleProceedToPayment}
+          />
+        ) : (
+          <EmptyStateBox
+            imageSrc="/assets/empty-status.png"
+            alt="empty-status"
+            title={t('emptyStateTitle')}
+            buttonText={btnTexts('StartMarketingNow')}
+            btnlink="/store"
+          />
+        ))}
 
       {currentStep === STEPS.PAYMENT && (
         <PaymentStep
           items={cartItems}
-          // onPaymentComplete={handlePaymentComplete}
-          onBackToCart={handleBackToCart}
+          onBackToCart={() => setCurrentStep(STEPS.CART)}
           totalAmount={totalAmount}
         />
       )}
 
       {currentStep === STEPS.COMPLETE && (
         <OrderCompleteStep
+          orderNumber={orderId}
+          amountCents={amountCents}
+          currency={currency}
           onReturnToStore={handleOrderComplete}
-          orderNumber={orderNumber}
+        />
+      )}
+
+      {currentStep === STEPS.FAILED && (
+        <PaymentFailedStep
+          onRetry={handleOrderComplete}
+          errorMessage={message}
         />
       )}
     </div>

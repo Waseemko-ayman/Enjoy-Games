@@ -13,6 +13,12 @@ import { Variants } from 'framer-motion';
 import { Messages, useTranslations } from 'next-intl';
 import { ElementType, JSX, ReactNode } from 'react';
 
+export interface APIRequest {
+  isLoading: boolean;
+  error: any;
+  refresh: () => void;
+}
+
 export interface Category {
   id: number;
   slug: string | null;
@@ -674,6 +680,7 @@ interface Step {
 
 export interface StepIndicatorProps {
   steps: Step[];
+  success?: boolean;
 }
 
 export interface LoginFormData {

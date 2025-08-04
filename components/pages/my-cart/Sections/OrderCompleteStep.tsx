@@ -23,7 +23,7 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
 }) => {
   const t = useTranslations('MyCart.order');
   const btnTexts = useTranslations('BtnTexts');
-  const points = 1000;
+  // const points = 1000;
 
   return (
     <Layer otherClassName="!my-9 sm:!my-12">
@@ -97,7 +97,7 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
               </div>
             </MotionSection>
 
-            <MotionSection index={3}>
+            {/* <MotionSection index={3}>
               <div className="mt-6 sm:mt-8 p-4 bg-enjoy-glass rounded-lg">
                 <div className="flex items-center justify-center gap-2 text-enjoy-primary mb-2">
                   <span className="text-2xl">⭐</span>
@@ -107,7 +107,7 @@ const OrderCompleteStep: React.FC<OrderCompleteStepProps> = ({
                 </div>
                 <p className="text-sm text-gray-600">{t('pointsUsageInfo')}</p>
               </div>
-            </MotionSection>
+            </MotionSection> */}
           </CardWrapper>
         </div>
       </Container>
