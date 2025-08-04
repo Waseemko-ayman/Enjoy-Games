@@ -10,6 +10,7 @@ import BodyWrapper from '@/components/organism/layouts/BodyWrapper';
 import { IBM_Plex_Sans_Arabic } from 'next/font/google';
 import LocaleSync from '@/components/organism/layouts/LocaleSync';
 import { CartProvider } from '@/context/CartContext';
+import { TicketsProvider } from '@/context/TicketsContext';
 
 const ibmArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
@@ -48,7 +49,9 @@ export default async function RootLayout({
           <ErrorBoundary>
             <AuthProvider>
               <CartProvider>
-                <BodyWrapper>{children}</BodyWrapper>
+                <TicketsProvider>
+                  <BodyWrapper>{children}</BodyWrapper>
+                </TicketsProvider>
               </CartProvider>
             </AuthProvider>
           </ErrorBoundary>

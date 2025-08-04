@@ -16,18 +16,27 @@ import Button from '@/components/atomic/Button';
 import { useTranslations } from 'next-intl';
 import { useAuthContext } from '@/context/AuthContext';
 import { useCartContext } from '@/context/CartContext';
+import { FaRegBell } from 'react-icons/fa6';
+import { useTickets } from '@/context/TicketsContext';
 
 const Header = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { token } = useAuthContext();
+
+  // Ref
   const menuRef = useRef<HTMLDivElement>(null);
-  const { toggleLocale, isArabic } = useToggleLocale();
+
+  // Translations
   const t = useTranslations('Inputs.placeHolders');
   const langTexts = useTranslations('Languages');
   const ariaTxts = useTranslations('ariaLabels.links');
+
+  // API Context (Hook)
+  const { token } = useAuthContext();
   const { cartItems } = useCartContext();
+  const { tickets, hasUnreadTickets } = useTickets();
+  const { toggleLocale, isArabic } = useToggleLocale();
 
   const iconsStyle = 'w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer';
 
@@ -72,7 +81,7 @@ const Header = () => {
             </AnimatedWrapper>
           </form>
 
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-3">
             {token ? (
               <div className="relative" ref={menuRef}>
                 <AnimatedWrapper direction="y" distance={40}>
@@ -90,6 +99,21 @@ const Header = () => {
                 </Link>
               </AnimatedWrapper>
             )}
+            <AnimatedWrapper direction="y" distance={-40}>
+              <Link
+                href={PATHS.TICKETS.ROOT.link}
+                aria-label={ariaTxts('myTicketPage')}
+                className="relative"
+              >
+                <FaRegBell className={iconsStyle} />
+                {hasUnreadTickets && tickets && tickets.length > 0 && (
+                  <>
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+                  </>
+                )}
+              </Link>
+            </AnimatedWrapper>
             <AnimatedWrapper direction="y" distance={-40}>
               <Link
                 href={PATHS.MY_CART.link}
