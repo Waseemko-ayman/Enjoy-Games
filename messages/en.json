@@ -331,7 +331,11 @@
     "addAttachments": "Add attachments to the ticket (optional)",
     "attachmentsDescription": "Attach images with comments, or upload files",
     "by": "By",
-    "createdAt": "Created At"
+    "createdAt": "Created At",
+    "lastUpdated": "last Updated",
+    "conversation": "Conversation",
+    "customer": "Customer",
+    "ticketId": "Ticket ID"
   },
   "productDetails": {
     "shareLinkWith": "Share the link via:",

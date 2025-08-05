@@ -331,7 +331,11 @@
     "addAttachments": "أضف مرفقات للتذكرة (غير إلزامي)",
     "attachmentsDescription": "ارفاق صور مع التعليق، أو بتحميل الملفات",
     "by": "بواسطة",
-    "createdAt": "تاريخ الإنشاء"
+    "createdAt": "تاريخ الإنشاء",
+    "lastUpdated": "آخر تحديث",
+    "conversation": "محادثة",
+    "customer": "عميل",
+    "ticketId": "رقم التذكرة"
   },
   "productDetails": {
     "shareLinkWith": "شارك الرابط عبر:",
