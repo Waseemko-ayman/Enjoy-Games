@@ -202,6 +202,10 @@
     background-color: var(--enjoy-gray-700);
   }
 
+  .hover\:border-enjoy-primary:hover {
+    border-color: var(--enjoy-primary);
+  }
+
   .shadow-custom {
     box-shadow: 0 4px 18px 2px rgba(0, 0, 0, 0.08);
   }

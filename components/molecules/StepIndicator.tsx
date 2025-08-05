@@ -12,12 +12,18 @@ import { useTranslations } from 'next-intl';
 import { FaX } from 'react-icons/fa6';
 
 const StepIndicator: React.FC<StepIndicatorProps> = ({ steps, success }) => {
-  const totalSteps = steps.length;
-  const completedCount = steps.filter((s) => s.isCompleted).length;
-const progressPercentage =
-  success === false || success === true
+  // const totalSteps = steps.length;
+  // const completedCount = steps.filter((s) => s.isCompleted).length;
+  // const progressPercentage =
+  //   success === false || success === true
+  //     ? 100
+  //     : (completedCount / (totalSteps - 1)) * 100;
+
+  const currentStepIndex = steps.findIndex((step) => step.isCurrent);
+  const progressPercentage = steps[2]?.isCurrent
     ? 100
-    : (completedCount / (totalSteps - 1)) * 100;
+    : (currentStepIndex / (steps.length - 1)) * 100;
+
   const t = useTranslations('MyCart.stepsTitles');
 
   return (

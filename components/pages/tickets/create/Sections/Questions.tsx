@@ -14,7 +14,7 @@ const Questions = () => {
     >
       <h3 className="text-base font-normal mb-5">{t('searchFaqPrompt')}</h3>
       <Button
-        href={PATHS.FAQ.link}
+        href={PATHS.FAQS.link}
         variant="forth"
         otherClassName="w-full py-3 px-3"
       >

@@ -1,14 +1,14 @@
 import PageHeader from '@/components/molecules/PageHeader';
 import React from 'react';
-import Content from './FaqContent';
+import FAQS from '@/components/organism/FAQS';
 
-const FAQPage = () => {
+const FAQSPage = () => {
   return (
     <div>
       <PageHeader />
-      <Content />
+      <FAQS />
     </div>
   );
 };
 
-export default FAQPage;
+export default FAQSPage;

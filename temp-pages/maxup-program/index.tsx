@@ -2,9 +2,9 @@
 import React from 'react';
 import Profits from './Sections/Profits';
 import Upgrade from './Sections/Upgrade';
-import FAQ from './Sections/FAQ';
 import EarnMore from './Sections/EarnMore';
 import { useAuthContext } from '@/context/AuthContext';
+import FAQS from '@/components/organism/FAQS';
 
 const MaxupProgramPage = () => {
   const { token } = useAuthContext();
@@ -14,7 +14,7 @@ const MaxupProgramPage = () => {
       <Profits />
       <Upgrade />
       {token && <EarnMore />}
-      <FAQ />
+      <FAQS />
     </>
   );
 };

@@ -24,9 +24,9 @@ export const PATHS = {
   REFUND_POLICY: { name: 'سياسة الإسترجاع', link: '/refund-policy' },
   PRIVACY_POLICY: { name: 'سياسة الخصوصية', link: '/privacy-policy' },
   ABOUT: { name: 'من نحن', link: '/about' },
-  FAQ: {
+  FAQS: {
     name: 'الأسئلة الشائعة',
-    link: '/faq',
+    link: '/faqs',
   },
   LOGIN: '/auth/login',
   SIGNUP: '/auth/signup',

@@ -1,4 +1,4 @@
-import FAQPage from '@/components/pages/faq';
+import FAQSPage from '@/components/pages/faqs';
 import { Metadata } from 'next';
 import React from 'react';
 
@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   title: 'إنجوي قيمز | الاسئلة الشائعة',
 };
 
-const FAQ = () => <FAQPage />;
+const FAQS = () => <FAQSPage />;
 
-export default FAQ;
+export default FAQS;

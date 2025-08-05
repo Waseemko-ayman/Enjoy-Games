@@ -189,6 +189,23 @@ export interface Ticket {
   user: TicketUser;
 }
 
+export interface TicketMetaItemProps {
+  Icon: ElementType;
+  label: string;
+  value: string;
+}
+
+export interface FAQSDataType {
+  id?: string | number;
+  question: string;
+  answer: string;
+  [key: string]: unknown;
+}
+
+export interface FaqsContextType extends APIRequest {
+  faqs: FAQSDataType[] | null;
+}
+
 export interface FormData {
   subject: string;
   // ticketType: string;
@@ -234,7 +251,8 @@ interface WithChildren {
   children: React.ReactNode;
 }
 
-export interface ButtonProps extends BaseClassNameProps, WithChildren {
+export interface ButtonProps extends BaseClassNameProps {
+  children?: React.ReactNode;
   variant?: ButtonVarinats;
   borderRadius?: string;
   handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
