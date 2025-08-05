@@ -97,8 +97,8 @@ export const FOOTER_LINKS_DATA = {
     },
     {
       id: 2,
-      key: 'faq',
-      url: PATHS.FAQ.link,
+      key: 'faqs',
+      url: PATHS.FAQS.link,
     },
     {
       id: 3,
@@ -190,7 +190,7 @@ export const menuLists = [
     id: 2,
     linksItem: [
       { id: 1, key: 'tickets', icon: FaRegFlag, link: PATHS.TICKETS.ROOT.link },
-      { id: 2, key: 'faq', icon: IoMdHelpCircleOutline, link: PATHS.FAQ.link },
+      { id: 2, key: 'faqs', icon: IoMdHelpCircleOutline, link: PATHS.FAQS.link },
       // { id: 3, key: 'TalkToCustomerService', icon: MdOutlineEmail, link: '#' },
     ],
   },
@@ -343,7 +343,7 @@ export const tiers = [
   },
 ];
 
-export const faqData = [
+export const faqsData = [
   {
     id: 1,
     question: '1️⃣ ما هو إنجوي قيمز ؟',

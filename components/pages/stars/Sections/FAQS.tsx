@@ -1,38 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Layer from '@/components/atomic/Layer';
+import { faqsData } from '@/data';
+import CardWrapper from '@/components/atomic/CardWrapper';
 import Container from '@/components/organism/Container';
 import SectionTitle from '@/components/atomic/SectionTitle';
-import CardWrapper from '@/components/atomic/CardWrapper';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from '@/components/ui/accordion';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useTranslations } from 'next-intl';
 
-type FAQItem = {
-  id: string | number;
-  question: string;
-  answer: string | string[];
-};
-
-type FAQComProps = {
-  title: string;
-  faqData: FAQItem[];
-};
-
-const FAQCom: React.FC<FAQComProps> = ({ title, faqData }) => {
-  const [activeItem, setActiveItem] = useState<string | undefined>(undefined);
+const FAQS = () => {
+  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const t = useTranslations('SectionsTitles');
 
   return (
     <Layer>
       <Container>
         <SectionTitle
-          title={title}
+          title={t('faq')}
           className="!mb-3"
-          titleClassName="!text-2xl !text-start"
+          titleClassName="!text-2xl"
         />
 
         <motion.div
@@ -45,17 +39,11 @@ const FAQCom: React.FC<FAQComProps> = ({ title, faqData }) => {
             type="single"
             collapsible
             className="max-w-full pt-4"
-            value={activeItem}
-            onValueChange={setActiveItem}
+            value={activeItem || undefined}
+            onValueChange={(value) => setActiveItem(value)}
           >
-            {faqData.map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 * index }}
-                viewport={{ once: true }}
-              >
+            {faqsData.map((item: any, index: number) => (
+              <AnimatedWrapper key={item.id} custom={index}>
                 <CardWrapper className="mb-4 px-4 py-2">
                   <AccordionItem value={`item-${index}`}>
                     <AccordionTrigger className="text-black font-normal hover:no-underline transition-colors w-full cursor-pointer">
@@ -69,8 +57,8 @@ const FAQCom: React.FC<FAQComProps> = ({ title, faqData }) => {
                           item.answer
                         ) : (
                           <ul>
-                            {item.answer.map((text, idx) => (
-                              <li key={idx}>{text}</li>
+                            {item.answer.map((text: string, index: number) => (
+                              <li key={index}>{text}</li>
                             ))}
                           </ul>
                         )}
@@ -78,7 +66,7 @@ const FAQCom: React.FC<FAQComProps> = ({ title, faqData }) => {
                     </AccordionContent>
                   </AccordionItem>
                 </CardWrapper>
-              </motion.div>
+              </AnimatedWrapper>
             ))}
           </Accordion>
         </motion.div>
@@ -87,4 +75,4 @@ const FAQCom: React.FC<FAQComProps> = ({ title, faqData }) => {
   );
 };
 
-export default FAQCom;
+export default FAQS;

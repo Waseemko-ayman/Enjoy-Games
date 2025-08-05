@@ -1,29 +1,38 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Layer from '@/components/atomic/Layer';
-import { faqData } from '@/data';
-import CardWrapper from '@/components/atomic/CardWrapper';
 import Container from '@/components/organism/Container';
 import SectionTitle from '@/components/atomic/SectionTitle';
+import CardWrapper from '@/components/atomic/CardWrapper';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@/components/ui/accordion';
 
-const FAQ = () => {
-  const [activeItem, setActiveItem] = useState<string | null>(null);
+type FAQSItem = {
+  id: string | number;
+  question: string;
+  answer: string | string[];
+};
+
+type FAQSComProps = {
+  title: string;
+  faqsData: FAQSItem[];
+};
+
+const FAQSCom: React.FC<FAQSComProps> = ({ title, faqsData }) => {
+  const [activeItem, setActiveItem] = useState<string | undefined>(undefined);
 
   return (
     <Layer>
       <Container>
         <SectionTitle
-          title="الأسئلة الشائعة"
+          title={title}
           className="!mb-3"
-          titleClassName="!text-2xl"
+          titleClassName="!text-2xl !text-start"
         />
 
         <motion.div
@@ -36,10 +45,10 @@ const FAQ = () => {
             type="single"
             collapsible
             className="max-w-full pt-4"
-            value={activeItem || undefined}
-            onValueChange={(value) => setActiveItem(value)}
+            value={activeItem}
+            onValueChange={setActiveItem}
           >
-            {faqData.map((item: any, index: number) => (
+            {faqsData.map((item, index) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, y: 10 }}
@@ -60,8 +69,8 @@ const FAQ = () => {
                           item.answer
                         ) : (
                           <ul>
-                            {item.answer.map((text: string, index: number) => (
-                              <li key={index}>{text}</li>
+                            {item.answer.map((text, idx) => (
+                              <li key={idx}>{text}</li>
                             ))}
                           </ul>
                         )}
@@ -78,4 +87,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ;
+export default FAQSCom;

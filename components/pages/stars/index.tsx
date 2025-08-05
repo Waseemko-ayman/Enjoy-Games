@@ -3,7 +3,7 @@ import React from 'react';
 import WelcomeSection from './Sections/WelcomeSection';
 import EnjoyGamesGifts from './Sections/EnjoyGamesGifts';
 import Upgrade from './Sections/Upgrade';
-import FAQ from './Sections/FAQ';
+import FAQS from './Sections/FAQS';
 import EarnMore from './Sections/EarnMore';
 import { useAuthContext } from '@/context/AuthContext';
 import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
@@ -22,7 +22,7 @@ const StarsPage = () => {
       />
       <Upgrade />
       {token && <EarnMore />}
-      <FAQ />
+      <FAQS />
     </>
   );
 };
