@@ -195,6 +195,17 @@ export interface TicketMetaItemProps {
   value: string;
 }
 
+export interface FAQSDataType {
+  id?: string | number;
+  question: string;
+  answer: string;
+  [key: string]: unknown;
+}
+
+export interface FaqsContextType extends APIRequest {
+  faqs: FAQSDataType[] | null;
+}
+
 export interface FormData {
   subject: string;
   // ticketType: string;

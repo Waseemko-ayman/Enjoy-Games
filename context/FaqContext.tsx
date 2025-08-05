@@ -1,14 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import React, { createContext, useContext, useEffect } from 'react';
 import useAPI from '@/hook/useAPI';
-import { APIRequest, Ticket } from '@/interfaces';
-
-interface FaqsContextType extends APIRequest {
-  faqs: Ticket[] | null;
-}
+import { FaqsContextType, FAQSDataType } from '@/interfaces';
 
 const FaqsContext = createContext<FaqsContextType>({
   faqs: null,
@@ -20,7 +15,7 @@ const FaqsContext = createContext<FaqsContextType>({
 export const FaqsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { get, data, isLoading, error } = useAPI<any>('faqs');
+  const { get, data, isLoading, error } = useAPI<FAQSDataType>('faqs');
 
   useEffect(() => {
     get();
