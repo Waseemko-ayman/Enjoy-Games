@@ -752,7 +752,7 @@ export const accountOptions = [
 export const MyPurchasesTypes = [
   { id: 1, labelKey: 'all' },
   { id: 2, labelKey: 'completed' },
-  { id: 3, labelKey: 'inProgress' },
+  { id: 3, labelKey: 'pending' },
   { id: 4, labelKey: 'cancelled' },
 ];
 

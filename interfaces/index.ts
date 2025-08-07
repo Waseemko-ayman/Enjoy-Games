@@ -206,6 +206,26 @@ export interface FaqsContextType extends APIRequest {
   faqs: FAQSDataType[] | null;
 }
 
+export interface Order {
+  id: number;
+  status: string;
+  total_price: string;
+  discount: string;
+}
+
+export interface OrdersStatsProps {
+  orders: Order[];
+}
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  totalItems: number;
+  itemsPerPage: number;
+  className?: string;
+}
+
 export interface FormData {
   subject: string;
   // ticketType: string;
@@ -308,7 +328,7 @@ export interface ImageProps extends BaseClassNameProps {
 }
 
 export interface SectionComponentProps extends WithChildren {
-  title: string;
+  title?: string;
 }
 
 export interface ContactInfoProps extends BaseIconProps {
