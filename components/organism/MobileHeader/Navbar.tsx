@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../Container';
 import { MdMoreHoriz } from 'react-icons/md';
 import Link from 'next/link';
@@ -8,22 +8,21 @@ import PopupMenu from './PopupMenu';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { useTranslations } from 'next-intl';
 import { useAuthContext } from '@/context/AuthContext';
+import { usePathname } from 'next/navigation';
 
 const MobileNavbar = () => {
-  const [showMore, setShowMore] = useState(false);
-  const [animateClose, setAnimateClose] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const pathname = usePathname();
   const t = useTranslations('PagesHeaderTitles');
   const { token } = useAuthContext();
 
   const handleOpen = () => {
-    setShowMore(true);
-    setAnimateClose(false);
+    setDrawerOpen(true);
   };
 
-  const handleClose = () => {
-    setAnimateClose(true);
-    setTimeout(() => setShowMore(false), 300);
-  };
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, [pathname]);
 
   return (
     <>
@@ -62,9 +61,7 @@ const MobileNavbar = () => {
         </Container>
       </div>
 
-      {showMore && (
-        <PopupMenu onClose={handleClose} animateClose={animateClose} />
-      )}
+      <PopupMenu open={drawerOpen} onOpenChange={setDrawerOpen} />
     </>
   );
 };

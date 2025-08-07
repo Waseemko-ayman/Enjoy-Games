@@ -21,7 +21,9 @@
       "navBarPopup": {
         "ChangeTheLanguage": "غير اللغة",
         "ChangeCountryCurrencyTitle": "تغيير الدولة - العملة",
-        "ChangeCountryCurrencyDescription": "اختر الدولة والعملة المناسبة لك من القائمة أدناه."
+        "ChangeCountryCurrencyDescription": "اختر الدولة والعملة المناسبة لك من القائمة أدناه.",
+        "PopupMenuTitle": "قائمة المستخدم والتنقل",
+        "PopupMenuDescription": "الوصول إلى معلومات حسابك، خيارات تسجيل الدخول، قائمة التنقل، وخيار تسجيل الخروج."
       }
     },
     "HelpSection": {

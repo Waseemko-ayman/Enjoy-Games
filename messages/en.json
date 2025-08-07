@@ -21,7 +21,9 @@
       "navBarPopup": {
         "ChangeTheLanguage": "Change the language",
         "ChangeCountryCurrencyTitle": "Change Country - Currency",
-        "ChangeCountryCurrencyDescription": "Select your preferred country and currency from the list below."
+        "ChangeCountryCurrencyDescription": "Select your preferred country and currency from the list below.",
+        "PopupMenuTitle": "User Account and Navigation Menu",
+        "PopupMenuDescription": "Access your account information, authentication options, menu navigation, and logout."
       }
     },
     "HelpSection": {
