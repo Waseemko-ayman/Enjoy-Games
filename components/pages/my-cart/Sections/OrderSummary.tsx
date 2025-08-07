@@ -50,12 +50,14 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                       item.final_price !== Number(item.price) ? (
                         <>
                           <p className="text-gray-500 font-semibold line-through">
-                            {(Number(item.price) ?? 0) * quantity}{' '}
+                            {(item.parsedPrice ?? 0) * quantity}{' '}
                             {item.parsedCurrency}
                           </p>
-                          <p className="font-semibold">
-                            {item.final_price} {item.parsedCurrency}
-                          </p>
+                          <div>
+                            <p className="font-semibold">
+                              {item.final_price} {item.parsedCurrency}
+                            </p>
+                          </div>
                         </>
                       ) : (
                         <p className="font-semibold">

@@ -14,17 +14,21 @@ interface InvoiceSummaryProps {
 const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
   const t = useTranslations('Invoice.summary');
 
-  const total = items.reduce(
-    (acc, item) =>
-      acc +
-      (item.final_price ?? (item.parsedPrice ?? 0) * (item.quantity ?? 1)),
-    0
-  );
+  const total = items.reduce((acc, item) => {
+    const priceToUse =
+      item.final_price && item.final_price > 0
+        ? item.final_price
+        : item.parsedPrice ?? 0;
+    const quantity = item.quantity ?? 1;
+    return acc + priceToUse * quantity;
+  }, 0);
 
   const totalDiscount = items.reduce(
     (acc, item) => acc + (item.discount ?? 0),
     0
   );
+
+  console.log(items);
 
   // const currencyImage = items[0]?.currencyImage ?? '/assets/saudi_riyal.png';
   const currency = items[0]?.parsedCurrency ?? '';
@@ -49,7 +53,6 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
               ).toLocaleString()}{' '}
               {currency}
             </span>
-            {/* <Image src={currencyImage} alt="عملة" width={18} height={18} /> */}
           </div>
         </div>
 
@@ -61,7 +64,6 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
                 <span className="text-lg">
                   -{Number(totalDiscount).toLocaleString()} {currency}
                 </span>
-                {/* <Image src={currencyImage} alt="عملة" width={18} height={18} /> */}
               </div>
             </div>
           </MotionSection>
@@ -74,7 +76,6 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
               <span className="text-lg font-bold">
                 {Number(total).toLocaleString()} {currency}
               </span>
-              {/* <Image src={currencyImage} alt="عملة" width={18} height={18} /> */}
             </div>
           </div>
         </MotionSection>

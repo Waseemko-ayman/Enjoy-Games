@@ -315,8 +315,8 @@ export interface CountryDrawerProps {
 }
 
 export interface PopupMenuProps {
-  animateClose: boolean;
-  onClose: () => void;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export interface ImageProps extends BaseClassNameProps {
