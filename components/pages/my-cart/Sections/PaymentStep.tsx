@@ -152,6 +152,21 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
           '_blank',
           'width=500,height=700,top=40,left=400'
         );
+
+        // const paymentWindow = window.open(
+        //   paymentData?.data?.payment_url,
+        //   '_blank',
+        //   'width=500,height=700,top=40,left=400'
+        // );
+
+        // if (paymentWindow) {
+        //   const interval = setInterval(() => {
+        //     if (paymentWindow.closed) {
+        //       clearInterval(interval);
+        //       window.location.reload();
+        //     }
+        //   }, 500);
+        // }
       }
     } catch (err) {
       const apiError = (err as any)?.response?.data?.message;
@@ -162,13 +177,26 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
   // Prepare items for rendering with parsed price and currency
   const processedItems = (couponResponse ?? items).map(
     (item: ProductCardProps) => {
-      const priceParts = item.price?.toString().match(/^([\d.,]+)\s*(.*)$/);
-      const parsedPrice = parseFloat(priceParts?.[1]?.replace(',', '') || '0');
-      const parsedCurrency = priceParts?.[2] || 'ر.س.';
+      const cleanNumber = (value: string | number | undefined): number => {
+        if (!value) return 0;
+        if (typeof value === 'number') return value;
+        const match = value.match(/^([\d.,]+)\s*(.*)$/);
+        const num = parseFloat(match?.[1]?.replace(',', '') || '0');
+        return isNaN(num) ? 0 : num;
+      };
+
+      const extractCurrency = (value: string | number | undefined): string => {
+        if (!value || typeof value === 'number') return '';
+        const match = value.match(/^([\d.,]+)\s*(.*)$/);
+        return match?.[2]?.trim() || '';
+      };
+
       return {
         ...item,
-        parsedPrice,
-        parsedCurrency,
+        parsedPrice: cleanNumber(item.price),
+        final_price: cleanNumber(item.final_price),
+        discount: cleanNumber(item.discount),
+        parsedCurrency: extractCurrency(item.price),
       };
     }
   );

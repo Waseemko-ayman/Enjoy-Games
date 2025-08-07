@@ -11,6 +11,7 @@ import { useMainContent } from '@/context/MainContentContext';
 import Loading from '@/components/molecules/loading';
 import { getSlugsProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
+import GridWrapper from '@/components/molecules/GridWrapper';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -19,7 +20,7 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const secTexts = useTranslations('SectionsTitles.Gifts');
   const btnTexts = useTranslations('BtnTexts');
   const { data, isLoading, error } = useMainContent();
-  
+
   return (
     <Layer>
       <Container>
@@ -33,7 +34,7 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
         ) : error ? (
           <ErrorFetching />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3">
+          <GridWrapper otherClassName="gap-5" isScrollable>
             {Array.isArray(data?.newly_arrived) &&
               data.newly_arrived.map((card, index) => {
                 const { image, ...cardWithoutImage } = card;
@@ -68,7 +69,7 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
                   </AnimatedWrapper>
                 );
               })}
-          </div>
+          </GridWrapper>
         )}
       </Container>
     </Layer>

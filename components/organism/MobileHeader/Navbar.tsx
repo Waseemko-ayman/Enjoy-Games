@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../Container';
 import { MdMoreHoriz } from 'react-icons/md';
 import Link from 'next/link';
@@ -7,25 +7,22 @@ import { navBarLinks } from '@/data/paths';
 import PopupMenu from './PopupMenu';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { useTranslations } from 'next-intl';
-import { useToggleLocale } from '@/hook/useToggleLocale';
 import { useAuthContext } from '@/context/AuthContext';
+import { usePathname } from 'next/navigation';
 
 const MobileNavbar = () => {
-  const [showMore, setShowMore] = useState(false);
-  const [animateClose, setAnimateClose] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const pathname = usePathname();
   const t = useTranslations('PagesHeaderTitles');
-  const { isArabic } = useToggleLocale();
   const { token } = useAuthContext();
 
   const handleOpen = () => {
-    setShowMore(true);
-    setAnimateClose(false);
+    setDrawerOpen(true);
   };
 
-  const handleClose = () => {
-    setAnimateClose(true);
-    setTimeout(() => setShowMore(false), 300);
-  };
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, [pathname]);
 
   return (
     <>
@@ -45,28 +42,16 @@ const MobileNavbar = () => {
                         href={item.link}
                         className="flex flex-col items-center font-medium"
                       >
-                        <item.icon className="text-2xl" />
-                        <h5
-                          className={`${
-                            isArabic ? 'text-base' : 'text-sm'
-                          } mt-2`}
-                        >
-                          {t(item.titleKey)}
-                        </h5>
+                        <item.icon className="text-xl" />
+                        <h5 className="text-sm mt-2">{t(item.titleKey)}</h5>
                       </Link>
                     ) : (
                       <div
                         className="flex flex-col items-center !cursor-pointer"
                         onClick={handleOpen}
                       >
-                        <MdMoreHoriz className="text-2xl" />
-                        <h5
-                          className={`${
-                            isArabic ? 'text-base' : 'text-sm'
-                          } mt-2`}
-                        >
-                          {t('more')}
-                        </h5>
+                        <MdMoreHoriz className="text-xl" />
+                        <h5 className="text-sm mt-2">{t('more')}</h5>
                       </div>
                     )}
                   </AnimatedWrapper>
@@ -76,9 +61,7 @@ const MobileNavbar = () => {
         </Container>
       </div>
 
-      {showMore && (
-        <PopupMenu onClose={handleClose} animateClose={animateClose} />
-      )}
+      <PopupMenu open={drawerOpen} onOpenChange={setDrawerOpen} />
     </>
   );
 };

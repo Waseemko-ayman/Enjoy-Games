@@ -21,7 +21,9 @@
       "navBarPopup": {
         "ChangeTheLanguage": "غير اللغة",
         "ChangeCountryCurrencyTitle": "تغيير الدولة - العملة",
-        "ChangeCountryCurrencyDescription": "اختر الدولة والعملة المناسبة لك من القائمة أدناه."
+        "ChangeCountryCurrencyDescription": "اختر الدولة والعملة المناسبة لك من القائمة أدناه.",
+        "PopupMenuTitle": "قائمة المستخدم والتنقل",
+        "PopupMenuDescription": "الوصول إلى معلومات حسابك، خيارات تسجيل الدخول، قائمة التنقل، وخيار تسجيل الخروج."
       }
     },
     "HelpSection": {
@@ -158,8 +160,31 @@
     "ُemptyStateMsg": "طلباتك تقول لك: وينك؟ يلا تسوق!",
     "all": "الكل",
     "completed": "المكتملة",
-    "inProgress": "قيد التجهيز والمراجعة",
-    "cancelled": "الملغية والمسترجعة"
+    "cancelled": "الملغية والمسترجعة",
+    "pending": "قيد الانتظار",
+    "processing": "قيد المعالجة",
+    "paid": "مدفوع",
+    "manageAndTrackYourOrders": "إدارة وتتبع طلباتك",
+    "yourOrders": "طلباتك",
+    "sortedByDate": "مرتبة حسب التاريخ",
+    "orderNumber": "طلب",
+    "totalPrice": "السعر الإجمالي",
+    "discount": "الخصم",
+    "finalAmount": "المبلغ النهائي",
+    "viewDetails": "عرض التفاصيل",
+    "cancel": "إلغاء",
+    "reorder": "إعادة الطلب",
+    "totalOrders": "إجمالي الطلبات",
+    "pendingOrders": "الطلبات المعلقة",
+    "completedOrders": "الطلبات المكتملة",
+    "totalSpent": "إجمالي المبلغ المنفق",
+    "emptyFiltered": {
+      "completed": "لا توجد طلبات مكتملة حاليًا.",
+      "pending": "لا توجد طلبات قيد الانتظار.",
+      "cancelled": "لا توجد طلبات ملغية.",
+      "paid": "لا توجد طلبات مدفوعة."
+    },
+    "showingItems": "عرض {startItem} إلى {endItem} من أصل {totalItems} طلب"
   },
   "Stars": {
     "pointsSystem": {
@@ -429,7 +454,9 @@
     "sendEmail": "الإيميل",
     "backToHome": "العودة إلى الرئيسية",
     "continueWithGoogle": "المتابعة باستخدام جوجل",
-    "continueWithFacebook": "المتابعة باستخدام فيسبوك"
+    "continueWithFacebook": "المتابعة باستخدام فيسبوك",
+    "next": "التالي",
+    "previous": "السابق"
   },
   "Inputs": {
     "labels": {
@@ -540,7 +567,10 @@
       "menuTrigger": "فتح القائمة",
       "goToSlide": "اذهب إلى الشريحة رقم {number}",
       "openChatWindow": "فتح نافذة الدردشة",
-      "selectPurchaseType": "تصفية مشترياتك حسب النوع"
+      "selectPurchaseType": "تصفية مشترياتك حسب النوع",
+      "NextPage": "الصفحة التالية",
+      "PreviousPage": "الصفحة السابقة",
+      "page": "الصفحة"
     }
   },
   "Loading": {

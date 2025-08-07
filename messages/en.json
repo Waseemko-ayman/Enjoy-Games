@@ -21,7 +21,9 @@
       "navBarPopup": {
         "ChangeTheLanguage": "Change the language",
         "ChangeCountryCurrencyTitle": "Change Country - Currency",
-        "ChangeCountryCurrencyDescription": "Select your preferred country and currency from the list below."
+        "ChangeCountryCurrencyDescription": "Select your preferred country and currency from the list below.",
+        "PopupMenuTitle": "User Account and Navigation Menu",
+        "PopupMenuDescription": "Access your account information, authentication options, menu navigation, and logout."
       }
     },
     "HelpSection": {
@@ -34,7 +36,7 @@
       "LearnMore": {
         "title": "Learn More About Us",
         "about": "About Us",
-        "faq": "Frequently Asked Questions",
+        "faqs": "Frequently Asked Questions",
         "privacyPolicy": "Privacy Policy",
         "refundPolicy": "Refund Policy",
         "termsOfUser": "Terms of Service"
@@ -64,7 +66,7 @@
     "store": "Store",
     "create": "Add New Ticket",
     "TalkToCustomerService": "Talk to customer service",
-    "faq": "Frequently Asked Questions",
+    "faqs": "Frequently Asked Questions",
     "RegisterNow": "Register now",
     "more": "More"
   },
@@ -82,7 +84,7 @@
       "desc": "Earn a percentage from every purchase made by your friends, and the more you share, the more you earn!"
     },
     "Interests": "What do you love to buy the most?",
-    "faq": "Frequently Asked Questions"
+    "faqs": "Frequently Asked Questions"
   },
   "HomePage": {
     "walletSections": {
@@ -158,8 +160,31 @@
     "ُemptyStateMsg": "Your orders are saying: Where are you? Go shop!",
     "all": "All",
     "completed": "Completed",
-    "inProgress": "In Progress and Under Review",
-    "cancelled": "Cancelled and Refunded"
+    "cancelled": "Cancelled and Refunded",
+    "pending": "Pending",
+    "processing": "Processing",
+    "paid": "Paid",
+    "manageAndTrackYourOrders": "Manage and track your orders",
+    "yourOrders": "Your Orders",
+    "sortedByDate": "Sorted by date",
+    "orderNumber": "Order",
+    "totalPrice": "Total Price",
+    "discount": "Discount",
+    "finalAmount": "Final Amount",
+    "viewDetails": "View Details",
+    "cancel": "Cancel",
+    "reorder": "Reorder",
+    "totalOrders": "Total Orders",
+    "pendingOrders": "Pending Orders",
+    "completedOrders": "Completed Orders",
+    "totalSpent": "Total Spent",
+    "emptyFiltered": {
+      "completed": "There are no currently completed requests.",
+      "pending": "There are no pending requests.",
+      "cancelled": "There are no canceled requests.",
+      "paid": "There are no paid requests."
+    },
+    "showingItems": "Showing {startItem} to {endItem} of {totalItems} orders"
   },
   "Stars": {
     "pointsSystem": {
@@ -327,7 +352,7 @@
   },
   "Tickets": {
     "emptyStateTitle": "No support tickets yet...",
-    "searchFaqPrompt": "Have you searched your question in the FAQ?",
+    "searchFaqsPrompt": "Have you searched your question in the FAQ?",
     "addAttachments": "Add attachments to the ticket (optional)",
     "attachmentsDescription": "Attach images with comments, or upload files",
     "by": "By",
@@ -417,7 +442,7 @@
     "MoreAboutParticipateAndWin": "More About Participate and Win",
     "MoreAboutEnjoyGames": "More About Enjoy Games",
     "AddTicket": "Add Ticket",
-    "faq": "FAQ",
+    "faqs": "FAQS",
     "sendTicket": "Send Ticket",
     "LearnMore": "Learn More",
     "continue": "Continue",
@@ -429,7 +454,9 @@
     "sendEmail": "email",
     "backToHome": "Back to Home",
     "continueWithGoogle": "Continue with Google",
-    "continueWithFacebook": "Continue with Facebook"
+    "continueWithFacebook": "Continue with Facebook",
+    "next": "Next",
+    "previous": "Previous"
   },
   "Inputs": {
     "labels": {
@@ -540,7 +567,10 @@
       "menuTrigger": "Open menu",
       "goToSlide": "Go to slide number {number}",
       "openChatWindow": "Open chat window",
-      "selectPurchaseType": "Filter your purchases by type"
+      "selectPurchaseType": "Filter your purchases by type",
+      "NextPage": "Next Page",
+      "PreviousPage": "Previous page",
+      "page": "page"
     }
   },
   "Loading": {
