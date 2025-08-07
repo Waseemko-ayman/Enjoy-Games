@@ -25,7 +25,7 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   const maxupTxt = useTranslations('MaxupProgram.pointSystem');
   const sharedTexts = useTranslations('Shared');
   const { isArabic } = useToggleLocale();
-  const btnStyled = `${isArabic ? 'p-4' : 'py-3 px-2.5'} text-sm`;
+  const btnStyled = `py-3 ${isArabic ? 'px-5' : 'px-2.5'} text-sm`;
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
       <motion.div
