@@ -17,7 +17,7 @@ const SubCartHeader = ({
 }) => {
   const { isArabic } = useToggleLocale();
   return (
-    <div className="flex justify-center items-center gap-4 mb-10 sm:justify-between sm:mb-8 flex-wrap">
+    <div className="flex items-center justify-between gap-4 mb-10 sm:mb-8 flex-wrap">
       <AnimatedWrapper direction="x" distance={40}>
         <h1 className="text-xl sm:text-2xl font-bold">{title}</h1>
       </AnimatedWrapper>
