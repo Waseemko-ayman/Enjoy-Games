@@ -55,7 +55,7 @@ const CartContent: React.FC<CartContentProps> = ({
   });
 
   return (
-    <Layer otherClassName="!my-12">
+    <Layer otherClassName="!my-12 max-sm:!mb-28">
       <Container>
         <SubCartHeader
           title={t('basketSummary')}
@@ -68,7 +68,7 @@ const CartContent: React.FC<CartContentProps> = ({
             <Suspense fallback={<Loading />}>
               {processedItems.map((item) => (
                 <CardWrapper key={item.id} className="px-6 py-4">
-                  <div className="flex items-end justify-between gap-4 mb-4 max-sm:flex-col sm:items-start">
+                  <div className="flex items-end justify-between gap-3 mb-4 max-sm:flex-col sm:items-start">
                     <div className="flex max-sm:w-full max-sm:flex-col gap-2 sm:gap-4">
                       <Image
                         src={'/assets/play-station.webp'}
@@ -77,11 +77,14 @@ const CartContent: React.FC<CartContentProps> = ({
                         height={170}
                         className="rounded-xl max-sm:w-full"
                       />
-                      <div className="flex sm:flex-col justify-between py-2">
+                      <div className="flex flex-col justify-between py-2 gap-2">
                         <h2 className="text-xl font-semibold">{item.title}</h2>
-                        <p className="text-center text-xs sm:text-sm text-gray-600 font-semibold bg-[var(--enjoy-gray-100)] py-2 px-3 rounded-full">
-                          {item.storeName ?? 'المتجر السعودي'}
+                        <p className="text-xs text-gray-600 font-semibold">
+                          {item.description}
                         </p>
+                        {/* <p className="text-center text-xs sm:text-sm text-gray-600 font-semibold bg-[var(--enjoy-gray-100)] py-2 px-3 rounded-full">
+                          {item.storeName ?? 'المتجر السعودي'}
+                        </p> */}
                       </div>
                     </div>
                     <Button
