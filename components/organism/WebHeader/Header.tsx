@@ -18,11 +18,14 @@ import { useAuthContext } from '@/context/AuthContext';
 import { useCartContext } from '@/context/CartContext';
 import { FaRegBell } from 'react-icons/fa6';
 import { useTickets } from '@/context/TicketsContext';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const router = useRouter();
 
   // Ref
   const menuRef = useRef<HTMLDivElement>(null);
@@ -37,6 +40,14 @@ const Header = () => {
   const { cartItems } = useCartContext();
   const { tickets, hasUnreadTickets } = useTickets();
   const { toggleLocale, isArabic } = useToggleLocale();
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const trimmedQuery = query.trim();
+    if (!trimmedQuery) return;
+
+    router.push(`/search?query=${encodeURIComponent(trimmedQuery)}`);
+  };
 
   const iconsStyle = 'w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer';
 
@@ -70,11 +81,13 @@ const Header = () => {
             </Link>
           </AnimatedWrapper>
 
-          <form className="flex-1">
+          <form className="flex-1" onSubmit={handleSearch}>
             <AnimatedWrapper direction="y" distance={-40}>
               <Input
                 type="text"
                 inputName="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
                 placeholder={t('cardAndOffersSearch')}
                 Icon={IoSearch}
               />

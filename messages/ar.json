@@ -68,7 +68,8 @@
     "TalkToCustomerService": "التحدث مع خدمة العملاء",
     "faqs": "الأسئلة الشائعة",
     "RegisterNow": "سجل الآن",
-    "more": "المزيد"
+    "more": "المزيد",
+    "search": "البحث"
   },
   "SectionsTitles": {
     "Stars": {
@@ -84,7 +85,10 @@
       "desc": "اربح نسبة من كل عملية شراء يقوم بها أصدقاؤك، وكل ما شاركت أكثر، زاد مكسبك!"
     },
     "Interests": "وش أكثر شي تحب تشتريه؟",
-    "faqs": "الأسئلة الشائعة"
+    "faqs": "الأسئلة الشائعة",
+    "products": "المنتجات",
+    "categories": "الأقسام",
+    "subCategories": "الأقسام الفرعية"
   },
   "HomePage": {
     "walletSections": {
@@ -313,9 +317,9 @@
   },
   "MyCart": {
     "basketSummary": "ملخص السلة",
-    "choosePaymentMethod": "اختر وسيلة الدفع",
+    "choosePaymentMethod": "إختر وسيلة الدفع",
     "emptyStateTitle": "سلتك جاهزة وتناديك للتسوق",
-    "termsAndPrivacyAgreement": "بالانتقال الى الدفع فانت تتوافق على <termsLink>سياسة الاستخدام</termsLink> و <privacyLink>سياسة الخصوصية</privacyLink> لـ دليل ستور",
+    "termsAndPrivacyAgreement": "بالانتقال إلى الدفع فانت تتوافق على <termsLink>سياسة الاستخدام</termsLink> و <privacyLink>سياسة الخصوصية</privacyLink> لـ دليل ستور",
     "discountCoupon": "كوبون الخصم:",
     "cartSummary": "ملخص سلة التسوق",
     "rewards": {
@@ -386,6 +390,10 @@
     "bad": "سيء",
     "relatedProducts": "منتجات مشابهة",
     "productEvaluation": "تم إرسال تقييمك بنجاح, شكرا جزيلا لك"
+  },
+  "search": {
+    "searchResults": "نتائج البحث",
+    "noResult": "لا يوجد نتائج"
   },
   "errorBoundary": {
     "title": "عفواً! حدث خطأ ما"
