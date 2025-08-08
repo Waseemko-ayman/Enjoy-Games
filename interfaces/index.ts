@@ -41,15 +41,6 @@ export interface SubCategories {
   href?: string;
   onClick?: () => void;
   categorySlug?: string | null;
-  // shiddatData: shiddaItem[];
-  // accounts?: AccountItem[];
-  // accountId?: string;
-  // bundles?: {
-  //   id: string;
-  //   title: string;
-  //   price: number;
-  //   accountId: string;
-  // }[];
 }
 
 export interface ProductCardProps {
