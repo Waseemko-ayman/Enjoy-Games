@@ -9,7 +9,7 @@ import { PATHS } from '@/data/paths';
 import { useTranslations } from 'next-intl';
 import Container from '@/components/organism/Container';
 import Layer from '@/components/atomic/Layer';
-import { useTickets } from '@/context/TicketsContext';
+import { TicketsProvider, useTickets } from '@/context/TicketsContext';
 import { Ticket } from '@/interfaces';
 import { AlertCircle, CheckCircle, Clock, MessageCircle } from 'lucide-react';
 import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
@@ -71,7 +71,7 @@ const TicketsPage = () => {
   return (
     <div>
       <PageHeader />
-      <div>
+      <TicketsProvider>
         {!tickets || tickets.length === 0 ? (
           <EmptyStateBox
             imageSrc="/assets/empty-tickets.png"
@@ -118,7 +118,7 @@ const TicketsPage = () => {
             </Container>
           </Layer>
         )}
-      </div>
+      </TicketsProvider>
     </div>
   );
 };
