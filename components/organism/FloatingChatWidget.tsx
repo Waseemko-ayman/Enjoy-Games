@@ -19,14 +19,14 @@ export function FloatingChatWidget() {
   const { isArabic } = useToggleLocale();
   const ariaTxts = useTranslations('ariaLabels.btns');
   const pathname = usePathname();
-  const isMyCartPage = pathname === '/my-cart';
+  const isMyCartPage = pathname.endsWith('/my-cart');
 
   return (
     <>
       {/* Floating Chat Button */}
       <div
         className={`fixed ${
-          isMyCartPage ? 'bottom-24' : 'bottom-6'
+          isMyCartPage ? 'bottom-6' : 'bottom-24'
         } md:bottom-6 ${isArabic ? 'right-6' : 'left-6'} z-50`}
       >
         <button
@@ -35,7 +35,7 @@ export function FloatingChatWidget() {
           name="chat_button"
           className={`
             relative group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700
-            text-white rounded-full p-4 shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer
+            text-white rounded-full p-3 shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer
             ${hasNotification ? 'animate-pulse' : ''}
           `}
           style={{

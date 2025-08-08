@@ -27,13 +27,13 @@ const FloatingActions: React.FC<FloatingActionsProps> = ({ phone }) => {
 
   const { isArabic } = useToggleLocale();
   const pathname = usePathname();
-  const isMyCartPage = pathname === '/my-cart';
+  const isMyCartPage = pathname.endsWith('/my-cart');
 
   return (
     <div
-      className={`fixed z-50 ${isMyCartPage ? 'bottom-24' : 'bottom-6'} ${
+      className={`fixed z-50 ${isMyCartPage ? 'bottom-6' : 'bottom-24'} ${
         isArabic ? 'left-6' : 'right-6'
-      } flex flex-col items-center space-y-3`}
+      } md:bottom-6 flex flex-col items-center space-y-3`}
     >
       <Button
         variant="circle"
