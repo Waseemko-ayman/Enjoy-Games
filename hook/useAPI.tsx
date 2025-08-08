@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosRequestConfig } from 'axios';
-import { useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
 import axiosInstance from '@/utils/axiosInstance';
 
 interface State<T> {
@@ -90,21 +90,24 @@ const useAPI = <
 ) => {
   const [state, dispatch] = useReducer(reduce<ResponseData>, initialState);
 
-  const get = async (getConfig?: AxiosRequestConfig) => {
-    try {
-      dispatch({ type: API_ACTIONS.SET_LOADING });
-      const res = await axiosInstance.get<{
-        data: ResponseData | ResponseData[];
-      }>(`/${url}`, {
-        ...config,
-        ...getConfig,
-      });
-      dispatch({ type: API_ACTIONS.GET, payload: res?.data?.data });
-      return res?.data?.data;
-    } catch (error) {
-      dispatch({ type: API_ACTIONS.ERROR, payload: error });
-    }
-  };
+  const get = useCallback(
+    async (getConfig?: AxiosRequestConfig) => {
+      try {
+        dispatch({ type: API_ACTIONS.SET_LOADING });
+        const res = await axiosInstance.get<{
+          data: ResponseData | ResponseData[];
+        }>(`/${url}`, {
+          ...config,
+          ...getConfig,
+        });
+        dispatch({ type: API_ACTIONS.GET, payload: res?.data?.data });
+        return res?.data?.data;
+      } catch (error) {
+        dispatch({ type: API_ACTIONS.ERROR, payload: error });
+      }
+    },
+    [url, config]
+  );
 
   const getSingle = async (
     id: string | number,

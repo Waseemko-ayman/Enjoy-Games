@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -29,7 +28,7 @@ export const TicketsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     get();
-  }, []);
+  }, [get]);
 
   useEffect(() => {
     if (data && data.length > 0) {

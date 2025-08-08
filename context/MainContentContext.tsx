@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// context/MainContentContext.tsx
 'use client';
 
 import React, { createContext, useContext, useEffect } from 'react';
@@ -41,7 +39,7 @@ export const MainContentProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     get();
-  }, [locale]);
+  }, [locale, get]);
 
   const refresh = () => get();
 
