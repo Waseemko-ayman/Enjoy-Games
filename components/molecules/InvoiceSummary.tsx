@@ -28,8 +28,6 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
     0
   );
 
-  console.log(items);
-
   // const currencyImage = items[0]?.currencyImage ?? '/assets/saudi_riyal.png';
   const currency = items[0]?.parsedCurrency ?? '';
 
