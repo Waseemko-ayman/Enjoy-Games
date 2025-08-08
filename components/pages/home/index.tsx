@@ -4,7 +4,7 @@ import CategoriesTypes from './Sections/CategoriesTypes';
 import BestSellers from './Sections/BestSellers';
 import SuggestedProducts from './Sections/SuggestedProducts';
 import NewlyArrived from './Sections/NewlyArrived';
-import RedeemPoints from './Sections/RedeemPoints';
+// import RedeemPoints from './Sections/RedeemPoints';
 import EnjoyWinWin from './Sections/EnjoyWinWin';
 import ServiceAdvantages from './Sections/ServiceAdvantages';
 import WalletSection from './Sections/WalletSection';
@@ -60,7 +60,7 @@ const HomePage = () => {
           getCategoryAndSubCategorySlugs(categories, subCatId)
         }
       />
-      <RedeemPoints
+      {/* <RedeemPoints
         t={t}
         newlyArrived={data?.newly_arrived ?? []}
         isLoading={mainContentLoading}
@@ -68,7 +68,7 @@ const HomePage = () => {
         getSlugs={(subCatId) =>
           getCategoryAndSubCategorySlugs(categories, subCatId)
         }
-      />
+      /> */}
       <EnjoyWinWin t={t} />
       <ServiceAdvantages t={t} />
     </>
