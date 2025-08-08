@@ -4,6 +4,7 @@ import ErrorFetching from '@/components/molecules/ErrorFetching';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
+import { API_IMAGE_URL } from '@/config/api';
 import { useMainContent } from '@/context/MainContentContext';
 import { getSlugsProps } from '@/interfaces';
 import { useTranslations } from 'next-intl';
@@ -35,8 +36,9 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
               return (
                 <AnimatedWrapper key={card.id} custom={index}>
                   <ProductCard
-                    // imgSrc={card.image}
-                    image={image || '/assets/play-station.webp'}
+                    image={
+                      `${API_IMAGE_URL}${image}` || '/assets/play-station.webp'
+                    }
                     imgAlt={card.title}
                     imgTitle={card.title}
                     showDesc

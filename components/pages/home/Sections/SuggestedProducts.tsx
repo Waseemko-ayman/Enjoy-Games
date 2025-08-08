@@ -35,8 +35,10 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({
             return (
               <AnimatedWrapper key={card.id} custom={index}>
                 <ProductCard
-                  // imgSrc={card.image}
-                  image={'/assets/play-station.webp'}
+                  image={
+                    `http://31.97.36.197/${card.image}` ||
+                    '/assets/play-station.webp'
+                  }
                   imgAlt={card.title}
                   imgTitle={card.title}
                   title={card.title}

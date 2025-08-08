@@ -210,8 +210,14 @@ export interface FaqsContextType extends APIRequest {
 export interface Order {
   id: number;
   status: string;
-  total_price: string;
-  discount: string;
+  total_price: {
+    amount: number;
+    currency: string;
+  };
+  discount: {
+    amount: number;
+    currency: string;
+  };
 }
 
 export interface OrdersStatsProps {

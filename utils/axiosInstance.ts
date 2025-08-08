@@ -17,6 +17,10 @@ axiosInstance.interceptors.request.use((config) => {
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    const currencyCode = localStorage.getItem('currencyCode');
+    if (currencyCode) {
+      config.headers['Currency'] = currencyCode;
+    }
   }
   return config;
 });

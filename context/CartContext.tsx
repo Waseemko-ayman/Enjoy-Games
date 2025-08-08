@@ -1,6 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ProductCardProps } from '@/interfaces';
+// import { useCurrency } from './CurrencyContext';
 
 const CART_STORAGE_KEY = 'my_cart_items';
 
@@ -15,6 +16,8 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+  // const { selectedCountry } = useCurrency();
+
   const [cartItems, setCartItems] = useState<ProductCardProps[]>(() => {
     if (typeof window === 'undefined') return [];
     try {
@@ -38,25 +41,16 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
+  // // عند تغيير العملة، نمسح السلة لأن المنتجات قد تختلف الأسعار أو العملات
+  // useEffect(() => {
+  //   // مسح السلة وتحديث localStorage عند تغيير العملة
+  //   setCartItems([]);
+  //   localStorage.removeItem(CART_STORAGE_KEY);
+  // }, [selectedCountry?.code]);
+
   useEffect(() => {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
   }, [cartItems]);
-
-  // const addToCart = (item: ProductCardProps) => {
-  //   setCartItems((prev) => {
-  //     const existing = prev.find(
-  //       (i) => i.id === item.id && i.slug === item.slug
-  //     );
-  //     if (existing) {
-  //       return prev.map((i) =>
-  //         i.id === item.id && i.slug === item.slug
-  //           ? { ...i, quantity: (i.quantity ?? 1) + 1 }
-  //           : i
-  //       );
-  //     }
-  //     return [...prev, { ...item, quantity: 1 }];
-  //   });
-  // };
 
   const addToCart = (item: ProductCardProps) => {
     const quantityToAdd = item.quantity ?? 1;
@@ -78,11 +72,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         };
         return updatedItems;
       }
-
-      /**
-       * slug
-       * quantity
-       */
 
       // المنتج جديد
       return [...prev, { ...item, quantity: quantityToAdd }];

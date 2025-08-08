@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import dynamic from 'next/dynamic';
 import { useEffect, useMemo } from 'react';
@@ -13,6 +12,8 @@ import { useTranslations } from 'next-intl';
 import Loading from '@/components/molecules/loading';
 import { useParams, useRouter } from 'next/navigation';
 import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
+import { useCurrency } from '@/context/CurrencyContext';
+import { API_IMAGE_URL } from '@/config/api';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -23,7 +24,9 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
   const router = useRouter();
   const t = useTranslations('Loading');
 
+  // API Hooks
   const { get, data, isLoading } = useAPI(`sub-category/${itemId}`);
+  const { selectedCountry } = useCurrency();
 
   const enhancedCards = useMemo(() => {
     if (!data || data.type !== 'products') return [];
@@ -40,7 +43,7 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
 
   useEffect(() => {
     get();
-  }, []);
+  }, [get, selectedCountry]);
 
   if (isLoading) {
     return <LoadingPlaceholder message={t('loadingMessage')} />;
@@ -58,7 +61,9 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
                     key={card.id}
                     imgAlt={card.title}
                     imgTitle={card.title}
-                    image={image || '/assets/play-station.webp'}
+                    image={
+                      `${API_IMAGE_URL}${image}` || '/assets/play-station.webp'
+                    }
                     storeFlagImg={card.storeFlagImg}
                     showBtn={true}
                     btnVariant="primary"

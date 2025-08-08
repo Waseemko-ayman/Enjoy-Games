@@ -31,10 +31,12 @@ const CategoriesTypes = ({
           {categories?.map((item: Category) => (
             <Suspense key={item.id} fallback={<Loading />}>
               <SectionTypeCard
+                imgSrc={
+                  `http://31.97.36.197/${item.image}` ||
+                  '/assets/play-station.webp'
+                }
                 path={`/categories/${item.slug}`}
-                // imgSrc={item.image}
                 title={item.name}
-                imgSrc={'/assets/digitalStores.webp'}
                 imgAlt={item.name}
                 imgTitle={item.name}
                 width={90}

@@ -13,6 +13,7 @@ import { useTranslations } from 'next-intl';
 import { NewlyArrivedProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import { useRouter } from 'next/navigation';
+import { API_IMAGE_URL } from '@/config/api';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -65,8 +66,9 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
               return (
                 <AnimatedWrapper key={card.id} custom={index}>
                   <ProductCard
-                    // imgSrc={card.image}
-                    image={image || '/assets/play-station.webp'}
+                    image={
+                      `${API_IMAGE_URL}${image}` || '/assets/play-station.webp'
+                    }
                     imgAlt={card.title}
                     imgTitle={card.title}
                     showDesc

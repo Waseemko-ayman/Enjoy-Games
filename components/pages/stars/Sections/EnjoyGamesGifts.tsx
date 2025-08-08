@@ -13,6 +13,7 @@ import { getSlugsProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import GridWrapper from '@/components/molecules/GridWrapper';
 import { useRouter } from 'next/navigation';
+import { API_IMAGE_URL } from '@/config/api';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -48,7 +49,10 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
                   <AnimatedWrapper key={card.id} custom={index}>
                     <ProductCard
                       key={card.id}
-                      image={image || '/assets/play-station.webp'}
+                      image={
+                        `${API_IMAGE_URL}${image}` ||
+                        '/assets/play-station.webp'
+                      }
                       imgAlt={card.title}
                       imgTitle={card.title}
                       showDesc

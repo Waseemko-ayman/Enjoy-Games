@@ -83,11 +83,11 @@ const OrderCard = ({ order }: { order: Order }) => {
                 </span>
               </div>
               <span className="font-bold text-base sm:text-lg">
-                {order.total_price}
+                {order.total_price.amount} {order.total_price.currency}
               </span>
             </div>
 
-            {order.discount !== '0.00 ر.س.' && (
+            {order.discount.amount !== 0 && (
               <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
                 <div className="flex items-center gap-2">
                   <Tag className="w-4 h-4 text-green-600" />
@@ -96,7 +96,7 @@ const OrderCard = ({ order }: { order: Order }) => {
                   </span>
                 </div>
                 <span className="font-semibold text-green-700">
-                  -{order.discount}
+                  -{order.discount?.amount} {order.discount.currency}
                 </span>
               </div>
             )}
@@ -106,7 +106,7 @@ const OrderCard = ({ order }: { order: Order }) => {
             <div className="text-center p-4 bg-gradient-to-r from-enjoy-primary/5 to-enjoy-primary/10 rounded-lg">
               <p className="text-sm text-gray-600 mb-1">{t('finalAmount')}</p>
               <p className="text-lg sm:text-xl md:text-2xl font-bold text-enjoy-primary">
-                {order.total_price}
+                {order.total_price.amount} {order.total_price.currency}
               </p>
             </div>
           </div>

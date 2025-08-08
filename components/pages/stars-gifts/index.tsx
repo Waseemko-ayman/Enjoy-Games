@@ -15,11 +15,13 @@ import { useCategories } from '@/context/CategoriesContext';
 import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import { useRouter } from 'next/navigation';
+import { API_IMAGE_URL } from '@/config/api';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
 
 const StarsGiftsPage = () => {
+  const btnText = useTranslations('BtnTexts');
   const secTexts = useTranslations('SectionsTitles.Gifts');
   const { data, isLoading, error } = useMainContent();
   const { categories } = useCategories();
@@ -52,13 +54,16 @@ const StarsGiftsPage = () => {
                 return (
                   <AnimatedWrapper key={card.id} custom={index}>
                     <ProductCard
-                      image={image || '/assets/play-station.webp'}
+                      image={
+                        `${API_IMAGE_URL}${image}` ||
+                        '/assets/play-station.webp'
+                      }
                       imgAlt={card.title}
                       imgTitle={card.title}
                       showDesc
                       showBtn={true}
                       btnVariant="primary"
-                      btnText="إشترِ الآن"
+                      btnText={btnText('BuyNow')}
                       icon={PiShoppingCartLight}
                       onClick={() => {
                         if (slugs) {

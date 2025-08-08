@@ -183,14 +183,24 @@ export const menuLists = [
     linksItem: [
       { id: 1, key: 'stars', icon: IoArrowRedoOutline, link: PATHS.STARS.link },
       { id: 2, key: 'wallet', icon: IoWalletOutline, link: PATHS.WALLET.link },
-      { id: 3, key: 'interests', icon: FaRegHeart, link: PATHS.MY_ACCOUNT.INTERESTS.link },
+      {
+        id: 3,
+        key: 'interests',
+        icon: FaRegHeart,
+        link: PATHS.MY_ACCOUNT.INTERESTS.link,
+      },
     ],
   },
   {
     id: 2,
     linksItem: [
       { id: 1, key: 'tickets', icon: FaRegFlag, link: PATHS.TICKETS.ROOT.link },
-      { id: 2, key: 'faqs', icon: IoMdHelpCircleOutline, link: PATHS.FAQS.link },
+      {
+        id: 2,
+        key: 'faqs',
+        icon: IoMdHelpCircleOutline,
+        link: PATHS.FAQS.link,
+      },
       // { id: 3, key: 'TalkToCustomerService', icon: MdOutlineEmail, link: '#' },
     ],
   },
@@ -267,14 +277,66 @@ export const userList = [
 ];
 
 export const countries = [
-  { name: 'السعودية', currency: 'الريال السعودي', img: 'saudi-arabia' },
-  { name: 'الإمارات', currency: 'درهم إماراتي', img: 'united-arab-emirates' },
-  { name: 'الكويت', currency: 'الدينار الكويتي', img: 'kuwait' },
-  { name: 'قطر', currency: 'الريال القطري', img: 'qatar' },
-  { name: 'البحرين', currency: 'الدينار البحريني', img: 'bahrain' },
-  { name: 'عمان', currency: 'الدينار العماني', img: 'oman' },
-  { name: 'العراق', currency: 'الدينار العراقي', img: 'iraq' },
-  { name: 'الأردن', currency: 'الدينار الأردني', img: 'jordan' },
+  {
+    name: 'السعودية',
+    currency: 'الريال السعودي',
+    img: 'saudi-arabia',
+    code: 'SAR',
+  },
+  {
+    name: 'الإمارات',
+    currency: 'درهم إماراتي',
+    img: 'united-arab-emirates',
+    code: 'AED',
+  },
+  {
+    name: 'الكويت',
+    currency: 'الدينار الكويتي',
+    img: 'kuwait',
+    code: 'KWD',
+  },
+  {
+    name: 'قطر',
+    currency: 'الريال القطري',
+    img: 'qatar',
+    code: 'QAR',
+  },
+  {
+    name: 'البحرين',
+    currency: 'الدينار البحريني',
+    img: 'bahrain',
+    code: 'BHD',
+  },
+  {
+    name: 'عمان',
+    currency: 'الريال العماني',
+    img: 'oman',
+    code: 'OMR',
+  },
+  {
+    name: 'العراق',
+    currency: 'الدينار العراقي',
+    img: 'iraq',
+    code: 'IQD',
+  },
+  {
+    name: 'الأردن',
+    currency: 'الدينار الأردني',
+    img: 'jordan',
+    code: 'JOD',
+  },
+  {
+    name: 'الولايات المتحدة',
+    currency: 'الدولار الأمريكي',
+    img: 'usa',
+    code: 'USD',
+  },
+  {
+    name: 'ألمانيا',
+    currency: 'اليورو',
+    img: 'germany',
+    code: 'EUR',
+  },
 ];
 
 export const featuresData = [
