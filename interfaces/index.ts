@@ -55,17 +55,27 @@ export interface ProductCardProps {
   imgAlt?: string;
   imgTitle?: string;
   name?: string;
-  price_before?: string;
-  price?: string;
-  discount?: number;
+  price_before?: {
+    amount: number;
+    currency: string;
+  };
+  price?: {
+    amount: number;
+    currency: string;
+  };
+  discount?: {
+    amount: number;
+    currency: string;
+  };
+  final_price?: {
+    amount: number;
+    currency: string;
+  };
   shipping_payment?: string;
   product_id?: number;
-  final_price?: number;
   quantity?: number;
   currencyImage?: string;
   ratings?: number[];
-  parsedPrice?: number;
-  parsedCurrency?: string;
   icon?: React.ElementType | string | any;
   showDesc?: boolean;
   showBtn?: boolean;
@@ -295,6 +305,7 @@ export interface Country {
   name: string;
   currency: string;
   img: string;
+  code: string;
 }
 
 export interface CountryDrawerProps {

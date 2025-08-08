@@ -43,17 +43,6 @@ const CartContent: React.FC<CartContentProps> = ({
     showToast(`${title} ${msgTxts('removedFromCart')}`);
   };
 
-  const processedItems = items.map((item) => {
-    const priceParts = item.price?.toString().match(/^([\d.,]+)\s*(.*)$/);
-    const parsedPrice = parseFloat(priceParts?.[1]?.replace(',', '') || '0');
-    const parsedCurrency = priceParts?.[2] || '';
-    return {
-      ...item,
-      parsedPrice,
-      parsedCurrency,
-    };
-  });
-
   return (
     <Layer otherClassName="!my-12 max-sm:!mb-28">
       <Container>
@@ -66,7 +55,7 @@ const CartContent: React.FC<CartContentProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <Suspense fallback={<Loading />}>
-              {processedItems.map((item) => (
+              {items.map((item) => (
                 <CardWrapper key={item.id} className="px-6 py-4">
                   <div className="flex items-end justify-between gap-3 mb-4 max-sm:flex-col sm:items-start">
                     <div className="flex max-sm:w-full max-sm:flex-col gap-2 sm:gap-4">
@@ -132,10 +121,8 @@ const CartContent: React.FC<CartContentProps> = ({
                       </Button>
                     </div>
                     <span className="text-lg font-bold">
-                      {Number(
-                        item.parsedPrice * (item.quantity ?? 1)
-                      ).toLocaleString()}{' '}
-                      {item.parsedCurrency}
+                      {(item.price?.amount ?? 0) * (item.quantity ?? 1)}{' '}
+                      {item.price?.currency}
                     </span>
                   </div>
                 </CardWrapper>
@@ -190,7 +177,7 @@ const CartContent: React.FC<CartContentProps> = ({
 
           <div className="space-y-6">
             <MotionSection index={0}>
-              <InvoiceSummary items={processedItems} />
+              <InvoiceSummary items={items} />
             </MotionSection>
 
             <MotionSection index={1}>

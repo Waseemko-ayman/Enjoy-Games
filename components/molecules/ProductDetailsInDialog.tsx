@@ -105,17 +105,20 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
 
             <MotionSection index={2}>
               <div className="gap-3 mt-4">
-                <h3 className="text-xl font-semibold">{product?.price}</h3>
+                <h3 className="text-xl font-semibold">
+                  {product?.price?.amount} {product?.price?.currency}
+                </h3>
                 <div className="flex items-center gap-3">
                   <span className="line-through text-red-500 text-base">
-                    {product?.price_before}
+                    {product?.price_before?.amount}{' '}
+                    {product?.price_before?.currency}
                   </span>
                   <CardWrapper
                     bgColor="bg-red-500"
                     className="py-0.5 px-2 flex items-center justify-center"
                   >
                     <span className="text-white text-xs">
-                      {t('rival')} {product?.discount || 9}%
+                      {t('rival')} {product?.discount?.amount || 9}%
                     </span>
                   </CardWrapper>
                 </div>
