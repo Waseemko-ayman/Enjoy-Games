@@ -92,7 +92,7 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
           <Suspense fallback={<Loading />}>
             <Image
               src="/assets/play-station.webp"
-              alt={product.title}
+              alt={product?.title}
               width={170}
               height={170}
               className="rounded-lg object-cover"
@@ -100,7 +100,7 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
           </Suspense>
           <div>
             <MotionSection index={1}>
-              <h1 className="text-2xl">{product?.title}</h1>
+              <h1 className="text-2xl">{product?.title || product?.name}</h1>
             </MotionSection>
 
             <MotionSection index={2}>

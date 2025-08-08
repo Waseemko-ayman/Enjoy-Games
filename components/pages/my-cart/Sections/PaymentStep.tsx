@@ -202,7 +202,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
   );
 
   return (
-    <Layer otherClassName="!my-12 max-sm:!mb-24">
+    <Layer otherClassName="!my-12 max-sm:!mb-28">
       <Container>
         <SubCartHeader
           title={t('choosePaymentMethod')}
