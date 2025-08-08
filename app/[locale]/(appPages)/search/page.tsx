@@ -5,7 +5,7 @@ type Props = {
   searchParams: { query?: string };
 };
 
-export async function generateMetadata({ params, searchParams }: Props) {
+export async function generateMetadata({ searchParams }: Props) {
   const query = searchParams.query || '';
   return {
     title: query ? `${query} | إنجوي قيمز` : 'إنجوي قيمز',
