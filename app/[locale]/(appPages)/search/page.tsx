@@ -1,6 +1,21 @@
 import SearchPage from '@/components/pages/search';
-import React from 'react';
+import { Metadata } from 'next';
 
-const Search = () => <SearchPage />;
+type Props = {
+  searchParams: { query?: string };
+};
 
-export default Search;
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  const query = searchParams.query || '';
+  return {
+    title: query
+      ? `${query} | إنجوي قيمز`
+      : 'إنجوي قيمز',
+  };
+}
+
+export default function Search() {
+  return <SearchPage />;
+}
