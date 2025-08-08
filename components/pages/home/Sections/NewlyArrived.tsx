@@ -9,6 +9,7 @@ import Loading from '@/components/molecules/loading';
 import { useTranslations } from 'next-intl';
 import { NewlyArrivedProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
+import { useRouter } from 'next/navigation';
 
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
@@ -22,7 +23,7 @@ const NewlyArrived: React.FC<NewlyArrivedProps> = ({
   error,
 }) => {
   const btnText = useTranslations('BtnTexts');
-  
+  const router = useRouter();
   return (
     <SectionComponent title={t('sectionsTitles.newlyArrived')}>
       {isLoading ? (
@@ -51,7 +52,7 @@ const NewlyArrived: React.FC<NewlyArrivedProps> = ({
                     if (slugs) {
                       const { categorySlug, subCategorySlug } = slugs;
                       const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
-                      window.location.href = path;
+                      router.push(path);
                     }
                   }}
                   productData={card}

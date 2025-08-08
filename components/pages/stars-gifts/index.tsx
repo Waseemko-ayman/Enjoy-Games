@@ -14,6 +14,7 @@ import { MdWavingHand } from 'react-icons/md';
 import { useCategories } from '@/context/CategoriesContext';
 import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
+import { useRouter } from 'next/navigation';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -22,6 +23,7 @@ const StarsGiftsPage = () => {
   const secTexts = useTranslations('SectionsTitles.Gifts');
   const { data, isLoading, error } = useMainContent();
   const { categories } = useCategories();
+  const router = useRouter();
 
   return (
     <Layer>
@@ -62,7 +64,7 @@ const StarsGiftsPage = () => {
                         if (slugs) {
                           const { categorySlug, subCategorySlug } = slugs;
                           const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
-                          window.location.href = path;
+                          router.push(path);
                         }
                       }}
                       productData={card}

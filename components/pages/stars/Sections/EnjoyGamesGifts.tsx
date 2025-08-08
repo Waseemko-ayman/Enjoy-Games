@@ -12,6 +12,7 @@ import Loading from '@/components/molecules/loading';
 import { getSlugsProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import GridWrapper from '@/components/molecules/GridWrapper';
+import { useRouter } from 'next/navigation';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -20,6 +21,7 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const secTexts = useTranslations('SectionsTitles.Gifts');
   const btnTexts = useTranslations('BtnTexts');
   const { data, isLoading, error } = useMainContent();
+  const router = useRouter();
 
   return (
     <Layer>
@@ -59,7 +61,7 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
                         if (slugs) {
                           const { categorySlug, subCategorySlug } = slugs;
                           const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
-                          window.location.href = path;
+                          router.push(path);
                         }
                       }}
                       // onAddToCart={() => handleAddToCart(card)}

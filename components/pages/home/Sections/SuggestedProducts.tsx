@@ -6,6 +6,7 @@ import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
 import { SuggestedProductsProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
+import { useRouter } from 'next/navigation';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -17,6 +18,7 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({
   getSlugs,
   error,
 }) => {
+  const router = useRouter();
   return (
     <SectionComponent title={t('sectionsTitles.suggestedProducts')}>
       {isLoading ? (
@@ -42,7 +44,7 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({
                     if (slugs) {
                       const { categorySlug, subCategorySlug } = slugs;
                       const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
-                      window.location.href = path;
+                      router.push(path);
                     }
                   }}
                 />

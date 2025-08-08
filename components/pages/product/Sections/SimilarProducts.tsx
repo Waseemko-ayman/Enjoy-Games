@@ -7,6 +7,7 @@ import Loading from '@/components/molecules/loading';
 import { useMainContent } from '@/context/MainContentContext';
 import { getSlugsProps } from '@/interfaces';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { PiShoppingCartLight } from 'react-icons/pi';
 
@@ -14,6 +15,7 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const t = useTranslations('productDetails');
   const btnTxts = useTranslations('BtnTexts');
   const { data, isLoading, error } = useMainContent();
+  const router = useRouter();
 
   return (
     <SectionComponent title={t('relatedProducts')}>
@@ -47,7 +49,7 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
                       if (slugs) {
                         const { categorySlug, subCategorySlug } = slugs;
                         const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
-                        window.location.href = path;
+                        router.push(path);
                       }
                     }}
                     productData={card}
