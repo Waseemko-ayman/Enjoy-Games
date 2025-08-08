@@ -15,7 +15,16 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cartItems, setCartItems] = useState<ProductCardProps[]>([]);
+  const [cartItems, setCartItems] = useState<ProductCardProps[]>(() => {
+    if (typeof window === 'undefined') return [];
+    try {
+      const stored = localStorage.getItem(CART_STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      localStorage.removeItem(CART_STORAGE_KEY);
+      return [];
+    }
+  });
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
