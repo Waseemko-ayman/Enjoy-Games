@@ -24,6 +24,7 @@ const PageHeader = ({
 }) => {
   const pathname = usePathname();
   const tPages = useTranslations('PagesHeaderTitles');
+  const tLoading = useTranslations('Loading');
 
   const pathParts = pathname
     .split('/')
@@ -36,7 +37,9 @@ const PageHeader = ({
       ? pathParts[categoryIndex + 1]
       : '';
 
-  const categoryLabel = useCategoryTitle(categorySlug); // ✅ always called
+  const { title: categoryLabel, loading: loadingCategory } =
+    useCategoryTitle(categorySlug);
+
   const pathNameMap = extractPaths(PATHS);
   const breadcrumbs = [{ label: tPages('home'), href: '/' }];
   let accumulatedPath = '';
@@ -44,14 +47,14 @@ const PageHeader = ({
   for (let i = 0; i < pathParts.length; i++) {
     const part = pathParts[i];
 
-    if (part === 'bundles') {
-      accumulatedPath += `/${part}`;
-      continue;
-    }
-
     if (part === 'categories' && pathParts[i + 1]) {
       accumulatedPath += `/categories/${categorySlug}`;
-      breadcrumbs.push({ label: categoryLabel || '', href: accumulatedPath });
+      breadcrumbs.push({
+        label: loadingCategory
+          ? tLoading('loadingMessage')
+          : categoryLabel || '',
+        href: accumulatedPath,
+      });
       i++;
       continue;
     }
@@ -66,16 +69,11 @@ const PageHeader = ({
     });
   }
 
-  const cleanParts = pathParts.filter((p) => p !== 'categories');
-  const lastPart = cleanParts[cleanParts.length - 1] || '';
-  const secondLastPart = cleanParts[cleanParts.length - 2] || '';
-  const itemLabel = useCategoryTitle(secondLastPart);
-
   let currentTitle =
     breadcrumbs[breadcrumbs.length - 1]?.label || tPages('home');
 
-  if (lastPart === 'bundles') {
-    currentTitle = `بطاقات ${itemLabel}`;
+  if (categorySlug) {
+    currentTitle = loadingCategory ? tLoading('loadingMessage') : categoryLabel;
   }
 
   if (pathParts.length === 0) {
@@ -142,7 +140,6 @@ function getLabel(
   return translated;
 }
 
-// 1. تحديث تعريف الأنواع لاستيعاب القيم النصية
 interface PathLeaf {
   name: string;
   link: string;
@@ -153,7 +150,6 @@ type PathTree = {
   [key: string]: PathValue;
 };
 
-// 2. تعديل دالة extractPaths
 function extractPaths(
   obj: PathTree,
   map: Record<string, string> = {}
@@ -163,15 +159,12 @@ function extractPaths(
       const value = obj[key];
 
       if (typeof value === 'string') {
-        // معالجة القيم النصية مباشرة
         const pathKey = value.split('/').filter(Boolean).pop() || '';
-        map[pathKey] = key; // أو أي قيمة أخرى مناسبة
+        map[pathKey] = key;
       } else if (isPathLeaf(value)) {
-        // معالجة كائنات PathLeaf
         const pathKey = value.link.split('/').filter(Boolean).pop() || '';
         map[pathKey] = value.name;
       } else {
-        // معالجة الكائنات المتداخلة (PathTree)
         extractPaths(value, map);
       }
     }
@@ -179,7 +172,6 @@ function extractPaths(
   return map;
 }
 
-// 3. تعديل Type Guard
 function isPathLeaf(obj: any): obj is PathLeaf {
   return (
     typeof obj === 'object' && obj !== null && 'link' in obj && 'name' in obj
@@ -194,24 +186,6 @@ function formatPart(str: string) {
 
 export default PageHeader;
 
-// /* eslint-disable @typescript-eslint/no-explicit-any */
-// 'use client';
-
-// import { usePathname } from 'next/navigation';
-// import {
-//   Breadcrumb,
-//   BreadcrumbItem,
-//   BreadcrumbLink,
-//   BreadcrumbList,
-//   BreadcrumbSeparator,
-// } from '@/components/ui/breadcrumb';
-// import Container from '../organism/Container';
-// import { PATHS } from '@/data/paths';
-// import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
-// import { useTranslations } from 'next-intl';
-// import { useCategoryTitle } from '@/hook/useCategoryTitle';
-// import { useTranslatedPathParts } from '@/utils/translatePath';
-
 // const PageHeader = ({
 //   showTitle = true,
 //   children,
@@ -221,7 +195,10 @@ export default PageHeader;
 // }) => {
 //   const pathname = usePathname();
 //   const tPages = useTranslations('PagesHeaderTitles');
-//   const translatedParts = useTranslatedPathParts(pathname);
+
+//   // 🟢 state جديد لتخزين العنوان من الـ API
+//   const [currentTitle, setCurrentTitle] = useState<string>('');
+//   const { getSingle, isLoading } = useAPI<any, any>('categories-subcategories');
 
 //   const pathParts = pathname
 //     .split('/')
@@ -234,11 +211,18 @@ export default PageHeader;
 //       ? pathParts[categoryIndex + 1]
 //       : '';
 
-//   const categoryLabel = useCategoryTitle(categorySlug);
+//   // 🟢 جلب العنوان من الـ API بدل الاعتماد على useCategoryTitle
+//   useEffect(() => {
+//     if (categorySlug) {
+//       getSingle(categorySlug).then((data) => {
+//         if (data?.name) {
+//           setCurrentTitle(data.name);
+//         }
+//       });
+//     }
+//   }, [categorySlug, getSingle]);
 
-//   // مسارات الترجمة من PATHS
 //   const pathNameMap = extractPaths(PATHS);
-
 //   const breadcrumbs = [{ label: tPages('home'), href: '/' }];
 //   let accumulatedPath = '';
 
@@ -252,7 +236,7 @@ export default PageHeader;
 
 //     if (part === 'categories' && pathParts[i + 1]) {
 //       accumulatedPath += `/categories/${categorySlug}`;
-//       breadcrumbs.push({ label: categoryLabel || '', href: accumulatedPath });
+//       breadcrumbs.push({ label: currentTitle || '', href: accumulatedPath });
 //       i++;
 //       continue;
 //     }
@@ -267,11 +251,12 @@ export default PageHeader;
 //     });
 //   }
 
-//   const cleanParts = pathParts.filter((p) => p !== 'categories');
-//   const lastPart = cleanParts[cleanParts.length - 1] || '';
-//   const secondLastPart = cleanParts[cleanParts.length - 2] || '';
-//   const itemLabel = useCategoryTitle(secondLastPart);
+//   console.log(currentTitle);
 
+//   // -------------------
+//   // الكود القديم لجلب العنوان (تم استبداله بالكود فوق)
+//   /*
+//   const categoryLabel = useCategoryTitle(categorySlug);
 //   let currentTitle =
 //     breadcrumbs[breadcrumbs.length - 1]?.label || tPages('home');
 
@@ -282,6 +267,7 @@ export default PageHeader;
 //   if (pathParts.length === 0) {
 //     currentTitle = tPages('home');
 //   }
+//   */
 
 //   return (
 //     <div className="bg-enjoy-gray-light py-6 md:py-8 px-4 md:px-8 rounded-md">
@@ -298,7 +284,9 @@ export default PageHeader;
 //                 >
 //                   <BreadcrumbItem>
 //                     {index === breadcrumbs.length - 1 ? (
-//                       <span className="text-gray-700">{crumb.label}</span>
+//                       <span className="text-gray-700 text-base">
+//                         {crumb.label}
+//                       </span>
 //                     ) : (
 //                       <BreadcrumbLink href={crumb.href}>
 //                         {crumb.label}
@@ -315,7 +303,7 @@ export default PageHeader;
 //             <div className="flex items-center justify-between mt-5 mb-7 gap-4 flex-wrap">
 //               <AnimatedWrapper direction="x" distance={40}>
 //                 <h1 className="text-2xl md:text-3xl font-semibold">
-//                   {currentTitle}
+//                   {isLoading ? '...' : currentTitle || tPages('home')}
 //                 </h1>
 //               </AnimatedWrapper>
 //               <AnimatedWrapper direction="x" distance={-40}>
@@ -345,7 +333,6 @@ export default PageHeader;
 //   name: string;
 //   link: string;
 // }
-
 // type PathValue = PathLeaf | PathTree | string;
 // type PathTree = {
 //   [key: string]: PathValue;

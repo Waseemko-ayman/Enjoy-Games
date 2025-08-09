@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import EmptyStateBox from '@/components/molecules/EmptyStateBox';
 import PageHeader from '@/components/molecules/PageHeader';
@@ -21,6 +20,7 @@ import OrdersGrid from '@/components/molecules/OrdersGrid';
 import Layer from '@/components/atomic/Layer';
 import { Order } from '@/interfaces';
 import { usePagination } from '@/hook/usePagination';
+import { useCurrency } from '@/context/CurrencyContext';
 
 const MyPurchasesPage = () => {
   const [filter, setFilter] = useState('all');
@@ -31,6 +31,7 @@ const MyPurchasesPage = () => {
 
   // API Hook
   const { get, data: orders, isLoading, error } = useAPI('orders');
+  const { selectedCountry } = useCurrency();
 
   // Pagination configuration
   const ITEMS_PER_PAGE = 6; // Number of orders to show per page
@@ -51,7 +52,7 @@ const MyPurchasesPage = () => {
 
   useEffect(() => {
     get();
-  }, []);
+  }, [get, selectedCountry]);
 
   const handleFilterChange = (value: string) => {
     setFilter(value);
