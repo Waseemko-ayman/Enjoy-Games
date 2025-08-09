@@ -1,17 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import SearchPage from '@/components/pages/search';
 import { Metadata } from 'next';
 
-type Props = {
-  params: { locale: string };
-  searchParams?: { query?: string };
-};
-
 export async function generateMetadata({
   searchParams,
-}: Props): Promise<Metadata> {
-  const query = searchParams?.query || '';
+}: {
+  params: Promise<any>;
+  searchParams: Promise<{ query?: string }>;
+}): Promise<Metadata> {
+  const queryParam = (await searchParams)?.query || '';
   return {
-    title: query ? `${query} | إنجوي قيمز` : 'إنجوي قيمز',
+    title: queryParam ? `${queryParam} | إنجوي قيمز` : 'إنجوي قيمز',
   };
 }
 
