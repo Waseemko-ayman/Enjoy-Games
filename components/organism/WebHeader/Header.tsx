@@ -24,11 +24,6 @@ import { useCurrency } from '@/context/CurrencyContext';
 import { Country } from '@/interfaces';
 
 const Header = () => {
-  // const [selectedCountry, setSelectedCountry] = useState(() => {
-  //   const storedCode = localStorage.getItem('currencyCode');
-  //   if (!storedCode) return null;
-  //   return countries.find((c) => c.code === storedCode) || null;
-  // });
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
