@@ -93,7 +93,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             {discount && (
               <span className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-semibold px-2 py-1 rounded-lg shadow-md z-10">
                 خصم
-                {discount}%
+                {discount.amount}%
               </span>
             )}
           </div>
@@ -111,7 +111,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
               {price_before && (
                 <div className="flex items-center justify-between gap-2">
                   {price && (
-                    <h4 className="font-semibold mb-2 text-[15px]">{price}</h4>
+                    <h4 className="font-semibold mb-2 text-[15px]">
+                      {price.amount} {price.currency}
+                    </h4>
                   )}
                   <h4
                     className={`font-semibold mb-2 ${
@@ -120,7 +122,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                         : 'text-[15px]'
                     }`}
                   >
-                    {price_before}
+                    {price_before.amount} {price_before.currency}
                   </h4>
                 </div>
               )}

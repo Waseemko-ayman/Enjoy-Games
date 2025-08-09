@@ -17,8 +17,7 @@ const OrdersStats: React.FC<OrdersStatsProps> = ({ orders }) => {
   };
 
   const totalSpent = orders.reduce((sum, order) => {
-    const price = parseFloat(order.total_price.replace(/[^\d.]/g, ''));
-    return sum + price;
+    return sum + order.total_price.amount;
   }, 0);
 
   const statsData = [
@@ -45,7 +44,7 @@ const OrdersStats: React.FC<OrdersStatsProps> = ({ orders }) => {
     },
     {
       title: t('totalSpent'),
-      value: `${totalSpent.toFixed(2)} ر.س.`,
+      value: `${totalSpent.toFixed(2)}`,
       icon: ShoppingBag,
       color: 'text-enjoy-primary',
       bgColor: 'bg-enjoy-primary/10',

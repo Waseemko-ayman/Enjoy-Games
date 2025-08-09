@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import React, { createContext, useContext, useEffect } from 'react';
@@ -19,7 +18,7 @@ export const FaqsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     get();
-  }, []);
+  }, [get]);
 
   const refresh = () => get();
 

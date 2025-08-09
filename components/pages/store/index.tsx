@@ -24,10 +24,10 @@ const StorePage = () => {
   };
 
   const allSubCategories = shuffleArray(
-    categories?.flatMap((cat: Category) =>
-      cat.sub_categories.map((sub) => ({
+    categories?.flatMap((cart: Category) =>
+      cart.sub_categories.map((sub) => ({
         ...sub,
-        categorySlug: cat.slug,
+        categorySlug: cart.slug,
       }))
     ) || []
   );

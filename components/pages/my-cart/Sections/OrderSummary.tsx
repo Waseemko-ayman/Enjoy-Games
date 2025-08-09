@@ -11,11 +11,6 @@ interface OrderSummaryProps {
   t: TranslationFunction;
 }
 
-// Helper function to parse price with fallback value
-function parsedPriceOrFallback(price?: number, parsedPrice?: number) {
-  return parsedPrice ?? price ?? 0;
-}
-
 const OrderSummary: React.FC<OrderSummaryProps> = ({
   processedItems,
   items,
@@ -46,28 +41,23 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                   <div className="flex flex-col w-full">
                     <h3 className="font-semibold">{originalItem?.title}</h3>
                     <div className="flex justify-between w-full text-sm items-center">
-                      {item.final_price &&
-                      item.final_price !== Number(item.price) ? (
+                      {item.final_price?.amount &&
+                      item.final_price?.amount !== item.price?.amount ? (
                         <>
                           <p className="text-gray-500 font-semibold line-through">
-                            {(item.parsedPrice ?? 0) * quantity}{' '}
-                            {item.parsedCurrency}
+                            {(item.price?.amount ?? 0) * quantity}{' '}
+                            {item.price?.currency}
                           </p>
                           <div>
                             <p className="font-semibold">
-                              {item.final_price} {item.parsedCurrency}
+                              {item.final_price?.amount} {item.price?.currency}
                             </p>
                           </div>
                         </>
                       ) : (
                         <p className="font-semibold">
-                          {(
-                            parsedPriceOrFallback(
-                              Number(item.price),
-                              item.parsedPrice
-                            ) * quantity
-                          ).toLocaleString()}{' '}
-                          {item.parsedCurrency}
+                          {(item.price?.amount ?? 0) * quantity}{' '}
+                          {item.price?.currency}
                         </p>
                       )}
                     </div>

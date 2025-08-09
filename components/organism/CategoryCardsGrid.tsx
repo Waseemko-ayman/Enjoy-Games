@@ -33,7 +33,10 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({
           {cards.map((card, index) => (
             <AnimatedWrapper key={card.id} custom={index}>
               <CategoryCard
-                image={'/assets/play-station.webp'}
+                image={
+                  `http://31.97.36.197/${card.image}` ||
+                  '/assets/play-station.webp'
+                }
                 name={card.name}
                 onClick={() => {
                   onCardClick?.(card.categorySlug ?? '', card.slug);

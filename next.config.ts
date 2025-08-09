@@ -11,6 +11,16 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '31.97.36.197',
+        port: '',
+        pathname: '/uploads/**',
+      },
+    ],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();

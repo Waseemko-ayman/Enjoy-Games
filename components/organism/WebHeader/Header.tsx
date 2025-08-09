@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+'use client';
 import Input from '@/components/atomic/Input';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
@@ -18,11 +20,20 @@ import { useAuthContext } from '@/context/AuthContext';
 import { useCartContext } from '@/context/CartContext';
 import { FaRegBell } from 'react-icons/fa6';
 import { useTickets } from '@/context/TicketsContext';
+import { useRouter } from 'next/navigation';
+import { useCurrency } from '@/context/CurrencyContext';
+import { Country } from '@/interfaces';
 
 const Header = () => {
-  const [selectedCountry, setSelectedCountry] = useState(countries[0]);
+  // const [selectedCountry, setSelectedCountry] = useState(() => {
+  //   const storedCode = localStorage.getItem('currencyCode');
+  //   if (!storedCode) return null;
+  //   return countries.find((c) => c.code === storedCode) || null;
+  // });
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const router = useRouter();
 
   // Ref
   const menuRef = useRef<HTMLDivElement>(null);
@@ -37,6 +48,19 @@ const Header = () => {
   const { cartItems } = useCartContext();
   const { tickets, hasUnreadTickets } = useTickets();
   const { toggleLocale, isArabic } = useToggleLocale();
+  const { selectedCountry, setSelectedCountry } = useCurrency();
+
+  const handleCountryChange = (country: Country) => {
+    setSelectedCountry(country);
+  };
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const trimmedQuery = query.trim();
+    if (!trimmedQuery) return;
+
+    router.push(`/search?query=${encodeURIComponent(trimmedQuery)}`);
+  };
 
   const iconsStyle = 'w-9 h-9 text-[var(--enjoy-primary-deep)] cursor-pointer';
 
@@ -70,11 +94,13 @@ const Header = () => {
             </Link>
           </AnimatedWrapper>
 
-          <form className="flex-1">
+          <form className="flex-1" onSubmit={handleSearch}>
             <AnimatedWrapper direction="y" distance={-40}>
               <Input
                 type="text"
                 inputName="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
                 placeholder={t('cardAndOffersSearch')}
                 Icon={IoSearch}
               />
@@ -135,7 +161,7 @@ const Header = () => {
               <CountryDialog
                 countries={countries}
                 selectedCountry={selectedCountry}
-                setSelectedCountry={setSelectedCountry}
+                setSelectedCountry={handleCountryChange}
                 open={open}
                 setOpen={setOpen}
               />

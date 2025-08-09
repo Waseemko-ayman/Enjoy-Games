@@ -64,19 +64,19 @@ const PaymentOptions: React.FC<PaymentOptionsProps> = ({
       <MotionSection index={1}>
         <CardWrapper className="p-6 mt-5">
           <h3 className="text-lg font-bold mb-4">{t('discountCoupon')}</h3>
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-row gap-3">
             <Input
               type="text"
               variant="secondary"
               placeholder={inputsTexts('placeHolders.haveCoupon')}
-              otherClassNameContainer="flex-1 focus:ring-2 focus:ring-purple-500"
+              otherClassNameContainer="sm:flex-1 focus:ring-2 focus:ring-purple-500"
               inputName="couponCode"
               {...register('couponCode')}
             />
             <Button
               type="button"
               variant="secondary"
-              otherClassName="py-3 sm:px-6 max-sm:w-full"
+              otherClassName="p-3 sm:px-6 max-sm:w-full rounded-lg max-sm:flex-1"
               handleClick={onApplyCoupon}
             >
               {isLoading ? <ButtonLoading /> : btnTexts('apply')}

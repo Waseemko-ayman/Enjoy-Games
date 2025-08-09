@@ -14,8 +14,8 @@ const FooterBanner = () => {
       </AnimatedWrapper>
       <AnimatedWrapper direction="x" distance={-40}>
         <div className="flex flex-col md:flex-row items-center text-center gap-3 text-sm font-semibold">
-          <p>{t('taxRegisterationNum')}: 311192285200003</p>
-          <p className="hidden md:block">|</p>
+          {/* <p>{t('taxRegisterationNum')}: 311192285200003</p>
+          <p className="hidden md:block">|</p> */}
           <p>
             © {t('desc')} {yearNow}
           </p>

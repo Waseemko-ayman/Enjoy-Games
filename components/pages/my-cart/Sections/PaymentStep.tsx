@@ -43,13 +43,23 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
   // Toast notifications
   const { showToast } = useToast();
 
+  const currencyCode =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('currencyCode') || 'SAR'
+      : 'SAR';
+
   // API hooks
   const {
     add: AddCoupon,
     data,
     isLoading,
   } = useAPI<{ cart: CartItem[]; coupon_code: string }, CouponResponse>(
-    'coupon/apply-coupon'
+    'coupon/apply-coupon',
+    {
+      headers: {
+        Currency: currencyCode,
+      },
+    }
   );
   const { add: orderAdd, isLoading: orderIsLoading } = useAPI<
     OrderRequest,
@@ -152,21 +162,6 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
           '_blank',
           'width=500,height=700,top=40,left=400'
         );
-
-        // const paymentWindow = window.open(
-        //   paymentData?.data?.payment_url,
-        //   '_blank',
-        //   'width=500,height=700,top=40,left=400'
-        // );
-
-        // if (paymentWindow) {
-        //   const interval = setInterval(() => {
-        //     if (paymentWindow.closed) {
-        //       clearInterval(interval);
-        //       window.location.reload();
-        //     }
-        //   }, 500);
-        // }
       }
     } catch (err) {
       const apiError = (err as any)?.response?.data?.message;
@@ -174,35 +169,8 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
     }
   };
 
-  // Prepare items for rendering with parsed price and currency
-  const processedItems = (couponResponse ?? items).map(
-    (item: ProductCardProps) => {
-      const cleanNumber = (value: string | number | undefined): number => {
-        if (!value) return 0;
-        if (typeof value === 'number') return value;
-        const match = value.match(/^([\d.,]+)\s*(.*)$/);
-        const num = parseFloat(match?.[1]?.replace(',', '') || '0');
-        return isNaN(num) ? 0 : num;
-      };
-
-      const extractCurrency = (value: string | number | undefined): string => {
-        if (!value || typeof value === 'number') return '';
-        const match = value.match(/^([\d.,]+)\s*(.*)$/);
-        return match?.[2]?.trim() || '';
-      };
-
-      return {
-        ...item,
-        parsedPrice: cleanNumber(item.price),
-        final_price: cleanNumber(item.final_price),
-        discount: cleanNumber(item.discount),
-        parsedCurrency: extractCurrency(item.price),
-      };
-    }
-  );
-
   return (
-    <Layer otherClassName="!my-12 max-sm:!mb-24">
+    <Layer otherClassName="!my-12 max-sm:!mb-28">
       <Container>
         <SubCartHeader
           title={t('choosePaymentMethod')}
@@ -227,7 +195,11 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
           />
 
           {/* Order summary */}
-          <OrderSummary processedItems={processedItems} items={items} t={t} />
+          <OrderSummary
+            processedItems={couponResponse || items}
+            items={items}
+            t={t}
+          />
         </form>
       </Container>
     </Layer>

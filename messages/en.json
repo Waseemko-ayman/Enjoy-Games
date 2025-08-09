@@ -68,7 +68,8 @@
     "TalkToCustomerService": "Talk to customer service",
     "faqs": "Frequently Asked Questions",
     "RegisterNow": "Register now",
-    "more": "More"
+    "more": "More",
+    "search": "Search"
   },
   "SectionsTitles": {
     "Stars": {
@@ -84,7 +85,10 @@
       "desc": "Earn a percentage from every purchase made by your friends, and the more you share, the more you earn!"
     },
     "Interests": "What do you love to buy the most?",
-    "faqs": "Frequently Asked Questions"
+    "faqs": "Frequently Asked Questions",
+    "products": "Products",
+    "categories": "Sections",
+    "subCategories": "Subsections"
   },
   "HomePage": {
     "walletSections": {
@@ -386,6 +390,10 @@
     "bad": "Bad",
     "relatedProducts": "Related Products",
     "productEvaluation": "Your evaluation has been submitted successfully. Thank you very much."
+  },
+  "search": {
+    "searchResults": "Search results",
+    "noResult": "No results"
   },
   "errorBoundary": {
     "title": "Oops! Something Went Wrong"

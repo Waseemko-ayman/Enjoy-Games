@@ -7,8 +7,9 @@ import CartContent from '@/components/pages/my-cart/Sections/CartContent';
 import { useCartContext } from '@/context/CartContext';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import PaymentFailedStep from './Sections/PaymentFailedStep';
+import { PATHS } from '@/data/paths';
 
 const STEPS = {
   CART: 1,
@@ -45,6 +46,8 @@ const MyCartPage = () => {
   const btnTexts = useTranslations('BtnTexts');
   const { cartItems, clearCart } = useCartContext();
 
+  const router = useRouter();
+
   const finalStepKey =
     successParam === 'true'
       ? 'complete'
@@ -80,11 +83,11 @@ const MyCartPage = () => {
 
   const handleOrderComplete = () => {
     clearCart();
-    window.location.href = '/store';
+    router.push(PATHS.STORE.link);
   };
 
   const totalAmount = cartItems.reduce(
-    (total, item) => total + (Number(item.price) ?? 0) * (item.quantity ?? 1),
+    (total, item) => total + (item.price?.amount ?? 0) * (item.quantity ?? 1),
     0
   );
 

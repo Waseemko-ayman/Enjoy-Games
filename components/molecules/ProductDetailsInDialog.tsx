@@ -92,7 +92,7 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
           <Suspense fallback={<Loading />}>
             <Image
               src="/assets/play-station.webp"
-              alt={product.title}
+              alt={product?.title}
               width={170}
               height={170}
               className="rounded-lg object-cover"
@@ -100,22 +100,25 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
           </Suspense>
           <div>
             <MotionSection index={1}>
-              <h1 className="text-2xl">{product?.title}</h1>
+              <h1 className="text-2xl">{product?.title || product?.name}</h1>
             </MotionSection>
 
             <MotionSection index={2}>
               <div className="gap-3 mt-4">
-                <h3 className="text-xl font-semibold">{product?.price}</h3>
+                <h3 className="text-xl font-semibold">
+                  {product?.price?.amount} {product?.price?.currency}
+                </h3>
                 <div className="flex items-center gap-3">
                   <span className="line-through text-red-500 text-base">
-                    {product?.price_before}
+                    {product?.price_before?.amount}{' '}
+                    {product?.price_before?.currency}
                   </span>
                   <CardWrapper
                     bgColor="bg-red-500"
                     className="py-0.5 px-2 flex items-center justify-center"
                   >
                     <span className="text-white text-xs">
-                      {t('rival')} {product?.discount || 9}%
+                      {t('rival')} {product?.discount?.amount || 9}%
                     </span>
                   </CardWrapper>
                 </div>

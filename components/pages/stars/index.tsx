@@ -8,6 +8,7 @@ import { useAuthContext } from '@/context/AuthContext';
 import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 import { useCategories } from '@/context/CategoriesContext';
 import FAQS from '@/components/organism/FAQS';
+import { FaqsProvider } from '@/context/FaqContext';
 
 const StarsPage = () => {
   const { token } = useAuthContext();
@@ -22,7 +23,9 @@ const StarsPage = () => {
       />
       <Upgrade />
       {token && <EarnMore />}
-      <FAQS />
+      <FaqsProvider>
+        <FAQS />
+      </FaqsProvider>
     </>
   );
 };

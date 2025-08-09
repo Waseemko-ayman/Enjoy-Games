@@ -12,21 +12,25 @@ import { useCategories } from '@/context/CategoriesContext';
 import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
 import { useTranslations } from 'next-intl';
 import ServiceAdvantages from '../home/Sections/ServiceAdvantages';
+import { useCurrency } from '@/context/CurrencyContext';
 
 const ProductDetailsPage = ({ productId }: { productId: string }) => {
+  // API Hooks
   const { categories } = useCategories();
   const { getSingle, product, isLoading } = useAPI(`product`);
+  const { selectedCountry } = useCurrency();
 
   const t = useTranslations('Loading');
   const serviceTxts = useTranslations('HomePage');
 
   useEffect(() => {
     getSingle(productId);
-  }, [productId]);
+  }, [productId, selectedCountry]);
 
   if (isLoading) {
     return <LoadingPlaceholder message={t('loadingMessage')} />;
   }
+
   return (
     <Layer className="mt-5">
       <Container>

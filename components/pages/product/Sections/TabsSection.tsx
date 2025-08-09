@@ -17,9 +17,13 @@ const TabsSection = ({ product }: { product: ProductCardProps }) => {
             {t('productDetailsTab')}
           </TabsTrigger>
         </TabsList>
+        
+        {/* Ratings */}
         <TabsContent value="ratings">
           <RatingsTabContent />
         </TabsContent>
+
+        {/* Description */}
         <TabsContent value="product-details">
           <ProductDetailsTabContent product={product} />
         </TabsContent>

@@ -6,6 +6,7 @@ import GridWrapper from '@/components/molecules/GridWrapper';
 import { BestSellersProps } from '@/interfaces';
 import Loading from '@/components/molecules/loading';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
+import { useRouter } from 'next/navigation';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -17,6 +18,7 @@ const BestSellers: React.FC<BestSellersProps> = ({
   getSlugs,
   error,
 }) => {
+  const router = useRouter();
   return (
     <SectionComponent title={t('sectionsTitles.bestSellers')}>
       {isLoading ? (
@@ -33,8 +35,10 @@ const BestSellers: React.FC<BestSellersProps> = ({
             return (
               <AnimatedWrapper key={card.id} custom={index}>
                 <ProductCard
-                  // imgSrc={card.image}
-                  image={'/assets/best-sellers/itunes.webp'}
+                  image={
+                    `http://31.97.36.197/${card.image}` ||
+                    '/assets/play-station.webp'
+                  }
                   imgAlt={card.title}
                   imgTitle={card.title}
                   title={card.title}
@@ -43,7 +47,7 @@ const BestSellers: React.FC<BestSellersProps> = ({
                     if (slugs) {
                       const { categorySlug, subCategorySlug } = slugs;
                       const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
-                      window.location.href = path;
+                      router.push(path);
                     }
                   }}
                 />

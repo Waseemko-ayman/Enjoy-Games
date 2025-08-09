@@ -1,11 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// context/MainContentContext.tsx
 'use client';
 
 import React, { createContext, useContext, useEffect } from 'react';
 import useAPI from '@/hook/useAPI';
 import { useLocale } from 'next-intl';
 import { APIRequest, Category, ProductCardProps } from '@/interfaces';
+import { useCurrency } from './CurrencyContext';
 
 interface Sliders {
   id: number;
@@ -39,9 +38,11 @@ export const MainContentProvider: React.FC<{ children: React.ReactNode }> = ({
     useAPI<MobileMainContent>('main-content');
   const locale = useLocale();
 
+  const { selectedCountry } = useCurrency();
+
   useEffect(() => {
     get();
-  }, [locale]);
+  }, [locale, get, selectedCountry]);
 
   const refresh = () => get();
 

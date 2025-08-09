@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import React, { createContext, useContext, useEffect } from 'react';
@@ -34,7 +33,7 @@ export const CategoriesProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     get();
-  }, [locale]);
+  }, [locale, get]);
 
   const refresh = () => {
     get();

@@ -1,4 +1,3 @@
-// helpers/getSlugs.ts
 import { Category } from '@/interfaces';
 
 export const getCategoryAndSubCategorySlugs = (
