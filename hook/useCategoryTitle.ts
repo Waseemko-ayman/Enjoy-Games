@@ -1,17 +1,32 @@
-// import { useMemo } from 'react';
-
-// const mockAPITitles: Record<string, string> = {
-//   playstation: 'بلايستيشن',
-//   xbox: 'اكس بوكس',
-//   pubg: 'شدات ببجي',
-//   fortnite: 'بطاقات فورتنايت',
-// };
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// import { useState, useEffect } from 'react';
+// import axiosInstance from '@/utils/axiosInstance';
+// import { useLocale } from 'next-intl';
 
 // export function useCategoryTitle(slug?: string): string {
-//   const title = useMemo(() => {
-//     if (!slug) return '';
-//     return mockAPITitles[slug] || formatSlug(slug);
-//   }, [slug]);
+//   const [title, setTitle] = useState<string>('');
+//   const locale = useLocale();
+
+//   useEffect(() => {
+//     if (!slug) {
+//       setTitle('');
+//       return;
+//     }
+
+//     const fetchTitle = async () => {
+//       try {
+//         const response = await axiosInstance.get(
+//           `/categories-subcategories/${slug}`
+//         );
+//         setTitle(response.data?.name || formatSlug(slug));
+//       } catch (error) {
+//         console.error('فشل في جلب عنوان التصنيف:', error);
+//         setTitle(formatSlug(slug));
+//       }
+//     };
+
+//     fetchTitle();
+//   }, [slug, locale]);
 
 //   return title;
 // }
@@ -26,8 +41,12 @@ import { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/axiosInstance';
 import { useLocale } from 'next-intl';
 
-export function useCategoryTitle(slug?: string): string {
+export function useCategoryTitle(slug?: string): {
+  title: string;
+  loading: boolean;
+} {
   const [title, setTitle] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const locale = useLocale();
 
   useEffect(() => {
@@ -36,22 +55,30 @@ export function useCategoryTitle(slug?: string): string {
       return;
     }
 
+    setLoading(true);
+
     const fetchTitle = async () => {
       try {
-        const response = await axiosInstance.get(
-          `/categories-subcategories/${slug}`
-        );
-        setTitle(response.data?.name || formatSlug(slug));
+        const response = await axiosInstance.get(`/categories-subcategories`);
+        const categories = response.data;
+
+        const foundCategory = Array.isArray(categories)
+          ? categories.find((cat: any) => cat.slug === slug)
+          : null;
+
+        setTitle(foundCategory?.name || formatSlug(slug));
       } catch (error) {
         console.error('فشل في جلب عنوان التصنيف:', error);
         setTitle(formatSlug(slug));
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchTitle();
   }, [slug, locale]);
 
-  return title;
+  return { title, loading };
 }
 
 function formatSlug(slug: string) {
@@ -59,3 +86,4 @@ function formatSlug(slug: string) {
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
+
