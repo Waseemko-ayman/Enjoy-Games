@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import Button from '../atomic/Button';
-import { FiLogIn } from 'react-icons/fi';
 import { CountrySelectorContentProps } from '@/interfaces';
 import SelectableList from './SelectableList';
 import { useTranslations } from 'next-intl';
@@ -54,14 +53,10 @@ const CountrySelectorContent: React.FC<CountrySelectorContentProps> = ({
       </div>
 
       <div className="flex items-center justify-between gap-2 px-2">
-        <Button otherClassName="w-full py-2" iconPosition="left" Icon={FiLogIn}>
+        {/* <Button otherClassName="w-full py-2" iconPosition="left" Icon={FiLogIn}>
           {btnTxts('save')}
-        </Button>
-        <Button
-          variant="forth"
-          otherClassName="w-full py-2"
-          handleClick={closeHandler}
-        >
+        </Button> */}
+        <Button otherClassName="w-full py-2" handleClick={closeHandler}>
           {btnTxts('cancel')}
         </Button>
       </div>

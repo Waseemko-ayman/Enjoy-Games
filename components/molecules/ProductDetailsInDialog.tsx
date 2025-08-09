@@ -108,20 +108,22 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
                 <h3 className="text-xl font-semibold">
                   {product?.price?.amount} {product?.price?.currency}
                 </h3>
-                <div className="flex items-center gap-3">
-                  <span className="line-through text-red-500 text-base">
-                    {product?.price_before?.amount}{' '}
-                    {product?.price_before?.currency}
-                  </span>
-                  <CardWrapper
-                    bgColor="bg-red-500"
-                    className="py-0.5 px-2 flex items-center justify-center"
-                  >
-                    <span className="text-white text-xs">
-                      {t('rival')} {product?.discount?.amount || 9}%
+                {product?.discount?.amount && (
+                  <div className="flex items-center gap-3">
+                    <span className="line-through text-red-500 text-base">
+                      {product?.price_before?.amount}{' '}
+                      {product?.price_before?.currency}
                     </span>
-                  </CardWrapper>
-                </div>
+                    <CardWrapper
+                      bgColor="bg-red-500"
+                      className="py-0.5 px-2 flex items-center justify-center"
+                    >
+                      <span className="text-white text-xs">
+                        {t('rival')} {product?.discount?.amount || 9}%
+                      </span>
+                    </CardWrapper>
+                  </div>
+                )}
               </div>
             </MotionSection>
           </div>
