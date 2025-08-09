@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import Input from '@/components/atomic/Input';
 import Image from 'next/image';
