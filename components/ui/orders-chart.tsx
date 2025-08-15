@@ -164,7 +164,7 @@ export function OrderChart() {
     if (!data) {
       return (
         <div className="flex items-center justify-center h-full">
-          <p>{t('Dashborad.overview.noData')}</p>
+          <p>{t('Dashboard.overview.noData')}</p>
         </div>
       );
     }
@@ -190,13 +190,13 @@ export function OrderChart() {
             <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey="ordersCount"
-              name={t('Dashborad.Chart.ordersCount')}
+              name={t('Dashboard.Chart.ordersCount')}
               fill="#3b82f6"
               radius={[4, 4, 0, 0]}
             />
             <Bar
               dataKey="paidOrdersCount"
-              name={t('Dashborad.Chart.paidOrdersCount')}
+              name={t('Dashboard.Chart.paidOrdersCount')}
               fill="#10b981"
               radius={[4, 4, 0, 0]}
             />
@@ -223,13 +223,13 @@ export function OrderChart() {
             <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey="ordersCount"
-              name={t('Dashborad.Chart.ordersCount')}
+              name={t('Dashboard.Chart.ordersCount')}
               fill="#3b82f6"
               radius={[4, 4, 0, 0]}
             />
             <Bar
               dataKey="paidOrdersCount"
-              name={t('Dashborad.Chart.paidOrdersCount')}
+              name={t('Dashboard.Chart.paidOrdersCount')}
               fill="#10b981"
               radius={[4, 4, 0, 0]}
             />
@@ -257,7 +257,7 @@ export function OrderChart() {
             <Line
               type="monotone"
               dataKey="ordersAmount"
-              name={t('Dashborad.Chart.ordersAmount')}
+              name={t('Dashboard.Chart.ordersAmount')}
               stroke="#3b82f6"
               strokeWidth={3}
               activeDot={{ r: 6 }}
@@ -266,7 +266,7 @@ export function OrderChart() {
             <Line
               type="monotone"
               dataKey="paidOrdersAmount"
-              name={t('Dashborad.Chart.paidOrdersAmount')}
+              name={t('Dashboard.Chart.paidOrdersAmount')}
               stroke="#10b981"
               strokeWidth={3}
               activeDot={{ r: 6 }}
@@ -295,13 +295,13 @@ export function OrderChart() {
             <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey="ordersAmount"
-              name={t('Dashborad.Chart.ordersAmount')}
+              name={t('Dashboard.Chart.ordersAmount')}
               fill="#3b82f6"
               radius={[4, 4, 0, 0]}
             />
             <Bar
               dataKey="paidOrdersAmount"
-              name={t('Dashborad.Chart.paidOrdersAmount')}
+              name={t('Dashboard.Chart.paidOrdersAmount')}
               fill="#10b981"
               radius={[4, 4, 0, 0]}
             />
@@ -310,7 +310,7 @@ export function OrderChart() {
       default:
         return (
           <div className="flex items-center justify-center h-full">
-            <p>{t('Dashborad.overview.noData')}</p>
+            <p>{t('Dashboard.overview.noData')}</p>
           </div>
         );
     }
@@ -319,8 +319,8 @@ export function OrderChart() {
   return (
     <Card className="col-span-4">
       <CardHeaderContent
-        title={t('Dashborad.overview.title')}
-        description={t('Dashborad.overview.desc')}
+        title={t('Dashboard.overview.title')}
+        description={t('Dashboard.overview.desc')}
       />
       <CardContent className="pl-2">
         <Tabs

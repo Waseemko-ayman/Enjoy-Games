@@ -366,7 +366,14 @@
     "lastUpdated": "last Updated",
     "conversation": "Conversation",
     "customer": "Customer",
-    "ticketId": "Ticket ID"
+    "ticketId": "Ticket ID",
+    "Dashboard": {
+      "PageDesc": {
+        "desc": "Create and manage tickets for your store"
+      },
+      "allTickets": "All Tickets",
+      "desc": "Manage all tickets in one place"
+    }
   },
   "productDetails": {
     "shareLinkWith": "Share the link via:",
@@ -409,7 +416,7 @@
     "faqs": "Faqs",
     "tickets": "Tickets"
   },
-  "Dashborad": {
+  "Dashboard": {
     "desc": "Welcome to your order management orders",
     "overview": {
       "title": "Orders Overview",

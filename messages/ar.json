@@ -366,7 +366,14 @@
     "lastUpdated": "آخر تحديث",
     "conversation": "محادثة",
     "customer": "عميل",
-    "ticketId": "رقم التذكرة"
+    "ticketId": "رقم التذكرة",
+    "Dashboard": {
+      "PageDesc": {
+        "desc": "قم بإنشاء وإدارة التذاكر لمتجرك"
+      },
+      "allTickets": "جميع التذاكر",
+      "desc": "إدارة جميع التذاكر في مكان واحد"
+    }
   },
   "productDetails": {
     "shareLinkWith": "شارك الرابط عبر:",
@@ -409,7 +416,7 @@
     "faqs": "الأسئلة الشائعة",
     "tickets": "تذاكر الدعم الفني"
   },
-  "Dashborad": {
+  "Dashboard": {
     "desc": "مرحباً بكم في إدارة طلباتكم",
     "overview": {
       "title": "نظرة عامة على الطلبات",

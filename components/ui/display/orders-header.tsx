@@ -23,7 +23,7 @@ export function OrdersHeader() {
         <h1 className="text-2xl font-bold tracking-tight">
           {t('PagesHeaderTitles.orders')}
         </h1>
-        <p className="text-muted-foreground">{t('Dashborad.desc')}</p>
+        <p className="text-muted-foreground">{t('Dashboard.desc')}</p>
       </div>
       <div className="flex flex-wrap gap-2">
         <Popover>
