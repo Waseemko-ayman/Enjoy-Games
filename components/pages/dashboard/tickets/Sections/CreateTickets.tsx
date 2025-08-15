@@ -62,7 +62,7 @@ const CreateTickets = ({
     control,
     setValue,
     formState: { errors },
-  } = useForm<TicketFormData>({
+  } = useForm<any, TicketFormData>({
     resolver: yupResolver(createSchema),
     defaultValues: {
       subject: '',
