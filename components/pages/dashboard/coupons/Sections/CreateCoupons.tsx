@@ -108,7 +108,7 @@ const CreateCoupons = ({
     reset,
     control,
     formState: { errors },
-  } = useForm<CouponFormData>({
+  } = useForm<any, CouponFormData>({
     resolver: yupResolver(createSchema),
   });
 
