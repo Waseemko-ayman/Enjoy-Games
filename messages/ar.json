@@ -69,7 +69,10 @@
     "faqs": "الأسئلة الشائعة",
     "RegisterNow": "سجل الآن",
     "more": "المزيد",
-    "search": "البحث"
+    "search": "البحث",
+    "dashboard": "لوحة التحكم",
+    "orders": "الطلبات",
+    "ordersOverview": "نظرة عامة على الطلبات"
   },
   "SectionsTitles": {
     "Stars": {
@@ -394,6 +397,29 @@
   "search": {
     "searchResults": "نتائج البحث",
     "noResult": "لا يوجد نتائج"
+  },
+  "sidebar": {
+    "enjoyGames": "إنجوي قيمز",
+    "dashboard": "لوحة التحكم | الرئيسية",
+    "categories": "الأقسام",
+    "subCategories": "الأقسام الفرعية",
+    "products": "المنتجات",
+    "coupons": "الكوبونات",
+    "codes": "الأكواد",
+    "sliders": "السلايدرز",
+    "faqs": "الأسئلة الشائعة",
+    "tickets": "تذاكر الدعم الفني"
+  },
+  "Dashborad": {
+    "overview": {
+      "desc": "تحليل الطلبات خلال الفترة المحددة"
+    },
+    "Goal": {
+      "title": "هدف الطلبات",
+      "desc": "ملخص طلبات اليوم وإجمالي الطلبات",
+      "today": "اليوم",
+      "total": "الإجمالي"
+    }
   },
   "errorBoundary": {
     "title": "عفواً! حدث خطأ ما"

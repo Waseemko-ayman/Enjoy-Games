@@ -69,7 +69,10 @@
     "faqs": "Frequently Asked Questions",
     "RegisterNow": "Register now",
     "more": "More",
-    "search": "Search"
+    "search": "Search",
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "ordersOverview": "Orders Overview"
   },
   "SectionsTitles": {
     "Stars": {
@@ -394,6 +397,29 @@
   "search": {
     "searchResults": "Search results",
     "noResult": "No results"
+  },
+  "sidebar": {
+    "enjoyGames": "Enjoy Games",
+    "dashboard": "Dashboard",
+    "categories": "Categories",
+    "subCategories": "Sub Categories",
+    "products": "Products",
+    "coupons": "Coupons",
+    "codes": "Codes",
+    "sliders": "Sliders",
+    "faqs": "Faqs",
+    "tickets": "Tickets"
+  },
+  "Dashborad": {
+    "overview": {
+      "desc": "Analysis of orders during the specified period"
+    },
+    "Goal": {
+      "title": "Orders Goal",
+      "desc": "Summary of today's and total orders",
+      "today": "Today",
+      "total": "Total"
+    }
   },
   "errorBoundary": {
     "title": "Oops! Something Went Wrong"

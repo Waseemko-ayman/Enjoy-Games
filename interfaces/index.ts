@@ -92,6 +92,28 @@ export interface ProductCardProps {
   productData?: ProductCardProps;
 }
 
+export interface CategoryFormData {
+  nameAr: string;
+  nameEn: string;
+  icon: FileList;
+  image: FileList;
+  [key: string]: unknown;
+}
+
+export interface CategoryResponse {
+  id: number;
+  slug: string;
+  name: {
+    ar: string;
+    en: string;
+  };
+  icon: string;
+  image: string;
+  products_count: number;
+  sub_categories_count: number;
+  [key: string]: unknown;
+}
+
 export interface CartItem {
   product_id?: number;
   quantity: number;
@@ -154,19 +176,20 @@ export interface TicketMessage {
   updated_at: string;
 }
 
-export interface TicketData {
-  id: number;
-  user_id: number;
-  subject: string;
-  created_at: string;
-  updated_at: string;
-  messages: TicketMessage[];
-}
+// export interface TicketData {
+//   id: number;
+//   user_id: number;
+//   subject: string;
+//   created_at: string;
+//   updated_at: string;
+//   messages: TicketMessage[];
+// }
 
 export interface TicketResponse {
   success: boolean;
   message: string;
-  data: TicketData;
+  // data: TicketData;
+  data: TicketsProps;
   [key: string]: unknown;
 }
 
@@ -195,6 +218,24 @@ export interface TicketMetaItemProps {
   label: string;
   value: string;
 }
+
+/*
+export interface FAQSDataType {
+  id: number;
+  question: {
+    ar: string;
+    en: string;
+  };
+  answer: {
+    ar: string;
+    en: string;
+  };
+  user_id: number;
+  created_at: string;
+  updated_at: string;
+  [key: string]: unknown;
+}
+*/
 
 export interface FAQSDataType {
   id?: string | number;
@@ -235,7 +276,6 @@ export interface PaginationProps {
 
 export interface FormData {
   subject: string;
-  // ticketType: string;
   message: string;
   attachments?: File[];
   [key: string]: unknown;
@@ -752,4 +792,529 @@ export interface SelectAccountPageProps {
 export interface Sliders {
   id: number;
   image: string;
+}
+
+export interface APIRequest {
+  isLoading: boolean;
+  error: any;
+  refresh: () => void;
+}
+
+export interface SubCategories {
+  id: number;
+  category: number;
+  parent: null;
+  name: string;
+  slug: string;
+  icon: string;
+  image?: string;
+  children_count: number;
+  products_count: number;
+  onClick?: () => void;
+  categorySlug?: string | null;
+}
+
+export interface ProductCardProps {
+  id?: number;
+  category_id?: number;
+  sub_category_id?: number;
+  title: string;
+  slug?: string;
+  content?: string;
+  description?: string;
+  image: string;
+  imgAlt?: string;
+  imgTitle?: string;
+  name?: string;
+  price_before?: {
+    amount: number;
+    currency: string;
+  };
+  price?: {
+    amount: number;
+    currency: string;
+  };
+  discount?: {
+    amount: number;
+    currency: string;
+  };
+  final_price?: {
+    amount: number;
+    currency: string;
+  };
+  shipping_payment?: string;
+  product_id?: number;
+  quantity?: number;
+  currencyImage?: string;
+  ratings?: number[];
+  icon?: React.ElementType | string | any;
+  showDesc?: boolean;
+  showBtn?: boolean;
+  variant?: CommonCardVariant;
+  storeName?: string;
+  storeFlagImg?: string;
+  tall?: boolean;
+  btnVariant?: ButtonMainVarinats;
+  btnText?: string;
+  otherClassNameBtn?: string;
+  onClick?: () => void;
+  // onAddToCart?: () => void;
+  formScheme?: Record<string, any>;
+  [key: string]: unknown;
+}
+export interface CartItem {
+  product_id?: number;
+  quantity: number;
+  shipping_data?: Record<string, any>;
+}
+
+export interface CouponItem extends CartItem {
+  price: number;
+  category_id: number;
+  sub_category_id: number;
+  discount: number;
+  final_price: number;
+}
+
+export interface PaymentFormData {
+  paymentMethod: string;
+  couponCode: string | null;
+}
+
+export interface TicketMessage {
+  id: number;
+  ticket_id: number;
+  user_id: number;
+  message: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface TicketUser {
+  id: number;
+  name: string;
+  email: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface TicketsProps {
+  id: number;
+  user_id: number;
+  assigned_to: number | null;
+  subject: string;
+  status: 'open' | 'closed' | string;
+  created_at: string;
+  updated_at: string;
+  latest_message: TicketMessage | null;
+  user: TicketUser;
+}
+
+// export interface TicketData {
+//   id: number;
+//   user_id: number;
+//   subject: string;
+//   created_at: string;
+//   updated_at: string;
+//   messages: TicketMessage[];
+// }
+
+export interface TicketMetaItemProps {
+  Icon: ElementType;
+  label: string;
+  value: string;
+}
+
+export interface FaqFormData {
+  questionAr: string;
+  questionEn: string;
+  answerAr: string;
+  answerEn: string;
+  [key: string]: unknown;
+}
+
+export interface Order {
+  id: number;
+  status: string;
+  total_price: {
+    amount: number;
+    currency: string;
+  };
+  discount: {
+    amount: number;
+    currency: string;
+  };
+}
+
+export interface OrdersStatsProps {
+  orders: Order[];
+}
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  totalItems: number;
+  itemsPerPage: number;
+  className?: string;
+}
+
+export interface getSlugsProps {
+  getSlugs: (subCategoryId: number) => {
+    categorySlug: string;
+    subCategorySlug: string;
+  } | null;
+  error?: string;
+}
+
+export interface HomeSectionsProps extends getSlugsProps {
+  t: TranslationFunction;
+  isLoading: boolean;
+}
+
+export interface BestSellersProps extends HomeSectionsProps {
+  bestSeller: ProductCardProps[];
+}
+
+export interface SuggestedProductsProps extends HomeSectionsProps {
+  suggestedProducts: ProductCardProps[];
+}
+
+export interface NewlyArrivedProps extends HomeSectionsProps {
+  newlyArrived: ProductCardProps[];
+}
+
+interface BaseIconProps {
+  icon?: React.ElementType | string | any;
+}
+
+export interface ButtonProps {
+  children?: React.ReactNode;
+  variant?: ButtonVarinats;
+  borderRadius?: string;
+  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: ButtonTypes;
+  Icon?: React.ElementType;
+  iconPosition?: ButtonIconPosition;
+  disabled?: boolean;
+  bgColor?: string;
+  hoverBgColor?: string;
+  target?: string;
+  otherClassName?: string;
+}
+
+export interface Country {
+  name: string;
+  currency: string;
+  img: string;
+  code: string;
+}
+
+export interface SubMenuItem extends BaseIconProps {
+  name: string;
+  sub_categories?: SubMenuItem[];
+  path?: string;
+}
+
+export interface Slider {
+  id: number;
+  image: {
+    ar: string;
+    en: string;
+  };
+  updated_at: string;
+  created_at: string;
+  [key: string]: unknown;
+}
+
+export interface CategoryPageProps {
+  cards: SubCategories[];
+  error?: string;
+  isLoading?: boolean;
+  onCardClick?: (categorySlug: string, subSlug: string) => void;
+}
+
+export interface CategoryCardProps {
+  onClick?: () => void;
+  image?: string;
+  name: string;
+}
+
+export interface subCategoryFormData {
+  nameAr: string;
+  nameEn: string;
+  categoryID: string;
+  parentID?: string | null;
+  icon: FileList;
+  image: FileList;
+  [key: string]: unknown;
+}
+
+export interface MainResponseProps {
+  id: number;
+  name: { ar: string; en: string };
+  slug: string | { ar: string; en: string };
+  icon: string;
+  image: string;
+  [key: string]: unknown;
+}
+
+export interface suCategoryResponse extends MainResponseProps {
+  category_id: string;
+  parent_id: string | null;
+}
+
+export interface getSuCategoryResponse extends MainResponseProps {
+  category: string;
+  parent: string | null;
+}
+
+export interface ProductData {
+  id: number;
+  category_id: string | number;
+  sub_category_id: string | number;
+  title: {
+    ar: string;
+    en: string;
+  };
+  content: {
+    ar: string;
+    en: string;
+  };
+  description: {
+    ar: string;
+    en: string;
+  };
+  price: number | { amount: number; currency: string };
+  price_before?: string | { amount: number; currency: string };
+  discount?: string | { amount: number; currency: string };
+  is_active: boolean;
+  shipping_payment: string;
+  image?: string;
+  icon?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface ProductResponse {
+  data: ProductData;
+  message: string;
+}
+
+export interface MainCodesResponse {
+  id: number;
+  code: string;
+  is_used: boolean;
+  used_at: string | null;
+  order_item_id: number;
+  notes: string | null;
+  [key: string]: unknown;
+}
+
+export interface CodesResponse extends MainCodesResponse {
+  product_title: string;
+  user_name: string;
+}
+
+export interface CreateCodeResponse {
+  id: number;
+  product_id: string;
+  code: string;
+  user_id: number;
+  is_used: boolean;
+  updated_at: string | null;
+  created_at: string | null;
+  [key: string]: unknown;
+}
+
+export interface UpdateCodeResponse extends MainCodesResponse {
+  product_id: string;
+  user_id: number;
+}
+
+export interface ShowCodeRequest {
+  product_id: string;
+  code: string;
+  is_used: boolean;
+  [key: string]: unknown;
+}
+
+export interface CodesFormData {
+  productID: string;
+  code: string;
+}
+
+export interface CouponProps {
+  id: number;
+  code: string;
+  type: string;
+  value: string;
+}
+
+export interface CreateCoupon {
+  code: string;
+  value: string;
+  type: 'fixed' | 'percent';
+  usage_limit: string;
+  expires_from: string;
+  expires_at: string;
+  allowed_user_ids?: number[];
+  excluded_product_ids?: number[];
+  excluded_categories_ids?: number[];
+  excluded_subcategory_ids?: number[];
+  [key: string]: unknown;
+}
+
+export interface CouponOptionsResponse {
+  categories: CategoryResponse[];
+  sub_categories: SubCategories[];
+  products: ProductCardProps[];
+  users: { id: number; name: string | null }[];
+  [key: string]: unknown;
+}
+
+export interface CountrySelectorContentProps {
+  countries: Country[];
+  selectedCountry: Country;
+  setSelectedCountry: (country: Country) => void;
+  closeHandler: () => void;
+  t: TranslationFunction;
+}
+
+export interface ResponsiveDialogDrawerProps {
+  children: React.ReactNode;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  isMobile?: boolean;
+  trigger: React.ReactNode;
+  contentClassName?: string;
+  headerClassName?: string;
+}
+
+export interface CustomDialogDrawerProps extends ResponsiveDialogDrawerProps {
+  title?: string;
+  description?: string;
+}
+
+export interface AuthLayoutProps {
+  children: React.ReactNode;
+  title?: string;
+  btnText: string;
+  description: string;
+  isSubmitDisabled?: boolean;
+  isSubmitting?: boolean;
+  onSubmit?: () => void;
+}
+
+export interface EmptyStateBoxProps {
+  imageSrc: string;
+  alt: string;
+  title: string;
+  buttonText: string;
+  btnlink: string;
+}
+
+export interface CartItemData {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+  storeLabel: string;
+  currencyImage: string;
+}
+
+export interface CartContentProps {
+  items: ProductCardProps[];
+  onProceedToPayment: () => void;
+  quantity?: number;
+  setQuantity?: React.Dispatch<React.SetStateAction<number>>;
+  // onSendAsGift: () => void;
+}
+
+export interface PaymentStepProps {
+  // onPaymentComplete: () => void;
+  onBackToCart: () => void;
+  totalAmount: number;
+  items: ProductCardProps[];
+  quantity?: number;
+}
+
+export interface FormValues {
+  name: string;
+  email: string;
+  phone?: string;
+  birthDate?: string;
+  gender?: 'ذكر' | 'أنثى' | null;
+  options: boolean[];
+  avatar?: FileList | string | null;
+}
+
+export interface paramsProps {
+  locale: string;
+  category: string;
+  itemId: string;
+  productId: string;
+}
+
+export interface ReviewData {
+  overallRating: number;
+  totalReviews: number;
+  ratingBreakdown: {
+    excellent: number;
+    good: number;
+    average: number;
+    poor: number;
+    bad: number;
+  };
+}
+
+export interface Review {
+  id: string;
+  userId: string;
+  userName: string;
+  rating: number;
+  comment: string;
+  createdAt: Date;
+  verified?: boolean;
+}
+
+export interface ReviewApiResponse {
+  success: boolean;
+  data: ReviewData;
+  reviews: Review[];
+}
+
+export interface ReviewSectionProps {
+  data?: ReviewData;
+}
+
+export interface AnimatedWrapperProps {
+  children: ReactNode;
+  custom?: number;
+  variants?: Variants;
+  direction?: 'x' | 'y';
+  distance?: number;
+  duration?: number;
+}
+
+export interface InputItem {
+  id: number;
+  inputName: string;
+  type: string;
+  labelKey?: string;
+  label?: string;
+  errorKey?: string;
+  placeholder?: string;
+  options?: InputOption[];
+}
+
+export interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+export interface signupFormData extends LoginFormData {
+  name: string;
+  password_confirmation: string;
 }

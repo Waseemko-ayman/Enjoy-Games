@@ -18,11 +18,21 @@ export type footerListsName =
 export type NavbarLayout = 'default' | 'store';
 export type InputTypes =
   | 'text'
-  | 'email'
   | 'password'
   | 'search'
-  | 'select'
   | 'number'
+  | 'email'
+  | 'phone'
+  | 'tel'
+  | 'select'
+  | 'multi-select'
   | 'date'
-  | 'checkbox'
-  | 'textarea';
+  | 'editor'
+  | 'radio'
+  | 'file'
+  | 'textarea'
+  | 'checkbox';
+
+export type Option = { id: string | number | null; name: string };
+export type ProductOption = { id: string; name: string };
+export type ValueOption = { value: string | number; label: string };

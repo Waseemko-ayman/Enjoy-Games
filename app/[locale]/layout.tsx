@@ -12,6 +12,8 @@ import LocaleSync from '@/components/organism/layouts/LocaleSync';
 import { CartProvider } from '@/context/CartContext';
 import { TicketsProvider } from '@/context/TicketsContext';
 import { CurrencyProvider } from '@/context/CurrencyContext';
+import { UpdateContentProvider } from '@/context/updateContentContext';
+import { ProductCodesProvider } from '@/context/selectedProductId';
 
 const ibmArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
@@ -49,13 +51,17 @@ export default async function RootLayout({
           <LocaleSync />
           <ErrorBoundary>
             <AuthProvider>
-              <CurrencyProvider>
-                <CartProvider>
-                  <TicketsProvider>
-                    <BodyWrapper>{children}</BodyWrapper>
-                  </TicketsProvider>
-                </CartProvider>
-              </CurrencyProvider>
+              <ProductCodesProvider>
+                <UpdateContentProvider>
+                  <CurrencyProvider>
+                    <CartProvider>
+                      <TicketsProvider>
+                        <BodyWrapper>{children}</BodyWrapper>
+                      </TicketsProvider>
+                    </CartProvider>
+                  </CurrencyProvider>
+                </UpdateContentProvider>
+              </ProductCodesProvider>
             </AuthProvider>
           </ErrorBoundary>
         </NextIntlClientProvider>

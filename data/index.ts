@@ -34,6 +34,7 @@ import {
 import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
 import { Sparkles, Wallet } from 'lucide-react';
 import { BannerSlide, InputItem, RewardTier } from '@/interfaces';
+import { FaTachometerAlt } from 'react-icons/fa';
 
 export const EnjoyWinWinData = [
   {
@@ -271,8 +272,19 @@ export const userList = [
     ],
   },
   {
+    section: 'dashboard',
+    items: [
+      {
+        id: 10,
+        title: 'لوحة التحكم',
+        link: PATHS.DASHBOARD.HOME.ROOT,
+        icon: FaTachometerAlt,
+      },
+    ],
+  },
+  {
     section: 'logout',
-    items: [{ id: 10, title: 'تسجيل خروج', icon: FiLogOut }],
+    items: [{ id: 11, title: 'تسجيل خروج', icon: FiLogOut }],
   },
 ];
 
