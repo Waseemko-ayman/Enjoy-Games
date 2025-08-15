@@ -157,11 +157,14 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
         };
         const paymentData = await payOrder(paymentPayload);
 
-        window.open(
-          paymentData?.data?.payment_url,
-          '_blank',
-          'width=500,height=700,top=40,left=400'
-        );
+        // window.open(
+        //   paymentData?.data?.payment_url,
+        //   '_blank',
+        //   'width=500,height=700,top=40,left=400'
+        // );
+
+        const pay = paymentData?.data?.payment_url ?? '';
+        window.location.href = pay;
       }
     } catch (err) {
       const apiError = (err as any)?.response?.data?.message;

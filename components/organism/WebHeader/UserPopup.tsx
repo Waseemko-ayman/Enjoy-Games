@@ -92,6 +92,8 @@ function getTranslationKey(title: string): {
       return { key: 'wallet', namespace: 'PagesHeaderTitles' };
     case 'نقاط دليل ستارز':
       return { key: 'starsPoints', namespace: 'PagesHeaderTitles' };
+    case 'لوحة التحكم':
+      return { key: 'dashboard', namespace: 'PagesHeaderTitles' };
     case 'تسجيل خروج':
       return { key: 'logout', namespace: 'BtnTexts' };
     default:
