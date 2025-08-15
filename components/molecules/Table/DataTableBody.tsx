@@ -91,7 +91,7 @@ const DataTableBody = <T extends { id: string | number }>({
                         {imageUrl ? (
                           <div className="flex justify-center">
                             <Image
-                              // src={imageUrl}
+                              // src={`${API_IMAGE_URL}${imageUrl}` || '/assets/play-station.webp'}
                               src={'/assets/play-station.webp'}
                               alt={`${lang} image`}
                               width={80}
@@ -122,7 +122,10 @@ const DataTableBody = <T extends { id: string | number }>({
                       >
                         <div className="flex justify-center">
                           <Image
-                            // src={String(row[col])}
+                            // src={
+                            //   `${API_IMAGE_URL}${String((row as any)[col])}` ||
+                            //   '/assets/play-station.webp'
+                            // }
                             src={'/assets/play-station.webp'}
                             alt={columnKey}
                             width={80}
@@ -155,7 +158,7 @@ const DataTableBody = <T extends { id: string | number }>({
                       ) : col === 'icon' && (row as any)[col] ? (
                         <div className="flex justify-center">
                           <Image
-                            // src={String((row as any)[col])}
+                            // src={`${API_IMAGE_URL}${String((row as any)[col])}` || '/assets/play-station.webp'}
                             src={'/assets/play-station.webp'}
                             alt={String(col)}
                             width={80}

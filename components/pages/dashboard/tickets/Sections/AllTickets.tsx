@@ -1,6 +1,7 @@
 'use client';
 import GenericAllTable from '@/components/organism/GenericAllTable';
 import { TicketsProps } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const AllTickets = ({
@@ -12,11 +13,12 @@ const AllTickets = ({
   onTabChange: (val: string) => void;
   onEditIdChange: (id: string | number | null) => void;
 }) => {
+  const t = useTranslations('Tickets.Dashboard');
   return (
     <GenericAllTable<TicketsProps>
       value={value}
-      title="جميع التذاكر"
-      description="إدارة جميع التذاكر في مكان واحد"
+      title={t('allTickets')}
+      description={t('desc')}
       apiEndpoint="tickets"
       deleteEndpoint="ticket/delete"
       createTabValue="createTickets"

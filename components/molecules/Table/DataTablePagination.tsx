@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 interface DataTablePaginationProps {
   currentPage: number;
@@ -24,6 +25,8 @@ const DataTablePagination: React.FC<DataTablePaginationProps> = ({
   startIndex,
   endIndex,
 }) => {
+  const { isArabic } = useToggleLocale();
+
   const renderPageNumbers = () => {
     return Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
       let pageNumber;
@@ -77,7 +80,11 @@ const DataTablePagination: React.FC<DataTablePaginationProps> = ({
           disabled={currentPage === 1}
           className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer flex-shrink-0"
         >
-          <ChevronLeft className="h-4 w-4" />
+          {isArabic ? (
+            <ChevronRight className="h-4 w-4" />
+          ) : (
+            <ChevronLeft className="h-4 w-4" />
+          )}
         </button>
 
         {renderPageNumbers()}
@@ -87,7 +94,11 @@ const DataTablePagination: React.FC<DataTablePaginationProps> = ({
           disabled={currentPage === totalPages}
           className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
         >
-          <ChevronRight className="h-4 w-4" />
+          {isArabic ? (
+            <ChevronLeft className="h-4 w-4" />
+          ) : (
+            <ChevronRight className="h-4 w-4" />
+          )}
         </button>
       </div>
 

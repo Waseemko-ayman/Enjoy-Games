@@ -136,7 +136,10 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
               </h3>
             </MotionSection>
             <MotionSection index={5}>
-              <p className="text-[15px] text-gray-500">{product?.content}</p>
+              <p
+                className="text-[15px] text-gray-500"
+                dangerouslySetInnerHTML={{ __html: product?.content || '' }}
+              />
             </MotionSection>
           </div>
 

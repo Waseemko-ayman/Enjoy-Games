@@ -71,8 +71,7 @@
     "more": "المزيد",
     "search": "البحث",
     "dashboard": "لوحة التحكم",
-    "orders": "الطلبات",
-    "ordersOverview": "نظرة عامة على الطلبات"
+    "orders": "الطلبات"
   },
   "SectionsTitles": {
     "Stars": {
@@ -367,7 +366,14 @@
     "lastUpdated": "آخر تحديث",
     "conversation": "محادثة",
     "customer": "عميل",
-    "ticketId": "رقم التذكرة"
+    "ticketId": "رقم التذكرة",
+    "Dashboard": {
+      "PageDesc": {
+        "desc": "قم بإنشاء وإدارة التذاكر لمتجرك"
+      },
+      "allTickets": "جميع التذاكر",
+      "desc": "إدارة جميع التذاكر في مكان واحد"
+    }
   },
   "productDetails": {
     "shareLinkWith": "شارك الرابط عبر:",
@@ -410,15 +416,26 @@
     "faqs": "الأسئلة الشائعة",
     "tickets": "تذاكر الدعم الفني"
   },
-  "Dashborad": {
+  "Dashboard": {
+    "desc": "مرحباً بكم في إدارة طلباتكم",
     "overview": {
-      "desc": "تحليل الطلبات خلال الفترة المحددة"
+      "title": "نظرة عامة على الطلبات",
+      "desc": "تحليل الطلبات خلال الفترة المحددة",
+      "noData": "لا توجد بيانات متاحة"
     },
     "Goal": {
       "title": "هدف الطلبات",
       "desc": "ملخص طلبات اليوم وإجمالي الطلبات",
       "today": "اليوم",
       "total": "الإجمالي"
+    },
+    "Chart": {
+      "ordersCount": "إجمالي الطلبات",
+      "paidOrdersCount": "الطلبات المدفوعة",
+      "ordersAmount": "مبلغ الطلبات",
+      "paidOrdersAmount": "مبلغ الطلبات المدفوعة",
+      "loadError": "خطأ في تحميل بيانات المخطط",
+      "failedLoad": "فشل تحميل البيانات"
     }
   },
   "errorBoundary": {
@@ -490,7 +507,17 @@
     "continueWithGoogle": "المتابعة باستخدام جوجل",
     "continueWithFacebook": "المتابعة باستخدام فيسبوك",
     "next": "التالي",
-    "previous": "السابق"
+    "previous": "السابق",
+    "filter": "تصفية",
+    "export": "تصدير",
+    "today": "يومي",
+    "weekly": "أسبوعي",
+    "monthly": "شهري",
+    "todayLabel": "اليوم",
+    "yearly": "سنوي",
+    "lastWeek": "الأسبوع الماضي",
+    "lastMonthly": "الشهر الماضي",
+    "lastYearly": "السنة الماضية"
   },
   "Inputs": {
     "labels": {
@@ -560,7 +587,8 @@
       "avatarRequired": "الصورة مطلوبة",
       "subjectRequired": "العنوان مطلوب",
       "ticketTypeRequired": "نوع التذكرة مطلوب",
-      "detailsRequired": "الوصف مطلوب"
+      "detailsRequired": "الوصف مطلوب",
+      "selectStars": "الرجاء اختيار تصنيف النجوم"
     }
   },
   "Auth": {

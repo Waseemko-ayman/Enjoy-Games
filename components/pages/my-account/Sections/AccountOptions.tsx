@@ -34,7 +34,7 @@ const AccountOptions = ({ t }: { t: TranslationFunction }) => {
                   type="checkbox"
                   placeholder={t(text)}
                   inputName={`options[${index}]`}
-                  checked={checked[index]}
+                  // checked={checked[index]}
                   onChange={() => handleChange(index)}
                 />
               </li>

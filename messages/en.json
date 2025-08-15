@@ -71,8 +71,7 @@
     "more": "More",
     "search": "Search",
     "dashboard": "Dashboard",
-    "orders": "Orders",
-    "ordersOverview": "Orders Overview"
+    "orders": "Orders"
   },
   "SectionsTitles": {
     "Stars": {
@@ -367,7 +366,14 @@
     "lastUpdated": "last Updated",
     "conversation": "Conversation",
     "customer": "Customer",
-    "ticketId": "Ticket ID"
+    "ticketId": "Ticket ID",
+    "Dashboard": {
+      "PageDesc": {
+        "desc": "Create and manage tickets for your store"
+      },
+      "allTickets": "All Tickets",
+      "desc": "Manage all tickets in one place"
+    }
   },
   "productDetails": {
     "shareLinkWith": "Share the link via:",
@@ -410,15 +416,26 @@
     "faqs": "Faqs",
     "tickets": "Tickets"
   },
-  "Dashborad": {
+  "Dashboard": {
+    "desc": "Welcome to your order management orders",
     "overview": {
-      "desc": "Analysis of orders during the specified period"
+      "title": "Orders Overview",
+      "desc": "Analysis of orders during the specified period",
+      "noData": "No data available"
     },
     "Goal": {
       "title": "Orders Goal",
       "desc": "Summary of today's and total orders",
       "today": "Today",
       "total": "Total"
+    },
+    "Chart": {
+      "ordersCount": "Total Orders",
+      "paidOrdersCount": "Paid Orders",
+      "ordersAmount": "Orders Amount",
+      "paidOrdersAmount": "Paid Orders Amount",
+      "loadError": "Error loading chart data",
+      "failedLoad": "Failed to load data"
     }
   },
   "errorBoundary": {
@@ -490,7 +507,17 @@
     "continueWithGoogle": "Continue with Google",
     "continueWithFacebook": "Continue with Facebook",
     "next": "Next",
-    "previous": "Previous"
+    "previous": "Previous",
+    "filter": "Filter",
+    "export": "Export",
+    "today": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "todayLabel": "Today",
+    "lastWeek": "last week",
+    "lastMonthly": "last month",
+    "lastYearly": "last year"
   },
   "Inputs": {
     "labels": {
@@ -560,7 +587,8 @@
       "avatarRequired": "Image is required",
       "subjectRequired": "Subject is required",
       "ticketTypeRequired": "Ticket type is required",
-      "detailsRequired": "Description is required"
+      "detailsRequired": "Description is required",
+      "selectStars": "Please select a star rating"
     }
   },
   "Auth": {

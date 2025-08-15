@@ -13,7 +13,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { IoIosArrowBack, IoIosArrowForward, IoIosSend } from 'react-icons/io';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import AttachmentsUploader from '@/components/molecules/AttachmentsPreview';
@@ -24,20 +24,24 @@ import { useTranslations } from 'next-intl';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { usePathname } from 'next/navigation';
 import { useToast } from '@/lib/toast';
+import useAPI from '@/hook/useAPI';
+import { ProductCardProps } from '@/interfaces';
+import { useUpdateContent } from '@/context/updateContentContext';
 
-const RatingsSheet = () => {
+const RatingsSheet = ({ product }: { product: ProductCardProps }) => {
   const [attachments, setAttachments] = useState<File[]>([]);
-  const [, setFormData] = useState(null);
-  const [isSubmittingLocal, setIsSubmittingLocal] = useState(false);
+  const [stars, setStars] = useState(0);
   const [open, setOpen] = useState(false);
+
   const t = useTranslations('productDetails');
   const errosTxt = useTranslations('Inputs.errorsMsgs');
   const inputTxts = useTranslations('Inputs');
   const btnTxts = useTranslations('BtnTexts');
   const { isArabic } = useToggleLocale();
   const { showToast } = useToast();
-
+  const { triggerRefresh } = useUpdateContent();
   const pathname = usePathname();
+  const { add, isLoading } = useAPI('rating/create');
 
   useEffect(() => {
     setOpen(false);
@@ -48,24 +52,30 @@ const RatingsSheet = () => {
   const formSchema = Yup.object().shape({
     comment: Yup.string()
       .required(errosTxt('commentRequired'))
-      .test(
-        'maxLength',
-        errosTxt('maxChars', { number: maxCharsLength }),
-        (value) => (value ? value.length <= maxCharsLength : true)
-      ),
-    checkbox: Yup.boolean(),
+      .max(maxCharsLength, errosTxt('maxChars', { number: maxCharsLength })),
+    checkbox: Yup.boolean().required().default(false),
+    stars: Yup.number()
+      .required('selectStars')
+      .min(1, 'selectStars')
+      .default(0),
+    images: Yup.array()
+      .of(Yup.mixed<File>().required())
+      .nullable()
+      .default(null),
   });
 
+  type RatingFormData = Yup.InferType<typeof formSchema>;
+
   const {
-    register,
     handleSubmit,
     watch,
     setValue,
     reset,
+    control,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(formSchema),
-    defaultValues: { comment: '', checkbox: false },
+  } = useForm<RatingFormData>({
+    resolver: yupResolver(formSchema) as any,
+    defaultValues: { comment: '', checkbox: false, stars: 0, images: null },
     mode: 'onChange',
   });
 
@@ -77,22 +87,49 @@ const RatingsSheet = () => {
     setValue('comment', e.target.value, { shouldValidate: true });
   };
 
-  const onSubmit = (data: any) => {
+  const handleStarClick = (value: number) => {
+    setStars(value);
+    setValue('stars', value, { shouldValidate: true });
+  };
+
+  const onSubmit: SubmitHandler<RatingFormData> = async (data) => {
     if (data.comment.length > maxCharsLength) {
-      showToast(errosTxt('maxChars', { number: maxCharsLength }), 'error');
+      showToast(errosTxt('maxChars', { number: maxCharsLength }));
+      return;
+    }
+    if (stars === 0) {
+      showToast(errosTxt('selectStars'), 'error');
       return;
     }
 
-    setIsSubmittingLocal(true);
-    const finalData = { ...data, attachments };
+    const formData = new FormData();
+    formData.append('product_id', String(product.id));
+    formData.append('stars', String(data.stars || stars));
+    formData.append('comment', data.comment);
 
-    setTimeout(() => {
-      setIsSubmittingLocal(false);
-      setFormData(finalData);
-      reset();
-      setAttachments([]);
-    }, 1000);
-    showToast(t('productEvaluation'));
+    // هنا checkbox مرتبط بـ React Hook Form
+    const showName = data.checkbox ? '0' : '1';
+    formData.append('show_name', showName);
+
+    (data.images || attachments).forEach((file) => {
+      if (file) formData.append('images[]', file);
+    });
+
+    try {
+      const response = await add(formData);
+      if (response) {
+        console.log(response);
+        showToast(response?.message);
+        reset();
+        triggerRefresh();
+        setAttachments([]);
+        setStars(0);
+        setOpen(false);
+      }
+    } catch (error) {
+      console.log(error);
+      showToast((error as any)?.response?.message || 'Error', 'error');
+    }
   };
 
   return (
@@ -114,7 +151,7 @@ const RatingsSheet = () => {
             </Button>
           </SheetTrigger>
         </AnimatedWrapper>
-        <SheetContent className=" bg-white" closeTextColor="text-black">
+        <SheetContent className="bg-white" closeTextColor="text-black">
           <SheetTitle className="sr-only">{t('productRating')}</SheetTitle>
           <SheetDescription className="sr-only">
             {t('productRatingDesc')}
@@ -134,9 +171,15 @@ const RatingsSheet = () => {
 
               <MotionSection index={2}>
                 <div className="flex items-center justify-center gap-2 text-secondary mb-3">
-                  {[...Array(5)].map((_, i) => (
+                  {[1, 2, 3, 4, 5].map((i) => (
                     <AnimatedWrapper key={i} custom={i}>
-                      <FaStar className="text-enjoy-secondary" size={20} />
+                      <FaStar
+                        className={`cursor-pointer ${
+                          i <= stars ? 'text-yellow-400' : 'text-gray-300'
+                        }`}
+                        size={20}
+                        onClick={() => handleStarClick(i)}
+                      />
                     </AnimatedWrapper>
                   ))}
                 </div>
@@ -181,7 +224,7 @@ const RatingsSheet = () => {
                     type="checkbox"
                     inputName="checkbox"
                     placeholder={inputTxts('labels.hideMyName')}
-                    {...register('checkbox')}
+                    control={control}
                   />
                 </div>
               </MotionSection>
@@ -200,17 +243,14 @@ const RatingsSheet = () => {
                   otherClassName="w-full p-2 mt-7"
                   Icon={IoIosSend}
                 >
-                  {isSubmittingLocal ? (
-                    <ButtonLoading />
-                  ) : (
-                    btnTxts('submitRating')
-                  )}
+                  {isLoading ? <ButtonLoading /> : btnTxts('submitRating')}
                 </Button>
               </MotionSection>
             </form>
           </div>
         </SheetContent>
       </Sheet>
+
       <AnimatedWrapper direction="x">
         <h4 className="text-sm sm:text-base font-semibold">
           {t('customerReviewsTitle')}

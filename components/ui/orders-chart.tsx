@@ -84,7 +84,7 @@ export function OrderChart() {
     if (!data) return [];
     return [
       {
-        name: 'اليوم',
+        name: t('BtnTexts.todayLabel'),
         ordersCount: data.today.orders_count,
         ordersAmount: data.today.orders_amount,
         paidOrdersCount: data.today.paid_orders_count,
@@ -97,14 +97,14 @@ export function OrderChart() {
     if (!data) return [];
     return [
       // {
-      //   name: 'اليوم',
+      //   name: t('BtnTexts.lastWeek'),
       //   ordersCount: data.today.orders_count,
       //   ordersAmount: data.today.orders_amount,
       //   paidOrdersCount: data.today.paid_orders_count,
       //   paidOrdersAmount: data.today.paid_orders_amount,
       // },
       {
-        name: 'الأسبوع الماضي',
+        name: t('BtnTexts.lastWeek'),
         ordersCount: data.last_week.orders_count,
         ordersAmount: data.last_week.orders_amount,
         paidOrdersCount: data.last_week.paid_orders_count,
@@ -117,14 +117,14 @@ export function OrderChart() {
     if (!data) return [];
     return [
       {
-        name: 'الأسبوع الماضي',
+        name: t('BtnTexts.lastWeek'),
         ordersCount: data.last_week.orders_count,
         ordersAmount: data.last_week.orders_amount,
         paidOrdersCount: data.last_week.paid_orders_count,
         paidOrdersAmount: data.last_week.paid_orders_amount,
       },
       {
-        name: 'الشهر الماضي',
+        name: t('BtnTexts.lastMonthly'),
         ordersCount: data.last_month.orders_count,
         ordersAmount: data.last_month.orders_amount,
         paidOrdersCount: data.last_month.paid_orders_count,
@@ -137,14 +137,14 @@ export function OrderChart() {
     if (!data) return [];
     return [
       // {
-      //   name: 'الشهر الماضي',
+      //   name: t('BtnTexts.lastMonthly'),
       //   ordersCount: data.last_month.orders_count,
       //   ordersAmount: data.last_month.orders_amount,
       //   paidOrdersCount: data.last_month.paid_orders_count,
       //   paidOrdersAmount: data.last_month.paid_orders_amount,
       // },
       {
-        name: 'السنة الماضية',
+        name: t('BtnTexts.lastYearly'),
         ordersCount: data.last_year.orders_count,
         ordersAmount: data.last_year.orders_amount,
         paidOrdersCount: data.last_year.paid_orders_count,
@@ -154,17 +154,17 @@ export function OrderChart() {
   };
 
   const tabsData = [
-    { value: 'today', label: 'اليومي' },
-    { value: 'weekly', label: 'أسبوعي' },
-    { value: 'monthly', label: 'شهري' },
-    { value: 'yearly', label: 'سنوي' },
+    { value: 'today', label: t('BtnTexts.today') },
+    { value: 'weekly', label: t('BtnTexts.weekly') },
+    { value: 'monthly', label: t('BtnTexts.monthly') },
+    { value: 'yearly', label: t('BtnTexts.yearly') },
   ];
 
   const renderChart = (): JSX.Element => {
     if (!data) {
       return (
         <div className="flex items-center justify-center h-full">
-          <p>لا توجد بيانات متاحة</p>
+          <p>{t('Dashboard.overview.noData')}</p>
         </div>
       );
     }
@@ -190,13 +190,13 @@ export function OrderChart() {
             <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey="ordersCount"
-              name="إجمالي الطلبات"
+              name={t('Dashboard.Chart.ordersCount')}
               fill="#3b82f6"
               radius={[4, 4, 0, 0]}
             />
             <Bar
               dataKey="paidOrdersCount"
-              name="الطلبات المدفوعة"
+              name={t('Dashboard.Chart.paidOrdersCount')}
               fill="#10b981"
               radius={[4, 4, 0, 0]}
             />
@@ -223,13 +223,13 @@ export function OrderChart() {
             <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey="ordersCount"
-              name="إجمالي الطلبات"
+              name={t('Dashboard.Chart.ordersCount')}
               fill="#3b82f6"
               radius={[4, 4, 0, 0]}
             />
             <Bar
               dataKey="paidOrdersCount"
-              name="الطلبات المدفوعة"
+              name={t('Dashboard.Chart.paidOrdersCount')}
               fill="#10b981"
               radius={[4, 4, 0, 0]}
             />
@@ -257,7 +257,7 @@ export function OrderChart() {
             <Line
               type="monotone"
               dataKey="ordersAmount"
-              name="مبلغ الطلبات"
+              name={t('Dashboard.Chart.ordersAmount')}
               stroke="#3b82f6"
               strokeWidth={3}
               activeDot={{ r: 6 }}
@@ -266,7 +266,7 @@ export function OrderChart() {
             <Line
               type="monotone"
               dataKey="paidOrdersAmount"
-              name="مبلغ الطلبات المدفوعة"
+              name={t('Dashboard.Chart.paidOrdersAmount')}
               stroke="#10b981"
               strokeWidth={3}
               activeDot={{ r: 6 }}
@@ -295,13 +295,13 @@ export function OrderChart() {
             <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey="ordersAmount"
-              name="مبلغ الطلبات"
+              name={t('Dashboard.Chart.ordersAmount')}
               fill="#3b82f6"
               radius={[4, 4, 0, 0]}
             />
             <Bar
               dataKey="paidOrdersAmount"
-              name="مبلغ الطلبات المدفوعة"
+              name={t('Dashboard.Chart.paidOrdersAmount')}
               fill="#10b981"
               radius={[4, 4, 0, 0]}
             />
@@ -310,7 +310,7 @@ export function OrderChart() {
       default:
         return (
           <div className="flex items-center justify-center h-full">
-            <p>لا توجد بيانات متاحة</p>
+            <p>{t('Dashboard.overview.noData')}</p>
           </div>
         );
     }
@@ -319,8 +319,8 @@ export function OrderChart() {
   return (
     <Card className="col-span-4">
       <CardHeaderContent
-        title={t('PagesHeaderTitles.ordersOverview')}
-        description={t('Dashborad.overview.desc')}
+        title={t('Dashboard.overview.title')}
+        description={t('Dashboard.overview.desc')}
       />
       <CardContent className="pl-2">
         <Tabs

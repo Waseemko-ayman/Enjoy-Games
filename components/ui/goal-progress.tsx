@@ -8,7 +8,7 @@ import useAPI from '@/hook/useAPI';
 import { useTranslations } from 'next-intl';
 
 export function GoalProgress() {
-  const t = useTranslations('Dashborad.Goal');
+  const t = useTranslations('Dashboard.Goal');
 
   const { get, data } = useAPI('order/orders-statistics');
 

@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from 'react';
 import Image from 'next/image';
-// import Link from 'next/link';
-import React, { useState } from 'react';
-import Avatar from './Avatar';
-import { PiSparkleFill } from 'react-icons/pi';
-import Button from './Button';
-import { ProductCardProps } from '@/interfaces';
-import CardWrapper from './CardWrapper';
-import ResponsiveDialogDrawer from '../organism/ResponsiveDialogDrawer';
+import { useTranslations } from 'next-intl';
 import useIsMobile from '@/hook/useIsMobile';
 import { useCartContext } from '@/context/CartContext';
+import ProductDetailsInDialog from '@/components/molecules/ProductDetailsInDialog';
+import { ProductCardProps } from '@/interfaces';
+import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
+import Button from '@/components/atomic/Button';
+import Avatar from '@/components/atomic/Avatar';
+import CardWrapper from '@/components/atomic/CardWrapper';
 import { useToast } from '@/lib/toast';
-import { useTranslations } from 'next-intl';
-import ProductDetailsInDialog from '../molecules/ProductDetailsInDialog';
+import { FaStar, FaStarHalfStroke } from 'react-icons/fa6';
 
 const ProductCard: React.FC<ProductCardProps> = ({
   title,
@@ -23,9 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   storeName = '',
   storeFlagImg = '',
   variant = 'row',
-  // cardLinkPath = '#',
   onClick,
-  // onAddToCart,
   discount,
   ratings,
   tall = false,
@@ -53,21 +51,32 @@ const ProductCard: React.FC<ProductCardProps> = ({
         : `/${image}`
       : '/assets/play-station.webp';
 
-  // Calculate average rating if ratings is an array of numbers
-  const averageRating = ratings?.length
-    ? ratings.reduce((sum, r) => sum + r, 0) / ratings.length
-    : null;
+  // حساب متوسط النجوم من الـ stars في كل rating object
+  const averageRating =
+    ratings && ratings?.length > 0
+      ? ratings.reduce((sum: number, r: any) => sum + (r.stars || 0), 0) /
+        ratings.length
+      : null;
 
-  // Or if ratings is array of objects like [{score: number}], use:
-  // const averageRating = ratings.length > 0 ? ratings.reduce((sum, r) => sum + r.score, 0) / ratings.length : null;
-
-  // Function to render stars based on average rating (rounded)
   const renderStars = (rating: number | null) => {
     if (rating === null) return null;
     const stars = [];
-    const rounded = Math.round(rating);
-    for (let i = 0; i < rounded; i++) {
-      stars.push(<PiSparkleFill key={i} className="text-yellow-400" />);
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <FaStar key={`full-${i}`} className="text-sm text-yellow-500" />
+      );
+    }
+
+    if (hasHalfStar) {
+      stars.push(
+        <FaStarHalfStroke
+          key="half"
+          className="text-sm text-yellow-500"
+        />
+      );
     }
     return stars;
   };
@@ -92,11 +101,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
             )}
             {discount && (
               <span className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-semibold px-2 py-1 rounded-lg shadow-md z-10">
-                خصم
-                {discount.amount}%
+                خصم {discount.amount}%
               </span>
             )}
           </div>
+
           <h3
             className={`mt-3.5 ${
               variant === 'row'
@@ -106,6 +115,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           >
             {title}
           </h3>
+
           {showDesc && (
             <div className="mb-3 text-sm mt-2">
               {price_before && (
@@ -156,10 +166,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     </p>
                   </div>
                 )}
+
                 {averageRating !== null && (
                   <div
                     className={`text-[var(--enjoy-secondary)] ${
-                      variant === 'row' ? 'text-sm order-2' : 'text-2xl order-1'
+                      variant === 'row'
+                        ? 'text-sm order-2'
+                        : 'text-base order-1'
                     } flex items-center gap-1`}
                   >
                     {renderStars(averageRating)}
@@ -168,31 +181,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     </span>
                   </div>
                 )}
-                {/* {ratings && (
-                  <div
-                    className={`text-[var(--enjoy-secondary))] ${
-                      variant === 'row' ? 'text-sm order-2' : 'text-2xl order-1'
-                    }`}
-                  >
-                    <div className="flex items-center gap-0.5">
-                      {variant === 'row' ? (
-                        <>
-                          <h5>{ratings}</h5>
-                          <PiSparkleFill />
-                        </>
-                      ) : (
-                        <>
-                          <PiSparkleFill />
-                          <h5>{ratings}</h5>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                )} */}
               </div>
             </div>
           )}
         </div>
+
         {showBtn && (
           <ResponsiveDialogDrawer
             trigger={

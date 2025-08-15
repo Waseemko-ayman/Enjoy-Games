@@ -16,7 +16,11 @@ import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
-  const { categories, isLoading: categoriesLoading, error: categoriesError } = useCategories();
+  const {
+    categories,
+    isLoading: categoriesLoading,
+    error: categoriesError,
+  } = useCategories();
   const {
     data,
     isLoading: mainContentLoading,
@@ -25,8 +29,11 @@ const HomePage = () => {
 
   return (
     <>
-      {/* <HeroBanner sliders={data?.sliders ?? []} /> */}
-      <HeroBanner />
+      <HeroBanner
+        sliders={data?.sliders ?? []}
+        loading={mainContentLoading}
+        error={mainContentError}
+      />
       <CategoriesTypes
         categories={categories}
         loading={categoriesLoading}
