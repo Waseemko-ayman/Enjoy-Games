@@ -22,7 +22,7 @@ import {
 import { Controller, UseFormRegister, FieldError } from 'react-hook-form';
 import { InputTypes } from '@/utils/type';
 import Tiptap from '../molecules/Tiptap';
-import { Select } from '@radix-ui/react-select';
+import Select from 'react-select';
 
 interface FormFieldProps {
   id?: string;

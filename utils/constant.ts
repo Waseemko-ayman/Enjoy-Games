@@ -1,8 +1,6 @@
-import { DollarSign } from 'lucide-react';
 import { Home } from 'lucide-react';
 import { FaBox, FaImages, FaList, FaSitemap } from 'react-icons/fa6';
 import { IoBarcodeSharp } from 'react-icons/io5';
-// import { FaQuestionCircle, FaTicketAlt } from 'react-icons/fa';
 import { FaQuestionCircle, FaTachometerAlt } from 'react-icons/fa';
 import { PATHS } from '@/data/paths';
 
@@ -77,55 +75,6 @@ export const sidebarLinks = [
   //   href: PATHS.DASHBOARD.SETTINGS,
   //   icon: Settings,
   // },
-];
-
-export const CreateCampaingTabFields = [
-  {
-    id: 'campaign-name',
-    name: 'campaignName',
-    label: 'Campaign Name',
-    type: 'text',
-    placeholder: 'Enter campaign name',
-  },
-  {
-    id: 'email-subject',
-    name: 'emailSubject',
-    label: 'Email Subject',
-    type: 'text',
-    placeholder: 'Enter email subject',
-  },
-  {
-    id: 'template',
-    name: 'template',
-    label: 'Template',
-    type: 'select',
-    options: [
-      { value: 'thank-you', label: 'Thank You Template' },
-      { value: 'newsletter', label: 'Newsletter Template' },
-      { value: 'fundraising', label: 'Fundraising Template' },
-    ],
-    SelectValuePlaceholder: 'Select the template',
-  },
-  {
-    id: 'email-content',
-    name: 'emailContent',
-    label: 'Email Content',
-    type: 'textarea',
-    placeholder: 'Enter email content...',
-  },
-  {
-    id: 'recipient-group',
-    name: 'recipientGroup',
-    label: 'Recipient Group',
-    type: 'select',
-    options: [
-      { value: 'all-donors', label: 'All Donors' },
-      { value: 'recent-donors', label: 'Recent Donors (Last 30 Days)' },
-      { value: 'major-donors', label: 'Major Donors' },
-      { value: 'inactive-donors', label: 'Inactive Donors' },
-    ],
-    SelectValuePlaceholder: 'Select recipient group',
-  },
 ];
 
 export const CreateCategoriesFields = [
@@ -497,8 +446,8 @@ export const PayPalSettingsFields = [
     label: 'Environment',
     type: 'select',
     options: [
-      { value: 'sandbox', label: 'Sandbox (Testing)' },
-      { value: 'live', label: 'Live (Production)' },
+      { id: 'sandbox', name: 'Sandbox (Testing)' },
+      { id: 'live', name: 'Live (Production)' },
     ],
     SelectValuePlaceholder: 'Select the environment',
   },
@@ -547,9 +496,9 @@ export const BackupSettingsFields = [
     label: 'Backup Frequency',
     type: 'select',
     options: [
-      { value: 'daily', label: 'Daily' },
-      { value: 'weekly', label: 'Weekly' },
-      { value: 'monthly', label: 'Monthly' },
+      { id: 'daily', name: 'Daily' },
+      { id: 'weekly', name: 'Weekly' },
+      { id: 'monthly', name: 'Monthly' },
     ],
     SelectValuePlaceholder: 'Select frequency',
     fullWidth: true,
@@ -567,11 +516,11 @@ export const BackupSettingsFields = [
     label: 'Retention Period',
     type: 'select',
     options: [
-      { value: '7', label: '7 days' },
-      { value: '14', label: '14 days' },
-      { value: '30', label: '30 days' },
-      { value: '90', label: '90 days' },
-      { value: '365', label: '1 year' },
+      { id: '7', name: '7 days' },
+      { id: '14', name: '14 days' },
+      { id: '30', name: '30 days' },
+      { id: '90', name: '90 days' },
+      { id: '365', name: '1 year' },
     ],
     SelectValuePlaceholder: 'Select retention period',
     fullWidth: true,
@@ -758,15 +707,23 @@ export const AccountSettingsFields = [
     name: 'gender',
     options: [
       {
-        id: 1,
-        value: 'male',
-        label: 'ذكر',
+        id: 'male',
+        name: 'ذكر',
       },
       {
-        id: 2,
-        value: 'female',
-        label: 'أنثى',
+        id: 'female',
+        name: 'أنثى',
       },
+      // {
+      //   id: 1,
+      //   value: 'male',
+      //   label: 'ذكر',
+      // },
+      // {
+      //   id: 2,
+      //   value: 'female',
+      //   label: 'أنثى',
+      // },
     ],
   },
 ];
@@ -792,143 +749,5 @@ export const SecuritySettingsFields = [
     label: 'Confirm New Password',
     type: 'password',
     placeholder: 'Confirm New Password',
-  },
-];
-
-export const dashboardLayoutFields = [
-  {
-    id: 'display-language',
-    name: 'displayLanguage',
-    label: 'Display Language',
-    type: 'select',
-    options: [
-      { value: 'en', label: 'English' },
-      { value: 'es', label: 'Spanish' },
-      { value: 'fr', label: 'French' },
-      { value: 'de', label: 'German' },
-      { value: 'ar', label: 'Arabic' },
-    ],
-    SelectValuePlaceholder: 'Select language',
-  },
-  {
-    id: 'region',
-    name: 'region',
-    label: 'Region',
-    type: 'select',
-    options: [
-      { value: 'us', label: 'United States' },
-      { value: 'eu', label: 'European Union' },
-      { value: 'uk', label: 'United Kingdom' },
-      { value: 'ca', label: 'Canada' },
-      { value: 'au', label: 'Australia' },
-    ],
-    SelectValuePlaceholder: 'Select region',
-  },
-];
-
-export const localizationFields = [
-  {
-    id: 'sidebar-position',
-    name: 'sidebarPosition',
-    label: 'Sidebar Position',
-    type: 'select',
-    options: [
-      { value: 'left', label: 'Left' },
-      { value: 'right', label: 'Right' },
-    ],
-    SelectValuePlaceholder: 'Select position',
-  },
-  {
-    id: 'content-density',
-    name: 'contentDensity',
-    label: 'Content Density',
-    type: 'select',
-    options: [
-      { value: 'comfortable', label: 'Comfortable' },
-      { value: 'compact', label: 'Compact' },
-    ],
-    SelectValuePlaceholder: 'Select density',
-  },
-];
-
-export const DonorFields = [
-  {
-    id: 'first-name',
-    name: 'firstName',
-    label: 'First Name',
-    placeholder: 'Enter first name',
-  },
-  {
-    id: 'last-name',
-    name: 'lastName',
-    label: 'Last Name',
-    placeholder: 'Enter last name',
-  },
-  {
-    id: 'email',
-    name: 'email',
-    label: 'Email',
-    placeholder: 'Enter email address',
-    type: 'email',
-  },
-  {
-    id: 'phone',
-    name: 'phone',
-    label: 'Phone (Optional)',
-    placeholder: 'Enter phone number',
-    type: 'tel',
-  },
-];
-
-export const DonationFields = [
-  {
-    id: 'amount',
-    name: 'amount',
-    type: 'number',
-    label: 'Amount',
-    placeholder: '0.00',
-    withIcon: true,
-    icon: DollarSign,
-  },
-  {
-    id: 'payment-method',
-    name: 'paymentMethod',
-    type: 'select',
-    label: 'Payment Method',
-    options: [
-      { value: 'cash', label: 'cash' },
-      { value: 'check', label: 'check' },
-      { value: 'credit-card', label: 'Credit Card' },
-      { value: 'bank-transfer', label: 'Bank Transfer' },
-      { value: 'other', label: 'Other' },
-    ],
-    SelectValuePlaceholder: 'Select payment method',
-  },
-  {
-    id: 'date',
-    name: 'date',
-    type: 'date',
-    label: 'Date',
-  },
-  {
-    id: 'campaign',
-    name: 'campaign',
-    type: 'select',
-    label: 'Campaign (Optional)',
-    options: [
-      { value: 'general', label: 'General Donation' },
-      { value: 'summer', label: 'Summer Fundraiser' },
-      { value: 'emergency', label: 'Emergency Relief' },
-      { value: 'education', label: 'Education Fund' },
-    ],
-    SelectValuePlaceholder: 'Select campaign',
-  },
-  {
-    id: 'notes',
-    name: 'notes',
-    type: 'textarea',
-    label: 'Notes (Optional)',
-    placeholder: 'Add any additional notes about this donation',
-    fullWidth: true,
   },
 ];
