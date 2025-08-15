@@ -71,8 +71,7 @@
     "more": "المزيد",
     "search": "البحث",
     "dashboard": "لوحة التحكم",
-    "orders": "الطلبات",
-    "ordersOverview": "نظرة عامة على الطلبات"
+    "orders": "الطلبات"
   },
   "SectionsTitles": {
     "Stars": {
@@ -411,14 +410,25 @@
     "tickets": "تذاكر الدعم الفني"
   },
   "Dashborad": {
+    "desc": "مرحباً بكم في إدارة طلباتكم",
     "overview": {
-      "desc": "تحليل الطلبات خلال الفترة المحددة"
+      "title": "نظرة عامة على الطلبات",
+      "desc": "تحليل الطلبات خلال الفترة المحددة",
+      "noData": "لا توجد بيانات متاحة"
     },
     "Goal": {
       "title": "هدف الطلبات",
       "desc": "ملخص طلبات اليوم وإجمالي الطلبات",
       "today": "اليوم",
       "total": "الإجمالي"
+    },
+    "Chart": {
+      "ordersCount": "إجمالي الطلبات",
+      "paidOrdersCount": "الطلبات المدفوعة",
+      "ordersAmount": "مبلغ الطلبات",
+      "paidOrdersAmount": "مبلغ الطلبات المدفوعة",
+      "loadError": "خطأ في تحميل بيانات المخطط",
+      "failedLoad": "فشل تحميل البيانات"
     }
   },
   "errorBoundary": {
@@ -490,7 +500,17 @@
     "continueWithGoogle": "المتابعة باستخدام جوجل",
     "continueWithFacebook": "المتابعة باستخدام فيسبوك",
     "next": "التالي",
-    "previous": "السابق"
+    "previous": "السابق",
+    "filter": "تصفية",
+    "export": "تصدير",
+    "today": "يومي",
+    "weekly": "أسبوعي",
+    "monthly": "شهري",
+    "todayLabel": "اليوم",
+    "yearly": "سنوي",
+    "lastWeek": "الأسبوع الماضي",
+    "lastMonthly": "الشهر الماضي",
+    "lastYearly": "السنة الماضية"
   },
   "Inputs": {
     "labels": {
