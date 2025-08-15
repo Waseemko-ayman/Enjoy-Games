@@ -202,6 +202,12 @@ export const menuLists = [
         icon: IoMdHelpCircleOutline,
         link: PATHS.FAQS.link,
       },
+      {
+        id: 3,
+        key: 'dashboard',
+        icon: FaTachometerAlt,
+        link: PATHS.DASHBOARD.HOME.ROOT,
+      },
       // { id: 3, key: 'TalkToCustomerService', icon: MdOutlineEmail, link: '#' },
     ],
   },
