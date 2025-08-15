@@ -580,7 +580,8 @@
       "avatarRequired": "الصورة مطلوبة",
       "subjectRequired": "العنوان مطلوب",
       "ticketTypeRequired": "نوع التذكرة مطلوب",
-      "detailsRequired": "الوصف مطلوب"
+      "detailsRequired": "الوصف مطلوب",
+      "selectStars": "الرجاء اختيار تصنيف النجوم"
     }
   },
   "Auth": {

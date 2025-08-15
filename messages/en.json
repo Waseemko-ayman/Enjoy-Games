@@ -580,7 +580,8 @@
       "avatarRequired": "Image is required",
       "subjectRequired": "Subject is required",
       "ticketTypeRequired": "Ticket type is required",
-      "detailsRequired": "Description is required"
+      "detailsRequired": "Description is required",
+      "selectStars": "Please select a star rating"
     }
   },
   "Auth": {

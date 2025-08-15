@@ -13,19 +13,21 @@ import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
 import { useTranslations } from 'next-intl';
 import ServiceAdvantages from '../home/Sections/ServiceAdvantages';
 import { useCurrency } from '@/context/CurrencyContext';
+import { useUpdateContent } from '@/context/updateContentContext';
 
 const ProductDetailsPage = ({ productId }: { productId: string }) => {
   // API Hooks
   const { categories } = useCategories();
   const { getSingle, product, isLoading } = useAPI(`product`);
   const { selectedCountry } = useCurrency();
+  const { refreshFlag } = useUpdateContent();
 
   const t = useTranslations('Loading');
   const serviceTxts = useTranslations('HomePage');
 
   useEffect(() => {
     getSingle(productId);
-  }, [productId, selectedCountry]);
+  }, [productId, selectedCountry, refreshFlag]);
 
   if (isLoading) {
     return <LoadingPlaceholder message={t('loadingMessage')} />;
@@ -35,7 +37,7 @@ const ProductDetailsPage = ({ productId }: { productId: string }) => {
     <Layer className="mt-5">
       <Container>
         <ProductDetailsSections product={product} />
-        <TabsSection product={product} />
+        <TabsSection product={product} isLoading={isLoading} />
       </Container>
       <SimilarProducts
         getSlugs={(subCatId) =>

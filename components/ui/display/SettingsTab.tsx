@@ -28,7 +28,7 @@ const SettingsTab: React.FC<SettingsTabProps> = ({
   cardContentClassName,
 }) => {
   return (
-    <TabsContent value={value}>
+    <TabsContent value={value} variant="classic">
       <Card>
         <CardHeaderContent title={title} description={description} />
         <CardContent className={cardContentClassName}>{children}</CardContent>

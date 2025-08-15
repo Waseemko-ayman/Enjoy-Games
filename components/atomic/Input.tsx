@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Select,
   SelectContent,
@@ -10,8 +11,9 @@ import {
 import { FaCheck } from 'react-icons/fa6';
 import { InputTypes } from '@/utils/type';
 import { useTranslations } from 'next-intl';
+import { Controller } from 'react-hook-form';
 
-type InputProps = {
+export type InputProps = {
   type: InputTypes;
   placeholder?: string;
   variant?: 'primary' | 'secondary';
@@ -19,14 +21,13 @@ type InputProps = {
   otherClassNameContainer?: string;
   labelClassName?: string;
   inputName: string;
+  control?: any; // React Hook Form control
   options?: { id: number; value?: string; label: string }[];
   Icon?: React.ElementType;
   iconClassName?: string;
   label?: React.ReactNode;
-  checked?: boolean;
   value?: string | number;
   isRequired?: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange?: (e: React.ChangeEvent<any>) => void;
   onIconClick?: () => void;
 } & React.HTMLAttributes<HTMLElement>;
@@ -41,13 +42,13 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
       otherClassNameContainer,
       labelClassName,
       inputName,
+      control,
       options = [],
       Icon,
       iconClassName,
       label,
       value,
       isRequired = false,
-      checked,
       onChange,
       onIconClick,
       ...rest
@@ -58,22 +59,12 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
       type !== 'textarea' ? 'h-[46px]' : 'min-h-[120px]'
     } px-2 rounded-9xl border-none outline-none resize-none ${otherClassName}`;
 
-    const iconBeforeInput = variant === 'primary' && Icon;
-    const iconAfterInput = variant === 'secondary' && Icon;
-
-    const [localChecked, setLocalChecked] = useState(!!checked);
-
     const inputsTxt = useTranslations('Inputs.placeHolders');
-
-    useEffect(() => {
-      if (typeof checked === 'boolean') setLocalChecked(checked);
-    }, [checked]);
 
     const InputElement =
       type === 'select' ? (
         <Select
           onValueChange={(val) =>
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onChange?.({ target: { name: inputName, value: val } } as any)
           }
         >
@@ -104,31 +95,27 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
           value={value}
           {...rest}
         />
-      ) : type === 'checkbox' ? (
-        <label className="flex items-center cursor-pointer select-none gap-3">
-          <input
-            ref={ref as React.Ref<HTMLInputElement>}
-            type="checkbox"
-            name={inputName}
-            checked={localChecked}
-            onChange={(e) => {
-              setLocalChecked(e.target.checked);
-              onChange?.(e);
-            }}
-            className="peer sr-only"
-            {...rest}
-          />
-          <div className="w-6 h-6 rounded-lg border border-gray-300 peer-checked:bg-green-600 flex items-center justify-center transition-colors">
-            {localChecked && <FaCheck className="w-3 h-3 text-white" />}
-          </div>
-          <span
-            className={`text-sm transition-colors ${
-              localChecked ? 'text-gray-700' : 'text-gray-400'
-            }`}
-          >
-            {placeholder}
-          </span>
-        </label>
+      ) : type === 'checkbox' && control ? (
+        <Controller
+          name={inputName}
+          control={control}
+          defaultValue={false}
+          render={({ field }) => (
+            <label className="flex items-center cursor-pointer select-none gap-3">
+              <input
+                type="checkbox"
+                checked={field.value}
+                onChange={(e) => field.onChange(e.target.checked)}
+                className="peer sr-only"
+                {...rest}
+              />
+              <div className="w-6 h-6 rounded-lg border border-gray-300 peer-checked:bg-green-600 flex items-center justify-center transition-colors">
+                {field.value && <FaCheck className="w-3 h-3 text-white" />}
+              </div>
+              <span className="text-sm">{placeholder}</span>
+            </label>
+          )}
+        />
       ) : (
         <input
           ref={ref as React.Ref<HTMLInputElement>}
@@ -153,7 +140,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
           </label>
         )}
 
-        {type === 'checkbox' ? (
+        {type === 'checkbox' && control ? (
           InputElement
         ) : (
           <div
@@ -165,19 +152,13 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
                 : 'flex-row-reverse rounded-lg border border-gray-300 focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)] bg-white'
             } ${otherClassNameContainer}`}
           >
-            {iconAfterInput && (
+            {Icon && (
               <Icon
                 className={`${iconClassName} text-xl cursor-pointer`}
                 onClick={onIconClick}
               />
             )}
             {InputElement}
-            {iconBeforeInput && (
-              <Icon
-                className={`${iconClassName} text-xl cursor-pointer`}
-                onClick={onIconClick}
-              />
-            )}
           </div>
         )}
       </>

@@ -31,7 +31,10 @@ const TabsNavigation: React.FC<TabsNavigationProps> = ({
   }`;
 
   const tabsList = (
-    <TabsList className={`${variant === 'default' ? columnsClass : ''}`}>
+    <TabsList
+      className={`${variant === 'default' ? columnsClass : ''}`}
+      variant="classic"
+    >
       {tabs.map((tab) => (
         <TabsTrigger
           key={tab.value}
@@ -39,6 +42,7 @@ const TabsNavigation: React.FC<TabsNavigationProps> = ({
           className={`${isArabic ? 'text-base font-normal' : 'text-sm'} ${
             variant === 'segmented' ? 'rounded-lg px-4 py-2' : ''
           }`}
+          variant="classic"
         >
           {tab.label}
         </TabsTrigger>

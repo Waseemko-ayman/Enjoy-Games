@@ -22,14 +22,12 @@ import {
   codeInputs,
   multiIdInputs,
 } from '@/data';
-import { useToggleLocale } from '@/hook/useToggleLocale';
 import { ProductCardProps } from '@/interfaces';
 import { useToast } from '@/lib/toast';
 import { InputTypes } from '@/utils/type';
 import { useTranslations } from 'next-intl';
 import React, { lazy, Suspense, useState } from 'react';
-import { FaStar } from 'react-icons/fa6';
-import { MdAdd, MdAddShoppingCart } from 'react-icons/md';
+import { MdAddShoppingCart } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -48,7 +46,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const inputsTxt = useTranslations('Inputs');
   const btnTxt = useTranslations('BtnTexts');
   const msgTxts = useTranslations('Messages');
-  const { isArabic } = useToggleLocale();
+  // const { isArabic } = useToggleLocale();
   const { addToCart } = useCartContext();
   const { showToast } = useToast();
 
@@ -99,7 +97,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
         <Suspense fallback={<Loading />}>
           <Image
             src={
-              // `http://31.97.36.197/${product?.image}` ||
+              // `${API_IMAGE_URL}${product?.image}` ||
               '/assets/play-station.webp'
             }
             alt="play-station"
@@ -159,7 +157,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           </div>
         </MotionSection>
 
-        <MotionSection index={3}>
+        {/* <MotionSection index={3}>
           <div className="flex item-center justify-between gap-2 mt-4 border border-gray-400 rounded-lg p-3">
             <div
               className={`flex items-center ${
@@ -180,7 +178,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
             </div>
             <FaStar className="text-enjoy-secondary" size={20} />
           </div>
-        </MotionSection>
+        </MotionSection> */}
 
         <div className="mt-7">
           <MotionSection index={4}>
@@ -189,7 +187,10 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
             </h3>
           </MotionSection>
           <MotionSection index={5}>
-            <p className="text-[15px] text-gray-500">{product?.content}</p>
+            <p
+              className="text-[15px] text-gray-500"
+              dangerouslySetInnerHTML={{ __html: product?.content || '' }}
+            />
           </MotionSection>
         </div>
 
