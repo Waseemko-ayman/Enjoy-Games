@@ -97,7 +97,7 @@ const CreateProducts = ({
     control,
     watch,
     formState: { errors },
-  } = useForm<ProductFormData>({
+  } = useForm<any, ProductFormData>({
     resolver: yupResolver(createSchema),
   });
 

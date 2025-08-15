@@ -110,7 +110,7 @@ const CreateSubCategories = ({
     control,
     watch,
     formState: { errors },
-  } = useForm<subCategoryFormData>({
+  } = useForm<any, subCategoryFormData>({
     resolver: yupResolver(createSchema),
     defaultValues: {
       categoryID: categoriesOptions[0]?.id?.toString() ?? '',
