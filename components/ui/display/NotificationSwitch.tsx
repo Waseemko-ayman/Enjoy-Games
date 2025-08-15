@@ -1,5 +1,4 @@
 import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
 import { Mail, Bell } from 'lucide-react';
 
 type NotificationSwitchProps = {
@@ -35,7 +34,7 @@ const NotificationSwitch: React.FC<NotificationSwitchProps> = ({
       <div className="flex items-center space-x-2">
         {icon && getIcon()}
         <div>
-          <Label htmlFor={id}>{label}</Label>
+          <label htmlFor={id}>{label}</label>
           {description && (
             <p className="text-xs text-muted-foreground">{description}</p>
           )}
