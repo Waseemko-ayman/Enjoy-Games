@@ -372,7 +372,9 @@
         "desc": "Create and manage tickets for your store"
       },
       "allTickets": "All Tickets",
-      "desc": "Manage all tickets in one place"
+      "desc": "Manage all tickets in one place",
+      "createTicket": "Create Ticket",
+      "createNewTicket": "Create New Ticket"
     }
   },
   "productDetails": {

@@ -62,11 +62,11 @@ export const sidebarLinks = [
     href: PATHS.DASHBOARD.RATINGS,
     icon: FaStar,
   },
-  {
-    title: 'orders',
-    href: PATHS.DASHBOARD.ORDERS,
-    icon: FiShoppingCart,
-  },
+  // {
+  //   title: 'orders',
+  //   href: PATHS.DASHBOARD.ORDERS,
+  //   icon: FiShoppingCart,
+  // },
   // {
   //   title: 'Payment Gateways',
   //   href: PATHS.DASHBOARD.PAYMENT_GATEWAYS,
