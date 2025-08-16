@@ -41,6 +41,7 @@ export const PATHS = {
     FAQS: '/dashboard/faqs',
     TICKETS: '/dashboard/tickets',
     RATINGS: '/dashboard/ratings',
+    ORDERS: '/dashboard/orders',
     PAYMENT_GATEWAYS: '/dashboard/payment-gateways',
     REPORTS: '/dashboard/reports',
     NOTIFICATIONS: {

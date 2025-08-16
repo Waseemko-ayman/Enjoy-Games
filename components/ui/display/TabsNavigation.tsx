@@ -27,7 +27,9 @@ const TabsNavigation: React.FC<TabsNavigationProps> = ({
       ? 'grid-cols-3'
       : tabs.length === 4
       ? 'grid-cols-4'
-      : 'grid-cols-1'
+      : tabs.length === 5
+      ? 'grid-cols-5'
+      : ''
   }`;
 
   const tabsList = (

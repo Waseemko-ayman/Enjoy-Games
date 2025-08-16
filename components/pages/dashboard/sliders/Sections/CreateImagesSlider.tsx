@@ -18,8 +18,8 @@ import { useTranslations } from 'next-intl';
 // ----------------------------------------------------------------
 
 type SliderFormData = {
-  imageAr: File[];
-  imageEn: File[];
+  imageAr?: File | null;
+  imageEn?: File | null;
 };
 
 // ----------------------------------------------------------------
@@ -34,37 +34,20 @@ const CreateImagesSlider = ({
   const inputStyled =
     'flex items-center h-10 w-full rounded-md border border-gray-300 px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 md:text-sm outline-none cursor-pointer';
 
-  // ----------------------------------------------------------------
-
   const { showToast } = useToast();
   const { triggerRefresh } = useUpdateContent();
   const t = useTranslations();
   const inputT = useTranslations('Inputs.errorsMsgs');
 
-  // ----------------------------------------------------------------
-
   const createSchema = yup.object({
-    imageAr: yup
-      .array()
-      .of(yup.mixed<File>().required(inputT('arabicImageRequired')))
-      .min(1, inputT('arabicImageRequired'))
-      .required(inputT('arabicImageRequired')),
-    imageEn: yup
-      .array()
-      .of(yup.mixed<File>().required(inputT('englishImageRequired')))
-      .min(1, inputT('englishImageRequired'))
-      .required(inputT('englishImageRequired')),
+    imageAr: yup.mixed<File>().required(inputT('arabicImageRequired')),
+    imageEn: yup.mixed<File>().required(inputT('englishImageRequired')),
   });
 
-  // ----------------------------------------------------------------
-
-  // API
   const { add, isLoading } = useAPI<FormData, Slider>('slider/create');
 
-  // ----------------------------------------------------------------
-
-  const [previewAr, setPreviewAr] = useState<File[]>([]);
-  const [previewEn, setPreviewEn] = useState<File[]>([]);
+  const [previewAr, setPreviewAr] = useState<File | null>(null);
+  const [previewEn, setPreviewEn] = useState<File | null>(null);
 
   const {
     handleSubmit,
@@ -73,57 +56,46 @@ const CreateImagesSlider = ({
     setValue,
     trigger,
   } = useForm<SliderFormData>({
-    resolver: yupResolver(createSchema),
+    resolver: yupResolver(createSchema) as any,
     defaultValues: {
-      imageAr: [],
-      imageEn: [],
+      imageAr: undefined,
+      imageEn: undefined,
     },
   });
-
-  // ----------------------------------------------------------------
 
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     lang: 'ar' | 'en'
   ) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      const fileArray = Array.from(files);
-      if (lang === 'ar') {
-        setPreviewAr(fileArray);
-        setValue('imageAr', fileArray, { shouldValidate: true });
-      } else {
-        setPreviewEn(fileArray);
-        setValue('imageEn', fileArray, { shouldValidate: true });
-      }
-      trigger(lang === 'ar' ? 'imageAr' : 'imageEn');
-    }
-  };
-
-  const handleRemoveImage = (index: number, lang: 'ar' | 'en') => {
+    const file = e.target.files?.[0];
     if (lang === 'ar') {
-      const updated = [...previewAr];
-      updated.splice(index, 1);
-      setPreviewAr(updated);
-      setValue('imageAr', updated, { shouldValidate: true });
+      setPreviewAr(file ?? null);
+      setValue('imageAr', file);
       trigger('imageAr');
     } else {
-      const updated = [...previewEn];
-      updated.splice(index, 1);
-      setPreviewEn(updated);
-      setValue('imageEn', updated, { shouldValidate: true });
+      setPreviewEn(file ?? null);
+      setValue('imageEn', file);
       trigger('imageEn');
     }
   };
 
-  // ----------------------------------------------------------------
+  const handleRemoveImage = (lang: 'ar' | 'en') => {
+    if (lang === 'ar') {
+      setPreviewAr(null);
+      setValue('imageAr', null, { shouldValidate: true });
+      trigger('imageAr');
+    } else {
+      setPreviewEn(null);
+      setValue('imageEn', null, { shouldValidate: true });
+      trigger('imageEn');
+    }
+  };
 
   const onSubmit: SubmitHandler<SliderFormData> = async (data) => {
     try {
       const formData = new FormData();
-
-      data.imageAr.forEach((file) => formData.append('image_ar', file));
-      data.imageEn.forEach((file) => formData.append('image_en', file));
+      if (data.imageAr) formData.append('image_ar', data.imageAr);
+      if (data.imageEn) formData.append('image_en', data.imageEn);
 
       const response = await add(formData);
 
@@ -131,8 +103,8 @@ const CreateImagesSlider = ({
         showToast(response?.message);
         reset();
         triggerRefresh();
-        setPreviewAr([]);
-        setPreviewEn([]);
+        setPreviewAr(null);
+        setPreviewEn(null);
         onTabChange('AllImageSlider');
       }
     } catch (error) {
@@ -160,39 +132,32 @@ const CreateImagesSlider = ({
           <input
             type="file"
             accept="image/*"
-            multiple
             onChange={(e) => handleFileChange(e, 'ar')}
             className={inputStyled}
           />
           {errors.imageAr && (
             <p className="text-red-500 text-sm">{errors.imageAr.message}</p>
           )}
-          <div className="flex flex-wrap gap-2 mt-4">
-            {previewAr.map((src, i) => (
-              <div key={i} className="relative w-20 h-20">
-                <Image
-                  src={URL.createObjectURL(src)}
-                  alt={`preview-ar-${i}`}
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  className="w-full h-full object-contain"
-                  style={{ width: '100%', height: 'auto' }}
-                />
-                <button
-                  type="button"
-                  onClick={() => handleRemoveImage(i, 'ar')}
-                  className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 cursor-pointer"
-                  style={{
-                    transform: 'translate(30%, -30%)',
-                    fontSize: '10px',
-                  }}
-                >
-                  <FaX size={12} />
-                </button>
-              </div>
-            ))}
-          </div>
+          {previewAr && (
+            <div className="relative w-20 h-20 mt-4">
+              <Image
+                src={URL.createObjectURL(previewAr)}
+                alt="preview-ar"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="w-full h-auto object-contain"
+              />
+              <button
+                type="button"
+                onClick={() => handleRemoveImage('ar')}
+                className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 cursor-pointer"
+                style={{ transform: 'translate(30%, -30%)', fontSize: '10px' }}
+              >
+                <FaX size={12} />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* الصور بالإنجليزية */}
@@ -203,39 +168,32 @@ const CreateImagesSlider = ({
           <input
             type="file"
             accept="image/*"
-            multiple
             onChange={(e) => handleFileChange(e, 'en')}
             className={inputStyled}
           />
           {errors.imageEn && (
             <p className="text-red-500 text-sm">{errors.imageEn.message}</p>
           )}
-          <div className="flex flex-wrap gap-2 mt-2">
-            {previewEn.map((src, i) => (
-              <div key={i} className="relative w-20 h-20">
-                <Image
-                  src={URL.createObjectURL(src)}
-                  alt={`preview-en-${i}`}
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  className="w-full h-auto object-contain"
-                  style={{ width: '100%', height: 'auto' }}
-                />
-                <button
-                  type="button"
-                  onClick={() => handleRemoveImage(i, 'en')}
-                  className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 cursor-pointer"
-                  style={{
-                    transform: 'translate(30%, -30%)',
-                    fontSize: '10px',
-                  }}
-                >
-                  <FaX size={12} />
-                </button>
-              </div>
-            ))}
-          </div>
+          {previewEn && (
+            <div className="relative w-20 h-20 mt-2">
+              <Image
+                src={URL.createObjectURL(previewEn)}
+                alt="preview-en"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="w-full h-auto object-contain"
+              />
+              <button
+                type="button"
+                onClick={() => handleRemoveImage('en')}
+                className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 cursor-pointer"
+                style={{ transform: 'translate(30%, -30%)', fontSize: '10px' }}
+              >
+                <FaX size={12} />
+              </button>
+            </div>
+          )}
         </div>
 
         <Button type="submit">

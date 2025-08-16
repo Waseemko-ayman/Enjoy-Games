@@ -14,14 +14,12 @@ import { PATHS } from '@/data/paths';
 import { useAuthContext } from '@/context/AuthContext';
 import { useTranslations } from 'next-intl';
 import { useToggleLocale } from '@/hook/useToggleLocale';
-import { FaGlobe } from 'react-icons/fa6';
 
 export function DashboardSidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   // Translations
   const t = useTranslations();
-  const langTexts = useTranslations('Languages');
 
   // Pathname
   const rawPathname = usePathname();
@@ -29,7 +27,7 @@ export function DashboardSidebar() {
 
   // Hooks
   const isMobile = useIsMobile();
-  const { toggleLocale, isArabic } = useToggleLocale();
+  const { isArabic } = useToggleLocale();
 
   // Auth
   const { user } = useAuthContext();
@@ -78,18 +76,6 @@ export function DashboardSidebar() {
               </Link>
             ))}
           </nav>
-          <div
-            className="flex items-center justify-between gap-1 text-sm w-full py-2 cursor-pointer"
-            onClick={toggleLocale}
-          >
-            <div className="flex items-center gap-3">
-              <FaGlobe />
-              <span>{t('Layout.header.navBarPopup.ChangeTheLanguage')}</span>
-            </div>
-            <h4 className="font-normal">
-              {isArabic ? langTexts('english') : langTexts('arabic')}
-            </h4>
-          </div>
         </div>
       </div>
       <div className="mt-auto border-t border-t-gray-300 p-4">
@@ -111,7 +97,7 @@ export function DashboardSidebar() {
     <>
       {/* Mobile Menu Button */}
       {isMobile && (
-        <div className="fixed left-4 top-4 z-40">
+        <div className={`fixed ${isArabic ? 'left-4' : 'right-4'} top-4 z-40`}>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden">

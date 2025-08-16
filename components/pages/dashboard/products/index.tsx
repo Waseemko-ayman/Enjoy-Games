@@ -10,7 +10,7 @@ const ProductsPage = () => {
 
   const tabsData = [
     { value: 'allProducts', label: t('Dashboard.products.title') },
-    { value: 'createProducts', label: t('Dashboard.products.createNewCode') },
+    { value: 'createProducts', label: t('Dashboard.products.createNewProduct') },
   ];
 
   return (

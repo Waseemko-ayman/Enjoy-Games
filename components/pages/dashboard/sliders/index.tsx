@@ -6,11 +6,11 @@ import GenericPage from '@/components/organism/GenericPage';
 import { useTranslations } from 'next-intl';
 
 const SlidersPage = () => {
-  const t = useTranslations('sliders');
+  const t = useTranslations('Dashboard.sliders');
 
   const tabsData = [
     { value: 'AllImageSlider', label: t('title') },
-    { value: 'CreateImagesSlider', label: t('createFaq') },
+    { value: 'CreateImagesSlider', label: t('createSlider') },
   ];
 
   return (

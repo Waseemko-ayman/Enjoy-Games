@@ -127,7 +127,9 @@ const CreateTickets = ({
                 defaultValue={[]}
                 render={({ field: { onChange } }) => (
                   <div className="space-y-2">
-                    {label && <label htmlFor={id}>{label}</label>}
+                    {label && (
+                      <label htmlFor={id}>{t(`Inputs.labels.${label}`)}</label>
+                    )}
                     <input
                       type="file"
                       accept="image/*"
@@ -152,8 +154,8 @@ const CreateTickets = ({
                 id={id}
                 inputName={name}
                 type={type as InputTypes}
-                label={label}
-                placeholder={placeholder}
+                label={t(`Inputs.labels.${label}`)}
+                placeholder={t(`Inputs.placeHolders.${placeholder}`)}
                 register={register}
                 control={control}
                 error={

@@ -19,7 +19,7 @@ const AllRatings = ({
     <GenericAllTable<ProductCardProps>
       value={value}
       title={t('Dashboard.ratings.allTitle')}
-      description={t('Dashboard.ratings.manageCodes')}
+      description={t('Dashboard.ratings.manageRatings')}
       apiEndpoint="rating"
       deleteEndpoint="rating/delete"
       createTabValue="createRatings"

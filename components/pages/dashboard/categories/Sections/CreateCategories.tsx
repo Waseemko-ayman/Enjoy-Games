@@ -163,8 +163,8 @@ const CreateCategories = ({
                 id={id}
                 inputName={name}
                 type={type as InputTypes}
-                label={label}
-                placeholder={placeholder}
+                label={t(`Inputs.labels.${label}`)}
+                placeholder={t(`Inputs.placeHolders.${placeholder}`)}
                 register={register}
                 error={
                   errors[name as keyof CategoryFormData] as

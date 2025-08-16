@@ -21,7 +21,7 @@
       "navBarPopup": {
         "ChangeTheLanguage": "غير اللغة",
         "ChangeCountryCurrencyTitle": "تغيير الدولة - العملة",
-        "ChangeCountryCurrencyDescription": "اختر الدولة والعملة المناسبة لك من القائمة أدناه.",
+        "ChangeCountryCurrencyDescription": "إختر الدولة والعملة المناسبة لك من القائمة أدناه.",
         "PopupMenuTitle": "قائمة المستخدم والتنقل",
         "PopupMenuDescription": "الوصول إلى معلومات حسابك، خيارات تسجيل الدخول، قائمة التنقل، وخيار تسجيل الخروج."
       }
@@ -302,7 +302,7 @@
   "Wallet": {
     "title": "رصيدي الحالي",
     "RedeemPoints": {
-      "title": "اختر طريقة الاستبدال اللي تناسبك",
+      "title": "إختر طريقة الاستبدال اللي تناسبك",
       "subTitle": "برامج المكافآت"
     },
     "addCoupon": {
@@ -417,7 +417,8 @@
     "sliders": "السلايدرز",
     "faqs": "الأسئلة الشائعة",
     "tickets": "تذاكر الدعم الفني",
-    "ratings": "التقييمات"
+    "ratings": "التقييمات",
+    "orders": "الطلبات"
   },
   "Dashboard": {
     "desc": "مرحباً بكم في إدارة طلباتكم",
@@ -433,6 +434,8 @@
       "total": "الإجمالي"
     },
     "Chart": {
+      "selectStartDate": "إختار تاريخ البداية",
+      "selectEndDate": "إختار تاريخ الإنتهاء",
       "ordersCount": "إجمالي الطلبات",
       "paidOrdersCount": "الطلبات المدفوعة",
       "ordersAmount": "مبلغ الطلبات",
@@ -493,6 +496,13 @@
       "manageSliders": "إدارة جميع صور الإعلانات في مكان واحد",
       "createSlider": "إنشاء صور سلايدر",
       "createNewSliders": "إنشاء صور سلايدر جدد"
+    },
+    "orders": {
+      "title": "جميع الطلبات",
+      "desc": "قم بإنشاء وإدارة الطلبات لمتجرك",
+      "manageOrders": "إدارة جميع الطلبات في مكان واحد",
+      "createOrder": "إنشاء الطلبات",
+      "createNewOrder": "إنشاء طلب جديد"
     }
   },
   "errorBoundary": {
@@ -574,7 +584,8 @@
     "yearly": "سنوي",
     "lastWeek": "الأسبوع الماضي",
     "lastMonthly": "الشهر الماضي",
-    "lastYearly": "السنة الماضية"
+    "lastYearly": "السنة الماضية",
+    "customRange": "نطاق مخصص"
   },
   "Inputs": {
     "labels": {
@@ -594,7 +605,46 @@
       "comment": "اترك تعليق",
       "hideMyName": "لا تظهر إسمي فى قائمة العملاء",
       "arabicImage": "الصورة بالعربية",
-      "englishImage": "الصورة بالإنجليزية"
+      "englishImage": "الصورة بالإنجليزية",
+      "arabicName": "الإسم (عربي)",
+      "englishName": "الإسم (إنجليزي)",
+      "icon": "أيقونة",
+      "image": "صورة",
+      "categoryID": "القسم",
+      "parentID": "القسم الثانوي",
+      "arabicTitle": "العنوان (عربي)",
+      "englishTitle": "العنوان (إنجليزي)",
+      "arabicContent": "المحتوى (عربي)",
+      "englishContent": "المحتوى (إنجليزي)",
+      "arabicDescription": "الوصف (عربي)",
+      "englishDescription": "الوصف (إنجليزي)",
+      "price": "السعر",
+      "priceBefore": "السعر القديم",
+      "shippingPayment": "طريقة الدفع",
+      "code": "كود",
+      "accountId": "رقم تعريفي",
+      "multiId": "رقمين تعريفيين",
+      "access": "صلاحية الدخول أو بيانات الحساب",
+      "discount": "الخصم",
+      "isActive": "عرض",
+      "productID": "المنتج",
+      "value": "القيمة",
+      "typeCoupon": "نوع الكوبون",
+      "fixed": "مقدار ثابت",
+      "usageLimit": "حد الاستخدام",
+      "expiresFrom": "تاريخ البداية",
+      "expiresAt": "تاريخ الانتهاء",
+      "allowedUserIds": "المستخدمين المسموح لهم",
+      "excludedProductIds": "المنتجات المستثناة",
+      "excludedCategoriesIds": "الأقسام المستثناة",
+      "excludedSubcategoryIdds": "الأقسام الفرعية المستثناة",
+      "arabicQuestion": "السؤال (عربي)",
+      "englishQuestion": "السؤال (إنجليزي)",
+      "arabicAnswer": "الجواب (عربي)",
+      "englishAnswer": "الجواب (إنجليزي)",
+      "subject": "العنوان",
+      "message": "الوصف",
+      "attachments": "المرفقات"
     },
     "placeHolders": {
       "haveCoupon": "هل لديك كوبون خصم؟",
@@ -608,7 +658,7 @@
       "birthDate": "--/--/----",
       "gender": "حدد الجنس",
       "writeCouponHere": "أكتب كود القسيم هنا...",
-      "Choose": "اختر...",
+      "Choose": "إختر...",
       "Cancelled": "تم الإلغاء",
       "comment": "أكتب تعليقك هنا",
       "writeWhatYouWant": "اكتب اللي تبغاه، وخلّنا نلقاه لك",
@@ -625,7 +675,42 @@
       "searchCopouns": "البحث عن كوبون...",
       "searchFaq": "البحث عن سؤال...",
       "searchTicket": "البحث عن تذكرة...",
-      "searchImage": "البحث عن صورة..."
+      "searchImage": "البحث عن صورة...",
+      "searchOrder": "البحث عن طلب...",
+      "writeArabicName": "أكتب الإسم بالعربية",
+      "writeEnglishName": "أكتب الإسم بالإنجليزية",
+      "icon": "أيقونة",
+      "categoryID": "القسم",
+      "parentID": "القسم الثانوي",
+      "writeArabicTitle": "أكتب العنوان بالعربية",
+      "writeEnglishTitle": "أكتب العنوان بالإنجليزية",
+      "writeArabicContent": "أكتب المحتوى بالعربية",
+      "writeEnglishContent": "أكتب المحتوى بالإنجليزية",
+      "writeArabicDescription": "أكتب الوصف بالعربية",
+      "writeEnglishDescription": "أكتب الوصف بالإنجليزية",
+      "writePrice": "أكتب السعر",
+      "writePriceBefore": "أكتب السعر القديم",
+      "shippingPayment": "طريقة الدفع",
+      "writeDiscount": "أكتب قيمة الخصم",
+      "isActive": "عرض",
+      "addImage": "أضف صورة",
+      "productID": "المنتج",
+      "writeCode": "أكتب الكود",
+      "writeValue": "أدخل قيمة الكوبون",
+      "selectType": "إختر النوع",
+      "writeUsageLimit": "أدخل حد الاستخدام",
+      "YYYY-MM-DD": "يوم-شهر-سنة",
+      "selectUsers": "إختر المستخدمين",
+      "selectProducts": "إختر المنتجات",
+      "selectCategories": "إختر الأقسام",
+      "selectSsubCategories": "إختر الأقسام الفرعية",
+      "writeArabicQuestion": "أكتب السؤال بالعربية",
+      "writeEnglishQuestion": "أكتب السؤال بالإنجليزية",
+      "writeArabicAnswer": "أكتب الجواب بالعربية",
+      "writeEnglishAnswer": "أكتب الجواب بالإنجليزية",
+      "writeSubject": "أكتب العنوان",
+      "writeMessage": "أكتب الوصف...",
+      "selectAttachments": "إختر ملفات"
     },
     "options": {
       "gender": {
@@ -639,8 +724,8 @@
       "paymentRequired": "يجب اختيار طريقة الدفع",
       "maxChars": "الحد الأقصى {number} حرفًا",
       "commentRequired": "التعليق مطلوب",
-      "usernameInvalid": "الاسم يجب أن يحتوي على حروف أو أرقام فقط ويكون طوله على الأقل حرفين",
-      "usernameRequired": "الاسم مطلوب",
+      "usernameInvalid": "الإسم يجب أن يحتوي على حروف أو أرقام فقط ويكون طوله على الأقل حرفين",
+      "usernameRequired": "الإسم مطلوب",
       "emailInvalid": "البريد الإلكتروني غير صالح",
       "emailPatternInvalid": "الإيميل غير صالح",
       "emailRequired": "البريد الإلكتروني مطلوب",
