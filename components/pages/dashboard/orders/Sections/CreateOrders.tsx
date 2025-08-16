@@ -18,7 +18,7 @@ import { useTranslations } from 'next-intl';
 
 // ----------------------------------------------------------------
 
-const CreateFaqs = ({
+const CreateOrders = ({
   value,
   onTabChange,
 }: {
@@ -42,7 +42,7 @@ const CreateFaqs = ({
   // ----------------------------------------------------------------
 
   // API Hook
-  const { add, isLoading } = useAPI<FormData, FAQSDataType>('faq/create');
+  const { add, isLoading } = useAPI<FormData, FAQSDataType>('order/create');
 
   // ----------------------------------------------------------------
 
@@ -81,8 +81,8 @@ const CreateFaqs = ({
   return (
     <SettingsTab
       value={value}
-      title={t('Dashboard.faqs.createFaq')}
-      description={t('Dashboard.faqs.createNewFaqs')}
+      title={t('Dashboard.orders.createOrder')}
+      description={t('Dashboard.orders.createNewOrder')}
     >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="grid gap-5 md:grid-cols-2 mb-5">
@@ -110,4 +110,4 @@ const CreateFaqs = ({
   );
 };
 
-export default CreateFaqs;
+export default CreateOrders;

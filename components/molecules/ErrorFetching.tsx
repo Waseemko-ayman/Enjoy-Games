@@ -12,7 +12,7 @@ const ErrorFetching = () => {
     location.reload();
   };
   return (
-    <div className="text-center px-3 mt-10 relative z-20">
+    <div className="text-center px-3 pb-10 mt-10 relative z-20">
       <Image
         src="/assets/cloud.png"
         alt="Cloud with a lightning bolt"

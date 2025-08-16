@@ -415,7 +415,8 @@
     "sliders": "Sliders",
     "faqs": "Faqs",
     "tickets": "Tickets",
-    "ratings": "Ratings"
+    "ratings": "Ratings",
+    "orders": "Orders"
   },
   "Dashboard": {
     "desc": "Welcome to your order management orders",
@@ -431,6 +432,8 @@
       "total": "Total"
     },
     "Chart": {
+      "selectStartDate": "Select Start Date",
+      "selectEndDate": "Select End Date",
       "ordersCount": "Total Orders",
       "paidOrdersCount": "Paid Orders",
       "ordersAmount": "Orders Amount",
@@ -490,7 +493,14 @@
       "desc": "Create and manage advertisement images for your store",
       "manageSliders": "Manage all advertisement images in one place",
       "createSlider": "Create Slider Image",
-      "createNewSliders": "Create New Slider Images"
+      "createNewSliders": "Create new slider images"
+    },
+    "orders": {
+      "title": "All Orders",
+      "desc": "Create and manage Orders for your store",
+      "manageOrders": "Manage all Orders in one place",
+      "createOrder": "Create Order",
+      "createNewOrder": "Create new order"
     }
   },
   "errorBoundary": {
@@ -572,7 +582,8 @@
     "todayLabel": "Today",
     "lastWeek": "last week",
     "lastMonthly": "last month",
-    "lastYearly": "last year"
+    "lastYearly": "last year",
+    "customRange": "custom Range"
   },
   "Inputs": {
     "labels": {
@@ -592,7 +603,46 @@
       "comment": "Leave a comment",
       "hideMyName": "Hide my name in the customer list",
       "arabicImage": "Image in Arabic",
-      "englishImage": "Image in English"
+      "englishImage": "Image in English",
+      "arabicName": "Name (Arabic)",
+      "englishName": "Name (English)",
+      "icon": "Icon",
+      "image": "Image",
+      "categoryID": "Category",
+      "parentID": "Subcategory",
+      "arabicTitle": "Title (Arabic)",
+      "englishTitle": "Title (English)",
+      "arabicContent": "Content (Arabic)",
+      "englishContent": "Content (English)",
+      "arabicDescription": "Description (Arabic)",
+      "englishDescription": "Description (English)",
+      "price": "Price",
+      "priceBefore": "Old Price",
+      "shippingPayment": "Payment Method",
+      "code": "Code",
+      "accountId": "Account ID",
+      "multiId": "Multiple IDs",
+      "access": "Access / Account Data",
+      "discount": "Discount",
+      "isActive": "Active",
+      "productID": "Product",
+      "value": "Value",
+      "typeCoupon": "Coupon Type",
+      "fixed": "Fixed Amount",
+      "usageLimit": "Usage Limit",
+      "expiresFrom": "Start Date",
+      "expiresAt": "End Date",
+      "allowedUserIds": "Allowed Users",
+      "excludedProductIds": "Excluded Products",
+      "excludedCategoriesIds": "Excluded Categories",
+      "excludedSubcategoryIdds": "Excluded Subcategories",
+      "arabicQuestion": "Question (Arabic)",
+      "englishQuestion": "Question (English)",
+      "arabicAnswer": "Answer (Arabic)",
+      "englishAnswer": "Answer (English)",
+      "subject": "Subject",
+      "message": "Message",
+      "attachments": "Attachments"
     },
     "placeHolders": {
       "haveCoupon": "Do you have a discount coupon?",
@@ -623,7 +673,42 @@
       "searchCopouns": "Search for coupon...",
       "searchFaq": "Search for FAQ...",
       "searchTicket": "Search for ticket...",
-      "searchImage": "Search for image..."
+      "searchImage": "Search for image...",
+      "searchOrder": "Search for order...",
+      "writeArabicName": "Enter name in Arabic",
+      "writeEnglishName": "Enter name in English",
+      "icon": "Icon",
+      "categoryID": "Category",
+      "parentID": "Subcategory",
+      "writeArabicTitle": "Enter title in Arabic",
+      "writeEnglishTitle": "Enter title in English",
+      "writeArabicContent": "Enter content in Arabic",
+      "writeEnglishContent": "Enter content in English",
+      "writeArabicDescription": "Enter description in Arabic",
+      "writeEnglishDescription": "Enter description in English",
+      "writePrice": "Enter price",
+      "writePriceBefore": "Enter old price",
+      "shippingPayment": "Payment Method",
+      "writeDiscount": "Enter discount value",
+      "isActive": "Active",
+      "addImage": "Add image",
+      "productID": "Product",
+      "writeCode": "Enter code",
+      "writeValue": "Enter coupon value",
+      "selectType": "Select type",
+      "writeUsageLimit": "Enter usage limit",
+      "YYYY-MM-DD": "YYYY-MM-DD",
+      "selectUsers": "Select users",
+      "selectProducts": "Select products",
+      "selectCategories": "Select categories",
+      "selectSsubCategories": "Select subcategories",
+      "writeArabicQuestion": "Enter question in Arabic",
+      "writeEnglishQuestion": "Enter question in English",
+      "writeArabicAnswer": "Enter answer in Arabic",
+      "writeEnglishAnswer": "Enter answer in English",
+      "writeSubject": "Enter subject",
+      "writeMessage": "Enter description...",
+      "selectAttachments": "Select files"
     },
     "options": {
       "gender": {
