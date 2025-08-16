@@ -18,8 +18,8 @@ const AllSubCategories = ({
   return (
     <GenericAllTable<SubCategories>
       value={value}
-      title={t('Dashboard.subCategoriesallSubCategories')}
-      description={t('Dashboard.subCategoriesmanageSubCategories')}
+      title={t('Dashboard.subCategories.allSubCategories')}
+      description={t('Dashboard.subCategories.manageSubCategories')}
       apiEndpoint="sub-categories"
       deleteEndpoint="sub-category/delete"
       placeholder={t('Inputs.placeHolders.searchSubCategories')}
