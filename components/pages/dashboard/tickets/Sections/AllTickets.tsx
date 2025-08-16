@@ -13,15 +13,16 @@ const AllTickets = ({
   onTabChange: (val: string) => void;
   onEditIdChange: (id: string | number | null) => void;
 }) => {
-  const t = useTranslations('Tickets.Dashboard');
+  const t = useTranslations();
   return (
     <GenericAllTable<TicketsProps>
       value={value}
-      title={t('allTickets')}
-      description={t('desc')}
+      title={t('Tickets.Dashboard.allTickets')}
+      description={t('Tickets.Dashboard.desc')}
       apiEndpoint="tickets"
       deleteEndpoint="ticket/delete"
       createTabValue="createTickets"
+      placeholder={t('Inputs.placeHolders.searchTicket')}
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
     />

@@ -1,6 +1,7 @@
 'use client';
 import GenericAllTable from '@/components/organism/GenericAllTable';
 import { FAQSDataType } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const AllFaqs = ({
@@ -10,14 +11,17 @@ const AllFaqs = ({
   value: string;
   onTabChange: (val: string) => void;
 }) => {
+  const t = useTranslations();
+
   return (
     <GenericAllTable<FAQSDataType>
       value={value}
-      title="جميع الكوبونات"
-      description="إدارة جميع الكوبونات في مكان واحد"
+      title={t('Dashboard.faqs.title')}
+      description={t('Dashboard.faqs.manageFaqs')}
       apiEndpoint="faqs"
       deleteEndpoint="faq/delete"
       createTabValue="createFaqs"
+      placeholder={t('Inputs.placeHolders.searchFaq')}
       onTabChange={onTabChange}
       showEdit={false}
     />

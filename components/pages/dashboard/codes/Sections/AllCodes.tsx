@@ -2,6 +2,7 @@
 import GenericAllTable from '@/components/organism/GenericAllTable';
 import { useProductCodes } from '@/context/selectedProductId';
 import { CodesResponse } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const AllCodes = ({
@@ -14,15 +15,16 @@ const AllCodes = ({
   onEditIdChange: (id: string | number | null) => void;
 }) => {
   const { selectedProductId } = useProductCodes();
+  const t = useTranslations();
 
   return (
     <GenericAllTable<CodesResponse>
       value={value}
-      title="جميع الأكواد"
-      description="إدارة جميع الأكواد في مكان واحد"
+      title={t('Dashboard.codes.title')}
+      description={t('Dashboard.codes.manageCodes')}
       apiEndpoint={`product/${selectedProductId}/codes`}
       deleteEndpoint="code/delete"
-      placeholder="البحث عن الأكواد..."
+      placeholder={t('Inputs.placeHolders.searchCodes')}
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
       createTabValue="CreateCodes"

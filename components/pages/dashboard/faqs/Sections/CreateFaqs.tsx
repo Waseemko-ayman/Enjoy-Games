@@ -14,15 +14,7 @@ import SettingsTab from '@/components/ui/display/SettingsTab';
 import { useUpdateContent } from '@/context/updateContentContext';
 import { FaqFormData, FAQSDataType } from '@/interfaces';
 import { CreateFaqsFields } from '@/utils/constant';
-
-// ----------------------------------------------------------------
-
-const createSchema = yup.object({
-  questionAr: yup.string().required('السؤال العربي مطلوب'),
-  questionEn: yup.string().required('السؤال الإنجليزي مطلوب'),
-  answerAr: yup.string().required('الجواب العربي مطلوب'),
-  answerEn: yup.string().required('الجواب الإنجليزي مطلوب'),
-});
+import { useTranslations } from 'next-intl';
 
 // ----------------------------------------------------------------
 
@@ -35,6 +27,17 @@ const CreateFaqs = ({
 }) => {
   const { showToast } = useToast();
   const { triggerRefresh } = useUpdateContent();
+  const t = useTranslations();
+  const inputT = useTranslations('Inputs.errorsMsgs');
+
+  // ----------------------------------------------------------------
+
+  const createSchema = yup.object({
+    questionAr: yup.string().required(inputT('arabicQuestionRequired')),
+    questionEn: yup.string().required(inputT('englishQuestionRequired')),
+    answerAr: yup.string().required(inputT('arabicAnswerRequired')),
+    answerEn: yup.string().required(inputT('englishAnswerRequired')),
+  });
 
   // ----------------------------------------------------------------
 
@@ -76,7 +79,11 @@ const CreateFaqs = ({
   };
 
   return (
-    <SettingsTab value={value} title="إنشاء منتج" description="إنشاء منتج جديد">
+    <SettingsTab
+      value={value}
+      title={t('Dashboard.faqs.createFaq')}
+      description={t('Dashboard.faqs.createNewFaqs')}
+    >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="grid gap-5 md:grid-cols-2 mb-5">
           {CreateFaqsFields.map(({ id, label, name, placeholder, type }) => (
@@ -96,7 +103,7 @@ const CreateFaqs = ({
         </div>
 
         <Button type="submit">
-          {isLoading ? <ButtonLoading /> : 'حفظ التغييرات'}
+          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
         </Button>
       </form>
     </SettingsTab>

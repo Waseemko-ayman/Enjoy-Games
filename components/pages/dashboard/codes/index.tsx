@@ -3,17 +3,20 @@ import React from 'react';
 import AllCodes from './Sections/AllCodes';
 import CreateCodes from './Sections/CreateCodes';
 import GenericPage from '@/components/organism/GenericPage';
-
-const tabsData = [
-  { value: 'AllCodes', label: 'جميع الأكواد' },
-  { value: 'CreateCodes', label: 'إنشاء كود' },
-];
+import { useTranslations } from 'next-intl';
 
 const CodesPage = () => {
+  const t = useTranslations('Dashboard.codes');
+
+  const tabsData = [
+    { value: 'AllCodes', label: t('title') },
+    { value: 'CreateCodes', label: t('createCode') },
+  ];
+
   return (
     <GenericPage
-      title="جميع الأكواد"
-      description="قم بإنشاء وإدارة الأكواد لمتجرك"
+      title={t('title')}
+      description={t('desc')}
       tabs={tabsData}
       allComponent={AllCodes}
       createComponent={CreateCodes}

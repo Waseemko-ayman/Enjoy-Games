@@ -23,17 +23,7 @@ import { InputTypes, Option } from '@/utils/type';
 import SettingsTab from '@/components/ui/display/SettingsTab';
 import { useUpdateContent } from '@/context/updateContentContext';
 import { useProductCodes } from '@/context/selectedProductId';
-
-// ----------------------------------------------------------------
-
-const createSchema = yup.object({
-  productID: yup.string().required('المنتج مطلوب'),
-  code: yup.string().required('الكود مطلوب'),
-});
-
-// ----------------------------------------------------------------
-
-type CodeFormData = yup.InferType<typeof createSchema>;
+import { useTranslations } from 'next-intl';
 
 // ----------------------------------------------------------------
 
@@ -51,6 +41,16 @@ const CreateCodes = ({
   const { showToast } = useToast();
   const { triggerRefresh } = useUpdateContent();
   const { setSelectedProductId } = useProductCodes();
+  const t = useTranslations();
+
+  // ----------------------------------------------------------------
+
+  const createSchema = yup.object({
+    productID: yup.string().required(t('Inputs.errorsMsgs.productRequired')),
+    code: yup.string().required(t('Inputs.errorsMsgs.codeRequired')),
+  });
+
+  type CodeFormData = yup.InferType<typeof createSchema>;
 
   // ----------------------------------------------------------------
 
@@ -81,7 +81,7 @@ const CreateCodes = ({
     Array.isArray(productsData) && productsData.length
       ? productsData.map((p: ProductCardProps) => ({
           id: p.id ?? null,
-          name: p.title || 'غير محدد',
+          name: p.title || t('Messages.undefined'),
         }))
       : [];
 
@@ -166,7 +166,11 @@ const CreateCodes = ({
   const isLoading = createLoading || updateLoading;
 
   return (
-    <SettingsTab value={value} title="إنشاء منتج" description="إنشاء منتج جديد">
+    <SettingsTab
+      value={value}
+      title={t('Dashboard.codes.createCode')}
+      description={t('Dashboard.codes.createNewCode')}
+    >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="grid gap-5 md:grid-cols-2 mb-5">
           {CreateCodesFields.map(({ id, label, name, placeholder, type }) => {
@@ -191,7 +195,7 @@ const CreateCodes = ({
           })}
         </div>
         <Button type="submit">
-          {isLoading ? <ButtonLoading /> : 'حفظ التغييرات'}
+          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
         </Button>
       </form>
     </SettingsTab>

@@ -414,7 +414,8 @@
     "codes": "Codes",
     "sliders": "Sliders",
     "faqs": "Faqs",
-    "tickets": "Tickets"
+    "tickets": "Tickets",
+    "ratings": "Ratings"
   },
   "Dashboard": {
     "desc": "Welcome to your order management orders",
@@ -436,6 +437,60 @@
       "paidOrdersAmount": "Paid Orders Amount",
       "loadError": "Error loading chart data",
       "failedLoad": "Failed to load data"
+    },
+    "codes": {
+      "title": "All Codes",
+      "desc": "Create and manage codes for your store",
+      "manageCodes": "Manage all codes in one place",
+      "createCode": "Create a code",
+      "createNewCode": "Create a new code"
+    },
+    "categories": {
+      "title": "Create a section",
+      "desc": "Create and manage categories for your donors",
+      "createCategories": "Create new categories",
+      "manageCategories": "Manage all your categories in one place"
+    },
+    "subCategories": {
+      "allSubCategories": "All Subcategories",
+      "desc": "Manage subcategories to improve and organize main categories",
+      "createSubCategories": "Create Subcategory",
+      "manageSubCategories": "Manage all subcategories in one place",
+      "createNewSubCategories": "Create New Subcategory"
+    },
+    "ratings": {
+      "title": "All Ratings",
+      "allTitle": "All Ratings",
+      "manageRatings": "Manage all ratings in one place"
+    },
+    "products": {
+      "title": "All Products",
+      "desc": "Create and manage products for your store",
+      "manageProducts": "Manage all products in one place",
+      "createProduct": "Create Product",
+      "createNewProduct": "Create New Product"
+    },
+    "coupons": {
+      "title": "All Coupons",
+      "desc": "Create and manage coupons for your store",
+      "manageProducts": "Manage all coupons in one place",
+      "createProduct": "Create Coupon",
+      "createNewProduct": "Create New Coupon"
+    },
+    "faqs": {
+      "title": "All FAQs",
+      "desc": "Create and manage FAQs for your store",
+      "manageFaqs": "Manage all FAQs in one place",
+      "createFaq": "Create Question & Answer",
+      "createNewFaqs": "Create New Question & Answer"
+    },
+    "sliders": {
+      "title": "Slider Images",
+      "allTitle": "All Slider Images",
+      "desc": "Create and manage advertisement images for your store",
+      "manageSliders": "Manage all advertisement images in one place",
+      "createSlider": "Create Slider Image",
+      "createNewSliders": "Create New Slider Images"
     }
   },
   "errorBoundary": {
@@ -535,7 +590,9 @@
       "shipping_method": "Shipping method",
       "unlockAccount": "I have unlocked the account",
       "comment": "Leave a comment",
-      "hideMyName": "Hide my name in the customer list"
+      "hideMyName": "Hide my name in the customer list",
+      "arabicImage": "Image in Arabic",
+      "englishImage": "Image in English"
     },
     "placeHolders": {
       "haveCoupon": "Do you have a discount coupon?",
@@ -557,7 +614,16 @@
       "writeYorName": "write your name...",
       "writeYorEmail": "write your email...",
       "yourPassword": "your password",
-      "repassword": "Confirm password"
+      "repassword": "Confirm password",
+      "searchCategories": "Search for categories...",
+      "searchSubCategories": "Search for sub categories...",
+      "searchCodes": "Search for code...",
+      "searchRating": "Search for rating...",
+      "searchProduct": "Search for product...",
+      "searchCopouns": "Search for coupon...",
+      "searchFaq": "Search for FAQ...",
+      "searchTicket": "Search for ticket...",
+      "searchImage": "Search for image..."
     },
     "options": {
       "gender": {
@@ -588,7 +654,34 @@
       "subjectRequired": "Subject is required",
       "ticketTypeRequired": "Ticket type is required",
       "detailsRequired": "Description is required",
-      "selectStars": "Please select a star rating"
+      "selectStars": "Please select a star rating",
+      "productRequired": "Product Required",
+      "codeRequired": "Code Required",
+      "arabicNameRequired": "Arabic name required",
+      "englishNameRequired": "Arabic name required",
+      "iconRequired": "Icon required",
+      "arabicTitleRequired": "Arabic title is required",
+      "englishTitleRequired": "English title is required",
+      "categoryRequired": "Category is required",
+      "subCategoryRequired": "Subcategory is required",
+      "arabicContentRequired": "Arabic content is required",
+      "englishContentRequired": "English content is required",
+      "arabicDescriptionRequired": "Arabic description is required",
+      "englishDescriptionRequired": "English description is required",
+      "priceRequired": "Price is required",
+      "shippingPaymentRequired": "Payment method is required",
+      "couponRequired": "Coupon code is required",
+      "valueRequired": "Value is required",
+      "typeCouponRequired": "Coupon type is required",
+      "usageLimitRequired": "Usage limit is required",
+      "expiresFromRequired": "Start date is required",
+      "expiresAtRequired": "End date is required",
+      "arabicQuestionRequired": "Arabic question is required",
+      "englishQuestionRequired": "English question is required",
+      "arabicAnswerRequired": "Arabic answer is required",
+      "englishAnswerRequired": "English answer is required",
+      "arabicImageRequired": "Arabic image is required",
+      "englishImageRequired": "English image is required"
     }
   },
   "Auth": {
@@ -641,7 +734,8 @@
   "Messages": {
     "errorMessage": "Sorry! Something went wrong.",
     "addedToCart": "Added to cart",
-    "removedFromCart": "Removed from cart"
+    "removedFromCart": "Removed from cart",
+    "undefined": "undefined"
   },
   "Languages": {
     "english": "English",

@@ -1,6 +1,7 @@
 'use client';
 import GenericAllTable from '@/components/organism/GenericAllTable';
 import { CategoryResponse } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const AllCategories = ({
@@ -12,14 +13,16 @@ const AllCategories = ({
   onTabChange: (val: string) => void;
   onEditIdChange: (id: string | number | null) => void;
 }) => {
+  const t = useTranslations();
+
   return (
     <GenericAllTable<CategoryResponse>
       value={value}
-      title="جميع الأقسام"
-      description="إدارة جميع فئاتك في مكان واحد"
+      title={t('Layout.header.navBar.allCategories')}
+      description={t('Dashboard.categories.manageCategories')}
       apiEndpoint="categories"
       deleteEndpoint="category/delete"
-      placeholder="البحث عن الفئات..."
+      placeholder={t('Inputs.placeHolders.searchCategories')}
       createTabValue="createCategory"
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}

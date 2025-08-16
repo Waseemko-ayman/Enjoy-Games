@@ -3,17 +3,19 @@ import React from 'react';
 import AllCategories from './Sections/AllCategories';
 import CreateCategories from './Sections/CreateCategories';
 import GenericPage from '@/components/organism/GenericPage';
-
-const tabsData = [
-  { value: 'allCategories', label: 'جميع الأقسام' },
-  { value: 'createCategory', label: 'إنشاء قسم' },
-];
+import { useTranslations } from 'next-intl';
 
 const CategoriesPage = () => {
+  const t = useTranslations();
+
+  const tabsData = [
+    { value: 'allCategories', label: t('Layout.header.navBar.allCategories') },
+    { value: 'createCategory', label: t('Dashboard.categories.title') },
+  ];
   return (
     <GenericPage
-      title="الأقسام"
-      description="قم بإنشاء وإدارة الأقسام للمتبرعين لديك"
+      title={t('SectionsTitles.categories')}
+      description={t('Dashboard.categories.desc')}
       tabs={tabsData}
       allComponent={AllCategories}
       createComponent={CreateCategories}

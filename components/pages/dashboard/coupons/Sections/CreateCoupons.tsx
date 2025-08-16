@@ -20,27 +20,7 @@ import {
   ProductCardProps,
   SubCategories,
 } from '@/interfaces';
-
-// ----------------------------------------------------------------
-
-const createSchema = yup.object({
-  code: yup.string().required('الكود مطلوب'),
-  value: yup.string().required('القيمة مطلوبة'),
-  type: yup.string().oneOf(['fixed', 'percent']).required('نوع الكوبون مطلوب'),
-  usage_limit: yup.string().required('حد الاستخدام مطلوب'),
-  expires_from: yup.string().required('تاريخ البداية مطلوب'),
-  expires_at: yup.string().required('تاريخ الانتهاء مطلوب'),
-  allowed_user_ids: yup.array().of(yup.number()).nullable(),
-  excluded_product_ids: yup.array().of(yup.number()).nullable(),
-  excluded_categories_ids: yup.array().of(yup.number()).nullable(),
-  excluded_subcategory_ids: yup.array().of(yup.number()).nullable(),
-});
-
-// ----------------------------------------------------------------
-
-type CouponFormData = yup.InferType<typeof createSchema>;
-
-// ----------------------------------------------------------------
+import { useTranslations } from 'next-intl';
 
 const CreateCoupons = ({
   value,
@@ -51,6 +31,28 @@ const CreateCoupons = ({
 }) => {
   const { showToast } = useToast();
   const { triggerRefresh } = useUpdateContent();
+  const t = useTranslations();
+  const inputT = useTranslations('Inputs.errorsMsgs');
+
+  // ----------------------------------------------------------------
+
+  const createSchema = yup.object({
+    code: yup.string().required(inputT('couponRequired')),
+    value: yup.string().required(inputT('valueRequired')),
+    type: yup
+      .string()
+      .oneOf(['fixed', 'percent'])
+      .required(inputT('typeCouponRequired')),
+    usage_limit: yup.string().required(inputT('usageLimitRequired')),
+    expires_from: yup.string().required(inputT('expiresFromRequired')),
+    expires_at: yup.string().required(inputT('expiresAtRequired')),
+    allowed_user_ids: yup.array().of(yup.number()).nullable(),
+    excluded_product_ids: yup.array().of(yup.number()).nullable(),
+    excluded_categories_ids: yup.array().of(yup.number()).nullable(),
+    excluded_subcategory_ids: yup.array().of(yup.number()).nullable(),
+  });
+
+  type CouponFormData = yup.InferType<typeof createSchema>;
 
   // ----------------------------------------------------------------
 
@@ -67,36 +69,36 @@ const CreateCoupons = ({
 
   // Contain Null Value
   // const categoriesOptions = [
-  //   { id: null, name: 'غير محدد' },
+  //   { id: null, name: t("Messages.undefined") },
   //   ...(optionsData?.categories?.map((c: CategoryResponse, idx: number) => ({
   //     id: c.id ?? `cat-temp-${idx}`,
-  //     name: c.name || 'غير محدد',
+  //     name: c.name || t("Messages.undefined"),
   //   })) ?? []),
   // ];
 
   const categoriesOptions =
     optionsData?.categories?.map((c: CategoryResponse, idx: number) => ({
       id: c.id ?? `cat-temp-${idx}`,
-      name: c.name || 'غير محدد',
+      name: c.name || t('Messages.undefined'),
     })) ?? [];
 
   const subCategoriesOptions =
     optionsData?.sub_categories?.map((s: SubCategories, idx: number) => ({
       id: s.id ?? `sub-temp-${idx}`,
-      name: s.name || 'غير محدد',
+      name: s.name || t('Messages.undefined'),
     })) ?? [];
 
   const productsOptions =
     optionsData?.products?.map((p: ProductCardProps, idx: number) => ({
       id: p.id ?? `prod-temp-${idx}`,
-      name: p.title || 'غير محدد',
+      name: p.title || t('Messages.undefined'),
     })) ?? [];
 
   const usersOptions =
     optionsData?.users?.map(
       (u: { id: number; name: string | null }, idx: number) => ({
         id: u.id ?? `user-temp-${idx}`,
-        name: u.name || 'غير محدد',
+        name: u.name || t('Messages.undefined'),
       })
     ) ?? [];
 
@@ -145,7 +147,11 @@ const CreateCoupons = ({
   }, [getOptions]);
 
   return (
-    <SettingsTab value={value} title="إنشاء منتج" description="إنشاء منتج جديد">
+    <SettingsTab
+      value={value}
+      title={t('Dashboard.coupons.createProduct')}
+      description={t('Dashboard.coupons.createNewProduct')}
+    >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="grid gap-5 md:grid-cols-2 mb-5">
           {CreateCouponsFields.map(
@@ -201,7 +207,7 @@ const CreateCoupons = ({
         </div>
 
         <Button type="submit">
-          {isLoading ? <ButtonLoading /> : 'حفظ التغييرات'}
+          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
         </Button>
       </form>
     </SettingsTab>

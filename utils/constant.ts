@@ -1,8 +1,9 @@
 import { Home } from 'lucide-react';
-import { FaBox, FaImages, FaList, FaSitemap } from 'react-icons/fa6';
+import { FaBox, FaImages, FaList, FaSitemap, FaStar } from 'react-icons/fa6';
 import { IoBarcodeSharp } from 'react-icons/io5';
-import { FaQuestionCircle, FaTachometerAlt } from 'react-icons/fa';
+import { FaQuestionCircle, FaTachometerAlt, FaTicketAlt } from 'react-icons/fa';
 import { PATHS } from '@/data/paths';
+import { MdLocalOffer } from 'react-icons/md';
 
 export const sidebarLinks = [
   {
@@ -33,7 +34,7 @@ export const sidebarLinks = [
   {
     title: 'coupons',
     href: PATHS.DASHBOARD.COUPONS,
-    icon: FaBox,
+    icon: MdLocalOffer,
   },
   {
     title: 'codes',
@@ -50,11 +51,16 @@ export const sidebarLinks = [
     href: PATHS.DASHBOARD.FAQS,
     icon: FaQuestionCircle,
   },
-  // {
-  //   title: 'tickets',
-  //   href: PATHS.DASHBOARD.TICKETS,
-  //   icon: FaTicketAlt,
-  // },
+  {
+    title: 'tickets',
+    href: PATHS.DASHBOARD.TICKETS,
+    icon: FaTicketAlt,
+  },
+  {
+    title: 'ratings',
+    href: PATHS.DASHBOARD.RATINGS,
+    icon: FaStar,
+  },
   // {
   //   title: 'Payment Gateways',
   //   href: PATHS.DASHBOARD.PAYMENT_GATEWAYS,

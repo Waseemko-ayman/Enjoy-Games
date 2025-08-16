@@ -4,13 +4,13 @@ import AllTickets from './Sections/AllTickets';
 import CreateTickets from './Sections/CreateTickets';
 import { useTranslations } from 'next-intl';
 
-const tabsData = [
-  { value: 'allTickets', label: 'جميع التذاكر' },
-  { value: 'createTickets', label: 'إنشاء تذكرة' },
-];
-
 const TicketsPage = () => {
   const t = useTranslations();
+
+  const tabsData = [
+    { value: 'allTickets', label: t('Tickets.Dashboard.allTickets') },
+    { value: 'createTickets', label: t('Tickets.Dashboard.createTicket') },
+  ];
   return (
     <GenericPage
       title={t('PagesHeaderTitles.tickets')}

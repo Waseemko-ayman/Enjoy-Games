@@ -15,7 +15,7 @@ interface GenericPageProps {
     onTabChange: (val: string) => void;
     onEditIdChange: (id: string | number | null) => void;
   }>;
-  createComponent: React.ComponentType<{
+  createComponent?: React.ComponentType<{
     value: string;
     editId: string | number | null;
     onTabChange: (val: string) => void;
@@ -49,12 +49,14 @@ const GenericPage = ({
           onTabChange={setActiveTab}
           onEditIdChange={setEditId}
         />
-        <CreateComponent
+        {CreateComponent && (
+          <CreateComponent
           value={tabs[1].value}
           editId={editId}
           onTabChange={setActiveTab}
           onEditIdChange={setEditId}
         />
+        )}
       </Tabs>
     </Layer>
   );
