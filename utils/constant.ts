@@ -52,21 +52,21 @@ export const sidebarLinks = [
     href: PATHS.DASHBOARD.FAQS,
     icon: FaQuestionCircle,
   },
-  {
-    title: 'tickets',
-    href: PATHS.DASHBOARD.TICKETS,
-    icon: FaTicketAlt,
-  },
+  // {
+  //   title: 'tickets',
+  //   href: PATHS.DASHBOARD.TICKETS,
+  //   icon: FaTicketAlt,
+  // },
   {
     title: 'ratings',
     href: PATHS.DASHBOARD.RATINGS,
     icon: FaStar,
   },
-  {
-    title: 'orders',
-    href: PATHS.DASHBOARD.ORDERS,
-    icon: FiShoppingCart,
-  },
+  // {
+  //   title: 'orders',
+  //   href: PATHS.DASHBOARD.ORDERS,
+  //   icon: FiShoppingCart,
+  // },
   // {
   //   title: 'Payment Gateways',
   //   href: PATHS.DASHBOARD.PAYMENT_GATEWAYS,

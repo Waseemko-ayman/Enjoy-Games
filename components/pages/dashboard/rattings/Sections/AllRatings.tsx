@@ -26,6 +26,7 @@ const AllRatings = ({
       placeholder={t('Inputs.placeHolders.searchRating')}
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
+      showEdit={false}
     />
   );
 };
