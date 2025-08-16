@@ -52,11 +52,11 @@ export const sidebarLinks = [
     href: PATHS.DASHBOARD.FAQS,
     icon: FaQuestionCircle,
   },
-  {
-    title: 'tickets',
-    href: PATHS.DASHBOARD.TICKETS,
-    icon: FaTicketAlt,
-  },
+  // {
+  //   title: 'tickets',
+  //   href: PATHS.DASHBOARD.TICKETS,
+  //   icon: FaTicketAlt,
+  // },
   {
     title: 'ratings',
     href: PATHS.DASHBOARD.RATINGS,
