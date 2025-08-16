@@ -1,6 +1,7 @@
 'use client';
 import GenericAllTable from '@/components/organism/GenericAllTable';
 import { Slider } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const AllImageSlider = ({
@@ -10,14 +11,17 @@ const AllImageSlider = ({
   value: string;
   onTabChange: (val: string) => void;
 }) => {
+  const t = useTranslations();
+
   return (
     <GenericAllTable<Slider>
       value={value}
-      title="جميع صور السلايدر"
-      description="إدارة جميع صور السلايدر في مكان واحد"
+      title={t('Dashboard.sliders.allTitle')}
+      description={t('Dashboard.sliders.manageSliders')}
       apiEndpoint="sliders"
       deleteEndpoint="slider"
       createTabValue="CreateImagesSlider"
+      placeholder={t('Inputs.placeHolders.searchImage')}
       onTabChange={onTabChange}
       showEdit={false}
     />

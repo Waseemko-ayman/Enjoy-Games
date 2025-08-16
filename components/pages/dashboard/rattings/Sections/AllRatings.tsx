@@ -1,10 +1,10 @@
 'use client';
 import GenericAllTable from '@/components/organism/GenericAllTable';
-import { CouponProps } from '@/interfaces';
+import { ProductCardProps } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-const AllCoupons = ({
+const AllRatings = ({
   value,
   onTabChange,
   onEditIdChange,
@@ -16,19 +16,18 @@ const AllCoupons = ({
   const t = useTranslations();
 
   return (
-    <GenericAllTable<CouponProps>
+    <GenericAllTable<ProductCardProps>
       value={value}
-      title={t('Dashboard.coupons.title')}
-      description={t('Dashboard.coupons.manageProducts')}
-      apiEndpoint="coupons"
-      deleteEndpoint="coupon/delete"
-      createTabValue="CreateCoupons"
-      placeholder={t('Inputs.placeHolders.searchCopouns')}
+      title={t('Dashboard.ratings.allTitle')}
+      description={t('Dashboard.ratings.manageCodes')}
+      apiEndpoint="rating"
+      deleteEndpoint="rating/delete"
+      createTabValue="createRatings"
+      placeholder={t('Inputs.placeHolders.searchRating')}
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
-      showEdit={false}
     />
   );
 };
 
-export default AllCoupons;
+export default AllRatings;

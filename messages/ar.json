@@ -372,7 +372,9 @@
         "desc": "قم بإنشاء وإدارة التذاكر لمتجرك"
       },
       "allTickets": "جميع التذاكر",
-      "desc": "إدارة جميع التذاكر في مكان واحد"
+      "desc": "إدارة جميع التذاكر في مكان واحد",
+      "createTicket": "إنشاء تذكرة",
+      "createNewTicket": "إنشاء تذكرة جديدة جديد"
     }
   },
   "productDetails": {
@@ -414,7 +416,8 @@
     "codes": "الأكواد",
     "sliders": "السلايدرز",
     "faqs": "الأسئلة الشائعة",
-    "tickets": "تذاكر الدعم الفني"
+    "tickets": "تذاكر الدعم الفني",
+    "ratings": "التقييمات"
   },
   "Dashboard": {
     "desc": "مرحباً بكم في إدارة طلباتكم",
@@ -436,6 +439,60 @@
       "paidOrdersAmount": "مبلغ الطلبات المدفوعة",
       "loadError": "خطأ في تحميل بيانات المخطط",
       "failedLoad": "فشل تحميل البيانات"
+    },
+    "codes": {
+      "title": "جميع الأكواد",
+      "desc": "قم بإنشاء وإدارة الأكواد لمتجرك",
+      "manageCodes": "إدارة جميع الأكواد في مكان واحد",
+      "createCode": "إنشاء كود",
+      "createNewCode": "إنشاء كود جديد"
+    },
+    "categories": {
+      "title": "إنشاء قسم",
+      "desc": "قم بإنشاء وإدارة الأقسام للمتبرعين لديك",
+      "createCategories": "إنشاء تصنيفات جديدة",
+      "manageCategories": "إدارة جميع فئاتك في مكان واحد"
+    },
+    "subCategories": {
+      "allSubCategories": "جميع الأقسام الفرعية",
+      "desc": "قم بإدارة الأقسام الفرعية لتحسين وتنظيم الأقسام الرئيسية",
+      "createSubCategories": "إنشاء قسم فرعي",
+      "manageSubCategories": "إدارة جميع الأقسام الفرعية في مكان واحد",
+      "createNewSubCategories": "إنشاء قسم فرعي جديد"
+    },
+    "ratings": {
+      "title": "جميع التقييمات",
+      "allTitle": "جميع التقييمات",
+      "manageRatings": "إدارة جميع التقييمات في مكان واحد"
+    },
+    "products": {
+      "title": "جميع المنتجات",
+      "desc": "قم بإنشاء وإدارة المنتجات لمتجرك",
+      "manageProducts": "إدارة جميع المنتجات في مكان واحد",
+      "createProduct": "إنشاء منتج",
+      "createNewProduct": "إنشاء منتج جديد"
+    },
+    "coupons": {
+      "title": "جميع الكوبونات",
+      "desc": "قم بإنشاء وإدارة الكوبونات لمتجرك",
+      "manageProducts": "إدارة جميع الكوبونات في مكان واحد",
+      "createProduct": "إنشاء كوبون",
+      "createNewProduct": "إنشاء كوبون جديد"
+    },
+    "faqs": {
+      "title": "جميع الأسئلة الشائعة",
+      "desc": "قم بإنشاء وإدارة الأسئلة الشائعة لمتجرك",
+      "manageFaqs": "إدارة جميع الأسئلة الشائعة في مكان واحد",
+      "createFaq": "إنشاء سؤال وجواب",
+      "createNewFaqs": "إنشاء سؤال وجواب جديدين"
+    },
+    "sliders": {
+      "title": "صور السلايدر",
+      "allTitle": "جميع صور السلايدر",
+      "desc": "قم بإنشاء وإدارة صور الإعلانات لمتجرك",
+      "manageSliders": "إدارة جميع صور الإعلانات في مكان واحد",
+      "createSlider": "إنشاء صور سلايدر",
+      "createNewSliders": "إنشاء صور سلايدر جدد"
     }
   },
   "errorBoundary": {
@@ -535,7 +592,9 @@
       "shipping_method": "طريقة الشحن",
       "unlockAccount": "قد قمت بالغاء القفل من الحساب",
       "comment": "اترك تعليق",
-      "hideMyName": "لا تظهر إسمي فى قائمة العملاء"
+      "hideMyName": "لا تظهر إسمي فى قائمة العملاء",
+      "arabicImage": "الصورة بالعربية",
+      "englishImage": "الصورة بالإنجليزية"
     },
     "placeHolders": {
       "haveCoupon": "هل لديك كوبون خصم؟",
@@ -557,7 +616,16 @@
       "writeYorName": "أكتب إسمك...",
       "writeYorEmail": "أكتب إيميلك...",
       "yourPassword": "كلمة المرور الخاصة بك",
-      "repassword": "تأكيد كلمة المرور"
+      "repassword": "تأكيد كلمة المرور",
+      "searchCategories": "البحث عن الفئات...",
+      "searchSubCategories": "البحث عن الفئات الفرعية...",
+      "searchCodes": "البحث عن الكود...",
+      "searchRating": "البحث عن تقييم...",
+      "searchProduct": "البحث عن منتج...",
+      "searchCopouns": "البحث عن كوبون...",
+      "searchFaq": "البحث عن سؤال...",
+      "searchTicket": "البحث عن تذكرة...",
+      "searchImage": "البحث عن صورة..."
     },
     "options": {
       "gender": {
@@ -588,7 +656,34 @@
       "subjectRequired": "العنوان مطلوب",
       "ticketTypeRequired": "نوع التذكرة مطلوب",
       "detailsRequired": "الوصف مطلوب",
-      "selectStars": "الرجاء اختيار تصنيف النجوم"
+      "selectStars": "الرجاء اختيار تصنيف النجوم",
+      "productRequired": "المنتج مطلوب",
+      "codeRequired": "الكود مطلوب",
+      "arabicNameRequired": "الإسم العربي مطلوب",
+      "englishNameRequired": "الإسم الإنجليزي مطلوب",
+      "iconRequired": "الأيقونة مطلوبة",
+      "arabicTitleRequired": "العنوان العربي مطلوب",
+      "englishTitleRequired": "العنوان الإنجليزي مطلوب",
+      "categoryRequired": "القسم مطلوب",
+      "subCategoryRequired": "القسم الفرعي مطلوب",
+      "arabicContentRequired": "المحتوى العربي مطلوب",
+      "englishContentRequired": "المحتوى الإنجليزي مطلوب",
+      "arabicDescriptionRequired": "الوصف العربي مطلوب",
+      "englishDescriptionRequired": "الوصف الإنجليزي مطلوب",
+      "priceRequired": "السعر مطلوب",
+      "shippingPaymentRequired": "طريقة الدفع مطلوبة",
+      "couponRequired": "الكود مطلوب",
+      "valueRequired": "القيمة مطلوبة",
+      "typeCouponRequired": "نوع الكوبون مطلوب",
+      "usageLimitRequired": "حد الاستخدام مطلوب",
+      "expiresFromRequired": "تاريخ البداية مطلوب",
+      "expiresAtRequired": "تاريخ الانتهاء مطلوب",
+      "arabicQuestionRequired": "السؤال العربي مطلوب",
+      "englishQuestionRequired": "السؤال الإنجليزي مطلوب",
+      "arabicAnswerRequired": "الجواب العربي مطلوب",
+      "englishAnswerRequired": "الجواب الإنجليزي مطلوب",
+      "arabicImageRequired": "الصورة بالعربية مطلوبة",
+      "englishImageRequired": "الصورة بالإنجليزية مطلوبة"
     }
   },
   "Auth": {
@@ -641,7 +736,8 @@
   "Messages": {
     "errorMessage": "عفواً! حدث خطأ ما",
     "addedToCart": "تمت الإضافة إلى السلة",
-    "removedFromCart": "تم الحذف من السلة"
+    "removedFromCart": "تم الحذف من السلة",
+    "undefined": "غير محدد"
   },
   "Languages": {
     "english": "إنجليزي",

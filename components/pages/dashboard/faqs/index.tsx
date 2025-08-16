@@ -2,17 +2,19 @@ import GenericPage from '@/components/organism/GenericPage';
 import React from 'react';
 import AllFaqs from './Sections/AllFaqs';
 import CreateFaqs from './Sections/CreateFaqs';
-
-const tabsData = [
-  { value: 'allFaqs', label: 'جميع الأسئلة الشائعة' },
-  { value: 'createFaqs', label: 'إنشاء سؤال' },
-];
+import { useTranslations } from 'next-intl';
 
 const FaqsPage = () => {
+  const t = useTranslations('Dashboard.faqs');
+  const tabsData = [
+    { value: 'allFaqs', label: t('title') },
+    { value: 'createFaqs', label: t('createFaq') },
+  ];
+
   return (
     <GenericPage
-      title="جميع الأسئلة الشائعة"
-      description="قم بإنشاء وإدارة الأسئلة لمتجرك"
+      title={t('title')}
+      description={t('desc')}
       tabs={tabsData}
       allComponent={AllFaqs}
       createComponent={CreateFaqs}

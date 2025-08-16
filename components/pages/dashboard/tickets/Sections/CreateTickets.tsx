@@ -21,18 +21,7 @@ import { useUpdateContent } from '@/context/updateContentContext';
 import { TicketResponse } from '@/interfaces';
 import Image from 'next/image';
 import { FaX } from 'react-icons/fa6';
-
-// ----------------------------------------------------------------
-
-const createSchema = yup.object({
-  subject: yup.string().required('العنوان مطلوب'),
-  message: yup.string().required('الوصف مطلوب'),
-  attachments: yup.array().of(yup.mixed<File>()).optional(),
-});
-
-// ----------------------------------------------------------------
-
-type TicketFormData = yup.InferType<typeof createSchema>;
+import { useTranslations } from 'next-intl';
 
 // ----------------------------------------------------------------
 
@@ -47,6 +36,18 @@ const CreateTickets = ({
   const { triggerRefresh } = useUpdateContent();
   const [attachments, setAttachments] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const t = useTranslations();
+  const inputT = useTranslations('Inputs.errorsMsgs');
+
+  // ----------------------------------------------------------------
+
+  const createSchema = yup.object({
+    subject: yup.string().required(inputT('subjectRequired')),
+    message: yup.string().required(inputT('detailsRequired')),
+    attachments: yup.array().of(yup.mixed<File>()).optional(),
+  });
+
+  type TicketFormData = yup.InferType<typeof createSchema>;
 
   // ----------------------------------------------------------------
 
@@ -110,7 +111,11 @@ const CreateTickets = ({
   };
 
   return (
-    <SettingsTab value={value} title="إنشاء منتج" description="إنشاء منتج جديد">
+    <SettingsTab
+      value={value}
+      title={t('Tickets.Dashboard.createTicket')}
+      description={t('Tickets.Dashboard.createNewTicket')}
+    >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="grid gap-5 md:grid-cols-2 mb-5">
           {CreateTicketsFields.map(({ id, label, name, placeholder, type }) =>
@@ -188,7 +193,7 @@ const CreateTickets = ({
         )}
 
         <Button type="submit">
-          {isLoading ? <ButtonLoading /> : 'حفظ التغييرات'}
+          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
         </Button>
       </form>
     </SettingsTab>

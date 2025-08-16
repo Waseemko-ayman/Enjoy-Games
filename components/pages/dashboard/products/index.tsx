@@ -3,17 +3,20 @@ import React from 'react';
 import AllProducts from './Sections/AllProducts';
 import CreateProducts from './Sections/CreateProducts';
 import GenericPage from '@/components/organism/GenericPage';
-
-const tabsData = [
-  { value: 'allProducts', label: 'جميع المنتجات' },
-  { value: 'createProducts', label: 'إنشاء منتج' },
-];
+import { useTranslations } from 'next-intl';
 
 const ProductsPage = () => {
+  const t = useTranslations();
+
+  const tabsData = [
+    { value: 'allProducts', label: t('Dashboard.products.title') },
+    { value: 'createProducts', label: t('Dashboard.products.createNewCode') },
+  ];
+
   return (
     <GenericPage
-      title="المنتجات"
-      description="قم بإنشاء وإدارة المنتجات لمتجرك"
+      title={t('SectionsTitles.products')}
+      description={t('Dashboard.products.desc')}
       tabs={tabsData}
       allComponent={AllProducts}
       createComponent={CreateProducts}

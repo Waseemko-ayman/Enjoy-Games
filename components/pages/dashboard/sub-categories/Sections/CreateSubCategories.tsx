@@ -18,6 +18,7 @@ import {
   subCategoryFormData,
   suCategoryResponse,
 } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 
 // ----------------------------------------------------------------
 
@@ -30,27 +31,6 @@ function mapToOptions(
     ...items.map((item) => ({ id: item.id, name: item.name })),
   ];
 }
-
-// ----------------------------------------------------------------
-
-const createSchema = yup.object({
-  nameAr: yup.string().required('الإسم العربي مطلوب'),
-  nameEn: yup.string().required('الإسم الإنجليزي مطلوب'),
-  categoryID: yup.string().required('القسم مطلوب'),
-  parentID: yup.string().nullable(),
-  icon: yup
-    .mixed<FileList>()
-    .test('required', 'الأيقونة مطلوبة', (value) => {
-      return value instanceof FileList && value.length > 0;
-    })
-    .required('الأيقونة مطلوبة'),
-  image: yup
-    .mixed<FileList>()
-    .test('required', 'الصورة مطلوبة', (value) => {
-      return value instanceof FileList && value.length > 0;
-    })
-    .required('الصورة مطلوبة'),
-});
 
 // ----------------------------------------------------------------
 
@@ -67,6 +47,29 @@ const CreateSubCategories = ({
 }) => {
   const { triggerRefresh } = useUpdateContent();
   const { showToast } = useToast();
+  const t = useTranslations();
+  const inputT = useTranslations('Inputs.errorsMsgs');
+
+  // ----------------------------------------------------------------
+
+  const createSchema = yup.object({
+    nameAr: yup.string().required(inputT('arabicNameRequired')),
+    nameEn: yup.string().required(inputT('englishNameRequired')),
+    categoryID: yup.string().required(inputT('categoryRequired')),
+    parentID: yup.string().nullable(),
+    icon: yup
+      .mixed<FileList>()
+      .test('required', inputT('iconRequired'), (value) => {
+        return value instanceof FileList && value.length > 0;
+      })
+      .required(inputT('iconRequired')),
+    image: yup
+      .mixed<FileList>()
+      .test('required', inputT('avatarRequired'), (value) => {
+        return value instanceof FileList && value.length > 0;
+      })
+      .required(inputT('avatarRequired')),
+  });
 
   // ----------------------------------------------------------------
 
@@ -223,8 +226,8 @@ const CreateSubCategories = ({
   return (
     <SettingsTab
       value={value}
-      title="إنشاء قسم فرعي"
-      description="إنشاء قسم فرعي جديد"
+      title={t('Dashboard.subCategories.createSubCategories')}
+      description={t('Dashboard.subCategories.createNewSubCategories')}
     >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="grid gap-5 md:grid-cols-2 mb-5">
@@ -282,7 +285,7 @@ const CreateSubCategories = ({
           </div>
         )} */}
         <Button type="submit">
-          {isLoading ? <ButtonLoading /> : 'حفظ التغييرات'}
+          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
         </Button>
       </form>
     </SettingsTab>

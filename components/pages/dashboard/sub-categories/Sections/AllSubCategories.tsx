@@ -1,6 +1,7 @@
 'use client';
 import GenericAllTable from '@/components/organism/GenericAllTable';
 import { SubCategories } from '@/interfaces';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const AllSubCategories = ({
@@ -12,14 +13,16 @@ const AllSubCategories = ({
   onTabChange: (val: string) => void;
   onEditIdChange: (id: string | number | null) => void;
 }) => {
+  const t = useTranslations();
+
   return (
     <GenericAllTable<SubCategories>
       value={value}
-      title="جميع الأقسام الفرعية"
-      description="إدارة جميع الأقسام الفرعية في مكان واحد"
+      title={t('Dashboard.subCategoriesallSubCategories')}
+      description={t('Dashboard.subCategoriesmanageSubCategories')}
       apiEndpoint="sub-categories"
       deleteEndpoint="sub-category/delete"
-      placeholder="البحث عن الفئات الفرعية..."
+      placeholder={t('Inputs.placeHolders.searchSubCategories')}
       createTabValue="createSubCategory"
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}

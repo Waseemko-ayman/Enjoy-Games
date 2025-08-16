@@ -15,25 +15,7 @@ import ButtonLoading from '@/components/atomic/ButtonLoading';
 import { useToast } from '@/lib/toast';
 import { useUpdateContent } from '@/context/updateContentContext';
 import { useEffect } from 'react';
-
-// ----------------------------------------------------------------
-
-const createSchema = yup.object({
-  nameAr: yup.string().required('الإسم العربي مطلوب'),
-  nameEn: yup.string().required('الإسم الإنجليزي مطلوب'),
-  icon: yup
-    .mixed<FileList>()
-    .test('required', 'الأيقونة مطلوبة', (value) => {
-      return value instanceof FileList && value.length > 0;
-    })
-    .required('الأيقونة مطلوبة'),
-  image: yup
-    .mixed<FileList>()
-    .test('required', 'الصورة مطلوبة', (value) => {
-      return value instanceof FileList && value.length > 0;
-    })
-    .required('الصورة مطلوبة'),
-});
+import { useTranslations } from 'next-intl';
 
 // ----------------------------------------------------------------
 
@@ -50,6 +32,26 @@ const CreateCategories = ({
 }) => {
   const { showToast } = useToast();
   const { triggerRefresh } = useUpdateContent();
+  const t = useTranslations();
+
+  // ----------------------------------------------------------------
+
+  const createSchema = yup.object({
+    nameAr: yup.string().required(t('Inputs.errorsMsgs.arabicNameRequired')),
+    nameEn: yup.string().required(t('Inputs.errorsMsgs.englishNameRequired')),
+    icon: yup
+      .mixed<FileList>()
+      .test('required', t('Inputs.errorsMsgs.iconRequired'), (value) => {
+        return value instanceof FileList && value.length > 0;
+      })
+      .required(t('Inputs.errorsMsgs.iconRequired')),
+    image: yup
+      .mixed<FileList>()
+      .test('required', t('Inputs.errorsMsgs.avatarRequired'), (value) => {
+        return value instanceof FileList && value.length > 0;
+      })
+      .required(t('Inputs.errorsMsgs.avatarRequired')),
+  });
 
   // ----------------------------------------------------------------
 
@@ -149,8 +151,8 @@ const CreateCategories = ({
   return (
     <SettingsTab
       value={value}
-      title="إنشاء قسم"
-      description="إنشاء تصنيفات جديدة"
+      title={t('Dashboard.categories.title')}
+      description={t('Dashboard.categories.createCategories')}
     >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="grid gap-5 md:grid-cols-2 mb-5">
@@ -202,7 +204,7 @@ const CreateCategories = ({
         )} */}
 
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? <ButtonLoading /> : 'حفظ التغييرات'}
+          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
         </Button>
       </form>
     </SettingsTab>

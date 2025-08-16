@@ -13,21 +13,7 @@ import SettingsTab from '@/components/ui/display/SettingsTab';
 import Image from 'next/image';
 import { FaX } from 'react-icons/fa6';
 import { useUpdateContent } from '@/context/updateContentContext';
-
-// ----------------------------------------------------------------
-
-const createSchema = yup.object({
-  imageAr: yup
-    .array()
-    .of(yup.mixed<File>().required('الصورة مطلوبة'))
-    .min(1, 'الصور بالعربية مطلوبة')
-    .required('الصور بالعربية مطلوبة'),
-  imageEn: yup
-    .array()
-    .of(yup.mixed<File>().required('الصورة مطلوبة'))
-    .min(1, 'الصور بالإنجليزية مطلوبة')
-    .required('الصور بالإنجليزية مطلوبة'),
-});
+import { useTranslations } from 'next-intl';
 
 // ----------------------------------------------------------------
 
@@ -52,6 +38,27 @@ const CreateImagesSlider = ({
 
   const { showToast } = useToast();
   const { triggerRefresh } = useUpdateContent();
+  const t = useTranslations();
+  const inputT = useTranslations('Inputs.errorsMsgs');
+
+  // ----------------------------------------------------------------
+
+  const createSchema = yup.object({
+    imageAr: yup
+      .array()
+      .of(yup.mixed<File>().required(inputT('arabicImageRequired')))
+      .min(1, inputT('arabicImageRequired'))
+      .required(inputT('arabicImageRequired')),
+    imageEn: yup
+      .array()
+      .of(yup.mixed<File>().required(inputT('englishImageRequired')))
+      .min(1, inputT('englishImageRequired'))
+      .required(inputT('englishImageRequired')),
+  });
+
+  // ----------------------------------------------------------------
+
+  // API
   const { add, isLoading } = useAPI<FormData, Slider>('slider/create');
 
   // ----------------------------------------------------------------
@@ -137,8 +144,8 @@ const CreateImagesSlider = ({
   return (
     <SettingsTab
       value={value}
-      title="إنشاء سلايدر"
-      description="إنشاء سلايدر جديد"
+      title={t('Dashboard.sliders.createSlider')}
+      description={t('Dashboard.sliders.createNewSliders')}
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -147,7 +154,9 @@ const CreateImagesSlider = ({
       >
         {/* الصور بالعربية */}
         <div>
-          <label className="block mb-1 font-medium">الصور بالعربية</label>
+          <label className="block mb-1 font-medium">
+            {t('Inputs.labels.arabicImage')}
+          </label>
           <input
             type="file"
             accept="image/*"
@@ -188,7 +197,9 @@ const CreateImagesSlider = ({
 
         {/* الصور بالإنجليزية */}
         <div>
-          <label className="block mb-1 font-medium">الصور بالإنجليزية</label>
+          <label className="block mb-1 font-medium">
+            {t('Inputs.labels.englishImage')}
+          </label>
           <input
             type="file"
             accept="image/*"
@@ -228,7 +239,7 @@ const CreateImagesSlider = ({
         </div>
 
         <Button type="submit">
-          {isLoading ? <ButtonLoading /> : 'حفظ التغييرات'}
+          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
         </Button>
       </form>
     </SettingsTab>

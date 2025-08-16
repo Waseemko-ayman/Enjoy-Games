@@ -111,6 +111,65 @@ const DataTableBody = <T extends { id: string | number }>({
                     );
                   }
 
+                  // -----------------------------------------------------------------
+                  // If type of Image = Array
+                  if (
+                    columnKey === 'images' &&
+                    Array.isArray((row as any)[col])
+                  ) {
+                    const images = (row as any)[col] as {
+                      id: number;
+                      image: string;
+                    }[];
+                    return (
+                      <td
+                        key={columnKey}
+                        className="px-6 py-4 max-w-xs whitespace-nowrap overflow-hidden"
+                      >
+                        {images.length > 0 ? (
+                          images.length > 1 ? (
+                            <div className="grid grid-cols-2 gap-1 justify-center">
+                              {images.map((img, idx) => (
+                                <Image
+                                  key={idx}
+                                  // src={`${API_IMAGE_URL}${img}` || '/assets/play-station.webp'}
+                                  src={'/assets/play-station.webp'}
+                                  alt={`image-${idx}`}
+                                  width={80}
+                                  height={80}
+                                  className="rounded-md border border-gray-200"
+                                  onError={(e) => {
+                                    (
+                                      e.currentTarget as HTMLImageElement
+                                    ).style.display = 'none';
+                                  }}
+                                />
+                              ))}
+                            </div>
+                          ) : (
+                            <Image
+                              // src={`${API_IMAGE_URL}${img}` || '/assets/play-station.webp'}
+                              src={'/assets/play-station.webp'}
+                              alt={`image`}
+                              width={100}
+                              height={100}
+                              className="mx-auto rounded-md border border-gray-200"
+                              onError={(e) => {
+                                (
+                                  e.currentTarget as HTMLImageElement
+                                ).style.display = 'none';
+                              }}
+                            />
+                          )
+                        ) : (
+                          'غير متوفر'
+                        )}
+                      </td>
+                    );
+                  }
+
+                  // -----------------------------------------------------------------
+                  // If type of Image = String
                   if (
                     columnKey === 'image' &&
                     typeof (row as any)[col] === 'string'

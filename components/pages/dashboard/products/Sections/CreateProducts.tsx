@@ -20,30 +20,9 @@ import FormField from '@/components/ui/FormField';
 import { InputTypes, ProductOption } from '@/utils/type';
 import SettingsTab from '@/components/ui/display/SettingsTab';
 import { useUpdateContent } from '@/context/updateContentContext';
+import { useTranslations } from 'next-intl';
 
-const createSchema = yup.object({
-  titleAr: yup.string().required('العنوان العربي مطلوب'),
-  titleEn: yup.string().required('العنوان الإنجليزي مطلوب'),
-  categoryID: yup.string().required('القسم مطلوب'),
-  subCategoryID: yup.string().required('القسم الفرعي مطلوب'),
-  contentAr: yup.string().required('المحتوى العربي مطلوب'),
-  contentEn: yup.string().required('المحتوى الإنجليزي مطلوب'),
-  descriptionAr: yup.string().required('الوصف مطلوب'),
-  descriptionEn: yup.string().required('الوصف مطلوب'),
-  price: yup.string().required('السعر مطلوب'),
-  priceBefore: yup.string().nullable(),
-  discount: yup.string().nullable(),
-  isActive: yup.boolean().nullable(),
-  shippingPayment: yup.string().required('طريقة الدفع مطلوبة'),
-  image: yup
-    .mixed<FileList>()
-    .test('required', 'الصورة مطلوبة', (value) => {
-      return value instanceof FileList && value.length > 0;
-    })
-    .required('الصورة مطلوبة'),
-});
-
-type ProductFormData = yup.InferType<typeof createSchema>;
+// ----------------------------------------------------------------
 
 const CreateProducts = ({
   value,
@@ -58,8 +37,34 @@ const CreateProducts = ({
 }) => {
   const { showToast } = useToast();
   const { triggerRefresh } = useUpdateContent();
+  const t = useTranslations();
+  const inputT = useTranslations('Inputs.errorsMsgs');
 
   // ----------------------------------------------------------------
+
+  const createSchema = yup.object({
+    titleAr: yup.string().required(inputT('arabicTitleRequired')),
+    titleEn: yup.string().required(inputT('englishTitleRequired')),
+    categoryID: yup.string().required(inputT('categoryRequired')),
+    subCategoryID: yup.string().required(inputT('subCategoryRequired')),
+    contentAr: yup.string().required(inputT('arabicContentRequired')),
+    contentEn: yup.string().required(inputT('englishContentRequired')),
+    descriptionAr: yup.string().required(inputT('arabicDescriptionRequired')),
+    descriptionEn: yup.string().required(inputT('englishDescriptionRequired')),
+    price: yup.string().required(inputT('priceRequired')),
+    priceBefore: yup.string().nullable(),
+    discount: yup.string().nullable(),
+    isActive: yup.boolean().nullable(),
+    shippingPayment: yup.string().required(inputT('shippingPaymentRequired')),
+    image: yup
+      .mixed<FileList>()
+      .test('required', inputT('avatarRequired'), (value) => {
+        return value instanceof FileList && value.length > 0;
+      })
+      .required(inputT('avatarRequired')),
+  });
+
+  type ProductFormData = yup.InferType<typeof createSchema>;
 
   // API Hook
   // Create Sub Category
@@ -229,7 +234,11 @@ const CreateProducts = ({
   const isLoading = createLoading || updateLoading;
 
   return (
-    <SettingsTab value={value} title="إنشاء منتج" description="إنشاء منتج جديد">
+    <SettingsTab
+      value={value}
+      title={t('Dashboard.products.createProduct')}
+      description={t('Dashboard.products.createNewProduct')}
+    >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="grid gap-5 md:grid-cols-2 mb-5">
           {CreateProductsFields.map(
@@ -287,7 +296,7 @@ const CreateProducts = ({
           </div>
         )} */}
         <Button type="submit">
-          {isLoading ? <ButtonLoading /> : 'حفظ التغييرات'}
+          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
         </Button>
       </form>
     </SettingsTab>
