@@ -32,7 +32,7 @@ import {
   IoMdPricetag,
 } from 'react-icons/io';
 import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
-import { Sparkles, Wallet } from 'lucide-react';
+import { Wallet } from 'lucide-react';
 import { BannerSlide, InputItem, RewardTier } from '@/interfaces';
 import { FaTachometerAlt } from 'react-icons/fa';
 
@@ -475,42 +475,6 @@ export const faqsData = [
     answer:
       'إذا واجهت أي مشكلة، يمكنك التواصل مع الدعم الفني، وسنساعدك في حل المشكلة بأسرع وقت ممكن.',
   },
-];
-
-export const WalletSectionData = [
-  {
-    id: 1,
-    link: PATHS.WALLET.link,
-    title: 'wallet',
-    value: '0',
-    unit: '/assets/saudi_riyal.png',
-    icon: Wallet,
-    bgColor: 'bg-violet-600',
-    textColor: 'text-white',
-    isUnitTranslatable: false,
-  },
-  {
-    id: 2,
-    link: PATHS.STARS.link,
-    title: 'stars',
-    value: '0',
-    unit: 'point',
-    icon: Sparkles,
-    bgColor: 'bg-orange-300',
-    textColor: 'text-[#060919]',
-    isUnitTranslatable: true,
-  },
-  // {
-  //   id: 3,
-  //   link: '#',
-  //   title: 'maxup',
-  //   value: '0',
-  //   unit: '/assets/saudi_riyal.png',
-  //   icon: Wallet,
-  //   bgColor: 'bg-amber-50',
-  //   textColor: 'text-[#060919]',
-  //   isUnitTranslatable: false,
-  // },
 ];
 
 export const inviteStepsData = [

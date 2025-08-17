@@ -1,6 +1,4 @@
-// components/WalletCard.tsx
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { WalletCardProps } from '@/interfaces';
 import useIsMobile from '@/hook/useIsMobile';
@@ -34,12 +32,8 @@ const WalletCard: React.FC<WalletCardProps> = ({
         <h5 className={`${titleSize} font-semibold`}>{title}</h5>
       </div>
       <div className={`${titleSize} font-bold flex items-center gap-2 mt-2.5`}>
-        <span>{value}</span>
-        {isUnitTranslatable ? (
-          <span className="text-base">{unit}</span>
-        ) : (
-          <Image src={unit} alt={unit} width={20} height={20} />
-        )}
+        <div>{value}</div>
+        {isUnitTranslatable && <span className="text-base">{unit}</span>}
       </div>
     </Link>
   );

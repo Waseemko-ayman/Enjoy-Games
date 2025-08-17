@@ -19,6 +19,18 @@ export interface APIRequest {
   refresh: () => void;
 }
 
+export interface TotalPaidData {
+  amount: number;
+  currency: string;
+}
+
+export interface TotalPaidContextType extends APIRequest {
+  totalPaid: TotalPaidData | null;
+  isLoading: boolean;
+  error: any;
+  refresh: () => void;
+}
+
 export interface Category {
   id: number;
   slug: string | null;
@@ -525,8 +537,8 @@ export interface AuthLayoutProps extends SectionComponentProps {
 
 export interface WalletCardProps extends BaseIconProps {
   title: string;
-  value: string;
-  unit: string;
+  value: string | JSX.Element;
+  unit?: string;
   bgColor: string;
   textColor: string;
   pathName: string;
