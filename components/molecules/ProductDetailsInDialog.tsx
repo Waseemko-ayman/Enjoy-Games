@@ -27,6 +27,7 @@ import {
   multiIdInputs,
 } from '@/data';
 import MotionSection from './FramerMotion/MotionSection';
+import { extractText } from '@/utils/extractText';
 
 const Image = lazy(() => import('next/image'));
 
@@ -110,7 +111,7 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
                 </h3>
                 {product?.discount?.amount && (
                   <div className="flex items-center gap-3">
-                    <span className="line-through text-red-500 text-base">
+                    <span className="line-through text-red-500 text-base font-semibold">
                       {product?.price_before?.amount}{' '}
                       {product?.price_before?.currency}
                     </span>
@@ -119,7 +120,8 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
                       className="py-0.5 px-2 flex items-center justify-center"
                     >
                       <span className="text-white text-xs">
-                        {t('rival')} {product?.discount?.amount || 9}%
+                        {t('rival')} {product?.discount?.amount}{' '}
+                        {product?.discount?.currency}
                       </span>
                     </CardWrapper>
                   </div>
@@ -136,10 +138,9 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
               </h3>
             </MotionSection>
             <MotionSection index={5}>
-              <p
-                className="text-[15px] text-gray-500"
-                dangerouslySetInnerHTML={{ __html: product?.content || '' }}
-              />
+              <p className="text-[15px] text-gray-500">
+                {extractText(product?.contentn)}
+              </p>
             </MotionSection>
           </div>
 

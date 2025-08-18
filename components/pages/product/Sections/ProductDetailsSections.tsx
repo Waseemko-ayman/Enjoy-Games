@@ -32,6 +32,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import FormError from '@/components/atomic/FormError';
+import { extractText } from '@/utils/extractText';
 
 const inputQuantityOptions = [
   { id: 1, label: '1' },
@@ -140,7 +141,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
             </h3>
             {product?.discount?.amount && (
               <div className="flex items-center gap-3">
-                <span className="line-through text-red-500 text-base">
+                <span className="line-through text-red-500 text-base font-semibold">
                   {product?.price_before?.amount}{' '}
                   {product?.price_before?.currency}
                 </span>
@@ -149,7 +150,8 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                   className="py-0.5 px-2 flex items-center justify-center"
                 >
                   <span className="text-white text-xs">
-                    {t('rival')} {product?.discount?.amount || 9}%
+                    {t('rival')} {product?.discount?.amount}{' '}
+                    {product?.discount?.currency}
                   </span>
                 </CardWrapper>
               </div>
@@ -187,10 +189,9 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
             </h3>
           </MotionSection>
           <MotionSection index={5}>
-            <p
-              className="text-[15px] text-gray-500"
-              dangerouslySetInnerHTML={{ __html: product?.content || '' }}
-            />
+            <p className="text-[15px] text-gray-500">
+              {extractText(product?.contentn)}
+            </p>
           </MotionSection>
         </div>
 
