@@ -52,21 +52,21 @@ export const sidebarLinks = [
     href: PATHS.DASHBOARD.FAQS,
     icon: FaQuestionCircle,
   },
-  // {
-  //   title: 'tickets',
-  //   href: PATHS.DASHBOARD.TICKETS,
-  //   icon: FaTicketAlt,
-  // },
+  {
+    title: 'tickets',
+    href: PATHS.DASHBOARD.TICKETS,
+    icon: FaTicketAlt,
+  },
   {
     title: 'ratings',
     href: PATHS.DASHBOARD.RATINGS,
     icon: FaStar,
   },
-  // {
-  //   title: 'orders',
-  //   href: PATHS.DASHBOARD.ORDERS,
-  //   icon: FiShoppingCart,
-  // },
+  {
+    title: 'orders',
+    href: PATHS.DASHBOARD.ORDERS.ROOT,
+    icon: FiShoppingCart,
+  },
   // {
   //   title: 'Payment Gateways',
   //   href: PATHS.DASHBOARD.PAYMENT_GATEWAYS,
@@ -76,11 +76,6 @@ export const sidebarLinks = [
   //   title: 'Reports',
   //   href: PATHS.DASHBOARD.REPORTS,
   //   icon: BarChart3,
-  // },
-  // {
-  //   title: 'Notifications',
-  //   href: PATHS.DASHBOARD.NOTIFICATIONS.ROOT,
-  //   icon: Bell,
   // },
   // {
   //   title: 'Settings',
@@ -115,7 +110,7 @@ export const CreateCategoriesFields = [
     id: 'image',
     name: 'image',
     label: 'image',
-    placeholder: 'image',
+    placeholder: 'addImage',
     type: 'file',
   },
 ];
@@ -146,7 +141,7 @@ export const CreateSubCategoriesFields = [
     id: 'image',
     name: 'image',
     label: 'image',
-    placeholder: 'image',
+    placeholder: 'addImage',
     type: 'file',
   },
   {
@@ -169,14 +164,14 @@ export const CreateProductsFields = [
   {
     id: 'title[ar]',
     name: 'titleAr',
-    label: 'arabicTitlte',
+    label: 'arabicTitle',
     placeholder: 'writeArabicTitle',
     type: 'text',
   },
   {
     id: 'title[en]',
     name: 'titleEn',
-    label: 'englishTitlte',
+    label: 'englishTitle',
     placeholder: 'writeEnglishTitle',
     type: 'text',
   },
@@ -266,7 +261,7 @@ export const CreateProductsFields = [
     id: 'image',
     name: 'image',
     label: 'image',
-    placeholder: 'image',
+    placeholder: 'addImage',
     type: 'file',
   },
   {
