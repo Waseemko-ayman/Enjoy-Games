@@ -338,6 +338,12 @@ export const countries = [
     code: 'IQD',
   },
   {
+    name: 'مصر',
+    currency: 'الجنيه المصري',
+    img: 'egypt',
+    code: 'EGP',
+  },
+  {
     name: 'الأردن',
     currency: 'الدينار الأردني',
     img: 'jordan',
@@ -798,6 +804,8 @@ export const MyPurchasesTypes = [
   { id: 2, labelKey: 'completed' },
   { id: 3, labelKey: 'pending' },
   { id: 4, labelKey: 'cancelled' },
+  { id: 5, labelKey: 'paid' },
+  { id: 6, labelKey: 'processing' },
 ];
 
 export const loginInputs = [
