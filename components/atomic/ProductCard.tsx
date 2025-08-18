@@ -11,7 +11,8 @@ import Button from '@/components/atomic/Button';
 import Avatar from '@/components/atomic/Avatar';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import { useToast } from '@/lib/toast';
-import { FaStar, FaStarHalfStroke } from 'react-icons/fa6';
+import { FaRegStar, FaStar, FaStarHalfStroke } from 'react-icons/fa6';
+import { extractText } from '@/utils/extractText';
 
 const ProductCard: React.FC<ProductCardProps> = ({
   title,
@@ -39,6 +40,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const isMobile = useIsMobile();
   const { addToCart } = useCartContext();
   const { showToast } = useToast();
+  const t = useTranslations('productDetails');
   const msgTxts = useTranslations('Messages');
 
   const safeImage =
@@ -56,28 +58,35 @@ const ProductCard: React.FC<ProductCardProps> = ({
     ratings && ratings?.length > 0
       ? ratings.reduce((sum: number, r: any) => sum + (r.stars || 0), 0) /
         ratings.length
-      : null;
+      : 0; // بدل null حطينا 0
 
-  const renderStars = (rating: number | null) => {
-    if (rating === null) return null;
+  const renderStars = (rating: number) => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
 
+    // النجوم الممتلئة
     for (let i = 0; i < fullStars; i++) {
       stars.push(
         <FaStar key={`full-${i}`} className="text-sm text-yellow-500" />
       );
     }
 
+    // النصف نجمة إن وجد
     if (hasHalfStar) {
       stars.push(
-        <FaStarHalfStroke
-          key="half"
-          className="text-sm text-yellow-500"
-        />
+        <FaStarHalfStroke key="half" className="text-sm text-yellow-500" />
       );
     }
+
+    // النجوم الفارغة (نكمل إلى 5 نجوم)
+    const emptyStars = 5 - (fullStars + (hasHalfStar ? 1 : 0));
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(
+        <FaRegStar key={`empty-${i}`} className="text-sm text-gray-400" />
+      );
+    }
+
     return stars;
   };
 
@@ -101,7 +110,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             )}
             {discount && (
               <span className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-semibold px-2 py-1 rounded-lg shadow-md z-10">
-                خصم {discount.amount}%
+                {t('rival')} {discount.amount} {discount.currency}
               </span>
             )}
           </div>
@@ -118,13 +127,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
           {showDesc && (
             <div className="mb-3 text-sm mt-2">
-              {price_before && (
-                <div className="flex items-center justify-between gap-2">
-                  {price && (
-                    <h4 className="font-semibold mb-2 text-[15px]">
-                      {price.amount} {price.currency}
-                    </h4>
-                  )}
+              <div className="flex items-center justify-between gap-2">
+                {price && (
+                  <h4 className="font-semibold mb-2 text-[15px]">
+                    {price.amount} {price.currency}
+                  </h4>
+                )}
+                {price_before && (
                   <h4
                     className={`font-semibold mb-2 ${
                       price
@@ -134,8 +143,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   >
                     {price_before.amount} {price_before.currency}
                   </h4>
-                </div>
-              )}
+                )}
+              </div>
 
               <div
                 className={`flex ${
@@ -167,20 +176,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   </div>
                 )}
 
-                {averageRating !== null && (
-                  <div
-                    className={`text-[var(--enjoy-secondary)] ${
-                      variant === 'row'
-                        ? 'text-sm order-2'
-                        : 'text-base order-1'
-                    } flex items-center gap-1`}
-                  >
-                    {renderStars(averageRating)}
-                    <span className="ml-1 font-semibold">
-                      {averageRating.toFixed(1)}
-                    </span>
-                  </div>
-                )}
+                <div
+                  className={`text-[var(--enjoy-secondary)] ${
+                    variant === 'row' ? 'text-sm order-2' : 'text-base order-1'
+                  } flex items-center gap-1`}
+                >
+                  {renderStars(averageRating)}
+                  <span className="ml-1 font-semibold">
+                    {averageRating.toFixed(1)}
+                  </span>
+                </div>
               </div>
             </div>
           )}
@@ -204,7 +209,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
           >
             {open && productData && (
               <ProductDetailsInDialog
-                product={productData}
+                product={{
+                  ...productData,
+                  description: extractText(productData.description),
+                  content: extractText(productData.content),
+                }}
                 onAddToCart={(data) => {
                   addToCart(data);
                   showToast(`${data.title} ${msgTxts('addedToCart')}`);
