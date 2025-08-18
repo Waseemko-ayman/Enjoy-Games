@@ -16,10 +16,14 @@ interface DataTableProps<T extends { id: number | string }> {
 function getItemsPerPageOptions(totalItems: number) {
   const fixedOptions = [6, 10, 20];
   const options = fixedOptions.filter((opt) => opt < totalItems);
-  const lastOption = totalItems - 2;
+
+  let lastOption = totalItems - 2;
+  if (lastOption > 30) lastOption = 30;
+
   if (!options.includes(lastOption)) {
     options.push(lastOption);
   }
+
   return options.sort((a, b) => a - b);
 }
 
