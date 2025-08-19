@@ -1,7 +1,7 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Minus, Trash2 } from 'lucide-react';
+import { AlertTriangle, Minus, Trash2 } from 'lucide-react';
 import { FaPlus, FaStar } from 'react-icons/fa6';
 import { useTranslations } from 'next-intl';
 import { PATHS } from '@/data/paths';
@@ -19,6 +19,9 @@ import { useToast } from '@/lib/toast';
 import AuthButtons from '@/components/organism/MobileHeader/PopupMenu/Sections/AuthButtons';
 import Loading from '@/components/molecules/loading';
 import InvoiceSummary from '@/components/molecules/InvoiceSummary';
+import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
+import useIsMobile from '@/hook/useIsMobile';
+import { extractText } from '@/utils/extractText';
 
 interface CartContentProps {
   items: ProductCardProps[];
@@ -29,12 +32,17 @@ const CartContent: React.FC<CartContentProps> = ({
   items,
   onProceedToPayment,
 }) => {
+  const [open, setOpen] = useState(false);
+
+  const isMobile = useIsMobile();
+  const { isArabic } = useToggleLocale();
+  const { showToast } = useToast();
+  const { removeFromCart, updateQuantity } = useCartContext();
+
   const t = useTranslations('MyCart');
   const btnTexts = useTranslations('BtnTexts');
   const msgTxts = useTranslations('Messages');
-  const { isArabic } = useToggleLocale();
-  const { removeFromCart, updateQuantity } = useCartContext();
-  const { showToast } = useToast();
+
   const { token } = useAuthContext();
   const points = 1000;
 
@@ -69,22 +77,68 @@ const CartContent: React.FC<CartContentProps> = ({
                       <div className="flex flex-col justify-between py-2 gap-2">
                         <h2 className="text-xl font-semibold">{item.title}</h2>
                         <p className="text-xs text-gray-600 font-semibold">
-                          {item.description}
+                          {extractText(item.description)}
                         </p>
                         {/* <p className="text-center text-xs sm:text-sm text-gray-600 font-semibold bg-[var(--enjoy-gray-100)] py-2 px-3 rounded-full">
                           {item.storeName ?? 'المتجر السعودي'}
                         </p> */}
                       </div>
                     </div>
-                    <Button
-                      variant="ghost"
-                      otherClassName="!text-gray-400 hover:!text-red-500"
-                      handleClick={() =>
-                        item.id && handleRemoveFromCart(item.id, item.title)
+                    <ResponsiveDialogDrawer
+                      trigger={
+                        <Button
+                          variant="ghost"
+                          otherClassName="!text-gray-400 hover:!text-red-500"
+                          handleClick={() => setOpen(true)}
+                        >
+                          <Trash2 className="w-5 h-5" />
+                        </Button>
                       }
+                      open={open}
+                      setOpen={setOpen}
+                      isMobile={isMobile}
                     >
-                      <Trash2 className="w-5 h-5" />
-                    </Button>
+                      <div>
+                        <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-xl p-4">
+                          <AlertTriangle className="h-6 w-6 text-red-600" />
+                          <div>
+                            <h3 className="text-lg font-semibold text-red-700">
+                              {msgTxts('deleteWarningTitle')}
+                            </h3>
+                            <p className="text-gray-700">
+                              {msgTxts.rich('deleteWarningMessage', {
+                                item: (chunks) => (
+                                  <span className="font-bold text-red-600">
+                                    {chunks}
+                                  </span>
+                                ),
+                              })}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end gap-3 mt-6">
+                          <Button
+                            otherClassName="px-5 py-2"
+                            variant="third"
+                            handleClick={() => setOpen(false)}
+                          >
+                            {btnTexts('cancel')}
+                          </Button>
+                          <Button
+                            otherClassName="px-5 py-2 !bg-red-500 hover:!bg-red-600"
+                            handleClick={() => {
+                              if (item.id) {
+                                handleRemoveFromCart(item.id, item.title);
+                                setOpen(false);
+                              }
+                            }}
+                          >
+                            {btnTexts('delete')}
+                          </Button>
+                        </div>
+                      </div>
+                    </ResponsiveDialogDrawer>
                   </div>
 
                   <div className="flex items-center justify-between border-t border-dotted border-gray-300 pt-4">
@@ -121,7 +175,9 @@ const CartContent: React.FC<CartContentProps> = ({
                       </Button>
                     </div>
                     <span className="text-lg font-bold">
-                      {(item.price?.amount ?? 0) * (item.quantity ?? 1)}{' '}
+                      {(
+                        (item.price?.amount ?? 0) * (item.quantity ?? 1)
+                      ).toFixed(2)}{' '}
                       {item.price?.currency}
                     </span>
                   </div>
