@@ -133,6 +133,12 @@ function getLabel(
   pathNameMap: Record<string, string>,
   tPages: (key: string) => string
 ): string {
+  // لو part رقم (id للتذكرة)
+  if (!isNaN(Number(part))) {
+    const template = tPages('ticket-detail');
+    return template.replace(':id', part);
+  }
+
   const translated = tPages(part);
   if (translated === part) {
     return pathNameMap[part] || formatPart(part);
