@@ -19,11 +19,10 @@ const AllOrders = ({
       title={t('Dashboard.orders.title')}
       description={t('Dashboard.orders.manageOrders')}
       apiEndpoint="order/admin/get-orders"
-      deleteEndpoint="order/delete"
-      createTabValue="createOrders"
       placeholder={t('Inputs.placeHolders.searchOrder')}
       onTabChange={onTabChange}
       showEdit={false}
+      showActionsColumn={false}
     />
   );
 };
