@@ -36,6 +36,11 @@ const MyPurchasesPage = () => {
   // Pagination configuration
   const ITEMS_PER_PAGE = 6; // Number of orders to show per page
 
+  const filteredOrders = orders?.filter((order: Order) => {
+    if (filter === 'all') return true;
+    return order.status?.trim().toLowerCase() === filter.trim().toLowerCase();
+  });
+
   // Pagination hook - manages all pagination logic and state
   const {
     currentPage,
@@ -44,8 +49,8 @@ const MyPurchasesPage = () => {
     goToPage,
     totalItems,
     itemsPerPage,
-  } = usePagination({
-    data: orders || [], // Use empty array if orders is null/undefined
+  } = usePagination<Order>({
+    data: filteredOrders || [], // Use empty array if orders is null/undefined
     itemsPerPage: ITEMS_PER_PAGE,
     initialPage: 1,
   });
@@ -57,12 +62,6 @@ const MyPurchasesPage = () => {
   const handleFilterChange = (value: string) => {
     setFilter(value);
   };
-
-  const filteredOrders = orders?.filter((order: Order) =>
-    filter === 'all'
-      ? true
-      : order.status.toLowerCase() === filter.toLowerCase()
-  );
 
   if (isLoading) return <Loading />;
   if (error) return <ErrorFetching />;
