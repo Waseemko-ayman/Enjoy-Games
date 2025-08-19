@@ -11,6 +11,7 @@ interface DataTableProps<T extends { id: number | string }> {
   onEdit?: (id: string | number) => void;
   onDelete?: (id: string | number) => void;
   showEdit?: boolean;
+  showActionsColumn?: boolean;
 }
 
 function getItemsPerPageOptions(totalItems: number) {
@@ -33,6 +34,7 @@ export function DataTable<T extends { id: number | string }>({
   onDelete,
   placeholder = 'بحث...',
   showEdit,
+  showActionsColumn,
 }: DataTableProps<T>) {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm] = useDebounce(searchTerm, 700);
@@ -110,6 +112,7 @@ export function DataTable<T extends { id: number | string }>({
         onDelete={onDelete}
         searchTerm={debouncedSearchTerm}
         showEdit={showEdit}
+        showActionsColumn={showActionsColumn}
       />
       {totalPages > 1 && (
         <DataTablePagination
