@@ -19,6 +19,10 @@ export const PATHS = {
   TICKETS: {
     ROOT: { name: 'تذاكر الدعم الفني', link: '/tickets' },
     CREATE: { name: 'إضافة تذكرة جديدة', link: '/tickets/create' },
+    ITEM: (id: string | number) => ({
+      name: `تفاصيل التذكرة ${id}`,
+      link: `/tickets/${id}`,
+    }),
   },
   TERMS_OF_USER: { name: 'سياسة الإستخدام', link: '/terms-of-use' },
   REFUND_POLICY: { name: 'سياسة الإسترجاع', link: '/refund-policy' },
@@ -41,14 +45,12 @@ export const PATHS = {
     FAQS: '/dashboard/faqs',
     TICKETS: '/dashboard/tickets',
     RATINGS: '/dashboard/ratings',
-    ORDERS: '/dashboard/orders',
+    ORDERS: {
+      ROOT: '/dashboard/orders',
+      ITEM: '/dashboard/orders/:id/products',
+    },
     PAYMENT_GATEWAYS: '/dashboard/payment-gateways',
     REPORTS: '/dashboard/reports',
-    NOTIFICATIONS: {
-      ROOT: '/dashboard/notifications',
-      // ITEM: '/dashboard/notifications/:id/read',
-      ITEM: '/dashboard/notifications/:id',
-    },
     SETTINGS: '/dashboard/settings',
   },
   LOGIN: '/auth/login',
