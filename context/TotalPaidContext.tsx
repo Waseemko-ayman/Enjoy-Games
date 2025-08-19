@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect } from 'react';
 import useAPI from '@/hook/useAPI';
 import { TotalPaidContextType, TotalPaidData } from '@/interfaces';
+import { useCurrency } from './CurrencyContext';
 
 const TotalPaidContext = createContext<TotalPaidContextType>({
   totalPaid: null,
@@ -16,10 +17,11 @@ export const TotalPaidProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const { get, data, isLoading, error } =
     useAPI<TotalPaidData>('user/total-paid');
+  const { selectedCountry } = useCurrency();
 
   useEffect(() => {
     get();
-  }, [get]);
+  }, [get, selectedCountry]);
 
   const refresh = () => get();
 
