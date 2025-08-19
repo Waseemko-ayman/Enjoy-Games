@@ -54,8 +54,8 @@ export function DashboardSidebar() {
           <Image
             src="/assets/logo.png"
             alt="Enjoy Games Logo"
-            width={120}
-            height={120}
+            width={100}
+            height={100}
           />
         </Link>
       </div>
