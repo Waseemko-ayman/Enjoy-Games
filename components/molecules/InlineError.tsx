@@ -5,7 +5,7 @@ const InlineError = () => {
   const t = useTranslations('Messages');
 
   return (
-    <span className="flex items-center text-red-500 text-sm gap-1">
+    <span className="flex items-center text-white text-sm gap-1">
       <AlertCircle className="w-4 h-4" />
       {t('errorMessage')}
     </span>
