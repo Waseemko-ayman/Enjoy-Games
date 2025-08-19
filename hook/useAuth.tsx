@@ -184,7 +184,7 @@ const useAuth = () => {
         showToast(data?.message);
         router.replace(PATHS.HOME.link);
       } else {
-        showToast(authTxts('verificationFailedCode'));
+        showToast(authTxts('verificationFailedCode'), 'error');
       }
     } catch (error: any) {
       const errorMsg = error.response?.data?.message || error.message;
@@ -192,7 +192,7 @@ const useAuth = () => {
         type: AUTH_ACTIONS.SET_ERROR,
         payload: { error: errorMsg },
       });
-      showToast(errorMsg);
+      showToast(errorMsg, 'error');
     } finally {
       dispatch({ type: AUTH_ACTIONS.SET_LOADING_FALSE });
     }
@@ -221,7 +221,7 @@ const useAuth = () => {
         type: AUTH_ACTIONS.SET_ERROR,
         payload: { error: errorMsg },
       });
-      showToast(errorMsg);
+      showToast(errorMsg, 'error');
     } finally {
       dispatch({ type: AUTH_ACTIONS.SET_LOADING_FALSE });
     }
