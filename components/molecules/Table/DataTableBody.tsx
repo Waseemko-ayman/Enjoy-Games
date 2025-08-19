@@ -11,6 +11,7 @@ import { PATHS } from '@/utils/router.helper';
 import { useTranslations } from 'next-intl';
 import DialogUpload from './DialogUpload';
 import { usePathname } from 'next/navigation';
+import { getStatusColor, getStatusIcon } from '@/utils/statusHelpers';
 
 interface DataTableBodyProps<T> {
   columns: (keyof T)[];
@@ -117,6 +118,24 @@ const DataTableBody = <T extends { id: string | number }>({
                     const columnKey = String(col);
 
                     if (columnKey === 'user_id') return null;
+
+                    if (columnKey === 'status') {
+                      return (
+                        <td
+                          key={columnKey}
+                          className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden "
+                        >
+                          <div
+                            className={`flex items-center justify-center gap-1 p-2 rounded-xl ${getStatusColor(
+                              String(row[col])
+                            )}`}
+                          >
+                            {getStatusIcon(String(row[col]))}
+                            <span>{String(row[col])}</span>
+                          </div>
+                        </td>
+                      );
+                    }
 
                     // if (
                     //   columnKey === 'items' &&

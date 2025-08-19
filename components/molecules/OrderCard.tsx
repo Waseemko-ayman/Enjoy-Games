@@ -1,55 +1,13 @@
 import React from 'react';
-import {
-  CreditCard,
-  Tag,
-  Receipt,
-  Clock,
-  CheckCircle,
-  XCircle,
-  RefreshCw,
-  FileText,
-} from 'lucide-react';
+import { CreditCard, Tag, Receipt } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import CardWrapper from '../atomic/CardWrapper';
 import Button from '../atomic/Button';
 import { Order } from '@/interfaces';
+import { getStatusColor, getStatusIcon } from '@/utils/statusHelpers';
 
 const OrderCard = ({ order }: { order: Order }) => {
   const t = useTranslations('MyPurchases');
-
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'completed':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'paid':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'cancelled':
-        return 'bg-red-100 text-red-800 border-red-200';
-      case 'processing':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'pending':
-        return <Clock className="w-4 h-4 text-yellow-500" />;
-      case 'completed':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
-      case 'paid':
-        return <CreditCard className="w-4 h-4 text-blue-500" />;
-      case 'cancelled':
-        return <XCircle />;
-      case 'processing':
-        return <RefreshCw className="w-4 h-4 text-purple-500 animate-spin" />;
-      default:
-        return <FileText className="w-4 h-4 text-gray-500" />;
-    }
-  };
 
   return (
     <CardWrapper className="p-2 md:p-3 hover:shadow-lg transition-all duration-300">

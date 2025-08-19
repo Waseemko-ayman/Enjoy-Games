@@ -12,6 +12,8 @@ interface DataTableProps<T extends { id: number | string }> {
   onDelete?: (id: string | number) => void;
   showEdit?: boolean;
   showActionsColumn?: boolean;
+  filter?: string;
+  setFilter?: (value: string) => void;
 }
 
 function getItemsPerPageOptions(totalItems: number) {
@@ -35,6 +37,8 @@ export function DataTable<T extends { id: number | string }>({
   placeholder = 'بحث...',
   showEdit,
   showActionsColumn,
+  filter,
+  setFilter,
 }: DataTableProps<T>) {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm] = useDebounce(searchTerm, 700);
@@ -104,6 +108,8 @@ export function DataTable<T extends { id: number | string }>({
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
         placeholder={placeholder}
+        filter={filter}
+        handleFilterChange={setFilter}
       />
       <DataTableBody
         columns={columns}

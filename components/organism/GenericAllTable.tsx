@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useToast } from '@/lib/toast';
 import { useUpdateContent } from '@/context/updateContentContext';
 import useAPI from '@/hook/useAPI';
@@ -52,6 +52,16 @@ const GenericAllTable = <T,>({
     ? data
     : [];
 
+  // --- Filter State ---
+  const [filter, setFilter] = useState('all');
+
+  const filteredTableData = useMemo(() => {
+    if (filter === 'all') return tableData;
+    return tableData.filter(
+      (item: any) => item.status?.toLowerCase() === filter.toLowerCase()
+    );
+  }, [filter, tableData]);
+
   const handleEdit = (id: string | number) => {
     onEditIdChange?.(id);
     if (createTabValue) onTabChange(createTabValue);
@@ -88,11 +98,13 @@ const GenericAllTable = <T,>({
       ) : (
         <DataTable
           placeholder={placeholder}
-          data={tableData}
+          data={filteredTableData}
           onEdit={handleEdit}
           onDelete={deleteEndpoint ? handleDelete : undefined}
           showEdit={showEdit}
           showActionsColumn={showActionsColumn}
+          filter={filter}
+          setFilter={setFilter}
         />
       )}
     </SettingsTab>

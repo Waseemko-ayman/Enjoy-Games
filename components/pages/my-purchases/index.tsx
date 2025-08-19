@@ -1,16 +1,8 @@
 'use client';
 import EmptyStateBox from '@/components/molecules/EmptyStateBox';
 import PageHeader from '@/components/molecules/PageHeader';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { PATHS } from '@/data/paths';
 import React, { useEffect, useState } from 'react';
-import { MyPurchasesTypes } from '@/data';
 import { useTranslations } from 'next-intl';
 import useAPI from '@/hook/useAPI';
 import Loading from '@/components/molecules/loading';
@@ -21,12 +13,12 @@ import Layer from '@/components/atomic/Layer';
 import { Order } from '@/interfaces';
 import { usePagination } from '@/hook/usePagination';
 import { useCurrency } from '@/context/CurrencyContext';
+import PurchasesFilterSelect from '@/components/molecules/PurchasesFilterSelect';
 
 const MyPurchasesPage = () => {
   const [filter, setFilter] = useState('all');
 
   const t = useTranslations('MyPurchases');
-  const ariaTxts = useTranslations('ariaLabels.btns');
   const btnTexts = useTranslations('BtnTexts');
 
   // API Hook
@@ -69,25 +61,7 @@ const MyPurchasesPage = () => {
   return (
     <div>
       <PageHeader>
-        <Select onValueChange={handleFilterChange} value={filter}>
-          <SelectTrigger
-            className="w-[180px]"
-            aria-label={ariaTxts('selectPurchaseType')}
-          >
-            <SelectValue placeholder={t('all')} />
-          </SelectTrigger>
-          <SelectContent>
-            {MyPurchasesTypes.map((item) => (
-              <SelectItem
-                key={item.id}
-                value={item.labelKey}
-                className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
-              >
-                {t(item.labelKey)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <PurchasesFilterSelect value={filter} onChange={handleFilterChange} />
       </PageHeader>
       {!filteredOrders || filteredOrders.length === 0 ? (
         <EmptyStateBox
