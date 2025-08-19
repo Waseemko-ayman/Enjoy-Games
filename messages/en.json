@@ -65,13 +65,15 @@
     "starsPoints": "Loyalty Enjoy Points",
     "store": "Store",
     "create": "Add New Ticket",
+    "ticket-detail": "Ticket details #:id",
     "TalkToCustomerService": "Talk to customer service",
     "faqs": "Frequently Asked Questions",
     "RegisterNow": "Register now",
     "more": "More",
     "search": "Search",
     "dashboard": "Dashboard",
-    "orders": "Orders"
+    "orders": "Orders",
+    "notifications": "Notifications"
   },
   "SectionsTitles": {
     "Stars": {
@@ -184,11 +186,13 @@
     "pendingOrders": "Pending Orders",
     "completedOrders": "Completed Orders",
     "totalSpent": "Total Spent",
+    "order": "Order",
     "emptyFiltered": {
       "completed": "There are no currently completed requests.",
       "pending": "There are no pending requests.",
       "cancelled": "There are no canceled requests.",
-      "paid": "There are no paid requests."
+      "paid": "There are no paid requests.",
+      "processing": "There are no requests currently being processed."
     },
     "showingItems": "Showing {startItem} to {endItem} of {totalItems} orders"
   },
@@ -366,6 +370,8 @@
     "lastUpdated": "last Updated",
     "conversation": "Conversation",
     "customer": "Customer",
+    "supportAgent": "Support Agent",
+    "supportTeam": "Support Team",
     "ticketId": "Ticket ID",
     "Dashboard": {
       "PageDesc": {
@@ -418,7 +424,8 @@
     "faqs": "Faqs",
     "tickets": "Tickets",
     "ratings": "Ratings",
-    "orders": "Orders"
+    "orders": "Orders",
+    "notifications": "Notifications"
   },
   "Dashboard": {
     "desc": "Welcome to your order management orders",
@@ -502,7 +509,13 @@
       "desc": "Create and manage Orders for your store",
       "manageOrders": "Manage all Orders in one place",
       "createOrder": "Create Order",
-      "createNewOrder": "Create new order"
+      "createNewOrder": "Create new order",
+      "products": {
+        "allProducts": "All Products",
+        "title": "Order Products",
+        "desc": "Browse all products included in this order"
+      },
+      "uploadDoc": "Upload documentation"
     }
   },
   "errorBoundary": {
@@ -534,6 +547,7 @@
     "save": "Save",
     "Saving": "Saving",
     "cancel": "Cancel",
+    "delete": "Delete",
     "StartMarketingNow": "Start Shopping Now",
     "GetItNow": "Get It Now",
     "BuyNow": "Buy Now",
@@ -585,7 +599,10 @@
     "lastWeek": "last week",
     "lastMonthly": "last month",
     "lastYearly": "last year",
-    "customRange": "custom Range"
+    "customRange": "custom Range",
+    "upload": "Upload",
+    "reply": "Reply",
+    "sending": "Sending..."
   },
   "Inputs": {
     "labels": {
@@ -710,7 +727,8 @@
       "writeEnglishAnswer": "Enter answer in English",
       "writeSubject": "Enter subject",
       "writeMessage": "Enter description...",
-      "selectAttachments": "Select files"
+      "selectAttachments": "Select files",
+      "typeYourReply": "write your response here..."
     },
     "options": {
       "gender": {
@@ -768,7 +786,8 @@
       "arabicAnswerRequired": "Arabic answer is required",
       "englishAnswerRequired": "English answer is required",
       "arabicImageRequired": "Arabic image is required",
-      "englishImageRequired": "English image is required"
+      "englishImageRequired": "English image is required",
+      "fileRequired": "File required"
     }
   },
   "Auth": {
@@ -822,7 +841,11 @@
     "errorMessage": "Sorry! Something went wrong.",
     "addedToCart": "Added to cart",
     "removedFromCart": "Removed from cart",
-    "undefined": "undefined"
+    "undefined": "undefined",
+    "unavailable": "unavailable",
+    "deleteWarningTitle": "Warning",
+    "deleteWarningMessage": "Are you sure you want to remove {item} from the cart?",
+    "errorNotifications": "Error fetching notifications:"
   },
   "Languages": {
     "english": "English",

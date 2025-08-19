@@ -65,13 +65,15 @@
     "starsPoints": "نقاط ولاء إنجوي",
     "store": "المتجر",
     "create": "إضافة تذكرة جديدة",
+    "ticket-detail": "تفاصيل التذكرة #:id",
     "TalkToCustomerService": "التحدث مع خدمة العملاء",
     "faqs": "الأسئلة الشائعة",
     "RegisterNow": "سجل الآن",
     "more": "المزيد",
     "search": "البحث",
     "dashboard": "لوحة التحكم",
-    "orders": "الطلبات"
+    "orders": "الطلبات",
+    "notifications": "الإشعارات"
   },
   "SectionsTitles": {
     "Stars": {
@@ -180,15 +182,17 @@
     "viewDetails": "عرض التفاصيل",
     "cancel": "إلغاء",
     "reorder": "إعادة الطلب",
-    "totalOrders": "إجمالي الطلبات",
+    "ordersTotal": "إجمالي الطلبات",
     "pendingOrders": "الطلبات المعلقة",
     "completedOrders": "الطلبات المكتملة",
     "totalSpent": "إجمالي المبلغ المنفق",
+    "order": "طلب",
     "emptyFiltered": {
       "completed": "لا توجد طلبات مكتملة حاليًا.",
       "pending": "لا توجد طلبات قيد الانتظار.",
       "cancelled": "لا توجد طلبات ملغية.",
-      "paid": "لا توجد طلبات مدفوعة."
+      "paid": "لا توجد طلبات مدفوعة.",
+      "processing": "لا توجد طلبات قيد المعالجة حالياً."
     },
     "showingItems": "عرض {startItem} إلى {endItem} من أصل {totalItems} طلب"
   },
@@ -366,6 +370,8 @@
     "lastUpdated": "آخر تحديث",
     "conversation": "محادثة",
     "customer": "عميل",
+    "supportAgent": "وكيل الدعم",
+    "supportTeam": "فريق الدعم",
     "ticketId": "رقم التذكرة",
     "Dashboard": {
       "PageDesc": {
@@ -418,7 +424,8 @@
     "faqs": "الأسئلة الشائعة",
     "tickets": "تذاكر الدعم الفني",
     "ratings": "التقييمات",
-    "orders": "الطلبات"
+    "orders": "الطلبات",
+    "notifications": "الإشعارات"
   },
   "Dashboard": {
     "desc": "مرحباً بكم في إدارة طلباتكم",
@@ -502,7 +509,13 @@
       "desc": "قم بإنشاء وإدارة الطلبات لمتجرك",
       "manageOrders": "إدارة جميع الطلبات في مكان واحد",
       "createOrder": "إنشاء الطلبات",
-      "createNewOrder": "إنشاء طلب جديد"
+      "createNewOrder": "إنشاء طلب جديد",
+      "products": {
+        "allProducts": "جميع المنتجات",
+        "title": "منتجات الطلب",
+        "desc": "استعرض كافة المنتجات الموجودة في هذا الطلب"
+      },
+      "uploadDoc": "رفع التوثيق"
     }
   },
   "errorBoundary": {
@@ -534,6 +547,7 @@
     "save": "حفظ",
     "Saving": "جاري الحفظ",
     "cancel": "إلغاء",
+    "delete": "حذف",
     "StartMarketingNow": "إبدأ بالتسوق الآن",
     "GetItNow": "احصل عليه الآن",
     "BuyNow": "إشترِ الآن",
@@ -585,7 +599,10 @@
     "lastWeek": "الأسبوع الماضي",
     "lastMonthly": "الشهر الماضي",
     "lastYearly": "السنة الماضية",
-    "customRange": "نطاق مخصص"
+    "customRange": "نطاق مخصص",
+    "upload": "رفع",
+    "reply": "رد",
+    "sending": "إرسال..."
   },
   "Inputs": {
     "labels": {
@@ -710,7 +727,8 @@
       "writeEnglishAnswer": "أكتب الجواب بالإنجليزية",
       "writeSubject": "أكتب العنوان",
       "writeMessage": "أكتب الوصف...",
-      "selectAttachments": "إختر ملفات"
+      "selectAttachments": "إختر ملفات",
+      "typeYourReply": "أكتب ردك هنا..."
     },
     "options": {
       "gender": {
@@ -768,7 +786,8 @@
       "arabicAnswerRequired": "الجواب العربي مطلوب",
       "englishAnswerRequired": "الجواب الإنجليزي مطلوب",
       "arabicImageRequired": "الصورة بالعربية مطلوبة",
-      "englishImageRequired": "الصورة بالإنجليزية مطلوبة"
+      "englishImageRequired": "الصورة بالإنجليزية مطلوبة",
+      "fileRequired": "الملف مطلوب"
     }
   },
   "Auth": {
@@ -822,7 +841,11 @@
     "errorMessage": "عفواً! حدث خطأ ما",
     "addedToCart": "تمت الإضافة إلى السلة",
     "removedFromCart": "تم الحذف من السلة",
-    "undefined": "غير محدد"
+    "undefined": "غير محدد",
+    "unavailable": "غير متوفر",
+    "deleteWarningTitle": "تحذير",
+    "deleteWarningMessage": "هل أنت متأكد أنك تريد حذف {item} من السلة؟",
+    "errorNotifications": "خطأ في جلب الإشعارات:"
   },
   "Languages": {
     "english": "إنجليزي",
