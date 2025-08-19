@@ -20,14 +20,14 @@ const ProductDetailsPage = ({ productId }: { productId: string }) => {
   const { categories } = useCategories();
   const { getSingle, product, isLoading } = useAPI(`product`);
   const { selectedCountry } = useCurrency();
-  const { refreshFlag } = useUpdateContent();
+  const { refreshFlags } = useUpdateContent();
 
   const t = useTranslations('Loading');
   const serviceTxts = useTranslations('HomePage');
 
   useEffect(() => {
     getSingle(productId);
-  }, [productId, selectedCountry, refreshFlag]);
+  }, [productId, selectedCountry, refreshFlags['ratings']]);
 
   if (isLoading) {
     return <LoadingPlaceholder message={t('loadingMessage')} />;

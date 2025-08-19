@@ -39,9 +39,10 @@ const CreateCodes = ({
   onTabChange: (val: string) => void;
 }) => {
   const { showToast } = useToast();
-  const { triggerRefresh } = useUpdateContent();
   const { setSelectedProductId } = useProductCodes();
   const t = useTranslations();
+  const { triggerRefresh } = useUpdateContent();
+  const refreshKey = 'codes';
 
   // ----------------------------------------------------------------
 
@@ -125,7 +126,7 @@ const CreateCodes = ({
         showToast(response.message);
         setSelectedProductId(Number(data.productID));
         reset();
-        triggerRefresh();
+        triggerRefresh(refreshKey);
         onTabChange('AllCodes');
         onEditIdChange(null);
       }

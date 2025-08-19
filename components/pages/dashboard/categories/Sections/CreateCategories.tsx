@@ -31,8 +31,9 @@ const CreateCategories = ({
   onTabChange: (val: string) => void;
 }) => {
   const { showToast } = useToast();
-  const { triggerRefresh } = useUpdateContent();
   const t = useTranslations();
+  const { triggerRefresh } = useUpdateContent();
+  const refreshKey = 'categories';
 
   // ----------------------------------------------------------------
 
@@ -107,7 +108,7 @@ const CreateCategories = ({
       if (response) {
         showToast(response.message);
         reset();
-        triggerRefresh();
+        triggerRefresh(refreshKey);
         onTabChange('allCategories');
         onEditIdChange(null);
       }

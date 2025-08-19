@@ -36,9 +36,10 @@ const CreateProducts = ({
   onTabChange: (val: string) => void;
 }) => {
   const { showToast } = useToast();
-  const { triggerRefresh } = useUpdateContent();
   const t = useTranslations();
   const inputT = useTranslations('Inputs.errorsMsgs');
+  const { triggerRefresh } = useUpdateContent();
+  const refreshKey = 'products';
 
   // ----------------------------------------------------------------
 
@@ -162,7 +163,7 @@ const CreateProducts = ({
       if (response) {
         showToast(response?.message);
         reset();
-        triggerRefresh();
+        triggerRefresh(refreshKey);
         onTabChange('allProducts');
         onEditIdChange(null);
       }

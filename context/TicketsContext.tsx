@@ -4,11 +4,12 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import useAPI from '@/hook/useAPI';
 import { APIRequest, Ticket } from '@/interfaces';
+import { useUpdateContent } from './updateContentContext';
 
 interface TicketsContextType extends APIRequest {
   tickets: Ticket[] | null;
   hasUnreadTickets: boolean;
-  markTicketsAsRead: () => void;
+  // markTicketsAsRead: () => void;
 }
 
 const TicketsContext = createContext<TicketsContextType>({
@@ -17,7 +18,7 @@ const TicketsContext = createContext<TicketsContextType>({
   error: null,
   refresh: () => {},
   hasUnreadTickets: false,
-  markTicketsAsRead: () => {},
+  // markTicketsAsRead: () => {},
 });
 
 export const TicketsProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -25,10 +26,13 @@ export const TicketsProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const { get, data, isLoading, error } = useAPI<any>('tickets');
   const [hasUnreadTickets, setHasUnreadTickets] = useState(false);
+  const { refreshFlags } = useUpdateContent();
+
+  const ticketsRefreshFlag = refreshFlags['tickets'];
 
   useEffect(() => {
     get();
-  }, [get]);
+  }, [get, ticketsRefreshFlag]);
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -38,7 +42,7 @@ export const TicketsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const refresh = () => get();
 
-  const markTicketsAsRead = () => setHasUnreadTickets(false);
+  // const markTicketsAsRead = () => setHasUnreadTickets(false);
 
   return (
     <TicketsContext.Provider
@@ -48,7 +52,7 @@ export const TicketsProvider: React.FC<{ children: React.ReactNode }> = ({
         error,
         refresh,
         hasUnreadTickets,
-        markTicketsAsRead,
+        // markTicketsAsRead,
       }}
     >
       {children}

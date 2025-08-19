@@ -45,10 +45,11 @@ const CreateSubCategories = ({
   onEditIdChange: (id: string | number | null) => void;
   onTabChange: (val: string) => void;
 }) => {
-  const { triggerRefresh } = useUpdateContent();
   const { showToast } = useToast();
   const t = useTranslations();
   const inputT = useTranslations('Inputs.errorsMsgs');
+  const { triggerRefresh } = useUpdateContent();
+  const refreshKey = 'subCategories';
 
   // ----------------------------------------------------------------
 
@@ -171,7 +172,7 @@ const CreateSubCategories = ({
       if (response) {
         showToast(response?.message);
         reset();
-        triggerRefresh();
+        triggerRefresh(refreshKey);
         onTabChange('allSubCategories');
         onEditIdChange(null);
       }
