@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import EmptyStateBox from '@/components/molecules/EmptyStateBox';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import Loading from '@/components/molecules/loading';
@@ -11,31 +10,36 @@ import Container from '@/components/organism/Container';
 import Layer from '@/components/atomic/Layer';
 import { TicketsProvider, useTickets } from '@/context/TicketsContext';
 import { Ticket } from '@/interfaces';
-import { AlertCircle, CheckCircle, Clock, MessageCircle } from 'lucide-react';
-import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
+import { Bell, CheckCircle, Clock, MessageCircle } from 'lucide-react';
 import TicketsCards from './Sections/TicketsCards';
-import TicketDialogContent from './Sections/TicketDialogContent';
-import useIsMobile from '@/hook/useIsMobile';
+import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
+import Button from '@/components/atomic/Button';
+import { useRouter } from 'next/navigation';
+import Pagination from '@/components/molecules/Pagination';
+import { usePagination } from '@/hook/usePagination';
 
 const TicketsPage = () => {
-  const [open, setOpen] = useState(false);
-  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
-
   const t = useTranslations('Tickets');
   const btnTexts = useTranslations('BtnTexts');
 
   // API Context (Hook)
-  const { tickets, isLoading, error, markTicketsAsRead } = useTickets();
-  const isMobile = useIsMobile();
+  const { tickets, isLoading, error } = useTickets();
+  const router = useRouter();
 
-  useEffect(() => {
-    markTicketsAsRead();
-  }, []);
+  const {
+    currentPage,
+    totalPages,
+    paginatedData,
+    goToPage,
+    totalItems,
+    itemsPerPage,
+  } = usePagination<Ticket>({ data: tickets || [], itemsPerPage: 9 });
 
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = (status?: string) => {
+    if (!status) return <MessageCircle className="w-4 h-4" />;
     switch (status.toLowerCase()) {
       case 'open':
-        return <AlertCircle className="w-4 h-4" />;
+        return <Bell className="w-4 h-4" />;
       case 'closed':
         return <CheckCircle className="w-4 h-4" />;
       case 'pending':
@@ -45,10 +49,11 @@ const TicketsPage = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status?: string) => {
+    if (!status) return 'bg-gray-100 text-gray-800 border-gray-200';
     switch (status.toLowerCase()) {
       case 'open':
-        return 'bg-red-100 text-red-800 border-red-200';
+        return 'bg-green-100 text-green-800 border-green-200';
       case 'closed':
         return 'bg-green-100 text-green-800 border-green-200';
       case 'pending':
@@ -58,11 +63,6 @@ const TicketsPage = () => {
       default:
         return 'bg-gray-100 text-gray-800 border-gray-200';
     }
-  };
-
-  const handleTicketClick = (ticket: Ticket) => {
-    setSelectedTicket(ticket);
-    setOpen(true);
   };
 
   if (isLoading) return <Loading />;
@@ -84,37 +84,35 @@ const TicketsPage = () => {
           <Layer otherClassName="!my-12">
             <Container>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
-                {tickets.map((ticket: Ticket, index: number) => (
-                  <ResponsiveDialogDrawer
+                {paginatedData.map((ticket: Ticket, index: number) => (
+                  <TicketsCards
                     key={index}
-                    trigger={
-                      <TicketsCards
-                        ticket={ticket}
-                        t={t}
-                        getStatusIcon={getStatusIcon}
-                        getStatusColor={getStatusColor}
-                        handleTicketClick={handleTicketClick}
-                      />
+                    ticket={ticket}
+                    t={t}
+                    getStatusIcon={getStatusIcon}
+                    getStatusColor={getStatusColor}
+                    handleTicketClick={(id) =>
+                      router.push(PATHS.TICKETS.ITEM(id).link)
                     }
-                    open={selectedTicket?.id === ticket.id && open}
-                    setOpen={(isOpen) => {
-                      if (!isOpen) setSelectedTicket(null);
-                      setOpen(isOpen);
-                    }}
-                    isMobile={isMobile}
-                    contentClassName="!px-0 !max-w-2xl"
-                  >
-                    <TicketDialogContent
-                      t={t}
-                      selectedTicket={selectedTicket}
-                      btnTexts={btnTexts}
-                      getStatusIcon={getStatusIcon}
-                      getStatusColor={getStatusColor}
-                      setOpen={setOpen}
-                    />
-                  </ResponsiveDialogDrawer>
+                  />
                 ))}
               </div>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={goToPage}
+                totalItems={totalItems}
+                itemsPerPage={itemsPerPage}
+                className="mt-6"
+              />
+              <MotionSection index={2}>
+                <Button
+                  href={PATHS.TICKETS.CREATE.link}
+                  otherClassName="py-3 mt-5 w-[150px]"
+                >
+                  {btnTexts('AddTicket')}
+                </Button>
+              </MotionSection>
             </Container>
           </Layer>
         )}
