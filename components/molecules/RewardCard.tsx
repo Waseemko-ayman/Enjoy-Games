@@ -28,7 +28,9 @@ const RewardCard = ({
           href={href}
           handleClick={onClick}
           Icon={isArabic ? FaArrowLeftLong : FaArrowRightLong}
-          otherClassName="py-2 px-5 gap-5 max-sm:mx-auto max-w-[250px]"
+          otherClassName={`py-2 px-5 gap-5 max-sm:mx-auto ${
+            isArabic ? 'max-w-[250px]' : '!text-sm max-w-[300px]'
+          }`}
           iconPosition="right"
         >
           {buttonText}
