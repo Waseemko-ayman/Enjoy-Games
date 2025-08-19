@@ -14,11 +14,6 @@ export const PATHS = {
     ROOT: '/dashboard/orders',
     ITEM: '/dashboard/orders/:id',
   },
-  NOTIFICATIONS: {
-    ROOT: '/dashboard/notifications',
-    // ITEM: '/dashboard/notifications/:id/read',
-    ITEM: '/dashboard/notifications/:id',
-  },
   PAYMENT_GATEWAYS: '/dashboard/payment-gateways',
   REPORTS: '/dashboard/reports',
   SETTINGS: '/dashboard/settings',
