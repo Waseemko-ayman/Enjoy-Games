@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
@@ -14,13 +15,14 @@ interface GenericAllProps<T> {
   value: string;
   title: string;
   description: string;
-  apiEndpoint: string;
-  deleteEndpoint: string;
-  createTabValue: string;
+  apiEndpoint?: string;
+  deleteEndpoint?: string;
+  createTabValue?: string;
   placeholder?: string;
   onEditIdChange?: (id: string | number | null) => void;
   onTabChange: (val: string) => void;
   showEdit?: boolean;
+  showActionsColumn?: boolean;
 }
 
 const GenericAllTable = <T,>({
@@ -34,19 +36,30 @@ const GenericAllTable = <T,>({
   onEditIdChange,
   onTabChange,
   showEdit,
+  showActionsColumn,
 }: GenericAllProps<T>) => {
   const { showToast } = useToast();
-  const { refreshFlag } = useUpdateContent();
 
-  const { get, data, isLoading, error } = useAPI<T>(apiEndpoint);
-  const { remove } = useAPI(deleteEndpoint);
+  const { refreshFlags } = useUpdateContent();
+  const refreshKey = apiEndpoint || 'default';
+
+  const { get, data, isLoading, error } = useAPI<T>(apiEndpoint || '');
+  const { remove } = useAPI(deleteEndpoint || '');
+
+  const tableData = Array.isArray(data?.items)
+    ? data.items
+    : Array.isArray(data)
+    ? data
+    : [];
 
   const handleEdit = (id: string | number) => {
     onEditIdChange?.(id);
-    onTabChange(createTabValue);
+    if (createTabValue) onTabChange(createTabValue);
   };
 
   const handleDelete = async (id: string | number) => {
+    if (!deleteEndpoint) return;
+
     try {
       const res = await remove(id);
       showToast(res?.message || 'تم الحذف بنجاح');
@@ -59,7 +72,7 @@ const GenericAllTable = <T,>({
 
   useEffect(() => {
     get();
-  }, [get, refreshFlag]);
+  }, [get, refreshFlags[refreshKey]]);
 
   return (
     <SettingsTab
@@ -75,10 +88,11 @@ const GenericAllTable = <T,>({
       ) : (
         <DataTable
           placeholder={placeholder}
-          data={data}
+          data={tableData}
           onEdit={handleEdit}
-          onDelete={handleDelete}
+          onDelete={deleteEndpoint ? handleDelete : undefined}
           showEdit={showEdit}
+          showActionsColumn={showActionsColumn}
         />
       )}
     </SettingsTab>
