@@ -121,7 +121,7 @@ const RatingsSheet = ({ product }: { product: ProductCardProps }) => {
         console.log(response);
         showToast(response?.message);
         reset();
-        triggerRefresh();
+        triggerRefresh("ratings");
         setAttachments([]);
         setStars(0);
         setOpen(false);
