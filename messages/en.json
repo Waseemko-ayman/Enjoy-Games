@@ -691,6 +691,7 @@
       "subject": "Ticket Title",
       "ticketType": "Select Ticket Type",
       "details": "Please write a detailed description of your issue",
+      "message": "Please write a more detailed description of your assistance.",
       "name": "",
       "email": "",
       "phone": "xxxxxxxxx",
