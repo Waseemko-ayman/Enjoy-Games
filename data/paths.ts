@@ -8,7 +8,13 @@ export const PATHS = {
   STARS: { name: 'دليل ستارز', link: '/stars' },
   STARS_GIFTS: '/stars-gifts',
   WALLET: { name: 'محفظتي', link: '/wallet' },
-  MY_PURCHASES: { name: 'طلباتي', link: '/my-purchases' },
+  MY_PURCHASES: {
+    ROOT: { name: 'طلباتي', link: '/my-purchases' },
+    ITEM: (id: string | number) => ({
+      name: `تفاصيل الطلب ${id}`,
+      link: `/my-purchases/${id}`,
+    }),
+  },
   MY_CART: { name: 'سلتي', link: '/my-cart' },
 
   MY_ACCOUNT: {
@@ -69,7 +75,7 @@ export const navBarLinks = [
     id: 3,
     icon: MdOutlineAssignment,
     titleKey: 'my-purchases',
-    link: PATHS.MY_PURCHASES.link,
+    link: PATHS.MY_PURCHASES.ROOT.link,
   },
   {
     id: 4,
