@@ -11,10 +11,15 @@ import { PATHS } from '@/utils/router.helper';
 import { useTranslations } from 'next-intl';
 import DialogUpload from './DialogUpload';
 import { usePathname } from 'next/navigation';
-import { getStatusColor, getStatusIcon } from '@/utils/statusHelpers';
-import { FaUsers } from 'react-icons/fa6';
+import {
+  getStatusColor,
+  getStatusIcon,
+  getTicketStatusColor,
+  getTicketStatusIcon,
+} from '@/utils/statusHelpers';
+import { FaClipboardList, FaUsers } from 'react-icons/fa6';
 import UserPermissionsDrawer from '../UserPermissionsDrawer';
-import { permissionsOptions } from '@/utils/constant';
+import UpdateTicketStatusDrawer from '../UpdateTicketStatusDrawer';
 
 interface DataTableBodyProps<T> {
   columns: (keyof T)[];
@@ -25,6 +30,7 @@ interface DataTableBodyProps<T> {
   searchTerm: string;
   showEdit?: boolean;
   showActionsColumn?: boolean;
+  onRowPatched?: (id: string | number, patch: Partial<T>) => void;
 }
 
 function formatHeader(key: string) {
@@ -43,17 +49,22 @@ const DataTableBody = <T extends { id: string | number }>({
   searchTerm,
   showEdit,
   showActionsColumn = true,
+  onRowPatched,
 }: DataTableBodyProps<T>) => {
-  const [userId, setUserId] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  // Users
+  const [openUserId, setOpenUserId] = useState<string | null>(null);
+
+  // Tickets
+  const [openTicketId, setOpenTicketId] = useState<string | null>(null);
 
   const { setSelectedProductId } = useProductCodes();
 
   const t = useTranslations('Messages');
 
   const pathname = usePathname();
-  const isOrdersPage = pathname?.endsWith('/dashboard/orders');
-  const isUsersPage = pathname?.endsWith('/dashboard/users');
+  const isOrdersPage = pathname?.includes('/dashboard/orders');
+  const isUsersPage = pathname?.includes('/dashboard/users');
+  const isTicketsPage = pathname?.includes('/dashboard/tickets');
 
   const filteredColumns = columns.filter((col) => {
     if (col === 'shipping_method') {
@@ -134,11 +145,17 @@ const DataTableBody = <T extends { id: string | number }>({
                           className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden "
                         >
                           <div
-                            className={`flex items-center justify-center gap-1 p-2 rounded-xl ${getStatusColor(
-                              String(row[col])
-                            )}`}
+                            className={`flex items-center justify-center gap-1 p-2 rounded-xl ${
+                              isOrdersPage
+                                ? getStatusColor(String(row[col]))
+                                : isTicketsPage &&
+                                  getTicketStatusColor(String(row[col]))
+                            }`}
                           >
-                            {getStatusIcon(String(row[col]))}
+                            {isOrdersPage
+                              ? getStatusIcon(String(row[col]))
+                              : isTicketsPage &&
+                                getTicketStatusIcon(String(row[col]))}
                             <span>{String(row[col])}</span>
                           </div>
                         </td>
@@ -368,24 +385,45 @@ const DataTableBody = <T extends { id: string | number }>({
                           >
                             <Edit2 className="h-4 w-4" />
                           </Button>
+                        ) : isUsersPage ? (
+                          <UserPermissionsDrawer
+                            userId={row.id}
+                            open={openUserId === String(row.id)}
+                            setOpen={(val: boolean) =>
+                              setOpenUserId(val ? String(row.id) : null)
+                            }
+                            trigger={
+                              <Button
+                                onClick={() => setOpenUserId(String(row.id))}
+                                className="inline-flex items-center justify-center h-8 w-8 rounded-lg text-gray-400 bg-transparent hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                              >
+                                <FaUsers className="h-4 w-4" />
+                              </Button>
+                            }
+                          />
                         ) : (
-                          isUsersPage && (
-                            <UserPermissionsDrawer
-                              userId={userId}
-                              open={isOpen}
-                              setOpen={setIsOpen}
-                              permissionsOptions={permissionsOptions}
+                          isTicketsPage && (
+                            <UpdateTicketStatusDrawer
+                              ticketId={row.id}
+                              open={openTicketId === String(row.id)}
+                              setOpen={(val: boolean) =>
+                                setOpenTicketId(val ? String(row.id) : null)
+                              }
                               trigger={
                                 <Button
-                                  onClick={() => {
-                                    setUserId(row.id);
-                                    setIsOpen(true);
-                                  }}
+                                  onClick={() =>
+                                    setOpenTicketId(String(row.id))
+                                  }
                                   className="inline-flex items-center justify-center h-8 w-8 rounded-lg text-gray-400 bg-transparent hover:text-blue-600 hover:bg-blue-50 transition-colors"
                                 >
-                                  <FaUsers className="h-4 w-4" />
+                                  <FaClipboardList className="h-4 w-4" />
                                 </Button>
                               }
+                              onSuccess={(newStatusName) => {
+                                onRowPatched?.(row.id, {
+                                  status: newStatusName,
+                                } as unknown as Partial<T>);
+                              }}
                             />
                           )
                         )}
