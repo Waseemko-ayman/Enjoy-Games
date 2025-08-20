@@ -13,6 +13,13 @@ const AllOrders = ({
 }) => {
   const t = useTranslations();
 
+  const handleOrderFilter = (rows: any[], currentFilter: string) => {
+    if (currentFilter === 'all') return rows;
+    return rows.filter(
+      (item: any) => item.status?.toLowerCase() === currentFilter.toLowerCase()
+    );
+  };
+
   return (
     <GenericAllTable<any>
       value={value}
@@ -23,6 +30,7 @@ const AllOrders = ({
       onTabChange={onTabChange}
       showEdit={false}
       showActionsColumn={false}
+      customFilter={handleOrderFilter}
     />
   );
 };
