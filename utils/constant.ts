@@ -4,7 +4,7 @@ import { IoBarcodeSharp } from 'react-icons/io5';
 import { FaQuestionCircle, FaTachometerAlt, FaTicketAlt } from 'react-icons/fa';
 import { PATHS } from '@/data/paths';
 import { MdLocalOffer } from 'react-icons/md';
-import { FiShoppingCart } from 'react-icons/fi';
+import { FiShoppingCart, FiUsers } from 'react-icons/fi';
 
 export const sidebarLinks = [
   {
@@ -66,6 +66,11 @@ export const sidebarLinks = [
     title: 'orders',
     href: PATHS.DASHBOARD.ORDERS.ROOT,
     icon: FiShoppingCart,
+  },
+  {
+    title: 'users',
+    href: PATHS.DASHBOARD.USERS,
+    icon: FiUsers,
   },
   // {
   //   title: 'Payment Gateways',
@@ -243,12 +248,6 @@ export const CreateProductsFields = [
       { id: 'multi_id', name: 'multiId' },
       { id: 'access', name: 'access' },
     ],
-    // options: [
-    //   { id: 'code', name: 'كود' },
-    //   { id: 'account_id', name: 'رقم تعريفي' },
-    //   { id: 'multi_id', name: 'رقمين تعريفيين' },
-    //   { id: 'access', name: 'صلاحية الدخول أو بيانات الحساب' },
-    // ],
   },
   {
     id: 'discount',
@@ -270,6 +269,59 @@ export const CreateProductsFields = [
     label: 'isActive',
     placeholder: 'isActive',
     type: 'checkbox',
+  },
+];
+
+export const permissionsOptions = [
+  { id: 'manage products', name: 'manageProducts' },
+  { id: 'manage settings', name: 'manageSettings' },
+  { id: 'manage users', name: 'manageUsers' },
+  { id: 'manage categories', name: 'manageCategories' },
+  { id: 'manage subcategories', name: 'manageSubcategories' },
+  { id: 'manage codes', name: 'manageCodes' },
+  { id: 'manage coupons', name: 'manageCoupons' },
+  { id: 'manage sliders', name: 'manageSliders' },
+  { id: 'manage orders', name: 'manageOrders' },
+  { id: 'manage ratings', name: 'manageRatings' },
+  { id: 'reply tickets', name: 'replyTickets' },
+];
+
+export const CreateUsersFields = [
+  {
+    id: 1,
+    type: 'text',
+    label: 'name',
+    name: 'name',
+    placeholder: 'writeYorName',
+  },
+  {
+    id: 2,
+    type: 'email',
+    label: 'email',
+    name: 'email',
+    placeholder: 'writeYorEmail',
+  },
+  {
+    id: 3,
+    type: 'text',
+    label: 'password',
+    name: 'password',
+    placeholder: 'yourPassword',
+  },
+  {
+    id: 4,
+    type: 'text',
+    label: 'password_confirmation',
+    name: 'password_confirmation',
+    placeholder: 'repassword',
+  },
+  {
+    id: 5,
+    type: 'multi-select',
+    label: 'permissions',
+    name: 'permissions',
+    placeholder: 'selectPermissions',
+    options: permissionsOptions,
   },
 ];
 
@@ -332,10 +384,6 @@ export const CreateCouponsFields = [
       { id: 'fixed', name: 'fixed' },
       { id: 'percent', name: 'percent' },
     ],
-    // options: [
-    //   { id: 'fixed', name: 'مقدار ثابت' },
-    //   { id: 'percent', name: 'نسبة مئوية' },
-    // ],
   },
   {
     id: 'usage_limit',

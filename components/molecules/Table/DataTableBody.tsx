@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Edit2, Trash2, Search, Hash } from 'lucide-react';
@@ -12,6 +12,9 @@ import { useTranslations } from 'next-intl';
 import DialogUpload from './DialogUpload';
 import { usePathname } from 'next/navigation';
 import { getStatusColor, getStatusIcon } from '@/utils/statusHelpers';
+import { FaUsers } from 'react-icons/fa6';
+import UserPermissionsDrawer from '../UserPermissionsDrawer';
+import { permissionsOptions } from '@/utils/constant';
 
 interface DataTableBodyProps<T> {
   columns: (keyof T)[];
@@ -41,11 +44,16 @@ const DataTableBody = <T extends { id: string | number }>({
   showEdit,
   showActionsColumn = true,
 }: DataTableBodyProps<T>) => {
+  const [userId, setUserId] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+
   const { setSelectedProductId } = useProductCodes();
+
   const t = useTranslations('Messages');
 
   const pathname = usePathname();
   const isOrdersPage = pathname?.endsWith('/dashboard/orders');
+  const isUsersPage = pathname?.endsWith('/dashboard/users');
 
   const filteredColumns = columns.filter((col) => {
     if (col === 'shipping_method') {
@@ -353,13 +361,33 @@ const DataTableBody = <T extends { id: string | number }>({
                         {['account_id', 'multi_id', 'access'].includes(
                           (row as any).shipping_method
                         ) && <DialogUpload rowId={row.id} />}
-                        {onEdit && showEdit !== false && (
+                        {onEdit && showEdit !== false ? (
                           <Button
                             onClick={() => onEdit(row.id)}
                             className="inline-flex items-center justify-center h-8 w-8 rounded-lg text-gray-400 bg-transparent hover:text-blue-600 hover:bg-blue-50 transition-colors"
                           >
                             <Edit2 className="h-4 w-4" />
                           </Button>
+                        ) : (
+                          isUsersPage && (
+                            <UserPermissionsDrawer
+                              userId={userId}
+                              open={isOpen}
+                              setOpen={setIsOpen}
+                              permissionsOptions={permissionsOptions}
+                              trigger={
+                                <Button
+                                  onClick={() => {
+                                    setUserId(row.id);
+                                    setIsOpen(true);
+                                  }}
+                                  className="inline-flex items-center justify-center h-8 w-8 rounded-lg text-gray-400 bg-transparent hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                                >
+                                  <FaUsers className="h-4 w-4" />
+                                </Button>
+                              }
+                            />
+                          )
                         )}
                         {onDelete && (
                           <Button

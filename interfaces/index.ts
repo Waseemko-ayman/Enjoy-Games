@@ -791,6 +791,10 @@ export interface signupFormData extends LoginFormData {
   password_confirmation: string;
 }
 
+export interface CreateUsersPorps extends signupFormData {
+  permissions: (string | undefined)[];
+}
+
 type Account = {
   id: string;
   name: string;

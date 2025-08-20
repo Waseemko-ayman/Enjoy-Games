@@ -14,6 +14,7 @@ export const PATHS = {
     ROOT: '/dashboard/orders',
     ITEM: '/dashboard/orders/:id',
   },
+  USERS: '/dashboard/users',
   PAYMENT_GATEWAYS: '/dashboard/payment-gateways',
   REPORTS: '/dashboard/reports',
   SETTINGS: '/dashboard/settings',

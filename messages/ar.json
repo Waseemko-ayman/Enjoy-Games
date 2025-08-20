@@ -425,7 +425,8 @@
     "tickets": "تذاكر الدعم الفني",
     "ratings": "التقييمات",
     "orders": "الطلبات",
-    "notifications": "الإشعارات"
+    "notifications": "الإشعارات",
+    "users": "المستخدمين"
   },
   "Dashboard": {
     "desc": "مرحباً بكم في إدارة طلباتكم",
@@ -508,14 +509,32 @@
       "title": "جميع الطلبات",
       "desc": "قم بإنشاء وإدارة الطلبات لمتجرك",
       "manageOrders": "إدارة جميع الطلبات في مكان واحد",
-      "createOrder": "إنشاء الطلبات",
-      "createNewOrder": "إنشاء طلب جديد",
       "products": {
         "allProducts": "جميع المنتجات",
         "title": "منتجات الطلب",
         "desc": "استعرض كافة المنتجات الموجودة في هذا الطلب"
       },
       "uploadDoc": "رفع التوثيق"
+    },
+    "Users": {
+      "title": "جميع المستخدمين",
+      "desc": "إدارة المستخدمين لمتجرك",
+      "manageUsers": "إدارة جميع المستخدمين في مكان واحد",
+      "createUsers": "إنشاء مستخدمين",
+      "createNewUsers": "إنشاء مستخدم جديد",
+      "permissions": {
+        "manageProducts": "إدارة المنتجات",
+        "manageSettings": "إدارة الإعدادات",
+        "manageUsers": "إدارة المستخدمين",
+        "manageCategories": "إدارة التصنيفات",
+        "manageSubcategories": "إدارة التصنيفات الفرعية",
+        "manageCodes": "إدارة الأكواد",
+        "manageCoupons": "إدارة القسائم",
+        "manageSliders": "إدارة السلايدر",
+        "manageOrders": "إدارة الطلبات",
+        "manageRatings": "إدارة التقييمات",
+        "replyTickets": "الرد على التذاكر"
+      }
     }
   },
   "errorBoundary": {
@@ -661,7 +680,8 @@
       "englishAnswer": "الجواب (إنجليزي)",
       "subject": "العنوان",
       "message": "الوصف",
-      "attachments": "المرفقات"
+      "attachments": "المرفقات",
+      "permissions": "الأذونات"
     },
     "placeHolders": {
       "haveCoupon": "هل لديك كوبون خصم؟",
@@ -728,7 +748,10 @@
       "writeSubject": "أكتب العنوان",
       "writeMessage": "أكتب الوصف...",
       "selectAttachments": "إختر ملفات",
-      "typeYourReply": "أكتب ردك هنا..."
+      "typeYourReply": "أكتب ردك هنا...",
+      "searchUser": "البحث عن مستحدم...",
+      "selectPermissions": "حدد الأذونات",
+      "permissions": "إختار الأذونات"
     },
     "options": {
       "gender": {
@@ -787,7 +810,8 @@
       "englishAnswerRequired": "الجواب الإنجليزي مطلوب",
       "arabicImageRequired": "الصورة بالعربية مطلوبة",
       "englishImageRequired": "الصورة بالإنجليزية مطلوبة",
-      "fileRequired": "الملف مطلوب"
+      "fileRequired": "الملف مطلوب",
+      "permissionsRequired": "الأذونات مطلوبة"
     }
   },
   "Auth": {

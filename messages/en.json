@@ -425,7 +425,8 @@
     "tickets": "Tickets",
     "ratings": "Ratings",
     "orders": "Orders",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "users": "Users"
   },
   "Dashboard": {
     "desc": "Welcome to your order management orders",
@@ -506,16 +507,34 @@
     },
     "orders": {
       "title": "All Orders",
-      "desc": "Create and manage Orders for your store",
+      "desc": "Manage Orders for your store",
       "manageOrders": "Manage all Orders in one place",
-      "createOrder": "Create Order",
-      "createNewOrder": "Create new order",
       "products": {
         "allProducts": "All Products",
         "title": "Order Products",
         "desc": "Browse all products included in this order"
       },
       "uploadDoc": "Upload documentation"
+    },
+    "Users": {
+      "title": "All Users",
+      "desc": "Manage Users for your store",
+      "manageUsers": "Manage all Users in one place",
+      "createUsers": "Create Users",
+      "createNewUsers": "Create new User",
+      "permissions": {
+        "manageProducts": "Manage Products",
+        "manageSettings": "Manage Settings",
+        "manageUsers": "Manage Users",
+        "manageCategories": "Manage Categories",
+        "manageSubcategories": "Manage Subcategories",
+        "manageCodes": "Manage Codes",
+        "manageCoupons": "Manage Coupons",
+        "manageSliders": "Manage Sliders",
+        "manageOrders": "Manage Orders",
+        "manageRatings": "Manage Ratings",
+        "replyTickets": "Reply Tickets"
+      }
     }
   },
   "errorBoundary": {
@@ -661,7 +680,8 @@
       "englishAnswer": "Answer (English)",
       "subject": "Subject",
       "message": "Message",
-      "attachments": "Attachments"
+      "attachments": "Attachments",
+      "permissions": "Permissions"
     },
     "placeHolders": {
       "haveCoupon": "Do you have a discount coupon?",
@@ -728,7 +748,10 @@
       "writeSubject": "Enter subject",
       "writeMessage": "Enter description...",
       "selectAttachments": "Select files",
-      "typeYourReply": "write your response here..."
+      "typeYourReply": "write your response here...",
+      "searchUser": "Search for user...",
+      "selectPermissions": "Select Permissions",
+      "permissions": "Select Permissions"
     },
     "options": {
       "gender": {
@@ -787,7 +810,8 @@
       "englishAnswerRequired": "English answer is required",
       "arabicImageRequired": "Arabic image is required",
       "englishImageRequired": "English image is required",
-      "fileRequired": "File required"
+      "fileRequired": "File required",
+      "permissionsRequired": "Permissions required"
     }
   },
   "Auth": {
