@@ -66,6 +66,7 @@
     "store": "المتجر",
     "create": "إضافة تذكرة جديدة",
     "ticket-detail": "تفاصيل التذكرة #:id",
+    "order-detail": "تفاصيل الطلب #:id",
     "TalkToCustomerService": "التحدث مع خدمة العملاء",
     "faqs": "الأسئلة الشائعة",
     "RegisterNow": "سجل الآن",
@@ -406,7 +407,8 @@
     "poor": "لم يعجبني",
     "bad": "سيء",
     "relatedProducts": "منتجات مشابهة",
-    "productEvaluation": "تم إرسال تقييمك بنجاح, شكرا جزيلا لك"
+    "productEvaluation": "تم إرسال تقييمك بنجاح, شكرا جزيلا لك",
+    "noImages": "لم يتم إضافة أي صور لهذا التقييم !"
   },
   "search": {
     "searchResults": "نتائج البحث",

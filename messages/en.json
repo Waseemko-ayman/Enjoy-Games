@@ -66,6 +66,7 @@
     "store": "Store",
     "create": "Add New Ticket",
     "ticket-detail": "Ticket details #:id",
+    "order-detail": "Order details #:id",
     "TalkToCustomerService": "Talk to customer service",
     "faqs": "Frequently Asked Questions",
     "RegisterNow": "Register now",
@@ -406,7 +407,8 @@
     "poor": "Didn't Like It",
     "bad": "Bad",
     "relatedProducts": "Related Products",
-    "productEvaluation": "Your evaluation has been submitted successfully. Thank you very much."
+    "productEvaluation": "Your evaluation has been submitted successfully. Thank you very much.",
+    "noImages": "No images provided for this rating.!"
   },
   "search": {
     "searchResults": "Search results",
