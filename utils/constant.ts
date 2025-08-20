@@ -286,6 +286,13 @@ export const permissionsOptions = [
   { id: 'reply tickets', name: 'replyTickets' },
 ];
 
+export const ticketsStatus = [
+  { id: 'open', name: 'open' },
+  { id: 'pending', name: 'pending' },
+  { id: 'resolved', name: 'resolved' },
+  { id: 'closed', name: 'closed' },
+];
+
 export const CreateUsersFields = [
   {
     id: 1,
