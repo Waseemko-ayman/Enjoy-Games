@@ -15,7 +15,7 @@ const MenuCard = ({
   t: TranslationFunction;
 }) => {
   const { isArabic } = useToggleLocale();
-  const { tickets, hasUnreadTickets } = useTickets();
+  const { tickets } = useTickets();
   return (
     <div className="py-3 px-5 bg-white rounded-[10px] shadow-[0_8.293px_37.319px_4.147px_rgba(0,0,0,0.08)] mb-4">
       <ul className="flex flex-col gap-3">
@@ -31,7 +31,6 @@ const MenuCard = ({
                   <h4 className="flex items-center gap-3 text-base font-normal">
                     <div className="relative">
                       {list.key === 'tickets' &&
-                      hasUnreadTickets &&
                       tickets &&
                       tickets.length > 0 ? (
                         <>
