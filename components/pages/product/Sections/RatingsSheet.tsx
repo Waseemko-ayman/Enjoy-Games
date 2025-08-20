@@ -107,7 +107,7 @@ const RatingsSheet = ({ product }: { product: ProductCardProps }) => {
     formData.append('stars', String(data.stars || stars));
     formData.append('comment', data.comment);
 
-    const showName = data.show_name ? 0 : 1;
+    const showName = data.show_name ? 1 : 0;
     formData.append('show_name', String(showName));
 
     (data.images || attachments).forEach((file) => {
@@ -117,7 +117,6 @@ const RatingsSheet = ({ product }: { product: ProductCardProps }) => {
     try {
       const response = await add(formData);
       if (response) {
-        console.log(response);
         showToast(response?.message);
         reset();
         triggerRefresh('ratings');
