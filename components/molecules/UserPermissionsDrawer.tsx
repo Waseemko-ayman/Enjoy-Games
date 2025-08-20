@@ -13,12 +13,13 @@ import ResponsiveDialogDrawer from '../organism/ResponsiveDialogDrawer';
 import Button from '../atomic/Button';
 import ButtonLoading from '../atomic/ButtonLoading';
 import useIsMobile from '@/hook/useIsMobile';
+import { permissionsOptions } from '@/utils/constant';
 
 interface UserPermissionsDrawerProps {
   userId: string | number;
   open: boolean;
   setOpen: (val: boolean) => void;
-  permissionsOptions: { id: string; name: string }[];
+  // permissionsOptions: { id: string; name: string }[];
   trigger?: React.ReactNode;
 }
 
@@ -30,7 +31,6 @@ const UserPermissionsDrawer: React.FC<UserPermissionsDrawerProps> = ({
   userId,
   open,
   setOpen,
-  permissionsOptions,
   trigger,
 }) => {
   const t = useTranslations();
