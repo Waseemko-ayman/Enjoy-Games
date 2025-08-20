@@ -47,7 +47,7 @@ interface FormFieldProps {
   inputName: string;
   register?: UseFormRegister<any>;
   error?: FieldError;
-  editId: string | number | null;
+  editId?: string | number | null;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
