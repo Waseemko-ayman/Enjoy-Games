@@ -7,11 +7,9 @@ import React from 'react';
 const AllTickets = ({
   value,
   onTabChange,
-  onEditIdChange,
 }: {
   value: string;
   onTabChange: (val: string) => void;
-  onEditIdChange: (id: string | number | null) => void;
 }) => {
   const t = useTranslations();
   return (
@@ -21,10 +19,9 @@ const AllTickets = ({
       description={t('Tickets.Dashboard.desc')}
       apiEndpoint="tickets/admin/tickets"
       deleteEndpoint="ticket/delete"
-      createTabValue="createTickets"
       placeholder={t('Inputs.placeHolders.searchTicket')}
-      onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
+      showEdit={false}
     />
   );
 };
