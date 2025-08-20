@@ -53,10 +53,10 @@ const RatingsSheet = ({ product }: { product: ProductCardProps }) => {
     comment: Yup.string()
       .required(errosTxt('commentRequired'))
       .max(maxCharsLength, errosTxt('maxChars', { number: maxCharsLength })),
-    checkbox: Yup.boolean().required().default(false),
+    show_name: Yup.boolean(),
     stars: Yup.number()
-      .required('selectStars')
-      .min(1, 'selectStars')
+      .required(errosTxt('selectStars'))
+      .min(1, errosTxt('selectStars'))
       .default(0),
     images: Yup.array()
       .of(Yup.mixed<File>().required())
@@ -75,7 +75,7 @@ const RatingsSheet = ({ product }: { product: ProductCardProps }) => {
     formState: { errors },
   } = useForm<RatingFormData>({
     resolver: yupResolver(formSchema) as any,
-    defaultValues: { comment: '', checkbox: false, stars: 0, images: null },
+    defaultValues: { comment: '', show_name: false, stars: 0, images: null },
     mode: 'onChange',
   });
 
@@ -107,9 +107,8 @@ const RatingsSheet = ({ product }: { product: ProductCardProps }) => {
     formData.append('stars', String(data.stars || stars));
     formData.append('comment', data.comment);
 
-    // هنا checkbox مرتبط بـ React Hook Form
-    const showName = data.checkbox ? '0' : '1';
-    formData.append('show_name', showName);
+    const showName = data.show_name ? 0 : 1;
+    formData.append('show_name', String(showName));
 
     (data.images || attachments).forEach((file) => {
       if (file) formData.append('images[]', file);
@@ -121,7 +120,7 @@ const RatingsSheet = ({ product }: { product: ProductCardProps }) => {
         console.log(response);
         showToast(response?.message);
         reset();
-        triggerRefresh("ratings");
+        triggerRefresh('ratings');
         setAttachments([]);
         setStars(0);
         setOpen(false);
@@ -183,6 +182,11 @@ const RatingsSheet = ({ product }: { product: ProductCardProps }) => {
                     </AnimatedWrapper>
                   ))}
                 </div>
+                {errors.stars && (
+                  <p className="text-red-500 text-base font-medium mt-2 mb-3">
+                    {errors.stars.message}
+                  </p>
+                )}
               </MotionSection>
 
               <MotionSection index={3}>
@@ -222,7 +226,7 @@ const RatingsSheet = ({ product }: { product: ProductCardProps }) => {
                 <div className="my-4">
                   <Input
                     type="checkbox"
-                    inputName="checkbox"
+                    inputName="show_name"
                     placeholder={inputTxts('labels.hideMyName')}
                     control={control}
                   />
