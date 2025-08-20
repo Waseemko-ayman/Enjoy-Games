@@ -61,7 +61,8 @@ const PageHeader = ({
 
     accumulatedPath += `/${part}`;
     const isLast = i === pathParts.length - 1;
-    const label = getLabel(part, pathNameMap, tPages);
+    const prevPart = pathParts[i - 1]; // 👈 الجزء السابق
+    const label = getLabel(part, pathNameMap, tPages, prevPart);
 
     breadcrumbs.push({
       label,
@@ -131,12 +132,21 @@ const PageHeader = ({
 function getLabel(
   part: string,
   pathNameMap: Record<string, string>,
-  tPages: (key: string) => string
+  tPages: (key: string) => string,
+  prevPart?: string
 ): string {
-  // لو part رقم (id للتذكرة)
+  // لو part رقم (id لصفحة تفاصيل)
   if (!isNaN(Number(part))) {
-    const template = tPages('ticket-detail');
-    return template.replace(':id', part);
+    if (prevPart === 'tickets') {
+      const template = tPages('ticket-detail');
+      return template.replace(':id', part);
+    }
+    if (prevPart === 'my-purchases') {
+      const template = tPages('order-detail');
+      return template.replace(':id', part);
+    }
+    // fallback عام لو ما في تعريف
+    return `#${part}`;
   }
 
   const translated = tPages(part);
