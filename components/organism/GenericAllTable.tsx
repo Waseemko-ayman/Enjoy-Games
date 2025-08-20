@@ -23,6 +23,8 @@ interface GenericAllProps<T> {
   onTabChange: (val: string) => void;
   showEdit?: boolean;
   showActionsColumn?: boolean;
+  refreshKeyProp?: string;
+  customFilter?: (rows: any[], currentFilter: string) => any[];
 }
 
 const GenericAllTable = <T,>({
@@ -37,30 +39,33 @@ const GenericAllTable = <T,>({
   onTabChange,
   showEdit,
   showActionsColumn,
+  refreshKeyProp,
+  customFilter,
 }: GenericAllProps<T>) => {
+  // --- Filter State ---
+  const [filter, setFilter] = useState('all');
+  const [rows, setRows] = useState<any[]>([]);
+
   const { showToast } = useToast();
 
   const { refreshFlags } = useUpdateContent();
-  const refreshKey = apiEndpoint || 'default';
+  const refreshKey = refreshKeyProp || apiEndpoint || 'default';
 
   const { get, data, isLoading, error } = useAPI<T>(apiEndpoint || '');
   const { remove } = useAPI(deleteEndpoint || '');
 
-  const tableData = Array.isArray(data?.items)
-    ? data.items
-    : Array.isArray(data)
-    ? data
-    : [];
+  // const tableData = Array.isArray(data?.items)
+  //   ? data.items
+  //   : Array.isArray(data)
+  //   ? data
+  //   : [];
 
-  // --- Filter State ---
-  const [filter, setFilter] = useState('all');
-
-  const filteredTableData = useMemo(() => {
-    if (filter === 'all') return tableData;
-    return tableData.filter(
-      (item: any) => item.status?.toLowerCase() === filter.toLowerCase()
-    );
-  }, [filter, tableData]);
+  // const filteredTableData = useMemo(() => {
+  //   if (filter === 'all') return tableData;
+  //   return tableData.filter(
+  //     (item: any) => item.status?.toLowerCase() === filter.toLowerCase()
+  //   );
+  // }, [filter, tableData]);
 
   const handleEdit = (id: string | number) => {
     onEditIdChange?.(id);
@@ -73,12 +78,39 @@ const GenericAllTable = <T,>({
     try {
       const res = await remove(id);
       showToast(res?.message || 'تم الحذف بنجاح');
-      get();
+
+      // Instead of get(), we delete the row directly from rows
+      setRows((prev) => prev.filter((r) => r.id !== id));
     } catch (err) {
       const apiError = (err as any)?.response?.message;
       showToast(apiError);
     }
   };
+
+  useEffect(() => {
+    const list = Array.isArray(data?.items)
+      ? data.items
+      : Array.isArray(data)
+      ? data
+      : [];
+    setRows(list);
+  }, [data]);
+
+  const patchRow = (id: string | number, patch: Partial<any>) => {
+    setRows((prev) => prev.map((r) => (r.id === id ? { ...r, ...patch } : r)));
+  };
+
+  const filteredRows = useMemo(() => {
+    if (customFilter) {
+      return customFilter(rows, filter); // 👈 Apply custom filtering if present
+    }
+
+    //Default filtering
+    if (filter === 'all') return rows;
+    return rows.filter(
+      (item: any) => item.status?.toLowerCase() === filter.toLowerCase()
+    );
+  }, [rows, filter, customFilter]);
 
   useEffect(() => {
     get();
@@ -98,7 +130,8 @@ const GenericAllTable = <T,>({
       ) : (
         <DataTable
           placeholder={placeholder}
-          data={filteredTableData}
+          data={filteredRows}
+          onRowPatched={patchRow}
           onEdit={handleEdit}
           onDelete={deleteEndpoint ? handleDelete : undefined}
           showEdit={showEdit}
