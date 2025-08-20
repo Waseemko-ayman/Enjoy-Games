@@ -55,6 +55,8 @@ export const getTicketStatusIcon = (status?: string) => {
       return <CheckCircle className="w-4 h-4" />;
     case 'pending':
       return <Clock className="w-4 h-4" />;
+    case 'resolved':
+      return <CheckCircle className="w-4 h-4 text-blue-500" />;
     default:
       return <MessageCircle className="w-4 h-4" />;
   }
@@ -70,8 +72,8 @@ export const getTicketStatusColor = (status?: string) => {
       return 'bg-green-100 text-green-800 border-green-200';
     case 'pending':
       return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-    case 'in_progress':
-      return 'bg-blue-100 text-blue-800 border-blue-200';
+    case 'resolved':
+      return 'bg-purple-100 text-purple-800 border-purple-200';
     default:
       return 'bg-gray-100 text-gray-800 border-gray-200';
   }
