@@ -265,6 +265,7 @@ const CreateProducts = ({
                       | FieldError
                       | undefined
                   }
+                  editId={editId}
                   {...(type === 'file' ? { accept: 'image/*' } : {})}
                 />
               );
