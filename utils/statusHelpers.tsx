@@ -52,11 +52,11 @@ export const getTicketStatusIcon = (status?: string) => {
     case 'open':
       return <Bell className="w-4 h-4" />;
     case 'closed':
-      return <CheckCircle className="w-4 h-4" />;
+      return <XCircle className="w-4 h-4" />;
     case 'pending':
       return <Clock className="w-4 h-4" />;
     case 'resolved':
-      return <CheckCircle className="w-4 h-4 text-blue-500" />;
+      return <CheckCircle className="w-4 h-4 text-purple-900" />;
     default:
       return <MessageCircle className="w-4 h-4" />;
   }
@@ -69,7 +69,7 @@ export const getTicketStatusColor = (status?: string) => {
     case 'open':
       return 'bg-green-100 text-green-800 border-green-200';
     case 'closed':
-      return 'bg-green-100 text-green-800 border-green-200';
+      return 'bg-gray-200 text-gray-700 border-gray-300';
     case 'pending':
       return 'bg-yellow-100 text-yellow-800 border-yellow-200';
     case 'resolved':
