@@ -10,13 +10,16 @@ import Container from '@/components/organism/Container';
 import Layer from '@/components/atomic/Layer';
 import { TicketsProvider, useTickets } from '@/context/TicketsContext';
 import { Ticket } from '@/interfaces';
-import { Bell, CheckCircle, Clock, MessageCircle } from 'lucide-react';
 import TicketsCards from './Sections/TicketsCards';
 import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
 import Button from '@/components/atomic/Button';
 import { useRouter } from 'next/navigation';
 import Pagination from '@/components/molecules/Pagination';
 import { usePagination } from '@/hook/usePagination';
+import {
+  getTicketStatusColor,
+  getTicketStatusIcon,
+} from '@/utils/statusHelpers';
 
 const TicketsPage = () => {
   const t = useTranslations('Tickets');
@@ -34,36 +37,6 @@ const TicketsPage = () => {
     totalItems,
     itemsPerPage,
   } = usePagination<Ticket>({ data: tickets || [], itemsPerPage: 9 });
-
-  const getStatusIcon = (status?: string) => {
-    if (!status) return <MessageCircle className="w-4 h-4" />;
-    switch (status.toLowerCase()) {
-      case 'open':
-        return <Bell className="w-4 h-4" />;
-      case 'closed':
-        return <CheckCircle className="w-4 h-4" />;
-      case 'pending':
-        return <Clock className="w-4 h-4" />;
-      default:
-        return <MessageCircle className="w-4 h-4" />;
-    }
-  };
-
-  const getStatusColor = (status?: string) => {
-    if (!status) return 'bg-gray-100 text-gray-800 border-gray-200';
-    switch (status.toLowerCase()) {
-      case 'open':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'closed':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'in_progress':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  };
 
   if (isLoading) return <Loading />;
   if (error) return <ErrorFetching />;
@@ -89,8 +62,8 @@ const TicketsPage = () => {
                     key={index}
                     ticket={ticket}
                     t={t}
-                    getStatusIcon={getStatusIcon}
-                    getStatusColor={getStatusColor}
+                    getStatusIcon={getTicketStatusIcon}
+                    getStatusColor={getTicketStatusColor}
                     handleTicketClick={(id) =>
                       router.push(PATHS.TICKETS.ITEM(id).link)
                     }
