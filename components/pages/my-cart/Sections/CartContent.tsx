@@ -79,9 +79,6 @@ const CartContent: React.FC<CartContentProps> = ({
                         <p className="text-xs text-gray-600 font-semibold">
                           {extractText(item.description)}
                         </p>
-                        {/* <p className="text-center text-xs sm:text-sm text-gray-600 font-semibold bg-[var(--enjoy-gray-100)] py-2 px-3 rounded-full">
-                          {item.storeName ?? 'المتجر السعودي'}
-                        </p> */}
                       </div>
                     </div>
                     <ResponsiveDialogDrawer
