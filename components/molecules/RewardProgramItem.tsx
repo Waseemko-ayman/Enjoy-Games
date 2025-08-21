@@ -18,9 +18,9 @@ const RewardProgramItem = ({ program, isSelected }: RewardProgramItemProps) => {
         >
           {isSelected && <div className="w-3 h-3 bg-white rounded-full" />}
         </div>
-        <h4 className="font-semibold text-sm">{t(`${program.key}`)}</h4>
+        <h4 className="font-semibold text-sm">{t(`${program?.key}`)}</h4>
       </div>
-      {program.description && (
+      {program?.description && (
         <p className="text-xs text-gray-600 bg-[var(--enjoy-gray-100)] py-2.5 px-2 rounded-lg flex items-center gap-1">
           {t(program.description)}:{' '}
           <div className="text-[var(--enjoy-success)] flex items-center gap-1">

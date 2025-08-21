@@ -9,23 +9,32 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { cardVariants } from '@/lib/context';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import { useWallet } from '@/context/WalletContext';
+import ButtonLoading from '../atomic/ButtonLoading';
+import InlineError from './InlineError';
+import { PATHS } from '@/data/paths';
 
 const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   variant,
   totalAmount = 0,
   withdrawableAmount = 0,
   conversionRate,
-  starPoints,
   lastWithdrawalText,
-  firstButtonHref,
-  secondButtonHref,
-  btnTexts,
+  // firstButtonHref,
+  // secondButtonHref,
+  // btnTexts,
 }) => {
+  const t = useTranslations('PagesHeaderTitles');
   const starsTxt = useTranslations('Stars.pointsSystem');
   const maxupTxt = useTranslations('MaxupProgram.pointSystem');
   const sharedTexts = useTranslations('Shared');
   const { isArabic } = useToggleLocale();
-  const btnStyled = `py-3 ${isArabic ? 'px-5' : 'px-2.5'} text-sm`;
+
+  // API Context
+  const { myWallet, isLoading, error } = useWallet();
+
+  console.log(myWallet);
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
       <motion.div
@@ -49,8 +58,16 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
                 : starsTxt('actions.starPoints')}
             </h5>
             <div className="flex items-center justify-center gap-1 mt-2 mb-5">
-              <h2 className="text-3xl font-bold">
-                {variant === 'earnings' ? withdrawableAmount : starPoints}
+              <h2 className="text-2xl font-bold">
+                {variant === 'earnings' ? (
+                  withdrawableAmount
+                ) : isLoading ? (
+                  <ButtonLoading borderColor="border-black" />
+                ) : error ? (
+                  <InlineError textColor="text-black" />
+                ) : (
+                  myWallet?.points_balance
+                )}
               </h2>
               {variant === 'earnings' && (
                 <Image
@@ -61,21 +78,12 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
                 />
               )}
             </div>
-            <div className="flex items-center justify-center gap-4">
-              <Button href={firstButtonHref} otherClassName={`${btnStyled}`}>
-                {btnTexts('TransferToMyWallet')}
-              </Button>
-
-              <Button
-                href={secondButtonHref}
-                variant="forth"
-                otherClassName={`${btnStyled} !bg-white`}
-              >
-                {variant === 'earnings'
-                  ? btnTexts('BankTransfer')
-                  : btnTexts('RedeemPoints')}
-              </Button>
-            </div>
+            <Button
+              href={PATHS.WALLET.link}
+              otherClassName={`py-3 ${isArabic ? 'px-7' : 'px-4'} text-sm`}
+            >
+              {t('wallet')}
+            </Button>
           </div>
         </CardWrapper>
       </motion.div>
@@ -93,10 +101,17 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
               bgColor="bg-enjoy-secondary-soft"
               className="p-3.5 !shadow-none w-full"
             >
-              <h5 className="text-xs font-semibold mb-4">
+              <h5 className="text-xs font-semibold mb-4 flex items-center gap-1">
                 {variant === 'earnings'
                   ? maxupTxt('header.totalEarnings')
-                  : starsTxt('conversionInfo.title', { currency: 'ريال' })}
+                  : starsTxt('conversionInfo.title')}
+                {isLoading ? (
+                  <ButtonLoading borderColor="border-black" />
+                ) : error ? (
+                  <InlineError textColor="text-black" />
+                ) : (
+                  <>{myWallet?.wallet_balance?.currency || 'ريال'}</>
+                )}
               </h5>
               <div
                 className={`flex items-center ${
@@ -116,14 +131,18 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
                 ) : (
                   <>
                     <span className="text-lg font-semibold">
-                      {conversionRate} = {totalAmount}
+                      {conversionRate} ={' '}
+                      {isLoading ? (
+                        <ButtonLoading borderColor="border-black" />
+                      ) : error ? (
+                        <InlineError textColor="text-black" />
+                      ) : (
+                        <>
+                          {myWallet?.points_to_cash?.amount}{' '}
+                          {myWallet?.points_to_cash?.currency}
+                        </>
+                      )}
                     </span>
-                    <Image
-                      src="/assets/saudi_riyal.png"
-                      alt="ريال سعودي"
-                      width={15}
-                      height={15}
-                    />
                   </>
                 )}
               </div>
@@ -150,7 +169,18 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
                 <span className="text-lg font-semibold">0</span>
               ) : (
                 <span className="text-lg font-semibold">
-                  {starsTxt('pointsSummary.value', { points: 0 })}
+                  {starsTxt('pointsSummary.value', {
+                    points: myWallet?.points_balance || 0,
+                  })}
+                  {/* {starsTxt('pointsSummary.value', {
+                    points: isLoading ? (
+                      <ButtonLoading borderColor="border-black" />
+                    ) : error ? (
+                      <InlineError textColor="text-black" />
+                    ) : (
+                      myWallet?.points_balance || 0
+                    ),
+                  })} */}
                 </span>
               )}
             </CardWrapper>

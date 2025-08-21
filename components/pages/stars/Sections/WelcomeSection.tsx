@@ -6,7 +6,6 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import EarningsPointsSection from '@/components/molecules/EarningsPointsSection';
 import PointsEarningGuide from '@/components/molecules/PointsEarningGuide';
 import Container from '@/components/organism/Container';
-import { PATHS } from '@/data/paths';
 import React from 'react';
 import { MdWavingHand } from 'react-icons/md';
 import { useTranslations } from 'next-intl';
@@ -28,12 +27,9 @@ const WelcomeSection = () => {
         {token ? (
           <EarningsPointsSection
             variant="points"
-            totalAmount={0}
             withdrawableAmount={0}
-            conversionRate={`1600 ${sharedTexts('point')}`}
-            starPoints={0}
+            conversionRate={`1000 ${sharedTexts('point')}`}
             lastWithdrawalText={sharedTexts('emptyState')}
-            secondButtonHref={PATHS.STARS_GIFTS}
             btnTexts={btnTexts}
           />
         ) : (

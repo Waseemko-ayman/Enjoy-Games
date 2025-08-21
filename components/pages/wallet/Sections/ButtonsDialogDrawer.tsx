@@ -1,38 +1,92 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import Button from '@/components/atomic/Button';
-import Input from '@/components/atomic/Input';
+import ButtonLoading from '@/components/atomic/ButtonLoading';
+// import Input from '@/components/atomic/Input';
 import DialogHeader from '@/components/molecules/DialogHeader';
 import RewardProgramItem from '@/components/molecules/RewardProgramItem';
 import SelectableList from '@/components/molecules/SelectableList';
 import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
-import { rewardsPrograms } from '@/data';
+import useAPI from '@/hook/useAPI';
 import useIsMobile from '@/hook/useIsMobile';
-import { TranslationFunction } from '@/interfaces';
+import { RedeemResponse, TranslationFunction } from '@/interfaces';
+import { useToast } from '@/lib/toast';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
-const ButtonsDialogDrawer = ({ t }: { t: TranslationFunction }) => {
-  const [openFirst, setOpenFirst] = useState(false);
+const ButtonsDialogDrawer = ({
+  t,
+  points,
+}: {
+  t: TranslationFunction;
+  points: number | undefined;
+}) => {
+  // const [openFirst, setOpenFirst] = useState(false);
   const [openSecond, setOpenSecond] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<number | null>(null);
   const isMobile = useIsMobile();
   const btnTxts = useTranslations('BtnTexts');
-  const inputsTxt = useTranslations('Inputs.placeHolders');
+  // const inputsTxt = useTranslations('Inputs.placeHolders');
+  const { showToast } = useToast();
+
+  const { get, isLoading } = useAPI<any, RedeemResponse>(
+    'user/increase-my-redeem'
+  );
 
   const handleProgramSelect = (id: number) => {
     setSelectedProgram(selectedProgram === id ? null : id);
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (selectedProgram) {
       const program = rewardsPrograms.find((p) => p.id === selectedProgram);
-      alert(`تم اختيار برنامج: ${program?.key}`);
+
+      if (program?.key === 'starsPoints') {
+        try {
+          const response = await get();
+          if ((response as any)?.success === false) {
+            showToast((response as any)?.message, 'error');
+          } else {
+            showToast((response as any)?.message);
+          }
+        } catch (error) {
+          const apiError = (error as any)?.response?.message;
+          showToast(apiError, 'error');
+        }
+      } else {
+        showToast(`${t('programSelected')}: ${program?.key}`);
+      }
       setOpenSecond(false);
     }
   };
+
+  const rewardsPrograms = [
+    // {
+    //   id: 1,
+    //   key: 'bonusesPrograms',
+    //   type: 'earnings',
+    // },
+    // {
+    //   id: 2,
+    //   key: 'maxupProgram',
+    //   type: 'earnings',
+    //   amount: 0,
+    //   currency: 'ريال',
+    //   description: 'profiledProfits',
+    // },
+    {
+      id: 2,
+      key: 'starsPoints',
+      type: 'point',
+      amount: points || 0,
+      currency: 'point',
+      description: 'convertiblePoints',
+    },
+  ];
+
   return (
     <div className="flex items-center justify-center gap-4">
-      <ResponsiveDialogDrawer
+      {/* <ResponsiveDialogDrawer
         open={openFirst}
         setOpen={setOpenFirst}
         isMobile={isMobile}
@@ -63,7 +117,7 @@ const ButtonsDialogDrawer = ({ t }: { t: TranslationFunction }) => {
             {btnTxts('addCoupon')}
           </Button>
         </div>
-      </ResponsiveDialogDrawer>
+      </ResponsiveDialogDrawer> */}
 
       <ResponsiveDialogDrawer
         open={openSecond}
@@ -72,7 +126,7 @@ const ButtonsDialogDrawer = ({ t }: { t: TranslationFunction }) => {
         trigger={
           <Button
             variant="forth"
-            otherClassName={`py-3 px-5 text-sm !bg-white`}
+            otherClassName={`py-3 px-5 text-sm !bg-white w-full`}
           >
             {btnTxts('RedeemPoints')}
           </Button>
@@ -91,12 +145,15 @@ const ButtonsDialogDrawer = ({ t }: { t: TranslationFunction }) => {
 
         <SelectableList
           items={rewardsPrograms}
+          // selectedItem={
+          //   rewardsPrograms.find((p) => p.id === selectedProgram) ??
+          //   rewardsPrograms[0]
+          // }
           selectedItem={
-            rewardsPrograms.find((p) => p.id === selectedProgram) ??
-            rewardsPrograms[0]
+            rewardsPrograms.find((p) => p.id === selectedProgram) || null
           }
-          getKey={(item) => item.id}
-          onSelect={(item) => handleProgramSelect(item.id)}
+          getKey={(item) => item!.id}
+          onSelect={(item) => handleProgramSelect(item!.id)}
           className="max-h-[400px] overflow-y-auto px-2 mb-5"
           renderContent={(program, isSelected) => (
             <RewardProgramItem program={program} isSelected={isSelected} />
@@ -108,7 +165,7 @@ const ButtonsDialogDrawer = ({ t }: { t: TranslationFunction }) => {
           disabled={!selectedProgram}
           handleClick={handleContinue}
         >
-          {btnTxts('continue')}
+          {isLoading ? <ButtonLoading /> : btnTxts('continue')}
         </Button>
       </ResponsiveDialogDrawer>
     </div>

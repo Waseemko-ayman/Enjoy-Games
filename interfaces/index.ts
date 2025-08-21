@@ -309,6 +309,24 @@ export interface FormData {
   [key: string]: unknown;
 }
 
+export interface RedeemResponse {
+  success: boolean;
+  data: {
+    points_redeemed: number;
+    points_balance: number;
+    amount: {
+      amount: number;
+      currency: string;
+    };
+    wallet_balance: {
+      amount: number;
+      currency: string;
+    };
+  };
+  message: string;
+  [key: string]: unknown;
+}
+
 export interface getSlugsProps {
   getSlugs: (subCategoryId: number) => {
     categorySlug: string;
@@ -553,7 +571,7 @@ export interface AuthLayoutProps extends SectionComponentProps {
 
 export interface WalletCardProps extends BaseIconProps {
   title: string;
-  value: string | JSX.Element;
+  value: string | number | JSX.Element;
   unit?: string;
   bgColor: string;
   textColor: string;
@@ -590,10 +608,9 @@ export interface TierProgressWrapperProps extends WithChildren {
 
 export interface EarningsPointsSectionProps {
   variant: 'earnings' | 'points';
-  totalAmount: number;
+  totalAmount?: number;
   withdrawableAmount: number;
   conversionRate?: string;
-  starPoints?: number;
   lastWithdrawalText: JSX.Element | string;
   firstButtonHref?: string;
   secondButtonHref?: string;
@@ -610,7 +627,7 @@ interface RewardProgram {
 }
 
 export interface RewardProgramItemProps {
-  program: RewardProgram;
+  program: RewardProgram | null;
   isSelected: boolean;
 }
 
