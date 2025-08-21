@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect } from 'react';
 import useAPI from '@/hook/useAPI';
 import { APIRequest, Category } from '@/interfaces';
 import { useLocale } from 'next-intl';
+import { useCurrency } from './CurrencyContext';
 
 interface CategoriesContextType extends APIRequest {
   categories: Category[];
@@ -31,9 +32,11 @@ export const CategoriesProvider: React.FC<{ children: React.ReactNode }> = ({
   }>('categories-subcategories');
   const locale = useLocale();
 
+  const { selectedCountry } = useCurrency();
+
   useEffect(() => {
     get();
-  }, [locale, get]);
+  }, [locale, get, selectedCountry]);
 
   const refresh = () => {
     get();
