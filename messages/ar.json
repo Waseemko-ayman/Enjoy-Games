@@ -381,7 +381,13 @@
       "allTickets": "جميع التذاكر",
       "desc": "إدارة جميع التذاكر في مكان واحد",
       "createTicket": "إنشاء تذكرة",
-      "createNewTicket": "إنشاء تذكرة جديدة جديد"
+      "createNewTicket": "إنشاء تذكرة جديدة جديد",
+      "status": {
+        "open": "مفتوح",
+        "pending": "قيد الانتظار",
+        "resolved": "تم الحل",
+        "closed": "مغلق"
+      }
     }
   },
   "productDetails": {
@@ -408,7 +414,8 @@
     "bad": "سيء",
     "relatedProducts": "منتجات مشابهة",
     "productEvaluation": "تم إرسال تقييمك بنجاح, شكرا جزيلا لك",
-    "noImages": "لم يتم إضافة أي صور لهذا التقييم !"
+    "noImages": "لم يتم إضافة أي صور لهذا التقييم !",
+    "proofFile": "مرفق التوثيق"
   },
   "search": {
     "searchResults": "نتائج البحث",
@@ -561,7 +568,8 @@
       },
       "total": {
         "label": "إجمالي المبلغ"
-      }
+      },
+      "itemId": "معرف العنصر"
     }
   },
   "BtnTexts": {
@@ -683,7 +691,8 @@
       "subject": "العنوان",
       "message": "الوصف",
       "attachments": "المرفقات",
-      "permissions": "الأذونات"
+      "permissions": "الأذونات",
+      "status": "الحالة"
     },
     "placeHolders": {
       "haveCoupon": "هل لديك كوبون خصم؟",
@@ -753,7 +762,8 @@
       "typeYourReply": "أكتب ردك هنا...",
       "searchUser": "البحث عن مستحدم...",
       "selectPermissions": "حدد الأذونات",
-      "permissions": "إختار الأذونات"
+      "permissions": "إختار الأذونات",
+      "status": "إختار الحالة"
     },
     "options": {
       "gender": {
@@ -813,7 +823,8 @@
       "arabicImageRequired": "الصورة بالعربية مطلوبة",
       "englishImageRequired": "الصورة بالإنجليزية مطلوبة",
       "fileRequired": "الملف مطلوب",
-      "permissionsRequired": "الأذونات مطلوبة"
+      "permissionsRequired": "الأذونات مطلوبة",
+      "statusRequired": "الحالة مطلوبة"
     }
   },
   "Auth": {

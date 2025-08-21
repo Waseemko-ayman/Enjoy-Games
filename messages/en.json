@@ -381,7 +381,13 @@
       "allTickets": "All Tickets",
       "desc": "Manage all tickets in one place",
       "createTicket": "Create Ticket",
-      "createNewTicket": "Create New Ticket"
+      "createNewTicket": "Create New Ticket",
+      "status": {
+        "open": "Open",
+        "pending": "Pending",
+        "resolved": "Resolved",
+        "closed": "Closed"
+      }
     }
   },
   "productDetails": {
@@ -408,7 +414,8 @@
     "bad": "Bad",
     "relatedProducts": "Related Products",
     "productEvaluation": "Your evaluation has been submitted successfully. Thank you very much.",
-    "noImages": "No images provided for this rating.!"
+    "noImages": "No images provided for this rating.!",
+    "proofFile": "Authentication facility"
   },
   "search": {
     "searchResults": "Search results",
@@ -561,7 +568,8 @@
       },
       "total": {
         "label": "Total Amount"
-      }
+      },
+      "itemId": "معرف العنصر"
     }
   },
   "BtnTexts": {
@@ -683,7 +691,8 @@
       "subject": "Subject",
       "message": "Message",
       "attachments": "Attachments",
-      "permissions": "Permissions"
+      "permissions": "Permissions",
+      "status": "Status"
     },
     "placeHolders": {
       "haveCoupon": "Do you have a discount coupon?",
@@ -754,7 +763,8 @@
       "typeYourReply": "write your response here...",
       "searchUser": "Search for user...",
       "selectPermissions": "Select Permissions",
-      "permissions": "Select Permissions"
+      "permissions": "Select Permissions",
+      "status": "Select Status"
     },
     "options": {
       "gender": {
@@ -814,7 +824,8 @@
       "arabicImageRequired": "Arabic image is required",
       "englishImageRequired": "English image is required",
       "fileRequired": "File required",
-      "permissionsRequired": "Permissions required"
+      "permissionsRequired": "Permissions required",
+      "statusRequired": "Status Required"
     }
   },
   "Auth": {

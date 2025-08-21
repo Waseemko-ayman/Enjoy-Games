@@ -277,6 +277,22 @@ export interface OrdersStatsProps {
   orders: Order[];
 }
 
+export interface OrderItem {
+  id: number;
+  product_title: string;
+  quantity: number;
+  total_price: string;
+  currency_code: string | null;
+  discount: string;
+  proof_file: string | null;
+  shipping_method: string;
+  shipping_data: string;
+}
+
+export interface OrderDetailsProps {
+  items: OrderItem[];
+}
+
 export interface PaginationProps {
   currentPage: number;
   totalPages: number;

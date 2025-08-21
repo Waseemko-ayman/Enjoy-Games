@@ -221,7 +221,7 @@ export const userList = [
       {
         id: 2,
         title: 'طلباتي',
-        link: PATHS.MY_PURCHASES.link,
+        link: PATHS.MY_PURCHASES.ROOT.link,
         icon: IoMdPricetag,
       },
       {
