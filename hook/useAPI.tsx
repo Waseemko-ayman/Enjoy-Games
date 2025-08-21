@@ -102,7 +102,8 @@ const useAPI = <
           ...getConfig,
         });
         dispatch({ type: API_ACTIONS.GET, payload: res?.data?.data });
-        return res?.data?.data;
+        // return res?.data?.data;
+        return res?.data;
       } catch (error) {
         dispatch({ type: API_ACTIONS.ERROR, payload: error });
       }
