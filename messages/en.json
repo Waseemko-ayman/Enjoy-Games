@@ -204,7 +204,7 @@
         "value": "{points} Point"
       },
       "conversionInfo": {
-        "title": "Convert Points to {currency}",
+        "title": "Convert Points to ",
         "rule": "After {minPoints} points = 1 card",
         "action": "Withdrawal History",
         "emptyState": "No withdrawals yet"
@@ -305,7 +305,7 @@
     }
   },
   "Wallet": {
-    "title": "My Current Balance",
+    "title": "Wallet balance",
     "RedeemPoints": {
       "title": "Choose Your Preferred Redemption Method",
       "subTitle": "Rewards Programs"
@@ -320,7 +320,8 @@
       "starsPoints": "Loyalty Enjoy Points",
       "profiledProfits": "Your Withdrawable Earnings",
       "convertiblePoints": "Your Convertible Points"
-    }
+    },
+    "programSelected": "The program has been selected"
   },
   "MyCart": {
     "basketSummary": "Basket Summary",

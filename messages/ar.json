@@ -204,7 +204,7 @@
         "value": "نقطة {points}"
       },
       "conversionInfo": {
-        "title": "تحويل نقاط إلى {currency}",
+        "title": "تحويل النقاط إلى ",
         "rule": "بعد {minPoints} نقطة = بطاقة",
         "action": "سجل عمليات السحب",
         "emptyState": "لا توجد عمليات سحب بعد"
@@ -305,7 +305,7 @@
     }
   },
   "Wallet": {
-    "title": "رصيدي الحالي",
+    "title": "رصيد المحفظة",
     "RedeemPoints": {
       "title": "إختر طريقة الاستبدال اللي تناسبك",
       "subTitle": "برامج المكافآت"
@@ -320,7 +320,8 @@
       "starsPoints": "نقاط ولاء إنجوي",
       "profiledProfits": "أرباحك القابلة للسحب",
       "convertiblePoints": "نقاطك القابلة للتحويل"
-    }
+    },
+    "programSelected": "تم اختيار برنامج"
   },
   "MyCart": {
     "basketSummary": "ملخص السلة",
