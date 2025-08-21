@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Edit2, Trash2, Search, Hash } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
@@ -20,6 +20,12 @@ import {
 import { FaClipboardList, FaUsers } from 'react-icons/fa6';
 import UserPermissionsDrawer from '../UserPermissionsDrawer';
 import UpdateTicketStatusDrawer from '../UpdateTicketStatusDrawer';
+import { API_IMAGE_URL } from '@/config/api';
+import Loading from '../loading';
+const DynamicImage = dynamic(() => import('next/image'), {
+  loading: () => <Loading />,
+  ssr: false,
+});
 
 interface DataTableBodyProps<T> {
   columns: (keyof T)[];
@@ -194,8 +200,11 @@ const DataTableBody = <T extends { id: string | number }>({
                         >
                           {imageUrl ? (
                             <div className="flex justify-center">
-                              <Image
-                                src={'/assets/play-station.webp'}
+                              <DynamicImage
+                                src={
+                                  `${API_IMAGE_URL}${imageUrl}` ||
+                                  '/assets/play-station.webp'
+                                }
                                 alt={`${lang} image`}
                                 width={80}
                                 height={80}
@@ -231,9 +240,12 @@ const DataTableBody = <T extends { id: string | number }>({
                             images.length > 1 ? (
                               <div className="grid grid-cols-2 gap-1 justify-center">
                                 {images.map((img, idx) => (
-                                  <Image
+                                  <DynamicImage
                                     key={idx}
-                                    src={'/assets/play-station.webp'}
+                                    src={
+                                      `${API_IMAGE_URL}${img.image}` ||
+                                      '/assets/play-station.webp'
+                                    }
                                     alt={`image-${idx}`}
                                     width={80}
                                     height={80}
@@ -247,8 +259,11 @@ const DataTableBody = <T extends { id: string | number }>({
                                 ))}
                               </div>
                             ) : (
-                              <Image
-                                src={'/assets/play-station.webp'}
+                              <DynamicImage
+                                src={
+                                  `${API_IMAGE_URL}${images[0].image}` ||
+                                  '/assets/play-station.webp'
+                                }
                                 alt={`image`}
                                 width={100}
                                 height={100}
@@ -277,8 +292,11 @@ const DataTableBody = <T extends { id: string | number }>({
                           className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden"
                         >
                           <div className="flex justify-center">
-                            <Image
-                              src={'/assets/play-station.webp'}
+                            <DynamicImage
+                              src={
+                                `${API_IMAGE_URL}${(row as any)[col]}` ||
+                                '/assets/play-station.webp'
+                              }
                               alt={columnKey}
                               width={80}
                               height={80}
@@ -325,8 +343,11 @@ const DataTableBody = <T extends { id: string | number }>({
                           })()
                         ) : col === 'icon' && cellValue ? (
                           <div className="flex justify-center">
-                            <Image
-                              src={'/assets/play-station.webp'}
+                            <DynamicImage
+                              src={
+                                `${API_IMAGE_URL}${cellValue}` ||
+                                '/assets/play-station.webp'
+                              }
                               alt={String(col)}
                               width={80}
                               height={80}
