@@ -13,7 +13,6 @@ import { useTranslations } from 'next-intl';
 import { useCategories } from '@/context/CategoriesContext';
 import { useMainContent } from '@/context/MainContentContext';
 import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
-import { TotalPaidProvider } from '@/context/TotalPaidContext';
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
@@ -40,9 +39,7 @@ const HomePage = () => {
         loading={categoriesLoading}
         error={categoriesError}
       />
-      <TotalPaidProvider>
-        <WalletSection t={t} />
-      </TotalPaidProvider>
+      <WalletSection t={t} />
       <BestSellers
         t={t}
         bestSeller={data?.best_seller ?? []}
