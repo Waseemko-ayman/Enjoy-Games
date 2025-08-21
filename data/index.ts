@@ -532,30 +532,6 @@ export const mockApiData: RewardTier[] = [
   { id: 5, key: 'VIP', percentage: 0.7, isActive: false },
 ];
 
-export const rewardsPrograms = [
-  {
-    id: 1,
-    key: 'bonusesPrograms',
-    type: 'earnings',
-  },
-  // {
-  //   id: 2,
-  //   key: 'maxupProgram',
-  //   type: 'earnings',
-  //   amount: 0,
-  //   currency: 'ريال',
-  //   description: 'profiledProfits',
-  // },
-  {
-    id: 2,
-    key: 'starsPoints',
-    type: 'point',
-    amount: 0,
-    currency: 'point',
-    description: 'convertiblePoints',
-  },
-];
-
 export const HeroSlides: BannerSlide[] = [
   { id: 1, image: '/assets/banners/banner1.webp' },
   { id: 2, image: '/assets/banners/banner2.webp' },
