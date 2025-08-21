@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-const Image = lazy(() => import('next/image'));
 import Button from '@/components/atomic/Button';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import Input from '@/components/atomic/Input';
@@ -26,13 +25,19 @@ import { ProductCardProps } from '@/interfaces';
 import { useToast } from '@/lib/toast';
 import { InputTypes } from '@/utils/type';
 import { useTranslations } from 'next-intl';
-import React, { lazy, Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import FormError from '@/components/atomic/FormError';
 import { extractText } from '@/utils/extractText';
+import { API_IMAGE_URL } from '@/config/api';
+import dynamic from 'next/dynamic';
+const DynamicImage = dynamic(() => import('next/image'), {
+  loading: () => <Loading />,
+  ssr: false,
+});
 
 const inputQuantityOptions = [
   { id: 1, label: '1' },
@@ -95,18 +100,15 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   return (
     <CardWrapper className="flex flex-col md:flex-row gap-7 p-4 md:p-10">
       <MotionSection index={0}>
-        <Suspense fallback={<Loading />}>
-          <Image
-            src={
-              // `${API_IMAGE_URL}${product?.image}` ||
-              '/assets/play-station.webp'
-            }
-            alt="play-station"
-            width={300}
-            height={300}
-            className="rounded-xl max-md:w-full"
-          />
-        </Suspense>
+        <DynamicImage
+          src={
+            `${API_IMAGE_URL}${product?.image}` || '/assets/play-station.webp'
+          }
+          alt="play-station"
+          width={300}
+          height={300}
+          className="rounded-xl max-md:w-full"
+        />
         <div className="flex items-center justify-between flex-wrap gap-2 mt-5">
           <h4 className="text-base md:text-lg font-semibold">
             {t('shareLinkWith')}
