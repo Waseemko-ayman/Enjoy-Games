@@ -6,7 +6,6 @@ export const PATHS = {
   HOME: { name: 'الرئيسية', link: '/' },
   STORE: { name: 'المتجر', link: '/store' },
   STARS: { name: 'دليل ستارز', link: '/stars' },
-  STARS_GIFTS: '/stars-gifts',
   WALLET: { name: 'محفظتي', link: '/wallet' },
   MY_PURCHASES: {
     ROOT: { name: 'طلباتي', link: '/my-purchases' },
