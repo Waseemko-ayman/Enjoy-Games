@@ -6,7 +6,7 @@ import StepIndicator from '@/components/molecules/StepIndicator';
 import CartContent from '@/components/pages/my-cart/Sections/CartContent';
 import { useCartContext } from '@/context/CartContext';
 import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import PaymentFailedStep from './Sections/PaymentFailedStep';
 import { PATHS } from '@/data/paths';
@@ -90,6 +90,12 @@ const MyCartPage = () => {
     (total, item) => total + (item.price?.amount ?? 0) * (item.quantity ?? 1),
     0
   );
+
+  useEffect(() => {
+    if (successParam === 'true') {
+      clearCart();
+    }
+  }, [successParam, clearCart]);
 
   return (
     <div>
