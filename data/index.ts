@@ -696,8 +696,8 @@ export const ticketsInputsTypes = [
 export const accessInputs: InputItem[] = [
   {
     id: 1,
-    inputName: 'shipping_method',
-    labelKey: 'shipping_method',
+    inputName: 'login_method',
+    labelKey: 'login_method',
     type: 'select',
     options: [
       { id: 1, value: 'phone', labelKey: 'phone' },
@@ -705,32 +705,37 @@ export const accessInputs: InputItem[] = [
       { id: 3, value: 'twitter', labelKey: 'twitter' },
       { id: 4, value: 'facebook', labelKey: 'facebook' },
     ],
+    errorKey: 'loginMethodRequired',
   },
   {
     id: 2,
-    inputName: 'phone_number',
+    inputName: 'email_phone',
     labelKey: 'phone',
     type: 'text',
+    errorKey: 'phoneRequired',
   },
   {
     id: 3,
     inputName: 'password',
     labelKey: 'password',
     type: 'password',
+    errorKey: 'passwordRequired',
   },
   {
     id: 4,
-    inputName: 'id_number',
-    labelKey: 'idNumber',
+    inputName: 'account_id',
+    labelKey: 'accountId',
     type: 'text',
+    errorKey: 'accountIdRequired',
   },
-  {
-    id: 5,
-    inputName: 'checkbox',
-    labelKey: 'unlockAccount',
-    type: 'checkbox',
-    placeholder: 'تم الإلغاء',
-  },
+  // {
+  //   id: 5,
+  //   inputName: 'checkbox',
+  //   labelKey: 'unlockAccount',
+  //   type: 'checkbox',
+  //   placeholder: 'تم الإلغاء',
+  //   errorKey: 'unlockAccountRequired',
+  // },
 ];
 
 export const codeInputs: InputItem[] = [
@@ -746,9 +751,9 @@ export const codeInputs: InputItem[] = [
 export const accountIdInputs: InputItem[] = [
   {
     id: 1,
-    inputName: 'idNumber',
-    labelKey: 'idNumber',
-    errorKey: 'idNumberRequired',
+    inputName: 'account_id',
+    labelKey: 'accountId',
+    errorKey: 'accountIdRequired',
     type: 'number',
   },
 ];
@@ -756,16 +761,16 @@ export const accountIdInputs: InputItem[] = [
 export const multiIdInputs: InputItem[] = [
   {
     id: 1,
-    inputName: 'id_number_1',
-    labelKey: 'idNumber',
-    errorKey: 'idNumberRequired',
+    inputName: 'account_1',
+    labelKey: 'accountId',
+    errorKey: 'accountIdRequired',
     type: 'number',
   },
   {
     id: 2,
-    inputName: 'id_number_2',
-    labelKey: 'idNumber',
-    errorKey: 'idNumberRequired',
+    inputName: 'account_2',
+    labelKey: 'accountId',
+    errorKey: 'accountIdRequired',
     type: 'number',
   },
 ];
