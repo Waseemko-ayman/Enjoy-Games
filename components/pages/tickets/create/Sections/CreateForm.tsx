@@ -78,7 +78,7 @@ const CreateForm = () => {
       }
     } catch (error) {
       const apiError = (error as any)?.res?.data?.message;
-      showToast(apiError);
+      showToast(apiError, 'error');
     }
   };
 

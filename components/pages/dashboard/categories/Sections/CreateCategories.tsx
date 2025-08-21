@@ -114,7 +114,7 @@ const CreateCategories = ({
       }
     } catch (error) {
       const apiError = (error as any)?.response?.message;
-      showToast(apiError);
+      showToast(apiError, 'error');
     }
   };
 
@@ -139,7 +139,7 @@ const CreateCategories = ({
         } catch (error) {
           console.error('فشل في جلب بيانات القسم:', error);
           const apiError = (error as any)?.response?.message;
-          showToast(apiError);
+          showToast(apiError, 'error');
         }
       })();
     }

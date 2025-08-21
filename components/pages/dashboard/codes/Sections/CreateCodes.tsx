@@ -132,7 +132,7 @@ const CreateCodes = ({
       }
     } catch (error) {
       const apiError = (error as any)?.response?.message;
-      showToast(apiError);
+      showToast(apiError, 'error');
     }
   };
 
@@ -152,7 +152,7 @@ const CreateCodes = ({
         } catch (error) {
           console.error('فشل في جلب بيانات القسم:', error);
           const apiError = (error as any)?.response?.message;
-          showToast(apiError);
+          showToast(apiError, 'error');
         }
       })();
     }

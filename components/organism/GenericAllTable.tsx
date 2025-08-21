@@ -83,7 +83,7 @@ const GenericAllTable = <T,>({
       setRows((prev) => prev.filter((r) => r.id !== id));
     } catch (err) {
       const apiError = (err as any)?.response?.message;
-      showToast(apiError);
+      showToast(apiError, 'error');
     }
   };
 
