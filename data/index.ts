@@ -728,14 +728,14 @@ export const accessInputs: InputItem[] = [
     type: 'text',
     errorKey: 'accountIdRequired',
   },
-  // {
-  //   id: 5,
-  //   inputName: 'checkbox',
-  //   labelKey: 'unlockAccount',
-  //   type: 'checkbox',
-  //   placeholder: 'تم الإلغاء',
-  //   errorKey: 'unlockAccountRequired',
-  // },
+  {
+    id: 5,
+    inputName: 'checkbox',
+    labelKey: 'unlockAccount',
+    type: 'checkbox',
+    placeholder: 'تم الإلغاء',
+    errorKey: 'unlockAccountRequired',
+  },
 ];
 
 export const codeInputs: InputItem[] = [
