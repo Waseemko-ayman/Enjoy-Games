@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import {
@@ -21,6 +21,10 @@ import { InputTypes, ProductOption } from '@/utils/type';
 import SettingsTab from '@/components/ui/display/SettingsTab';
 import { useUpdateContent } from '@/context/updateContentContext';
 import { useTranslations } from 'next-intl';
+import { extractText } from '@/utils/extractText';
+import Image from 'next/image';
+import { API_IMAGE_URL } from '@/config/api';
+import Loading from '@/components/molecules/loading';
 
 // ----------------------------------------------------------------
 
@@ -59,10 +63,18 @@ const CreateProducts = ({
     shippingPayment: yup.string().required(inputT('shippingPaymentRequired')),
     image: yup
       .mixed<FileList>()
-      .test('required', inputT('avatarRequired'), (value) => {
-        return value instanceof FileList && value.length > 0;
-      })
-      .required(inputT('avatarRequired')),
+      .test('required', inputT('avatarRequired'), function (value) {
+        return (
+          editId !== null || (value instanceof FileList && value.length > 0)
+        );
+      }),
+
+    // image: yup
+    //   .mixed<FileList>()
+    //   .test('required', inputT('avatarRequired'), (value) => {
+    //     return value instanceof FileList && value.length > 0;
+    //   })
+    //   .required(inputT('avatarRequired')),
   });
 
   type ProductFormData = yup.InferType<typeof createSchema>;
@@ -80,7 +92,10 @@ const CreateProducts = ({
   >('get/categories');
 
   // Get Single Category
-  const { getSingle } = useAPI<FormData, ProductCardProps>('product/show');
+  const { getSingle, isLoading: getSingleIsLoading } = useAPI<
+    FormData,
+    ProductCardProps
+  >('product/show');
 
   // Edit Category
   const { edit, isLoading: updateLoading } = useAPI<FormData, ProductCardProps>(
@@ -132,10 +147,10 @@ const CreateProducts = ({
       formData.append('title[en]', data.titleEn);
       formData.append('category_id', data.categoryID);
       formData.append('sub_category_id', data.subCategoryID);
-      formData.append('content[ar]', data.contentAr);
-      formData.append('content[en]', data.contentEn);
-      formData.append('description[ar]', data.descriptionAr);
-      formData.append('description[en]', data.descriptionEn);
+      formData.append('content[ar]', extractText(data.contentAr));
+      formData.append('content[en]', extractText(data.contentEn));
+      formData.append('description[ar]', extractText(data.descriptionAr));
+      formData.append('description[en]', extractText(data.descriptionEn));
       formData.append('price', data.price);
       if (data.priceBefore) formData.append('price_before', data.priceBefore);
       if (data.discount) formData.append('discount', data.discount);
@@ -144,6 +159,8 @@ const CreateProducts = ({
 
       if (data.image && data.image[0]) {
         formData.append('image', data.image[0]);
+      } else if (!data.image && editId !== null) {
+        formData.append('image', null as any);
       }
 
       let response: { data: ProductCardProps; message: string } | undefined;
@@ -175,8 +192,7 @@ const CreateProducts = ({
 
   // ----------------------------------------------------------------
 
-  // const [iconPreview, setIconPreview] = useState<string | null>(null);
-  // const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const toStringValue = (val: any) =>
     typeof val === 'string'
@@ -208,8 +224,9 @@ const CreateProducts = ({
               isActive: toBoolean(res.data.is_active),
               shippingPayment: res.data.shipping_payment ?? '',
             });
-            // setIconPreview(res.data.icon ?? null);
-            // setImagePreview(res.data.image ?? null);
+            setImagePreview(
+              res.data.image ? `${API_IMAGE_URL}${res.data.image}` : null
+            );
           }
         } catch (error) {
           console.error('فشل في جلب بيانات القسم:', error);
@@ -283,20 +300,23 @@ const CreateProducts = ({
               className="w-16 h-16 object-cover"
             />
           </div>
-        )}
+        )} */}
 
         {imagePreview && (
           <div className="mb-3">
-            <label className="block mb-1">معاينة الصورة:</label>
-            <Image
-              src={imagePreview}
-              alt="Image Preview"
-              width={128}
-              height={128}
-              className="w-32 h-32 object-cover"
-            />
+            {getSingleIsLoading ? (
+              <Loading />
+            ) : (
+              <Image
+                src={imagePreview}
+                alt="Image Preview"
+                width={128}
+                height={128}
+                className="w-32 h-32 object-cover"
+              />
+            )}
           </div>
-        )} */}
+        )}
         <Button type="submit">
           {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
         </Button>
