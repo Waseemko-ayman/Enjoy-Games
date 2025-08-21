@@ -1,26 +1,23 @@
 'use client';
 import React from 'react';
 import WelcomeSection from './Sections/WelcomeSection';
-import EnjoyGamesGifts from './Sections/EnjoyGamesGifts';
 import Upgrade from './Sections/Upgrade';
 import EarnMore from './Sections/EarnMore';
 import { useAuthContext } from '@/context/AuthContext';
-import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
-import { useCategories } from '@/context/CategoriesContext';
 import FAQS from '@/components/organism/FAQS';
 import { FaqsProvider } from '@/context/FaqContext';
 
 const StarsPage = () => {
   const { token } = useAuthContext();
-  const { categories } = useCategories();
+  // const { categories } = useCategories();
   return (
     <>
       <WelcomeSection />
-      <EnjoyGamesGifts
+      {/* <EnjoyGamesGifts
         getSlugs={(subCatId) =>
           getCategoryAndSubCategorySlugs(categories, subCatId)
         }
-      />
+      /> */}
       <Upgrade />
       {token && <EarnMore />}
       <FaqsProvider>
