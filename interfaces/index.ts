@@ -822,6 +822,7 @@ export interface LoginFormData {
 export interface signupFormData extends LoginFormData {
   name: string;
   password_confirmation: string;
+  referral_code?: string | null;
 }
 
 export interface CreateUsersPorps extends signupFormData {

@@ -840,4 +840,11 @@ export const signupInputs = [
     name: 'password_confirmation',
     placeholder: 'repassword',
   },
+  {
+    id: 5,
+    type: 'text',
+    label: 'referral_code',
+    name: 'referral_code',
+    placeholder: 'referralCode',
+  },
 ];

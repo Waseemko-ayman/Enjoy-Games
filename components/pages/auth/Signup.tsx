@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useState } from 'react';
@@ -29,6 +30,7 @@ const SignupPage = () => {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{5,}$/;
+  const referralRegex = /^[A-Za-z0-9]*$/;
 
   const schema = Yup.object().shape({
     name: Yup.string()
@@ -42,6 +44,10 @@ const SignupPage = () => {
     password_confirmation: Yup.string()
       .oneOf([Yup.ref('password')], errorsMsgs('repasswordNotMatch'))
       .required(errorsMsgs('repasswordRequired')),
+    referral_code: Yup.string()
+      .nullable()
+      .optional()
+      .matches(referralRegex, errorsMsgs('referralCodeInvalid')),
   });
 
   const {
@@ -50,9 +56,8 @@ const SignupPage = () => {
     reset,
     formState: { errors },
   } = useForm<signupFormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema) as any,
   });
-
   const onSubmit = (data: signupFormData) => {
     signup(data);
     reset();
