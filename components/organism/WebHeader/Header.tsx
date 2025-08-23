@@ -1,6 +1,5 @@
 'use client';
 import Input from '@/components/atomic/Input';
-import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import Container from '../Container';
 import { FiUser } from 'react-icons/fi';
@@ -21,6 +20,11 @@ import { useRouter } from 'next/navigation';
 import { useCurrency } from '@/context/CurrencyContext';
 import { Country } from '@/interfaces';
 import NotificationsMenu from '../NotificationsMenu';
+import Loading from '@/components/molecules/loading';
+import dynamic from 'next/dynamic';
+const Image = dynamic(() => import('next/image'), {
+  loading: () => <Loading />,
+});
 
 const Header = () => {
   const [open, setOpen] = useState(false);
