@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
 import { useState } from 'react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import useIsMobile from '@/hook/useIsMobile';
 import { useCartContext } from '@/context/CartContext';
@@ -11,8 +11,14 @@ import Button from '@/components/atomic/Button';
 import Avatar from '@/components/atomic/Avatar';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import { useToast } from '@/lib/toast';
-import { FaRegStar, FaStar, FaStarHalfStroke } from 'react-icons/fa6';
+import { FaHeart, FaRegStar, FaStar, FaStarHalfStroke } from 'react-icons/fa6';
 import { extractText } from '@/utils/extractText';
+import dynamic from 'next/dynamic';
+import Loading from '../molecules/loading';
+import { useInterests } from '@/context/InterestsContext';
+const Image = dynamic(() => import('next/image'), {
+  loading: () => <Loading />,
+});
 
 const ProductCard: React.FC<ProductCardProps> = ({
   title,
@@ -43,15 +49,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const t = useTranslations('productDetails');
   const msgTxts = useTranslations('Messages');
 
-  const safeImage =
-    image &&
-    typeof image === 'string' &&
-    image.trim() !== '' &&
-    !image.includes(' ')
-      ? image.startsWith('http') || image.startsWith('/')
-        ? image
-        : `/${image}`
-      : '/assets/play-station.webp';
+  const { interests, addInterest, removeInterest } = useInterests();
+
+  // **التغيير الصحيح: المقارنة باستخدام id**
+  const isInterested = productData
+    ? interests?.some((item) => item.id === productData.id)
+    : false;
+
+  const handleHeartClick = () => {
+    if (!productData) return;
+    if (isInterested) {
+      removeInterest(productData.id ?? 0); // الحذف يستخدم id
+    } else {
+      addInterest(productData.id ?? 0); // الإضافة تستقبل id لكن ترسله كـ product_id داخل الدالة
+    }
+  };
 
   // حساب متوسط النجوم من الـ stars في كل rating object
   const averageRating =
@@ -93,21 +105,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div>
       <CardWrapper className="p-3 transform transition-transform duration-300 hover:-translate-y-2">
-        <div onClick={onClick} className="cursor-pointer">
+        <div>
           <div
-            className={`relative w-full h-0 ${
+            className={`relative w-full h-0 cursor-pointer ${
               tall ? 'pb-[133.33%]' : 'pb-[65%]'
             }`}
+            onClick={onClick}
           >
-            {safeImage && (
-              <Image
-                src={safeImage}
-                alt={imgAlt}
-                title={imgTitle}
-                fill
-                className="absolute inset-0 object-cover rounded-[6px]"
-              />
-            )}
+            <Image
+              src={image || '/assets/play-station.webp'}
+              alt={imgAlt}
+              title={imgTitle}
+              fill
+              className="absolute inset-0 object-cover rounded-[6px]"
+            />
             {discount && (
               <span className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-semibold px-2 py-1 rounded-lg shadow-md z-10">
                 {t('rival')} {discount.amount} {discount.currency}
@@ -116,13 +127,27 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
 
           <h3
-            className={`mt-3.5 ${
+            className={`mt-3.5 relative flex items-center justify-between ${
               variant === 'row'
                 ? 'font-bold text-lg'
                 : 'font-semibold inline-block mb-1.5 text-[15px] text-[var(--enjoy-gray-650)] hover:text-[var(--enjoy-gray-300)] transition-all duration-600'
             }`}
           >
             {title}
+            <Button
+              variant="ghost"
+              handleClick={handleHeartClick}
+              otherClassName={`${
+                isInterested
+                  ? '!text-red-600'
+                  : '!text-gray-300 hover:!text-red-600'
+              }`}
+            >
+              <FaHeart
+                size={18}
+                className={isInterested ? 'text-red-600' : ''}
+              />
+            </Button>
           </h3>
 
           {showDesc && (
