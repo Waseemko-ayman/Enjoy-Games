@@ -21,7 +21,7 @@ import {
   User,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaX } from 'react-icons/fa6';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
@@ -46,9 +46,12 @@ const TicketContent = ({
   getStatusColor: (status: string) => string;
 }) => {
   const [attachments, setAttachments] = useState<File[]>([]);
+  const [localMessages, setLocalMessages] = useState<any[]>([]);
+
+  console.log(localMessages);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const inputT = useTranslations('Inputs.placeHolders');
+  const inputT = useTranslations('Inputs');
   const { showToast } = useToast();
 
   const metaData: TicketMetaItemProps[] = [
@@ -66,10 +69,11 @@ const TicketContent = ({
   ];
 
   const schema = yup.object().shape({
-    message: yup.string().required('الرسالة مطلوبة'),
+    message: yup.string().required(inputT('errorsMsgs.messageRequired')),
   });
 
   const { add, isLoading } = useAPI(`tickets/${ticket.id}/reply`);
+  const { get } = useAPI(`tickets/${ticket.id}/all-replies`);
 
   const {
     control,
@@ -92,22 +96,91 @@ const TicketContent = ({
   };
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    // أنشئ رسالة مؤقتة لإضافتها مباشرة للـ UI
+    const optimisticMessage = {
+      id: Math.random(), // مؤقت
+      message: data?.message,
+      created_at: new Date().toISOString(),
+      is_admin_reply: true, // أو false حسب الحالة
+      admin_name: 'You', // لتوضيح أنها من المستخدم الحالي
+      attachments: attachments?.map((file) => ({ name: file.name })),
+      temp: true, // علامة مؤقتة
+    };
+
+    // أضف الرسالة مباشرة للـ state
+    setLocalMessages((prev) => [...prev, optimisticMessage]);
+
+    // أعد تعيين الحقول
+    reset();
+    setAttachments([]);
+
     try {
       const formData = new FormData();
-      formData.append('message', data.message);
-
+      formData.append('message', data?.message);
       attachments.forEach((file) => formData.append('attachments[]', file));
 
       const response = await add(formData);
-      reset();
-      setAttachments([]);
       showToast(response?.message);
+
+      // بعد نجاح الإرسال، أعد الجلب للتأكد من البيانات الصحيحة
+      const freshData = await get();
+      if (freshData)
+        setLocalMessages(
+          Array.isArray(freshData.data) ? freshData.data : [freshData.data]
+        );
     } catch (error) {
-      const apiError = (error as any)?.response?.message;
-      showToast(apiError, 'error');
+      showToast((error as any)?.response?.message, 'error');
       console.error('Failed to send reply:', error);
+
+      // احذف الرسالة المؤقتة في حال فشل الإرسال
+      setLocalMessages((prev) =>
+        prev.filter((msg) => msg.id !== optimisticMessage.id)
+      );
     }
   };
+
+  // جلب الرسائل عند التحميل الأولي
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const res = await get();
+      if (res?.data) {
+        const arr = Array.isArray(res?.data) ? res?.data : [res?.data];
+        setLocalMessages(arr);
+      }
+    };
+    fetchMessages();
+  }, [get]);
+
+  /*
+  // جلب الرسائل عند التحميل الأولي
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const freshData = await get();
+        if (freshData) {
+          setLocalMessages((prev) => {
+            const newMessages = Array.isArray(freshData.data)
+              ? freshData.data
+              : [freshData.data];
+
+            // دمج الرسائل الجديدة مع الموجودة
+            return [
+              ...prev,
+              ...newMessages.map((msg) => ({
+                ...msg,
+                is_admin_reply: msg.is_admin_reply ?? false, // تأكد من القيمة
+              })),
+            ];
+          });
+        }
+      } catch (err) {
+        console.error('Failed to fetch messages', err);
+      }
+    };
+
+    fetchMessages();
+  }, [get]);
+*/
 
   return (
     <Layer>
@@ -145,7 +218,7 @@ const TicketContent = ({
               </div>
 
               {/* Conversation */}
-              <div className="space-y-4">
+              <div className="space-y-4 overflow-y-auto scrollbar-none max-h-[400px] md:max-h-[550px]">
                 <h3 className="text-lg font-semibold flex items-center gap-2">
                   <MessageCircle className="w-5 h-5" />
                   {t('conversation')}
@@ -175,7 +248,7 @@ const TicketContent = ({
                 </div>
 
                 {/* Messages */}
-                {ticket?.messages?.map((message: any, index: number) => {
+                {localMessages?.map((message: any, index: number) => {
                   const isAdmin = message.is_admin_reply;
                   const bgColor = isAdmin
                     ? 'bg-green-50 border-green-400'
@@ -263,7 +336,8 @@ const TicketContent = ({
                         type="textarea"
                         {...field}
                         placeholder={
-                          inputT('typeYourReply') || 'Type your reply...'
+                          inputT('placeHolders.typeYourReply') ||
+                          'Type your reply...'
                         }
                         otherClassNameContainer={`w-full !rounded-xl p-4 ${
                           errors.message ? 'border border-red-500' : ''
