@@ -76,12 +76,12 @@ const TicketsPage = () => {
                 onPageChange={goToPage}
                 totalItems={totalItems}
                 itemsPerPage={itemsPerPage}
-                className="mt-6"
+                className="mt-8 sm:max-w-2xl sm:mx-auto"
               />
               <MotionSection index={2}>
                 <Button
                   href={PATHS.TICKETS.CREATE.link}
-                  otherClassName="py-3 mt-5 w-[150px]"
+                  otherClassName="py-3 mt-5 w-[150px] max-sm:mx-auto"
                 >
                   {btnTexts('AddTicket')}
                 </Button>
