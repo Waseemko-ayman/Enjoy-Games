@@ -1,17 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Clock, Check, CheckCheck, Bell, AlertCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import Loading from '@/components/molecules/loading';
 import useAPI from '@/hook/useAPI';
 import useIsMobile from '@/hook/useIsMobile';
 import { useToast } from '@/lib/toast';
 import CardWrapper from '@/components/atomic/CardWrapper';
-import { useUpdateContent } from '@/context/updateContentContext';
+import Button from '@/components/atomic/Button';
+import { FaCheck } from 'react-icons/fa6';
+import { useRouter } from 'next/navigation';
+import { PATHS } from '@/data/paths';
 
 interface Notification {
   id: string;
@@ -24,74 +25,65 @@ interface Notification {
 }
 
 interface NotificationsPopupProps {
-  getAllNotifications: () => void;
   notifications: Notification[];
   isLoadingAll: boolean;
   errorAll: string;
 }
 
 const NotificationsPopup = ({
-  notifications,
-  getAllNotifications,
+  notifications: initialNotifications,
   isLoadingAll,
   errorAll,
 }: NotificationsPopupProps) => {
+  const [notifications, setNotifications] = useState<Notification[]>(
+    initialNotifications || []
+  );
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const { showToast } = useToast();
   const isMobile = useIsMobile();
   const t = useTranslations();
-  const { refreshFlags } = useUpdateContent();
-  const notificationsRefreshKey = 'notifications';
+
+  const router = useRouter();
 
   const { add: readMultiple, isLoading: isReadingMultiple } = useAPI(
     'notifications/read-multiple'
   );
-
   const { get: readAllUnread, isLoading: isReadingAll } = useAPI(
     'notifications/read-all'
   );
+  const { getSingle: readSingle } = useAPI('notifications');
 
-  const { getSingle: readSingle, isLoading: isReadingSingle } =
-    useAPI('notifications');
+  useEffect(() => {
+    setNotifications(initialNotifications || []);
+  }, [initialNotifications]);
 
-  const readSingleNotification = async (id: string) => {
+  const markAsReadLocally = (ids: string[]) => {
+    setNotifications((prev) =>
+      prev.map((n) =>
+        ids.includes(n.id) ? { ...n, read_at: new Date().toISOString() } : n
+      )
+    );
+  };
+
+  const handleReadSingle = async (id: string) => {
+    const notification = notifications.find((n) => n.id === id);
+    if (!notification || notification.read_at) return;
+
     try {
       const response = await readSingle(`${id}/read`);
-      await getAllNotifications();
+      markAsReadLocally([id]);
       showToast((response as any)?.message ?? 'Marked as read');
     } catch (error) {
       showToast((error as any)?.response?.message, 'error');
     }
   };
 
-  const allNotifications = notifications || [];
-  const unreadNotifications = allNotifications.filter(
-    (n: Notification) => !n.read_at
-  );
-  const readNotifications = allNotifications.filter(
-    (n: Notification) => n.read_at
-  );
-
-  const handleSelectAll = () => {
-    if (selectedIds.length === unreadNotifications.length) {
-      setSelectedIds([]);
-    } else {
-      setSelectedIds(unreadNotifications.map((n: any) => n.id));
-    }
-  };
-
-  const handleSelectNotification = (id: string) => {
-    setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((sid) => sid !== id) : [...prev, id]
-    );
-  };
-
   const handleReadMultiple = async () => {
     if (!selectedIds.length) return;
     try {
       const response = await readMultiple({ ids: selectedIds });
-      await getAllNotifications();
+      markAsReadLocally(selectedIds);
       setSelectedIds([]);
       showToast(response.message);
     } catch (error) {
@@ -102,7 +94,9 @@ const NotificationsPopup = ({
   const handleReadAllUnread = async () => {
     try {
       const response = await readAllUnread();
-      await getAllNotifications();
+      markAsReadLocally(
+        notifications.filter((n) => !n.read_at).map((n) => n.id)
+      );
       setSelectedIds([]);
       showToast(
         Array.isArray(response)
@@ -112,6 +106,21 @@ const NotificationsPopup = ({
     } catch (error) {
       showToast((error as any)?.response?.message, 'error');
     }
+  };
+
+  const allNotifications = notifications;
+  const unreadNotifications = allNotifications.filter((n) => !n.read_at);
+  const readNotifications = allNotifications.filter((n) => n.read_at);
+
+  const handleSelectAll = () => {
+    if (selectedIds.length === unreadNotifications.length) setSelectedIds([]);
+    else setSelectedIds(unreadNotifications.map((n) => n.id));
+  };
+
+  const handleSelectNotification = (id: string) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((sid) => sid !== id) : [...prev, id]
+    );
   };
 
   const getNotificationIcon = (type?: string) => {
@@ -127,21 +136,24 @@ const NotificationsPopup = ({
     }
   };
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString?: string | null) => {
+    if (!dateString) return t('Messages.justNow');
     const date = new Date(dateString);
+    if (isNaN(date.getTime())) return t('Messages.justNow');
     const now = new Date();
     const diffInHours = Math.floor(
       (now.getTime() - date.getTime()) / (1000 * 60 * 60)
     );
-    if (diffInHours < 1) return 'Just now';
-    if (diffInHours < 24) return `${diffInHours}h ago`;
-    if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
+    const passedTime = Math.floor(diffInHours / 24);
+
+    if (diffInHours < 1) return t('Messages.justNow');
+    if (diffInHours < 24) return `${diffInHours}${t('Messages.hourAgo')}`;
+    if (diffInHours < 168)
+      return `${passedTime}${
+        passedTime < 2 ? t('Messages.dayAgo') : t('Messages.daysAgo')
+      }`;
     return date.toLocaleDateString();
   };
-
-  useEffect(() => {
-    getAllNotifications();
-  }, [getAllNotifications, refreshFlags[notificationsRefreshKey]]);
 
   return (
     <CardWrapper
@@ -166,73 +178,105 @@ const NotificationsPopup = ({
           {unreadNotifications.length > 0 && (
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={
-                    selectedIds.length === unreadNotifications.length &&
-                    unreadNotifications.length > 0
-                  }
-                  onChange={handleSelectAll}
-                />
+                <label className="flex items-center cursor-pointer select-none gap-3">
+                  <input
+                    name="unread Notifications checkbox"
+                    type="checkbox"
+                    checked={
+                      selectedIds.length === unreadNotifications.length &&
+                      unreadNotifications.length > 0
+                    }
+                    onChange={handleSelectAll}
+                    className="peer sr-only"
+                  />
+                  <div className="w-5 h-5 rounded-sm border border-gray-300 peer-checked:bg-green-600 flex items-center justify-center transition-colors">
+                    {!!selectedIds && (
+                      <FaCheck className="w-3 h-3 text-white" />
+                    )}
+                  </div>
+                </label>
                 <span className="text-sm text-muted-foreground">
                   {selectedIds.length > 0
                     ? `${selectedIds.length} selected`
-                    : 'Select all unread'}
+                    : t('Messages.selectAllUnread')}
                 </span>
               </div>
               {selectedIds.length > 0 && (
                 <Button
-                  onClick={handleReadMultiple}
+                  handleClick={handleReadMultiple}
                   disabled={isReadingMultiple}
-                  size="sm"
-                  className="gap-2"
+                  otherClassName="text-sm px-3 py-1"
                 >
-                  <Check className="h-4 w-4" />
-                  Mark Selected
+                  <Check className="w-4 h-4" />
+                  {t('Messages.readable')}
                 </Button>
               )}
             </div>
           )}
 
-          <div className="space-y-2 max-h-96 overflow-y-auto">
+          <div className="max-h-96 overflow-y-auto scrollbar-none">
             {unreadNotifications.map((n: any) => (
-              <CardWrapper
+              <div
                 key={n.id}
-                className="p-2 border-l-4 border-l-primary bg-primary/10 flex items-start gap-2"
+                className="py-2 border-b border-gray-200 flex items-center justify-between gap-2 cursor-pointer"
+                onClick={() => {
+                  if (n.data.ticket_id) {
+                    handleReadSingle(n.id);
+                    router.push(PATHS.TICKETS.ITEM(n.data.ticket_id).link);
+                  }
+                }}
               >
-                <input
-                  type="checkbox"
-                  checked={selectedIds.includes(n.id)}
-                  onChange={() => handleSelectNotification(n.id)}
-                />
                 <div className="flex-1 min-w-0">
-                  <div className="flex justify-between items-start gap-2">
-                    <div className="flex items-center gap-1 flex-1">
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-1 flex-1">
                       {getNotificationIcon(n.type)}
-                      <p className="text-sm">{n.data.message}</p>
-                    </div>
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground flex-shrink-0">
-                      <Clock className="h-3 w-3" />
-                      {formatDate(n.read_at || n.createdAt)}
-                      <Button
-                        onClick={() => readSingleNotification(n.id)}
-                        disabled={isReadingSingle}
-                        size="sm"
-                        variant="ghost"
-                        className="h-6 w-6 p-0"
-                      >
-                        <Check className="h-4 w-4" />
-                      </Button>
+                      <div>
+                        <p className="text-sm">{n.data.message}</p>
+                        <div className="flex items-center gap-1 text-xs text-muted-foreground flex-shrink-0">
+                          <Clock className="h-3 w-3" />
+                          {formatDate(n.read_at || n.createdAt)}
+                          {/* <Button
+                            handleClick={() => readSingleNotification(n.id)}
+                            disabled={isReadingSingle}
+                            otherClassName="h-6 w-6 p-0"
+                          >
+                            <Check className="w-4 h-4" />
+                          </Button> */}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </CardWrapper>
+                <label
+                  className="flex items-center cursor-pointer select-none gap-3"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <input
+                    type="checkbox"
+                    name="unread Notifications checkbox"
+                    checked={selectedIds.includes(n.id)}
+                    onChange={() => handleSelectNotification(n.id)}
+                    className="peer sr-only"
+                  />
+                  <div className="w-5 h-5 rounded-sm border border-gray-300 peer-checked:bg-green-600 flex items-center justify-center transition-colors">
+                    {!!selectedIds && (
+                      <FaCheck className="w-3 h-3 text-white" />
+                    )}
+                  </div>
+                </label>
+              </div>
             ))}
 
             {readNotifications.map((n: any) => (
-              <CardWrapper
+              <div
                 key={n.id}
-                className="p-2 opacity-60 flex items-start gap-2"
+                className="py-2 border-b border-gray-200 opacity-60 flex items-start gap-2 cursor-pointer"
+                onClick={() => {
+                  if (n.data.ticket_id) {
+                    handleReadSingle(n.id);
+                    router.push(PATHS.TICKETS.ITEM(n.data.ticket_id).link);
+                  }
+                }}
               >
                 {getNotificationIcon(n.type)}
                 <div className="flex-1 min-w-0">
@@ -242,25 +286,24 @@ const NotificationsPopup = ({
                     {formatDate(n.read_at || n.createdAt)}
                   </div>
                 </div>
-              </CardWrapper>
+              </div>
             ))}
 
             {allNotifications.length === 0 && (
               <div className="text-center py-4 text-sm text-muted-foreground">
-                No notifications yet
+                {t('Messages.noNotifications')}
               </div>
             )}
           </div>
 
           {unreadNotifications.length > 0 && (
             <Button
-              onClick={handleReadAllUnread}
+              handleClick={handleReadAllUnread}
               disabled={isReadingAll}
-              size="sm"
-              className="mt-3 w-full gap-2"
+              otherClassName="py-1.5 text-sm mt-3 w-full gap-2 rounded-md"
             >
-              <CheckCheck className="h-4 w-4" />
-              Mark All Read
+              <CheckCheck className="w-4 h-4" />
+              {t('Messages.selectAllUnread')}
             </Button>
           )}
         </>

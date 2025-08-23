@@ -7,6 +7,7 @@ import { FaRegBell } from 'react-icons/fa';
 import AnimatedWrapper from '../molecules/FramerMotion/AnimatedWrapper';
 import NotificationsPopup from './WebHeader/NotificationsPopup';
 import { useUpdateContent } from '@/context/updateContentContext';
+import useIsMobile from '@/hook/useIsMobile';
 
 interface NotificationsMenuProps {
   isOpen?: boolean;
@@ -20,6 +21,8 @@ const NotificationsMenu = ({
   otherClassName,
 }: NotificationsMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const isMobile = useIsMobile();
 
   // Context
   const { refreshFlags } = useUpdateContent();
@@ -35,6 +38,10 @@ const NotificationsMenu = ({
   } = useAPI<any>('notifications');
 
   const iconsStyle = `${otherClassName} text-[var(--enjoy-primary-deep)] cursor-pointer`;
+
+  const hasUnreadNotifications = notifications?.some(
+    (notif: any) => notif.read_at === null
+  );
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -59,7 +66,7 @@ const NotificationsMenu = ({
   }, [get, notifRefreshFlag, ticketsRefreshFlag]);
 
   return (
-    <div className="relative" ref={menuRef}>
+    <div className={isMobile ? '' : 'relative'} ref={menuRef}>
       <AnimatedWrapper direction="y" distance={-40}>
         <div className="relative">
           <FaRegBell
@@ -68,7 +75,7 @@ const NotificationsMenu = ({
               if (setIsNotificationsOpen) setIsNotificationsOpen(!isOpen);
             }}
           />
-          {notifications && notifications.length > 0 && (
+          {notifications.length > 0 && hasUnreadNotifications && (
             <>
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
@@ -79,7 +86,6 @@ const NotificationsMenu = ({
 
       {isOpen && (
         <NotificationsPopup
-          getAllNotifications={get}
           notifications={notifications}
           isLoadingAll={isLoadingAll}
           errorAll={errorAll}

@@ -43,7 +43,7 @@ const MobileHeader = () => {
   const { cartItems } = useCartContext();
 
   return (
-    <header className="h-[60px] bg-enjoy-gray-light flex items-center">
+    <header className="relative h-[60px] bg-enjoy-gray-light flex items-center">
       <Container otherClassName="w-full flex items-center justify-between gap-4">
         <AnimatedWrapper>
           <NavbarSheet />
