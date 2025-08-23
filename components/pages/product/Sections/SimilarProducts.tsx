@@ -36,9 +36,7 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
               return (
                 <AnimatedWrapper key={card.id} custom={index}>
                   <ProductCard
-                    image={
-                      `${API_IMAGE_URL}${image}` || '/assets/play-station.webp'
-                    }
+                    image={`${API_IMAGE_URL}${image}`}
                     imgAlt={card.title}
                     imgTitle={card.title}
                     showDesc

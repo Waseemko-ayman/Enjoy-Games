@@ -49,10 +49,7 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
                   <AnimatedWrapper key={card.id} custom={index}>
                     <ProductCard
                       key={card.id}
-                      image={
-                        `${API_IMAGE_URL}${image}` ||
-                        '/assets/play-station.webp'
-                      }
+                      image={`${API_IMAGE_URL}${image}`}
                       imgAlt={card.title}
                       imgTitle={card.title}
                       showDesc

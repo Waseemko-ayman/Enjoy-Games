@@ -58,9 +58,7 @@ const SheetContentComp = () => {
             >
               <NavItem
                 key={index}
-                icon={
-                  `${API_IMAGE_URL}${item.icon}` || '/assets/digitalStores.webp'
-                }
+                icon={`${API_IMAGE_URL}${item.icon}`}
                 name={
                   <span
                     onClick={(e) => {
@@ -94,10 +92,7 @@ const SheetContentComp = () => {
                   {item.sub_categories.map((subItem, index) => (
                     <NavItem
                       key={index}
-                      icon={
-                        `${API_IMAGE_URL}${subItem.icon}` ||
-                        '/assets/digitalStores.webp'
-                      }
+                      icon={`${API_IMAGE_URL}${subItem.icon}`}
                       name={subItem.name}
                       otherClassName="!py-2 !px-0 !text-base !font-medium"
                       onClick={() =>

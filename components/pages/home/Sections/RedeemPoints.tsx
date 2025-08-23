@@ -5,7 +5,6 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
 import ResponsiveWrapper from '@/components/molecules/ResponsiveWrapper';
-import { PATHS } from '@/data/paths';
 import useIsMobile from '@/hook/useIsMobile';
 import Link from 'next/link';
 import { PiShoppingCartLight } from 'react-icons/pi';
@@ -43,7 +42,7 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
             </h2>
           </AnimatedWrapper>
           <AnimatedWrapper direction="x" distance={-40}>
-            <Link href={PATHS.STARS_GIFTS} className="text-base">
+            <Link href="#" className="text-base">
               {t('sectionsTitles.redeemPoints.showAll')}
             </Link>
           </AnimatedWrapper>
@@ -66,9 +65,7 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
               return (
                 <AnimatedWrapper key={card.id} custom={index}>
                   <ProductCard
-                    image={
-                      `${API_IMAGE_URL}${image}` || '/assets/play-station.webp'
-                    }
+                    image={`${API_IMAGE_URL}${image}`}
                     imgAlt={card.title}
                     imgTitle={card.title}
                     showDesc
