@@ -17,6 +17,7 @@ import { ProductCodesProvider } from '@/context/selectedProductId';
 import DashboardGuard from '@/components/auth/DashboardGuard';
 import { OrdersProvider } from '@/context/OrdersContext';
 import { WalletProvider } from '@/context/WalletContext';
+import { InterestsProvider } from '@/context/InterestsContext';
 
 const ibmArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
@@ -61,9 +62,11 @@ export default async function RootLayout({
                       <TicketsProvider>
                         <OrdersProvider>
                           <WalletProvider>
-                            <BodyWrapper>
-                              <DashboardGuard>{children}</DashboardGuard>
-                            </BodyWrapper>
+                            <InterestsProvider>
+                              <BodyWrapper>
+                                <DashboardGuard>{children}</DashboardGuard>
+                              </BodyWrapper>
+                            </InterestsProvider>
                           </WalletProvider>
                         </OrdersProvider>
                       </TicketsProvider>
