@@ -1,31 +1,55 @@
 import CardWrapper from '@/components/atomic/CardWrapper';
 import { CardTitle } from '@/components/ui/card';
 import { OrderItem } from '@/interfaces';
-import {
-  Badge,
-  FileText,
-  Mail,
-  MessageCircle,
-  Package,
-  Tag,
-  Truck,
-} from 'lucide-react';
+import { Badge, FileText, Tag, Truck } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { FaTruck, FaUser } from 'react-icons/fa6';
-import { IoBarcodeSharp } from 'react-icons/io5';
 
 const OrderProductCard = ({ item }: { item: OrderItem }) => {
   const t = useTranslations();
   const methodsT = useTranslations('Inputs.labels');
-
-  const iconStyle = 'w-3 h-3';
 
   const parseShippingData = (shippingData: string) => {
     try {
       return JSON.parse(shippingData);
     } catch {
       return {};
+    }
+  };
+
+  const renderShippingData = (method: string, shippingData: string) => {
+    if (!shippingData) return null;
+    const data = parseShippingData(shippingData);
+
+    switch (method) {
+      case 'code':
+        return data?.email ?? shippingData;
+      case 'access':
+        return (
+          <div className="space-y-1 text-sm text-muted-foreground">
+            {Object.entries(data).map(([key, value]) => (
+              <div key={key} className="flex items-center gap-2">
+                <span className="font-medium">{key}:</span>
+                <span>{String(value)}</span>
+              </div>
+            ))}
+          </div>
+        );
+      case 'multi_id':
+        return (
+          <div className="space-y-1 text-sm text-muted-foreground">
+            {Object.entries(data).map(([key, value]) => (
+              <div key={key} className="flex items-center gap-2">
+                <span className="font-medium">{key}:</span>
+                <span>{String(value)}</span>
+              </div>
+            ))}
+          </div>
+        );
+      case 'account_id':
+        return data?.account_id ?? shippingData;
+      default:
+        return shippingData;
     }
   };
 
@@ -52,24 +76,24 @@ const OrderProductCard = ({ item }: { item: OrderItem }) => {
     return colors[method] || 'bg-gray-100 text-gray-800';
   };
 
-  const getShippingDataIcon = (shippingData?: string) => {
-    if (!shippingData) return <MessageCircle className={iconStyle} />;
+  // const getShippingDataIcon = (shippingData?: string) => {
+  //   if (!shippingData) return <MessageCircle className="w-3 h-3" />;
 
-    switch (shippingData.toLowerCase()) {
-      case 'code':
-        return <IoBarcodeSharp className={iconStyle} />;
-      case 'email':
-        return <Mail className="h-3 w-3" />;
-      case 'account_id':
-        return <FaTruck className={iconStyle} />;
-      case 'multi_id':
-        return <Package className={iconStyle} />;
-      case 'access':
-        return <FaUser className={iconStyle} />;
-      default:
-        return <MessageCircle className={iconStyle} />;
-    }
-  };
+  //   switch (shippingData.toLowerCase()) {
+  //     case 'code':
+  //       return <IoBarcodeSharp className="w-3 h-3" />;
+  //     case 'email':
+  //       return <Mail className="h-3 w-3" />;
+  //     case 'account_id':
+  //       return <FaTruck className="w-3 h-3" />;
+  //     case 'multi_id':
+  //       return <Package className="w-3 h-3" />;
+  //     case 'access':
+  //       return <FaUser className="w-3 h-3" />;
+  //     default:
+  //       return <MessageCircle className="w-3 h-3" />;
+  //   }
+  // };
 
   return (
     <CardWrapper key={item.id} className="p-5">
@@ -131,10 +155,8 @@ const OrderProductCard = ({ item }: { item: OrderItem }) => {
           </div>
           {item.shipping_data && (
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              {getShippingDataIcon(item.shipping_method)}
-              {item.shipping_method === 'code'
-                ? parseShippingData(item.shipping_data).email
-                : item.shipping_data}
+              {/* {getShippingDataIcon(item.shipping_method)} */}
+              {renderShippingData(item.shipping_method, item.shipping_data)}
             </div>
           )}
         </div>
