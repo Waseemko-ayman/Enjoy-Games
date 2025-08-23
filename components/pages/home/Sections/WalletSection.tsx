@@ -25,8 +25,22 @@ const WalletSection = ({ t }: { t: TranslationFunction }) => {
   // );
 
   const getCardValue = (value?: string | number) => {
-    if (isLoading) return <ButtonLoading />;
-    if (error) return <InlineError />;
+    if (isLoading)
+      return (
+        <ButtonLoading
+          borderColor={
+            value === myWallet?.points_balance ? 'border-black' : 'border-white'
+          }
+        />
+      );
+    if (error)
+      return (
+        <InlineError
+          textColor={
+            value === myWallet?.points_balance ? 'text-black' : 'text-white'
+          }
+        />
+      );
     return value ?? 0;
   };
 
