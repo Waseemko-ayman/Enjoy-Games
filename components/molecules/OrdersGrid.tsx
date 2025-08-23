@@ -40,7 +40,7 @@ const OrdersGrid: React.FC<OrdersGridProps> = ({
 
   return (
     <Container>
-      <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
+      <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">
             {t('MyPurchases.yourOrders')}
