@@ -74,7 +74,8 @@
     "search": "البحث",
     "dashboard": "لوحة التحكم",
     "orders": "الطلبات",
-    "notifications": "الإشعارات"
+    "notifications": "الإشعارات",
+    "referrals": "دعواتي"
   },
   "SectionsTitles": {
     "Stars": {
@@ -421,6 +422,12 @@
   "search": {
     "searchResults": "نتائج البحث",
     "noResult": "لا يوجد نتائج"
+  },
+  "referrals": {
+    "totalReferrals": "إجمالي الدعوات",
+    "pointsEarned": "النقاط المكتسبة",
+    "invitedFriends": "الأصدقاء المدعوون",
+    "noFriends": "لم يتم دعوة أي صديق بعد."
   },
   "sidebar": {
     "enjoyGames": "إنجوي قيمز",

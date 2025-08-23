@@ -74,7 +74,8 @@
     "search": "Search",
     "dashboard": "Dashboard",
     "orders": "Orders",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "referrals": "Referrals"
   },
   "SectionsTitles": {
     "Stars": {
@@ -417,6 +418,12 @@
     "productEvaluation": "Your evaluation has been submitted successfully. Thank you very much.",
     "noImages": "No images provided for this rating.!",
     "proofFile": "Authentication facility"
+  },
+  "referrals": {
+    "totalReferrals": "Total Referrals",
+    "pointsEarned": "Points Earned",
+    "invitedFriends": "Invited Friends",
+    "noFriends": "No friends have been invited yet."
   },
   "search": {
     "searchResults": "Search results",

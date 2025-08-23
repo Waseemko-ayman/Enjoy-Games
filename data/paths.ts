@@ -5,7 +5,7 @@ import { MdMoreHoriz, MdOutlineAssignment } from 'react-icons/md';
 export const PATHS = {
   HOME: { name: 'الرئيسية', link: '/' },
   STORE: { name: 'المتجر', link: '/store' },
-  STARS: { name: 'دليل ستارز', link: '/stars' },
+  STARS: { name: 'ولاء إنجوي', link: '/stars' },
   WALLET: { name: 'محفظتي', link: '/wallet' },
   MY_PURCHASES: {
     ROOT: { name: 'طلباتي', link: '/my-purchases' },
@@ -59,6 +59,7 @@ export const PATHS = {
     REPORTS: '/dashboard/reports',
     SETTINGS: '/dashboard/settings',
   },
+  REFERRALS: { name: 'دعواتي', link: '/referrals' },
   LOGIN: '/auth/login',
   SIGNUP: '/auth/signup',
   OTP: '/auth/otp',

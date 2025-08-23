@@ -84,14 +84,14 @@ function getTranslationKey(title: string): {
       return { key: 'my-purchases', namespace: 'PagesHeaderTitles' };
     case 'تذاكر الدعم الفني':
       return { key: 'tickets', namespace: 'PagesHeaderTitles' };
-    case 'دليل ستارز':
+    case 'ولاء إنجوي':
       return { key: 'stars', namespace: 'PagesHeaderTitles' };
     case 'الإهتمامات':
       return { key: 'interests', namespace: 'PagesHeaderTitles' };
     case 'المحفظة':
       return { key: 'wallet', namespace: 'PagesHeaderTitles' };
-    case 'نقاط دليل ستارز':
-      return { key: 'starsPoints', namespace: 'PagesHeaderTitles' };
+    case 'دعواتي':
+      return { key: 'referrals', namespace: 'PagesHeaderTitles' };
     case 'لوحة التحكم':
       return { key: 'dashboard', namespace: 'PagesHeaderTitles' };
     case 'تسجيل خروج':

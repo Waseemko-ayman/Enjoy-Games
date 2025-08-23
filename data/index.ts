@@ -249,7 +249,12 @@ export const userList = [
       //   link: PATHS.MAX_PROGRAM.link,
       //   icon: FaLink,
       // },
-      { id: 4, title: 'دليل ستارز', link: PATHS.STARS.link, icon: FaFlag },
+      {
+        id: 4,
+        title: 'ولاء إنجوي',
+        link: PATHS.STARS.link,
+        icon: PiSparkleFill,
+      },
       {
         id: 5,
         title: 'الإهتمامات',
@@ -270,10 +275,9 @@ export const userList = [
       },
       {
         id: 9,
-        title: 'نقاط دليل ستارز',
-        link: PATHS.STARS.link,
-        icon: PiSparkleFill,
-        badge: '0',
+        title: 'دعواتي',
+        link: PATHS.REFERRALS.link,
+        icon: FaFlag,
       },
     ],
   },
