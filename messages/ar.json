@@ -826,7 +826,8 @@
       "englishImageRequired": "الصورة بالإنجليزية مطلوبة",
       "fileRequired": "الملف مطلوب",
       "permissionsRequired": "الأذونات مطلوبة",
-      "statusRequired": "الحالة مطلوبة"
+      "statusRequired": "الحالة مطلوبة",
+      "messageRequired": "الرسالة مطلوبة"
     }
   },
   "Auth": {
@@ -884,7 +885,15 @@
     "unavailable": "غير متوفر",
     "deleteWarningTitle": "تحذير",
     "deleteWarningMessage": "هل أنت متأكد أنك تريد حذف {item} من السلة؟",
-    "errorNotifications": "خطأ في جلب الإشعارات:"
+    "errorNotifications": "خطأ في جلب الإشعارات:",
+    "noNotifications": "لا يوجد إشعارات",
+    "justNow": "الآن",
+    "hourAgo": "ساعة",
+    "dayAgo": "يوم",
+    "daysAgo": "أيام",
+    "selectAllUnread": "تحديد الكل غير المقروءة",
+    "markSelected": "تحديد الكل غير المقروءة",
+    "readable": "مقروء"
   },
   "Languages": {
     "english": "إنجليزي",

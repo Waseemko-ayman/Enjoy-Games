@@ -827,7 +827,8 @@
       "englishImageRequired": "English image is required",
       "fileRequired": "File required",
       "permissionsRequired": "Permissions required",
-      "statusRequired": "Status Required"
+      "statusRequired": "Status Required",
+      "messageRequired": "Message Required"
     }
   },
   "Auth": {
@@ -885,7 +886,14 @@
     "unavailable": "unavailable",
     "deleteWarningTitle": "Warning",
     "deleteWarningMessage": "Are you sure you want to remove {item} from the cart?",
-    "errorNotifications": "Error fetching notifications:"
+    "errorNotifications": "Error fetching notifications:",
+    "noNotifications": "No notifications yet",
+    "justNow": "Just now",
+    "hourAgo": "h ago",
+    "dayAgo": "d ago",
+    "daysAgo": "days ago",
+    "selectAllUnread": "Select all unread",
+    "readable": "Readable"
   },
   "Languages": {
     "english": "English",
