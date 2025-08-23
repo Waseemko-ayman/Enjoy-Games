@@ -53,7 +53,7 @@ const OrdersStats: React.FC<OrdersStatsProps> = ({ orders }) => {
     },
     {
       title: t('totalSpent'),
-      value: `${totalSpent.toFixed(2)}`,
+      value: `${totalSpent.toFixed(2)} ${orders[0]?.total_price?.currency}`,
       icon: ShoppingBag,
       color: 'text-enjoy-primary',
       bgColor: 'bg-gradient-to-br from-enjoy-primary/5 to-enjoy-primary/15',
