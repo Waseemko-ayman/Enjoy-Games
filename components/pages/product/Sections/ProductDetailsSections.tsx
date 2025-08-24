@@ -34,6 +34,8 @@ import FormError from '@/components/atomic/FormError';
 import { extractText } from '@/utils/extractText';
 import { API_IMAGE_URL } from '@/config/api';
 import dynamic from 'next/dynamic';
+import { FaStar } from 'react-icons/fa6';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 const DynamicImage = dynamic(() => import('next/image'), {
   loading: () => <Loading />,
   ssr: false,
@@ -52,7 +54,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const inputsTxt = useTranslations('Inputs');
   const btnTxt = useTranslations('BtnTexts');
   const msgTxts = useTranslations('Messages');
-  // const { isArabic } = useToggleLocale();
+  const { isArabic } = useToggleLocale();
   const { addToCart } = useCartContext();
   const { showToast } = useToast();
 
@@ -161,7 +163,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           </div>
         </MotionSection>
 
-        {/* <MotionSection index={3}>
+        <MotionSection index={3}>
           <div className="flex item-center justify-between gap-2 mt-4 border border-gray-400 rounded-lg p-3">
             <div
               className={`flex items-center ${
@@ -169,9 +171,9 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
               } gap-2`}
             >
               <div className="flex items-center">
-                <MdAdd className="font-bold" />
+                {/* <MdAdd className="font-bold" /> */}
                 <span className="text-enjoy-primary text-base font-bold">
-                  4
+                  {String(product?.points)}
                 </span>
               </div>
               <h3
@@ -182,7 +184,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
             </div>
             <FaStar className="text-enjoy-secondary" size={20} />
           </div>
-        </MotionSection> */}
+        </MotionSection>
 
         <div className="mt-7">
           <MotionSection index={4}>
