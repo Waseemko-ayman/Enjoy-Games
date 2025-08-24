@@ -331,7 +331,7 @@
     "basketSummary": "Basket Summary",
     "choosePaymentMethod": "Choose Payment Method",
     "emptyStateTitle": "Your basket is ready and waiting for you to shop",
-    "termsAndPrivacyAgreement": "By proceeding to payment you agree to <termsLink>Terms of Use</termsLink> and <privacyLink>Privacy Policy</privacyLink> of Store Guide",
+    "termsAndPrivacyAgreement": "By proceeding to payment you agree to <termsLink>Terms of Use</termsLink> and <privacyLink>Privacy Policy</privacyLink> of Enjoy Games",
     "discountCoupon": "Discount Coupon:",
     "cartSummary": "Shopping Cart Summary",
     "rewards": {
@@ -848,7 +848,8 @@
       "fileRequired": "File required",
       "permissionsRequired": "Permissions required",
       "statusRequired": "Status Required",
-      "messageRequired": "Message Required"
+      "messageRequired": "Message Required",
+      "termsAccepted": "Terms and Privacy Policy must be accepted."
     }
   },
   "Auth": {

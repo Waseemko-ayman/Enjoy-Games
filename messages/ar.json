@@ -331,7 +331,7 @@
     "basketSummary": "ملخص السلة",
     "choosePaymentMethod": "إختر وسيلة الدفع",
     "emptyStateTitle": "سلتك جاهزة وتناديك للتسوق",
-    "termsAndPrivacyAgreement": "بالانتقال إلى الدفع فانت تتوافق على <termsLink>سياسة الاستخدام</termsLink> و <privacyLink>سياسة الخصوصية</privacyLink> لـ دليل ستور",
+    "termsAndPrivacyAgreement": "بالانتقال إلى الدفع فانت تتوافق على <termsLink>سياسة الاستخدام</termsLink> و <privacyLink>سياسة الخصوصية</privacyLink> لـ إنجوي قيمز",
     "discountCoupon": "كوبون الخصم:",
     "cartSummary": "ملخص سلة التسوق",
     "rewards": {
@@ -847,7 +847,8 @@
       "fileRequired": "الملف مطلوب",
       "permissionsRequired": "الأذونات مطلوبة",
       "statusRequired": "الحالة مطلوبة",
-      "messageRequired": "الرسالة مطلوبة"
+      "messageRequired": "الرسالة مطلوبة",
+      "termsAccepted": "يجب الموافقة على الشروط وسياسة الخصوصية"
     }
   },
   "Auth": {
