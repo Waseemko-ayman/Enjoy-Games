@@ -219,9 +219,9 @@ const NotificationsPopup = ({
               <div
                 key={n.id}
                 className="py-2 border-b border-gray-200 flex items-center justify-between gap-2 cursor-pointer"
-                onClick={() => {
+                onClick={async () => {
                   if (n.data.ticket_id) {
-                    handleReadSingle(n.id);
+                    await handleReadSingle(n.id);
                     router.push(PATHS.TICKETS.ITEM(n.data.ticket_id).link);
                   }
                 }}
