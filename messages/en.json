@@ -94,7 +94,8 @@
     "faqs": "Frequently Asked Questions",
     "products": "Products",
     "categories": "Sections",
-    "subCategories": "Subsections"
+    "subCategories": "Subsections",
+    "productSubscribers": "Product Subscribers"
   },
   "HomePage": {
     "walletSections": {
@@ -390,7 +391,8 @@
         "resolved": "Resolved",
         "closed": "Closed"
       }
-    }
+    },
+    "you": "You"
   },
   "productDetails": {
     "shareLinkWith": "Share the link via:",
@@ -443,7 +445,8 @@
     "ratings": "Ratings",
     "orders": "Orders",
     "notifications": "Notifications",
-    "users": "Users"
+    "users": "Users",
+    "productSubscribers": "Product Subscribers"
   },
   "Dashboard": {
     "desc": "Welcome to your order management orders",
@@ -552,6 +555,11 @@
         "manageRatings": "Manage Ratings",
         "replyTickets": "Reply Tickets"
       }
+    },
+    "productSubscribers": {
+      "title": "All subscribers to a product",
+      "desc": "Manage subscribers for your store",
+      "manageSubscribers": "Manage all subscribers in one place"
     }
   },
   "errorBoundary": {

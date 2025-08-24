@@ -13,6 +13,7 @@ interface DataTableHeaderProps {
   placeholder: string;
   filter?: string;
   handleFilterChange?: (value: string) => void;
+  filterOptions?: { id: string; label: string }[];
 }
 
 const DataTableHeader: React.FC<DataTableHeaderProps> = ({
@@ -23,16 +24,22 @@ const DataTableHeader: React.FC<DataTableHeaderProps> = ({
   placeholder,
   filter,
   handleFilterChange,
+  filterOptions,
 }) => {
   const pathname = usePathname();
   const showSearch = pathname !== '/en/dashboard/sliders';
-  const showFilter = pathname === '/en/dashboard/orders';
+  // const showFilter = pathname === '/en/dashboard/orders';
+  const showFilter = (filterOptions ?? []).length > 0;
 
   return (
     <div className="px-6 py-4 border-b border-gray-200 flex items-center flex-col sm:flex-row justify-between gap-4">
       <div className="flex items-center gap-3">
         {showFilter && (
-          <PurchasesFilterSelect value={filter} onChange={handleFilterChange} />
+          <PurchasesFilterSelect
+            value={filter}
+            onChange={handleFilterChange}
+            options={filterOptions}
+          />
         )}
         <p className="text-sm text-gray-500">
           {filteredItems} من {totalItems} عنصرًا

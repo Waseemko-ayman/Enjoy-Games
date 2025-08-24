@@ -1,4 +1,4 @@
-import { Home } from 'lucide-react';
+import { Home, UserPlus } from 'lucide-react';
 import { FaBox, FaImages, FaList, FaSitemap, FaStar } from 'react-icons/fa6';
 import { IoBarcodeSharp } from 'react-icons/io5';
 import { FaQuestionCircle, FaTachometerAlt, FaTicketAlt } from 'react-icons/fa';
@@ -71,6 +71,11 @@ export const sidebarLinks = [
     title: 'users',
     href: PATHS.DASHBOARD.USERS,
     icon: FiUsers,
+  },
+  {
+    title: 'productSubscribers',
+    href: PATHS.DASHBOARD.PRODUCT_SUBSCRIBERS,
+    icon: UserPlus,
   },
   // {
   //   title: 'Payment Gateways',

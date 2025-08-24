@@ -18,6 +18,7 @@ export const PATHS = {
   PAYMENT_GATEWAYS: '/dashboard/payment-gateways',
   REPORTS: '/dashboard/reports',
   SETTINGS: '/dashboard/settings',
+  PRODUCT_SUBSCRIBERS: '/dashboard/product-subscribers',
   AUTH: {
     LOGIN: '/auth/login',
     SIGNUP: '/auth/signup',

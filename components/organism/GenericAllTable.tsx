@@ -20,11 +20,13 @@ interface GenericAllProps<T> {
   createTabValue?: string;
   placeholder?: string;
   onEditIdChange?: (id: string | number | null) => void;
-  onTabChange: (val: string) => void;
+  onTabChange?: (val: string) => void;
   showEdit?: boolean;
   showActionsColumn?: boolean;
   refreshKeyProp?: string;
   customFilter?: (rows: any[], currentFilter: string) => any[];
+  filterOptions?: { id: string; label: string }[];
+  onFilterChange?: (filter: string) => void;
 }
 
 const GenericAllTable = <T,>({
@@ -41,6 +43,8 @@ const GenericAllTable = <T,>({
   showActionsColumn,
   refreshKeyProp,
   customFilter,
+  filterOptions,
+  onFilterChange,
 }: GenericAllProps<T>) => {
   // --- Filter State ---
   const [filter, setFilter] = useState('all');
@@ -69,7 +73,9 @@ const GenericAllTable = <T,>({
 
   const handleEdit = (id: string | number) => {
     onEditIdChange?.(id);
-    if (createTabValue) onTabChange(createTabValue);
+    if (createTabValue && onTabChange) {
+      onTabChange(createTabValue);
+    }
   };
 
   const handleDelete = async (id: string | number) => {
@@ -90,6 +96,8 @@ const GenericAllTable = <T,>({
   useEffect(() => {
     const list = Array.isArray(data?.items)
       ? data.items
+      : Array.isArray(data?.data)
+      ? data.data
       : Array.isArray(data)
       ? data
       : [];
@@ -100,21 +108,35 @@ const GenericAllTable = <T,>({
     setRows((prev) => prev.map((r) => (r.id === id ? { ...r, ...patch } : r)));
   };
 
-  const filteredRows = useMemo(() => {
-    if (customFilter) {
-      return customFilter(rows, filter); // 👈 Apply custom filtering if present
-    }
+  // const filteredRows = useMemo(() => {
+  //   if (customFilter) {
+  //     return customFilter(rows, filter); // 👈 Apply custom filtering if present
+  //   }
 
-    //Default filtering
+  //   //Default filtering
+  //   if (filter === 'all') return rows;
+  //   return rows.filter(
+  //     (item: any) => item.status?.toLowerCase() === filter.toLowerCase()
+  //   );
+  // }, [rows, filter, customFilter]);
+
+  const filteredRows = useMemo(() => {
+    if (customFilter) return customFilter(rows, filter);
     if (filter === 'all') return rows;
-    return rows.filter(
-      (item: any) => item.status?.toLowerCase() === filter.toLowerCase()
-    );
+    return rows; // بدون فلترة إذا لم يتم تمرير customFilter
   }, [rows, filter, customFilter]);
+
+  const handleFilterChange = (newFilter: string) => {
+    setFilter(newFilter);
+    // استدعاء الدالة الممررة من المكون الأب إذا كانت موجودة
+    if (onFilterChange) {
+      onFilterChange(newFilter);
+    }
+  };
 
   useEffect(() => {
     get();
-  }, [get, refreshFlags[refreshKey]]);
+  }, [get, apiEndpoint, refreshFlags[refreshKey]]);
 
   return (
     <SettingsTab
@@ -123,23 +145,20 @@ const GenericAllTable = <T,>({
       description={description}
       cardContentClassName="!p-0"
     >
-      {isLoading ? (
-        <Loading />
-      ) : error ? (
-        <ErrorFetching />
-      ) : (
-        <DataTable
-          placeholder={placeholder}
-          data={filteredRows}
-          onRowPatched={patchRow}
-          onEdit={handleEdit}
-          onDelete={deleteEndpoint ? handleDelete : undefined}
-          showEdit={showEdit}
-          showActionsColumn={showActionsColumn}
-          filter={filter}
-          setFilter={setFilter}
-        />
-      )}
+      <DataTable
+        placeholder={placeholder}
+        data={filteredRows}
+        onRowPatched={patchRow}
+        onEdit={handleEdit}
+        onDelete={deleteEndpoint ? handleDelete : undefined}
+        showEdit={showEdit}
+        showActionsColumn={showActionsColumn}
+        filter={filter}
+        setFilter={handleFilterChange}
+        filterOptions={filterOptions}
+        isLoading={isLoading}
+        error={error}
+      />
     </SettingsTab>
   );
 };

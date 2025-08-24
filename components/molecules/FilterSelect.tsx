@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import {
   Select,
@@ -8,33 +9,34 @@ import {
 } from '@/components/ui/select';
 import { useTranslations } from 'next-intl';
 
-interface PurchasesFilterSelectProps {
+interface FilterSelectProps {
   value?: string;
   onChange?: (value: string) => void;
-  options?: { id: string; label: string }[]; // جديد
+  options?: any[];
   ariaLabelKey?: string;
   className?: string;
 }
 
-const PurchasesFilterSelect: React.FC<PurchasesFilterSelectProps> = ({
+const FilterSelect: React.FC<FilterSelectProps> = ({
   value,
   onChange,
-  options,
+  options = [],
   ariaLabelKey = 'selectPurchaseType',
   className = 'w-[180px]',
 }) => {
+  const t = useTranslations('MyPurchases');
   const ariaTxts = useTranslations('ariaLabels.btns');
 
   return (
     <Select onValueChange={onChange} value={value}>
       <SelectTrigger className={className} aria-label={ariaTxts(ariaLabelKey)}>
-        <SelectValue placeholder="الكل" />
+        <SelectValue placeholder={t('all')} />
       </SelectTrigger>
       <SelectContent>
-        {options?.map((item) => (
+        {options.map((item) => (
           <SelectItem
             key={item.id}
-            value={item.id}
+            value={item.value}
             className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
           >
             {item.label}
@@ -45,4 +47,4 @@ const PurchasesFilterSelect: React.FC<PurchasesFilterSelectProps> = ({
   );
 };
 
-export default PurchasesFilterSelect;
+export default FilterSelect;

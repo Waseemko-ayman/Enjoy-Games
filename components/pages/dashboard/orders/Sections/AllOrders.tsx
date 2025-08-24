@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import GenericAllTable from '@/components/organism/GenericAllTable';
+import { MyPurchasesTypes } from '@/data';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -31,6 +32,10 @@ const AllOrders = ({
       showEdit={false}
       showActionsColumn={false}
       customFilter={handleOrderFilter}
+      filterOptions={MyPurchasesTypes.map((item) => ({
+        id: item.labelKey,
+        label: t(`MyPurchases.${item.labelKey}`),
+      }))}
     />
   );
 };

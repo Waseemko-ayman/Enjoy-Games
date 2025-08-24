@@ -58,6 +58,7 @@ export const PATHS = {
     PAYMENT_GATEWAYS: '/dashboard/payment-gateways',
     REPORTS: '/dashboard/reports',
     SETTINGS: '/dashboard/settings',
+    PRODUCT_SUBSCRIBERS: '/dashboard/product-subscribers',
   },
   REFERRALS: { name: 'دعواتي', link: '/referrals' },
   LOGIN: '/auth/login',

@@ -3,6 +3,8 @@ import { useDebounce } from 'use-debounce';
 import DataTableHeader from './Table/DataTableHeader';
 import DataTableBody from './Table/DataTableBody';
 import DataTablePagination from './Table/DataTablePagination';
+import Loading from './loading';
+import ErrorFetching from './ErrorFetching';
 
 interface DataTableProps<T extends { id: number | string }> {
   title?: string;
@@ -15,6 +17,9 @@ interface DataTableProps<T extends { id: number | string }> {
   filter?: string;
   setFilter?: (value: string) => void;
   onRowPatched?: (id: string | number, patch: Partial<T>) => void;
+  filterOptions?: { id: string; label: string }[];
+  isLoading: boolean;
+  error: string;
 }
 
 function getItemsPerPageOptions(totalItems: number) {
@@ -41,6 +46,9 @@ export function DataTable<T extends { id: number | string }>({
   filter,
   setFilter,
   onRowPatched,
+  filterOptions,
+  isLoading,
+  error,
 }: DataTableProps<T>) {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm] = useDebounce(searchTerm, 700);
@@ -112,29 +120,38 @@ export function DataTable<T extends { id: number | string }>({
         placeholder={placeholder}
         filter={filter}
         handleFilterChange={setFilter}
+        filterOptions={filterOptions}
       />
-      <DataTableBody
-        columns={columns}
-        data={currentData}
-        onEdit={onEdit}
-        onDelete={onDelete}
-        searchTerm={debouncedSearchTerm}
-        showEdit={showEdit}
-        showActionsColumn={showActionsColumn}
-        onRowPatched={onRowPatched}
-      />
-      {totalPages > 1 && (
-        <DataTablePagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          itemsPerPage={itemsPerPage}
-          itemsPerPageOptions={itemsPerPageOptions}
-          onPageChange={goToPage}
-          onItemsPerPageChange={handleItemsPerPageChange}
-          filteredCount={filteredData.length}
-          startIndex={startIndex}
-          endIndex={endIndex}
-        />
+      {isLoading ? (
+        <Loading />
+      ) : error ? (
+        <ErrorFetching />
+      ) : (
+        <>
+          <DataTableBody
+            columns={columns}
+            data={currentData}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            searchTerm={debouncedSearchTerm}
+            showEdit={showEdit}
+            showActionsColumn={showActionsColumn}
+            onRowPatched={onRowPatched}
+          />
+          {totalPages > 1 && (
+            <DataTablePagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              itemsPerPage={itemsPerPage}
+              itemsPerPageOptions={itemsPerPageOptions}
+              onPageChange={goToPage}
+              onItemsPerPageChange={handleItemsPerPageChange}
+              filteredCount={filteredData.length}
+              startIndex={startIndex}
+              endIndex={endIndex}
+            />
+          )}
+        </>
       )}
     </div>
   );

@@ -94,7 +94,8 @@
     "faqs": "الأسئلة الشائعة",
     "products": "المنتجات",
     "categories": "الأقسام",
-    "subCategories": "الأقسام الفرعية"
+    "subCategories": "الأقسام الفرعية",
+    "productSubscribers": "المشتركين بالمنتجات"
   },
   "HomePage": {
     "walletSections": {
@@ -390,7 +391,8 @@
         "resolved": "تم الحل",
         "closed": "مغلق"
       }
-    }
+    },
+    "you": "أنت"
   },
   "productDetails": {
     "shareLinkWith": "شارك الرابط عبر:",
@@ -443,7 +445,8 @@
     "ratings": "التقييمات",
     "orders": "الطلبات",
     "notifications": "الإشعارات",
-    "users": "المستخدمين"
+    "users": "المستخدمين",
+    "productSubscribers": "المشتركين بالمنتجات"
   },
   "Dashboard": {
     "desc": "مرحباً بكم في إدارة طلباتكم",
@@ -552,6 +555,11 @@
         "manageRatings": "إدارة التقييمات",
         "replyTickets": "الرد على التذاكر"
       }
+    },
+    "productSubscribers": {
+      "title": "جميع المشتركين بمنتج",
+      "desc": "إدارة المشتركين لمتجرك",
+      "manageSubscribers": "إدارة جميع المشتركين في مكان واحد"
     }
   },
   "errorBoundary": {

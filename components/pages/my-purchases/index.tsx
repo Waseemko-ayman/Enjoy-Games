@@ -11,7 +11,7 @@ import OrdersGrid from '@/components/molecules/OrdersGrid';
 import Layer from '@/components/atomic/Layer';
 import { Order } from '@/interfaces';
 import { usePagination } from '@/hook/usePagination';
-import PurchasesFilterSelect from '@/components/molecules/PurchasesFilterSelect';
+import PurchasesFilterSelect from '@/components/molecules/FilterSelect';
 import { useOrders } from '@/context/OrdersContext';
 
 const MyPurchasesPage = () => {
