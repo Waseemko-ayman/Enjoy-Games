@@ -209,7 +209,9 @@
         "title": "Convert Points to ",
         "rule": "After {minPoints} points = 1 card",
         "action": "Withdrawal History",
-        "emptyState": "No withdrawals yet"
+        "emptyState": "No withdrawals yet",
+        "deposit": "Deposit",
+        "withdraw": "Withdraw"
       },
       "actions": {
         "starPoints": "Loyalty Enjoy Points",
@@ -567,10 +569,10 @@
   },
   "Shared": {
     "procedures": {
-      "default": "Withdrawal History",
+      "default": "Withdrawal and Deposit History",
       "last": "Last Withdrawal Record"
     },
-    "emptyState": "No withdrawals found",
+    "emptyState": "No withdrawals or deposits",
     "point": "Point"
   },
   "Invoice": {

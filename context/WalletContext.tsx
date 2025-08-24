@@ -13,6 +13,13 @@ interface WalletData {
     amount: number;
     currency: string;
   };
+  wallet_transactions: {
+    type: 'deposit' | 'withdraw' | string;
+    amount: {
+      amount: number;
+      currency: string;
+    };
+  }[];
 }
 
 interface WalletContextType {
