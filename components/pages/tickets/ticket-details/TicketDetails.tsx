@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TicketContent from './Sections/TicketContent';
 import { Bell, CheckCircle, Clock, MessageCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Loading from '@/components/molecules/loading';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
-import { useTickets } from '@/context/TicketsContext';
 import PageHeader from '@/components/molecules/PageHeader';
 import useAPI from '@/hook/useAPI';
 import { useSearchParams } from 'next/navigation';
@@ -14,13 +15,14 @@ const TicketDetailsPage = ({ id }: { id: string }) => {
   const t = useTranslations('Tickets');
   const btnTexts = useTranslations('BtnTexts');
 
-  const { tickets, isLoading, error } = useTickets();
+  // const { tickets, isLoading, error } = useTickets();
   const { getSingle: readSingleNotification } = useAPI('notifications');
 
-  const ticket = tickets?.find((t) => String(t.id) === id);
+  const { getSingle: getTicket, isLoading, error } = useAPI('tickets');
+  const [ticket, setTicket] = useState<any>(null);
 
   const searchParams = useSearchParams();
-  const ticketId = searchParams.get('id');
+  const ticketId = id || searchParams.get('id');
 
   const getStatusIcon = (status?: string) => {
     if (!status) return <MessageCircle className="w-4 h-4" />;
@@ -53,7 +55,7 @@ const TicketDetailsPage = ({ id }: { id: string }) => {
   };
 
   useEffect(() => {
-    if (!ticketId) return;
+    if (!ticketId || !ticket) return;
     const markAsRead = async () => {
       try {
         await readSingleNotification(`${ticketId}/read`);
@@ -62,7 +64,24 @@ const TicketDetailsPage = ({ id }: { id: string }) => {
       }
     };
     markAsRead();
-  }, [ticketId, readSingleNotification]);
+  }, [ticketId]);
+
+  useEffect(() => {
+    if (!ticketId) return;
+
+    const fetchTicket = async () => {
+      try {
+        const res = await getTicket(ticketId);
+        setTicket(res?.data);
+        console.log('res?.data', res?.data);
+      } catch (err: any) {
+        console.error(err);
+      } finally {
+      }
+    };
+
+    fetchTicket();
+  }, [ticketId]);
 
   return (
     <div>

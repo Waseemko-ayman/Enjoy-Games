@@ -26,6 +26,7 @@ import { FaX } from 'react-icons/fa6';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useToast } from '@/lib/toast';
+import { useAuthContext } from '@/context/AuthContext';
 
 type FormValues = {
   message: string;
@@ -48,7 +49,7 @@ const TicketContent = ({
   const [attachments, setAttachments] = useState<File[]>([]);
   const [localMessages, setLocalMessages] = useState<any[]>([]);
 
-  console.log(localMessages);
+  const { user } = useAuthContext();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const inputT = useTranslations('Inputs');
@@ -99,10 +100,12 @@ const TicketContent = ({
     // أنشئ رسالة مؤقتة لإضافتها مباشرة للـ UI
     const optimisticMessage = {
       id: Math.random(), // مؤقت
+      ticket_id: ticket.id,
       message: data?.message,
       created_at: new Date().toISOString(),
-      is_admin_reply: true, // أو false حسب الحالة
-      admin_name: 'You', // لتوضيح أنها من المستخدم الحالي
+      // is_admin_reply: true, // أو false حسب الحالة
+      user_id: user?.id,
+      admin_name: t('you'), // لتوضيح أنها من المستخدم الحالي
       attachments: attachments?.map((file) => ({ name: file.name })),
       temp: true, // علامة مؤقتة
     };
@@ -150,37 +153,6 @@ const TicketContent = ({
     };
     fetchMessages();
   }, [get]);
-
-  /*
-  // جلب الرسائل عند التحميل الأولي
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const freshData = await get();
-        if (freshData) {
-          setLocalMessages((prev) => {
-            const newMessages = Array.isArray(freshData.data)
-              ? freshData.data
-              : [freshData.data];
-
-            // دمج الرسائل الجديدة مع الموجودة
-            return [
-              ...prev,
-              ...newMessages.map((msg) => ({
-                ...msg,
-                is_admin_reply: msg.is_admin_reply ?? false, // تأكد من القيمة
-              })),
-            ];
-          });
-        }
-      } catch (err) {
-        console.error('Failed to fetch messages', err);
-      }
-    };
-
-    fetchMessages();
-  }, [get]);
-*/
 
   return (
     <Layer>
@@ -243,21 +215,23 @@ const TicketContent = ({
                     </span>
                   </div>
                   <p className="text-gray-800 whitespace-pre-wrap">
-                    {ticket?.latest_message.message}
+                    {ticket?.latest_message
+                      ? ticket?.latest_message.message
+                      : ''}
                   </p>
                 </div>
 
                 {/* Messages */}
                 {localMessages?.map((message: any, index: number) => {
-                  const isAdmin = message.is_admin_reply;
-                  const bgColor = isAdmin
-                    ? 'bg-green-50 border-green-400'
-                    : 'bg-blue-50 border-blue-400';
-                  const IconComp = isAdmin ? Reply : User;
-                  const name = isAdmin
-                    ? message.admin_name || t('supportTeam')
-                    : ticket?.user.name;
-                  const role = isAdmin ? t('supportAgent') : t('customer');
+                  const isCustomer = ticket.user_id == user?.id;
+                  const bgColor = isCustomer
+                    ? 'bg-blue-50 border-blue-400'
+                    : 'bg-green-50 border-green-400';
+                  const IconComp = isCustomer ? User : Reply;
+                  const name = isCustomer
+                    ? ticket?.user.name
+                    : t('supportTeam');
+                  const role = isCustomer ? t('customer') : t('supportAgent');
 
                   return (
                     <div
