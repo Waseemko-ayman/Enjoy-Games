@@ -17,16 +17,21 @@ import { InputTypes } from '@/utils/type';
 import { useAuthContext } from '@/context/AuthContext';
 import SocialLogin from '@/components/molecules/SocialLogin';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
+import { generateUniqueId } from '@/hook/useAuth';
+import { useReferralCode } from '@/hook/ReferralCodeContext';
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const authTxts = useTranslations('Auth');
   const btnTxts = useTranslations('BtnTexts');
   const reqTxts = useTranslations('Layout.footer.LearnMore');
+
   const { signup, isLoading } = useAuthContext();
+  const { setReferralCode } = useReferralCode();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{5,}$/;
@@ -60,6 +65,8 @@ const SignupPage = () => {
   });
   const onSubmit = (data: signupFormData) => {
     signup(data);
+    const referralCode = generateUniqueId();
+    setReferralCode(referralCode);
     reset();
   };
 
