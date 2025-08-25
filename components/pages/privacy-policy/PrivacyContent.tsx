@@ -13,14 +13,14 @@ const PrivacyContent = () => {
   const trackingCookiesDetails = t.raw('tracking.cookiesDetails') as string[];
   const usageList = t.raw('usage.list') as unknown as string[];
 
-  const headingTitle = 'text-xl sm:text-2xl font-medium mb-2';
+  const headingTitle = 'text-xl sm:text-2xl font-medium mb-2 text-[#53576e]';
   const listStyle = 'list-disc list-inside space-y-1 mr-4';
 
   return (
     <Layer>
       <Container>
         <div className="prose prose-lg max-w-none">
-          <h2 className="text-3xl font-semibold mb-4">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-[#53576e]">
             {pageT('privacy-policy')}
           </h2>
           <p className="mb-6">{t('intro')}</p>

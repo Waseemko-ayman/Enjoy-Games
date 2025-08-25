@@ -39,7 +39,7 @@
         "faqs": "Frequently Asked Questions",
         "privacyPolicy": "Privacy Policy",
         "refundPolicy": "Refund Policy",
-        "termsOfUser": "Terms of Service"
+        "termsOfUse": "Terms of Service"
       },
       "BusinessAndSolutions": {
         "title": "Business & Solutions",
@@ -76,9 +76,9 @@
     "orders": "Orders",
     "notifications": "Notifications",
     "referrals": "Referrals",
-    "privacyPolicy": "Privacy Policy",
-    "refundPolicy": "Refund Policy",
-    "termsOfUser": "Terms of Service"
+    "privacy-policy": "Privacy Policy",
+    "refund-policy": "Refund Policy",
+    "terms-of-use": "Terms of Service"
   },
   "SectionsTitles": {
     "Stars": {
@@ -440,8 +440,8 @@
       "items": [
         "Account: A unique account created to access our services.",
         "Affiliate: An entity that controls, is controlled by, or is under common control with another party.",
-        "Application: DaleelStore software provided by the company.",
-        "Company: Daleel User Technology Solutions, Sole Proprietorship and DaleelStore E-Transaction LLC.",
+        "Application: EngoyGames software provided by the company.",
+        "Company: Daleel User Technology Solutions, Sole Proprietorship and EngoyGames E-Transaction LLC.",
         "Cookies: Small files placed on your device by a website to store your browsing history.",
         "Country: Saudi Arabia and the United Arab Emirates.",
         "Device: Any device that can access the service (e.g., computer, mobile phone, tablet).",
@@ -449,7 +449,7 @@
         "Service: Refers to the application or website, or both.",
         "Service Provider: Any legal entity that processes data on behalf of the company.",
         "Usage Data: Data collected automatically when using the service.",
-        "Website: DaleelStore accessible at DaleelStore website.",
+        "Website: EngoyGames accessible at EngoyGames website.",
         "You: The individual accessing or using the service."
       ]
     },
@@ -526,8 +526,8 @@
     "contact": {
       "title": "Contact Us",
       "text": "For any inquiries about this Privacy Policy, you can reach us:",
-      "email": "contact@daleelstore.com",
-      "website": "https://daleelstore.com",
+      "email": "contact@EngoyGames.com",
+      "website": "https://EngoyGames.com",
       "websiteTilte": "Website"
     }
   },
@@ -536,14 +536,59 @@
     "intro": "Although we strive for your complete satisfaction with your purchases of our digital products, you may sometimes need to know our refund policy. This policy explains all the information you need to know in this regard.",
     "steps": [
       "Due to the nature of digital products (cards, codes, e-vouchers), all sales are considered final and non-refundable or non-exchangeable after the purchase is completed and the code is delivered to the customer.",
-      "DaleelStore or its affiliated companies bear no responsibility for incorrect purchases you made due to your negligence or entering false/incorrect information.",
+      "EngoyGames or its affiliated companies bear no responsibility for incorrect purchases you made due to your negligence or entering false/incorrect information.",
       "Refund requests are only considered if there is a proven technical defect in the code itself that prevents proper use, provided that this defect originates from the company issuing the original card and not from misuse by the customer or issues related to the platform where the code is being used.",
-      "If the customer chooses a refund to the original bank card used for payment, a service fee of up to 3.5% of the refunded order value will be deducted. Please note that the bank refund process may take between 24 hours and 5 business days and is subject to the policies of different banks and payment gateways, and DaleelStore is not responsible for delays caused by these entities.",
-      "After receiving your order, DaleelStore is not responsible for any loss or damage to the purchased digital product. DaleelStore is not responsible for used or stolen codes after proper delivery, or expired codes whose expiration date was clear at the time of purchase.",
-      "DaleelStore reserves the right to change, modify, add, or remove parts of this refund and exchange policy at any time without prior notice. Changes take effect immediately upon posting on the website or app. Please review this policy periodically to keep up with updates. Continued use of the website or app after posting changes constitutes your full acceptance of these changes."
+      "If the customer chooses a refund to the original bank card used for payment, a service fee of up to 3.5% of the refunded order value will be deducted. Please note that the bank refund process may take between 24 hours and 5 business days and is subject to the policies of different banks and payment gateways, and EngoyGames is not responsible for delays caused by these entities.",
+      "After receiving your order, EngoyGames is not responsible for any loss or damage to the purchased digital product. EngoyGames is not responsible for used or stolen codes after proper delivery, or expired codes whose expiration date was clear at the time of purchase.",
+      "EngoyGames reserves the right to change, modify, add, or remove parts of this refund and exchange policy at any time without prior notice. Changes take effect immediately upon posting on the website or app. Please review this policy periodically to keep up with updates. Continued use of the website or app after posting changes constitutes your full acceptance of these changes."
     ],
     "needHelpTitle": "Having an issue with your order?",
     "needHelpText": "We do our best to ensure the validity and functionality of products, and if you encounter any problem with your order, please contact our customer support team."
+  },
+  "termsOfUse": {
+    "title": "EngoyGames Terms of Use",
+    "intro": "Welcome to \"EngoyGames\". These terms and conditions apply to your use of the website or app. By entering and using EngoyGames, you fully agree to these terms and conditions.",
+    "userAccount": {
+      "title": "User Account",
+      "items": [
+        "Registration and Login: Using certain features may require creating a user account. Accounts are created and logged in using the customer's phone number, verified via a code sent to that number. You are responsible for providing accurate information, including ensuring your phone can receive the verification code.",
+        "Account Security: You are fully responsible for keeping your registered phone number secure and the verification codes private. You must prevent unauthorized access and report any unauthorized use immediately.",
+        "Personal Use: The user account is for personal use only and cannot be transferred or shared.",
+        "Suspension Right: EngoyGames reserves the right to suspend or deactivate your account if you violate these terms or site policies, at management's discretion."
+      ]
+    },
+    "orders": {
+      "title": "Orders and Purchases",
+      "items": [
+        "Order Acceptance: EngoyGames reserves the right not to approve any order at its discretion for reasons including, but not limited to, using someone else's payment method, suspected fraud, missing membership verification information, or other internal policy reasons.",
+        "Payment Methods: Entered payment information must match the cardholder’s data. Customers are responsible for providing accurate data and any additional info requested to avoid cancellation.",
+        "Fraud Cases: EngoyGames may cancel any suspected fraudulent order without providing an explanation.",
+        "Promotions and Loyalty Programs: EngoyGames may create and apply discounts, vouchers, or benefits. Usage is subject to the terms of each offer. The \"DaleelStars\" loyalty program allows eligible customers to earn or redeem points. Policies may be updated at any time."
+      ]
+    },
+    "digitalOrders": {
+      "title": "Digital Orders and Delivery",
+      "items": [
+        "Modify Order: Orders cannot be modified after confirmation. Please ensure data accuracy before confirming.",
+        "Order Cancellation by Customer: Due to the nature of digital products, the order cannot be canceled after confirmation.",
+        "Digital Delivery: After purchase and payment confirmation, the digital product is delivered directly in the customer's account and may also be sent via registered email as per delivery policies.",
+        "Non-Refundable and Non-Exchangeable: Products cannot be refunded or exchanged after purchase except in case of a defect in the original code.",
+        "Customer Responsibility: Once the code appears in the account or is delivered, the customer is fully responsible for using and safeguarding it.",
+        "Code Expiry: EngoyGames is not responsible for codes that expire before use."
+      ]
+    },
+    "vouchers": {
+      "title": "EngoyGames Vouchers",
+      "items": [
+        "When using vouchers, EngoyGames reserves the right to suspend or deactivate the account temporarily or permanently if misuse, fraud, or manipulation is suspected."
+      ]
+    },
+    "termsChanges": {
+      "title": "Terms and Conditions Changes",
+      "items": [
+        "EngoyGames reserves the right to change, modify, add, or remove parts of the terms at any time without notice. Changes take effect immediately. Continued use constitutes acceptance of the changes."
+      ]
+    }
   },
   "search": {
     "searchResults": "Search results",
