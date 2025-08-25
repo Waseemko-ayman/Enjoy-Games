@@ -20,11 +20,7 @@ import { useRouter } from 'next/navigation';
 import { useCurrency } from '@/context/CurrencyContext';
 import { Country } from '@/interfaces';
 import NotificationsMenu from '../NotificationsMenu';
-import Loading from '@/components/molecules/loading';
-import dynamic from 'next/dynamic';
-const Image = dynamic(() => import('next/image'), {
-  loading: () => <Loading />,
-});
+import Image from 'next/image';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
