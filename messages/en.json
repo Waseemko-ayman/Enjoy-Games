@@ -75,7 +75,10 @@
     "dashboard": "Dashboard",
     "orders": "Orders",
     "notifications": "Notifications",
-    "referrals": "Referrals"
+    "referrals": "Referrals",
+    "privacyPolicy": "Privacy Policy",
+    "refundPolicy": "Refund Policy",
+    "termsOfUser": "Terms of Service"
   },
   "SectionsTitles": {
     "Stars": {
@@ -428,6 +431,105 @@
     "pointsEarned": "Points Earned",
     "invitedFriends": "Invited Friends",
     "noFriends": "No friends have been invited yet."
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "intro": "This Privacy Policy describes how we collect, use, and disclose your information when you use our services. It also explains your privacy rights and legal protections. By using our services, you agree to the collection and use of your information as described in this policy.",
+    "definitions": {
+      "title": "Definitions",
+      "items": [
+        "Account: A unique account created to access our services.",
+        "Affiliate: An entity that controls, is controlled by, or is under common control with another party.",
+        "Application: DaleelStore software provided by the company.",
+        "Company: Daleel User Technology Solutions, Sole Proprietorship and DaleelStore E-Transaction LLC.",
+        "Cookies: Small files placed on your device by a website to store your browsing history.",
+        "Country: Saudi Arabia and the United Arab Emirates.",
+        "Device: Any device that can access the service (e.g., computer, mobile phone, tablet).",
+        "Personal Data: Information that relates to an identified individual.",
+        "Service: Refers to the application or website, or both.",
+        "Service Provider: Any legal entity that processes data on behalf of the company.",
+        "Usage Data: Data collected automatically when using the service.",
+        "Website: DaleelStore accessible at DaleelStore website.",
+        "You: The individual accessing or using the service."
+      ]
+    },
+    "collection": {
+      "title": "Collection and Use of Your Personal Data",
+      "personalData": "Personal Data",
+      "usageData": "Usage Data",
+      "mobileData": "Mobile Data",
+      "types": {
+        "title": "Types of Data Collected",
+        "personal": ["Email address", "First and last name", "Phone number"],
+        "usage": [
+          "IP address",
+          "Browser type and version",
+          "Pages visited",
+          "Date and time of visit",
+          "Time spent on pages",
+          "Unique device identifiers",
+          "Diagnostic data"
+        ],
+        "mobile": [
+          "Mobile device type and unique ID",
+          "Mobile device IP address",
+          "Mobile device operating system",
+          "Mobile browser type"
+        ]
+      }
+    },
+    "tracking": {
+      "title": "Tracking Technologies and Cookies",
+      "cookiesIntro": "We use cookies and similar technologies to monitor activity on our service and store certain information. The technologies we use include:",
+      "cookiesDetails": [
+        "Enhancing user experience: Cookies help remember your preferences, allowing us to tailor our services to your needs.",
+        "Usage analysis: Cookies provide insights into how our website is used, helping us improve our service and user experience.",
+        "You can refuse cookies through your browser settings. However, disabling cookies may affect some parts of our service."
+      ],
+      "cloudflare": "We use Cloudflare to enhance security and performance of our website. Cloudflare may use cookies and other technologies to collect and store information such as IP address, browser type and version, and time zone settings. Cloudflare helps ensure speed, security, and reliability for our users."
+    },
+    "usage": {
+      "title": "Use of Your Personal Data",
+      "list": [
+        "Provide and maintain the service",
+        "Manage your account",
+        "Perform contracts",
+        "Contact you with updates and promotional information",
+        "Manage orders",
+        "Other purposes such as data analysis and service improvement"
+      ]
+    },
+    "retention": {
+      "title": "Retention and Transfer of Your Personal Data",
+      "text": "We retain personal data only as long as necessary for the purposes outlined in this policy, including legal compliance. Data may be transferred to computers outside your jurisdiction with appropriate safeguards."
+    },
+    "deletion": {
+      "title": "Deletion and Disclosure of Your Personal Data",
+      "text": "You have the right to delete or request assistance in deleting your personal data. We may retain some information when required by law. Personal data may also be disclosed for legal requirements."
+    },
+    "security": {
+      "title": "Security of Your Personal Data",
+      "text": "While we strive to protect your data, no method of transmission or storage is 100% secure."
+    },
+    "children": {
+      "title": "Children’s Privacy",
+      "text": "We do not knowingly collect personal information from children under 13. If you become aware that your child has provided personal data to us, please contact us to remove it."
+    },
+    "externalLinks": {
+      "title": "Links to Other Websites",
+      "text": "We are not responsible for the privacy practices of third-party websites."
+    },
+    "updates": {
+      "title": "Changes to This Privacy Policy",
+      "text": "We may update this policy and will notify you via email. The updated policy becomes effective once posted on this page."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "text": "For any inquiries about this Privacy Policy, you can reach us:",
+      "email": "contact@daleelstore.com",
+      "website": "https://daleelstore.com",
+      "websiteTilte": "Website"
+    }
   },
   "search": {
     "searchResults": "Search results",
