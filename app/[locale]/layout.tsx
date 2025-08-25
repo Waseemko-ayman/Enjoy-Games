@@ -18,6 +18,7 @@ import DashboardGuard from '@/components/auth/DashboardGuard';
 import { OrdersProvider } from '@/context/OrdersContext';
 import { WalletProvider } from '@/context/WalletContext';
 import { InterestsProvider } from '@/context/InterestsContext';
+import { ReferralCodeProvider } from '@/hook/ReferralCodeContext';
 
 const ibmArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
@@ -63,9 +64,11 @@ export default async function RootLayout({
                         <OrdersProvider>
                           <WalletProvider>
                             <InterestsProvider>
-                              <BodyWrapper>
-                                <DashboardGuard>{children}</DashboardGuard>
-                              </BodyWrapper>
+                              <ReferralCodeProvider>
+                                <BodyWrapper>
+                                  <DashboardGuard>{children}</DashboardGuard>
+                                </BodyWrapper>
+                              </ReferralCodeProvider>
                             </InterestsProvider>
                           </WalletProvider>
                         </OrdersProvider>

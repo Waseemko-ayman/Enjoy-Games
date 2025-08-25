@@ -1,6 +1,7 @@
 'use client';
 
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { useReferralCode } from '@/hook/ReferralCodeContext';
 import { TranslationFunction } from '@/interfaces';
 import { ExternalLink } from 'lucide-react';
 import React, { useState } from 'react';
@@ -8,7 +9,11 @@ import { FaCheck } from 'react-icons/fa6';
 
 const InvitationLink = ({ t }: { t: TranslationFunction }) => {
   const [copied, setCopied] = useState(false);
-  const link = 'https://daleelstore.com/r/871249';
+
+  // Context hook
+  const { referralCode } = useReferralCode();
+
+  const link = `/auth/signup?referral_code=${referralCode}`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(link).then(() => {
