@@ -14,6 +14,7 @@ import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
 import { useTranslations } from 'next-intl';
 import { useRouter, useSearchParams } from 'next/navigation';
 import SectionTypeCard from '@/components/molecules/SectionTypeCard';
+import { API_IMAGE_URL } from '@/config/api';
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
@@ -72,7 +73,10 @@ const SearchPage = () => {
                       return (
                         <AnimatedWrapper key={card.id} custom={index}>
                           <CategoryCard
-                            image={'/assets/play-station.webp'}
+                            image={
+                              `${API_IMAGE_URL}${image}` ||
+                              '/assets/play-station.webp'
+                            }
                             name={card.name}
                             onClick={() => {
                               if (slugs) {
@@ -132,7 +136,10 @@ const SearchPage = () => {
                       return (
                         <AnimatedWrapper key={card.id} custom={index}>
                           <ProductCard
-                            image={image || '/assets/play-station.webp'}
+                            image={
+                              `${API_IMAGE_URL}${image}` ||
+                              '/assets/play-station.webp'
+                            }
                             imgAlt={card.title}
                             imgTitle={card.title}
                             showDesc
@@ -175,7 +182,10 @@ const SearchPage = () => {
                             imgAlt={sub.name}
                             imgTitle={sub.name}
                             title={sub.name}
-                            image={image || '/assets/play-station.webp'}
+                            image={
+                              `${API_IMAGE_URL}${image}` ||
+                              '/assets/play-station.webp'
+                            }
                             showBtn={true}
                             btnVariant="primary"
                             btnText={btnTxts('addToCart')}
