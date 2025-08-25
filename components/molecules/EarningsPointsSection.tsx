@@ -109,7 +109,10 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
                 {isLoading ? (
                   <ButtonLoading borderColor="border-black" />
                 ) : error ? (
-                  <InlineError textColor="text-black" />
+                  <InlineError
+                    textColor="text-black"
+                    otherClassName="text-xs"
+                  />
                 ) : (
                   <>{myWallet?.wallet_balance?.currency || 'ريال'}</>
                 )}
