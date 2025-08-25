@@ -13,7 +13,6 @@ import {
   FaRegHeart,
   FaRegStar,
   FaSackDollar,
-  FaStar,
   FaTwitter,
   FaUser,
   FaWallet,
@@ -32,7 +31,6 @@ import {
   IoMdPricetag,
 } from 'react-icons/io';
 import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
-import { Wallet } from 'lucide-react';
 import { BannerSlide, InputItem, RewardTier } from '@/interfaces';
 import { FaTachometerAlt } from 'react-icons/fa';
 
@@ -78,13 +76,13 @@ export const contactData = [
   {
     id: 1,
     label: 'email',
-    email: 'contact@enjoygames.com',
+    email: 'Info@enjoygames.shop',
     icon: MdEmail,
   },
   {
     id: 2,
     label: 'helpCenter',
-    email: 'help.enjoygames.com',
+    email: 'Support@chargerspeed.online',
     icon: IoMdHelpCircle,
   },
 ];
@@ -113,7 +111,7 @@ export const FOOTER_LINKS_DATA = {
     },
     {
       id: 5,
-      key: 'termsOfUser',
+      key: 'termsOfUse',
       url: PATHS.TERMS_OF_USER.link,
     },
   ],
@@ -574,20 +572,34 @@ export const inputData = [
     id: 5,
     label: 'الجنس',
     type: 'select',
-    placeholder: 'حدد الجنس',
+    placeholder: 'gender',
     name: 'gender',
     options: [
       {
         id: 1,
         value: 'male',
-        label: 'ذكر',
+        labelKey: 'male',
       },
       {
         id: 2,
         value: 'female',
-        label: 'أنثى',
+        labelKey: 'female',
       },
     ],
+  },
+  {
+    id: 6,
+    type: 'password',
+    label: 'password',
+    name: 'password',
+    placeholder: 'yourPassword',
+  },
+  {
+    id: 7,
+    type: 'password',
+    label: 'password_confirmation',
+    name: 'password_confirmation',
+    placeholder: 'repassword',
   },
 ];
 
@@ -752,28 +764,6 @@ export const multiIdInputs: InputItem[] = [
     labelKey: 'accountId',
     errorKey: 'accountIdRequired',
     type: 'number',
-  },
-];
-
-export const stats = [
-  {
-    id: 1,
-    icon: Wallet,
-    titleKey: 'balance',
-    currency: '/assets/saudi_riyal.png',
-    account: 0,
-  },
-  {
-    id: 2,
-    icon: FaStar,
-    titleKey: 'currentLevel',
-    account: 0,
-  },
-  {
-    id: 3,
-    icon: FaHeart,
-    titleKey: 'interests',
-    href: PATHS.MY_ACCOUNT.INTERESTS.link,
   },
 ];
 
