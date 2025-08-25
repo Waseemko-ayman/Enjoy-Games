@@ -7,6 +7,7 @@ import Button from '../atomic/Button';
 import ResponsiveDialogDrawer from '../organism/ResponsiveDialogDrawer';
 import Input from '../atomic/Input';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 interface ChatModalProps {
   open: boolean;
@@ -52,7 +53,12 @@ export function ChatModal({
         <div className="flex items-center space-x-3">
           <div className="relative">
             <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-              <Bot className="w-5 h-5" />
+              <Image
+                src="/assets/logo.png"
+                width={35}
+                height={35}
+                alt="Enjoy Games logo"
+              />
             </div>
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
           </div>
@@ -90,7 +96,7 @@ export function ChatModal({
                 <div className="flex items-center space-x-2 mb-1">
                   <Sparkles className="w-3 h-3 text-enjoy-primary" />
                   <span className="text-xs text-gray-500 font-medium">
-                    AI Assistant
+                    {t('assistant')}
                   </span>
                 </div>
               )}
