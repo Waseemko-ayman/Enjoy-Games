@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React, { lazy, Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@/components/atomic/Button';
 import Input from '@/components/atomic/Input';
 import CardWrapper from '@/components/atomic/CardWrapper';
@@ -28,15 +28,11 @@ import {
 } from '@/data';
 import MotionSection from './FramerMotion/MotionSection';
 import { extractText } from '@/utils/extractText';
-
-const Image = lazy(() => import('next/image'));
-
-const inputQuantityOptions = [
-  { id: 1, label: '1' },
-  { id: 2, label: '2' },
-  { id: 3, label: '3' },
-  { id: 4, label: '4' },
-];
+import { API_IMAGE_URL } from '@/config/api';
+import dynamic from 'next/dynamic';
+const Image = dynamic(() => import('next/image'), {
+  loading: () => <Loading />,
+});
 
 interface Props {
   product: ProductCardProps;
@@ -60,7 +56,6 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
       ? accessInputs
       : [];
 
-  // بناء مخطط التحقق
   const dynamicSchemaFields = selectedInputs.reduce((acc, input) => {
     acc[input.inputName] = yup
       .string()
@@ -90,15 +85,15 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
     <div className="max-h-[550px] overflow-y-auto scrollbar-none">
       <div className="flex flex-col gap-5">
         <div className="flex items-center gap-2">
-          <Suspense fallback={<Loading />}>
-            <Image
-              src="/assets/play-station.webp"
-              alt={product?.title}
-              width={170}
-              height={170}
-              className="rounded-lg object-cover"
-            />
-          </Suspense>
+          <Image
+            src={
+              `${API_IMAGE_URL}${product?.image}` || '/assets/play-station.webp'
+            }
+            alt={product?.title}
+            width={170}
+            height={170}
+            className="rounded-lg object-cover"
+          />
           <div>
             <MotionSection index={1}>
               <h1 className="text-2xl">{product?.title || product?.name}</h1>
@@ -150,7 +145,6 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
               type="number"
               inputName="quantity"
               label={inputsTxt('labels.quantity')}
-              options={inputQuantityOptions}
               value={selectedQuantity}
               onChange={(e) => {
                 const val = Number(e.target.value);
