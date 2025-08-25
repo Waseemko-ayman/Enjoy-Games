@@ -531,6 +531,20 @@
       "websiteTilte": "Website"
     }
   },
+  "refundPolicy": {
+    "title": "Refund Policy",
+    "intro": "Although we strive for your complete satisfaction with your purchases of our digital products, you may sometimes need to know our refund policy. This policy explains all the information you need to know in this regard.",
+    "steps": [
+      "Due to the nature of digital products (cards, codes, e-vouchers), all sales are considered final and non-refundable or non-exchangeable after the purchase is completed and the code is delivered to the customer.",
+      "DaleelStore or its affiliated companies bear no responsibility for incorrect purchases you made due to your negligence or entering false/incorrect information.",
+      "Refund requests are only considered if there is a proven technical defect in the code itself that prevents proper use, provided that this defect originates from the company issuing the original card and not from misuse by the customer or issues related to the platform where the code is being used.",
+      "If the customer chooses a refund to the original bank card used for payment, a service fee of up to 3.5% of the refunded order value will be deducted. Please note that the bank refund process may take between 24 hours and 5 business days and is subject to the policies of different banks and payment gateways, and DaleelStore is not responsible for delays caused by these entities.",
+      "After receiving your order, DaleelStore is not responsible for any loss or damage to the purchased digital product. DaleelStore is not responsible for used or stolen codes after proper delivery, or expired codes whose expiration date was clear at the time of purchase.",
+      "DaleelStore reserves the right to change, modify, add, or remove parts of this refund and exchange policy at any time without prior notice. Changes take effect immediately upon posting on the website or app. Please review this policy periodically to keep up with updates. Continued use of the website or app after posting changes constitutes your full acceptance of these changes."
+    ],
+    "needHelpTitle": "Having an issue with your order?",
+    "needHelpText": "We do our best to ensure the validity and functionality of products, and if you encounter any problem with your order, please contact our customer support team."
+  },
   "search": {
     "searchResults": "Search results",
     "noResult": "No results"
