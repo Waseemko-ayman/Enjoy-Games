@@ -12,10 +12,11 @@ interface User {
   id: number;
   name: string;
   email: string;
-  // phone?: string;
-  // birthDate?: string;
-  // gender?: string;
-  // avatar?: string;
+  phone?: string;
+  date?: string;
+  gender?: string;
+  photo?: string;
+  referral_code?: string;
   created_at?: string;
   updated_at?: string;
 }
@@ -63,6 +64,10 @@ const reducer = (state: AuthState, action: Action): AuthState => {
         action.payload?.token || localStorage.getItem('token') || '';
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(action?.payload?.user));
+      // Generate unique_id if not exists
+      if (!localStorage.getItem('unique_id')) {
+        localStorage.setItem('unique_id', generateUniqueId());
+      }
       return {
         // user: action.payload?.user ?? null,
         user: action.payload?.user || state?.user,
@@ -72,7 +77,9 @@ const reducer = (state: AuthState, action: Action): AuthState => {
       };
 
     case AUTH_ACTIONS.LOGOUT:
-      ['token', 'user'].forEach((item) => localStorage.removeItem(item));
+      ['token', 'user', 'unique_id'].forEach((item) =>
+        localStorage.removeItem(item)
+      );
       return {
         user: null,
         token: null,
@@ -237,3 +244,13 @@ const useAuth = () => {
 };
 
 export default useAuth;
+
+export function generateUniqueId(length = 16) {
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
