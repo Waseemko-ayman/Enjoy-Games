@@ -108,18 +108,6 @@ const GenericAllTable = <T,>({
     setRows((prev) => prev.map((r) => (r.id === id ? { ...r, ...patch } : r)));
   };
 
-  // const filteredRows = useMemo(() => {
-  //   if (customFilter) {
-  //     return customFilter(rows, filter); // 👈 Apply custom filtering if present
-  //   }
-
-  //   //Default filtering
-  //   if (filter === 'all') return rows;
-  //   return rows.filter(
-  //     (item: any) => item.status?.toLowerCase() === filter.toLowerCase()
-  //   );
-  // }, [rows, filter, customFilter]);
-
   const filteredRows = useMemo(() => {
     if (customFilter) return customFilter(rows, filter);
     if (filter === 'all') return rows;
