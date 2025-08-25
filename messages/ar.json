@@ -30,7 +30,9 @@
       "title": "هل تحتاج مساعدة ؟",
       "email": "البريد الإلكتروني",
       "helpCenter": "مركز المساعدة",
-      "OnlineNow": "متصل الآن"
+      "OnlineNow": "متصل الآن",
+      "assistant": "مساعد إنجوي قيمز",
+      "user": "مستخدم"
     },
     "footer": {
       "LearnMore": {
@@ -534,8 +536,8 @@
     "contact": {
       "title": "اتصل بنا",
       "text": "لأي استفسارات حول سياسة الخصوصية هذه، يمكنك الاتصال بنا:",
-      "email": "contact@enjoygames.com",
-      "website": "https://enjoygames.com",
+      "email": "Info@enjoygames.shop",
+      "website": "https://enjoy-games.vercel.app/",
       "websiteTilte": "الموقع"
     }
   },
@@ -898,7 +900,9 @@
       "writeYorName": "أكتب إسمك...",
       "writeYorEmail": "أكتب إيميلك...",
       "yourPassword": "كلمة المرور الخاصة بك",
+      "password": "كلمة المرور الخاصة بك",
       "repassword": "تأكيد كلمة المرور",
+      "password_confirmation": "تأكيد كلمة المرور",
       "referralCode": "كود الإحالة",
       "searchCategories": "البحث عن الفئات...",
       "searchSubCategories": "البحث عن الفئات الفرعية...",
@@ -1079,7 +1083,8 @@
     "daysAgo": "أيام",
     "selectAllUnread": "تحديد الكل غير المقروءة",
     "markSelected": "تحديد الكل غير المقروءة",
-    "readable": "مقروء"
+    "readable": "مقروء",
+    "welcomeMessage": "مرحباً! أنا مساعدك في إنجوي قيمز. أنا هنا لمساعدتك في أي استفسارات حول منتجاتنا وخدماتنا، ولتقديم الدعم العام. كيف يمكنني مساعدتك اليوم؟"
   },
   "Languages": {
     "english": "إنجليزي",

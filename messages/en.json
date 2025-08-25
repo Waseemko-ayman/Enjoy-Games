@@ -30,7 +30,9 @@
       "title": "Need Help?",
       "email": "Email",
       "helpCenter": "Help Center",
-      "OnlineNow": "Online now"
+      "OnlineNow": "Online now",
+      "assistant": "EnjoyGames Assistant",
+      "user": "user"
     },
     "footer": {
       "LearnMore": {
@@ -895,7 +897,9 @@
       "writeYorName": "write your name...",
       "writeYorEmail": "write your email...",
       "yourPassword": "your password",
+      "password": "your password",
       "repassword": "confirm password",
+      "password_confirmation": "confirm password",
       "referralCode": "referral code",
       "searchCategories": "Search for categories...",
       "searchSubCategories": "Search for sub categories...",
@@ -1075,7 +1079,8 @@
     "dayAgo": "d ago",
     "daysAgo": "days ago",
     "selectAllUnread": "Select all unread",
-    "readable": "Readable"
+    "readable": "Readable",
+    "welcomeMessage": "Hello! I'm your EnjoyGames assistant. I'm here to help you with questions about our products, services, and provide general support. How can I assist you today?"
   },
   "Languages": {
     "english": "English",
