@@ -30,6 +30,7 @@ export type InputProps = {
   isRequired?: boolean;
   onChange?: (e: React.ChangeEvent<any>) => void;
   onIconClick?: () => void;
+  readOnly?: boolean;
 } & React.HTMLAttributes<HTMLElement>;
 
 const Input = React.forwardRef<HTMLElement, InputProps>(
@@ -51,6 +52,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
       isRequired = false,
       onChange,
       onIconClick,
+      readOnly,
       ...rest
     },
     ref
@@ -125,6 +127,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
           className={inputClasses}
           onChange={onChange}
           value={value}
+          readOnly={readOnly}
           {...rest}
         />
       );
