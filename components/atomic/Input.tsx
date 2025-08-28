@@ -66,6 +66,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
     const InputElement =
       type === 'select' ? (
         <Select
+          value={value != null ? String(value) : ''}
           onValueChange={(val) =>
             onChange?.({ target: { name: inputName, value: val } } as any)
           }
@@ -79,7 +80,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
             {options.map((opt) => (
               <SelectItem
                 key={opt.id}
-                value={opt.label}
+                value={opt.value || ''}
                 className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
               >
                 {opt.label}

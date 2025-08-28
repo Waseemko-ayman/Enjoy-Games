@@ -1,12 +1,19 @@
 'use client';
 import Avatar from '@/components/atomic/Avatar';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { API_IMAGE_URL } from '@/config/api';
 import useIsMobile from '@/hook/useIsMobile';
 import { FormValues, TranslationFunction } from '@/interfaces';
 import React, { useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-const ProfilePicture = ({ t }: { t: TranslationFunction }) => {
+const ProfilePicture = ({
+  t,
+  photo,
+}: {
+  t: TranslationFunction;
+  photo: FileList | string | null;
+}) => {
   const isMobile = useIsMobile();
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -17,9 +24,16 @@ const ProfilePicture = ({ t }: { t: TranslationFunction }) => {
     const files = e.target.files;
     if (files && files.length) {
       setAvatarPreview(URL.createObjectURL(files[0]));
-      setValue('avatar', files);
+      setValue('photo', files);
     }
   };
+
+  const getPhotoSrc = () => {
+    if (avatarPreview) return avatarPreview; // صورة جديدة مختارة
+    if (photo && typeof photo === 'string') return `${API_IMAGE_URL}${photo}`; // رابط موجود
+    return '/assets/user-vector.jpg'; // افتراضي
+  };
+
   return (
     <div className={`pb-7 ${!isMobile ? 'border-b border-gray-300' : ''}`}>
       <AnimatedWrapper>
@@ -30,7 +44,7 @@ const ProfilePicture = ({ t }: { t: TranslationFunction }) => {
             className="rounded-full flex items-center justify-center cursor-pointer"
           >
             <Avatar
-              imgSrc={avatarPreview || '/assets/user-vector.jpg'}
+              imgSrc={getPhotoSrc()}
               imgAlt="Profile"
               otherClassName="w-20 h-20 shadow-lg"
               width={20}

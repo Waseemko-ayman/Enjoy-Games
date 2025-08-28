@@ -48,7 +48,7 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                 ...opt,
                 label:
                   inputsTexts(`options.${input.name}.${opt.value}`) ||
-                  opt.label,
+                  opt.labelKey,
               }))
             : undefined;
 
@@ -75,6 +75,7 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                               ? 'border-red-500'
                               : 'border-gray-300'
                           } focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)]`}
+                          readOnly
                         />
                       )}
                     />
@@ -99,6 +100,7 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                         errors[input.name] ? 'border-red-500' : ''
                       }
                       {...register(input.name)}
+                      readOnly={input.name === 'email'}
                     />
                     {errors[input.name] && (
                       <FormError
