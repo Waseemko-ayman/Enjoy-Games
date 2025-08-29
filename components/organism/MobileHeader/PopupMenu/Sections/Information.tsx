@@ -1,11 +1,13 @@
 'use client';
 import Avatar from '@/components/atomic/Avatar';
+import ButtonLoading from '@/components/atomic/ButtonLoading';
 import CardWrapper from '@/components/atomic/CardWrapper';
+import InlineError from '@/components/molecules/InlineError';
+import { useWallet } from '@/context/WalletContext';
 import { PATHS } from '@/data/paths';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { Wallet } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { PiSparkleFill } from 'react-icons/pi';
@@ -16,6 +18,9 @@ const Information = () => {
   const t = useTranslations('Layout.header.account');
   const titleTxts = useTranslations('PagesHeaderTitles');
   const { isArabic } = useToggleLocale();
+
+  const { myWallet, isLoading, error } = useWallet();
+
   return (
     <CardWrapper
       bgColor="bg-white"
@@ -29,9 +34,7 @@ const Information = () => {
             width={30}
             height={30}
           />
-          <h5
-            className={`${isArabic ? 'text-base' : 'text-sm'} font-semibold`}
-          >
+          <h5 className={`${isArabic ? 'text-base' : 'text-sm'} font-semibold`}>
             {t('completeAccountData')}
           </h5>
         </div>
@@ -51,21 +54,30 @@ const Information = () => {
 
       <div className={`mb-2 ${infoStyle}`}>
         <Wallet size={18} />
-        <div className="flex items-center gap-2">
-          <span>0</span>
-          <Image
-            src={'/assets/saudi_riyal.png'}
-            alt="ريال سعودي"
-            width={15}
-            height={15}
-          />
+        <div>
+          {isLoading ? (
+            <ButtonLoading borderColor="border-black" />
+          ) : error ? (
+            <InlineError textColor="text-black" />
+          ) : (
+            <>
+              {myWallet?.wallet_balance?.amount}{' '}
+              {myWallet?.wallet_balance?.currency}
+            </>
+          )}
         </div>
       </div>
 
       <div className={`text-[var(--enjoy-secondary))] ${infoStyle}`}>
         <PiSparkleFill size={18} />
         <div className="flex items-center gap-2">
-          <span>0</span>
+          {isLoading ? (
+            <ButtonLoading borderColor="border-black" />
+          ) : error ? (
+            <InlineError textColor="text-black" />
+          ) : (
+            <>{myWallet?.points_balance}</>
+          )}
           <span>{titleTxts('starsPoints')}</span>
         </div>
       </div>
