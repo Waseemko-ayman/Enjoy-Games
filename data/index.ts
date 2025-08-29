@@ -7,22 +7,19 @@ import {
   FaGift,
   FaHeart,
   FaInstagram,
-  FaLinkedin,
   FaRegFlag,
   FaRegGem,
   FaRegHeart,
   FaRegStar,
   FaSackDollar,
-  FaTwitter,
+  FaSnapchat,
+  FaTelegram,
+  FaTiktok,
   FaUser,
   FaWallet,
 } from 'react-icons/fa6';
 import { IoArrowRedoOutline, IoWalletOutline } from 'react-icons/io5';
-import {
-  MdEmail,
-  MdOutlineAlternateEmail,
-  // MdOutlineEmail,
-} from 'react-icons/md';
+import { MdEmail, MdOutlineAlternateEmail } from 'react-icons/md';
 import { PiSparkleFill } from 'react-icons/pi';
 import { PATHS } from './paths';
 import {
@@ -126,11 +123,6 @@ export const FOOTER_LINKS_DATA = {
       key: 'helpCenter',
       url: '#',
     },
-    // {
-    //   id: 3,
-    //   key: 'أنضم للتجار',
-    //   url: '#',
-    // },
   ],
   shop_app: [
     {
@@ -151,27 +143,33 @@ export const FOOTER_LINKS_DATA = {
   socialMedia: [
     {
       id: 1,
-      url: '#',
+      url: 'https://www.facebook.com/profile.php?id=61568686790856',
       icon: FaFacebook,
       ariaLabel: 'facebook',
     },
     {
       id: 2,
-      url: '#',
-      icon: FaTwitter,
-      ariaLabel: 'twitter',
+      url: 'https://t.me/azouzz1994',
+      icon: FaTelegram,
+      ariaLabel: 'Telegram',
     },
     {
       id: 3,
-      url: '#',
+      url: 'https://www.instagram.com/charger_speed?igsh=Yms4bWU1bWZhM3hq&utm_source=qr',
       icon: FaInstagram,
       ariaLabel: 'instagram',
     },
     {
       id: 4,
-      url: '#',
-      icon: FaLinkedin,
-      ariaLabel: 'linkedin',
+      url: 'https://www.tiktok.com/@charger_speed?_t=ZS-8z7OVQX2Nc2&_r=1',
+      icon: FaTiktok,
+      ariaLabel: 'Tiktok',
+    },
+    {
+      id: 5,
+      url: 'https://t.snapchat.com/VWSRbZOT',
+      icon: FaSnapchat,
+      ariaLabel: 'Snapchat',
     },
   ],
 };
