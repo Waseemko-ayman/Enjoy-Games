@@ -6,6 +6,7 @@ import Loading from '@/components/molecules/loading';
 import Container from '@/components/organism/Container';
 import { Category } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
+import { API_IMAGE_URL } from '@/config/api';
 
 const CategoriesTypes = ({
   categories,
@@ -32,8 +33,7 @@ const CategoriesTypes = ({
             <Suspense key={item.id} fallback={<Loading />}>
               <SectionTypeCard
                 imgSrc={
-                  `http://31.97.36.197/${item.image}` ||
-                  '/assets/play-station.webp'
+                  `${API_IMAGE_URL}${item.image}` || '/assets/play-station.webp'
                 }
                 path={`/categories/${item.slug}`}
                 title={item.name}
