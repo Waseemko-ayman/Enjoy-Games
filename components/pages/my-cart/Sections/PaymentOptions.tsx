@@ -13,6 +13,8 @@ import {
   TranslationFunction,
 } from '@/interfaces';
 import useAPI from '@/hook/useAPI';
+import Loading from '@/components/molecules/loading';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 
 type PaymentOptionsProps = {
   register: UseFormRegister<PaymentFormData>;
@@ -35,42 +37,49 @@ const PaymentOptions: React.FC<PaymentOptionsProps> = ({
   inputsTexts,
   t,
 }) => {
-  const { get, data: methods } = useAPI('payment-methods');
+  const {
+    get,
+    data: methods,
+    isLoading: methodLoading,
+    error: methodError,
+  } = useAPI('payment-methods');
 
   useEffect(() => {
     get();
   }, [get]);
-
   return (
     <div className="lg:col-span-2 space-y-6">
       <MotionSection index={0}>
-        {methods?.map((method: PaymentMethod) => (
-          <label key={method.value}>
-            <CardWrapper
-              className={`p-6 cursor-pointer mb-4 ${
-                errors.paymentMethod ? 'border border-red-500' : ''
-              }`}
-            >
-              <div className="flex items-center justify-between gap-4">
-                <input
-                  type="radio"
-                  value={method.value}
-                  {...register('paymentMethod')}
-                  className="w-4 h-4 text-enjoy-primary"
-                />
-                <div className="flex items-center gap-3">
+        {methodLoading ? (
+          <Loading />
+        ) : methodError ? (
+          <ErrorFetching />
+        ) : (
+          methods?.map((method: PaymentMethod) => (
+            <label key={method.value}>
+              <CardWrapper
+                className={`py-3 px-6 cursor-pointer mb-4 ${
+                  errors.paymentMethod ? 'border border-red-500' : ''
+                }`}
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <input
+                    type="radio"
+                    value={method.value}
+                    {...register('paymentMethod')}
+                    className="w-4 h-4 text-enjoy-primary"
+                  />
                   <Image
                     src={method.image}
                     alt={method.label}
-                    width={70}
-                    height={70}
+                    width={method.value === 'wallet' ? 50 : 70}
+                    height={method.value === 'wallet' ? 50 : 70}
                   />
-                  <span className="font-medium">{method.label}</span>
                 </div>
-              </div>
-            </CardWrapper>
-          </label>
-        ))}
+              </CardWrapper>
+            </label>
+          ))
+        )}
         {errors.paymentMethod && (
           <p className="text-red-500 text-sm mt-2">
             {errors.paymentMethod.message}
