@@ -48,6 +48,7 @@ interface FormFieldProps {
   register?: UseFormRegister<any>;
   error?: FieldError;
   editId?: string | number | null;
+  readOnly?: boolean;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -67,6 +68,7 @@ const FormField: React.FC<FormFieldProps> = ({
   register,
   error,
   editId,
+  readOnly,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
@@ -267,6 +269,7 @@ const FormField: React.FC<FormFieldProps> = ({
             } ${fieldStyle}`}
             disabled={disabled}
             {...(register ? register(inputName) : {})}
+            readOnly={readOnly}
           />
           {isPassword && (
             <span
