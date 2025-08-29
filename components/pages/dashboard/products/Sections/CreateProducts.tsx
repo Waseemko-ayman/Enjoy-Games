@@ -68,13 +68,6 @@ const CreateProducts = ({
           editId !== null || (value instanceof FileList && value.length > 0)
         );
       }),
-
-    // image: yup
-    //   .mixed<FileList>()
-    //   .test('required', inputT('avatarRequired'), (value) => {
-    //     return value instanceof FileList && value.length > 0;
-    //   })
-    //   .required(inputT('avatarRequired')),
   });
 
   type ProductFormData = yup.InferType<typeof createSchema>;
@@ -120,6 +113,9 @@ const CreateProducts = ({
     formState: { errors },
   } = useForm<any, ProductFormData>({
     resolver: yupResolver(createSchema),
+    defaultValues: {
+      isActive: true,
+    },
   });
 
   const selectedCategoryID = watch('categoryID');
