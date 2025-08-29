@@ -54,7 +54,11 @@ const InvitationLink = ({
           </AnimatePresence>
         </div>
         <div className="flex items-center justify-center gap-2 bg-enjoy-gray-light rounded-full py-2 px-3 text-center cursor-pointer">
-          <span className="text-enjoy-primary text-sm break-all font-bold">
+          <span
+            className="text-enjoy-primary text-sm break-all font-bold truncate max-w-[270px]"
+            dir="ltr"
+            title={link}
+          >
             {link}
           </span>
         </div>
