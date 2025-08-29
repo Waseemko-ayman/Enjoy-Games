@@ -415,7 +415,12 @@
     "discountSuccess": "The debit transaction was completed successfully.",
     "discountFaild": "The selected coupon code is invalid.",
     "orderSuccess": "Code was stored successfully",
-    "orderFaild": "The selected product id is invalid."
+    "orderFaild": "The selected product id is invalid.",
+    "partialWallet": "Pay part of the wallet.",
+    "partialWalletDesc": "The entire wallet balance will be paid, and then your bank card will be paid.",
+    "fullCard": "Pay the full amount using your bank card.",
+    "fullCardDesc": "The full amount will be paid using your bank card without any deduction from the balance.",
+    "choosePayment": "Choose payment"
   },
   "Tickets": {
     "emptyStateTitle": "No support tickets yet...",
@@ -864,7 +869,8 @@
     "upload": "Upload",
     "reply": "Reply",
     "sending": "Sending...",
-    "changeAvatar": "Change Avatar"
+    "changeAvatar": "Change Avatar",
+    "confirm": "Confirm"
   },
   "Inputs": {
     "labels": {
