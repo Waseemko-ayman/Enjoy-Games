@@ -151,7 +151,7 @@ export const FOOTER_LINKS_DATA = {
       id: 2,
       url: 'https://t.me/azouzz1994',
       icon: FaTelegram,
-      ariaLabel: 'Telegram',
+      ariaLabel: 'telegram',
     },
     {
       id: 3,
@@ -163,13 +163,13 @@ export const FOOTER_LINKS_DATA = {
       id: 4,
       url: 'https://www.tiktok.com/@charger_speed?_t=ZS-8z7OVQX2Nc2&_r=1',
       icon: FaTiktok,
-      ariaLabel: 'Tiktok',
+      ariaLabel: 'tiktok',
     },
     {
       id: 5,
       url: 'https://t.snapchat.com/VWSRbZOT',
       icon: FaSnapchat,
-      ariaLabel: 'Snapchat',
+      ariaLabel: 'snapchat',
     },
   ],
 };
@@ -200,6 +200,12 @@ export const menuLists = [
       },
       {
         id: 3,
+        key: 'referrals',
+        icon: FaRegFlag,
+        link: PATHS.REFERRALS.link,
+      },
+      {
+        id: 4,
         key: 'dashboard',
         icon: FaTachometerAlt,
         link: PATHS.DASHBOARD.HOME.ROOT,
