@@ -23,7 +23,7 @@ const FooterLinks = ({
       <ul
         className={`${
           listName === 'socialMedia'
-            ? 'flex items-center max-md:!justify-center gap-2'
+            ? 'flex items-center flex-wrap max-md:!justify-center gap-2'
             : listName === 'shop_app'
             ? 'flex flex-col max-md:!items-center'
             : ''
