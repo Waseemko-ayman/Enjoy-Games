@@ -494,6 +494,12 @@ export interface AccountItem {
   shiddatData: shiddaItem[];
 }
 
+export interface PaymentMethod {
+  value: string;
+  label: string;
+  image: string;
+}
+
 export interface CategoryPageProps {
   cards: SubCategories[];
   error?: string;
@@ -684,19 +690,21 @@ export interface myAccountStatsProps {
   id: number;
   icon: ElementType;
   titleKey: string;
-  currency?: string;
-  account?: number;
+  amount?: string | number | JSX.Element;
+  currency?: string | number | JSX.Element;
   href?: string;
 }
 
 export interface FormValues {
   name: string;
-  email: string;
+  email?: string;
   phone?: string;
-  birthDate?: string;
-  gender?: 'ذكر' | 'أنثى' | null;
+  date?: string;
+  gender?: 'male' | 'female' | null;
   options: boolean[];
-  avatar?: FileList | string | null;
+  photo?: FileList | string | null;
+  password?: string | null;
+  password_confirmation?: string | null;
 }
 
 export interface paramsProps {
@@ -1288,16 +1296,6 @@ export interface PaymentStepProps {
   totalAmount: number;
   items: ProductCardProps[];
   quantity?: number;
-}
-
-export interface FormValues {
-  name: string;
-  email: string;
-  phone?: string;
-  birthDate?: string;
-  gender?: 'ذكر' | 'أنثى' | null;
-  options: boolean[];
-  avatar?: FileList | string | null;
 }
 
 export interface paramsProps {
