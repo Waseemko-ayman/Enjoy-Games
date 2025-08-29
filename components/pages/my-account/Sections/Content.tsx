@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Form from './Form';
 import Container from '@/components/organism/Container';
 import Layer from '@/components/atomic/Layer';
@@ -19,11 +19,12 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import { useTranslations } from 'next-intl';
 import useAPI from '@/hook/useAPI';
 import { useToast } from '@/lib/toast';
+import useIsMobile from '@/hook/useIsMobile';
 
 const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{2,}$/;
 
 const Content = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
 
   const { showToast } = useToast();
 
@@ -58,7 +59,7 @@ const Content = () => {
       .optional()
       .test(
         'valid-date',
-        `التاريخ يجب أن يكون بين 1935 ${currentYear}`,
+        `${errorsTxts('invalidDate')} ${currentYear}`,
         (value) => {
           if (!value) return true;
           const year = new Date(value).getFullYear();
@@ -77,11 +78,11 @@ const Content = () => {
     password_confirmation: Yup.string()
       .nullable()
       .optional()
-      .oneOf([Yup.ref('password'), null], 'كلمة المرور غير متطابقة'),
+      .oneOf([Yup.ref('password'), null], errorsTxts('repasswordNotMatch')),
     photo: Yup.mixed()
       .nullable()
       .optional()
-      .test('is-file-or-null', 'الصورة غير صالحة', (value) => {
+      .test('is-file-or-null', errorsTxts('invalidImage'), (value) => {
         if (!value) return true; // إذا لم يغيّر المستخدم الصورة ترسل null
         return value instanceof FileList || typeof value === 'string';
       }),
@@ -145,19 +146,6 @@ const Content = () => {
       });
     }
   }, [user, reset]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 991) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     get();
