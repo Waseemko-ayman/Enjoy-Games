@@ -1,4 +1,4 @@
-import { Home, UserPlus } from 'lucide-react';
+import { Home, Settings, UserPlus } from 'lucide-react';
 import { FaBox, FaImages, FaList, FaSitemap, FaStar } from 'react-icons/fa6';
 import { IoBarcodeSharp } from 'react-icons/io5';
 import { FaQuestionCircle, FaTachometerAlt, FaTicketAlt } from 'react-icons/fa';
@@ -77,6 +77,11 @@ export const sidebarLinks = [
     href: PATHS.DASHBOARD.PRODUCT_SUBSCRIBERS,
     icon: UserPlus,
   },
+  {
+    title: 'settings',
+    href: PATHS.DASHBOARD.SETTINGS,
+    icon: Settings,
+  },
   // {
   //   title: 'Payment Gateways',
   //   href: PATHS.DASHBOARD.PAYMENT_GATEWAYS,
@@ -86,11 +91,6 @@ export const sidebarLinks = [
   //   title: 'Reports',
   //   href: PATHS.DASHBOARD.REPORTS,
   //   icon: BarChart3,
-  // },
-  // {
-  //   title: 'Settings',
-  //   href: PATHS.DASHBOARD.SETTINGS,
-  //   icon: Settings,
   // },
 ];
 
@@ -744,87 +744,5 @@ export const SystemSettingsFields = [
       { id: 'ar', name: 'Arabic' },
     ],
     SelectValuePlaceholder: 'Select language',
-  },
-];
-
-export const AccountSettingsFields = [
-  {
-    id: 'name',
-    name: 'name',
-    label: 'الإسم',
-    placeholder: 'Enter your first name',
-    // fullWidth: true,
-  },
-  {
-    id: 'email',
-    name: 'email',
-    label: 'البريد الإلكتروني',
-    type: 'email',
-    placeholder: 'example@example.com',
-  },
-  {
-    id: 'phone',
-    name: 'phone',
-    label: 'رقم الجوال',
-    type: 'number',
-    placeholder: 'xxxxxxxxx',
-  },
-  {
-    id: 'birthDate',
-    name: 'birthDate',
-    label: 'تاريخ الميلاد',
-    type: 'date',
-    placeholder: '--/--/----',
-  },
-  {
-    id: 5,
-    label: 'الجنس',
-    type: 'select',
-    placeholder: 'حدد الجنس',
-    name: 'gender',
-    options: [
-      {
-        id: 'male',
-        name: 'ذكر',
-      },
-      {
-        id: 'female',
-        name: 'أنثى',
-      },
-      // {
-      //   id: 1,
-      //   value: 'male',
-      //   label: 'ذكر',
-      // },
-      // {
-      //   id: 2,
-      //   value: 'female',
-      //   label: 'أنثى',
-      // },
-    ],
-  },
-];
-
-export const SecuritySettingsFields = [
-  {
-    id: 'current-password',
-    name: 'current-password',
-    label: 'Current Password',
-    type: 'password',
-    placeholder: 'Enter your current password',
-  },
-  {
-    id: 'new-password',
-    name: 'newPassword',
-    label: 'New Password',
-    type: 'password',
-    placeholder: 'Enter your new password',
-  },
-  {
-    id: 'confirm-password',
-    name: 'rePassword',
-    label: 'Confirm New Password',
-    type: 'password',
-    placeholder: 'Confirm New Password',
   },
 ];
