@@ -1,11 +1,11 @@
 'use client';
-import Avatar from '@/components/atomic/Avatar';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { API_IMAGE_URL } from '@/config/api';
 import useIsMobile from '@/hook/useIsMobile';
 import { FormValues, TranslationFunction } from '@/interfaces';
 import React, { useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const ProfilePicture = ({
   t,
@@ -43,13 +43,14 @@ const ProfilePicture = ({
             onClick={() => fileInputRef.current?.click()}
             className="rounded-full flex items-center justify-center cursor-pointer"
           >
-            <Avatar
-              imgSrc={getPhotoSrc()}
-              imgAlt="Profile"
-              otherClassName="w-20 h-20 shadow-lg"
-              width={20}
-              height={20}
-            />
+            <Avatar className="h-20 w-20">
+              <AvatarImage
+                src={getPhotoSrc()}
+                alt="Profile"
+                className="shadow-lg"
+              />
+              <AvatarFallback>A.I.</AvatarFallback>
+            </Avatar>
             <input
               type="file"
               accept="image/*"
