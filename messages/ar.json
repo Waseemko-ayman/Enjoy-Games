@@ -24,6 +24,52 @@
         "ChangeCountryCurrencyDescription": "إختر الدولة والعملة المناسبة لك من القائمة أدناه.",
         "PopupMenuTitle": "قائمة المستخدم والتنقل",
         "PopupMenuDescription": "الوصول إلى معلومات حسابك، خيارات تسجيل الدخول، قائمة التنقل، وخيار تسجيل الخروج."
+      },
+      "countries": {
+        "saudi-arabia": {
+          "name": "السعودية",
+          "currency": "الريال السعودي"
+        },
+        "united-arab-emirates": {
+          "name": "الإمارات",
+          "currency": "درهم إماراتي"
+        },
+        "kuwait": {
+          "name": "الكويت",
+          "currency": "الدينار الكويتي"
+        },
+        "qatar": {
+          "name": "قطر",
+          "currency": "الريال القطري"
+        },
+        "bahrain": {
+          "name": "البحرين",
+          "currency": "الدينار البحريني"
+        },
+        "oman": {
+          "name": "عمان",
+          "currency": "الريال العماني"
+        },
+        "iraq": {
+          "name": "العراق",
+          "currency": "الدينار العراقي"
+        },
+        "egypt": {
+          "name": "مصر",
+          "currency": "الجنيه المصري"
+        },
+        "jordan": {
+          "name": "الأردن",
+          "currency": "الدينار الأردني"
+        },
+        "usa": {
+          "name": "الولايات المتحدة",
+          "currency": "الدولار الأمريكي"
+        },
+        "germany": {
+          "name": "ألمانيا",
+          "currency": "اليورو"
+        }
       }
     },
     "HelpSection": {
@@ -615,7 +661,8 @@
     "orders": "الطلبات",
     "notifications": "الإشعارات",
     "users": "المستخدمين",
-    "productSubscribers": "المشتركين بالمنتجات"
+    "productSubscribers": "المشتركين بالمنتجات",
+    "settings": "الإعدادات"
   },
   "Dashboard": {
     "desc": "مرحباً بكم في إدارة طلباتكم",
@@ -729,6 +776,10 @@
       "title": "جميع المشتركين بمنتج",
       "desc": "إدارة المشتركين لمتجرك",
       "manageSubscribers": "إدارة جميع المشتركين في مكان واحد"
+    },
+    "settings": {
+      "title": "إعدادات الحساب",
+      "desc": "تحديث معلومات حسابك"
     }
   },
   "errorBoundary": {
@@ -816,7 +867,8 @@
     "customRange": "نطاق مخصص",
     "upload": "رفع",
     "reply": "رد",
-    "sending": "إرسال..."
+    "sending": "إرسال...",
+    "changeAvatar": "تغيير الصورة الشخصية"
   },
   "Inputs": {
     "labels": {
@@ -982,6 +1034,7 @@
       "repasswordNotMatch": "كلمة المرور غير متطابقة",
       "genderRequired": "الجنس مطلوب",
       "avatarRequired": "الصورة مطلوبة",
+      "invalidImage": "الصورة غير صالحة",
       "subjectRequired": "العنوان مطلوب",
       "ticketTypeRequired": "نوع التذكرة مطلوب",
       "detailsRequired": "الوصف مطلوب",
@@ -1017,7 +1070,8 @@
       "permissionsRequired": "الأذونات مطلوبة",
       "statusRequired": "الحالة مطلوبة",
       "messageRequired": "الرسالة مطلوبة",
-      "termsAccepted": "يجب الموافقة على الشروط وسياسة الخصوصية"
+      "termsAccepted": "يجب الموافقة على الشروط وسياسة الخصوصية",
+      "invalidDate": "التاريخ يجب أن يكون بين 1935 و"
     }
   },
   "Auth": {
@@ -1047,10 +1101,11 @@
     "links": {
       "myCartPage": "صفحة سلتي",
       "myTicketPage": "صفحة تذاكر الدعم الفني",
-      "linkedin": "حساب لينكدإن",
-      "twitter": "حساب تويتر",
-      "instagram": "حساب الإنستغرام",
       "facebook": "حساب فيس بوك",
+      "telegram": "حساب تيليجرام",
+      "instagram": "حساب الإنستغرام",
+      "tiktok": "حساب تيك توك",
+      "snapchat": "حساب سناب شات",
       "googlePlayApp": "تطبيق جوجل بلاي",
       "appStoreApp": "تطبيق اب ستور"
     },
@@ -1084,7 +1139,8 @@
     "selectAllUnread": "تحديد الكل غير المقروءة",
     "markSelected": "تحديد الكل غير المقروءة",
     "readable": "مقروء",
-    "welcomeMessage": "مرحباً! أنا مساعدك في إنجوي قيمز. أنا هنا لمساعدتك في أي استفسارات حول منتجاتنا وخدماتنا، ولتقديم الدعم العام. كيف يمكنني مساعدتك اليوم؟"
+    "welcomeMessage": "مرحباً! أنا مساعدك في إنجوي قيمز. أنا هنا لمساعدتك في أي استفسارات حول منتجاتنا وخدماتنا، ولتقديم الدعم العام. كيف يمكنني مساعدتك اليوم؟",
+    "linkCopied": "تم نسخ الرابط!"
   },
   "Languages": {
     "english": "إنجليزي",

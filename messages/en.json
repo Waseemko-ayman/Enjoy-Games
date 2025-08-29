@@ -24,6 +24,52 @@
         "ChangeCountryCurrencyDescription": "Select your preferred country and currency from the list below.",
         "PopupMenuTitle": "User Account and Navigation Menu",
         "PopupMenuDescription": "Access your account information, authentication options, menu navigation, and logout."
+      },
+      "countries": {
+        "saudi-arabia": {
+          "name": "Saudi Arabia",
+          "currency": "Saudi Riyal"
+        },
+        "united-arab-emirates": {
+          "name": "United Arab Emirates",
+          "currency": "Emirati Dirham"
+        },
+        "kuwait": {
+          "name": "Kuwait",
+          "currency": "Kuwaiti Dinar"
+        },
+        "qatar": {
+          "name": "Qatar",
+          "currency": "Qatari Riyal"
+        },
+        "bahrain": {
+          "name": "Bahrain",
+          "currency": "Bahraini Dinar"
+        },
+        "oman": {
+          "name": "Oman",
+          "currency": "Omani Riyal"
+        },
+        "iraq": {
+          "name": "Iraq",
+          "currency": "Iraqi Dinar"
+        },
+        "egypt": {
+          "name": "Egypt",
+          "currency": "Egyptian Pound"
+        },
+        "jordan": {
+          "name": "Jordan",
+          "currency": "Jordanian Dinar"
+        },
+        "usa": {
+          "name": "United States",
+          "currency": "US Dollar"
+        },
+        "germany": {
+          "name": "Germany",
+          "currency": "Euro"
+        }
       }
     },
     "HelpSection": {
@@ -611,7 +657,8 @@
     "orders": "Orders",
     "notifications": "Notifications",
     "users": "Users",
-    "productSubscribers": "Product Subscribers"
+    "productSubscribers": "Product Subscribers",
+    "settings": "Settings"
   },
   "Dashboard": {
     "desc": "Welcome to your order management orders",
@@ -725,6 +772,10 @@
       "title": "All subscribers to a product",
       "desc": "Manage subscribers for your store",
       "manageSubscribers": "Manage all subscribers in one place"
+    },
+    "settings": {
+      "title": "Account Settings",
+      "desc": "Update your account information"
     }
   },
   "errorBoundary": {
@@ -812,7 +863,8 @@
     "customRange": "custom Range",
     "upload": "Upload",
     "reply": "Reply",
-    "sending": "Sending..."
+    "sending": "Sending...",
+    "changeAvatar": "Change Avatar"
   },
   "Inputs": {
     "labels": {
@@ -979,6 +1031,7 @@
       "referralCodeInvalid": "Invalid referral code",
       "repasswordNotMatch": "Passwords do not match",
       "avatarRequired": "Image is required",
+      "invalidImage": "Invalid image",
       "subjectRequired": "Subject is required",
       "ticketTypeRequired": "Ticket type is required",
       "detailsRequired": "Description is required",
@@ -1014,7 +1067,8 @@
       "permissionsRequired": "Permissions required",
       "statusRequired": "Status Required",
       "messageRequired": "Message Required",
-      "termsAccepted": "Terms and Privacy Policy must be accepted."
+      "termsAccepted": "Terms and Privacy Policy must be accepted.",
+      "invalidDate": "Date must be between 1935 and"
     }
   },
   "Auth": {
@@ -1044,10 +1098,11 @@
     "links": {
       "myCartPage": "My cart page",
       "myTicketPage": "Technical Support Tickets Page",
-      "linkedin": "LinkedIn account",
-      "twitter": "Twitter account",
-      "instagram": "Instagram account",
       "facebook": "Facebook account",
+      "telegram": "Telegram account",
+      "instagram": "Instagram account",
+      "tiktok": "Tiktok account",
+      "snapchat": "Snapchat account",
       "googlePlayApp": "Google Play App",
       "appStoreApp": "App Store App"
     },
@@ -1080,7 +1135,8 @@
     "daysAgo": "days ago",
     "selectAllUnread": "Select all unread",
     "readable": "Readable",
-    "welcomeMessage": "Hello! I'm your EnjoyGames assistant. I'm here to help you with questions about our products, services, and provide general support. How can I assist you today?"
+    "welcomeMessage": "Hello! I'm your EnjoyGames assistant. I'm here to help you with questions about our products, services, and provide general support. How can I assist you today?",
+    "linkCopied": "Link copied!"
   },
   "Languages": {
     "english": "English",
