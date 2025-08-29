@@ -37,13 +37,6 @@ export function DashboardSidebar() {
     setIsOpen(false);
   }, [pathname]);
 
-  // useEffect(() => {
-  //   if (isAuth) {
-  //     getProfileData();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isAuth]);
-
   const SidebarContent = () => (
     <>
       <div className="flex items-center justify-center border-b border-b-gray-300 px-4 pb-4">
@@ -54,8 +47,8 @@ export function DashboardSidebar() {
           <Image
             src="/assets/logo.png"
             alt="Enjoy Games Logo"
-            width={100}
-            height={100}
+            width={70}
+            height={70}
           />
         </Link>
       </div>
