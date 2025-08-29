@@ -11,6 +11,7 @@ import { FaRegStar, FaStar, FaStarHalfStroke } from 'react-icons/fa6';
 import Pagination from '@/components/molecules/Pagination';
 import Image from 'next/image';
 import Loading from '@/components/molecules/loading';
+import { API_IMAGE_URL } from '@/config/api';
 
 const ReviewSection = ({
   product,
@@ -198,7 +199,10 @@ const ReviewSection = ({
               <div className="flex gap-2 mt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300">
                 {rating.images.map((img: any) => (
                   <Image
-                    src="/assets/play-station.webp"
+                    src={
+                      `${API_IMAGE_URL}${img.img}` ||
+                      '/assets/play-station.webp'
+                    }
                     key={img.id}
                     alt="Rating"
                     width={80}
