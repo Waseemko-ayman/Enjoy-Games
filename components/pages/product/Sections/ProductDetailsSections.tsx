@@ -106,13 +106,13 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           src={
             `${API_IMAGE_URL}${product?.image}` || '/assets/play-station.webp'
           }
-          alt="play-station"
+          alt={product?.title}
           width={300}
           height={300}
           className="rounded-xl max-md:w-full"
         />
         <div className="flex items-center justify-between flex-wrap gap-2 mt-5">
-          <h4 className="text-base md:text-lg font-semibold">
+          <h4 className="text-sm md:text-base font-semibold">
             {t('shareLinkWith')}
           </h4>
           <div className="flex items-center gap-2">
@@ -122,7 +122,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                 <AnimatedWrapper key={item.id} custom={index}>
                   <div key={item.id} className="cursor-pointer">
                     <Icon
-                      size={20}
+                      size={18}
                       className="hover:text-enjoy-primary transition-all duration-400"
                     />
                   </div>
