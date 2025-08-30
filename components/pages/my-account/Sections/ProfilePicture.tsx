@@ -6,6 +6,8 @@ import { FormValues, TranslationFunction } from '@/interfaces';
 import React, { useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useAuthContext } from '@/context/AuthContext';
+import { getInitials } from '@/utils/stringUtils';
 
 const ProfilePicture = ({
   t,
@@ -14,11 +16,14 @@ const ProfilePicture = ({
   t: TranslationFunction;
   photo: FileList | string | null;
 }) => {
-  const isMobile = useIsMobile();
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const { user } = useAuthContext();
+  const isMobile = useIsMobile();
   const { setValue } = useFormContext<FormValues>();
+
+  const initials = getInitials(user?.name);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -31,7 +36,6 @@ const ProfilePicture = ({
   const getPhotoSrc = () => {
     if (avatarPreview) return avatarPreview; // صورة جديدة مختارة
     if (photo && typeof photo === 'string') return `${API_IMAGE_URL}${photo}`; // رابط موجود
-    return '/assets/user-vector.jpg'; // افتراضي
   };
 
   return (
@@ -43,13 +47,13 @@ const ProfilePicture = ({
             onClick={() => fileInputRef.current?.click()}
             className="rounded-full flex items-center justify-center cursor-pointer"
           >
-            <Avatar className="h-20 w-20">
+            <Avatar className="h-20 w-20 shadow-lg">
               <AvatarImage
                 src={getPhotoSrc()}
                 alt="Profile"
                 className="shadow-lg"
               />
-              <AvatarFallback>A.I.</AvatarFallback>
+              <AvatarFallback>{initials}</AvatarFallback>
             </Avatar>
             <input
               type="file"
