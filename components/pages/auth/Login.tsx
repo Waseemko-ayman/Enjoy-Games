@@ -15,7 +15,6 @@ import FormError from '@/components/atomic/FormError';
 import { useAuthContext } from '@/context/AuthContext';
 import { InputTypes } from '@/utils/type';
 import { useRouter } from 'next/navigation';
-import SocialLogin from '@/components/molecules/SocialLogin';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 
 const LoginPage = () => {
@@ -115,7 +114,7 @@ const LoginPage = () => {
         );
       })}
 
-      <SocialLogin btnTxts={btnTxts} authTxts={authTxts} />
+      {/* <SocialLogin btnTxts={btnTxts} authTxts={authTxts} /> */}
 
       <p className="text-xs text-[var(--enjoy-gray-650)] font-normal text-center mt-4">
         {authTxts('dontHaveAccount')}{' '}
