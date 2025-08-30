@@ -32,15 +32,15 @@ import { BannerSlide, InputItem, RewardTier } from '@/interfaces';
 import { FaTachometerAlt } from 'react-icons/fa';
 
 export const EnjoyWinWinData = [
+  // {
+  //   id: 1,
+  //   translationKey: 'participateAndWin',
+  //   buttonTextKey: 'MoreAboutParticipateAndWin',
+  //   image: '/assets/coin.gif',
+  //   href: '#',
+  // },
   {
     id: 1,
-    translationKey: 'participateAndWin',
-    buttonTextKey: 'MoreAboutParticipateAndWin',
-    image: '/assets/coin.gif',
-    href: '#',
-  },
-  {
-    id: 2,
     translationKey: 'enjoyGames',
     buttonTextKey: 'MoreAboutEnjoyGames',
     image: '/assets/coin.gif',
