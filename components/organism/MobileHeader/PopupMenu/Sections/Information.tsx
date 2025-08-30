@@ -3,6 +3,7 @@ import Avatar from '@/components/atomic/Avatar';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import InlineError from '@/components/molecules/InlineError';
+import { useUserInfo } from '@/context/UserInfoContext';
 import { useWallet } from '@/context/WalletContext';
 import { PATHS } from '@/data/paths';
 import { useToggleLocale } from '@/hook/useToggleLocale';
@@ -20,6 +21,7 @@ const Information = () => {
   const { isArabic } = useToggleLocale();
 
   const { myWallet, isLoading, error } = useWallet();
+  const { user, isLoading: infoLoading, error: infoError } = useUserInfo();
 
   return (
     <CardWrapper
@@ -28,12 +30,18 @@ const Information = () => {
     >
       <Link href={PATHS.MY_ACCOUNT.ROOT.link}>
         <div className="flex items-center gap-3">
-          <Avatar
-            imgSrc="/assets/user-avatar.png"
-            imgAlt="character"
-            width={30}
-            height={30}
-          />
+          {infoLoading ? (
+            <ButtonLoading borderColor="text-black" />
+          ) : infoError ? (
+            <InlineError textColor="text-black" />
+          ) : (
+            <Avatar
+              imgSrc={String(user?.photo) || '/assets/user-avatar.png'}
+              imgAlt="character"
+              width={30}
+              height={30}
+            />
+          )}
           <h5 className={`${isArabic ? 'text-base' : 'text-sm'} font-semibold`}>
             {t('completeAccountData')}
           </h5>

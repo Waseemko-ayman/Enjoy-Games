@@ -6,6 +6,7 @@ import PageTitle from '@/components/ui/common/PageTitle';
 import TabsNavigation from '@/components/ui/display/TabsNavigation';
 import GeneralSettings from './Sections/GeneralSettings';
 import AccountSettings from './Sections/AccountSettings';
+import { UserInfoProvider } from '@/context/UserInfoContext';
 
 const SettingsPage = () => {
   const [saving, setSaving] = useState(false);
@@ -44,7 +45,9 @@ const SettingsPage = () => {
           success={success}
           handleSave={handleSave}
         />
-        <AccountSettings />
+        <UserInfoProvider>
+          <AccountSettings />
+        </UserInfoProvider>
       </Tabs>
     </div>
   );

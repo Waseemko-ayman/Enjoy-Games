@@ -697,14 +697,25 @@ export interface myAccountStatsProps {
   href?: string;
 }
 
-export interface FormValues {
+export interface UserInfo {
+  id: number;
+  points: number;
+  wallet_balance: string;
   name: string;
   email?: string;
   phone?: string;
   date?: string;
   gender?: 'male' | 'female' | null;
-  options: boolean[];
   photo?: FileList | string | null;
+  referral_code: string;
+}
+
+export interface UserInfoContextType extends APIRequest {
+  user: UserInfo | null;
+}
+
+export interface FormValues extends UserInfo {
+  options: boolean[];
   password?: string | null;
   password_confirmation?: string | null;
 }
