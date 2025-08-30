@@ -6,6 +6,7 @@ import EarnMore from './Sections/EarnMore';
 import { useAuthContext } from '@/context/AuthContext';
 import FAQS from '@/components/organism/FAQS';
 import { FaqsProvider } from '@/context/FaqContext';
+import { WalletProvider } from '@/context/WalletContext';
 
 const StarsPage = () => {
   const { token } = useAuthContext();
@@ -18,10 +19,12 @@ const StarsPage = () => {
           getCategoryAndSubCategorySlugs(categories, subCatId)
         }
       /> */}
-      <Upgrade />
+      <WalletProvider>
+        <Upgrade />
+      </WalletProvider>
       {token && <EarnMore />}
       <FaqsProvider>
-        <FAQS />
+        <FAQS showTitle />
       </FaqsProvider>
     </>
   );
