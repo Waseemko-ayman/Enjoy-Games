@@ -76,7 +76,7 @@ const Stats = ({
     <ul className="border-b border-gray-300 pb-7 space-y-2">
       {stats.map((item) => (
         <AnimatedWrapper key={item.id}>
-          <li className="w-full flex items-center justify-between">
+          <li className="w-full flex items-center justify-between gap-3">
             {item.href ? (
               <Link href={item.href}>{contents(item)}</Link>
             ) : (
