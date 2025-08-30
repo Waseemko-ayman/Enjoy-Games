@@ -610,6 +610,8 @@ export interface TierProgressWrapperProps extends WithChildren {
   connectionLineWidth: number;
   progress: string;
   progressFooter: React.ComponentProps<typeof ProgressCircle>['footer'];
+  isLoading?: boolean;
+  error?: string;
 }
 
 export interface EarningsPointsSectionProps {

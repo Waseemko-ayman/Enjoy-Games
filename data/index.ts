@@ -28,7 +28,7 @@ import {
   IoMdPricetag,
 } from 'react-icons/io';
 import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
-import { BannerSlide, InputItem, RewardTier } from '@/interfaces';
+import { InputItem, RewardTier } from '@/interfaces';
 import { FaTachometerAlt } from 'react-icons/fa';
 
 export const EnjoyWinWinData = [
@@ -402,90 +402,41 @@ export const tiers = [
     id: 1,
     key: 'junior',
     icon: FaRegGem,
-    percentage: 0.2,
+    amount: 0, // أول ما يسجل
+    percentage: 0.0025, // 0.25% خصم
     isActive: true,
   },
   {
     id: 2,
     key: 'active',
     icon: FaCrown,
-    percentage: 0.4,
+    amount: 750, // ≈ 200$
+    percentage: 0.004, // 0.4% خصم
     isActive: false,
   },
   {
     id: 3,
     key: 'pro',
     icon: FaRegStar,
-    percentage: 0.6,
+    amount: 1876, // ≈ 500$
+    percentage: 0.005, // 0.5% خصم
     isActive: false,
   },
   {
     id: 4,
     key: 'expert',
     icon: FiAward,
-    percentage: 0.8,
+    amount: 3752, // ≈ 1000$
+    percentage: 0.007, // 0.7% خصم
     isActive: false,
   },
   {
     id: 5,
     key: 'vip',
     icon: FaDiamond,
-    percentage: 1,
+    amount: 18760, // ≈ 5000$
+    percentage: 0.01, // 1% خصم
     isActive: false,
-  },
-];
-
-export const faqsData = [
-  {
-    id: 1,
-    question: '1️⃣ ما هو إنجوي قيمز ؟',
-    answer:
-      'إنجوي قيمز هو رنامج نقاط الولاء الذي يمكنك من كسب النقاط مع كل عملية شراء داخل إنجوي قيمز، ثم استبدالها بـ رصيد في محفظتك أو بطاقات رقمية مثل آيتونز، يلا لودو، وغيرها.',
-  },
-  {
-    id: 2,
-    question: '2️⃣ كيف يمكنني كسب النقاط ؟',
-    answer:
-      'يمكنك كسب النقاط عند إتمام عمليات الشراء داخل إنجوي قيمز. كل عملية شراء تمنحك عددًا معينًا من النقاط، والتي يمكنك استبدالها لاحقًا.',
-  },
-  {
-    id: 3,
-    question: '3️⃣ كيف أستبدل النقاط ؟',
-    answer: [
-      'عند تجميع نقاط كافية، يمكنك استبدالها بـ:',
-      'رصيد يُضاف إلى محفظتك داخل إنجوي قيمز.',
-      'بطاقات رقمية متنوعة مثل آيتونز، يلا لودو، وغيرها.',
-    ],
-  },
-  {
-    id: 4,
-    question: '4️⃣ هل هناك حد معين لاستخدام النقاط ؟',
-    answer:
-      'لا، يمكنك استبدال النقاط في أي وقت طالما لديك الرصيد الكافي، ولكن بعض البطاقات قد تتطلب حدًا أدنى معينًا من النقاط للاستبدال.',
-  },
-  {
-    id: 5,
-    question: '5️⃣ هل يمكنني تحويل نقاطي لشخص آخر ؟',
-    answer:
-      'حاليًا، لا يمكن تحويل النقاط بين الحسابات، ولكن يمكنك استخدامها لشراء بطاقات رقمية وإهدائها لأي شخص.',
-  },
-  {
-    id: 6,
-    question: '6️⃣ هل تنتهي صلاحية النقاط ؟ ',
-    answer:
-      'لا يوجد هناك تاريخ محدد لانتهاء النقاط ويمكنك استخدامها واستبدالها في أي وقت.',
-  },
-  {
-    id: 7,
-    question: '7️⃣ كيف يمكنني معرفة عدد النقاط التي أملكها ؟',
-    answer:
-      'يمكنك الاطلاع على رصيد نقاطك في أي وقت عبر حسابك في إنجوي قيمز، حيث ستجد سجل جميع عمليات الكسب والاستبدال.',
-  },
-  {
-    id: 8,
-    question: '8️⃣ ماذا أفعل إذا لم يصلني الرصيد أو البطاقة بعد الاستبدال ؟',
-    answer:
-      'إذا واجهت أي مشكلة، يمكنك التواصل مع الدعم الفني، وسنساعدك في حل المشكلة بأسرع وقت ممكن.',
   },
 ];
 
@@ -536,12 +487,6 @@ export const mockApiData: RewardTier[] = [
   { id: 3, key: 'الذهبية', percentage: 0.5, isActive: false },
   { id: 4, key: 'البلاتينيوم', percentage: 0.6, isActive: false },
   { id: 5, key: 'VIP', percentage: 0.7, isActive: false },
-];
-
-export const HeroSlides: BannerSlide[] = [
-  { id: 1, image: '/assets/banners/banner1.webp' },
-  { id: 2, image: '/assets/banners/banner2.webp' },
-  { id: 3, image: '/assets/banners/banner3.webp' },
 ];
 
 export const inputData = [

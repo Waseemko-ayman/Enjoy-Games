@@ -1,6 +1,8 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React from 'react';
+import ButtonLoading from '../atomic/ButtonLoading';
+import InlineError from './InlineError';
 
 interface ProgressCircleProps {
   progress: string;
@@ -8,13 +10,19 @@ interface ProgressCircleProps {
   footer?:
     | { type: 'link'; text: string; href: string }
     | { type: 'text'; text: string };
+  isLoading?: boolean;
+  error?: string;
 }
 
 const ProgressCircle: React.FC<ProgressCircleProps> = ({
   progress,
   progressColor = 'text-enjoy-secondary',
   footer,
+  isLoading,
+  error,
 }) => {
+  console.log(progress);
+
   const t = useTranslations('MaxupProgram.Upgrade.percentageSection');
   return (
     <div className="flex justify-center">
@@ -28,8 +36,14 @@ const ProgressCircle: React.FC<ProgressCircleProps> = ({
             <div className="absolute inset-0 rounded-full" />
             {/* Inner content */}
             <div className="absolute inset-1.5 bg-white rounded-full flex flex-col items-center justify-center z-10 font-bold">
-              <div className={`text-[46px] mb-2 ${progressColor}`}>
-                {progress}%
+              <div className={`!text-[46px] mb-2 ${progressColor}`}>
+                {isLoading ? (
+                  <ButtonLoading borderColor={progressColor} />
+                ) : error ? (
+                  <InlineError textColor={progressColor} />
+                ) : (
+                  `${(Number(progress) * 100).toFixed(2)}%`
+                )}
               </div>
               <p className="text-sm text-gray-800 mb-[7px]">{t('title')}</p>
               {footer?.type === 'link' ? (
