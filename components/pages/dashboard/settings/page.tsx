@@ -6,7 +6,6 @@ import PageTitle from '@/components/ui/common/PageTitle';
 import TabsNavigation from '@/components/ui/display/TabsNavigation';
 import GeneralSettings from './Sections/GeneralSettings';
 import AccountSettings from './Sections/AccountSettings';
-import SecuritySettings from './Sections/SecuritySettings';
 
 const SettingsPage = () => {
   const [saving, setSaving] = useState(false);
@@ -30,7 +29,6 @@ const SettingsPage = () => {
   const tabsData = [
     // { value: 'general', label: 'General' },
     { value: 'account', label: 'Account' },
-    { value: 'security', label: 'Security' },
   ];
 
   return (
@@ -46,16 +44,7 @@ const SettingsPage = () => {
           success={success}
           handleSave={handleSave}
         />
-        <AccountSettings
-          saving={saving}
-          success={success}
-          handleSave={handleSave}
-        />
-        <SecuritySettings
-          saving={saving}
-          success={success}
-          handleSave={handleSave}
-        />
+        <AccountSettings />
       </Tabs>
     </div>
   );
