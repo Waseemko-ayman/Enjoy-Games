@@ -23,7 +23,8 @@ const EnjoyWinWin = ({ t }: { t: TranslationFunction }) => {
             {t('sectionsTitles.enjoyWinWin.title')}
           </h2>
         </AnimatedWrapper>
-        <div className="flex flex-col md:flex-row items-center justify-between gap-16 md:gap-6">
+        {/* <div className="flex flex-col md:flex-row items-center justify-between gap-16 md:gap-6"> */}
+        <div>
           {EnjoyWinWinData.map((sec, index) => {
             const title = t(
               `sectionsTitles.enjoyWinWin.${sec.translationKey}.title`
