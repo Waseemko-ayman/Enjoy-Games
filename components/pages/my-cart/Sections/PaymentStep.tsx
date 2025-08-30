@@ -34,6 +34,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
   );
   const [, setOrderResponse] = useState<OrderResponseData | null>(null);
   const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+  const [paymentOptionValue, setPaymentOptionValue] = useState<number>(1);
 
   // Translations hooks
   const t = useTranslations('MyCart');
@@ -154,6 +155,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
         const paymentPayload = {
           order_id: responseData?.data?.order_id,
           payment_gateway: paymentGateway,
+          use_wallet: paymentOptionValue || 1,
         };
         const paymentData = await payOrder(paymentPayload);
 
@@ -195,6 +197,7 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ onBackToCart, items }) => {
             btnTexts={btnTexts}
             inputsTexts={inputsTexts}
             t={t}
+            setPaymentOptionValue={setPaymentOptionValue}
           />
 
           {/* Order summary */}

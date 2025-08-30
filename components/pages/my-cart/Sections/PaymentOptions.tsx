@@ -29,6 +29,7 @@ type PaymentOptionsProps = {
   btnTexts: TranslationFunction;
   inputsTexts: TranslationFunction;
   t: TranslationFunction;
+  setPaymentOptionValue: (value: number) => void;
 };
 
 const PaymentOptions: React.FC<PaymentOptionsProps> = ({
@@ -40,6 +41,7 @@ const PaymentOptions: React.FC<PaymentOptionsProps> = ({
   btnTexts,
   inputsTexts,
   t,
+  setPaymentOptionValue,
 }) => {
   const isMobile = useIsMobile();
   const btnT = useTranslations('BtnTexts');
@@ -52,8 +54,13 @@ const PaymentOptions: React.FC<PaymentOptionsProps> = ({
   } = useAPI('payment-methods');
 
   const [popupOpen, setPopupOpen] = useState(false);
-  const [popupOption, setPopupOption] = useState<'partial' | 'full'>('partial');
-  const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
+  const [popupOption, setPopupOption] = useState<'partial' | 'full'>();
+  const [, setSelectedPayment] = useState<string | null>(null);
+
+  const handlePopupOptionChange = (option: 'partial' | 'full') => {
+    setPopupOption(option);
+    setPaymentOptionValue(option === 'partial' ? 1 : 0);
+  };
 
   useEffect(() => {
     get();
@@ -137,7 +144,7 @@ const PaymentOptions: React.FC<PaymentOptionsProps> = ({
               name="paymentOption"
               value="partial"
               checked={popupOption === 'partial'}
-              onChange={() => setPopupOption('partial')}
+              onChange={() => handlePopupOptionChange('partial')}
               className="mt-1 w-6 h-6"
             />
           </label>
@@ -156,7 +163,7 @@ const PaymentOptions: React.FC<PaymentOptionsProps> = ({
               name="paymentOption"
               value="full"
               checked={popupOption === 'full'}
-              onChange={() => setPopupOption('full')}
+              onChange={() => handlePopupOptionChange('full')}
               className="mt-1 w-6 h-6"
             />
           </label>
