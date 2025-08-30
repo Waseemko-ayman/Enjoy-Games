@@ -1,20 +1,19 @@
-'use client';
-
-import React, { useState, useRef, useEffect } from 'react';
-import { X, Send, Bot, Sparkles } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { X, Send, Sparkles, Bot } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useChatLogic } from '@/hook/useChatLogic';
 import Button from '../atomic/Button';
-import ResponsiveDialogDrawer from '../organism/ResponsiveDialogDrawer';
 import Input from '../atomic/Input';
-import { useTranslations } from 'next-intl';
+import ResponsiveDialogDrawer from '../organism/ResponsiveDialogDrawer';
 import Image from 'next/image';
 
-interface ChatModalProps {
+type ChatModalProps = {
   open: boolean;
   setOpen: (value: boolean) => void;
   isMobile: boolean;
   trigger?: React.ReactNode;
-}
+};
 
 export function ChatModal({
   open,
@@ -34,8 +33,8 @@ export function ChatModal({
 
   const handleSend = async () => {
     if (inputMessage.trim()) {
-      await sendMessage(inputMessage);
       setInputMessage('');
+      await sendMessage(inputMessage);
     }
   };
 
@@ -101,8 +100,59 @@ export function ChatModal({
                 </div>
               )}
               <p className="text-sm">{message.text}</p>
+
+              {/* روابط مصنفة حسب النوع */}
+              {message.links && (
+                <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    'category',
+                    'sub_category',
+                    'product',
+                    'support',
+                    'order',
+                  ].map((type) => {
+                    const filtered = message.links!.filter(
+                      (l) => l.type === type
+                    );
+                    if (!filtered.length) return null;
+
+                    const title =
+                      type === 'category'
+                        ? 'Categories'
+                        : type === 'sub_category'
+                        ? 'Subcategories'
+                        : type === 'product'
+                        ? 'Products'
+                        : type === 'support'
+                        ? 'Support'
+                        : 'Orders';
+
+                    return (
+                      <div
+                        key={type}
+                        className="bg-gray-50 p-3 rounded-xl shadow-sm"
+                      >
+                        <h4 className="text-sm font-semibold mb-2">{title}</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {filtered.map((l) => (
+                            <Link
+                              key={l.url}
+                              href={l.url}
+                              target="_blank"
+                              className="px-2 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition"
+                            >
+                              {l.title_ar || l.title_en || l.url}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
               <span className="text-xs opacity-70 mt-1 block">
-                {message.timestamp.toLocaleTimeString([], {
+                {message?.timestamp?.toLocaleTimeString([], {
                   hour: '2-digit',
                   minute: '2-digit',
                 })}
