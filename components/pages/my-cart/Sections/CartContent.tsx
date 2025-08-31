@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { AlertTriangle, Minus, Trash2 } from 'lucide-react';
+import { Minus, Trash2 } from 'lucide-react';
 import { FaPlus, FaStar } from 'react-icons/fa6';
 import { useTranslations } from 'next-intl';
 import { PATHS } from '@/data/paths';
@@ -26,6 +26,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { API_IMAGE_URL } from '@/config/api';
 import Input from '@/components/atomic/Input';
 import dynamic from 'next/dynamic';
+import { DeleteWarningContent } from '@/components/molecules/DeleteWarningContent';
 const Image = dynamic(() => import('next/image'), {
   loading: () => <Loading />,
 });
@@ -85,10 +86,9 @@ const CartContent: React.FC<CartContentProps> = ({
     defaultValues: { agreeToTerms: false },
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = () => {
     // إذا تحقق الشرط (checkbox مفعّل)
-    // onProceedToPayment();
-    console.log(data);
+    onProceedToPayment();
   };
 
   return (
@@ -137,46 +137,17 @@ const CartContent: React.FC<CartContentProps> = ({
                     setOpen={setOpen}
                     isMobile={isMobile}
                   >
-                    <div>
-                      <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-xl p-4">
-                        <AlertTriangle className="h-6 w-6 text-red-600" />
-                        <div>
-                          <h3 className="text-lg font-semibold text-red-700">
-                            {msgTxts('deleteWarningTitle')}
-                          </h3>
-                          <p className="text-gray-700">
-                            {msgTxts.rich('deleteWarningMessage', {
-                              item: (chunks) => (
-                                <span className="font-bold text-red-600">
-                                  {chunks}
-                                </span>
-                              ),
-                            })}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex justify-end gap-3 mt-6">
-                        <Button
-                          otherClassName="px-5 py-2"
-                          variant="third"
-                          handleClick={() => setOpen(false)}
-                        >
-                          {btnTexts('cancel')}
-                        </Button>
-                        <Button
-                          otherClassName="px-5 py-2 !bg-red-500 hover:!bg-red-600"
-                          handleClick={() => {
-                            if (item.id) {
-                              handleRemoveFromCart(item.id, item.title);
-                              setOpen(false);
-                            }
-                          }}
-                        >
-                          {btnTexts('delete')}
-                        </Button>
-                      </div>
-                    </div>
+                    <DeleteWarningContent
+                      msgTxts={msgTxts}
+                      btnTexts={btnTexts}
+                      onCancel={() => setOpen(false)}
+                      onDelete={() => {
+                        if (item.id) {
+                          handleRemoveFromCart(item.id, item.title);
+                          setOpen(false);
+                        }
+                      }}
+                    />
                   </ResponsiveDialogDrawer>
                 </div>
 

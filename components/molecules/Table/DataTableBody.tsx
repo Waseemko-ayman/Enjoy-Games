@@ -22,6 +22,9 @@ import UserPermissionsDrawer from '../UserPermissionsDrawer';
 import UpdateTicketStatusDrawer from '../UpdateTicketStatusDrawer';
 import { API_IMAGE_URL } from '@/config/api';
 import Loading from '../loading';
+import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
+import { DeleteWarningContent } from '../DeleteWarningContent';
+import useIsMobile from '@/hook/useIsMobile';
 const DynamicImage = dynamic(() => import('next/image'), {
   loading: () => <Loading />,
   ssr: false,
@@ -63,9 +66,16 @@ const DataTableBody = <T extends { id: string | number }>({
   // Tickets
   const [openTicketId, setOpenTicketId] = useState<string | null>(null);
 
+  // Delete DialogDrawer
+  const [openDeleteId, setOpenDeleteId] = useState<string | null>(null);
+
+  const isMobile = useIsMobile();
+
   const { setSelectedProductId } = useProductCodes();
 
   const t = useTranslations('Messages');
+  const btnTexts = useTranslations('BtnTexts');
+  const msgTxts = useTranslations('Messages');
 
   const pathname = usePathname();
   const isOrdersPage = pathname?.includes('/dashboard/orders');
@@ -449,12 +459,31 @@ const DataTableBody = <T extends { id: string | number }>({
                           )
                         )}
                         {onDelete && (
-                          <Button
-                            onClick={() => onDelete(row.id)}
-                            className="inline-flex items-center justify-center h-8 w-8 rounded-lg text-gray-400 bg-transparent hover:text-red-600 hover:bg-red-50 transition-colors"
+                          <ResponsiveDialogDrawer
+                            trigger={
+                              <Button
+                                onClick={() => setOpenDeleteId(String(row.id))}
+                                className="inline-flex items-center justify-center h-8 w-8 rounded-lg text-gray-400 bg-transparent hover:text-red-600 hover:bg-red-50 transition-colors"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            }
+                            open={openDeleteId === String(row.id)}
+                            setOpen={(val) =>
+                              setOpenDeleteId(val ? String(row.id) : null)
+                            }
+                            isMobile={isMobile}
                           >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
+                            <DeleteWarningContent
+                              msgTxts={msgTxts}
+                              btnTexts={btnTexts}
+                              onCancel={() => setOpenDeleteId(null)}
+                              onDelete={() => {
+                                onDelete(row.id);
+                                setOpenDeleteId(null);
+                              }}
+                            />
+                          </ResponsiveDialogDrawer>
                         )}
                       </td>
                     )}
