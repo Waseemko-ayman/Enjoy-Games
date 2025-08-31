@@ -59,6 +59,12 @@ const CreateProducts = ({
     price: yup.string().required(inputT('priceRequired')),
     priceBefore: yup.string().nullable(),
     discount: yup.string().nullable(),
+    vatRate: yup
+      .number()
+      .typeError(inputT('vatRateRequired'))
+      .required(inputT('vatRateRequired'))
+      .min(0, inputT('vatRateBetween'))
+      .max(100, inputT('vatRateBetween')),
     isActive: yup.boolean().nullable(),
     shippingPayment: yup.string().required(inputT('shippingPaymentRequired')),
     image: yup
@@ -150,6 +156,7 @@ const CreateProducts = ({
       formData.append('price', data.price);
       if (data.priceBefore) formData.append('price_before', data.priceBefore);
       if (data.discount) formData.append('discount', data.discount);
+      formData.append('vat_rate', String(data.vatRate));
       formData.append('is_active', data.isActive ? '1' : '0');
       formData.append('shipping_payment', data.shippingPayment);
 

@@ -262,6 +262,13 @@ export const CreateProductsFields = [
     type: 'text',
   },
   {
+    id: 'vat_rate',
+    name: 'vatRate',
+    label: 'vatRate',
+    placeholder: 'writeVatRate',
+    type: 'number',
+  },
+  {
     id: 'image',
     name: 'image',
     label: 'image',
