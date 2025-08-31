@@ -27,6 +27,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   imgTitle,
   price_before,
   price,
+  vat_rate,
   storeName = '',
   storeFlagImg = '',
   variant = 'row',
@@ -47,6 +48,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const { addToCart } = useCartContext();
   const { showToast } = useToast();
   const t = useTranslations('productDetails');
+  const inputsTxt = useTranslations('Inputs');
+
   const msgTxts = useTranslations('Messages');
 
   const { interests, addInterest, removeInterest } = useInterests();
@@ -168,6 +171,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   >
                     {price_before.amount} {price_before.currency}
                   </h4>
+                )}
+              </div>
+
+              {/* VAT Rate */}
+              <div className="text-xs font-medium border border-gray-200 rounded-lg py-1 px-3 mb-2 w-fit bg-gray-100">
+                {vat_rate > 0 ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <p>{inputsTxt('labels.vatRate')}:</p>
+                    <span className="text-red-500">
+                      {parseFloat(vat_rate.toString())}%
+                    </span>
+                  </div>
+                ) : (
+                  t('vatExempt')
                 )}
               </div>
 

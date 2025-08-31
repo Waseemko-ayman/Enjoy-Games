@@ -485,7 +485,8 @@
     "relatedProducts": "Related Products",
     "productEvaluation": "Your evaluation has been submitted successfully. Thank you very much.",
     "noImages": "No images provided for this rating.!",
-    "proofFile": "Authentication facility"
+    "proofFile": "Authentication facility",
+    "vatExempt": "Vat exempt"
   },
   "referrals": {
     "totalReferrals": "Total Referrals",
@@ -1086,7 +1087,8 @@
       "statusRequired": "Status Required",
       "messageRequired": "Message Required",
       "termsAccepted": "Terms and Privacy Policy must be accepted.",
-      "invalidDate": "Date must be between 1935 and"
+      "invalidDate": "Date must be between 1935 and",
+      "unlockAccountRequired": "Account unlock required"
     }
   },
   "Auth": {

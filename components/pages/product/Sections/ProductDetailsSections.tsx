@@ -82,6 +82,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -138,8 +139,24 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           <h1 className="text-xl sm:text-[28px]">{product?.title}</h1>
         </MotionSection>
 
+        {/* VAT Rate */}
+        <MotionSection index={1}>
+          <div className="text-sm font-medium border border-gray-200 rounded-lg py-1 px-3 mt-4 w-fit bg-gray-100">
+            {product?.vat_rate > 0 ? (
+              <div className="flex items-center justify-center gap-2">
+                <p>{inputsTxt('labels.vatRate')}:</p>
+                <span className="text-red-500">
+                  {parseFloat(product?.vat_rate.toString())}%
+                </span>
+              </div>
+            ) : (
+              t('vatExempt')
+            )}
+          </div>
+        </MotionSection>
+
         <MotionSection index={2}>
-          <div className="flex items-end gap-3 mt-4">
+          <div className="flex items-end gap-2 mt-4">
             <h3 className="text-xl sm:text-[28px] font-semibold">
               {product?.price?.amount} {product?.price?.currency}
             </h3>
@@ -194,7 +211,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           </MotionSection>
           <MotionSection index={5}>
             <p className="text-[15px] text-gray-500">
-              {extractText(product?.contentn)}
+              {extractText(product?.content)}
             </p>
           </MotionSection>
         </div>
@@ -221,7 +238,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           </MotionSection>
 
           <MotionSection index={7}>
-            <Accordion type="single" collapsible>
+            <Accordion type="single" collapsible defaultValue="extra-options">
               <AccordionItem value="extra-options">
                 <AccordionTrigger className="mb-4 cursor-pointer border-b border-gray-200 pb-2">
                   {t('additionalOptions')}
@@ -249,7 +266,10 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                           errors[input.inputName] ? 'border-red-500' : ''
                         }
                         isRequired
-                        {...register(input.inputName)}
+                        control={control}
+                        {...(input.type !== 'checkbox'
+                          ? register(input.inputName)
+                          : {})}
                       />
                       {errors[input.inputName] && (
                         <FormError message={errors[input.inputName]?.message} />

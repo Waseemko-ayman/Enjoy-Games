@@ -485,7 +485,8 @@
     "relatedProducts": "منتجات مشابهة",
     "productEvaluation": "تم إرسال تقييمك بنجاح, شكرا جزيلا لك",
     "noImages": "لم يتم إضافة أي صور لهذا التقييم !",
-    "proofFile": "مرفق التوثيق"
+    "proofFile": "مرفق التوثيق",
+    "vatExempt": "معفى من الضريبة"
   },
   "search": {
     "searchResults": "نتائج البحث",
@@ -1089,7 +1090,8 @@
       "statusRequired": "الحالة مطلوبة",
       "messageRequired": "الرسالة مطلوبة",
       "termsAccepted": "يجب الموافقة على الشروط وسياسة الخصوصية",
-      "invalidDate": "التاريخ يجب أن يكون بين 1935 و"
+      "invalidDate": "التاريخ يجب أن يكون بين 1935 و",
+      "unlockAccountRequired": "إلغاء قفل الحساب مطلوب"
     }
   },
   "Auth": {
