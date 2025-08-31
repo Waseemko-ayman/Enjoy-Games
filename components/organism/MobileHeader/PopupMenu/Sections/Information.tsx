@@ -3,6 +3,7 @@ import Avatar from '@/components/atomic/Avatar';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import InlineError from '@/components/molecules/InlineError';
+import { API_IMAGE_URL } from '@/config/api';
 import { useUserInfo } from '@/context/UserInfoContext';
 import { useWallet } from '@/context/WalletContext';
 import { PATHS } from '@/data/paths';
@@ -36,7 +37,9 @@ const Information = () => {
             <InlineError textColor="text-black" />
           ) : (
             <Avatar
-              imgSrc={String(user?.photo) || '/assets/user-avatar.png'}
+              imgSrc={
+                `${API_IMAGE_URL}${user?.photo}` || '/assets/user-avatar.png'
+              }
               imgAlt="character"
               width={30}
               height={30}
