@@ -12,7 +12,6 @@ import InvitationLink from './InvitationLink';
 import ProfilePicture from './ProfilePicture';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import * as Yup from 'yup';
 import { FormValues } from '@/interfaces';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
@@ -20,8 +19,11 @@ import { useTranslations } from 'next-intl';
 import useAPI from '@/hook/useAPI';
 import { useToast } from '@/lib/toast';
 import useIsMobile from '@/hook/useIsMobile';
-
-const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{2,}$/;
+import {
+  getAccountDefaultValues,
+  getAccountSchema,
+  toFormData,
+} from '@/utils/accountSchema';
 
 const Content = () => {
   const isMobile = useIsMobile();
@@ -45,61 +47,11 @@ const Content = () => {
 
   const date = new Date();
   const currentYear = date.getFullYear();
-
-  const formSchema = Yup.object({
-    name: Yup.string()
-      .matches(
-        alphanumericWithArabicRegex,
-        errorsTxts('usernameInvalid') ||
-          'الاسم يجب أن يحتوي على حروف أو أرقام فقط ويكون طوله على الأقل حرفين'
-      )
-      .required(errorsTxts('usernameRequired') || 'الاسم مطلوب'),
-    date: Yup.string()
-      .nullable()
-      .optional()
-      .test(
-        'valid-date',
-        `${errorsTxts('invalidDate')} ${currentYear}`,
-        (value) => {
-          if (!value) return true;
-          const year = new Date(value).getFullYear();
-          return year >= 1935 && year <= currentYear;
-        }
-      ),
-    gender: Yup.string()
-      .nullable()
-      .optional()
-      .test(
-        'valid-gender',
-        'القيمة غير صحيحة',
-        (value) => !value || ['male', 'female'].includes(value)
-      ),
-    password: Yup.string().nullable().optional(),
-    password_confirmation: Yup.string()
-      .nullable()
-      .optional()
-      .oneOf([Yup.ref('password'), null], errorsTxts('repasswordNotMatch')),
-    photo: Yup.mixed()
-      .nullable()
-      .optional()
-      .test('is-file-or-null', errorsTxts('invalidImage'), (value) => {
-        if (!value) return true; // إذا لم يغيّر المستخدم الصورة ترسل null
-        return value instanceof FileList || typeof value === 'string';
-      }),
-  });
+  const formSchema = getAccountSchema(errorsTxts, currentYear);
 
   const methods = useForm<FormValues>({
     resolver: yupResolver(formSchema) as any,
-    defaultValues: {
-      name: (user as any)?.name || '',
-      email: (user as any)?.email || '',
-      phone: (user as any)?.phone || '',
-      date: (user as any)?.date || null,
-      gender: (user as any)?.gender || null,
-      password: (user as any)?.password || null,
-      password_confirmation: (user as any)?.password_confirmation || null,
-      photo: (user as any)?.photo || null,
-    },
+    defaultValues: getAccountDefaultValues(user),
   });
 
   const {
@@ -111,19 +63,9 @@ const Content = () => {
   } = methods;
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    // console.log(data);
     try {
-      const formData = new FormData();
-
-      Object.entries(data).forEach(([key, value]) => {
-        if (key === 'photo') {
-          if (value instanceof FileList && value.length > 0) {
-            formData.append('photo', value[0]); // أول ملف فقط
-          }
-        } else if (value !== null && value !== undefined) {
-          formData.append(key, value as any);
-        }
-      });
-
+      const formData = toFormData(data);
       const response = await add(formData);
       reset(data);
       showToast(response?.message || 'تم التحديث بنجاح');
@@ -133,18 +75,7 @@ const Content = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      reset({
-        name: user?.name || '',
-        email: (user as any)?.email || '',
-        phone: (user as any)?.phone || '',
-        date: (user as any)?.date || '',
-        gender: (user as any)?.gender || '',
-        password: (user as any)?.password || '',
-        password_confirmation: (user as any)?.password_confirmation || '',
-        photo: (user as any)?.photo || '',
-      });
-    }
+    if (user) reset(getAccountDefaultValues(user));
   }, [user, reset]);
 
   useEffect(() => {
