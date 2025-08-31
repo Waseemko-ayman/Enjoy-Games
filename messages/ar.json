@@ -69,6 +69,14 @@
         "germany": {
           "name": "ألمانيا",
           "currency": "اليورو"
+        },
+        "united-kingdom": {
+          "name": "المملكة المتحدة",
+          "currency": "الجنيه الإسترليني"
+        },
+        "australia": {
+          "name": "أستراليا",
+          "currency": "الدولار الأسترالي"
         }
       }
     },

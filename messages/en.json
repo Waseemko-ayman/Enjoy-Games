@@ -69,6 +69,14 @@
         "germany": {
           "name": "Germany",
           "currency": "Euro"
+        },
+        "united-kingdom": {
+          "name": "United Kingdom",
+          "currency": "Sterling"
+        },
+        "australia": {
+          "name": "Australia",
+          "currency": "Australian dollar"
         }
       }
     },

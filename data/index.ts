@@ -367,6 +367,18 @@ export const countries = [
     img: 'germany',
     code: 'EUR',
   },
+  {
+    name: 'المملكة المتحدة',
+    currency: 'الجنيه الإسترليني',
+    img: 'united-kingdom',
+    code: 'GBP',
+  },
+  {
+    name: 'أستراليا',
+    currency: 'الدولار الأسترالي',
+    img: 'australia',
+    code: 'AUD',
+  },
 ];
 
 export const featuresData = [
