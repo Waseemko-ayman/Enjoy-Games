@@ -336,7 +336,10 @@ const DataTableBody = <T extends { id: string | number }>({
                       >
                         {isLink ? (
                           <Link
-                            href={PATHS.CODES}
+                            href={{
+                              pathname: PATHS.CODES,
+                              query: { fromProduct: row.id },
+                            }}
                             onClick={() => setSelectedProductId(Number(row.id))}
                             className="text-blue-600 underline"
                           >

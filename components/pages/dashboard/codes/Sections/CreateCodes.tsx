@@ -24,6 +24,8 @@ import SettingsTab from '@/components/ui/display/SettingsTab';
 import { useUpdateContent } from '@/context/updateContentContext';
 import { useProductCodes } from '@/context/selectedProductId';
 import { useTranslations } from 'next-intl';
+import Loading from '@/components/molecules/loading';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 
 // ----------------------------------------------------------------
 
@@ -68,7 +70,11 @@ const CreateCodes = ({
   >('code/get-products');
 
   // Get Single Category
-  const { getSingle } = useAPI<FormData, ShowCodeRequest>('code/show');
+  const {
+    getSingle,
+    isLoading: getSingleIsLoading,
+    error: getSingleError,
+  } = useAPI<FormData, ShowCodeRequest>('code/show');
 
   // Edit Category
   const { edit, isLoading: updateLoading } = useAPI<
@@ -173,31 +179,43 @@ const CreateCodes = ({
       description={t('Dashboard.codes.createNewCode')}
     >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-        <div className="grid gap-5 md:grid-cols-2 mb-5">
-          {CreateCodesFields.map(({ id, label, name, placeholder, type }) => {
-            let options: Option[] = [];
-            if (name === 'productID') options = productsOptions ?? [];
-            return (
-              <FormField
-                key={id}
-                id={id}
-                inputName={name}
-                type={type as InputTypes}
-                label={t(`Inputs.labels.${label}`)}
-                placeholder={t(`Inputs.placeHolders.${placeholder}`)}
-                register={register}
-                control={control}
-                options={options}
-                error={
-                  errors[name as keyof CodeFormData] as FieldError | undefined
+        {getSingleIsLoading ? (
+          <Loading />
+        ) : getSingleError ? (
+          <ErrorFetching />
+        ) : (
+          <>
+            <div className="grid gap-5 md:grid-cols-2 mb-5">
+              {CreateCodesFields.map(
+                ({ id, label, name, placeholder, type }) => {
+                  let options: Option[] = [];
+                  if (name === 'productID') options = productsOptions ?? [];
+                  return (
+                    <FormField
+                      key={id}
+                      id={id}
+                      inputName={name}
+                      type={type as InputTypes}
+                      label={t(`Inputs.labels.${label}`)}
+                      placeholder={t(`Inputs.placeHolders.${placeholder}`)}
+                      register={register}
+                      control={control}
+                      options={options}
+                      error={
+                        errors[name as keyof CodeFormData] as
+                          | FieldError
+                          | undefined
+                      }
+                    />
+                  );
                 }
-              />
-            );
-          })}
-        </div>
-        <Button type="submit">
-          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
-        </Button>
+              )}
+            </div>
+            <Button type="submit">
+              {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
+            </Button>
+          </>
+        )}
       </form>
     </SettingsTab>
   );
