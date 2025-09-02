@@ -1163,6 +1163,7 @@ export interface ProductData {
   discount?: string | { amount: number; currency: string };
   is_active: boolean;
   shipping_payment: string;
+  vat_rate: number;
   image?: string;
   icon?: string;
   created_at?: string;
