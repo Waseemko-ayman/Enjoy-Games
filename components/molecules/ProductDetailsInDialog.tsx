@@ -30,6 +30,8 @@ import MotionSection from './FramerMotion/MotionSection';
 import { extractText } from '@/utils/extractText';
 import { API_IMAGE_URL } from '@/config/api';
 import dynamic from 'next/dynamic';
+import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
+import { useToast } from '@/lib/toast';
 const Image = dynamic(() => import('next/image'), {
   loading: () => <Loading />,
 });
@@ -44,6 +46,8 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
   const t = useTranslations('productDetails');
   const inputsTxt = useTranslations('Inputs');
   const btnTxt = useTranslations('BtnTexts');
+  const msgTxts = useTranslations('Messages');
+  const { showToast } = useToast();
 
   const selectedInputs =
     product?.shipping_payment === 'code'
@@ -68,19 +72,24 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
   const {
     register,
     handleSubmit,
+    reset,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const submitHandler = (formValues: Record<string, any>) => {
+  const handleAddToCart = (formValues: Record<string, any>) => {
     onAddToCart({
       ...product,
       quantity: selectedQuantity,
       formScheme: formValues,
     });
+    showToast(`${product.title} ${msgTxts('addedToCart')}`);
+    setTimeout(() => {
+      reset();
+    }, 3000);
   };
-
   return (
     <div className="max-h-[550px] overflow-y-auto scrollbar-none">
       <div className="flex flex-col gap-5">
@@ -139,65 +148,81 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
             </MotionSection>
           </div>
 
-          <form onSubmit={handleSubmit(submitHandler)} className="space-y-4">
-            <Input
-              variant="secondary"
-              type="number"
-              inputName="quantity"
-              label={inputsTxt('labels.quantity')}
-              value={selectedQuantity}
-              onChange={(e) => {
-                const val = Number(e.target.value);
-                if (val >= 1) setSelectedQuantity(val);
-              }}
-            />
+          <form
+            className="mt-4 space-y-7"
+            onSubmit={handleSubmit((formValues) => {
+              handleAddToCart(formValues);
+            })}
+          >
+            <MotionSection index={6}>
+              <Input
+                variant="secondary"
+                type="number"
+                inputName="quantity"
+                label={inputsTxt('labels.quantity')}
+                value={selectedQuantity}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  if (value >= 1) setSelectedQuantity(value);
+                }}
+              />
+            </MotionSection>
 
-            <Accordion type="single" collapsible>
-              <AccordionItem value="extra-options">
-                <AccordionTrigger className="cursor-pointer border-b border-gray-300 pb-2 mb-3">
-                  {t('additionalOptions')}
-                </AccordionTrigger>
-                <AccordionContent className="space-y-3 max-h-60 overflow-auto">
-                  {selectedInputs.map((input) => (
-                    <div key={input.id}>
-                      <Input
-                        variant="secondary"
-                        type={input.type as InputTypes}
-                        inputName={input.inputName}
-                        label={
-                          input.label || inputsTxt(`labels.${input.labelKey}`)
-                        }
-                        options={input.options?.map((opt) => ({
-                          ...opt,
-                          label: inputsTxt(`labels.${opt.labelKey}`),
-                        }))}
-                        placeholder={
-                          input.inputName === 'checkbox'
-                            ? inputsTxt(`placeHolders.Cancelled`)
-                            : ''
-                        }
-                        otherClassNameContainer={
-                          errors[input.inputName] ? 'border-red-500' : ''
-                        }
-                        isRequired
-                        {...register(input.inputName)}
-                      />
-                      {errors[input.inputName] && (
-                        <FormError message={errors[input.inputName]?.message} />
-                      )}
-                    </div>
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+            <MotionSection index={7}>
+              <Accordion type="single" collapsible defaultValue="extra-options">
+                <AccordionItem value="extra-options">
+                  <AccordionTrigger className="mb-4 cursor-pointer border-b border-gray-200 pb-2">
+                    {t('additionalOptions')}
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-4">
+                    {selectedInputs.map((input, index) => (
+                      <AnimatedWrapper key={input.id} custom={index}>
+                        <Input
+                          variant="secondary"
+                          type={input.type as InputTypes}
+                          inputName={input.inputName}
+                          label={
+                            input.label || inputsTxt(`labels.${input.labelKey}`)
+                          }
+                          options={input.options?.map((opt) => ({
+                            ...opt,
+                            label: inputsTxt(`labels.${opt.labelKey}`),
+                          }))}
+                          placeholder={
+                            input.inputName === 'checkbox'
+                              ? inputsTxt(`placeHolders.Cancelled`)
+                              : ''
+                          }
+                          otherClassNameContainer={
+                            errors[input.inputName] ? 'border-red-500' : ''
+                          }
+                          isRequired
+                          control={control}
+                          {...(input.type !== 'checkbox'
+                            ? register(input.inputName)
+                            : {})}
+                        />
+                        {errors[input.inputName] && (
+                          <FormError
+                            message={errors[input.inputName]?.message}
+                          />
+                        )}
+                      </AnimatedWrapper>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </MotionSection>
 
-            <Button
-              type="submit"
-              otherClassName="w-full py-3 px-5 flex items-center justify-center gap-2"
-              Icon={MdAddShoppingCart}
-            >
-              {btnTxt('addToCart')}
-            </Button>
+            <MotionSection index={8}>
+              <Button
+                type="submit"
+                otherClassName="py-3 px-5 w-full"
+                Icon={MdAddShoppingCart}
+              >
+                {btnTxt('addToCart')}
+              </Button>
+            </MotionSection>
           </form>
         </div>
       </div>
