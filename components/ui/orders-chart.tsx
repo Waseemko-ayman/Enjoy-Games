@@ -186,21 +186,27 @@ export function OrderChart({
         ]
       : [];
 
-  const getManualData = (): ChartData[] =>
-    dateData && startDate && endDate
-      ? [
-          {
-            name: `${format(startDate, 'dd-MM-yyyy')} → ${format(
-              endDate,
-              'dd-MM-yyyy'
-            )}`,
-            ordersCount: dateData.orders_count || 0,
-            ordersAmount: dateData.orders_amount || 0,
-            paidOrdersCount: dateData.paid_orders_count || 0,
-            paidOrdersAmount: dateData.paid_orders_amount || 0,
-          },
-        ]
-      : [];
+  const getManualData = (): ChartData[] => {
+    if (!dateData) return [];
+
+    const name =
+      startDate && endDate
+        ? `${format(startDate, 'dd-MM-yyyy')} → ${format(
+            endDate,
+            'dd-MM-yyyy'
+          )}`
+        : t('Dashboard.Chart.custom');
+
+    return [
+      {
+        name,
+        ordersCount: dateData.orders_count ?? 0,
+        ordersAmount: dateData.orders_amount ?? 0,
+        paidOrdersCount: dateData.paid_orders_count ?? 0,
+        paidOrdersAmount: dateData.paid_orders_amount ?? 0,
+      },
+    ];
+  };
 
   const tabsData = [
     { value: 'today', label: t('BtnTexts.today') },
