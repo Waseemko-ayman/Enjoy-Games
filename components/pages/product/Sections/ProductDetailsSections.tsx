@@ -41,13 +41,6 @@ const DynamicImage = dynamic(() => import('next/image'), {
   ssr: false,
 });
 
-const inputQuantityOptions = [
-  { id: 1, label: '1' },
-  { id: 2, label: '2' },
-  { id: 3, label: '3' },
-  { id: 4, label: '4' },
-];
-
 const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const t = useTranslations('productDetails');
@@ -228,7 +221,6 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
               type="number"
               inputName="quantity"
               label={inputsTxt('labels.quantity')}
-              options={inputQuantityOptions}
               value={selectedQuantity}
               onChange={(e) => {
                 const value = Number(e.target.value);
