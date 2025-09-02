@@ -5,11 +5,10 @@ import {
   FaFacebook,
   FaFlag,
   FaGift,
-  FaHeart,
+  // FaHeart,
   FaInstagram,
   FaRegFlag,
   FaRegGem,
-  FaRegHeart,
   FaRegStar,
   FaSackDollar,
   FaSnapchat,
@@ -180,12 +179,12 @@ export const menuLists = [
     linksItem: [
       { id: 1, key: 'stars', icon: IoArrowRedoOutline, link: PATHS.STARS.link },
       { id: 2, key: 'wallet', icon: IoWalletOutline, link: PATHS.WALLET.link },
-      {
-        id: 3,
-        key: 'interests',
-        icon: FaRegHeart,
-        link: PATHS.MY_ACCOUNT.INTERESTS.link,
-      },
+      // {
+      //   id: 3,
+      //   key: 'interests',
+      //   icon: FaHeart,
+      //   link: PATHS.MY_ACCOUNT.INTERESTS.link,
+      // },
     ],
   },
   {
@@ -257,12 +256,12 @@ export const userList = [
         link: PATHS.STARS.link,
         icon: PiSparkleFill,
       },
-      {
-        id: 5,
-        title: 'الإهتمامات',
-        link: PATHS.MY_ACCOUNT.INTERESTS.link,
-        icon: FaHeart,
-      },
+      // {
+      //   id: 5,
+      //   title: 'الإهتمامات',
+      //   link: PATHS.MY_ACCOUNT.INTERESTS.link,
+      //   icon: FaHeart,
+      // },
     ],
   },
   {

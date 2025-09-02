@@ -83,7 +83,9 @@ const InterestsPage = () => {
             productData={card}
             showDesc
             showBtn
-            handleRemove={() => removeInterest(card.id ?? 0)}
+            handleRemove={() => {
+              removeInterest(Number(card.id)); // استخدام id الاهتمام مباشرة
+            }}
             {...cardWithoutImage}
           />
         </AnimatedWrapper>

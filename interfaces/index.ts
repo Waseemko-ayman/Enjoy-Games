@@ -103,6 +103,7 @@ export interface ProductCardProps {
   // onAddToCart?: () => void;
   formScheme?: Record<string, any>;
   productData?: ProductCardProps;
+  // interestId: string | number;
 }
 
 export interface CategoryFormData {

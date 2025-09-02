@@ -11,11 +11,10 @@ import Button from '@/components/atomic/Button';
 import Avatar from '@/components/atomic/Avatar';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import { useToast } from '@/lib/toast';
-import { FaHeart, FaRegStar, FaStar, FaStarHalfStroke } from 'react-icons/fa6';
+import { FaRegStar, FaStar, FaStarHalfStroke } from 'react-icons/fa6';
 import { extractText } from '@/utils/extractText';
 import dynamic from 'next/dynamic';
 import Loading from '../molecules/loading';
-import { useInterests } from '@/context/InterestsContext';
 const Image = dynamic(() => import('next/image'), {
   loading: () => <Loading />,
 });
@@ -42,31 +41,52 @@ const ProductCard: React.FC<ProductCardProps> = ({
   otherClassNameBtn,
   icon,
   productData,
+  // interestId,
 }) => {
   const [open, setOpen] = useState(false);
-  const isMobile = useIsMobile();
+
+  // Context
   const { addToCart } = useCartContext();
+
+  // Hooks
+  const isMobile = useIsMobile();
   const { showToast } = useToast();
+
+  // Translations
   const t = useTranslations('productDetails');
   const inputsTxt = useTranslations('Inputs');
-
   const msgTxts = useTranslations('Messages');
 
-  const { interests, addInterest, removeInterest } = useInterests();
+  // const { interests, addInterest, removeInterest } = useInterests();
 
   // **التغيير الصحيح: المقارنة باستخدام id**
-  const isInterested = productData
-    ? interests?.some((item) => item.id === productData.id)
-    : false;
+  // const isInterested = productData
+  //   ? interests?.some((item) => item.id === productData.id)
+  //   : false;
 
-  const handleHeartClick = () => {
-    if (!productData) return;
-    if (isInterested) {
-      removeInterest(productData.id ?? 0); // الحذف يستخدم id
-    } else {
-      addInterest(productData.id ?? 0); // الإضافة تستقبل id لكن ترسله كـ product_id داخل الدالة
-    }
-  };
+  // const handleHeartClick = () => {
+  //   if (!productData?.id) return;
+
+  //   if (isInterested) {
+  //     // استخدام interestId إذا كان متوفراً (في صفحة الاهتمامات)
+  //     // أو productData.id إذا لم يكن متوفراً (في صفحات أخرى)
+  //     const idToRemove = interestId || productData.id;
+  //     removeInterest(Number(idToRemove));
+  //   } else {
+  //     addInterest(productData.id);
+  //   }
+  // };
+
+  // const handleHeartClick = () => {
+  //   if (!productData?.id) return;
+
+  //   if (!productData) return;
+  //   if (isInterested) {
+  //     removeInterest(productData.id); // الحذف يستخدم id
+  //   } else {
+  //     addInterest(productData.id); // الإضافة تستقبل id لكن ترسله كـ product_id داخل الدالة
+  //   }
+  // };
 
   // حساب متوسط النجوم من الـ stars في كل rating object
   const averageRating =
@@ -137,7 +157,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             }`}
           >
             {title}
-            <Button
+            {/* <Button
               variant="ghost"
               handleClick={handleHeartClick}
               otherClassName={`${
@@ -150,7 +170,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 size={18}
                 className={isInterested ? 'text-red-600' : ''}
               />
-            </Button>
+            </Button> */}
           </h3>
 
           {showDesc && (

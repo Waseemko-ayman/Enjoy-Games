@@ -18,7 +18,7 @@ export const PATHS = {
 
   MY_ACCOUNT: {
     ROOT: { name: 'حسابي', link: '/my-account' },
-    INTERESTS: { name: 'الإهتمامات', link: '/my-account/interests' },
+    // INTERESTS: { name: 'الإهتمامات', link: '/my-account/interests' },
   },
 
   TICKETS: {
