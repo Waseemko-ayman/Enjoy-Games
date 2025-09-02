@@ -15,7 +15,7 @@ const WalletContent = () => {
   const t = useTranslations('Wallet');
   const starsTxt = useTranslations('Stars.pointsSystem');
 
-  const { myWallet, isLoading, error } = useWallet();
+  const { myWallet, isLoading, error, refreshWallet } = useWallet();
 
   return (
     <Layer otherClassName="!my-12">
@@ -71,7 +71,11 @@ const WalletContent = () => {
               </div>
             </div>
             <MotionSection index={2}>
-              <ButtonsDialogDrawer t={t} points={myWallet?.points_balance} />
+              <ButtonsDialogDrawer
+                t={t}
+                points={myWallet?.points_balance}
+                refreshWallet={refreshWallet}
+              />
             </MotionSection>
           </div>
         </CardWrapper>

@@ -26,6 +26,7 @@ interface WalletContextType {
   myWallet: WalletData | null;
   isLoading: boolean;
   error: string;
+  refreshWallet?: () => void;
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
@@ -46,12 +47,15 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
     getWallet();
   }, [getWallet, selectedCountry]);
 
+  const refreshWallet = () => getWallet();
+
   return (
     <WalletContext.Provider
       value={{
         myWallet: walletData || null,
         isLoading,
         error,
+        refreshWallet,
       }}
     >
       {children}

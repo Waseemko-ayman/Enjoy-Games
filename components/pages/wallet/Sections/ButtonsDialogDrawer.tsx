@@ -17,9 +17,11 @@ import React, { useState } from 'react';
 const ButtonsDialogDrawer = ({
   t,
   points,
+  refreshWallet,
 }: {
   t: TranslationFunction;
   points: number | undefined;
+  refreshWallet?: () => void;
 }) => {
   // const [openFirst, setOpenFirst] = useState(false);
   const [openSecond, setOpenSecond] = useState(false);
@@ -48,6 +50,7 @@ const ButtonsDialogDrawer = ({
             showToast((response as any)?.message, 'error');
           } else {
             showToast((response as any)?.message);
+            refreshWallet?.();
           }
         } catch (error) {
           const apiError = (error as any)?.response?.message;
