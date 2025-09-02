@@ -9,6 +9,7 @@ import { useUpdateContent } from './updateContentContext';
 interface TicketsContextType extends APIRequest {
   tickets: Ticket[] | null;
   hasUnreadTickets: boolean;
+  getSingle: (id: string | number, getConfig?: any) => Promise<any> | void;
   // markTicketsAsRead: () => void;
 }
 
@@ -18,13 +19,14 @@ const TicketsContext = createContext<TicketsContextType>({
   error: null,
   refresh: () => {},
   hasUnreadTickets: false,
+  getSingle: async () => {},
   // markTicketsAsRead: () => {},
 });
 
 export const TicketsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { get, data, isLoading, error } = useAPI<any>('tickets');
+  const { get, getSingle, data, isLoading, error } = useAPI<any>('tickets');
   const [hasUnreadTickets, setHasUnreadTickets] = useState(false);
   const { refreshFlags } = useUpdateContent();
 
@@ -52,6 +54,7 @@ export const TicketsProvider: React.FC<{ children: React.ReactNode }> = ({
         error,
         refresh,
         hasUnreadTickets,
+        getSingle,
         // markTicketsAsRead,
       }}
     >

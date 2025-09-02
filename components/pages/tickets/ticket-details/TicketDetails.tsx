@@ -10,15 +10,15 @@ import ErrorFetching from '@/components/molecules/ErrorFetching';
 import PageHeader from '@/components/molecules/PageHeader';
 import useAPI from '@/hook/useAPI';
 import { useSearchParams } from 'next/navigation';
+import { useTickets } from '@/context/TicketsContext';
 
 const TicketDetailsPage = ({ id }: { id: string }) => {
   const t = useTranslations('Tickets');
   const btnTexts = useTranslations('BtnTexts');
 
-  // const { tickets, isLoading, error } = useTickets();
   const { getSingle: readSingleNotification } = useAPI('notifications');
 
-  const { getSingle: getTicket, isLoading, error } = useAPI('tickets');
+  const { getSingle: getTicket, isLoading, error } = useTickets();
   const [ticket, setTicket] = useState<any>(null);
 
   const searchParams = useSearchParams();
