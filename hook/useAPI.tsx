@@ -118,7 +118,8 @@ const useAPI = <
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
       const res = await axiosInstance.get<{ data: ResponseData }>(
-        `/${url}/${id}`,
+        // `/${url}/${id}`,
+        `/${url}/${id}?_=${Date.now()}`,
         {
           ...config,
           ...getConfig,
