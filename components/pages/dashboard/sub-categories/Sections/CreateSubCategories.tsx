@@ -49,7 +49,7 @@ const CreateSubCategories = ({
   const t = useTranslations();
   const inputT = useTranslations('Inputs.errorsMsgs');
   const { triggerRefresh } = useUpdateContent();
-  const refreshKey = 'subCategories';
+  const refreshKey = 'sub-categories';
 
   // ----------------------------------------------------------------
 
