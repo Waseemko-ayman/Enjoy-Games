@@ -94,7 +94,6 @@ export function DashboardSidebar() {
           <div>
             <p className="text-sm font-medium">{user?.name}</p>
             {/* <p className="text-xs text-muted-foreground">{user?.role}</p> */}
-            <p className="text-xs text-muted-foreground">user?.role</p>
           </div>
         </div>
       </div>
