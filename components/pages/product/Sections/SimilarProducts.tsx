@@ -19,7 +19,7 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
   const router = useRouter();
 
   return (
-    <SectionComponent title={t('relatedProducts')}>
+    <SectionComponent title={t('suggestedProducts')}>
       {isLoading ? (
         <Loading />
       ) : error ? (
