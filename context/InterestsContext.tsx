@@ -60,18 +60,41 @@ export const InterestsProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const removeInterest = async (id: number) => {
+  const removeInterest = async (productId: number) => {
     const prevInterests = [...interests];
-    setInterests((prev) => prev.filter((item) => item.id !== id));
+
+    // إزالة من الحالة المحلية باستخدام product_id
+    setInterests((prev) =>
+      prev.filter((item) => Number(item.id) !== productId)
+    );
 
     try {
-      const response = await remove(id);
-      showToast(response?.message || 'Deleted successfully');
+      // إرسال product_id للحذف (يجب أن يدعمه الخادم)
+      const response = await remove(productId);
+      showToast(response?.message || 'تم الحذف بنجاح');
     } catch (error: any) {
       setInterests(prevInterests);
       showToast(error?.response?.message, 'error');
     }
   };
+
+  // const removeInterest = async (id: number) => {
+  //   // التأكد من أننا نحذف الاهتمام الصحيح
+  //   const interestToRemove = interests.find((item) => item.id === id);
+  //   if (!interestToRemove) return;
+
+  //   const prevInterests = [...interests];
+  //   setInterests((prev) => prev.filter((item) => item.id === id));
+
+  //   try {
+  //     // إرسال id الاهتمام وليس product_id
+  //     const response = await remove(id);
+  //     showToast(response?.message || 'تم الحذف بنجاح');
+  //   } catch (error: any) {
+  //     setInterests(prevInterests);
+  //     showToast(error?.response?.message, 'error');
+  //   }
+  // };
 
   useEffect(() => {
     get();
