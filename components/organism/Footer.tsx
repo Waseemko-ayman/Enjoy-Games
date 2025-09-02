@@ -22,17 +22,18 @@ const Footer = () => {
             width={120}
             height={120}
           />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 w-full">
+          {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 w-full"> */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-5 w-full">
             <FooterLinks
               secTitle={t('LearnMore.title')}
               listName="LearnMore"
               t={t}
             />
-            <FooterLinks
+            {/* <FooterLinks
               secTitle={t('BusinessAndSolutions.title')}
               listName="BusinessAndSolutions"
               t={t}
-            />
+            /> */}
             <FooterLinks
               secTitle={t('applyShopping')}
               t={t}
