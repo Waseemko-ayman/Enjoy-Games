@@ -18,7 +18,6 @@ const AllTickets = ({
       title={t('Tickets.Dashboard.allTickets')}
       description={t('Tickets.Dashboard.desc')}
       apiEndpoint="tickets/admin/tickets"
-      deleteEndpoint="ticket/delete"
       placeholder={t('Inputs.placeHolders.searchTicket')}
       onTabChange={onTabChange}
       showEdit={false}
