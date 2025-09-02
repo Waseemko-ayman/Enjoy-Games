@@ -25,6 +25,7 @@ import { extractText } from '@/utils/extractText';
 import Image from 'next/image';
 import { API_IMAGE_URL } from '@/config/api';
 import Loading from '@/components/molecules/loading';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 
 // ----------------------------------------------------------------
 
@@ -91,10 +92,11 @@ const CreateProducts = ({
   >('get/categories');
 
   // Get Single Category
-  const { getSingle, isLoading: getSingleIsLoading } = useAPI<
-    FormData,
-    ProductCardProps
-  >('product/show');
+  const {
+    getSingle,
+    isLoading: getSingleIsLoading,
+    error: getSingleError,
+  } = useAPI<FormData, ProductCardProps>('product/show');
 
   // Edit Category
   const { edit, isLoading: updateLoading } = useAPI<FormData, ProductCardProps>(
@@ -182,7 +184,22 @@ const CreateProducts = ({
 
       if (response) {
         showToast(response?.message);
-        reset();
+        reset({
+          titleAr: response.data['title[ar]'] ?? '',
+          titleEn: response.data['title[en]'] ?? '',
+          categoryID: response.data.category_id?.toString() ?? '',
+          subCategoryID: response.data.sub_category_id?.toString() ?? '',
+          contentAr: response.data['content[ar]'] ?? '',
+          contentEn: response.data['content[en]'] ?? '',
+          descriptionAr: response.data['description[ar]'] ?? '',
+          descriptionEn: response.data['description[en]'] ?? '',
+          price: toStringValue(response.data.price),
+          priceBefore: toStringValue(response.data.price_before),
+          discount: toStringValue(response.data.discount),
+          isActive: toBoolean(response.data.is_active),
+          shippingPayment: response.data.shipping_payment ?? '',
+          vatRate: response.data.vat_rate ?? 0,
+        });
         triggerRefresh(refreshKey);
         onTabChange('allProducts');
         onEditIdChange(null);
@@ -226,6 +243,7 @@ const CreateProducts = ({
               discount: toStringValue(res.data.discount),
               isActive: toBoolean(res.data.is_active),
               shippingPayment: res.data.shipping_payment ?? '',
+              vatRate: res.data.vat_rate ?? 0,
             });
             setImagePreview(
               res.data.image ? `${API_IMAGE_URL}${res.data.image}` : null
@@ -233,8 +251,7 @@ const CreateProducts = ({
           }
         } catch (error) {
           console.error('فشل في جلب بيانات القسم:', error);
-          const apiError = (error as any)?.response?.message;
-          showToast(apiError, 'error');
+          showToast((error as any)?.response?.message, 'error');
         }
       })();
     }
@@ -261,68 +278,85 @@ const CreateProducts = ({
       description={t('Dashboard.products.createNewProduct')}
     >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-        <div className="grid gap-5 md:grid-cols-2 mb-5">
-          {CreateProductsFields.map(
-            ({ id, label, name, placeholder, type, options: itemOptions }) => {
-              let options: ProductOption[] = [];
-              if (name === 'categoryID') options = categoriesOptions ?? [];
-              else if (name === 'subCategoryID')
-                options = subCategoriesProductsOptions ?? [];
-              else if (name === 'shippingPayment') options = itemOptions ?? [];
-              return (
-                <FormField
-                  key={id}
-                  id={id}
-                  inputName={name}
-                  type={type as InputTypes}
-                  label={t(`Inputs.labels.${label}`)}
-                  placeholder={t(`Inputs.placeHolders.${placeholder}`)}
-                  register={register}
-                  control={control}
-                  options={options}
-                  error={
-                    errors[name as keyof ProductFormData] as
-                      | FieldError
-                      | undefined
-                  }
-                  editId={editId}
-                  {...(type === 'file' ? { accept: 'image/*' } : {})}
+        {getSingleIsLoading ? (
+          <Loading />
+        ) : getSingleError ? (
+          <ErrorFetching />
+        ) : (
+          <>
+            <div className="grid gap-5 md:grid-cols-2 mb-5">
+              {CreateProductsFields.map(
+                ({
+                  id,
+                  label,
+                  name,
+                  placeholder,
+                  type,
+                  options: itemOptions,
+                }) => {
+                  let options: ProductOption[] = [];
+                  if (name === 'categoryID') options = categoriesOptions ?? [];
+                  else if (name === 'subCategoryID')
+                    options = subCategoriesProductsOptions ?? [];
+                  else if (name === 'shippingPayment')
+                    options = itemOptions ?? [];
+                  return (
+                    <FormField
+                      key={id}
+                      id={id}
+                      inputName={name}
+                      type={type as InputTypes}
+                      label={t(`Inputs.labels.${label}`)}
+                      placeholder={t(`Inputs.placeHolders.${placeholder}`)}
+                      register={register}
+                      control={control}
+                      options={options}
+                      error={
+                        errors[name as keyof ProductFormData] as
+                          | FieldError
+                          | undefined
+                      }
+                      editId={editId}
+                      {...(type === 'file' ? { accept: 'image/*' } : {})}
+                    />
+                  );
+                }
+              )}
+            </div>
+            {/*
+            {iconPreview && (
+              <div className="mb-3">
+                <label className="block mb-1">معاينة الأيقونة:</label>
+                <Image
+                  src={iconPreview}
+                  alt="Icon Preview"
+                  width={64}
+                  height={64}
+                  className="w-16 h-16 object-cover"
                 />
-              );
-            }
-          )}
-        </div>
-        {/* {iconPreview && (
-          <div className="mb-3">
-            <label className="block mb-1">معاينة الأيقونة:</label>
-            <Image
-              src={iconPreview}
-              alt="Icon Preview"
-              width={64}
-              height={64}
-              className="w-16 h-16 object-cover"
-            />
-          </div>
-        )} */}
-
-        {imagePreview && (
-          <div className="mb-3">
-            {getSingleIsLoading ? (
-              <Loading />
-            ) : (
-              <Image
-                src={imagePreview}
-                alt="Image Preview"
-                width={128}
-                height={128}
-                className="w-32 h-32 object-cover"
-              />
+              </div>
             )}
-          </div>
+            */}
+            {imagePreview && (
+              <div className="mb-3">
+                {getSingleIsLoading ? (
+                  <Loading />
+                ) : (
+                  <Image
+                    src={imagePreview}
+                    alt="Image Preview"
+                    width={128}
+                    height={128}
+                    className="w-32 h-32 object-cover"
+                  />
+                )}
+              </div>
+            )}
+            <Button type="submit">
+              {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
+            </Button>
+          </>
         )}
-        <Button type="submit">
-          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
-        </Button>
       </form>
     </SettingsTab>
   );
