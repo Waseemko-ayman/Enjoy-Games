@@ -743,6 +743,12 @@ export const MyPurchasesTypes = [
   { id: 6, labelKey: 'processing' },
 ];
 
+export const FaqsFilterTypes = [
+  { id: 1, labelKey: 'all' },
+  { id: 2, labelKey: 'generated' },
+  { id: 3, labelKey: 'manual' },
+];
+
 export const loginInputs = [
   {
     id: 1,

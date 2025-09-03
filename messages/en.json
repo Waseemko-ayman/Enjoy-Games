@@ -742,7 +742,12 @@
       "desc": "Create and manage FAQs for your store",
       "manageFaqs": "Manage all FAQs in one place",
       "createFaq": "Create Question & Answer",
-      "createNewFaqs": "Create New Question & Answer"
+      "createNewFaqs": "Create New Question & Answer",
+      "FaqsFilters": {
+        "all": "All",
+        "generated": "AI Generated",
+        "manual": "Manual"
+      }
     },
     "sliders": {
       "title": "Slider Images",
