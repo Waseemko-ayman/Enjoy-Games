@@ -91,21 +91,42 @@ const DataTableBody = <T extends { id: string | number }>({
     return true;
   });
 
+  // === visibleColumns ===
   const visibleColumns = filteredColumns.reduce<(keyof T | string)[]>(
     (acc, col) => {
       if (col === 'updated_at' || col === 'user_id') return acc;
 
+      const sampleValue = data.find((item) => item[col] != null)?.[col];
+
+      // If the value is object and it contains ar/en → we separate it
       if (
-        col === 'image' &&
-        data.some((item) => item[col] && typeof item[col] === 'object')
+        sampleValue &&
+        typeof sampleValue === 'object' &&
+        ('ar' in sampleValue || 'en' in sampleValue)
       ) {
-        return [...acc, 'image_ar', 'image_en'];
+        return [...acc, `${String(col)}_ar`, `${String(col)}_en`];
       }
 
       return [...acc, col];
     },
     []
   );
+
+  // const visibleColumns = filteredColumns.reduce<(keyof T | string)[]>(
+  //   (acc, col) => {
+  //     if (col === 'updated_at' || col === 'user_id') return acc;
+
+  //     if (
+  //       col === 'image' &&
+  //       data.some((item) => item[col] && typeof item[col] === 'object')
+  //     ) {
+  //       return [...acc, 'image_ar', 'image_en'];
+  //     }
+
+  //     return [...acc, col];
+  //   },
+  //   []
+  // );
 
   return (
     <div className="overflow-x-auto">
@@ -151,6 +172,51 @@ const DataTableBody = <T extends { id: string | number }>({
                 >
                   {visibleColumns.map((col) => {
                     const columnKey = String(col);
+
+                    // === cell render ===
+                    if (
+                      columnKey.endsWith('_ar') ||
+                      columnKey.endsWith('_en')
+                    ) {
+                      const [baseCol, lang] = columnKey.split('_'); // Example: image_ar → ['image','ar']
+                      const value = (row as any)[baseCol]?.[lang];
+
+                      // If the main column is image → we display an image
+                      if (baseCol === 'image') {
+                        return (
+                          <td
+                            key={columnKey}
+                            className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden"
+                          >
+                            {value ? (
+                              <div className="flex justify-center">
+                                <DynamicImage
+                                  src={`${API_IMAGE_URL}${value}`}
+                                  alt={`${lang} image`}
+                                  width={80}
+                                  height={80}
+                                  className="w-16 h-16 object-contain"
+                                  onError={(e) =>
+                                    ((
+                                      e.currentTarget as HTMLImageElement
+                                    ).style.display = 'none')
+                                  }
+                                />
+                              </div>
+                            ) : (
+                              t('unavailable')
+                            )}
+                          </td>
+                        );
+                      }
+
+                      // Otherwise → We display the text
+                      return (
+                        <td key={columnKey} className="px-6 py-4 truncate">
+                          {value ?? t('unavailable')}
+                        </td>
+                      );
+                    }
 
                     if (columnKey === 'user_id') return null;
 
