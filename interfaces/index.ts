@@ -337,6 +337,12 @@ export interface getSlugsProps {
   error?: string;
 }
 
+export interface SimilarProductsProps extends getSlugsProps {
+  products: ProductCardProps;
+  isLoading: boolean;
+  error: string;
+}
+
 export interface HomeSectionsProps extends getSlugsProps {
   t: TranslationFunction;
   isLoading: boolean;
