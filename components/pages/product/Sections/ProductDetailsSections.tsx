@@ -76,10 +76,13 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
     handleSubmit,
     reset,
     control,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const loginMethod = watch('login_method');
 
   const handleAddToCart = (formValues: Record<string, any>) => {
     addToCart({
@@ -135,7 +138,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
         {/* VAT Rate */}
         <MotionSection index={1}>
           <div className="text-sm font-medium border border-gray-200 rounded-lg py-1 px-3 mt-4 w-fit bg-gray-100">
-            {product?.vat_rate > 0 ? (
+            {product?.vat_rate && product?.vat_rate > 0 ? (
               <div className="flex items-center justify-center gap-2">
                 <p>{inputsTxt('labels.vatRate')}:</p>
                 <span className="text-red-500">
@@ -240,10 +243,25 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                     <AnimatedWrapper key={input.id} custom={index}>
                       <Input
                         variant="secondary"
-                        type={input.type as InputTypes}
+                        type={
+                          product?.shipping_payment === 'access' &&
+                          input.inputName === 'email_phone'
+                            ? loginMethod === 'email'
+                              ? 'email'
+                              : 'text'
+                            : (input.type as InputTypes)
+                        }
                         inputName={input.inputName}
                         label={
-                          input.label || inputsTxt(`labels.${input.labelKey}`)
+                          input.inputName === 'email_phone' &&
+                          product?.shipping_payment === 'access'
+                            ? inputsTxt(
+                                `labels.${
+                                  loginMethod === 'email' ? 'email' : 'phone'
+                                }`
+                              )
+                            : input.label ||
+                              inputsTxt(`labels.${input.labelKey}`)
                         }
                         options={input.options?.map((opt) => ({
                           ...opt,
