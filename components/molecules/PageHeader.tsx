@@ -161,7 +161,11 @@ interface PathLeaf {
   link: string;
 }
 
-type PathValue = PathLeaf | PathTree | string;
+type PathValue =
+  | PathLeaf
+  | PathTree
+  | string
+  | ((id: string | number) => PathLeaf);
 type PathTree = {
   [key: string]: PathValue;
 };
@@ -171,7 +175,7 @@ function extractPaths(
   map: Record<string, string> = {}
 ): Record<string, string> {
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       const value = obj[key];
 
       if (typeof value === 'string') {
@@ -180,8 +184,11 @@ function extractPaths(
       } else if (isPathLeaf(value)) {
         const pathKey = value.link.split('/').filter(Boolean).pop() || '';
         map[pathKey] = value.name;
+      } else if (typeof value === 'function') {
+        // نتجاهل الدوال هنا أو نعالجها بطريقة خاصة
+        continue;
       } else {
-        extractPaths(value, map);
+        extractPaths(value, map); // هنا Typescript متأكد إنه PathTree
       }
     }
   }
@@ -190,7 +197,11 @@ function extractPaths(
 
 function isPathLeaf(obj: any): obj is PathLeaf {
   return (
-    typeof obj === 'object' && obj !== null && 'link' in obj && 'name' in obj
+    typeof obj === 'object' &&
+    obj !== null &&
+    !Array.isArray(obj) &&
+    'link' in obj &&
+    'name' in obj
   );
 }
 
