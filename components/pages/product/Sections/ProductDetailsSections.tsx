@@ -243,21 +243,29 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                     <AnimatedWrapper key={input.id} custom={index}>
                       <Input
                         variant="secondary"
-                        type={
-                          product?.shipping_payment === 'access' &&
-                          input.inputName === 'email_phone'
-                            ? loginMethod === 'email'
-                              ? 'email'
-                              : 'text'
-                            : (input.type as InputTypes)
-                        }
+                        type={input.type as InputTypes}
+                        // type={
+                        //   product?.shipping_payment === 'access' &&
+                        //   input.inputName === 'email_phone'
+                        //     ? loginMethod === 'email'
+                        //       ? 'email'
+                        //       : 'text'
+                        //     : (input.type as InputTypes)
+                        // }
                         inputName={input.inputName}
+                        // label={
+                        //   input.label || inputsTxt(`labels.${input.labelKey}`)
+                        // }
                         label={
                           input.inputName === 'email_phone' &&
                           product?.shipping_payment === 'access'
                             ? inputsTxt(
                                 `labels.${
-                                  loginMethod === 'email' ? 'email' : 'phone'
+                                  loginMethod === 'email'
+                                    ? 'email'
+                                    : loginMethod === 'twitter'
+                                    ? 'twitter'
+                                    : 'facebook'
                                 }`
                               )
                             : input.label ||
