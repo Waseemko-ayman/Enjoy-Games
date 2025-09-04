@@ -228,6 +228,20 @@ export const CreateProductsFields = [
     type: 'editor',
   },
   {
+    id: 'terms_and_conditions[ar]',
+    name: 'termsAndConditionsAr',
+    label: 'arabicTermsAndConditions',
+    placeholder: 'writeArabicTermsAndConditions',
+    type: 'editor',
+  },
+  {
+    id: 'terms_and_conditions[en]',
+    name: 'termsAndConditionsEn',
+    label: 'englishTermsAndConditions',
+    placeholder: 'writeEnglishTermsAndConditions',
+    type: 'editor',
+  },
+  {
     id: 'price',
     name: 'price',
     label: 'price',

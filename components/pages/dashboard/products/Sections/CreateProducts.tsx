@@ -57,6 +57,13 @@ const CreateProducts = ({
     contentEn: yup.string().required(inputT('englishContentRequired')),
     descriptionAr: yup.string().required(inputT('arabicDescriptionRequired')),
     descriptionEn: yup.string().required(inputT('englishDescriptionRequired')),
+    termsAndConditionsAr: yup
+      .string()
+      .required(inputT('arabicTermsAndConditionsRequired')),
+    termsAndConditionsEn: yup
+      .string()
+      .required(inputT('englishTermsAndConditionsRequired')),
+
     price: yup.string().required(inputT('priceRequired')),
     priceBefore: yup.string().nullable(),
     discount: yup.string().nullable(),
@@ -155,6 +162,15 @@ const CreateProducts = ({
       formData.append('content[en]', extractText(data.contentEn));
       formData.append('description[ar]', extractText(data.descriptionAr));
       formData.append('description[en]', extractText(data.descriptionEn));
+      formData.append(
+        'terms_and_conditions[ar]',
+        extractText(data.termsAndConditionsAr)
+      );
+      formData.append(
+        'terms_and_conditions[en]',
+        extractText(data.termsAndConditionsEn)
+      );
+
       formData.append('price', data.price);
       if (data.priceBefore) formData.append('price_before', data.priceBefore);
       if (data.discount) formData.append('discount', data.discount);
@@ -193,6 +209,8 @@ const CreateProducts = ({
           contentEn: response.data['content[en]'] ?? '',
           descriptionAr: response.data['description[ar]'] ?? '',
           descriptionEn: response.data['description[en]'] ?? '',
+          termsAndConditionsAr: response.data['terms_and_conditions[ar]'] ?? '',
+          termsAndConditionsEn: response.data['terms_and_conditions[en]'] ?? '',
           price: toStringValue(response.data.price),
           priceBefore: toStringValue(response.data.price_before),
           discount: toStringValue(response.data.discount),
@@ -238,6 +256,8 @@ const CreateProducts = ({
               contentEn: res.data.content?.en ?? '',
               descriptionAr: res.data.description?.ar ?? '',
               descriptionEn: res.data.description?.en ?? '',
+              termsAndConditionsAr: res.data.terms_and_conditions?.ar ?? '',
+              termsAndConditionsEn: res.data.terms_and_conditions?.en ?? '',
               price: toStringValue(res.data.price),
               priceBefore: toStringValue(res.data.price_before),
               discount: toStringValue(res.data.discount),

@@ -63,6 +63,7 @@ export interface ProductCardProps {
   slug?: string;
   content?: string;
   description?: string;
+  terms_and_conditions?: string;
   image: string;
   imgAlt?: string;
   imgTitle?: string;
@@ -1161,6 +1162,10 @@ export interface ProductData {
     en: string;
   };
   description: {
+    ar: string;
+    en: string;
+  };
+  terms_and_conditions: {
     ar: string;
     en: string;
   };
