@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
 import DataTableHeader from './Table/DataTableHeader';
 import DataTableBody from './Table/DataTableBody';
@@ -109,6 +110,13 @@ export function DataTable<T extends { id: number | string }>({
     setItemsPerPage(value);
     setCurrentPage(1);
   };
+
+  useEffect(() => {
+    const newTotalPages = Math.ceil(filteredData.length / itemsPerPage);
+    if (currentPage > newTotalPages) {
+      setCurrentPage(newTotalPages > 0 ? newTotalPages : 1);
+    }
+  }, [filteredData.length, itemsPerPage]);
 
   return (
     <div>
