@@ -196,7 +196,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
               {/* VAT Rate */}
               <div className="text-xs font-medium border border-gray-200 rounded-lg py-1 px-3 mb-2 w-fit bg-gray-100">
-                {vat_rate > 0 ? (
+                {vat_rate && vat_rate > 0 ? (
                   <div className="flex items-center justify-center gap-2">
                     <p>{inputsTxt('labels.vatRate')}:</p>
                     <span className="text-red-500">

@@ -89,7 +89,7 @@ export interface ProductCardProps {
   quantity?: number;
   currencyImage?: string;
   ratings?: number[];
-  vat_rate: number;
+  vat_rate?: number;
   icon?: React.ElementType | string | any;
   showDesc?: boolean;
   showBtn?: boolean;
