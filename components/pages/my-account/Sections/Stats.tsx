@@ -1,12 +1,10 @@
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import InlineError from '@/components/molecules/InlineError';
-import { PATHS } from '@/data/paths';
 import { myAccountStatsProps, TranslationFunction } from '@/interfaces';
 import { Wallet } from 'lucide-react';
-import Link from 'next/link';
 import React from 'react';
-import { FaHeart, FaStar } from 'react-icons/fa6';
+import { FaStar } from 'react-icons/fa6';
 
 const Stats = ({
   t,
@@ -44,12 +42,12 @@ const Stats = ({
       titleKey: 'currentLevel',
       amount: getCardValue(points),
     },
-    {
-      id: 3,
-      icon: FaHeart,
-      titleKey: 'interests',
-      href: PATHS.MY_ACCOUNT.INTERESTS.link,
-    },
+    // {
+    //   id: 3,
+    //   icon: FaHeart,
+    //   titleKey: 'interests',
+    //   href: PATHS.MY_ACCOUNT.INTERESTS.link,
+    // },
   ];
 
   const contents = (item: myAccountStatsProps) => {
@@ -77,11 +75,11 @@ const Stats = ({
       {stats.map((item) => (
         <AnimatedWrapper key={item.id}>
           <li className="w-full flex items-center justify-between gap-3">
-            {item.href ? (
+            {/* {item.href ? (
               <Link href={item.href}>{contents(item)}</Link>
             ) : (
-              contents(item)
-            )}
+            )} */}
+            {contents(item)}
           </li>
         </AnimatedWrapper>
       ))}
