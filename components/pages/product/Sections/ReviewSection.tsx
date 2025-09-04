@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React, { useState } from 'react';
-import { Star } from 'lucide-react';
+import { ImageOff, Star } from 'lucide-react';
 import { ProductCardProps, ReviewData } from '@/interfaces';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
@@ -11,6 +11,7 @@ import { FaRegStar, FaStar, FaStarHalfStroke } from 'react-icons/fa6';
 import Pagination from '@/components/molecules/Pagination';
 import Image from 'next/image';
 import Loading from '@/components/molecules/loading';
+import { API_IMAGE_URL } from '@/config/api';
 
 const ReviewSection = ({
   product,
@@ -194,11 +195,14 @@ const ReviewSection = ({
               <span className="text-xs text-gray-400">{rating.stars}/5</span>
             </div>
             <p className="text-gray-700 text-sm">{rating.comment}</p>
-            {rating.images && rating.images.length > 0 && (
+            {rating.images && rating.images.length > 0 ? (
               <div className="flex gap-2 mt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300">
                 {rating.images.map((img: any) => (
                   <Image
-                    src="/assets/play-station.webp"
+                    src={
+                      `${API_IMAGE_URL}${img.img}` ||
+                      '/assets/play-station.webp'
+                    }
                     key={img.id}
                     alt="Rating"
                     width={80}
@@ -206,6 +210,11 @@ const ReviewSection = ({
                     className="flex-shrink-0 w-20 h-20 object-cover rounded-md border border-gray-200"
                   />
                 ))}
+              </div>
+            ) : (
+              <div className="text-center space-y-1 mt-2 text-gray-500 text-sm">
+                <ImageOff className="w-5 h-5 mx-auto" />
+                <p>{t('noImages')}</p>
               </div>
             )}
           </div>

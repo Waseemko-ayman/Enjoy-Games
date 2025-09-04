@@ -15,7 +15,8 @@ const RewardCard = ({
 }: RewardCardProps) => {
   const { isArabic } = useToggleLocale();
   return (
-    <div className="flex items-end gap-4 max-sm:flex-col max-sm:items-center max-sm:justify-center max-sm:text-center">
+    // <div className="flex items-end gap-4 max-sm:flex-col max-sm:items-center max-sm:justify-center">
+    <div className="flex items-end gap-4 max-sm:flex-col max-sm:items-center justify-between">
       <div className="mt-3 sm:mt-10 max-sm:order-2">
         <h3 className="text-2xl sm:text-3xl font-bold text-enjoy-primary mb-3.5">
           {title}
@@ -28,7 +29,9 @@ const RewardCard = ({
           href={href}
           handleClick={onClick}
           Icon={isArabic ? FaArrowLeftLong : FaArrowRightLong}
-          otherClassName="py-2 px-5 gap-5 max-sm:mx-auto max-w-[250px]"
+          otherClassName={`py-2 px-5 gap-5 max-sm:mx-auto ${
+            isArabic ? 'max-w-[250px]' : '!text-sm max-w-[300px]'
+          }`}
           iconPosition="right"
         >
           {buttonText}

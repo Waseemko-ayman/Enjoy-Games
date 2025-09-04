@@ -30,9 +30,10 @@ const CreateCoupons = ({
   onTabChange: (val: string) => void;
 }) => {
   const { showToast } = useToast();
-  const { triggerRefresh } = useUpdateContent();
   const t = useTranslations();
   const inputT = useTranslations('Inputs.errorsMsgs');
+  const { triggerRefresh } = useUpdateContent();
+  const refreshKey = 'coupons';
 
   // ----------------------------------------------------------------
 
@@ -132,7 +133,7 @@ const CreateCoupons = ({
       if (response) {
         showToast(response.message);
         reset();
-        triggerRefresh();
+        triggerRefresh(refreshKey);
         onTabChange('allCoupons');
       }
     } catch (err: any) {

@@ -44,7 +44,7 @@ const UserPopup = () => {
           return (
             <div
               key={index}
-              className="border-b border-b-gray-200 pb-2 last:border-0"
+              className="border-b border-b-gray-200 py-2 last:border-0"
             >
               {section.items?.map((item, index) => {
                 const { key, namespace } = getTranslationKey(item.title);
@@ -54,8 +54,14 @@ const UserPopup = () => {
                       <NavItem
                         icon={item.icon}
                         name={t(`${namespace}.${key}`)}
-                        otherClassNameIcon="text-gray-500 text-sm"
-                        otherClassName="!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg"
+                        otherClassNameIcon={`text-sm ${
+                          item.title === 'تسجيل خروج'
+                            ? '!text-red-500'
+                            : 'text-gray-500'
+                        }`}
+                        otherClassName={`!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg ${
+                          item.title === 'تسجيل خروج' ? '!text-red-500' : ''
+                        }`}
                         {...('link' in item ? { linkPath: item.link } : {})}
                         onClick={
                           item.title === 'تسجيل خروج' ? handleLogout : undefined
@@ -84,14 +90,14 @@ function getTranslationKey(title: string): {
       return { key: 'my-purchases', namespace: 'PagesHeaderTitles' };
     case 'تذاكر الدعم الفني':
       return { key: 'tickets', namespace: 'PagesHeaderTitles' };
-    case 'دليل ستارز':
+    case 'ولاء إنجوي':
       return { key: 'stars', namespace: 'PagesHeaderTitles' };
     case 'الإهتمامات':
       return { key: 'interests', namespace: 'PagesHeaderTitles' };
     case 'المحفظة':
       return { key: 'wallet', namespace: 'PagesHeaderTitles' };
-    case 'نقاط دليل ستارز':
-      return { key: 'starsPoints', namespace: 'PagesHeaderTitles' };
+    case 'دعواتي':
+      return { key: 'referrals', namespace: 'PagesHeaderTitles' };
     case 'لوحة التحكم':
       return { key: 'dashboard', namespace: 'PagesHeaderTitles' };
     case 'تسجيل خروج':

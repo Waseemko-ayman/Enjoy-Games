@@ -24,13 +24,69 @@
         "ChangeCountryCurrencyDescription": "Select your preferred country and currency from the list below.",
         "PopupMenuTitle": "User Account and Navigation Menu",
         "PopupMenuDescription": "Access your account information, authentication options, menu navigation, and logout."
+      },
+      "countries": {
+        "saudi-arabia": {
+          "name": "Saudi Arabia",
+          "currency": "Saudi Riyal"
+        },
+        "united-arab-emirates": {
+          "name": "United Arab Emirates",
+          "currency": "Emirati Dirham"
+        },
+        "kuwait": {
+          "name": "Kuwait",
+          "currency": "Kuwaiti Dinar"
+        },
+        "qatar": {
+          "name": "Qatar",
+          "currency": "Qatari Riyal"
+        },
+        "bahrain": {
+          "name": "Bahrain",
+          "currency": "Bahraini Dinar"
+        },
+        "oman": {
+          "name": "Oman",
+          "currency": "Omani Riyal"
+        },
+        "iraq": {
+          "name": "Iraq",
+          "currency": "Iraqi Dinar"
+        },
+        "egypt": {
+          "name": "Egypt",
+          "currency": "Egyptian Pound"
+        },
+        "jordan": {
+          "name": "Jordan",
+          "currency": "Jordanian Dinar"
+        },
+        "usa": {
+          "name": "United States",
+          "currency": "US Dollar"
+        },
+        "germany": {
+          "name": "Germany",
+          "currency": "Euro"
+        },
+        "united-kingdom": {
+          "name": "United Kingdom",
+          "currency": "Sterling"
+        },
+        "australia": {
+          "name": "Australia",
+          "currency": "Australian dollar"
+        }
       }
     },
     "HelpSection": {
       "title": "Need Help?",
       "email": "Email",
       "helpCenter": "Help Center",
-      "OnlineNow": "Online now"
+      "OnlineNow": "Online now",
+      "assistant": "EnjoyGames Assistant",
+      "user": "user"
     },
     "footer": {
       "LearnMore": {
@@ -39,7 +95,7 @@
         "faqs": "Frequently Asked Questions",
         "privacyPolicy": "Privacy Policy",
         "refundPolicy": "Refund Policy",
-        "termsOfUser": "Terms of Service"
+        "termsOfUse": "Terms of Service"
       },
       "BusinessAndSolutions": {
         "title": "Business & Solutions",
@@ -65,13 +121,20 @@
     "starsPoints": "Loyalty Enjoy Points",
     "store": "Store",
     "create": "Add New Ticket",
+    "ticket-detail": "Ticket details #:id",
+    "order-detail": "Order details #:id",
     "TalkToCustomerService": "Talk to customer service",
     "faqs": "Frequently Asked Questions",
     "RegisterNow": "Register now",
     "more": "More",
     "search": "Search",
     "dashboard": "Dashboard",
-    "orders": "Orders"
+    "orders": "Orders",
+    "notifications": "Notifications",
+    "referrals": "Referrals",
+    "privacy-policy": "Privacy Policy",
+    "refund-policy": "Refund Policy",
+    "terms-of-use": "Terms of Service"
   },
   "SectionsTitles": {
     "Stars": {
@@ -90,7 +153,8 @@
     "faqs": "Frequently Asked Questions",
     "products": "Products",
     "categories": "Sections",
-    "subCategories": "Subsections"
+    "subCategories": "Subsections",
+    "productSubscribers": "Product Subscribers"
   },
   "HomePage": {
     "walletSections": {
@@ -184,11 +248,13 @@
     "pendingOrders": "Pending Orders",
     "completedOrders": "Completed Orders",
     "totalSpent": "Total Spent",
+    "order": "Order",
     "emptyFiltered": {
       "completed": "There are no currently completed requests.",
       "pending": "There are no pending requests.",
       "cancelled": "There are no canceled requests.",
-      "paid": "There are no paid requests."
+      "paid": "There are no paid requests.",
+      "processing": "There are no requests currently being processed."
     },
     "showingItems": "Showing {startItem} to {endItem} of {totalItems} orders"
   },
@@ -199,10 +265,12 @@
         "value": "{points} Point"
       },
       "conversionInfo": {
-        "title": "Convert Points to {currency}",
+        "title": "Convert Points to ",
         "rule": "After {minPoints} points = 1 card",
         "action": "Withdrawal History",
-        "emptyState": "No withdrawals yet"
+        "emptyState": "No withdrawals yet",
+        "deposit": "Deposit",
+        "withdraw": "Withdraw"
       },
       "actions": {
         "starPoints": "Loyalty Enjoy Points",
@@ -300,7 +368,7 @@
     }
   },
   "Wallet": {
-    "title": "My Current Balance",
+    "title": "Wallet balance",
     "RedeemPoints": {
       "title": "Choose Your Preferred Redemption Method",
       "subTitle": "Rewards Programs"
@@ -315,13 +383,14 @@
       "starsPoints": "Loyalty Enjoy Points",
       "profiledProfits": "Your Withdrawable Earnings",
       "convertiblePoints": "Your Convertible Points"
-    }
+    },
+    "programSelected": "The program has been selected"
   },
   "MyCart": {
     "basketSummary": "Basket Summary",
     "choosePaymentMethod": "Choose Payment Method",
     "emptyStateTitle": "Your basket is ready and waiting for you to shop",
-    "termsAndPrivacyAgreement": "By proceeding to payment you agree to <termsLink>Terms of Use</termsLink> and <privacyLink>Privacy Policy</privacyLink> of Store Guide",
+    "termsAndPrivacyAgreement": "By proceeding to payment you agree to <termsLink>Terms of Use</termsLink> and <privacyLink>Privacy Policy</privacyLink> of Enjoy Games",
     "discountCoupon": "Discount Coupon:",
     "cartSummary": "Shopping Cart Summary",
     "rewards": {
@@ -354,7 +423,12 @@
     "discountSuccess": "The debit transaction was completed successfully.",
     "discountFaild": "The selected coupon code is invalid.",
     "orderSuccess": "Code was stored successfully",
-    "orderFaild": "The selected product id is invalid."
+    "orderFaild": "The selected product id is invalid.",
+    "partialWallet": "Pay part of the wallet.",
+    "partialWalletDesc": "The entire wallet balance will be paid, and then your bank card will be paid.",
+    "fullCard": "Pay the full amount using your bank card.",
+    "fullCardDesc": "The full amount will be paid using your bank card without any deduction from the balance.",
+    "choosePayment": "Choose payment"
   },
   "Tickets": {
     "emptyStateTitle": "No support tickets yet...",
@@ -366,6 +440,8 @@
     "lastUpdated": "last Updated",
     "conversation": "Conversation",
     "customer": "Customer",
+    "supportAgent": "Support Agent",
+    "supportTeam": "Support Team",
     "ticketId": "Ticket ID",
     "Dashboard": {
       "PageDesc": {
@@ -374,8 +450,15 @@
       "allTickets": "All Tickets",
       "desc": "Manage all tickets in one place",
       "createTicket": "Create Ticket",
-      "createNewTicket": "Create New Ticket"
-    }
+      "createNewTicket": "Create New Ticket",
+      "status": {
+        "open": "Open",
+        "pending": "Pending",
+        "resolved": "Resolved",
+        "closed": "Closed"
+      }
+    },
+    "you": "You"
   },
   "productDetails": {
     "shareLinkWith": "Share the link via:",
@@ -400,7 +483,175 @@
     "poor": "Didn't Like It",
     "bad": "Bad",
     "relatedProducts": "Related Products",
-    "productEvaluation": "Your evaluation has been submitted successfully. Thank you very much."
+    "suggestedProducts": "Suggested Products",
+    "productEvaluation": "Your evaluation has been submitted successfully. Thank you very much.",
+    "noImages": "No images provided for this rating.!",
+    "proofFile": "Authentication facility",
+    "vatExempt": "Vat exempt"
+  },
+  "referrals": {
+    "totalReferrals": "Total Referrals",
+    "pointsEarned": "Points Earned",
+    "invitedFriends": "Invited Friends",
+    "noFriends": "No friends have been invited yet."
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "intro": "This Privacy Policy describes how we collect, use, and disclose your information when you use our services. It also explains your privacy rights and legal protections. By using our services, you agree to the collection and use of your information as described in this policy.",
+    "definitions": {
+      "title": "Definitions",
+      "items": [
+        "Account: A unique account created to access our services.",
+        "Affiliate: An entity that controls, is controlled by, or is under common control with another party.",
+        "Application: EngoyGames software provided by the company.",
+        "Company: Daleel User Technology Solutions, Sole Proprietorship and EngoyGames E-Transaction LLC.",
+        "Cookies: Small files placed on your device by a website to store your browsing history.",
+        "Country: Saudi Arabia and the United Arab Emirates.",
+        "Device: Any device that can access the service (e.g., computer, mobile phone, tablet).",
+        "Personal Data: Information that relates to an identified individual.",
+        "Service: Refers to the application or website, or both.",
+        "Service Provider: Any legal entity that processes data on behalf of the company.",
+        "Usage Data: Data collected automatically when using the service.",
+        "Website: EngoyGames accessible at EngoyGames website.",
+        "You: The individual accessing or using the service."
+      ]
+    },
+    "collection": {
+      "title": "Collection and Use of Your Personal Data",
+      "personalData": "Personal Data",
+      "usageData": "Usage Data",
+      "mobileData": "Mobile Data",
+      "types": {
+        "title": "Types of Data Collected",
+        "personal": ["Email address", "First and last name", "Phone number"],
+        "usage": [
+          "IP address",
+          "Browser type and version",
+          "Pages visited",
+          "Date and time of visit",
+          "Time spent on pages",
+          "Unique device identifiers",
+          "Diagnostic data"
+        ],
+        "mobile": [
+          "Mobile device type and unique ID",
+          "Mobile device IP address",
+          "Mobile device operating system",
+          "Mobile browser type"
+        ]
+      }
+    },
+    "tracking": {
+      "title": "Tracking Technologies and Cookies",
+      "cookiesIntro": "We use cookies and similar technologies to monitor activity on our service and store certain information. The technologies we use include:",
+      "cookiesDetails": [
+        "Enhancing user experience: Cookies help remember your preferences, allowing us to tailor our services to your needs.",
+        "Usage analysis: Cookies provide insights into how our website is used, helping us improve our service and user experience.",
+        "You can refuse cookies through your browser settings. However, disabling cookies may affect some parts of our service."
+      ],
+      "cloudflare": "We use Cloudflare to enhance security and performance of our website. Cloudflare may use cookies and other technologies to collect and store information such as IP address, browser type and version, and time zone settings. Cloudflare helps ensure speed, security, and reliability for our users."
+    },
+    "usage": {
+      "title": "Use of Your Personal Data",
+      "list": [
+        "Provide and maintain the service",
+        "Manage your account",
+        "Perform contracts",
+        "Contact you with updates and promotional information",
+        "Manage orders",
+        "Other purposes such as data analysis and service improvement"
+      ]
+    },
+    "retention": {
+      "title": "Retention and Transfer of Your Personal Data",
+      "text": "We retain personal data only as long as necessary for the purposes outlined in this policy, including legal compliance. Data may be transferred to computers outside your jurisdiction with appropriate safeguards."
+    },
+    "deletion": {
+      "title": "Deletion and Disclosure of Your Personal Data",
+      "text": "You have the right to delete or request assistance in deleting your personal data. We may retain some information when required by law. Personal data may also be disclosed for legal requirements."
+    },
+    "security": {
+      "title": "Security of Your Personal Data",
+      "text": "While we strive to protect your data, no method of transmission or storage is 100% secure."
+    },
+    "children": {
+      "title": "Children’s Privacy",
+      "text": "We do not knowingly collect personal information from children under 13. If you become aware that your child has provided personal data to us, please contact us to remove it."
+    },
+    "externalLinks": {
+      "title": "Links to Other Websites",
+      "text": "We are not responsible for the privacy practices of third-party websites."
+    },
+    "updates": {
+      "title": "Changes to This Privacy Policy",
+      "text": "We may update this policy and will notify you via email. The updated policy becomes effective once posted on this page."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "text": "For any inquiries about this Privacy Policy, you can reach us:",
+      "email": "contact@EngoyGames.com",
+      "website": "https://EngoyGames.com",
+      "websiteTilte": "Website"
+    }
+  },
+  "refundPolicy": {
+    "title": "Refund Policy",
+    "intro": "Although we strive for your complete satisfaction with your purchases of our digital products, you may sometimes need to know our refund policy. This policy explains all the information you need to know in this regard.",
+    "steps": [
+      "Due to the nature of digital products (cards, codes, e-vouchers), all sales are considered final and non-refundable or non-exchangeable after the purchase is completed and the code is delivered to the customer.",
+      "EngoyGames or its affiliated companies bear no responsibility for incorrect purchases you made due to your negligence or entering false/incorrect information.",
+      "Refund requests are only considered if there is a proven technical defect in the code itself that prevents proper use, provided that this defect originates from the company issuing the original card and not from misuse by the customer or issues related to the platform where the code is being used.",
+      "If the customer chooses a refund to the original bank card used for payment, a service fee of up to 3.5% of the refunded order value will be deducted. Please note that the bank refund process may take between 24 hours and 5 business days and is subject to the policies of different banks and payment gateways, and EngoyGames is not responsible for delays caused by these entities.",
+      "After receiving your order, EngoyGames is not responsible for any loss or damage to the purchased digital product. EngoyGames is not responsible for used or stolen codes after proper delivery, or expired codes whose expiration date was clear at the time of purchase.",
+      "EngoyGames reserves the right to change, modify, add, or remove parts of this refund and exchange policy at any time without prior notice. Changes take effect immediately upon posting on the website or app. Please review this policy periodically to keep up with updates. Continued use of the website or app after posting changes constitutes your full acceptance of these changes."
+    ],
+    "needHelpTitle": "Having an issue with your order?",
+    "needHelpText": "We do our best to ensure the validity and functionality of products, and if you encounter any problem with your order, please contact our customer support team."
+  },
+  "termsOfUse": {
+    "title": "EngoyGames Terms of Use",
+    "intro": "Welcome to \"EngoyGames\". These terms and conditions apply to your use of the website or app. By entering and using EngoyGames, you fully agree to these terms and conditions.",
+    "userAccount": {
+      "title": "User Account",
+      "items": [
+        "Registration and Login: Using certain features may require creating a user account. Accounts are created and logged in using the customer's phone number, verified via a code sent to that number. You are responsible for providing accurate information, including ensuring your phone can receive the verification code.",
+        "Account Security: You are fully responsible for keeping your registered phone number secure and the verification codes private. You must prevent unauthorized access and report any unauthorized use immediately.",
+        "Personal Use: The user account is for personal use only and cannot be transferred or shared.",
+        "Suspension Right: EngoyGames reserves the right to suspend or deactivate your account if you violate these terms or site policies, at management's discretion."
+      ]
+    },
+    "orders": {
+      "title": "Orders and Purchases",
+      "items": [
+        "Order Acceptance: EngoyGames reserves the right not to approve any order at its discretion for reasons including, but not limited to, using someone else's payment method, suspected fraud, missing membership verification information, or other internal policy reasons.",
+        "Payment Methods: Entered payment information must match the cardholder’s data. Customers are responsible for providing accurate data and any additional info requested to avoid cancellation.",
+        "Fraud Cases: EngoyGames may cancel any suspected fraudulent order without providing an explanation.",
+        "Promotions and Loyalty Programs: EngoyGames may create and apply discounts, vouchers, or benefits. Usage is subject to the terms of each offer. The \"DaleelStars\" loyalty program allows eligible customers to earn or redeem points. Policies may be updated at any time."
+      ]
+    },
+    "digitalOrders": {
+      "title": "Digital Orders and Delivery",
+      "items": [
+        "Modify Order: Orders cannot be modified after confirmation. Please ensure data accuracy before confirming.",
+        "Order Cancellation by Customer: Due to the nature of digital products, the order cannot be canceled after confirmation.",
+        "Digital Delivery: After purchase and payment confirmation, the digital product is delivered directly in the customer's account and may also be sent via registered email as per delivery policies.",
+        "Non-Refundable and Non-Exchangeable: Products cannot be refunded or exchanged after purchase except in case of a defect in the original code.",
+        "Customer Responsibility: Once the code appears in the account or is delivered, the customer is fully responsible for using and safeguarding it.",
+        "Code Expiry: EngoyGames is not responsible for codes that expire before use."
+      ]
+    },
+    "vouchers": {
+      "title": "EngoyGames Vouchers",
+      "items": [
+        "When using vouchers, EngoyGames reserves the right to suspend or deactivate the account temporarily or permanently if misuse, fraud, or manipulation is suspected."
+      ]
+    },
+    "termsChanges": {
+      "title": "Terms and Conditions Changes",
+      "items": [
+        "EngoyGames reserves the right to change, modify, add, or remove parts of the terms at any time without notice. Changes take effect immediately. Continued use constitutes acceptance of the changes."
+      ]
+    }
   },
   "search": {
     "searchResults": "Search results",
@@ -418,7 +669,11 @@
     "faqs": "Faqs",
     "tickets": "Tickets",
     "ratings": "Ratings",
-    "orders": "Orders"
+    "orders": "Orders",
+    "notifications": "Notifications",
+    "users": "Users",
+    "productSubscribers": "Product Subscribers",
+    "settings": "Settings"
   },
   "Dashboard": {
     "desc": "Welcome to your order management orders",
@@ -487,7 +742,12 @@
       "desc": "Create and manage FAQs for your store",
       "manageFaqs": "Manage all FAQs in one place",
       "createFaq": "Create Question & Answer",
-      "createNewFaqs": "Create New Question & Answer"
+      "createNewFaqs": "Create New Question & Answer",
+      "FaqsFilters": {
+        "all": "All",
+        "generated": "AI Generated",
+        "manual": "Manual"
+      }
     },
     "sliders": {
       "title": "Slider Images",
@@ -499,10 +759,43 @@
     },
     "orders": {
       "title": "All Orders",
-      "desc": "Create and manage Orders for your store",
+      "desc": "Manage Orders for your store",
       "manageOrders": "Manage all Orders in one place",
-      "createOrder": "Create Order",
-      "createNewOrder": "Create new order"
+      "products": {
+        "allProducts": "All Products",
+        "title": "Order Products",
+        "desc": "Browse all products included in this order"
+      },
+      "uploadDoc": "Upload documentation"
+    },
+    "Users": {
+      "title": "All Users",
+      "desc": "Manage Users for your store",
+      "manageUsers": "Manage all Users in one place",
+      "createUsers": "Create Users",
+      "createNewUsers": "Create new User",
+      "permissions": {
+        "manageProducts": "Manage Products",
+        "manageSettings": "Manage Settings",
+        "manageUsers": "Manage Users",
+        "manageCategories": "Manage Categories",
+        "manageSubcategories": "Manage Subcategories",
+        "manageCodes": "Manage Codes",
+        "manageCoupons": "Manage Coupons",
+        "manageSliders": "Manage Sliders",
+        "manageOrders": "Manage Orders",
+        "manageRatings": "Manage Ratings",
+        "replyTickets": "Reply Tickets"
+      }
+    },
+    "productSubscribers": {
+      "title": "All subscribers to a product",
+      "desc": "Manage subscribers for your store",
+      "manageSubscribers": "Manage all subscribers in one place"
+    },
+    "settings": {
+      "title": "Account Settings",
+      "desc": "Update your account information"
     }
   },
   "errorBoundary": {
@@ -510,10 +803,10 @@
   },
   "Shared": {
     "procedures": {
-      "default": "Withdrawal History",
+      "default": "Withdrawal and Deposit History",
       "last": "Last Withdrawal Record"
     },
-    "emptyState": "No withdrawals found",
+    "emptyState": "No withdrawals or deposits",
     "point": "Point"
   },
   "Invoice": {
@@ -527,13 +820,15 @@
       },
       "total": {
         "label": "Total Amount"
-      }
+      },
+      "itemId": "معرف العنصر"
     }
   },
   "BtnTexts": {
     "save": "Save",
     "Saving": "Saving",
     "cancel": "Cancel",
+    "delete": "Delete",
     "StartMarketingNow": "Start Shopping Now",
     "GetItNow": "Get It Now",
     "BuyNow": "Buy Now",
@@ -585,7 +880,12 @@
     "lastWeek": "last week",
     "lastMonthly": "last month",
     "lastYearly": "last year",
-    "customRange": "custom Range"
+    "customRange": "custom Range",
+    "upload": "Upload",
+    "reply": "Reply",
+    "sending": "Sending...",
+    "changeAvatar": "Change Avatar",
+    "confirm": "Confirm"
   },
   "Inputs": {
     "labels": {
@@ -593,14 +893,15 @@
       "email": "Email",
       "password": "Password",
       "password_confirmation": "Confirm password",
+      "referral_code": "Referral Code (Optional)",
       "gender": "Gender",
       "phone": "Mobile Number",
       "birthDate": "Birth Date",
       "quantity": "Quantity",
       "twitter": "Twitter",
       "facebook": "Facebook",
-      "idNumber": "ID Number",
       "shipping_method": "Shipping method",
+      "login_method": "Login Method",
       "unlockAccount": "I have unlocked the account",
       "comment": "Leave a comment",
       "hideMyName": "Hide my name in the customer list",
@@ -618,6 +919,8 @@
       "englishContent": "Content (English)",
       "arabicDescription": "Description (Arabic)",
       "englishDescription": "Description (English)",
+      "arabicTermsAndConditions": "Terms and Conditions (Arabic)",
+      "englishTermsAndConditions": "Terms and Conditions (English)",
       "price": "Price",
       "priceBefore": "Old Price",
       "shippingPayment": "Payment Method",
@@ -626,6 +929,7 @@
       "multiId": "Multiple IDs",
       "access": "Access / Account Data",
       "discount": "Discount",
+      "vatRate": "Vat rate",
       "isActive": "Active",
       "productID": "Product",
       "value": "Value",
@@ -644,7 +948,9 @@
       "englishAnswer": "Answer (English)",
       "subject": "Subject",
       "message": "Message",
-      "attachments": "Attachments"
+      "attachments": "Attachments",
+      "permissions": "Permissions",
+      "status": "Status"
     },
     "placeHolders": {
       "haveCoupon": "Do you have a discount coupon?",
@@ -652,6 +958,7 @@
       "subject": "Ticket Title",
       "ticketType": "Select Ticket Type",
       "details": "Please write a detailed description of your issue",
+      "message": "Please write a more detailed description of your assistance.",
       "name": "",
       "email": "",
       "phone": "xxxxxxxxx",
@@ -666,7 +973,10 @@
       "writeYorName": "write your name...",
       "writeYorEmail": "write your email...",
       "yourPassword": "your password",
-      "repassword": "Confirm password",
+      "password": "your password",
+      "repassword": "confirm password",
+      "password_confirmation": "confirm password",
+      "referralCode": "referral code",
       "searchCategories": "Search for categories...",
       "searchSubCategories": "Search for sub categories...",
       "searchCodes": "Search for code...",
@@ -688,10 +998,13 @@
       "writeEnglishContent": "Enter content in English",
       "writeArabicDescription": "Enter description in Arabic",
       "writeEnglishDescription": "Enter description in English",
+      "writeArabicTermsAndConditions": "Write the terms and conditions in Arabic",
+      "writeEnglishTermsAndConditions": "Write the terms and conditions in English",
       "writePrice": "Enter price",
       "writePriceBefore": "Enter old price",
       "shippingPayment": "Payment Method",
       "writeDiscount": "Enter discount value",
+      "writeVatRate": "Enter the VAT rate",
       "isActive": "Active",
       "addImage": "Add image",
       "productID": "Product",
@@ -710,7 +1023,12 @@
       "writeEnglishAnswer": "Enter answer in English",
       "writeSubject": "Enter subject",
       "writeMessage": "Enter description...",
-      "selectAttachments": "Select files"
+      "selectAttachments": "Select files",
+      "typeYourReply": "write your response here...",
+      "searchUser": "Search for user...",
+      "selectPermissions": "Select Permissions",
+      "permissions": "Select Permissions",
+      "status": "Select Status"
     },
     "options": {
       "gender": {
@@ -729,15 +1047,18 @@
       "emailInvalid": "Invalid email address",
       "emailPatternInvalid": "Email format is incorrect",
       "emailRequired": "Email is required",
-      "idNumberRequired": "ID Number Required",
+      "loginMethodRequired": "Login Method Required",
+      "accountIdRequired": "ID Number Required",
       "phoneRequired": "Phone number is required",
       "birthDateRequired": "Birth date is required",
       "genderOneOf": "Please select a gender",
       "genderRequired": "Gender is required",
       "passwordRequired": "Password is required",
       "repasswordRequired": "Password confirmation is required",
+      "referralCodeInvalid": "Invalid referral code",
       "repasswordNotMatch": "Passwords do not match",
       "avatarRequired": "Image is required",
+      "invalidImage": "Invalid image",
       "subjectRequired": "Subject is required",
       "ticketTypeRequired": "Ticket type is required",
       "detailsRequired": "Description is required",
@@ -755,8 +1076,12 @@
       "englishContentRequired": "English content is required",
       "arabicDescriptionRequired": "Arabic description is required",
       "englishDescriptionRequired": "English description is required",
+      "arabicTermsAndConditionsRequired": "Arabic Terms and Conditions Required",
+      "englishTermsAndConditionsRequired": "English Terms and Conditions Required",
       "priceRequired": "Price is required",
       "shippingPaymentRequired": "Payment method is required",
+      "vatRateRequired": "VAT rate is required",
+      "vatRateBetween": "Between vat rates",
       "couponRequired": "Coupon code is required",
       "valueRequired": "Value is required",
       "typeCouponRequired": "Coupon type is required",
@@ -768,7 +1093,14 @@
       "arabicAnswerRequired": "Arabic answer is required",
       "englishAnswerRequired": "English answer is required",
       "arabicImageRequired": "Arabic image is required",
-      "englishImageRequired": "English image is required"
+      "englishImageRequired": "English image is required",
+      "fileRequired": "File required",
+      "permissionsRequired": "Permissions required",
+      "statusRequired": "Status Required",
+      "messageRequired": "Message Required",
+      "termsAccepted": "Terms and Privacy Policy must be accepted.",
+      "invalidDate": "Date must be between 1935 and",
+      "unlockAccountRequired": "Account unlock required"
     }
   },
   "Auth": {
@@ -798,10 +1130,11 @@
     "links": {
       "myCartPage": "My cart page",
       "myTicketPage": "Technical Support Tickets Page",
-      "linkedin": "LinkedIn account",
-      "twitter": "Twitter account",
-      "instagram": "Instagram account",
       "facebook": "Facebook account",
+      "telegram": "Telegram account",
+      "instagram": "Instagram account",
+      "tiktok": "Tiktok account",
+      "snapchat": "Snapchat account",
       "googlePlayApp": "Google Play App",
       "appStoreApp": "App Store App"
     },
@@ -822,7 +1155,20 @@
     "errorMessage": "Sorry! Something went wrong.",
     "addedToCart": "Added to cart",
     "removedFromCart": "Removed from cart",
-    "undefined": "undefined"
+    "undefined": "undefined",
+    "unavailable": "unavailable",
+    "deleteWarningTitle": "Warning",
+    "deleteWarningMessage": "Are you sure you want to remove {item} from the cart?",
+    "errorNotifications": "Error fetching notifications:",
+    "noNotifications": "No notifications yet",
+    "justNow": "Just now",
+    "hourAgo": "h ago",
+    "dayAgo": "d ago",
+    "daysAgo": "days ago",
+    "selectAllUnread": "Select all unread",
+    "readable": "Readable",
+    "welcomeMessage": "Hello! I'm your EnjoyGames assistant. I'm here to help you with questions about our products, services, and provide general support. How can I assist you today?",
+    "linkCopied": "Link copied!"
   },
   "Languages": {
     "english": "English",

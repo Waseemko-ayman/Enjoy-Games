@@ -1,11 +1,55 @@
+import ButtonLoading from '@/components/atomic/ButtonLoading';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
-import { stats } from '@/data';
+import InlineError from '@/components/molecules/InlineError';
 import { myAccountStatsProps, TranslationFunction } from '@/interfaces';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Wallet } from 'lucide-react';
 import React from 'react';
+import { FaStar } from 'react-icons/fa6';
 
-const Stats = ({ t }: { t: TranslationFunction }) => {
+const Stats = ({
+  t,
+  walletBalance,
+  points,
+  getLoading,
+  getError,
+}: {
+  t: TranslationFunction;
+  walletBalance: string;
+  points: number;
+  getLoading: boolean;
+  getError: string;
+}) => {
+  const getCardValue = (value?: string | number) => {
+    if (getLoading) return <ButtonLoading borderColor="border-black" />;
+    if (getError)
+      return (
+        <InlineError textColor="text-enjoy-primary" otherClassName="text-xs" />
+      );
+    return value ?? 0;
+  };
+
+  const stats = [
+    {
+      id: 1,
+      icon: Wallet,
+      titleKey: 'balance',
+      amount: getCardValue(walletBalance),
+      // currency: myWallet?.wallet_balance?.currency,
+    },
+    {
+      id: 2,
+      icon: FaStar,
+      titleKey: 'currentLevel',
+      amount: getCardValue(points),
+    },
+    // {
+    //   id: 3,
+    //   icon: FaHeart,
+    //   titleKey: 'interests',
+    //   href: PATHS.MY_ACCOUNT.INTERESTS.link,
+    // },
+  ];
+
   const contents = (item: myAccountStatsProps) => {
     const Icon = item.icon;
     return (
@@ -14,14 +58,12 @@ const Stats = ({ t }: { t: TranslationFunction }) => {
           {Icon && <Icon className="text-gray-500" size={12} />}
           <h4 className="text-base">{t(`statsTitles.${item.titleKey}`)}</h4>
         </div>
-        {item.account !== undefined && (
-          <div className="flex items-center justify-center gap-2 bg-[var(--enjoy-gray-200)] p-2 rounded-full">
+        {item.amount !== undefined && (
+          <div className="flex items-center justify-center gap-1 bg-[var(--enjoy-gray-200)] p-2 rounded-full">
             <span className="text-enjoy-primary text-xs font-bold">
-              {item.account}
+              {item.amount}
             </span>
-            {item.currency && (
-              <Image src={item.currency} alt="ريال" width={12} height={12} />
-            )}
+            {/* {item.currency} */}
           </div>
         )}
       </>
@@ -32,12 +74,12 @@ const Stats = ({ t }: { t: TranslationFunction }) => {
     <ul className="border-b border-gray-300 pb-7 space-y-2">
       {stats.map((item) => (
         <AnimatedWrapper key={item.id}>
-          <li className="w-full flex items-center justify-between">
-            {item.href ? (
+          <li className="w-full flex items-center justify-between gap-3">
+            {/* {item.href ? (
               <Link href={item.href}>{contents(item)}</Link>
             ) : (
-              contents(item)
-            )}
+            )} */}
+            {contents(item)}
           </li>
         </AnimatedWrapper>
       ))}

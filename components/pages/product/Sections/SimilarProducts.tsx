@@ -5,17 +5,20 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import GridWrapper from '@/components/molecules/GridWrapper';
 import Loading from '@/components/molecules/loading';
 import { API_IMAGE_URL } from '@/config/api';
-import { useMainContent } from '@/context/MainContentContext';
-import { getSlugsProps } from '@/interfaces';
+import { SimilarProductsProps } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { PiShoppingCartLight } from 'react-icons/pi';
 
-const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
+const SimilarProducts: React.FC<SimilarProductsProps> = ({
+  getSlugs,
+  products,
+  isLoading,
+  error,
+}) => {
   const t = useTranslations('productDetails');
   const btnTxts = useTranslations('BtnTexts');
-  const { data, isLoading, error } = useMainContent();
   const router = useRouter();
 
   return (
@@ -26,8 +29,8 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
         <ErrorFetching />
       ) : (
         <GridWrapper otherClassName="gap-5" isScrollable>
-          {Array.isArray(data?.newly_arrived) &&
-            data.newly_arrived.map((card, index) => {
+          {Array.isArray(products) &&
+            products?.map((card, index) => {
               const { image, ...cardWithoutImage } = card;
               const slugs =
                 card.sub_category_id !== undefined
@@ -36,9 +39,7 @@ const SimilarProducts: React.FC<getSlugsProps> = ({ getSlugs }) => {
               return (
                 <AnimatedWrapper key={card.id} custom={index}>
                   <ProductCard
-                    image={
-                      `${API_IMAGE_URL}${image}` || '/assets/play-station.webp'
-                    }
+                    image={`${API_IMAGE_URL}${image}`}
                     imgAlt={card.title}
                     imgTitle={card.title}
                     showDesc

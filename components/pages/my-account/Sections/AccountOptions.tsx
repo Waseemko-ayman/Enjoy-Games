@@ -1,7 +1,7 @@
 'use client';
 
-import Input from '@/components/atomic/Input';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import FormField from '@/components/ui/FormField';
 import { accountOptions } from '@/data';
 import { FormValues, TranslationFunction } from '@/interfaces';
 import React from 'react';
@@ -15,6 +15,7 @@ const AccountOptions = ({ t }: { t: TranslationFunction }) => {
     const updated = [...checked];
     updated[index] = !updated[index];
     setValue('options', updated);
+    console.log(updated);
   };
 
   return (
@@ -30,12 +31,14 @@ const AccountOptions = ({ t }: { t: TranslationFunction }) => {
           return (
             <AnimatedWrapper key={index} custom={index}>
               <li className="flex items-center gap-3">
-                <Input
+                <FormField
+                  key={index}
+                  inputName={`options[${index}]`}
                   type="checkbox"
                   placeholder={t(text)}
-                  inputName={`options[${index}]`}
                   // checked={checked[index]}
-                  onChange={() => handleChange(index)}
+                  handleChange={() => handleChange(index)}
+                  // register={register}
                 />
               </li>
             </AnimatedWrapper>

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
 import {
@@ -21,6 +21,11 @@ import { InputTypes, ProductOption } from '@/utils/type';
 import SettingsTab from '@/components/ui/display/SettingsTab';
 import { useUpdateContent } from '@/context/updateContentContext';
 import { useTranslations } from 'next-intl';
+import { extractText } from '@/utils/extractText';
+import Image from 'next/image';
+import { API_IMAGE_URL } from '@/config/api';
+import Loading from '@/components/molecules/loading';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 
 // ----------------------------------------------------------------
 
@@ -36,9 +41,10 @@ const CreateProducts = ({
   onTabChange: (val: string) => void;
 }) => {
   const { showToast } = useToast();
-  const { triggerRefresh } = useUpdateContent();
   const t = useTranslations();
   const inputT = useTranslations('Inputs.errorsMsgs');
+  const { triggerRefresh } = useUpdateContent();
+  const refreshKey = 'products';
 
   // ----------------------------------------------------------------
 
@@ -51,17 +57,31 @@ const CreateProducts = ({
     contentEn: yup.string().required(inputT('englishContentRequired')),
     descriptionAr: yup.string().required(inputT('arabicDescriptionRequired')),
     descriptionEn: yup.string().required(inputT('englishDescriptionRequired')),
+    termsAndConditionsAr: yup
+      .string()
+      .required(inputT('arabicTermsAndConditionsRequired')),
+    termsAndConditionsEn: yup
+      .string()
+      .required(inputT('englishTermsAndConditionsRequired')),
+
     price: yup.string().required(inputT('priceRequired')),
     priceBefore: yup.string().nullable(),
     discount: yup.string().nullable(),
+    vatRate: yup
+      .number()
+      .typeError(inputT('vatRateRequired'))
+      .required(inputT('vatRateRequired'))
+      .min(0, inputT('vatRateBetween'))
+      .max(100, inputT('vatRateBetween')),
     isActive: yup.boolean().nullable(),
     shippingPayment: yup.string().required(inputT('shippingPaymentRequired')),
     image: yup
       .mixed<FileList>()
-      .test('required', inputT('avatarRequired'), (value) => {
-        return value instanceof FileList && value.length > 0;
-      })
-      .required(inputT('avatarRequired')),
+      .test('required', inputT('avatarRequired'), function (value) {
+        return (
+          editId !== null || (value instanceof FileList && value.length > 0)
+        );
+      }),
   });
 
   type ProductFormData = yup.InferType<typeof createSchema>;
@@ -79,7 +99,11 @@ const CreateProducts = ({
   >('get/categories');
 
   // Get Single Category
-  const { getSingle } = useAPI<FormData, ProductCardProps>('product/show');
+  const {
+    getSingle,
+    isLoading: getSingleIsLoading,
+    error: getSingleError,
+  } = useAPI<FormData, ProductCardProps>('product/show');
 
   // Edit Category
   const { edit, isLoading: updateLoading } = useAPI<FormData, ProductCardProps>(
@@ -104,6 +128,9 @@ const CreateProducts = ({
     formState: { errors },
   } = useForm<any, ProductFormData>({
     resolver: yupResolver(createSchema),
+    defaultValues: {
+      isActive: true,
+    },
   });
 
   const selectedCategoryID = watch('categoryID');
@@ -131,18 +158,30 @@ const CreateProducts = ({
       formData.append('title[en]', data.titleEn);
       formData.append('category_id', data.categoryID);
       formData.append('sub_category_id', data.subCategoryID);
-      formData.append('content[ar]', data.contentAr);
-      formData.append('content[en]', data.contentEn);
-      formData.append('description[ar]', data.descriptionAr);
-      formData.append('description[en]', data.descriptionEn);
+      formData.append('content[ar]', extractText(data.contentAr));
+      formData.append('content[en]', extractText(data.contentEn));
+      formData.append('description[ar]', extractText(data.descriptionAr));
+      formData.append('description[en]', extractText(data.descriptionEn));
+      formData.append(
+        'terms_and_conditions[ar]',
+        extractText(data.termsAndConditionsAr)
+      );
+      formData.append(
+        'terms_and_conditions[en]',
+        extractText(data.termsAndConditionsEn)
+      );
+
       formData.append('price', data.price);
       if (data.priceBefore) formData.append('price_before', data.priceBefore);
       if (data.discount) formData.append('discount', data.discount);
+      formData.append('vat_rate', String(data.vatRate));
       formData.append('is_active', data.isActive ? '1' : '0');
       formData.append('shipping_payment', data.shippingPayment);
 
       if (data.image && data.image[0]) {
         formData.append('image', data.image[0]);
+      } else if (!data.image && editId !== null) {
+        formData.append('image', null as any);
       }
 
       let response: { data: ProductCardProps; message: string } | undefined;
@@ -161,8 +200,25 @@ const CreateProducts = ({
 
       if (response) {
         showToast(response?.message);
-        reset();
-        triggerRefresh();
+        reset({
+          titleAr: response.data['title[ar]'] ?? '',
+          titleEn: response.data['title[en]'] ?? '',
+          categoryID: response.data.category_id?.toString() ?? '',
+          subCategoryID: response.data.sub_category_id?.toString() ?? '',
+          contentAr: response.data['content[ar]'] ?? '',
+          contentEn: response.data['content[en]'] ?? '',
+          descriptionAr: response.data['description[ar]'] ?? '',
+          descriptionEn: response.data['description[en]'] ?? '',
+          termsAndConditionsAr: response.data['terms_and_conditions[ar]'] ?? '',
+          termsAndConditionsEn: response.data['terms_and_conditions[en]'] ?? '',
+          price: toStringValue(response.data.price),
+          priceBefore: toStringValue(response.data.price_before),
+          discount: toStringValue(response.data.discount),
+          isActive: toBoolean(response.data.is_active),
+          shippingPayment: response.data.shipping_payment ?? '',
+          vatRate: response.data.vat_rate ?? 0,
+        });
+        triggerRefresh(refreshKey);
         onTabChange('allProducts');
         onEditIdChange(null);
       }
@@ -174,8 +230,7 @@ const CreateProducts = ({
 
   // ----------------------------------------------------------------
 
-  // const [iconPreview, setIconPreview] = useState<string | null>(null);
-  // const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const toStringValue = (val: any) =>
     typeof val === 'string'
@@ -201,19 +256,22 @@ const CreateProducts = ({
               contentEn: res.data.content?.en ?? '',
               descriptionAr: res.data.description?.ar ?? '',
               descriptionEn: res.data.description?.en ?? '',
+              termsAndConditionsAr: res.data.terms_and_conditions?.ar ?? '',
+              termsAndConditionsEn: res.data.terms_and_conditions?.en ?? '',
               price: toStringValue(res.data.price),
               priceBefore: toStringValue(res.data.price_before),
               discount: toStringValue(res.data.discount),
               isActive: toBoolean(res.data.is_active),
               shippingPayment: res.data.shipping_payment ?? '',
+              vatRate: res.data.vat_rate ?? 0,
             });
-            // setIconPreview(res.data.icon ?? null);
-            // setImagePreview(res.data.image ?? null);
+            setImagePreview(
+              res.data.image ? `${API_IMAGE_URL}${res.data.image}` : null
+            );
           }
         } catch (error) {
           console.error('فشل في جلب بيانات القسم:', error);
-          const apiError = (error as any)?.response?.message;
-          showToast(apiError);
+          showToast((error as any)?.response?.message, 'error');
         }
       })();
     }
@@ -240,64 +298,85 @@ const CreateProducts = ({
       description={t('Dashboard.products.createNewProduct')}
     >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-        <div className="grid gap-5 md:grid-cols-2 mb-5">
-          {CreateProductsFields.map(
-            ({ id, label, name, placeholder, type, options: itemOptions }) => {
-              let options: ProductOption[] = [];
-              if (name === 'categoryID') options = categoriesOptions ?? [];
-              else if (name === 'subCategoryID')
-                options = subCategoriesProductsOptions ?? [];
-              else if (name === 'shippingPayment') options = itemOptions ?? [];
-              return (
-                <FormField
-                  key={id}
-                  id={id}
-                  inputName={name}
-                  type={type as InputTypes}
-                  label={t(`Inputs.labels.${label}`)}
-                  placeholder={t(`Inputs.placeHolders.${placeholder}`)}
-                  register={register}
-                  control={control}
-                  options={options}
-                  error={
-                    errors[name as keyof ProductFormData] as
-                      | FieldError
-                      | undefined
-                  }
-                  {...(type === 'file' ? { accept: 'image/*' } : {})}
+        {getSingleIsLoading ? (
+          <Loading />
+        ) : getSingleError ? (
+          <ErrorFetching />
+        ) : (
+          <>
+            <div className="grid gap-5 md:grid-cols-2 mb-5">
+              {CreateProductsFields.map(
+                ({
+                  id,
+                  label,
+                  name,
+                  placeholder,
+                  type,
+                  options: itemOptions,
+                }) => {
+                  let options: ProductOption[] = [];
+                  if (name === 'categoryID') options = categoriesOptions ?? [];
+                  else if (name === 'subCategoryID')
+                    options = subCategoriesProductsOptions ?? [];
+                  else if (name === 'shippingPayment')
+                    options = itemOptions ?? [];
+                  return (
+                    <FormField
+                      key={id}
+                      id={id}
+                      inputName={name}
+                      type={type as InputTypes}
+                      label={t(`Inputs.labels.${label}`)}
+                      placeholder={t(`Inputs.placeHolders.${placeholder}`)}
+                      register={register}
+                      control={control}
+                      options={options}
+                      error={
+                        errors[name as keyof ProductFormData] as
+                          | FieldError
+                          | undefined
+                      }
+                      editId={editId}
+                      {...(type === 'file' ? { accept: 'image/*' } : {})}
+                    />
+                  );
+                }
+              )}
+            </div>
+            {/*
+            {iconPreview && (
+              <div className="mb-3">
+                <label className="block mb-1">معاينة الأيقونة:</label>
+                <Image
+                  src={iconPreview}
+                  alt="Icon Preview"
+                  width={64}
+                  height={64}
+                  className="w-16 h-16 object-cover"
                 />
-              );
-            }
-          )}
-        </div>
-        {/* {iconPreview && (
-          <div className="mb-3">
-            <label className="block mb-1">معاينة الأيقونة:</label>
-            <Image
-              src={iconPreview}
-              alt="Icon Preview"
-              width={64}
-              height={64}
-              className="w-16 h-16 object-cover"
-            />
-          </div>
+              </div>
+            )}
+            */}
+            {imagePreview && (
+              <div className="mb-3">
+                {getSingleIsLoading ? (
+                  <Loading />
+                ) : (
+                  <Image
+                    src={imagePreview}
+                    alt="Image Preview"
+                    width={128}
+                    height={128}
+                    className="w-32 h-32 object-cover"
+                  />
+                )}
+              </div>
+            )}
+            <Button type="submit">
+              {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
+            </Button>
+          </>
         )}
-
-        {imagePreview && (
-          <div className="mb-3">
-            <label className="block mb-1">معاينة الصورة:</label>
-            <Image
-              src={imagePreview}
-              alt="Image Preview"
-              width={128}
-              height={128}
-              className="w-32 h-32 object-cover"
-            />
-          </div>
-        )} */}
-        <Button type="submit">
-          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
-        </Button>
       </form>
     </SettingsTab>
   );

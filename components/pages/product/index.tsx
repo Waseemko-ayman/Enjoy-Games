@@ -18,16 +18,16 @@ import { useUpdateContent } from '@/context/updateContentContext';
 const ProductDetailsPage = ({ productId }: { productId: string }) => {
   // API Hooks
   const { categories } = useCategories();
-  const { getSingle, product, isLoading } = useAPI(`product`);
+  const { getSingle, product, isLoading, error } = useAPI(`product`);
   const { selectedCountry } = useCurrency();
-  const { refreshFlag } = useUpdateContent();
+  const { refreshFlags } = useUpdateContent();
 
   const t = useTranslations('Loading');
   const serviceTxts = useTranslations('HomePage');
 
   useEffect(() => {
     getSingle(productId);
-  }, [productId, selectedCountry, refreshFlag]);
+  }, [productId, selectedCountry, refreshFlags['ratings']]);
 
   if (isLoading) {
     return <LoadingPlaceholder message={t('loadingMessage')} />;
@@ -36,10 +36,13 @@ const ProductDetailsPage = ({ productId }: { productId: string }) => {
   return (
     <Layer className="mt-5">
       <Container>
-        <ProductDetailsSections product={product} />
-        <TabsSection product={product} isLoading={isLoading} />
+        <ProductDetailsSections product={product?.product} />
+        <TabsSection product={product?.product} isLoading={isLoading} />
       </Container>
       <SimilarProducts
+        products={product?.similar_products}
+        isLoading={isLoading}
+        error={error}
         getSlugs={(subCatId) =>
           getCategoryAndSubCategorySlugs(categories, subCatId)
         }

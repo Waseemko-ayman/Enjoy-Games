@@ -61,9 +61,7 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
                     key={card.id}
                     imgAlt={card.title}
                     imgTitle={card.title}
-                    image={
-                      `${API_IMAGE_URL}${image}` || '/assets/play-station.webp'
-                    }
+                    image={`${API_IMAGE_URL}${image}`}
                     storeFlagImg={card.storeFlagImg}
                     showBtn={true}
                     btnVariant="primary"

@@ -1,7 +1,7 @@
 'use client';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { ProductCardProps } from '@/interfaces';
-// import { useCurrency } from './CurrencyContext';
+import { useCurrency } from './CurrencyContext';
 
 const CART_STORAGE_KEY = 'my_cart_items';
 
@@ -16,7 +16,8 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  // const { selectedCountry } = useCurrency();
+  const { selectedCountry } = useCurrency();
+  const prevCountryCodeRef = useRef<string | undefined>(undefined);
 
   const [cartItems, setCartItems] = useState<ProductCardProps[]>(() => {
     if (typeof window === 'undefined') return [];
@@ -42,11 +43,19 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   // // عند تغيير العملة، نمسح السلة لأن المنتجات قد تختلف الأسعار أو العملات
-  // useEffect(() => {
-  //   // مسح السلة وتحديث localStorage عند تغيير العملة
-  //   setCartItems([]);
-  //   localStorage.removeItem(CART_STORAGE_KEY);
-  // }, [selectedCountry?.code]);
+  useEffect(() => {
+    if (
+      prevCountryCodeRef.current &&
+      prevCountryCodeRef.current !== selectedCountry?.code
+    ) {
+      // فقط إذا كانت هناك قيمة سابقة وتغيرت
+      setCartItems([]);
+      localStorage.removeItem(CART_STORAGE_KEY);
+    }
+
+    // نحفظ القيمة الحالية للاستخدام لاحقًا
+    prevCountryCodeRef.current = selectedCountry?.code;
+  }, [selectedCountry?.code]);
 
   useEffect(() => {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));

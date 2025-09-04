@@ -1,6 +1,5 @@
 'use client';
 import Input from '@/components/atomic/Input';
-import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import Container from '../Container';
 import { FiUser } from 'react-icons/fi';
@@ -17,15 +16,16 @@ import Button from '@/components/atomic/Button';
 import { useTranslations } from 'next-intl';
 import { useAuthContext } from '@/context/AuthContext';
 import { useCartContext } from '@/context/CartContext';
-import { FaRegBell } from 'react-icons/fa6';
-import { useTickets } from '@/context/TicketsContext';
 import { useRouter } from 'next/navigation';
 import { useCurrency } from '@/context/CurrencyContext';
 import { Country } from '@/interfaces';
+import NotificationsMenu from '../NotificationsMenu';
+import Image from 'next/image';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const router = useRouter();
 
@@ -40,7 +40,6 @@ const Header = () => {
   // API Context (Hook)
   const { token } = useAuthContext();
   const { cartItems } = useCartContext();
-  const { tickets, hasUnreadTickets } = useTickets();
   const { toggleLocale, isArabic } = useToggleLocale();
   const { selectedCountry, setSelectedCountry } = useCurrency();
 
@@ -61,7 +60,7 @@ const Header = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+        setIsUserOpen(false);
       }
     };
 
@@ -107,10 +106,13 @@ const Header = () => {
                 <AnimatedWrapper direction="y" distance={40}>
                   <FiUser
                     className={iconsStyle}
-                    onClick={() => setIsOpen((prev) => !prev)}
+                    onClick={() => {
+                      setIsUserOpen((prev) => !prev);
+                      setIsNotificationsOpen(false);
+                    }}
                   />
                 </AnimatedWrapper>
-                {isOpen && <UserPopup />}
+                {isUserOpen && <UserPopup />}
               </div>
             ) : (
               <AnimatedWrapper direction="y" distance={40}>
@@ -119,21 +121,17 @@ const Header = () => {
                 </Link>
               </AnimatedWrapper>
             )}
-            <AnimatedWrapper direction="y" distance={-40}>
-              <Link
-                href={PATHS.TICKETS.ROOT.link}
-                aria-label={ariaTxts('myTicketPage')}
-                className="relative"
-              >
-                <FaRegBell className={iconsStyle} />
-                {hasUnreadTickets && tickets && tickets.length > 0 && (
-                  <>
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
-                  </>
-                )}
-              </Link>
-            </AnimatedWrapper>
+
+            {/* Notifications Menu */}
+            <NotificationsMenu
+              isOpen={isNotificationsOpen}
+              setIsNotificationsOpen={(open) => {
+                setIsNotificationsOpen(open);
+                if (open) setIsUserOpen(false);
+              }}
+              otherClassName="w-9 h-9"
+            />
+
             <AnimatedWrapper direction="y" distance={-40}>
               <Link
                 href={PATHS.MY_CART.link}

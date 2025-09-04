@@ -7,11 +7,9 @@ import React from 'react';
 const AllTickets = ({
   value,
   onTabChange,
-  onEditIdChange,
 }: {
   value: string;
   onTabChange: (val: string) => void;
-  onEditIdChange: (id: string | number | null) => void;
 }) => {
   const t = useTranslations();
   return (
@@ -19,12 +17,10 @@ const AllTickets = ({
       value={value}
       title={t('Tickets.Dashboard.allTickets')}
       description={t('Tickets.Dashboard.desc')}
-      apiEndpoint="tickets"
-      deleteEndpoint="ticket/delete"
-      createTabValue="createTickets"
+      apiEndpoint="tickets/admin/tickets"
       placeholder={t('Inputs.placeHolders.searchTicket')}
-      onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
+      showEdit={false}
     />
   );
 };

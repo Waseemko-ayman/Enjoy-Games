@@ -48,7 +48,7 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                 ...opt,
                 label:
                   inputsTexts(`options.${input.name}.${opt.value}`) ||
-                  opt.label,
+                  opt.labelKey,
               }))
             : undefined;
 
@@ -66,23 +66,15 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                       render={({ field: { onChange, value } }) => (
                         <PhoneInput
                           international
-                          defaultCountry="PS"
+                          defaultCountry="OM"
                           value={value}
                           onChange={onChange}
                           placeholder={placeholder}
-                          className={`px-4 py-3 bg-white rounded-lg border ${
-                            errors[input.name]
-                              ? 'border-red-500'
-                              : 'border-gray-300'
-                          } focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)]`}
+                          className={`px-4 py-3 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)]`}
+                          readOnly
                         />
                       )}
                     />
-                    {errors[input.name] && (
-                      <FormError
-                        message={errors[input.name]?.message as string}
-                      />
-                    )}
                   </div>
                 ) : (
                   <div>
@@ -99,6 +91,9 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                         errors[input.name] ? 'border-red-500' : ''
                       }
                       {...register(input.name)}
+                      readOnly={
+                        input.name === 'email' || input.name === 'phone'
+                      }
                     />
                     {errors[input.name] && (
                       <FormError

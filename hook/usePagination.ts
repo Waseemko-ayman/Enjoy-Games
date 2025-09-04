@@ -1,17 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Order } from '@/interfaces';
 import { useState, useMemo, useEffect } from 'react';
 
-interface UsePaginationProps {
-  data: Order[];
+interface UsePaginationProps<T> {
+  data: T[];
   itemsPerPage: number;
   initialPage?: number;
 }
 
-interface UsePaginationReturn {
+interface UsePaginationReturn<T> {
   currentPage: number;
   totalPages: number;
-  paginatedData: Order[];
+  paginatedData: T[];
   goToPage: (page: number) => void;
   nextPage: () => void;
   previousPage: () => void;
@@ -36,11 +35,11 @@ interface UsePaginationReturn {
  * @param initialPage - Starting page number (default: 1)
  * @returns Object with pagination state and controls
  */
-export const usePagination = ({
+export const usePagination = <T>({
   data,
   itemsPerPage,
   initialPage = 1,
-}: UsePaginationProps): UsePaginationReturn => {
+}: UsePaginationProps<T>): UsePaginationReturn<T> => {
   const [currentPage, setCurrentPage] = useState(initialPage);
 
   // Calculate total pages based on data length

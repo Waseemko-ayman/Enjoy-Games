@@ -7,6 +7,7 @@ import GridWrapper from '../molecules/GridWrapper';
 import AnimatedWrapper from '../molecules/FramerMotion/AnimatedWrapper';
 import Loading from '../molecules/loading';
 import ErrorFetching from '../molecules/ErrorFetching';
+import { API_IMAGE_URL } from '@/config/api';
 
 const CategoryCard = dynamic(() => import('../molecules/CategoryCard'), {
   loading: () => <Loading />,
@@ -34,7 +35,7 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({
             <AnimatedWrapper key={card.id} custom={index}>
               <CategoryCard
                 image={
-                  `http://31.97.36.197/${card.image}` ||
+                  `${API_IMAGE_URL}${card.image}` ||
                   '/assets/play-station.webp'
                 }
                 name={card.name}

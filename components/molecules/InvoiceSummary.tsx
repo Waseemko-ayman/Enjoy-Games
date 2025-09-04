@@ -42,7 +42,7 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
           <span>{t('subtotal.label')}:</span>
           <div className="flex items-center gap-2">
             <span className="text-lg">
-              {Subtotal} {currency}
+              {Subtotal.toFixed(2)} {currency}
             </span>
           </div>
         </div>
@@ -53,7 +53,7 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
               <span>{t('discount.label')}:</span>
               <div className="flex items-center gap-2">
                 <span className="text-lg">
-                  -{totalDiscount} {currency}
+                  -{totalDiscount.toFixed(2)} {currency}
                 </span>
               </div>
             </div>
@@ -65,7 +65,7 @@ const InvoiceSummary: React.FC<InvoiceSummaryProps> = ({ items }) => {
             <span>{t('total.label')}:</span>
             <div className="flex items-center gap-2">
               <span className="text-lg font-bold">
-                {total} {currency}
+                {total.toFixed(2)} {currency}
               </span>
             </div>
           </div>

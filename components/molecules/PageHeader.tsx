@@ -61,7 +61,8 @@ const PageHeader = ({
 
     accumulatedPath += `/${part}`;
     const isLast = i === pathParts.length - 1;
-    const label = getLabel(part, pathNameMap, tPages);
+    const prevPart = pathParts[i - 1]; // 👈 الجزء السابق
+    const label = getLabel(part, pathNameMap, tPages, prevPart);
 
     breadcrumbs.push({
       label,
@@ -131,8 +132,23 @@ const PageHeader = ({
 function getLabel(
   part: string,
   pathNameMap: Record<string, string>,
-  tPages: (key: string) => string
+  tPages: (key: string) => string,
+  prevPart?: string
 ): string {
+  // لو part رقم (id لصفحة تفاصيل)
+  if (!isNaN(Number(part))) {
+    if (prevPart === 'tickets') {
+      const template = tPages('ticket-detail');
+      return template.replace(':id', part);
+    }
+    if (prevPart === 'my-purchases') {
+      const template = tPages('order-detail');
+      return template.replace(':id', part);
+    }
+    // fallback عام لو ما في تعريف
+    return `#${part}`;
+  }
+
   const translated = tPages(part);
   if (translated === part) {
     return pathNameMap[part] || formatPart(part);
@@ -145,7 +161,11 @@ interface PathLeaf {
   link: string;
 }
 
-type PathValue = PathLeaf | PathTree | string;
+type PathValue =
+  | PathLeaf
+  | PathTree
+  | string
+  | ((id: string | number) => PathLeaf);
 type PathTree = {
   [key: string]: PathValue;
 };
@@ -155,7 +175,7 @@ function extractPaths(
   map: Record<string, string> = {}
 ): Record<string, string> {
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       const value = obj[key];
 
       if (typeof value === 'string') {
@@ -164,8 +184,11 @@ function extractPaths(
       } else if (isPathLeaf(value)) {
         const pathKey = value.link.split('/').filter(Boolean).pop() || '';
         map[pathKey] = value.name;
+      } else if (typeof value === 'function') {
+        // نتجاهل الدوال هنا أو نعالجها بطريقة خاصة
+        continue;
       } else {
-        extractPaths(value, map);
+        extractPaths(value, map); // هنا Typescript متأكد إنه PathTree
       }
     }
   }
@@ -174,7 +197,11 @@ function extractPaths(
 
 function isPathLeaf(obj: any): obj is PathLeaf {
   return (
-    typeof obj === 'object' && obj !== null && 'link' in obj && 'name' in obj
+    typeof obj === 'object' &&
+    obj !== null &&
+    !Array.isArray(obj) &&
+    'link' in obj &&
+    'name' in obj
   );
 }
 

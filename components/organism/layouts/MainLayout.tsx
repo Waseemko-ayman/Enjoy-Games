@@ -45,7 +45,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
         {!isCartPage && <Footer />}
         <FloatingChatWidget />
-        <FloatingActions phone="+972592164680" />
+        <FloatingActions phone="+96893809093" />
       </MainContentProvider>
     </CategoriesProvider>
   );

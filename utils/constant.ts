@@ -1,10 +1,10 @@
-import { Home } from 'lucide-react';
+import { Home, Settings, UserPlus } from 'lucide-react';
 import { FaBox, FaImages, FaList, FaSitemap, FaStar } from 'react-icons/fa6';
 import { IoBarcodeSharp } from 'react-icons/io5';
 import { FaQuestionCircle, FaTachometerAlt, FaTicketAlt } from 'react-icons/fa';
 import { PATHS } from '@/data/paths';
 import { MdLocalOffer } from 'react-icons/md';
-import { FiShoppingCart } from 'react-icons/fi';
+import { FiShoppingCart, FiUsers } from 'react-icons/fi';
 
 export const sidebarLinks = [
   {
@@ -52,21 +52,36 @@ export const sidebarLinks = [
     href: PATHS.DASHBOARD.FAQS,
     icon: FaQuestionCircle,
   },
-  // {
-  //   title: 'tickets',
-  //   href: PATHS.DASHBOARD.TICKETS,
-  //   icon: FaTicketAlt,
-  // },
+  {
+    title: 'tickets',
+    href: PATHS.DASHBOARD.TICKETS,
+    icon: FaTicketAlt,
+  },
   {
     title: 'ratings',
     href: PATHS.DASHBOARD.RATINGS,
     icon: FaStar,
   },
-  // {
-  //   title: 'orders',
-  //   href: PATHS.DASHBOARD.ORDERS,
-  //   icon: FiShoppingCart,
-  // },
+  {
+    title: 'orders',
+    href: PATHS.DASHBOARD.ORDERS.ROOT,
+    icon: FiShoppingCart,
+  },
+  {
+    title: 'users',
+    href: PATHS.DASHBOARD.USERS,
+    icon: FiUsers,
+  },
+  {
+    title: 'productSubscribers',
+    href: PATHS.DASHBOARD.PRODUCT_SUBSCRIBERS,
+    icon: UserPlus,
+  },
+  {
+    title: 'settings',
+    href: PATHS.DASHBOARD.SETTINGS,
+    icon: Settings,
+  },
   // {
   //   title: 'Payment Gateways',
   //   href: PATHS.DASHBOARD.PAYMENT_GATEWAYS,
@@ -76,16 +91,6 @@ export const sidebarLinks = [
   //   title: 'Reports',
   //   href: PATHS.DASHBOARD.REPORTS,
   //   icon: BarChart3,
-  // },
-  // {
-  //   title: 'Notifications',
-  //   href: PATHS.DASHBOARD.NOTIFICATIONS.ROOT,
-  //   icon: Bell,
-  // },
-  // {
-  //   title: 'Settings',
-  //   href: PATHS.DASHBOARD.SETTINGS,
-  //   icon: Settings,
   // },
 ];
 
@@ -115,7 +120,7 @@ export const CreateCategoriesFields = [
     id: 'image',
     name: 'image',
     label: 'image',
-    placeholder: 'image',
+    placeholder: 'addImage',
     type: 'file',
   },
 ];
@@ -146,7 +151,7 @@ export const CreateSubCategoriesFields = [
     id: 'image',
     name: 'image',
     label: 'image',
-    placeholder: 'image',
+    placeholder: 'addImage',
     type: 'file',
   },
   {
@@ -169,14 +174,14 @@ export const CreateProductsFields = [
   {
     id: 'title[ar]',
     name: 'titleAr',
-    label: 'arabicTitlte',
+    label: 'arabicTitle',
     placeholder: 'writeArabicTitle',
     type: 'text',
   },
   {
     id: 'title[en]',
     name: 'titleEn',
-    label: 'englishTitlte',
+    label: 'englishTitle',
     placeholder: 'writeEnglishTitle',
     type: 'text',
   },
@@ -223,6 +228,20 @@ export const CreateProductsFields = [
     type: 'editor',
   },
   {
+    id: 'terms_and_conditions[ar]',
+    name: 'termsAndConditionsAr',
+    label: 'arabicTermsAndConditions',
+    placeholder: 'writeArabicTermsAndConditions',
+    type: 'editor',
+  },
+  {
+    id: 'terms_and_conditions[en]',
+    name: 'termsAndConditionsEn',
+    label: 'englishTermsAndConditions',
+    placeholder: 'writeEnglishTermsAndConditions',
+    type: 'editor',
+  },
+  {
     id: 'price',
     name: 'price',
     label: 'price',
@@ -248,12 +267,6 @@ export const CreateProductsFields = [
       { id: 'multi_id', name: 'multiId' },
       { id: 'access', name: 'access' },
     ],
-    // options: [
-    //   { id: 'code', name: 'كود' },
-    //   { id: 'account_id', name: 'رقم تعريفي' },
-    //   { id: 'multi_id', name: 'رقمين تعريفيين' },
-    //   { id: 'access', name: 'صلاحية الدخول أو بيانات الحساب' },
-    // ],
   },
   {
     id: 'discount',
@@ -263,10 +276,17 @@ export const CreateProductsFields = [
     type: 'text',
   },
   {
+    id: 'vat_rate',
+    name: 'vatRate',
+    label: 'vatRate',
+    placeholder: 'writeVatRate',
+    type: 'number',
+  },
+  {
     id: 'image',
     name: 'image',
     label: 'image',
-    placeholder: 'image',
+    placeholder: 'addImage',
     type: 'file',
   },
   {
@@ -275,6 +295,66 @@ export const CreateProductsFields = [
     label: 'isActive',
     placeholder: 'isActive',
     type: 'checkbox',
+  },
+];
+
+export const permissionsOptions = [
+  { id: 'manage products', name: 'manageProducts' },
+  { id: 'manage settings', name: 'manageSettings' },
+  { id: 'manage users', name: 'manageUsers' },
+  { id: 'manage categories', name: 'manageCategories' },
+  { id: 'manage subcategories', name: 'manageSubcategories' },
+  { id: 'manage codes', name: 'manageCodes' },
+  { id: 'manage coupons', name: 'manageCoupons' },
+  { id: 'manage sliders', name: 'manageSliders' },
+  { id: 'manage orders', name: 'manageOrders' },
+  { id: 'manage ratings', name: 'manageRatings' },
+  { id: 'reply tickets', name: 'replyTickets' },
+];
+
+export const ticketsStatus = [
+  { id: 'open', name: 'open' },
+  { id: 'pending', name: 'pending' },
+  { id: 'resolved', name: 'resolved' },
+  { id: 'closed', name: 'closed' },
+];
+
+export const CreateUsersFields = [
+  {
+    id: 1,
+    type: 'text',
+    label: 'name',
+    name: 'name',
+    placeholder: 'writeYorName',
+  },
+  {
+    id: 2,
+    type: 'email',
+    label: 'email',
+    name: 'email',
+    placeholder: 'writeYorEmail',
+  },
+  {
+    id: 3,
+    type: 'text',
+    label: 'password',
+    name: 'password',
+    placeholder: 'yourPassword',
+  },
+  {
+    id: 4,
+    type: 'text',
+    label: 'password_confirmation',
+    name: 'password_confirmation',
+    placeholder: 'repassword',
+  },
+  {
+    id: 5,
+    type: 'multi-select',
+    label: 'permissions',
+    name: 'permissions',
+    placeholder: 'selectPermissions',
+    options: permissionsOptions,
   },
 ];
 
@@ -337,10 +417,6 @@ export const CreateCouponsFields = [
       { id: 'fixed', name: 'fixed' },
       { id: 'percent', name: 'percent' },
     ],
-    // options: [
-    //   { id: 'fixed', name: 'مقدار ثابت' },
-    //   { id: 'percent', name: 'نسبة مئوية' },
-    // ],
   },
   {
     id: 'usage_limit',
@@ -689,87 +765,5 @@ export const SystemSettingsFields = [
       { id: 'ar', name: 'Arabic' },
     ],
     SelectValuePlaceholder: 'Select language',
-  },
-];
-
-export const AccountSettingsFields = [
-  {
-    id: 'name',
-    name: 'name',
-    label: 'الإسم',
-    placeholder: 'Enter your first name',
-    // fullWidth: true,
-  },
-  {
-    id: 'email',
-    name: 'email',
-    label: 'البريد الإلكتروني',
-    type: 'email',
-    placeholder: 'example@example.com',
-  },
-  {
-    id: 'phone',
-    name: 'phone',
-    label: 'رقم الجوال',
-    type: 'number',
-    placeholder: 'xxxxxxxxx',
-  },
-  {
-    id: 'birthDate',
-    name: 'birthDate',
-    label: 'تاريخ الميلاد',
-    type: 'date',
-    placeholder: '--/--/----',
-  },
-  {
-    id: 5,
-    label: 'الجنس',
-    type: 'select',
-    placeholder: 'حدد الجنس',
-    name: 'gender',
-    options: [
-      {
-        id: 'male',
-        name: 'ذكر',
-      },
-      {
-        id: 'female',
-        name: 'أنثى',
-      },
-      // {
-      //   id: 1,
-      //   value: 'male',
-      //   label: 'ذكر',
-      // },
-      // {
-      //   id: 2,
-      //   value: 'female',
-      //   label: 'أنثى',
-      // },
-    ],
-  },
-];
-
-export const SecuritySettingsFields = [
-  {
-    id: 'current-password',
-    name: 'current-password',
-    label: 'Current Password',
-    type: 'password',
-    placeholder: 'Enter your current password',
-  },
-  {
-    id: 'new-password',
-    name: 'newPassword',
-    label: 'New Password',
-    type: 'password',
-    placeholder: 'Enter your new password',
-  },
-  {
-    id: 'confirm-password',
-    name: 'rePassword',
-    label: 'Confirm New Password',
-    type: 'password',
-    placeholder: 'Confirm New Password',
   },
 ];

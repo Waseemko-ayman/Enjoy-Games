@@ -30,6 +30,7 @@ export type InputProps = {
   isRequired?: boolean;
   onChange?: (e: React.ChangeEvent<any>) => void;
   onIconClick?: () => void;
+  readOnly?: boolean;
 } & React.HTMLAttributes<HTMLElement>;
 
 const Input = React.forwardRef<HTMLElement, InputProps>(
@@ -51,6 +52,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
       isRequired = false,
       onChange,
       onIconClick,
+      readOnly,
       ...rest
     },
     ref
@@ -64,6 +66,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
     const InputElement =
       type === 'select' ? (
         <Select
+          value={value != null ? String(value) : ''}
           onValueChange={(val) =>
             onChange?.({ target: { name: inputName, value: val } } as any)
           }
@@ -77,7 +80,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
             {options.map((opt) => (
               <SelectItem
                 key={opt.id}
-                value={opt.label}
+                value={opt.value || ''}
                 className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
               >
                 {opt.label}
@@ -125,6 +128,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
           className={inputClasses}
           onChange={onChange}
           value={value}
+          readOnly={readOnly}
           {...rest}
         />
       );

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React, { lazy, Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@/components/atomic/Button';
 import Input from '@/components/atomic/Input';
 import CardWrapper from '@/components/atomic/CardWrapper';
@@ -27,15 +27,14 @@ import {
   multiIdInputs,
 } from '@/data';
 import MotionSection from './FramerMotion/MotionSection';
-
-const Image = lazy(() => import('next/image'));
-
-const inputQuantityOptions = [
-  { id: 1, label: '1' },
-  { id: 2, label: '2' },
-  { id: 3, label: '3' },
-  { id: 4, label: '4' },
-];
+import { extractText } from '@/utils/extractText';
+import { API_IMAGE_URL } from '@/config/api';
+import dynamic from 'next/dynamic';
+import AnimatedWrapper from './FramerMotion/AnimatedWrapper';
+import { useToast } from '@/lib/toast';
+const Image = dynamic(() => import('next/image'), {
+  loading: () => <Loading />,
+});
 
 interface Props {
   product: ProductCardProps;
@@ -47,6 +46,8 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
   const t = useTranslations('productDetails');
   const inputsTxt = useTranslations('Inputs');
   const btnTxt = useTranslations('BtnTexts');
+  const msgTxts = useTranslations('Messages');
+  const { showToast } = useToast();
 
   const selectedInputs =
     product?.shipping_payment === 'code'
@@ -59,7 +60,6 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
       ? accessInputs
       : [];
 
-  // بناء مخطط التحقق
   const dynamicSchemaFields = selectedInputs.reduce((acc, input) => {
     acc[input.inputName] = yup
       .string()
@@ -72,32 +72,37 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
   const {
     register,
     handleSubmit,
+    reset,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const submitHandler = (formValues: Record<string, any>) => {
+  const handleAddToCart = (formValues: Record<string, any>) => {
     onAddToCart({
       ...product,
       quantity: selectedQuantity,
       formScheme: formValues,
     });
+    showToast(`${product.title} ${msgTxts('addedToCart')}`);
+    setTimeout(() => {
+      reset();
+    }, 3000);
   };
-
   return (
     <div className="max-h-[550px] overflow-y-auto scrollbar-none">
       <div className="flex flex-col gap-5">
         <div className="flex items-center gap-2">
-          <Suspense fallback={<Loading />}>
-            <Image
-              src="/assets/play-station.webp"
-              alt={product?.title}
-              width={170}
-              height={170}
-              className="rounded-lg object-cover"
-            />
-          </Suspense>
+          <Image
+            src={
+              `${API_IMAGE_URL}${product?.image}` || '/assets/play-station.webp'
+            }
+            alt={product?.title}
+            width={170}
+            height={170}
+            className="rounded-lg object-cover"
+          />
           <div>
             <MotionSection index={1}>
               <h1 className="text-2xl">{product?.title || product?.name}</h1>
@@ -110,7 +115,7 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
                 </h3>
                 {product?.discount?.amount && (
                   <div className="flex items-center gap-3">
-                    <span className="line-through text-red-500 text-base">
+                    <span className="line-through text-red-500 text-base font-semibold">
                       {product?.price_before?.amount}{' '}
                       {product?.price_before?.currency}
                     </span>
@@ -119,7 +124,8 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
                       className="py-0.5 px-2 flex items-center justify-center"
                     >
                       <span className="text-white text-xs">
-                        {t('rival')} {product?.discount?.amount || 9}%
+                        {t('rival')} {product?.discount?.amount}{' '}
+                        {product?.discount?.currency}
                       </span>
                     </CardWrapper>
                   </div>
@@ -136,73 +142,87 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
               </h3>
             </MotionSection>
             <MotionSection index={5}>
-              <p
-                className="text-[15px] text-gray-500"
-                dangerouslySetInnerHTML={{ __html: product?.content || '' }}
-              />
+              <p className="text-[15px] text-gray-500">
+                {extractText(product?.contentn)}
+              </p>
             </MotionSection>
           </div>
 
-          <form onSubmit={handleSubmit(submitHandler)} className="space-y-4">
-            <Input
-              variant="secondary"
-              type="number"
-              inputName="quantity"
-              label={inputsTxt('labels.quantity')}
-              options={inputQuantityOptions}
-              value={selectedQuantity}
-              onChange={(e) => {
-                const val = Number(e.target.value);
-                if (val >= 1) setSelectedQuantity(val);
-              }}
-            />
+          <form
+            className="mt-4 space-y-7"
+            onSubmit={handleSubmit((formValues) => {
+              handleAddToCart(formValues);
+            })}
+          >
+            <MotionSection index={6}>
+              <Input
+                variant="secondary"
+                type="number"
+                inputName="quantity"
+                label={inputsTxt('labels.quantity')}
+                value={selectedQuantity}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  if (value >= 1) setSelectedQuantity(value);
+                }}
+              />
+            </MotionSection>
 
-            <Accordion type="single" collapsible>
-              <AccordionItem value="extra-options">
-                <AccordionTrigger className="cursor-pointer border-b border-gray-300 pb-2 mb-3">
-                  {t('additionalOptions')}
-                </AccordionTrigger>
-                <AccordionContent className="space-y-3 max-h-60 overflow-auto">
-                  {selectedInputs.map((input) => (
-                    <div key={input.id}>
-                      <Input
-                        variant="secondary"
-                        type={input.type as InputTypes}
-                        inputName={input.inputName}
-                        label={
-                          input.label || inputsTxt(`labels.${input.labelKey}`)
-                        }
-                        options={input.options?.map((opt) => ({
-                          ...opt,
-                          label: inputsTxt(`labels.${opt.labelKey}`),
-                        }))}
-                        placeholder={
-                          input.inputName === 'checkbox'
-                            ? inputsTxt(`placeHolders.Cancelled`)
-                            : ''
-                        }
-                        otherClassNameContainer={
-                          errors[input.inputName] ? 'border-red-500' : ''
-                        }
-                        isRequired
-                        {...register(input.inputName)}
-                      />
-                      {errors[input.inputName] && (
-                        <FormError message={errors[input.inputName]?.message} />
-                      )}
-                    </div>
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+            <MotionSection index={7}>
+              <Accordion type="single" collapsible defaultValue="extra-options">
+                <AccordionItem value="extra-options">
+                  <AccordionTrigger className="mb-4 cursor-pointer border-b border-gray-200 pb-2">
+                    {t('additionalOptions')}
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-4">
+                    {selectedInputs.map((input, index) => (
+                      <AnimatedWrapper key={input.id} custom={index}>
+                        <Input
+                          variant="secondary"
+                          type={input.type as InputTypes}
+                          inputName={input.inputName}
+                          label={
+                            input.label || inputsTxt(`labels.${input.labelKey}`)
+                          }
+                          options={input.options?.map((opt) => ({
+                            ...opt,
+                            label: inputsTxt(`labels.${opt.labelKey}`),
+                          }))}
+                          placeholder={
+                            input.inputName === 'checkbox'
+                              ? inputsTxt(`placeHolders.Cancelled`)
+                              : ''
+                          }
+                          otherClassNameContainer={
+                            errors[input.inputName] ? 'border-red-500' : ''
+                          }
+                          isRequired
+                          control={control}
+                          {...(input.type !== 'checkbox'
+                            ? register(input.inputName)
+                            : {})}
+                        />
+                        {errors[input.inputName] && (
+                          <FormError
+                            message={errors[input.inputName]?.message}
+                          />
+                        )}
+                      </AnimatedWrapper>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </MotionSection>
 
-            <Button
-              type="submit"
-              otherClassName="w-full py-3 px-5 flex items-center justify-center gap-2"
-              Icon={MdAddShoppingCart}
-            >
-              {btnTxt('addToCart')}
-            </Button>
+            <MotionSection index={8}>
+              <Button
+                type="submit"
+                otherClassName="py-3 px-5 w-full"
+                Icon={MdAddShoppingCart}
+              >
+                {btnTxt('addToCart')}
+              </Button>
+            </MotionSection>
           </form>
         </div>
       </div>

@@ -35,9 +35,11 @@ const CreateImagesSlider = ({
     'flex items-center h-10 w-full rounded-md border border-gray-300 px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 md:text-sm outline-none cursor-pointer';
 
   const { showToast } = useToast();
-  const { triggerRefresh } = useUpdateContent();
   const t = useTranslations();
   const inputT = useTranslations('Inputs.errorsMsgs');
+  const { triggerRefresh } = useUpdateContent();
+  const refreshKey = 'sliders';
+
 
   const createSchema = yup.object({
     imageAr: yup.mixed<File>().required(inputT('arabicImageRequired')),
@@ -102,7 +104,7 @@ const CreateImagesSlider = ({
       if (response) {
         showToast(response?.message);
         reset();
-        triggerRefresh();
+        triggerRefresh(refreshKey);
         setPreviewAr(null);
         setPreviewEn(null);
         onTabChange('AllImageSlider');

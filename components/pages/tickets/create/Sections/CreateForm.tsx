@@ -19,6 +19,7 @@ import useAPI from '@/hook/useAPI';
 import { useToast } from '@/lib/toast';
 import { useRouter } from 'next/navigation';
 import { PATHS } from '@/data/paths';
+import { useUpdateContent } from '@/context/updateContentContext';
 
 const CreateForm = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
@@ -31,20 +32,19 @@ const CreateForm = () => {
   const btnTexts = useTranslations('BtnTexts');
   const t = useTranslations('Inputs.errorsMsgs');
 
-  // Notifications
+  // Context
   const { showToast } = useToast();
+  const { triggerRefresh } = useUpdateContent();
 
   // API Hook
-  const { add: addTickets, isLoading } = useAPI<FormData, TicketResponse>(
-    'tickets/create'
-  );
+  const { add: addTickets, isLoading } = useAPI<
+    globalThis.FormData,
+    TicketResponse
+  >('tickets/create');
 
   // Form Schema
   const schema = Yup.object().shape({
     subject: Yup.string().required(t('subjectRequired') || 'العنوان مطلوب'),
-    // ticketType: Yup.string().required(
-    //   t('ticketTypeRequired') || 'نوع التذكرة مطلوب'
-    // ),
     message: Yup.string().required(t('detailsRequired') || 'الوصف مطلوب'),
   });
 
@@ -59,16 +59,26 @@ const CreateForm = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const res = await addTickets(data);
+      // نستخدم FormData من Web API
+      const formData = new globalThis.FormData();
+      formData.append('subject', data.subject);
+      formData.append('message', data.message);
+
+      // إضافة الملفات إذا وجدت
+      attachments.forEach((file) => formData.append('attachments[]', file));
+
+      const res = await addTickets(formData);
+
       if (res?.success) {
         showToast(res.message);
         reset();
         setAttachments([]);
+        triggerRefresh('tickets');
         router.push(PATHS.TICKETS.ROOT.link);
       }
     } catch (error) {
       const apiError = (error as any)?.res?.data?.message;
-      showToast(apiError);
+      showToast(apiError, 'error');
     }
   };
 
@@ -86,7 +96,6 @@ const CreateForm = () => {
                   type={input.type as InputTypes}
                   inputName={input.name}
                   placeholder={placeholders(input.name)}
-                  // options={input.options}
                   otherClassNameContainer={
                     errors[fieldName]?.message ? 'border-red-500' : ''
                   }

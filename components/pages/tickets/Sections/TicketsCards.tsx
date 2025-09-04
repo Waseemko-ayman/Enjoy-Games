@@ -18,14 +18,14 @@ const TicketsCards = ({
   t: TranslationFunction;
   getStatusIcon: (status: string) => React.ReactNode;
   getStatusColor: (status: string) => string;
-  handleTicketClick: (ticket: Ticket) => void;
+  handleTicketClick: (id: number) => void;
 }) => {
   return (
     // <AnimatedWrapper custom={index}>
     <CardWrapper
       key={ticket.id}
       className="p-4 md:p-5 lg:p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 hover:border-blue-300"
-      onClick={() => handleTicketClick(ticket)}
+      onClick={() => handleTicketClick(ticket.id)}
     >
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-lg lg:text-xl font-semibold text-gray-900 line-clamp-2 flex-1">

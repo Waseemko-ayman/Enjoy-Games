@@ -1,133 +1,130 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { TabsContent } from '@/components/ui/tabs';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Upload } from 'lucide-react';
-import CardHeaderContent from '@/components/ui/display/CardHeader';
-import { AccountSettingsFields } from '@/utils/constant';
-import { useRef, useState } from 'react';
-import SaveButton from '@/components/ui/common/SaveButton';
-import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FieldError, Resolver, useForm } from 'react-hook-form';
-import FormField from '@/components/ui/FormField';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { InputTypes } from '@/utils/type';
+import { FormValues } from '@/interfaces';
+import { useTranslations } from 'next-intl';
+import { API_IMAGE_URL } from '@/config/api';
+import { inputData } from '@/data';
+import SettingsTab from '@/components/ui/display/SettingsTab';
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import PhoneInput from 'react-phone-number-input';
+import FormError from '@/components/atomic/FormError';
+import Input from '@/components/atomic/Input';
+import { getInitials } from '@/utils/stringUtils';
+import { useUserInfo } from '@/context/UserInfoContext';
+import ButtonLoading from '@/components/atomic/ButtonLoading';
+import { useToast } from '@/lib/toast';
+import useAPI from '@/hook/useAPI';
+import {
+  getAccountDefaultValues,
+  getAccountSchema,
+  toFormData,
+} from '@/utils/accountSchema';
 
-type FormValues = {
-  name: string;
-  email: string;
-  phone: string;
-  birthDate: string;
-  gender: string;
-  avatar?: FileList;
-  // notification: {
-  //   email: boolean;
-  //   browser: boolean;
-  //   marketing: boolean;
-  // };
-};
+import 'react-phone-number-input/style.css';
+import Loading from '@/components/molecules/loading';
+import ErrorFetching from '@/components/molecules/ErrorFetching';
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{5,}$/;
-
-const AcoountSchema = Yup.object().shape({
-  name: Yup.string()
-    .matches(alphanumericWithArabicRegex, 'Invalid Name')
-    .required('Name is required'),
-  email: Yup.string()
-    .email()
-    .matches(emailRegex, 'Please enter a valid email address.')
-    .required('Email is required'),
-  phone: Yup.string().required('رقم الجوال مطلوب'),
-  birthDate: Yup.string().required('تاريخ الميلاد مطلوب'),
-  gender: Yup.string().required('الجنس مطلوب'),
-  avatar: Yup.mixed()
-    // Custom test to validate the file type
-    .test('fileType', 'Only image files are allowed', (value) => {
-      if (!value) return true;
-      // If the value is a FileList (multiple files or a single file in a list)
-      if (value instanceof FileList) {
-        // Ensure at least one file exists and it's an image
-        return value.length > 0 && value[0].type.startsWith('image/');
-      }
-      // If the value is a single File object
-      else if (value instanceof File) {
-        // Check if the file is an image
-        return value.type.startsWith('image/');
-      }
-      // For any other type, return false (invalid)
-      return false;
-    }),
-  // notification: Yup.object().shape({
-  //   email: Yup.boolean(),
-  //   browser: Yup.boolean(),
-  //   marketing: Yup.boolean(),
-  // }),
-});
-
-const AccountSettings = ({
-  saving,
-  success,
-  handleSave,
-}: {
-  saving: boolean;
-  success: boolean;
-  handleSave: () => void;
-}) => {
+const AccountSettings = () => {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Translation
+  const t = useTranslations();
+
+  // Notifications
+  const { showToast } = useToast();
+
+  // Date Now
+  const date = new Date();
+  const currentYear = date.getFullYear();
+
+  // Get User Information
+  const {
+    user,
+    isLoading: userInfoLoading,
+    error: userInfoError,
+  } = useUserInfo();
+
+  // Update User Information
+  const { add, isLoading } = useAPI('update-user');
+
+  const initials = getInitials(user?.name);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && e.target.files) {
       setAvatarPreview(URL.createObjectURL(file));
-      setValue('avatar', e.target.files); // Update the value in the model
+      setValue('photo', e.target.files); // Update the value in the model
     }
   };
+
+  const getPhotoSrc = () => {
+    if (avatarPreview) return avatarPreview; // New selected image
+    if (user?.photo && typeof user?.photo === 'string')
+      return `${API_IMAGE_URL}${user?.photo}`; //Existing link
+  };
+
+  const schema = getAccountSchema(t, currentYear);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
     setValue,
     reset,
-    // watch,
+    control,
+    formState: { errors },
   } = useForm<FormValues>({
-    resolver: yupResolver(AcoountSchema) as Resolver<FormValues>,
+    resolver: yupResolver(schema) as any,
+    defaultValues: getAccountDefaultValues(user),
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log('Form data on submit:', data);
-    handleSave();
-    reset({
-      avatar: undefined, // Reset the image only if you need to
-    }); // Make sure this step is done only after saving the data.
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    // console.log(data);
+    try {
+      const formData = toFormData(data);
+      const response = await add(formData);
+      reset(data);
+      showToast(response?.message || 'تم التحديث بنجاح');
+    } catch (error: any) {
+      showToast(error?.response?.message || 'حدث خطأ أثناء التحديث', 'error');
+    }
   };
 
+  useEffect(() => {
+    if (user) reset(getAccountDefaultValues(user));
+  }, [user, reset]);
+
   return (
-    <TabsContent value="account">
-      <Card>
-        <CardHeaderContent
-          title="Account Settings"
-          description="Update your account information and preferences"
-        />
-        <CardContent className="space-y-6">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex flex-col gap-6 sm:flex-row">
+    <SettingsTab
+      value="account"
+      title={t('Dashboard.settings.title')}
+      description={t('Dashboard.settings.desc')}
+    >
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {userInfoLoading ? (
+          <Loading />
+        ) : userInfoError ? (
+          <ErrorFetching />
+        ) : (
+          <>
+            <div className="flex flex-col gap-6 lg:flex-row">
               <div className="flex flex-col items-center gap-4">
-                <Avatar className="h-24 w-24">
-                  <AvatarImage
-                    src={avatarPreview || '/placeholder.svg?height=96&width=96'}
-                    alt="Profile"
-                  />
-                  <AvatarFallback>A.I.</AvatarFallback>
+                <Avatar className="h-24 w-24 shadow-lg">
+                  <AvatarImage src={getPhotoSrc()} alt="character" />
+                  <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>
                 <input
                   type="file"
                   accept="image/*"
-                  {...register('avatar')}
+                  {...register('photo')}
                   ref={fileInputRef}
                   onChange={handleFileChange}
                   className="hidden"
@@ -139,76 +136,108 @@ const AccountSettings = ({
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <Upload className="mr-2 h-4 w-4" />
-                  Change Avatar
+                  {t('BtnTexts.changeAvatar')}
                 </Button>
-                {errors.avatar && (
+                {errors.photo && (
                   <p className="text-sm text-red-500 mt-1">
-                    {errors.avatar.message}
+                    {errors.photo.message}
                   </p>
                 )}
               </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mb-5">
+                {inputData.map((input, index) => {
+                  const label = t(`Inputs.labels.${input.name}`);
+                  const placeholder =
+                    t(`Inputs.placeHolders.${input.name}`) ||
+                    input.placeholder ||
+                    '';
 
-              {/* <FormRow
-                fields={AccountSettingsFields}
-                register={register}
-                errors={errors}
-              /> */}
-              <div className="grid gap-4 md:grid-cols-2 w-full">
-                {AccountSettingsFields.map(
-                  ({ id, label, name, placeholder, type }) => (
-                    <FormField
-                      key={id}
-                      inputName={name}
-                      label={label}
-                      placeholder={placeholder}
-                      type={type as InputTypes}
-                      register={register}
-                      error={
-                        errors[name as keyof FormValues] as
-                          | FieldError
-                          | undefined
-                      }
-                    />
-                  )
-                )}
+                  const options = input.options
+                    ? input.options.map((opt) => ({
+                        ...opt,
+                        label:
+                          t(`Inputs.options.${input.name}.${opt.value}`) ||
+                          opt.labelKey,
+                      }))
+                    : undefined;
+
+                  return (
+                    <AnimatedWrapper key={input.id} custom={index}>
+                      <div className="relative">
+                        {input.type === 'number' ? (
+                          <div className="w-full">
+                            <label className="block text-gray-700 font-normal text-sm mb-2">
+                              {label}
+                            </label>
+                            <Controller
+                              name={input.name as keyof FormValues}
+                              control={control}
+                              render={({ field: { onChange, value } }) => (
+                                <PhoneInput
+                                  international
+                                  defaultCountry="OM"
+                                  value={
+                                    typeof value === 'string' ? value : '' // Convert any non-string type to an empty string
+                                  }
+                                  onChange={onChange}
+                                  placeholder={placeholder}
+                                  className={`px-4 py-3 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)]`}
+                                  readOnly
+                                />
+                              )}
+                            />
+                          </div>
+                        ) : (
+                          <div>
+                            <Input
+                              variant="secondary"
+                              type={input.type as InputTypes}
+                              label={label}
+                              placeholder={placeholder}
+                              Icon={input.icon}
+                              iconClassName="h-4 w-4 text-gray-400"
+                              inputName={input.name}
+                              options={options}
+                              otherClassNameContainer={
+                                errors[input.name as keyof FormValues]
+                                  ? 'border-red-500'
+                                  : ''
+                              }
+                              {...register(input.name as keyof FormValues)}
+                              readOnly={
+                                input.name === 'email' || input.name === 'phone'
+                              }
+                            />
+                            {errors[input.name as keyof FormValues] && (
+                              <FormError
+                                message={
+                                  errors[input.name as keyof FormValues]
+                                    ?.message as string
+                                }
+                              />
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </AnimatedWrapper>
+                  );
+                })}
               </div>
             </div>
-
-            <div className="h-[1px] w-full bg-gray-300"></div>
-
-            {/* <div className="space-y-4">
-              <h3 className="text-lg font-medium">Notification Preferences</h3>
-              <div className="space-y-3">
-                {notificationPreferences.map(
-                  ({ id, label, description, settingKey }) => (
-                    <NotificationSwitch
-                      key={id}
-                      id={id}
-                      label={label}
-                      description={description}
-                      checked={watch(
-                        `notification.${
-                          settingKey as keyof FormValues['notification']
-                        }`
-                      )}
-                      onCheckedChange={(checked) =>
-                        setValue(
-                          `notification.${
-                            settingKey as keyof FormValues['notification']
-                          }`,
-                          checked
-                        )
-                      }
-                    />
-                  )
-                )}
-              </div>
-            </div> */}
-            <SaveButton type="submit" saving={saving} success={success} />
-          </form>
-        </CardContent>
-      </Card>
-    </TabsContent>
+            <Button type="submit">
+              {isLoading ? (
+                <>
+                  {t('BtnTexts.Saving')}
+                  <ButtonLoading />
+                </>
+              ) : (
+                t('BtnTexts.SaveChanges')
+              )}
+            </Button>
+          </>
+        )}
+      </form>
+    </SettingsTab>
   );
 };
 

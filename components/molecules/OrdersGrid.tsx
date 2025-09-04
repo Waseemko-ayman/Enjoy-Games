@@ -1,6 +1,8 @@
-import React from 'react';
+'use client';
+
+import type React from 'react';
 import { useTranslations } from 'next-intl';
-import { Order } from '@/interfaces';
+import type { Order } from '@/interfaces';
 import Pagination from './Pagination';
 import Container from '../organism/Container';
 import Loading from './loading';
@@ -34,31 +36,41 @@ const OrdersGrid: React.FC<OrdersGridProps> = ({
   isLoading,
   error,
 }) => {
-  const t = useTranslations('MyPurchases');
+  const t = useTranslations();
 
   return (
     <Container>
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="text-xl font-semibold">
-          {t('yourOrders')} ({orders.length})
-        </h2>
-        <div className="text-sm text-gray-500">{t('sortedByDate')}</div>
+      <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">
+            {t('MyPurchases.yourOrders')}
+          </h2>
+          <p className="text-sm text-gray-500 mt-1">
+            {orders.length}{' '}
+            {orders.length === 1
+              ? t('MyPurchases.order')
+              : t('PagesHeaderTitles.orders')}
+          </p>
+        </div>
+        <div className="text-sm text-gray-500 bg-gray-50 px-3 py-2 rounded-lg">
+          {t('MyPurchases.sortedByDate')}
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {isLoading ? (
           <Loading />
         ) : error ? (
           <ErrorFetching />
         ) : (
-          paginatedOrders.map((order) => (
+          paginatedOrders?.map((order) => (
             <OrderCard key={order.id} order={order} />
           ))
         )}
       </div>
-      {/* Pagination component - only shows if there are multiple pages */}
+
       {totalPages > 1 && (
-        <div className="mt-8 pt-6 border-t border-gray-200">
+        <div className="mt-10 pt-8 border-t border-gray-100">
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

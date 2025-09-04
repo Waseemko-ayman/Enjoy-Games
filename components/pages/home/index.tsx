@@ -13,6 +13,7 @@ import { useTranslations } from 'next-intl';
 import { useCategories } from '@/context/CategoriesContext';
 import { useMainContent } from '@/context/MainContentContext';
 import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
+import { WalletProvider } from '@/context/WalletContext';
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
@@ -39,7 +40,9 @@ const HomePage = () => {
         loading={categoriesLoading}
         error={categoriesError}
       />
-      <WalletSection t={t} />
+      <WalletProvider>
+        <WalletSection t={t} />
+      </WalletProvider>
       <BestSellers
         t={t}
         bestSeller={data?.best_seller ?? []}

@@ -1,141 +1,194 @@
-import { useState, useCallback } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useTranslations } from 'next-intl';
+import useAPI from './useAPI';
+import { useCallback, useState } from 'react';
 
 export interface Message {
   id: string;
-  text: string;
+  text: string; // نص الرسالة
   sender: 'user' | 'assistant';
   timestamp: Date;
+  unique_id?: string;
+  links?: ChatLinkItem[];
 }
 
-const predefinedResponses = {
-  greetings: [
-    "Hello! I'm your AI assistant. How can I help you today?",
-    "Hi there! I'm here to assist you with any questions you might have.",
-    "Welcome! I'm ready to help. What would you like to know?",
-  ],
-  help: [
-    'I can help you with various topics including general questions, product information, troubleshooting, and more. What specifically would you like assistance with?',
-    "I'm here to provide support and answer your questions. Feel free to ask me anything!",
-    'I can assist with a wide range of topics. What would you like to explore today?',
-  ],
-  features: [
-    'I can help you with product information, answer questions, provide recommendations, and assist with troubleshooting. What interests you most?',
-    'My capabilities include answering questions, providing information, helping with decisions, and offering support. How can I assist you today?',
-  ],
-  pricing: [
-    "I'd be happy to help you with pricing information. Could you please specify which product or service you're interested in?",
-    'For detailed pricing information, I can guide you to the right resources or answer specific questions about our offerings.',
-  ],
-  support: [
-    "I'm here to provide support! Please describe the issue you're experiencing and I'll do my best to help you resolve it.",
-    'I can help troubleshoot problems and provide solutions. What specific issue are you facing?',
-  ],
-  default: [
-    "That's an interesting question! While I'd love to help with that, I might need a bit more context. Could you elaborate?",
-    "I'm not quite sure about that specific topic, but I'm here to help however I can. Could you provide more details?",
-    'I want to make sure I give you the best answer possible. Could you rephrase your question or provide more information?',
-  ],
+interface Price {
+  amount: number;
+  currency: string;
+  formatted: string;
+}
+
+interface CategoryOrSubCategory {
+  name_ar: string;
+  name_en: string;
+  url: string;
+}
+
+interface Product {
+  title_ar: string;
+  title_en: string;
+  price: Price;
+  url: string;
+}
+
+export type ChatLinkItem = {
+  url: string;
+  title_ar?: string;
+  title_en?: string;
+  type: 'category' | 'sub_category' | 'product' | 'support' | 'order';
 };
 
+interface ChatLinks {
+  orders: any[];
+  categories: CategoryOrSubCategory[];
+  sub_categories: CategoryOrSubCategory[];
+  products: Product[];
+  support: any[];
+}
+
+interface ChatAPIResponse {
+  answer: string;
+  from_cache: boolean;
+  links: ChatLinks;
+}
+
 export function useChatLogic() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      text: "Hello! I'm your AI assistant. I'm here to help you with questions about our products, services, and provide general support. How can I assist you today?",
-      sender: 'assistant',
-      timestamp: new Date(),
-    },
-  ]);
-  const [isTyping, setIsTyping] = useState(false);
+  const { add } = useAPI('assistant/ask');
+  const t = useTranslations('Messages');
 
-  const getResponse = useCallback((userMessage: string): string => {
-    const message = userMessage.toLowerCase();
+  const uniqueId =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('unique_id') || ''
+      : '';
 
-    if (
-      message.includes('hello') ||
-      message.includes('hi') ||
-      message.includes('hey')
-    ) {
-      return predefinedResponses.greetings[
-        Math.floor(Math.random() * predefinedResponses.greetings.length)
-      ];
+  const [messages, setMessages] = useState<Message[]>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = JSON.parse(localStorage.getItem('messages') || '[]').map(
+        (m: any) => ({
+          ...m,
+          timestamp: new Date(m.timestamp),
+        })
+      );
+      return saved;
     }
-
-    if (
-      message.includes('help') ||
-      message.includes('assist') ||
-      message.includes('support')
-    ) {
-      return predefinedResponses.help[
-        Math.floor(Math.random() * predefinedResponses.help.length)
-      ];
-    }
-
-    if (
-      message.includes('feature') ||
-      message.includes('capability') ||
-      message.includes('what can you do')
-    ) {
-      return predefinedResponses.features[
-        Math.floor(Math.random() * predefinedResponses.features.length)
-      ];
-    }
-
-    if (
-      message.includes('price') ||
-      message.includes('cost') ||
-      message.includes('pricing')
-    ) {
-      return predefinedResponses.pricing[
-        Math.floor(Math.random() * predefinedResponses.pricing.length)
-      ];
-    }
-
-    if (
-      message.includes('problem') ||
-      message.includes('issue') ||
-      message.includes('error')
-    ) {
-      return predefinedResponses.support[
-        Math.floor(Math.random() * predefinedResponses.support.length)
-      ];
-    }
-
-    return predefinedResponses.default[
-      Math.floor(Math.random() * predefinedResponses.default.length)
+    return [
+      {
+        id: '1',
+        text: t('welcomeMessage'),
+        sender: 'assistant',
+        timestamp: new Date(),
+        unique_id: uniqueId,
+      },
     ];
-  }, []);
+  });
+
+  const [isTyping, setIsTyping] = useState(false);
 
   const sendMessage = useCallback(
     async (text: string) => {
-      // Add user message
       const userMessage: Message = {
         id: Date.now().toString(),
         text,
         sender: 'user',
         timestamp: new Date(),
+        unique_id: uniqueId,
       };
+      setMessages((prev) => {
+        const updated = [...prev, userMessage];
+        localStorage.setItem('messages', JSON.stringify(updated));
+        return updated;
+      });
 
-      setMessages((prev) => [...prev, userMessage]);
       setIsTyping(true);
 
-      // Simulate AI response delay
-      await new Promise((resolve) =>
-        setTimeout(resolve, 1000 + Math.random() * 1000)
-      );
+      try {
+        const response = await add({
+          question: text,
+          unique_id: uniqueId,
+        });
 
-      // Add AI response
-      const aiResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        text: getResponse(text),
-        sender: 'assistant',
-        timestamp: new Date(),
-      };
+        const data: ChatAPIResponse = response as unknown as ChatAPIResponse;
 
-      setIsTyping(false);
-      setMessages((prev) => [...prev, aiResponse]);
+        const linksByType: ChatLinkItem[] = [
+          ...(data.links?.categories ?? []).map((l) => ({
+            url: l.url,
+            title_ar: l.name_ar,
+            title_en: l.name_en,
+            type: 'category' as const, // Using as const here tells TypeScript that this type is not a generic string, but the exact value.
+          })),
+          ...(data.links?.sub_categories ?? []).map((l) => ({
+            url: l.url,
+            title_ar: l.name_ar,
+            title_en: l.name_en,
+            type: 'sub_category' as const, // Using as const....
+          })),
+          ...(data.links?.products ?? []).map((l) => ({
+            url: l.url,
+            title_ar: l.title_ar,
+            title_en: l.title_en,
+            type: 'product' as const, // Using as const....
+          })),
+          ...(data.links?.support ?? []).map((l: any) => ({
+            url: l.url,
+            title_ar: l.name_ar,
+            title_en: l.name_en,
+            type: 'support' as const, // Using as const....
+          })),
+          ...(data.links?.orders ?? []).map((l: any) => ({
+            url: l.url,
+            title_ar: l.name_ar,
+            title_en: l.name_en,
+            type: 'order' as const, // Using as const....
+          })),
+        ];
+
+        const markdownLinksRegex =
+          /\d*\.\s*\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
+        const extractedLinks: ChatLinkItem[] = [];
+        let match;
+        let cleanText = data.answer;
+
+        while ((match = markdownLinksRegex.exec(data.answer)) !== null) {
+          extractedLinks.push({
+            title_ar: match[1],
+            url: match[2],
+            type: 'category',
+          });
+          // إزالة الرابط من النص
+          cleanText = cleanText.replace(match[0], match[1]);
+        }
+
+        const aiMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          text: cleanText,
+          links: [...linksByType, ...extractedLinks],
+          sender: 'assistant',
+          timestamp: new Date(),
+          unique_id: uniqueId,
+        };
+
+        setMessages((prev) => {
+          const updated = [...prev, aiMessage];
+          localStorage.setItem('messages', JSON.stringify(updated));
+          return updated;
+        });
+      } catch (error: any) {
+        const aiMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          text:
+            error?.response?.message ||
+            'Something went wrong. Please try again later.',
+          sender: 'assistant',
+          timestamp: new Date(),
+          unique_id: uniqueId,
+        };
+        setMessages((prev) => [...prev, aiMessage]);
+        console.log(error);
+      } finally {
+        setIsTyping(false);
+      }
     },
-    [getResponse]
+    [add, uniqueId]
   );
 
   return {

@@ -1,8 +1,11 @@
-import { useState, useMemo, useCallback } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
 import DataTableHeader from './Table/DataTableHeader';
 import DataTableBody from './Table/DataTableBody';
 import DataTablePagination from './Table/DataTablePagination';
+import Loading from './loading';
+import ErrorFetching from './ErrorFetching';
 
 interface DataTableProps<T extends { id: number | string }> {
   title?: string;
@@ -11,15 +14,26 @@ interface DataTableProps<T extends { id: number | string }> {
   onEdit?: (id: string | number) => void;
   onDelete?: (id: string | number) => void;
   showEdit?: boolean;
+  showActionsColumn?: boolean;
+  filter?: string;
+  setFilter?: (value: string) => void;
+  onRowPatched?: (id: string | number, patch: Partial<T>) => void;
+  filterOptions?: { id: string; label: string }[];
+  isLoading: boolean;
+  error: string;
 }
 
 function getItemsPerPageOptions(totalItems: number) {
   const fixedOptions = [6, 10, 20];
   const options = fixedOptions.filter((opt) => opt < totalItems);
-  const lastOption = totalItems - 2;
+
+  let lastOption = totalItems - 2;
+  if (lastOption > 30) lastOption = 30;
+
   if (!options.includes(lastOption)) {
     options.push(lastOption);
   }
+
   return options.sort((a, b) => a - b);
 }
 
@@ -29,6 +43,13 @@ export function DataTable<T extends { id: number | string }>({
   onDelete,
   placeholder = 'بحث...',
   showEdit,
+  showActionsColumn,
+  filter,
+  setFilter,
+  onRowPatched,
+  filterOptions,
+  isLoading,
+  error,
 }: DataTableProps<T>) {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm] = useDebounce(searchTerm, 700);
@@ -90,6 +111,13 @@ export function DataTable<T extends { id: number | string }>({
     setCurrentPage(1);
   };
 
+  useEffect(() => {
+    const newTotalPages = Math.ceil(filteredData.length / itemsPerPage);
+    if (currentPage > newTotalPages) {
+      setCurrentPage(newTotalPages > 0 ? newTotalPages : 1);
+    }
+  }, [filteredData.length, itemsPerPage]);
+
   return (
     <div>
       <DataTableHeader
@@ -98,27 +126,40 @@ export function DataTable<T extends { id: number | string }>({
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
         placeholder={placeholder}
+        filter={filter}
+        handleFilterChange={setFilter}
+        filterOptions={filterOptions}
       />
-      <DataTableBody
-        columns={columns}
-        data={currentData}
-        onEdit={onEdit}
-        onDelete={onDelete}
-        searchTerm={debouncedSearchTerm}
-        showEdit={showEdit}
-      />
-      {totalPages > 1 && (
-        <DataTablePagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          itemsPerPage={itemsPerPage}
-          itemsPerPageOptions={itemsPerPageOptions}
-          onPageChange={goToPage}
-          onItemsPerPageChange={handleItemsPerPageChange}
-          filteredCount={filteredData.length}
-          startIndex={startIndex}
-          endIndex={endIndex}
-        />
+      {isLoading ? (
+        <Loading />
+      ) : error ? (
+        <ErrorFetching />
+      ) : (
+        <>
+          <DataTableBody
+            columns={columns}
+            data={currentData}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            searchTerm={debouncedSearchTerm}
+            showEdit={showEdit}
+            showActionsColumn={showActionsColumn}
+            onRowPatched={onRowPatched}
+          />
+          {totalPages > 1 && (
+            <DataTablePagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              itemsPerPage={itemsPerPage}
+              itemsPerPageOptions={itemsPerPageOptions}
+              onPageChange={goToPage}
+              onItemsPerPageChange={handleItemsPerPageChange}
+              filteredCount={filteredData.length}
+              startIndex={startIndex}
+              endIndex={endIndex}
+            />
+          )}
+        </>
       )}
     </div>
   );

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-const Image = lazy(() => import('next/image'));
 import Button from '@/components/atomic/Button';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import Input from '@/components/atomic/Input';
@@ -26,19 +25,21 @@ import { ProductCardProps } from '@/interfaces';
 import { useToast } from '@/lib/toast';
 import { InputTypes } from '@/utils/type';
 import { useTranslations } from 'next-intl';
-import React, { lazy, Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import FormError from '@/components/atomic/FormError';
-
-const inputQuantityOptions = [
-  { id: 1, label: '1' },
-  { id: 2, label: '2' },
-  { id: 3, label: '3' },
-  { id: 4, label: '4' },
-];
+import { extractText } from '@/utils/extractText';
+import { API_IMAGE_URL } from '@/config/api';
+import dynamic from 'next/dynamic';
+import { FaStar } from 'react-icons/fa6';
+import { useToggleLocale } from '@/hook/useToggleLocale';
+const DynamicImage = dynamic(() => import('next/image'), {
+  loading: () => <Loading />,
+  ssr: false,
+});
 
 const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -46,7 +47,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const inputsTxt = useTranslations('Inputs');
   const btnTxt = useTranslations('BtnTexts');
   const msgTxts = useTranslations('Messages');
-  // const { isArabic } = useToggleLocale();
+  const { isArabic } = useToggleLocale();
   const { addToCart } = useCartContext();
   const { showToast } = useToast();
 
@@ -74,10 +75,14 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
     register,
     handleSubmit,
     reset,
+    control,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const loginMethod = watch('login_method');
 
   const handleAddToCart = (formValues: Record<string, any>) => {
     addToCart({
@@ -94,20 +99,17 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   return (
     <CardWrapper className="flex flex-col md:flex-row gap-7 p-4 md:p-10">
       <MotionSection index={0}>
-        <Suspense fallback={<Loading />}>
-          <Image
-            src={
-              // `${API_IMAGE_URL}${product?.image}` ||
-              '/assets/play-station.webp'
-            }
-            alt="play-station"
-            width={300}
-            height={300}
-            className="rounded-xl max-md:w-full"
-          />
-        </Suspense>
+        <DynamicImage
+          src={
+            `${API_IMAGE_URL}${product?.image}` || '/assets/play-station.webp'
+          }
+          alt={product?.title}
+          width={300}
+          height={300}
+          className="rounded-xl max-md:w-full"
+        />
         <div className="flex items-center justify-between flex-wrap gap-2 mt-5">
-          <h4 className="text-base md:text-lg font-semibold">
+          <h4 className="text-sm md:text-base font-semibold">
             {t('shareLinkWith')}
           </h4>
           <div className="flex items-center gap-2">
@@ -117,7 +119,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                 <AnimatedWrapper key={item.id} custom={index}>
                   <div key={item.id} className="cursor-pointer">
                     <Icon
-                      size={20}
+                      size={18}
                       className="hover:text-enjoy-primary transition-all duration-400"
                     />
                   </div>
@@ -133,14 +135,30 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           <h1 className="text-xl sm:text-[28px]">{product?.title}</h1>
         </MotionSection>
 
+        {/* VAT Rate */}
+        <MotionSection index={1}>
+          <div className="text-sm font-medium border border-gray-200 rounded-lg py-1 px-3 mt-4 w-fit bg-gray-100">
+            {product?.vat_rate && product?.vat_rate > 0 ? (
+              <div className="flex items-center justify-center gap-2">
+                <p>{inputsTxt('labels.vatRate')}:</p>
+                <span className="text-red-500">
+                  {parseFloat(product?.vat_rate.toString())}%
+                </span>
+              </div>
+            ) : (
+              t('vatExempt')
+            )}
+          </div>
+        </MotionSection>
+
         <MotionSection index={2}>
-          <div className="flex items-end gap-3 mt-4">
+          <div className="flex items-end gap-2 mt-4">
             <h3 className="text-xl sm:text-[28px] font-semibold">
               {product?.price?.amount} {product?.price?.currency}
             </h3>
             {product?.discount?.amount && (
               <div className="flex items-center gap-3">
-                <span className="line-through text-red-500 text-base">
+                <span className="line-through text-red-500 text-base font-semibold">
                   {product?.price_before?.amount}{' '}
                   {product?.price_before?.currency}
                 </span>
@@ -149,7 +167,8 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                   className="py-0.5 px-2 flex items-center justify-center"
                 >
                   <span className="text-white text-xs">
-                    {t('rival')} {product?.discount?.amount || 9}%
+                    {t('rival')} {product?.discount?.amount}{' '}
+                    {product?.discount?.currency}
                   </span>
                 </CardWrapper>
               </div>
@@ -157,7 +176,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           </div>
         </MotionSection>
 
-        {/* <MotionSection index={3}>
+        <MotionSection index={3}>
           <div className="flex item-center justify-between gap-2 mt-4 border border-gray-400 rounded-lg p-3">
             <div
               className={`flex items-center ${
@@ -165,9 +184,9 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
               } gap-2`}
             >
               <div className="flex items-center">
-                <MdAdd className="font-bold" />
+                {/* <MdAdd className="font-bold" /> */}
                 <span className="text-enjoy-primary text-base font-bold">
-                  4
+                  {String(product?.points)}
                 </span>
               </div>
               <h3
@@ -178,7 +197,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
             </div>
             <FaStar className="text-enjoy-secondary" size={20} />
           </div>
-        </MotionSection> */}
+        </MotionSection>
 
         <div className="mt-7">
           <MotionSection index={4}>
@@ -187,10 +206,9 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
             </h3>
           </MotionSection>
           <MotionSection index={5}>
-            <p
-              className="text-[15px] text-gray-500"
-              dangerouslySetInnerHTML={{ __html: product?.content || '' }}
-            />
+            <p className="text-[15px] text-gray-500">
+              {extractText(product?.content)}
+            </p>
           </MotionSection>
         </div>
 
@@ -206,7 +224,6 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
               type="number"
               inputName="quantity"
               label={inputsTxt('labels.quantity')}
-              options={inputQuantityOptions}
               value={selectedQuantity}
               onChange={(e) => {
                 const value = Number(e.target.value);
@@ -216,7 +233,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
           </MotionSection>
 
           <MotionSection index={7}>
-            <Accordion type="single" collapsible>
+            <Accordion type="single" collapsible defaultValue="extra-options">
               <AccordionItem value="extra-options">
                 <AccordionTrigger className="mb-4 cursor-pointer border-b border-gray-200 pb-2">
                   {t('additionalOptions')}
@@ -227,9 +244,32 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                       <Input
                         variant="secondary"
                         type={input.type as InputTypes}
+                        // type={
+                        //   product?.shipping_payment === 'access' &&
+                        //   input.inputName === 'email_phone'
+                        //     ? loginMethod === 'email'
+                        //       ? 'email'
+                        //       : 'text'
+                        //     : (input.type as InputTypes)
+                        // }
                         inputName={input.inputName}
+                        // label={
+                        //   input.label || inputsTxt(`labels.${input.labelKey}`)
+                        // }
                         label={
-                          input.label || inputsTxt(`labels.${input.labelKey}`)
+                          input.inputName === 'email_phone' &&
+                          product?.shipping_payment === 'access'
+                            ? inputsTxt(
+                                `labels.${
+                                  loginMethod === 'email'
+                                    ? 'email'
+                                    : loginMethod === 'twitter'
+                                    ? 'twitter'
+                                    : 'facebook'
+                                }`
+                              )
+                            : input.label ||
+                              inputsTxt(`labels.${input.labelKey}`)
                         }
                         options={input.options?.map((opt) => ({
                           ...opt,
@@ -244,7 +284,10 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
                           errors[input.inputName] ? 'border-red-500' : ''
                         }
                         isRequired
-                        {...register(input.inputName)}
+                        control={control}
+                        {...(input.type !== 'checkbox'
+                          ? register(input.inputName)
+                          : {})}
                       />
                       {errors[input.inputName] && (
                         <FormError message={errors[input.inputName]?.message} />

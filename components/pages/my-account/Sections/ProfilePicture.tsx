@@ -1,25 +1,43 @@
 'use client';
-import Avatar from '@/components/atomic/Avatar';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
+import { API_IMAGE_URL } from '@/config/api';
 import useIsMobile from '@/hook/useIsMobile';
 import { FormValues, TranslationFunction } from '@/interfaces';
 import React, { useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useAuthContext } from '@/context/AuthContext';
+import { getInitials } from '@/utils/stringUtils';
 
-const ProfilePicture = ({ t }: { t: TranslationFunction }) => {
-  const isMobile = useIsMobile();
+const ProfilePicture = ({
+  t,
+  photo,
+}: {
+  t: TranslationFunction;
+  photo: FileList | string | null;
+}) => {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const { user } = useAuthContext();
+  const isMobile = useIsMobile();
   const { setValue } = useFormContext<FormValues>();
+
+  const initials = getInitials(user?.name);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length) {
       setAvatarPreview(URL.createObjectURL(files[0]));
-      setValue('avatar', files);
+      setValue('photo', files);
     }
   };
+
+  const getPhotoSrc = () => {
+    if (avatarPreview) return avatarPreview; // صورة جديدة مختارة
+    if (photo && typeof photo === 'string') return `${API_IMAGE_URL}${photo}`; // رابط موجود
+  };
+
   return (
     <div className={`pb-7 ${!isMobile ? 'border-b border-gray-300' : ''}`}>
       <AnimatedWrapper>
@@ -29,13 +47,14 @@ const ProfilePicture = ({ t }: { t: TranslationFunction }) => {
             onClick={() => fileInputRef.current?.click()}
             className="rounded-full flex items-center justify-center cursor-pointer"
           >
-            <Avatar
-              imgSrc={avatarPreview || '/assets/user-vector.jpg'}
-              imgAlt="Profile"
-              otherClassName="w-20 h-20 shadow-lg"
-              width={20}
-              height={20}
-            />
+            <Avatar className="h-20 w-20 shadow-lg">
+              <AvatarImage
+                src={getPhotoSrc()}
+                alt="Profile"
+                className="shadow-lg"
+              />
+              <AvatarFallback>{initials}</AvatarFallback>
+            </Avatar>
             <input
               type="file"
               accept="image/*"

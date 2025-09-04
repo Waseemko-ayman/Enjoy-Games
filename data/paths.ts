@@ -5,20 +5,29 @@ import { MdMoreHoriz, MdOutlineAssignment } from 'react-icons/md';
 export const PATHS = {
   HOME: { name: 'الرئيسية', link: '/' },
   STORE: { name: 'المتجر', link: '/store' },
-  STARS: { name: 'دليل ستارز', link: '/stars' },
-  STARS_GIFTS: '/stars-gifts',
+  STARS: { name: 'ولاء إنجوي', link: '/stars' },
   WALLET: { name: 'محفظتي', link: '/wallet' },
-  MY_PURCHASES: { name: 'طلباتي', link: '/my-purchases' },
+  MY_PURCHASES: {
+    ROOT: { name: 'طلباتي', link: '/my-purchases' },
+    ITEM: (id: string | number) => ({
+      name: `تفاصيل الطلب ${id}`,
+      link: `/my-purchases/${id}`,
+    }),
+  },
   MY_CART: { name: 'سلتي', link: '/my-cart' },
 
   MY_ACCOUNT: {
     ROOT: { name: 'حسابي', link: '/my-account' },
-    INTERESTS: { name: 'الإهتمامات', link: '/my-account/interests' },
+    // INTERESTS: { name: 'الإهتمامات', link: '/my-account/interests' },
   },
 
   TICKETS: {
     ROOT: { name: 'تذاكر الدعم الفني', link: '/tickets' },
     CREATE: { name: 'إضافة تذكرة جديدة', link: '/tickets/create' },
+    ITEM: (id: string | number) => ({
+      name: `تفاصيل التذكرة ${id}`,
+      link: `/tickets/${id}`,
+    }),
   },
   TERMS_OF_USER: { name: 'سياسة الإستخدام', link: '/terms-of-use' },
   REFUND_POLICY: { name: 'سياسة الإسترجاع', link: '/refund-policy' },
@@ -41,16 +50,17 @@ export const PATHS = {
     FAQS: '/dashboard/faqs',
     TICKETS: '/dashboard/tickets',
     RATINGS: '/dashboard/ratings',
-    ORDERS: '/dashboard/orders',
+    ORDERS: {
+      ROOT: '/dashboard/orders',
+      ITEM: '/dashboard/orders/:id/products',
+    },
+    USERS: '/dashboard/users',
     PAYMENT_GATEWAYS: '/dashboard/payment-gateways',
     REPORTS: '/dashboard/reports',
-    NOTIFICATIONS: {
-      ROOT: '/dashboard/notifications',
-      // ITEM: '/dashboard/notifications/:id/read',
-      ITEM: '/dashboard/notifications/:id',
-    },
     SETTINGS: '/dashboard/settings',
+    PRODUCT_SUBSCRIBERS: '/dashboard/product-subscribers',
   },
+  REFERRALS: { name: 'دعواتي', link: '/referrals' },
   LOGIN: '/auth/login',
   SIGNUP: '/auth/signup',
   OTP: '/auth/otp',
@@ -66,7 +76,7 @@ export const navBarLinks = [
     id: 3,
     icon: MdOutlineAssignment,
     titleKey: 'my-purchases',
-    link: PATHS.MY_PURCHASES.link,
+    link: PATHS.MY_PURCHASES.ROOT.link,
   },
   {
     id: 4,

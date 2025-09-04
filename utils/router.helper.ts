@@ -10,14 +10,15 @@ export const PATHS = {
   SLIDERS: '/dashboard/sliders',
   FAQS: '/dashboard/faqs',
   TICKETS: '/dashboard/tickets',
+  ORDERS: {
+    ROOT: '/dashboard/orders',
+    ITEM: '/dashboard/orders/:id',
+  },
+  USERS: '/dashboard/users',
   PAYMENT_GATEWAYS: '/dashboard/payment-gateways',
   REPORTS: '/dashboard/reports',
-  NOTIFICATIONS: {
-    ROOT: '/dashboard/notifications',
-    // ITEM: '/dashboard/notifications/:id/read',
-    ITEM: '/dashboard/notifications/:id',
-  },
   SETTINGS: '/dashboard/settings',
+  PRODUCT_SUBSCRIBERS: '/dashboard/product-subscribers',
   AUTH: {
     LOGIN: '/auth/login',
     SIGNUP: '/auth/signup',

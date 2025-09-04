@@ -1,28 +1,32 @@
 'use client';
 import { createContext, useContext, useState } from 'react';
 
-interface updateContentContextType {
-  refreshFlag: boolean;
-  triggerRefresh: () => void;
+interface UpdateContentContextType {
+  refreshFlags: { [key: string]: boolean };
+  triggerRefresh: (key: string) => void;
 }
 
-const updateContentContext = createContext<updateContentContextType>({
-  refreshFlag: false,
+const UpdateContentContext = createContext<UpdateContentContextType>({
+  refreshFlags: {},
   triggerRefresh: () => {},
 });
 
 export const UpdateContentProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [refreshFlag, setRefreshFlag] = useState(false);
+  const [refreshFlags, setRefreshFlags] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
-  const triggerRefresh = () => setRefreshFlag((prev) => !prev);
+  const triggerRefresh = (key: string) => {
+    setRefreshFlags((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   return (
-    <updateContentContext.Provider value={{ refreshFlag, triggerRefresh }}>
+    <UpdateContentContext.Provider value={{ refreshFlags, triggerRefresh }}>
       {children}
-    </updateContentContext.Provider>
+    </UpdateContentContext.Provider>
   );
 };
 
-export const useUpdateContent = () => useContext(updateContentContext);
+export const useUpdateContent = () => useContext(UpdateContentContext);

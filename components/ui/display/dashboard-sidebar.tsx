@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Menu, User } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -11,9 +11,13 @@ import { sidebarLinks } from '@/utils/constant';
 import useIsMobile from '@/hook/useIsMobile';
 import Image from 'next/image';
 import { PATHS } from '@/data/paths';
-import { useAuthContext } from '@/context/AuthContext';
 import { useTranslations } from 'next-intl';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import ButtonLoading from '@/components/atomic/ButtonLoading';
+import InlineError from '@/components/molecules/InlineError';
+import Avatar from '@/components/atomic/Avatar';
+import { useUserInfo } from '@/context/UserInfoContext';
+import { API_IMAGE_URL } from '@/config/api';
 
 export function DashboardSidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,24 +33,17 @@ export function DashboardSidebar() {
   const isMobile = useIsMobile();
   const { isArabic } = useToggleLocale();
 
-  // Auth
-  const { user } = useAuthContext();
+  // Get User Information
+  const { user, isLoading, error } = useUserInfo();
 
   // Close the mobile menu when navigating
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  // useEffect(() => {
-  //   if (isAuth) {
-  //     getProfileData();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isAuth]);
-
   const SidebarContent = () => (
     <>
-      <div className="flex items-center justify-center border-b border-b-gray-300 px-4 pb-4">
+      <div className="flex items-center justify-center border-b border-b-gray-300 px-4">
         <Link
           href={PATHS.HOME.link}
           className="flex items-center gap-2 font-semibold"
@@ -54,8 +51,8 @@ export function DashboardSidebar() {
           <Image
             src="/assets/logo.png"
             alt="Enjoy Games Logo"
-            width={120}
-            height={120}
+            width={90}
+            height={90}
           />
         </Link>
       </div>
@@ -80,13 +77,23 @@ export function DashboardSidebar() {
       </div>
       <div className="mt-auto border-t border-t-gray-300 p-4">
         <div className="flex items-center gap-2 rounded-lg border border-gray-300 p-4">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary">
-            <User className="h-4 w-4 text-primary-foreground" />
-          </div>
+          {isLoading ? (
+            <ButtonLoading borderColor="text-black" />
+          ) : error ? (
+            <InlineError textColor="text-black" />
+          ) : (
+            <Avatar
+              imgSrc={
+                `${API_IMAGE_URL}${user?.photo}` || '/assets/user-avatar.png'
+              }
+              imgAlt="character"
+              width={30}
+              height={30}
+            />
+          )}
           <div>
             <p className="text-sm font-medium">{user?.name}</p>
             {/* <p className="text-xs text-muted-foreground">{user?.role}</p> */}
-            <p className="text-xs text-muted-foreground">user?.role</p>
           </div>
         </div>
       </div>

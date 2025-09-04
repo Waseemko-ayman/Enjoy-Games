@@ -19,6 +19,18 @@ export interface APIRequest {
   refresh: () => void;
 }
 
+export interface TotalPaidData {
+  amount: number;
+  currency: string;
+}
+
+export interface TotalPaidContextType extends APIRequest {
+  totalPaid: TotalPaidData | null;
+  isLoading: boolean;
+  error: any;
+  refresh: () => void;
+}
+
 export interface Category {
   id: number;
   slug: string | null;
@@ -51,6 +63,7 @@ export interface ProductCardProps {
   slug?: string;
   content?: string;
   description?: string;
+  terms_and_conditions?: string;
   image: string;
   imgAlt?: string;
   imgTitle?: string;
@@ -76,6 +89,7 @@ export interface ProductCardProps {
   quantity?: number;
   currencyImage?: string;
   ratings?: number[];
+  vat_rate?: number;
   icon?: React.ElementType | string | any;
   showDesc?: boolean;
   showBtn?: boolean;
@@ -90,6 +104,7 @@ export interface ProductCardProps {
   // onAddToCart?: () => void;
   formScheme?: Record<string, any>;
   productData?: ProductCardProps;
+  // interestId: string | number;
 }
 
 export interface CategoryFormData {
@@ -265,6 +280,22 @@ export interface OrdersStatsProps {
   orders: Order[];
 }
 
+export interface OrderItem {
+  id: number;
+  product_title: string;
+  quantity: number;
+  total_price: string;
+  currency_code: string | null;
+  discount: string;
+  proof_file: string | null;
+  shipping_method: string;
+  shipping_data: string;
+}
+
+export interface OrderDetailsProps {
+  items: OrderItem[];
+}
+
 export interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -281,12 +312,36 @@ export interface FormData {
   [key: string]: unknown;
 }
 
+export interface RedeemResponse {
+  success: boolean;
+  data: {
+    points_redeemed: number;
+    points_balance: number;
+    amount: {
+      amount: number;
+      currency: string;
+    };
+    wallet_balance: {
+      amount: number;
+      currency: string;
+    };
+  };
+  message: string;
+  [key: string]: unknown;
+}
+
 export interface getSlugsProps {
   getSlugs: (subCategoryId: number) => {
     categorySlug: string;
     subCategorySlug: string;
   } | null;
   error?: string;
+}
+
+export interface SimilarProductsProps extends getSlugsProps {
+  products: ProductCardProps;
+  isLoading: boolean;
+  error: string;
 }
 
 export interface HomeSectionsProps extends getSlugsProps {
@@ -448,6 +503,12 @@ export interface AccountItem {
   shiddatData: shiddaItem[];
 }
 
+export interface PaymentMethod {
+  value: string;
+  label: string;
+  image: string;
+}
+
 export interface CategoryPageProps {
   cards: SubCategories[];
   error?: string;
@@ -525,8 +586,8 @@ export interface AuthLayoutProps extends SectionComponentProps {
 
 export interface WalletCardProps extends BaseIconProps {
   title: string;
-  value: string;
-  unit: string;
+  value: string | number | JSX.Element;
+  unit?: string;
   bgColor: string;
   textColor: string;
   pathName: string;
@@ -558,14 +619,15 @@ export interface TierProgressWrapperProps extends WithChildren {
   connectionLineWidth: number;
   progress: string;
   progressFooter: React.ComponentProps<typeof ProgressCircle>['footer'];
+  isLoading?: boolean;
+  error?: string;
 }
 
 export interface EarningsPointsSectionProps {
   variant: 'earnings' | 'points';
-  totalAmount: number;
+  totalAmount?: number;
   withdrawableAmount: number;
   conversionRate?: string;
-  starPoints?: number;
   lastWithdrawalText: JSX.Element | string;
   firstButtonHref?: string;
   secondButtonHref?: string;
@@ -582,7 +644,7 @@ interface RewardProgram {
 }
 
 export interface RewardProgramItemProps {
-  program: RewardProgram;
+  program: RewardProgram | null;
   isSelected: boolean;
 }
 
@@ -639,19 +701,32 @@ export interface myAccountStatsProps {
   id: number;
   icon: ElementType;
   titleKey: string;
-  currency?: string;
-  account?: number;
+  amount?: string | number | JSX.Element;
+  currency?: string | number | JSX.Element;
   href?: string;
 }
 
-export interface FormValues {
+export interface UserInfo {
+  id: number;
+  points: number;
+  wallet_balance: string;
   name: string;
-  email: string;
+  email?: string;
   phone?: string;
-  birthDate?: string;
-  gender?: 'ذكر' | 'أنثى' | null;
+  date?: string;
+  gender?: 'male' | 'female' | null;
+  photo?: FileList | string | null;
+  referral_code: string;
+}
+
+export interface UserInfoContextType extends APIRequest {
+  user: UserInfo | null;
+}
+
+export interface FormValues extends UserInfo {
   options: boolean[];
-  avatar?: FileList | string | null;
+  password?: string | null;
+  password_confirmation?: string | null;
 }
 
 export interface paramsProps {
@@ -777,6 +852,11 @@ export interface LoginFormData {
 export interface signupFormData extends LoginFormData {
   name: string;
   password_confirmation: string;
+  referral_code?: string | null;
+}
+
+export interface CreateUsersPorps extends signupFormData {
+  permissions: (string | undefined)[];
 }
 
 type Account = {
@@ -1085,11 +1165,16 @@ export interface ProductData {
     ar: string;
     en: string;
   };
+  terms_and_conditions: {
+    ar: string;
+    en: string;
+  };
   price: number | { amount: number; currency: string };
   price_before?: string | { amount: number; currency: string };
   discount?: string | { amount: number; currency: string };
   is_active: boolean;
   shipping_payment: string;
+  vat_rate: number;
   image?: string;
   icon?: string;
   created_at?: string;
@@ -1238,16 +1323,6 @@ export interface PaymentStepProps {
   totalAmount: number;
   items: ProductCardProps[];
   quantity?: number;
-}
-
-export interface FormValues {
-  name: string;
-  email: string;
-  phone?: string;
-  birthDate?: string;
-  gender?: 'ذكر' | 'أنثى' | null;
-  options: boolean[];
-  avatar?: FileList | string | null;
 }
 
 export interface paramsProps {

@@ -1,6 +1,7 @@
 import CardWrapper from '@/components/atomic/CardWrapper';
 import MotionSection from '@/components/molecules/FramerMotion/MotionSection';
 import InvoiceSummary from '@/components/molecules/InvoiceSummary';
+import { API_IMAGE_URL } from '@/config/api';
 import { ProductCardProps, TranslationFunction } from '@/interfaces';
 import Image from 'next/image';
 import React from 'react';
@@ -32,7 +33,10 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                   className="flex items-center gap-4 mb-4"
                 >
                   <Image
-                    src="/assets/play-station.webp"
+                    src={
+                      `${API_IMAGE_URL}${item.image}` ||
+                      '/assets/play-station.webp'
+                    }
                     alt="Nintendo"
                     width={80}
                     height={80}

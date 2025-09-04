@@ -12,13 +12,13 @@ const Questions = () => {
       bgColor="bg-white"
       className="text-center p-6 hover:-translate-x-1 transition duration-500"
     >
-      <h3 className="text-base font-normal mb-5">{t('searchFaqPrompt')}</h3>
+      <h3 className="text-base font-normal mb-5">{t('searchFaqsPrompt')}</h3>
       <Button
         href={PATHS.FAQS.link}
         variant="forth"
         otherClassName="w-full py-3 px-3"
       >
-        {btnTexts('faq')}
+        {btnTexts('faqs')}
       </Button>
     </CardWrapper>
   );

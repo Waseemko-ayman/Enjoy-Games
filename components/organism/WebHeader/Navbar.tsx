@@ -11,10 +11,12 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useCategories } from '@/context/CategoriesContext';
 import Loading from '@/components/molecules/loading';
+import InlineError from '@/components/molecules/InlineError';
+import { API_IMAGE_URL } from '@/config/api';
 
 const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
   const t = useTranslations('Layout.header.navBar');
-  const { categories, isLoading } = useCategories();
+  const { categories, isLoading, error } = useCategories();
 
   if (layout === 'store') {
     return (
@@ -27,12 +29,13 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
           >
             {isLoading ? (
               <Loading width="w-7" height="h-7" />
+            ) : error ? (
+              <InlineError />
             ) : (
               categories.map((item: Category) => (
                 <NavItem
                   key={item.id}
-                  // icon={item.icon}
-                  icon={'/assets/digitalStores.webp'}
+                  icon={`${API_IMAGE_URL}${item.icon}`}
                   name={item.name}
                   linkPath={`/categories/${item.slug}`}
                   layout={layout}

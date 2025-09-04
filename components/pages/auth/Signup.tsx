@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useState } from 'react';
@@ -16,19 +17,25 @@ import { InputTypes } from '@/utils/type';
 import { useAuthContext } from '@/context/AuthContext';
 import SocialLogin from '@/components/molecules/SocialLogin';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
+import { generateUniqueId } from '@/hook/useAuth';
+import { useReferralCode } from '@/hook/ReferralCodeContext';
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const authTxts = useTranslations('Auth');
   const btnTxts = useTranslations('BtnTexts');
   const reqTxts = useTranslations('Layout.footer.LearnMore');
+
   const { signup, isLoading } = useAuthContext();
+  const { setReferralCode } = useReferralCode();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{5,}$/;
+  const referralRegex = /^[A-Za-z0-9]*$/;
 
   const schema = Yup.object().shape({
     name: Yup.string()
@@ -42,6 +49,10 @@ const SignupPage = () => {
     password_confirmation: Yup.string()
       .oneOf([Yup.ref('password')], errorsMsgs('repasswordNotMatch'))
       .required(errorsMsgs('repasswordRequired')),
+    referral_code: Yup.string()
+      .nullable()
+      .optional()
+      .matches(referralRegex, errorsMsgs('referralCodeInvalid')),
   });
 
   const {
@@ -50,11 +61,12 @@ const SignupPage = () => {
     reset,
     formState: { errors },
   } = useForm<signupFormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema) as any,
   });
-
   const onSubmit = (data: signupFormData) => {
     signup(data);
+    const referralCode = generateUniqueId();
+    setReferralCode(referralCode);
     reset();
   };
 

@@ -47,6 +47,8 @@ interface FormFieldProps {
   inputName: string;
   register?: UseFormRegister<any>;
   error?: FieldError;
+  editId?: string | number | null;
+  readOnly?: boolean;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -65,6 +67,8 @@ const FormField: React.FC<FormFieldProps> = ({
   inputName,
   register,
   error,
+  editId,
+  readOnly,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
@@ -93,10 +97,12 @@ const FormField: React.FC<FormFieldProps> = ({
       {type === 'editor' && control ? (
         <div className="mt-2">
           <Controller
+            key={editId ?? 'new'}
             name={inputName}
             control={control}
             render={({ field: { onChange, value } }) => (
               <Tiptap
+                key={editId || 'new'}
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
@@ -263,6 +269,7 @@ const FormField: React.FC<FormFieldProps> = ({
             } ${fieldStyle}`}
             disabled={disabled}
             {...(register ? register(inputName) : {})}
+            readOnly={readOnly}
           />
           {isPassword && (
             <span

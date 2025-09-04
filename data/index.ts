@@ -5,25 +5,20 @@ import {
   FaFacebook,
   FaFlag,
   FaGift,
-  FaHeart,
+  // FaHeart,
   FaInstagram,
-  FaLinkedin,
   FaRegFlag,
   FaRegGem,
-  FaRegHeart,
   FaRegStar,
   FaSackDollar,
-  FaStar,
-  FaTwitter,
+  FaSnapchat,
+  FaTelegram,
+  FaTiktok,
   FaUser,
   FaWallet,
 } from 'react-icons/fa6';
 import { IoArrowRedoOutline, IoWalletOutline } from 'react-icons/io5';
-import {
-  MdEmail,
-  MdOutlineAlternateEmail,
-  // MdOutlineEmail,
-} from 'react-icons/md';
+import { MdEmail, MdOutlineAlternateEmail } from 'react-icons/md';
 import { PiSparkleFill } from 'react-icons/pi';
 import { PATHS } from './paths';
 import {
@@ -32,20 +27,19 @@ import {
   IoMdPricetag,
 } from 'react-icons/io';
 import { FiAward, FiLogOut, FiTrendingUp } from 'react-icons/fi';
-import { Sparkles, Wallet } from 'lucide-react';
-import { BannerSlide, InputItem, RewardTier } from '@/interfaces';
+import { InputItem, RewardTier } from '@/interfaces';
 import { FaTachometerAlt } from 'react-icons/fa';
 
 export const EnjoyWinWinData = [
+  // {
+  //   id: 1,
+  //   translationKey: 'participateAndWin',
+  //   buttonTextKey: 'MoreAboutParticipateAndWin',
+  //   image: '/assets/coin.gif',
+  //   href: '#',
+  // },
   {
     id: 1,
-    translationKey: 'participateAndWin',
-    buttonTextKey: 'MoreAboutParticipateAndWin',
-    image: '/assets/coin.gif',
-    href: '#',
-  },
-  {
-    id: 2,
     translationKey: 'enjoyGames',
     buttonTextKey: 'MoreAboutEnjoyGames',
     image: '/assets/coin.gif',
@@ -78,13 +72,13 @@ export const contactData = [
   {
     id: 1,
     label: 'email',
-    email: 'contact@enjoygames.com',
+    email: 'Info@enjoygames.shop',
     icon: MdEmail,
   },
   {
     id: 2,
     label: 'helpCenter',
-    email: 'help.enjoygames.com',
+    email: 'Support@chargerspeed.online',
     icon: IoMdHelpCircle,
   },
 ];
@@ -113,7 +107,7 @@ export const FOOTER_LINKS_DATA = {
     },
     {
       id: 5,
-      key: 'termsOfUser',
+      key: 'termsOfUse',
       url: PATHS.TERMS_OF_USER.link,
     },
   ],
@@ -128,11 +122,6 @@ export const FOOTER_LINKS_DATA = {
       key: 'helpCenter',
       url: '#',
     },
-    // {
-    //   id: 3,
-    //   key: 'أنضم للتجار',
-    //   url: '#',
-    // },
   ],
   shop_app: [
     {
@@ -153,27 +142,33 @@ export const FOOTER_LINKS_DATA = {
   socialMedia: [
     {
       id: 1,
-      url: '#',
+      url: 'https://www.facebook.com/profile.php?id=61568686790856',
       icon: FaFacebook,
       ariaLabel: 'facebook',
     },
     {
       id: 2,
-      url: '#',
-      icon: FaTwitter,
-      ariaLabel: 'twitter',
+      url: 'https://t.me/azouzz1994',
+      icon: FaTelegram,
+      ariaLabel: 'telegram',
     },
     {
       id: 3,
-      url: '#',
+      url: 'https://www.instagram.com/charger_speed?igsh=Yms4bWU1bWZhM3hq&utm_source=qr',
       icon: FaInstagram,
       ariaLabel: 'instagram',
     },
     {
       id: 4,
-      url: '#',
-      icon: FaLinkedin,
-      ariaLabel: 'linkedin',
+      url: 'https://www.tiktok.com/@charger_speed?_t=ZS-8z7OVQX2Nc2&_r=1',
+      icon: FaTiktok,
+      ariaLabel: 'tiktok',
+    },
+    {
+      id: 5,
+      url: 'https://t.snapchat.com/VWSRbZOT',
+      icon: FaSnapchat,
+      ariaLabel: 'snapchat',
     },
   ],
 };
@@ -184,12 +179,12 @@ export const menuLists = [
     linksItem: [
       { id: 1, key: 'stars', icon: IoArrowRedoOutline, link: PATHS.STARS.link },
       { id: 2, key: 'wallet', icon: IoWalletOutline, link: PATHS.WALLET.link },
-      {
-        id: 3,
-        key: 'interests',
-        icon: FaRegHeart,
-        link: PATHS.MY_ACCOUNT.INTERESTS.link,
-      },
+      // {
+      //   id: 3,
+      //   key: 'interests',
+      //   icon: FaHeart,
+      //   link: PATHS.MY_ACCOUNT.INTERESTS.link,
+      // },
     ],
   },
   {
@@ -204,6 +199,12 @@ export const menuLists = [
       },
       {
         id: 3,
+        key: 'referrals',
+        icon: FaRegFlag,
+        link: PATHS.REFERRALS.link,
+      },
+      {
+        id: 4,
         key: 'dashboard',
         icon: FaTachometerAlt,
         link: PATHS.DASHBOARD.HOME.ROOT,
@@ -221,7 +222,7 @@ export const userList = [
       {
         id: 2,
         title: 'طلباتي',
-        link: PATHS.MY_PURCHASES.link,
+        link: PATHS.MY_PURCHASES.ROOT.link,
         icon: IoMdPricetag,
       },
       {
@@ -249,13 +250,18 @@ export const userList = [
       //   link: PATHS.MAX_PROGRAM.link,
       //   icon: FaLink,
       // },
-      { id: 4, title: 'دليل ستارز', link: PATHS.STARS.link, icon: FaFlag },
       {
-        id: 5,
-        title: 'الإهتمامات',
-        link: PATHS.MY_ACCOUNT.INTERESTS.link,
-        icon: FaHeart,
+        id: 4,
+        title: 'ولاء إنجوي',
+        link: PATHS.STARS.link,
+        icon: PiSparkleFill,
       },
+      // {
+      //   id: 5,
+      //   title: 'الإهتمامات',
+      //   link: PATHS.MY_ACCOUNT.INTERESTS.link,
+      //   icon: FaHeart,
+      // },
     ],
   },
   {
@@ -270,10 +276,9 @@ export const userList = [
       },
       {
         id: 9,
-        title: 'نقاط دليل ستارز',
-        link: PATHS.STARS.link,
-        icon: PiSparkleFill,
-        badge: '0',
+        title: 'دعواتي',
+        link: PATHS.REFERRALS.link,
+        icon: FaFlag,
       },
     ],
   },
@@ -338,6 +343,12 @@ export const countries = [
     code: 'IQD',
   },
   {
+    name: 'مصر',
+    currency: 'الجنيه المصري',
+    img: 'egypt',
+    code: 'EGP',
+  },
+  {
     name: 'الأردن',
     currency: 'الدينار الأردني',
     img: 'jordan',
@@ -354,6 +365,18 @@ export const countries = [
     currency: 'اليورو',
     img: 'germany',
     code: 'EUR',
+  },
+  {
+    name: 'المملكة المتحدة',
+    currency: 'الجنيه الإسترليني',
+    img: 'united-kingdom',
+    code: 'GBP',
+  },
+  {
+    name: 'أستراليا',
+    currency: 'الدولار الأسترالي',
+    img: 'australia',
+    code: 'AUD',
   },
 ];
 
@@ -390,127 +413,42 @@ export const tiers = [
     id: 1,
     key: 'junior',
     icon: FaRegGem,
-    percentage: 0.2,
+    amount: 0, // أول ما يسجل
+    percentage: 0.0025, // 0.25% خصم
     isActive: true,
   },
   {
     id: 2,
     key: 'active',
     icon: FaCrown,
-    percentage: 0.4,
+    amount: 750, // ≈ 200$
+    percentage: 0.004, // 0.4% خصم
     isActive: false,
   },
   {
     id: 3,
     key: 'pro',
     icon: FaRegStar,
-    percentage: 0.6,
+    amount: 1876, // ≈ 500$
+    percentage: 0.005, // 0.5% خصم
     isActive: false,
   },
   {
     id: 4,
     key: 'expert',
     icon: FiAward,
-    percentage: 0.8,
+    amount: 3752, // ≈ 1000$
+    percentage: 0.007, // 0.7% خصم
     isActive: false,
   },
   {
     id: 5,
     key: 'vip',
     icon: FaDiamond,
-    percentage: 1,
+    amount: 18760, // ≈ 5000$
+    percentage: 0.01, // 1% خصم
     isActive: false,
   },
-];
-
-export const faqsData = [
-  {
-    id: 1,
-    question: '1️⃣ ما هو إنجوي قيمز ؟',
-    answer:
-      'إنجوي قيمز هو رنامج نقاط الولاء الذي يمكنك من كسب النقاط مع كل عملية شراء داخل إنجوي قيمز، ثم استبدالها بـ رصيد في محفظتك أو بطاقات رقمية مثل آيتونز، يلا لودو، وغيرها.',
-  },
-  {
-    id: 2,
-    question: '2️⃣ كيف يمكنني كسب النقاط ؟',
-    answer:
-      'يمكنك كسب النقاط عند إتمام عمليات الشراء داخل إنجوي قيمز. كل عملية شراء تمنحك عددًا معينًا من النقاط، والتي يمكنك استبدالها لاحقًا.',
-  },
-  {
-    id: 3,
-    question: '3️⃣ كيف أستبدل النقاط ؟',
-    answer: [
-      'عند تجميع نقاط كافية، يمكنك استبدالها بـ:',
-      'رصيد يُضاف إلى محفظتك داخل إنجوي قيمز.',
-      'بطاقات رقمية متنوعة مثل آيتونز، يلا لودو، وغيرها.',
-    ],
-  },
-  {
-    id: 4,
-    question: '4️⃣ هل هناك حد معين لاستخدام النقاط ؟',
-    answer:
-      'لا، يمكنك استبدال النقاط في أي وقت طالما لديك الرصيد الكافي، ولكن بعض البطاقات قد تتطلب حدًا أدنى معينًا من النقاط للاستبدال.',
-  },
-  {
-    id: 5,
-    question: '5️⃣ هل يمكنني تحويل نقاطي لشخص آخر ؟',
-    answer:
-      'حاليًا، لا يمكن تحويل النقاط بين الحسابات، ولكن يمكنك استخدامها لشراء بطاقات رقمية وإهدائها لأي شخص.',
-  },
-  {
-    id: 6,
-    question: '6️⃣ هل تنتهي صلاحية النقاط ؟ ',
-    answer:
-      'لا يوجد هناك تاريخ محدد لانتهاء النقاط ويمكنك استخدامها واستبدالها في أي وقت.',
-  },
-  {
-    id: 7,
-    question: '7️⃣ كيف يمكنني معرفة عدد النقاط التي أملكها ؟',
-    answer:
-      'يمكنك الاطلاع على رصيد نقاطك في أي وقت عبر حسابك في إنجوي قيمز، حيث ستجد سجل جميع عمليات الكسب والاستبدال.',
-  },
-  {
-    id: 8,
-    question: '8️⃣ ماذا أفعل إذا لم يصلني الرصيد أو البطاقة بعد الاستبدال ؟',
-    answer:
-      'إذا واجهت أي مشكلة، يمكنك التواصل مع الدعم الفني، وسنساعدك في حل المشكلة بأسرع وقت ممكن.',
-  },
-];
-
-export const WalletSectionData = [
-  {
-    id: 1,
-    link: PATHS.WALLET.link,
-    title: 'wallet',
-    value: '0',
-    unit: '/assets/saudi_riyal.png',
-    icon: Wallet,
-    bgColor: 'bg-violet-600',
-    textColor: 'text-white',
-    isUnitTranslatable: false,
-  },
-  {
-    id: 2,
-    link: PATHS.STARS.link,
-    title: 'stars',
-    value: '0',
-    unit: 'point',
-    icon: Sparkles,
-    bgColor: 'bg-orange-300',
-    textColor: 'text-[#060919]',
-    isUnitTranslatable: true,
-  },
-  // {
-  //   id: 3,
-  //   link: '#',
-  //   title: 'maxup',
-  //   value: '0',
-  //   unit: '/assets/saudi_riyal.png',
-  //   icon: Wallet,
-  //   bgColor: 'bg-amber-50',
-  //   textColor: 'text-[#060919]',
-  //   isUnitTranslatable: false,
-  // },
 ];
 
 export const inviteStepsData = [
@@ -562,36 +500,6 @@ export const mockApiData: RewardTier[] = [
   { id: 5, key: 'VIP', percentage: 0.7, isActive: false },
 ];
 
-export const rewardsPrograms = [
-  {
-    id: 1,
-    key: 'bonusesPrograms',
-    type: 'earnings',
-  },
-  // {
-  //   id: 2,
-  //   key: 'maxupProgram',
-  //   type: 'earnings',
-  //   amount: 0,
-  //   currency: 'ريال',
-  //   description: 'profiledProfits',
-  // },
-  {
-    id: 2,
-    key: 'starsPoints',
-    type: 'point',
-    amount: 0,
-    currency: 'point',
-    description: 'convertiblePoints',
-  },
-];
-
-export const HeroSlides: BannerSlide[] = [
-  { id: 1, image: '/assets/banners/banner1.webp' },
-  { id: 2, image: '/assets/banners/banner2.webp' },
-  { id: 3, image: '/assets/banners/banner3.webp' },
-];
-
 export const inputData = [
   {
     id: 1,
@@ -624,20 +532,34 @@ export const inputData = [
     id: 5,
     label: 'الجنس',
     type: 'select',
-    placeholder: 'حدد الجنس',
+    placeholder: 'gender',
     name: 'gender',
     options: [
       {
         id: 1,
         value: 'male',
-        label: 'ذكر',
+        labelKey: 'male',
       },
       {
         id: 2,
         value: 'female',
-        label: 'أنثى',
+        labelKey: 'female',
       },
     ],
+  },
+  {
+    id: 6,
+    type: 'password',
+    label: 'password',
+    name: 'password',
+    placeholder: 'yourPassword',
+  },
+  {
+    id: 7,
+    type: 'password',
+    label: 'password_confirmation',
+    name: 'password_confirmation',
+    placeholder: 'repassword',
   },
 ];
 
@@ -726,8 +648,8 @@ export const ticketsInputsTypes = [
 export const accessInputs: InputItem[] = [
   {
     id: 1,
-    inputName: 'shipping_method',
-    labelKey: 'shipping_method',
+    inputName: 'login_method',
+    labelKey: 'login_method',
     type: 'select',
     options: [
       { id: 1, value: 'phone', labelKey: 'phone' },
@@ -735,24 +657,28 @@ export const accessInputs: InputItem[] = [
       { id: 3, value: 'twitter', labelKey: 'twitter' },
       { id: 4, value: 'facebook', labelKey: 'facebook' },
     ],
+    errorKey: 'loginMethodRequired',
   },
   {
     id: 2,
-    inputName: 'phone_number',
+    inputName: 'email_phone',
     labelKey: 'phone',
     type: 'text',
+    errorKey: 'phoneRequired',
   },
   {
     id: 3,
     inputName: 'password',
     labelKey: 'password',
     type: 'password',
+    errorKey: 'passwordRequired',
   },
   {
     id: 4,
-    inputName: 'id_number',
-    labelKey: 'idNumber',
+    inputName: 'account_id',
+    labelKey: 'accountId',
     type: 'text',
+    errorKey: 'accountIdRequired',
   },
   {
     id: 5,
@@ -760,6 +686,7 @@ export const accessInputs: InputItem[] = [
     labelKey: 'unlockAccount',
     type: 'checkbox',
     placeholder: 'تم الإلغاء',
+    errorKey: 'unlockAccountRequired',
   },
 ];
 
@@ -776,9 +703,9 @@ export const codeInputs: InputItem[] = [
 export const accountIdInputs: InputItem[] = [
   {
     id: 1,
-    inputName: 'idNumber',
-    labelKey: 'idNumber',
-    errorKey: 'idNumberRequired',
+    inputName: 'account_id',
+    labelKey: 'accountId',
+    errorKey: 'accountIdRequired',
     type: 'number',
   },
 ];
@@ -786,39 +713,17 @@ export const accountIdInputs: InputItem[] = [
 export const multiIdInputs: InputItem[] = [
   {
     id: 1,
-    inputName: 'id_number_1',
-    labelKey: 'idNumber',
-    errorKey: 'idNumberRequired',
+    inputName: 'account_1',
+    labelKey: 'accountId',
+    errorKey: 'accountIdRequired',
     type: 'number',
   },
   {
     id: 2,
-    inputName: 'id_number_2',
-    labelKey: 'idNumber',
-    errorKey: 'idNumberRequired',
+    inputName: 'account_2',
+    labelKey: 'accountId',
+    errorKey: 'accountIdRequired',
     type: 'number',
-  },
-];
-
-export const stats = [
-  {
-    id: 1,
-    icon: Wallet,
-    titleKey: 'balance',
-    currency: '/assets/saudi_riyal.png',
-    account: 0,
-  },
-  {
-    id: 2,
-    icon: FaStar,
-    titleKey: 'currentLevel',
-    account: 0,
-  },
-  {
-    id: 3,
-    icon: FaHeart,
-    titleKey: 'interests',
-    href: PATHS.MY_ACCOUNT.INTERESTS.link,
   },
 ];
 
@@ -834,6 +739,14 @@ export const MyPurchasesTypes = [
   { id: 2, labelKey: 'completed' },
   { id: 3, labelKey: 'pending' },
   { id: 4, labelKey: 'cancelled' },
+  { id: 5, labelKey: 'paid' },
+  { id: 6, labelKey: 'processing' },
+];
+
+export const FaqsFilterTypes = [
+  { id: 1, labelKey: 'all' },
+  { id: 2, labelKey: 'generated' },
+  { id: 3, labelKey: 'manual' },
 ];
 
 export const loginInputs = [
@@ -882,5 +795,12 @@ export const signupInputs = [
     label: 'password_confirmation',
     name: 'password_confirmation',
     placeholder: 'repassword',
+  },
+  {
+    id: 5,
+    type: 'text',
+    label: 'referral_code',
+    name: 'referral_code',
+    placeholder: 'referralCode',
   },
 ];

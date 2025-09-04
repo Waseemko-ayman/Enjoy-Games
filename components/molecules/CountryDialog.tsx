@@ -23,13 +23,13 @@ const CountryDialog: React.FC<CountryDrawerProps> = ({
   setOpen,
 }) => {
   const { isArabic } = useToggleLocale();
-  const t = useTranslations('Layout.header.navBarPopup');
+  const t = useTranslations('Layout.header');
   return (
     <CustomDialog
       open={open}
       setOpen={setOpen}
-      title={t('ChangeCountryCurrencyTitle')}
-      description={t('ChangeCountryCurrencyDescription')}
+      title={t('navBarPopup.ChangeCountryCurrencyTitle')}
+      description={t('navBarPopup.ChangeCountryCurrencyDescription')}
       trigger={
         <button className="flex items-center justify-between w-full gap-2 cursor-pointer">
           <div className="flex items-center gap-3 font-semibold">
@@ -40,7 +40,8 @@ const CountryDialog: React.FC<CountryDrawerProps> = ({
               height={23}
             />
             <h4 className="text-sm">
-              {selectedCountry.name} - {selectedCountry.currency}
+              {t(`countries.${selectedCountry.img}.name`)} -{' '}
+              {t(`countries.${selectedCountry.img}.currency`)}
             </h4>
           </div>
           {isArabic ? <IoIosArrowBack /> : <IoIosArrowForward />}

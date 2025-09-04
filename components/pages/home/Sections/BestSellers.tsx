@@ -7,6 +7,7 @@ import { BestSellersProps } from '@/interfaces';
 import Loading from '@/components/molecules/loading';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import { useRouter } from 'next/navigation';
+import { API_IMAGE_URL } from '@/config/api';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -36,7 +37,7 @@ const BestSellers: React.FC<BestSellersProps> = ({
               <AnimatedWrapper key={card.id} custom={index}>
                 <ProductCard
                   image={
-                    `http://31.97.36.197/${card.image}` ||
+                    `${API_IMAGE_URL}${card.image}` ||
                     '/assets/play-station.webp'
                   }
                   imgAlt={card.title}
