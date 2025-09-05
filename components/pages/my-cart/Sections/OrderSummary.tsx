@@ -35,7 +35,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                   <Image
                     src={
                       `${API_IMAGE_URL}${item.image}` ||
-                      '/assets/play-station.webp'
+                      '/assets/no-image-available.webp'
                     }
                     alt="Nintendo"
                     width={80}

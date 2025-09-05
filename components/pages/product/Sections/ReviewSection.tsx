@@ -201,7 +201,7 @@ const ReviewSection = ({
                   <Image
                     src={
                       `${API_IMAGE_URL}${img.img}` ||
-                      '/assets/play-station.webp'
+                      '/assets/no-image-available.webp'
                     }
                     key={img.id}
                     alt="Rating"

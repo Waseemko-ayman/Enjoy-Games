@@ -96,7 +96,8 @@ const ProductDetailsInDialog: React.FC<Props> = ({ product, onAddToCart }) => {
         <div className="flex items-center gap-2">
           <Image
             src={
-              `${API_IMAGE_URL}${product?.image}` || '/assets/play-station.webp'
+              `${API_IMAGE_URL}${product?.image}` ||
+              '/assets/no-image-available.webp'
             }
             alt={product?.title}
             width={170}

@@ -101,7 +101,8 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
       <MotionSection index={0}>
         <DynamicImage
           src={
-            `${API_IMAGE_URL}${product?.image}` || '/assets/play-station.webp'
+            `${API_IMAGE_URL}${product?.image}` ||
+            '/assets/no-image-available.webp'
           }
           alt={product?.title}
           width={300}

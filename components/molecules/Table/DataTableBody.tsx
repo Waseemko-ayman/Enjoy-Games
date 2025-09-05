@@ -279,7 +279,7 @@ const DataTableBody = <T extends { id: string | number }>({
                               <DynamicImage
                                 src={
                                   `${API_IMAGE_URL}${imageUrl}` ||
-                                  '/assets/play-station.webp'
+                                  '/assets/no-image-available.webp'
                                 }
                                 alt={`${lang} image`}
                                 width={80}
@@ -320,7 +320,7 @@ const DataTableBody = <T extends { id: string | number }>({
                                     key={idx}
                                     src={
                                       `${API_IMAGE_URL}${img.image}` ||
-                                      '/assets/play-station.webp'
+                                      '/assets/no-image-available.webp'
                                     }
                                     alt={`image-${idx}`}
                                     width={80}
@@ -338,7 +338,7 @@ const DataTableBody = <T extends { id: string | number }>({
                               <DynamicImage
                                 src={
                                   `${API_IMAGE_URL}${images[0].image}` ||
-                                  '/assets/play-station.webp'
+                                  '/assets/no-image-available.webp'
                                 }
                                 alt={`image`}
                                 width={100}
@@ -371,7 +371,7 @@ const DataTableBody = <T extends { id: string | number }>({
                             <DynamicImage
                               src={
                                 `${API_IMAGE_URL}${(row as any)[col]}` ||
-                                '/assets/play-station.webp'
+                                '/assets/no-image-available.webp'
                               }
                               alt={columnKey}
                               width={80}
@@ -425,7 +425,7 @@ const DataTableBody = <T extends { id: string | number }>({
                             <DynamicImage
                               src={
                                 `${API_IMAGE_URL}${cellValue}` ||
-                                '/assets/play-station.webp'
+                                '/assets/no-image-available.webp'
                               }
                               alt={String(col)}
                               width={80}

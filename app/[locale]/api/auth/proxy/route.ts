@@ -1,0 +1,16 @@
+import { API_URL } from '@/config/api';
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function GET(req: NextRequest) {
+  const clientIP =
+    req.headers.get('x-forwarded-for')?.split(',')[0] || '0.0.0.0';
+
+  const apiRes = await fetch(`${API_URL}/main-content`, {
+    headers: {
+      'X-Forwarded-For': clientIP,
+    },
+  });
+
+  const data = await apiRes.json();
+  return NextResponse.json(data);
+}
