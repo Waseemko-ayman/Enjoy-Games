@@ -75,7 +75,7 @@ const SearchPage = () => {
                           <CategoryCard
                             image={
                               `${API_IMAGE_URL}${image}` ||
-                              '/assets/play-station.webp'
+                              '/assets/no-image-available.webp'
                             }
                             name={card.name}
                             onClick={() => {
@@ -138,7 +138,7 @@ const SearchPage = () => {
                           <ProductCard
                             image={
                               `${API_IMAGE_URL}${image}` ||
-                              '/assets/play-station.webp'
+                              '/assets/no-image-available.webp'
                             }
                             imgAlt={card.title}
                             imgTitle={card.title}
@@ -184,7 +184,7 @@ const SearchPage = () => {
                             title={sub.name}
                             image={
                               `${API_IMAGE_URL}${image}` ||
-                              '/assets/play-station.webp'
+                              '/assets/no-image-available.webp'
                             }
                             showBtn={true}
                             btnVariant="primary"

@@ -38,7 +38,7 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({
                 <ProductCard
                   image={
                     `${API_IMAGE_URL}${card.image}` ||
-                    '/assets/play-station.webp'
+                    '/assets/no-image-available.webp'
                   }
                   imgAlt={card.title}
                   imgTitle={card.title}

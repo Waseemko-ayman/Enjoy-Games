@@ -109,7 +109,7 @@ const CartContent: React.FC<CartContentProps> = ({
                     <Image
                       src={
                         `${API_IMAGE_URL}${item.image}` ||
-                        '/assets/play-station.webp'
+                        '/assets/no-image-available.webp'
                       }
                       alt={item.title}
                       width={170}

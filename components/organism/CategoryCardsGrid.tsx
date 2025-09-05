@@ -36,7 +36,7 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({
               <CategoryCard
                 image={
                   `${API_IMAGE_URL}${card.image}` ||
-                  '/assets/play-station.webp'
+                  '/assets/no-image-available.webp'
                 }
                 name={card.name}
                 onClick={() => {

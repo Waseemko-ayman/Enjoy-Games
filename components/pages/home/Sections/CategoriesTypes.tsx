@@ -33,7 +33,8 @@ const CategoriesTypes = ({
             <Suspense key={item.id} fallback={<Loading />}>
               <SectionTypeCard
                 imgSrc={
-                  `${API_IMAGE_URL}${item.image}` || '/assets/play-station.webp'
+                  `${API_IMAGE_URL}${item.image}` ||
+                  '/assets/no-image-available.webp'
                 }
                 path={`/categories/${item.slug}`}
                 title={item.name}

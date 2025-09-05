@@ -136,7 +136,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             onClick={onClick}
           >
             <Image
-              src={image || '/assets/play-station.webp'}
+              src={image || '/assets/no-image-available.webp'}
               alt={imgAlt}
               title={imgTitle}
               fill
