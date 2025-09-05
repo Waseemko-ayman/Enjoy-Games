@@ -20,16 +20,14 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
 
   const isStorePage = pathWithoutLocale === 'store';
   const isCartPage = pathWithoutLocale === 'my-cart';
-  const isMaintenancePage = pathWithoutLocale === 'maintenance';
 
   const isMobile = useIsMobile();
 
   return (
     <CategoriesProvider>
       <MainContentProvider>
-        {!isMaintenancePage && !isCartPage && <TopBanner />}
-        {!isMaintenancePage &&
-          !isCartPage &&
+        {!isCartPage && <TopBanner />}
+        {!isCartPage &&
           (isMobile ? (
             <>
               <MobileHeader />
@@ -46,14 +44,10 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
 
         {children}
 
-        {!isMaintenancePage && !isCartPage && <Footer />}
+        {!isCartPage && <Footer />}
 
-        {!isMaintenancePage && (
-          <>
-            <FloatingChatWidget />
-            <FloatingActions phone="+96893809093" />
-          </>
-        )}
+        <FloatingChatWidget />
+        <FloatingActions phone="+96893809093" />
       </MainContentProvider>
     </CategoriesProvider>
   );
