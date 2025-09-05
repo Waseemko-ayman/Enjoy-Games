@@ -27,23 +27,25 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <CategoriesProvider>
       <MainContentProvider>
         {!isCartPage && <TopBanner />}
-        {isCartPage ? (
-          <></>
-        ) : isMobile ? (
-          <>
-            <MobileHeader />
-            <SearchHeader />
-            <MobileNavbar />
-            {isStorePage && <Navbar layout="store" isMobile />}
-          </>
-        ) : (
-          <div className="shadow-header">
-            <Header />
-            <Navbar layout={isStorePage ? 'store' : 'default'} />
-          </div>
-        )}
+        {!isCartPage &&
+          (isMobile ? (
+            <>
+              <MobileHeader />
+              <SearchHeader />
+              <MobileNavbar />
+              {isStorePage && <Navbar layout="store" isMobile />}
+            </>
+          ) : (
+            <div className="shadow-header">
+              <Header />
+              <Navbar layout={isStorePage ? 'store' : 'default'} />
+            </div>
+          ))}
+
         {children}
+
         {!isCartPage && <Footer />}
+
         <FloatingChatWidget />
         <FloatingActions phone="+96893809093" />
       </MainContentProvider>
