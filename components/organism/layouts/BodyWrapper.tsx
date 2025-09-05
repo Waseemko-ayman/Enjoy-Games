@@ -1,4 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
+
+import { ToastContainer } from 'react-toastify';
+
+const BodyWrapper = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <>
+      {children}
+      <ToastContainer />
+    </>
+  );
+};
+
+export default BodyWrapper;
+
+/*
 'use client';
 
 import Loading from '@/components/molecules/loading';
@@ -41,3 +56,5 @@ const BodyWrapper = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default BodyWrapper;
+
+*/
