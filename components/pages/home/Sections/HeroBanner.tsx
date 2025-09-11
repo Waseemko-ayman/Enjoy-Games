@@ -3,6 +3,7 @@
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import Loading from '@/components/molecules/loading';
+import NoDataMessage from '@/components/organism/NoDataMessage';
 import { API_IMAGE_URL } from '@/config/api';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -20,8 +21,6 @@ export default function HeroBanner({
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const ariaTxts = useTranslations('ariaLabels.btns');
-
-  // const { get, data, isLoading, error } = useAPI('sliders');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,10 +48,6 @@ export default function HeroBanner({
     }, 300);
   };
 
-  // useEffect(() => {
-  //   get();
-  // }, [get]);
-
   return (
     <AnimatedWrapper>
       <div className="relative w-full h-[150px] sm:h-[300px] overflow-hidden rounded-lg my-10">
@@ -62,8 +57,10 @@ export default function HeroBanner({
             <Loading />
           ) : error ? (
             <ErrorFetching />
+          ) : sliders?.length === 0 ? (
+            <NoDataMessage />
           ) : (
-            sliders.map((slide: any, index: number) => (
+            sliders?.map((slide: any, index: number) => (
               <div
                 key={slide.id}
                 className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${
@@ -73,9 +70,9 @@ export default function HeroBanner({
                 <Image
                   src={
                     `${API_IMAGE_URL}${slide?.image}` ||
+                    slide?.image ||
                     '/assets/banners/banner1.webp'
                   }
-                  // src={'/assets/banners/banner1.webp'}
                   alt={`slide-${slide.id}`}
                   fill
                   className="object-cover"

@@ -8,6 +8,7 @@ import { SuggestedProductsProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import { useRouter } from 'next/navigation';
 import { API_IMAGE_URL } from '@/config/api';
+import NoDataMessage from '@/components/organism/NoDataMessage';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -26,6 +27,8 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({
         <Loading />
       ) : error ? (
         <ErrorFetching />
+      ) : suggestedProducts?.length === 0 ? (
+        <NoDataMessage />
       ) : (
         <GridWrapper isScrollable>
           {suggestedProducts.map((card, index) => {

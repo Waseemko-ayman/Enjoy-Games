@@ -13,6 +13,7 @@ import { useCategories } from '@/context/CategoriesContext';
 import Loading from '@/components/molecules/loading';
 import InlineError from '@/components/molecules/InlineError';
 import { API_IMAGE_URL } from '@/config/api';
+import NoDataMessage from '../NoDataMessage';
 
 const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
   const t = useTranslations('Layout.header.navBar');
@@ -31,6 +32,8 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
               <Loading width="w-7" height="h-7" />
             ) : error ? (
               <InlineError />
+            ) : categories?.length === 0 ? (
+              <NoDataMessage variant="iconOnly" />
             ) : (
               categories.map((item: Category) => (
                 <NavItem

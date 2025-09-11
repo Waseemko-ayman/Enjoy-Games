@@ -7,6 +7,7 @@ import Container from '@/components/organism/Container';
 import { Category } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import { API_IMAGE_URL } from '@/config/api';
+import NoDataMessage from '@/components/organism/NoDataMessage';
 
 const CategoriesTypes = ({
   categories,
@@ -23,6 +24,8 @@ const CategoriesTypes = ({
         <Loading />
       ) : error ? (
         <ErrorFetching />
+      ) : categories?.length === 0 ? (
+        <NoDataMessage />
       ) : (
         <div
           className={`grid grid-cols-3 ${

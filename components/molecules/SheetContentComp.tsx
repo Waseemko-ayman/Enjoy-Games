@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { API_IMAGE_URL } from '@/config/api';
 import Loading from './loading';
 import ErrorFetching from './ErrorFetching';
+import NoDataMessage from '../organism/NoDataMessage';
 
 const SheetContentComp = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -42,6 +43,8 @@ const SheetContentComp = () => {
         <Loading />
       ) : error ? (
         <ErrorFetching />
+      ) : categories?.length === 0 ? (
+        <NoDataMessage />
       ) : (
         categories.map((item: Category, index: number) => {
           const isOpen = openIndex === index;
