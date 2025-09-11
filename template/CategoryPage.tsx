@@ -42,7 +42,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ cards }) => {
 
   return (
     <div>
-      <PageHeader />
+      <PageHeader customTitle={data?.name} />
       <CategoryCardsGrid cards={enhancedCards} error={error} />
     </div>
   );

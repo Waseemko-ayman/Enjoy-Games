@@ -6,7 +6,7 @@ const GridWrapper = ({
   otherClassName,
   isScrollable = false,
   gridCols = 'lg:grid-cols-4',
-  itemClassName,
+  itemClassName = '',
 }: GridWrapperProps) => {
   const baseClass = isScrollable
     ? `flex max-md:overflow-x-auto max-md:scroll-smooth max-md:px-2 py-4 scrollbar-none md:grid md:grid-cols-2 md:grid-cols-3 ${gridCols}`
