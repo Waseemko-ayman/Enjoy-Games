@@ -1,5 +1,5 @@
 'use client';
-import Button from '@/components/atomic/Button';
+// import Button from '@/components/atomic/Button';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import { EarningsPointsSectionProps } from '@/interfaces';
 import Image from 'next/image';
@@ -8,11 +8,11 @@ import { PiSparkleFill } from 'react-icons/pi';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { cardVariants } from '@/lib/context';
-import { useToggleLocale } from '@/hook/useToggleLocale';
+// import { useToggleLocale } from '@/hook/useToggleLocale';
 import { useWallet } from '@/context/WalletContext';
 import ButtonLoading from '../atomic/ButtonLoading';
 import InlineError from './InlineError';
-import { PATHS } from '@/data/paths';
+// import { PATHS } from '@/data/paths';
 import Loading from './loading';
 
 const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
@@ -25,11 +25,11 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
   // secondButtonHref,
   // btnTexts,
 }) => {
-  const t = useTranslations('PagesHeaderTitles');
+  // const t = useTranslations('PagesHeaderTitles');
   const starsTxt = useTranslations('Stars.pointsSystem');
   const maxupTxt = useTranslations('MaxupProgram.pointSystem');
   const sharedTexts = useTranslations('Shared');
-  const { isArabic } = useToggleLocale();
+  // const { isArabic } = useToggleLocale();
 
   // API Context
   const { myWallet, isLoading, error } = useWallet();
@@ -58,7 +58,7 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
                 ? maxupTxt('earnings.title')
                 : starsTxt('actions.starPoints')}
             </h5>
-            <div className="flex items-center justify-center gap-1 mt-2 mb-5">
+            <div className="flex items-center justify-center gap-1 mt-2">
               <h2 className="text-2xl font-bold">
                 {variant === 'earnings' ? (
                   withdrawableAmount
@@ -79,12 +79,12 @@ const EarningsPointsSection: React.FC<EarningsPointsSectionProps> = ({
                 />
               )}
             </div>
-            <Button
+            {/* <Button
               href={PATHS.WALLET.link}
               otherClassName={`py-3 ${isArabic ? 'px-7' : 'px-4'} text-sm`}
             >
               {t('wallet')}
-            </Button>
+            </Button> */}
           </div>
         </CardWrapper>
       </motion.div>

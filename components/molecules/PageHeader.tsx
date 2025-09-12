@@ -18,9 +18,11 @@ import { useCategoryTitle } from '@/hook/useCategoryTitle';
 const PageHeader = ({
   showTitle = true,
   children,
+  customTitle,
 }: {
   showTitle?: boolean;
   children?: React.ReactNode;
+  customTitle?: string;
 }) => {
   const pathname = usePathname();
   const tPages = useTranslations('PagesHeaderTitles');
@@ -41,44 +43,62 @@ const PageHeader = ({
     useCategoryTitle(categorySlug);
 
   const pathNameMap = extractPaths(PATHS);
-  const breadcrumbs = [{ label: tPages('home'), href: '/' }];
-  let accumulatedPath = '';
 
-  for (let i = 0; i < pathParts.length; i++) {
-    const part = pathParts[i];
+  // إعداد breadcrumbs
+  const breadcrumbs: { label: string; href: string }[] = [
+    { label: tPages('home'), href: '/' },
+  ];
 
-    if (part === 'categories' && pathParts[i + 1]) {
-      accumulatedPath += `/categories/${categorySlug}`;
+  // إن كان هناك customTitle، فقط نضيفه كآخر عنصر
+  if (customTitle) {
+    breadcrumbs.push({ label: customTitle, href: '' });
+  } else {
+    // لا يوجد customTitle → نستخدم المنطق الاعتيادي
+    let accumulatedPath = '';
+
+    for (let i = 0; i < pathParts.length; i++) {
+      const part = pathParts[i];
+
+      if (part === 'categories' && pathParts[i + 1]) {
+        accumulatedPath += `/categories/${categorySlug}`;
+        breadcrumbs.push({
+          label: loadingCategory
+            ? tLoading('loadingMessage')
+            : categoryLabel || '',
+          href: accumulatedPath,
+        });
+        i++; // تخطي slug فرعي
+        continue;
+      }
+
+      accumulatedPath += `/${part}`;
+      const prevPart = pathParts[i - 1];
+      const label = getLabel(part, pathNameMap, tPages, prevPart);
+
       breadcrumbs.push({
-        label: loadingCategory
-          ? tLoading('loadingMessage')
-          : categoryLabel || '',
+        label,
         href: accumulatedPath,
       });
-      i++;
-      continue;
     }
-
-    accumulatedPath += `/${part}`;
-    const isLast = i === pathParts.length - 1;
-    const prevPart = pathParts[i - 1]; // 👈 الجزء السابق
-    const label = getLabel(part, pathNameMap, tPages, prevPart);
-
-    breadcrumbs.push({
-      label,
-      href: isLast ? '' : accumulatedPath,
-    });
   }
 
-  let currentTitle =
-    breadcrumbs[breadcrumbs.length - 1]?.label || tPages('home');
+  // الاختيار النهائي للعنوان
+  let currentTitle: string;
 
-  if (categorySlug) {
-    currentTitle = loadingCategory ? tLoading('loadingMessage') : categoryLabel;
-  }
-
-  if (pathParts.length === 0) {
-    currentTitle = tPages('home');
+  if (customTitle) {
+    currentTitle = customTitle;
+  } else {
+    if (pathParts.length === 0) {
+      currentTitle = tPages('home');
+    } else if (categorySlug) {
+      currentTitle = loadingCategory
+        ? tLoading('loadingMessage')
+        : categoryLabel;
+    } else {
+      // آخر breadcrumb موجود
+      currentTitle =
+        breadcrumbs[breadcrumbs.length - 1].label || tPages('home');
+    }
   }
 
   return (
@@ -129,13 +149,13 @@ const PageHeader = ({
   );
 };
 
+// الدوال المساعدة كما في الأصل
 function getLabel(
   part: string,
   pathNameMap: Record<string, string>,
   tPages: (key: string) => string,
   prevPart?: string
 ): string {
-  // لو part رقم (id لصفحة تفاصيل)
   if (!isNaN(Number(part))) {
     if (prevPart === 'tickets') {
       const template = tPages('ticket-detail');
@@ -145,63 +165,43 @@ function getLabel(
       const template = tPages('order-detail');
       return template.replace(':id', part);
     }
-    // fallback عام لو ما في تعريف
     return `#${part}`;
   }
 
   const translated = tPages(part);
-  if (translated === part) {
-    return pathNameMap[part] || formatPart(part);
+  if (translated !== part) {
+    return translated;
   }
-  return translated;
+  if (pathNameMap[part]) {
+    return pathNameMap[part];
+  }
+  return formatPart(part);
 }
-
-interface PathLeaf {
-  name: string;
-  link: string;
-}
-
-type PathValue =
-  | PathLeaf
-  | PathTree
-  | string
-  | ((id: string | number) => PathLeaf);
-type PathTree = {
-  [key: string]: PathValue;
-};
 
 function extractPaths(
-  obj: PathTree,
+  obj: any,
   map: Record<string, string> = {}
 ): Record<string, string> {
   for (const key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
       const value = obj[key];
-
       if (typeof value === 'string') {
         const pathKey = value.split('/').filter(Boolean).pop() || '';
         map[pathKey] = key;
       } else if (isPathLeaf(value)) {
         const pathKey = value.link.split('/').filter(Boolean).pop() || '';
         map[pathKey] = value.name;
-      } else if (typeof value === 'function') {
-        // نتجاهل الدوال هنا أو نعالجها بطريقة خاصة
-        continue;
-      } else {
-        extractPaths(value, map); // هنا Typescript متأكد إنه PathTree
+      } else if (typeof value === 'object') {
+        extractPaths(value, map);
       }
     }
   }
   return map;
 }
 
-function isPathLeaf(obj: any): obj is PathLeaf {
+function isPathLeaf(obj: any): obj is { name: string; link: string } {
   return (
-    typeof obj === 'object' &&
-    obj !== null &&
-    !Array.isArray(obj) &&
-    'link' in obj &&
-    'name' in obj
+    typeof obj === 'object' && obj !== null && 'link' in obj && 'name' in obj
   );
 }
 

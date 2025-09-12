@@ -14,6 +14,8 @@ import { useParams, useRouter } from 'next/navigation';
 import LoadingPlaceholder from '@/components/atomic/LoadingPlaceholder';
 import { useCurrency } from '@/context/CurrencyContext';
 import { API_IMAGE_URL } from '@/config/api';
+import Pagination from '@/components/molecules/Pagination';
+import { usePagination } from '@/hook/usePagination';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -41,6 +43,15 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
     }));
   }, [data, itemId, params.category, router]);
 
+  const {
+    currentPage,
+    totalPages,
+    paginatedData,
+    goToPage,
+    totalItems,
+    itemsPerPage,
+  } = usePagination<ProductCardProps>({ data: enhancedCards, itemsPerPage: 9 });
+
   useEffect(() => {
     get();
   }, [get, selectedCountry]);
@@ -53,7 +64,7 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
     <Container otherClassName="mt-12">
       <GridWrapper otherClassName="gap-5">
         {data.type === 'products'
-          ? enhancedCards.map((card: ProductCardProps, index: number) => {
+          ? paginatedData.map((card: ProductCardProps, index: number) => {
               const { image, ...cardWithoutImage } = card;
               return (
                 <AnimatedWrapper key={card.id} custom={index}>
@@ -78,6 +89,14 @@ const SubCategoryPage = ({ itemId }: { itemId: string }) => {
               <div key={item.id}>{item.name}</div>
             ))}
       </GridWrapper>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={goToPage}
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        className="mt-10 sm:max-w-2xl sm:mx-auto"
+      />
     </Container>
   );
 };

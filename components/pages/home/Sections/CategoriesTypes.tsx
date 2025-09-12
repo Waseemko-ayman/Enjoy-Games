@@ -1,12 +1,19 @@
-const SectionTypeCard = lazy(
-  () => import('@/components/molecules/SectionTypeCard')
-);
-import { lazy, Suspense } from 'react';
+'use client';
 import Loading from '@/components/molecules/loading';
 import Container from '@/components/organism/Container';
 import { Category } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import { API_IMAGE_URL } from '@/config/api';
+import NoDataMessage from '@/components/organism/NoDataMessage';
+import SectionComponent from '@/components/atomic/SectionComponent';
+import GridWrapper from '@/components/molecules/GridWrapper';
+import dynamic from 'next/dynamic';
+const SectionTypeCard = dynamic(
+  () => import('@/components/molecules/SectionTypeCard'),
+  {
+    loading: () => <Loading />,
+  }
+);
 
 const CategoriesTypes = ({
   categories,
@@ -17,21 +24,28 @@ const CategoriesTypes = ({
   loading: boolean;
   error: boolean;
 }) => {
+  const isScrollable = (categories?.length ?? 0) > 10;
+
   return (
     <Container>
-      {loading ? (
-        <Loading />
-      ) : error ? (
-        <ErrorFetching />
-      ) : (
-        <div
-          className={`grid grid-cols-3 ${
-            (categories?.length ?? 0) > 4 ? 'lg:grid-cols-5' : 'lg:grid-cols-4'
-          } gap-5`}
-        >
-          {categories?.map((item: Category) => (
-            <Suspense key={item.id} fallback={<Loading />}>
+      <SectionComponent>
+        {loading ? (
+          <Loading />
+        ) : error ? (
+          <ErrorFetching />
+        ) : categories?.length === 0 ? (
+          <NoDataMessage />
+        ) : (
+          <GridWrapper
+            isScrollable={isScrollable}
+            disableGridOnMd={true}
+            itemClassName={`max-md:!min-w-[120px] ${
+              isScrollable ? 'md:!min-w-[180px]' : 'md:!min-w-[200px]'
+            }`}
+          >
+            {categories?.map((item: Category) => (
               <SectionTypeCard
+                key={item.id}
                 imgSrc={
                   `${API_IMAGE_URL}${item.image}` ||
                   '/assets/no-image-available.webp'
@@ -44,10 +58,10 @@ const CategoriesTypes = ({
                 height={90}
                 otherClassName="w-[90px] h-[90px] sm:w-[120px] sm:h-[120px]"
               />
-            </Suspense>
-          ))}
-        </div>
-      )}
+            ))}
+          </GridWrapper>
+        )}
+      </SectionComponent>
     </Container>
   );
 };

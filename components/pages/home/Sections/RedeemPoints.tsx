@@ -13,6 +13,7 @@ import { NewlyArrivedProps } from '@/interfaces';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import { useRouter } from 'next/navigation';
 import { API_IMAGE_URL } from '@/config/api';
+import NoDataMessage from '@/components/organism/NoDataMessage';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -51,12 +52,14 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
           <Loading />
         ) : error ? (
           <ErrorFetching />
+        ) : newlyArrived?.length === 0 ? (
+          <NoDataMessage />
         ) : (
           <GridWrapper
             otherClassName="mt-3 !p-5 md:!py-0 px-5 sm:px-10"
             isScrollable
           >
-            {newlyArrived.map((card, index) => {
+            {newlyArrived?.map((card, index) => {
               const { image, ...cardWithoutImage } = card;
               const slugs =
                 card.sub_category_id !== undefined

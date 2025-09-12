@@ -11,34 +11,38 @@ import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper
 import { useTranslations } from 'next-intl';
 import { useCartContext } from '@/context/CartContext';
 import NotificationsMenu from '../NotificationsMenu';
+import { useCategoryTitle } from '@/hook/useCategoryTitle';
 
 const decodeTitle = (str: string) => decodeURIComponent(str).replace(/-/g, ' ');
 
 const MobileHeader = () => {
   const pathname = usePathname();
   const t = useTranslations('PagesHeaderTitles');
+  const loadingT = useTranslations('Loading');
   const ariaTxts = useTranslations('ariaLabels.links');
   const [isOpen, setIsOpen] = useState(false);
-
-  /*
-    const translatedParts = useTranslatedPathParts(pathname);
-    const title =
-      translatedParts.length > 0
-        ? translatedParts[translatedParts.length - 1]
-        : 'Home';
-  */
 
   const pathParts = pathname.split('/').filter(Boolean);
   const filteredParts = pathParts.filter(
     (part, index) => !(index === 0 && ['en', 'ar'].includes(part))
   );
 
-  // Last part of the path - we display it as is (decoded with dashes replaced)
-  const lastPart = filteredParts[filteredParts.length - 1] || 'home';
+  const categoryIndex = filteredParts.indexOf('categories');
+  const categorySlug =
+    categoryIndex !== -1 && filteredParts[categoryIndex + 1]
+      ? filteredParts[categoryIndex + 1]
+      : '';
 
-  const needsRawDisplay = /\d/.test(lastPart);
+  const { title: categoryLabel, loading: loadingCategory } =
+    useCategoryTitle(categorySlug);
 
-  const title = needsRawDisplay ? decodeTitle(lastPart) : t(lastPart);
+  console.log(categoryLabel);
+
+  // نستخدم العنوان المحمّل بدل slug لو متوفر
+  const title = loadingCategory
+    ? loadingT('loadingMessage')
+    : categoryLabel ||
+      decodeTitle(filteredParts[filteredParts.length - 1] || t('home'));
 
   const { cartItems } = useCartContext();
 
@@ -49,18 +53,19 @@ const MobileHeader = () => {
           <NavbarSheet />
         </AnimatedWrapper>
         <AnimatedWrapper direction="y" distance={-40}>
-          <h5 className="text-center text-lg font-bold w-full overflow-hidden whitespace-nowrap">
-            {title}
-          </h5>
+          <div className="w-full overflow-hidden" title={title}>
+            <h5 className="truncate text-center text-base font-bold px-4 max-w-full w-[220px]">
+              {title}
+            </h5>
+          </div>
         </AnimatedWrapper>
+
         <div className="flex gap-2">
-          {/* Notifications Menu */}
           <NotificationsMenu
             otherClassName="text-2xl text-enjoy-primary"
             isOpen={isOpen}
             setIsNotificationsOpen={(open) => setIsOpen(open)}
           />
-          {/* Cart Icon */}
           <AnimatedWrapper direction="y" distance={-40}>
             <Link
               href={PATHS.MY_CART.link}

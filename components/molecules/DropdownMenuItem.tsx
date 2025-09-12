@@ -20,11 +20,6 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
   ) => {
     const basePath = `/categories/${categorySlug}/${subCategory.slug}`;
     setTimeout(() => router.push(basePath), 150);
-    // const path =
-    //   subCategory.children_count > 0
-    //     ? `${basePath}/select-account`
-    //     : `${basePath}/bundles`;
-    // router.push(path);
   };
 
   return (
@@ -32,6 +27,20 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
       <NavItem icon={icon} name={name} />
 
       {categories && (
+        // <div
+        //   className={`absolute top-full right-6 z-50 hidden group-hover:block bg-white ${
+        //     categories?.length > 8
+        //       ? 'max-h-screen overflow-y-auto overflow-x-hidden'
+        //       : ''
+        //   } py-2 pr-1 pl-2 rounded-xl shadow-xl border border-gray-100
+        //   ${
+        //     isMainMenu
+        //       ? categories?.length > 8
+        //         ? 'w-[230px]'
+        //         : 'w-[200px]'
+        //       : 'w-[240px]'
+        //   } transition-all duration-200 ease-out custom-scroll`}
+        // >
         <div
           className={`
           absolute top-full right-6 z-50 hidden group-hover:block bg-white py-2 pr-1 pl-2 rounded-xl shadow-lg border border-gray-100

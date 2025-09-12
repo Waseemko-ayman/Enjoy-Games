@@ -17,6 +17,7 @@ import Loading from '../molecules/loading';
 import ErrorFetching from '../molecules/ErrorFetching';
 import { FAQSDataType } from '@/interfaces';
 import AnimatedWrapper from '../molecules/FramerMotion/AnimatedWrapper';
+import NoDataMessage from './NoDataMessage';
 
 const FAQS = ({ showTitle = false }: { showTitle?: boolean }) => {
   const [activeItem, setActiveItem] = useState<string | undefined>(undefined);
@@ -51,6 +52,8 @@ const FAQS = ({ showTitle = false }: { showTitle?: boolean }) => {
               <Loading />
             ) : error ? (
               <ErrorFetching />
+            ) : faqs?.length === 0 ? (
+              <NoDataMessage />
             ) : (
               faqs &&
               faqs.map((item: FAQSDataType, index: number) => (

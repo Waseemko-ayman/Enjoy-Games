@@ -84,6 +84,6 @@ export function useCategoryTitle(slug?: string): {
 function formatSlug(slug: string) {
   return decodeURIComponent(slug)
     .replace(/-/g, ' ')
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .replace(/\d+/g, '');
 }
-

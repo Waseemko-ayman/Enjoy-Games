@@ -6,7 +6,6 @@ import Container from '@/components/organism/Container';
 import Layer from '@/components/atomic/Layer';
 import Button from '@/components/atomic/Button';
 import { MdSave } from 'react-icons/md';
-import StepIndicator from './StepIndicator';
 import Stats from './Stats';
 import InvitationLink from './InvitationLink';
 import ProfilePicture from './ProfilePicture';
@@ -32,7 +31,7 @@ const Content = () => {
 
   const t = useTranslations('MyAccount');
   const btnTexts = useTranslations('BtnTexts');
-  const errorsTxts = useTranslations('Inputs.errorsMsgs');
+  const errorsTxts = useTranslations();
 
   // Get User Information
   const {
@@ -139,7 +138,7 @@ const Content = () => {
               {!isMobile && (
                 <>
                   {/* Step Indicator */}
-                  <StepIndicator t={t} />
+                  {/* <StepIndicator t={t} /> */}
 
                   {/* Stats */}
                   <Stats

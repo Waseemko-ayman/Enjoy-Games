@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import dynamic from 'next/dynamic';
 import React, { FC } from 'react';
@@ -8,6 +9,8 @@ import AnimatedWrapper from '../molecules/FramerMotion/AnimatedWrapper';
 import Loading from '../molecules/loading';
 import ErrorFetching from '../molecules/ErrorFetching';
 import { API_IMAGE_URL } from '@/config/api';
+import Pagination from '../molecules/Pagination';
+import { usePagination } from '@/hook/usePagination';
 
 const CategoryCard = dynamic(() => import('../molecules/CategoryCard'), {
   loading: () => <Loading />,
@@ -19,6 +22,18 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({
   isLoading,
   onCardClick,
 }) => {
+  const {
+    currentPage,
+    totalPages,
+    paginatedData,
+    goToPage,
+    totalItems,
+    itemsPerPage,
+  } = usePagination<any>({
+    data: cards,
+    itemsPerPage: 12,
+  });
+
   return (
     <Container>
       {isLoading ? (
@@ -26,27 +41,40 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({
       ) : error ? (
         <ErrorFetching />
       ) : (
-        <GridWrapper
-          otherClassName={`gap-8 mt-12 ${
-            cards.length > 1 ? 'max-sm:grid-cols-2' : ''
-          }`}
-        >
-          {cards.map((card, index) => (
-            <AnimatedWrapper key={card.id} custom={index}>
-              <CategoryCard
-                image={
-                  `${API_IMAGE_URL}${card.image}` ||
-                  '/assets/no-image-available.webp'
-                }
-                name={card.name}
-                onClick={() => {
-                  onCardClick?.(card.categorySlug ?? '', card.slug);
-                  card.onClick?.();
-                }}
-              />
-            </AnimatedWrapper>
-          ))}
-        </GridWrapper>
+        <>
+          <GridWrapper
+            otherClassName={`gap-8 mt-12 ${
+              cards.length > 1 ? 'max-sm:grid-cols-2' : ''
+            }`}
+          >
+            {paginatedData.map((card, index) => (
+              <AnimatedWrapper key={card.id} custom={index}>
+                <CategoryCard
+                  image={
+                    `${API_IMAGE_URL}${card.image}` ||
+                    '/assets/no-image-available.webp'
+                  }
+                  name={card.name}
+                  onClick={() => {
+                    onCardClick?.(card.categorySlug ?? '', card.slug);
+                    card.onClick?.();
+                  }}
+                />
+              </AnimatedWrapper>
+            ))}
+          </GridWrapper>
+
+          <AnimatedWrapper>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={goToPage}
+              totalItems={totalItems}
+              itemsPerPage={itemsPerPage}
+              className="justify-center mt-10"
+            />
+          </AnimatedWrapper>
+        </>
       )}
     </Container>
   );

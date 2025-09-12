@@ -13,6 +13,7 @@ import { useCategories } from '@/context/CategoriesContext';
 import Loading from '@/components/molecules/loading';
 import InlineError from '@/components/molecules/InlineError';
 import { API_IMAGE_URL } from '@/config/api';
+import NoDataMessage from '../NoDataMessage';
 
 const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
   const t = useTranslations('Layout.header.navBar');
@@ -20,28 +21,39 @@ const Navbar: React.FC<NavbarProps> = ({ layout = 'default', isMobile }) => {
 
   if (layout === 'store') {
     return (
-      <nav className={`${!isMobile ? 'bg-white' : 'pt-2 mt-4'}`}>
+      <nav
+        className={`${
+          !isMobile ? 'bg-white' : 'pt-2 mt-4'
+        } overflow-x-auto scroll-smooth scrollbar-none`}
+      >
         <Container>
           <ul
-            className={`flex items-center ${
-              isMobile ? 'justify-center flex-wrap gap-4' : 'gap-7'
+            className={`inline-flex items-center whitespace-nowrap ${
+              isMobile ? 'gap-4' : 'gap-12'
             }`}
           >
             {isLoading ? (
               <Loading width="w-7" height="h-7" />
             ) : error ? (
               <InlineError />
+            ) : categories?.length === 0 ? (
+              <NoDataMessage variant="iconOnly" />
             ) : (
-              categories.map((item: Category) => (
-                <NavItem
-                  key={item.id}
-                  icon={`${API_IMAGE_URL}${item.icon}`}
-                  name={item.name}
-                  linkPath={`/categories/${item.slug}`}
-                  layout={layout}
-                  isMobile={isMobile}
-                />
-              ))
+              <>
+                {categories.map((item: Category) => (
+                  <NavItem
+                    key={item.id}
+                    icon={`${API_IMAGE_URL}${item.icon}`}
+                    name={item.name}
+                    linkPath={`/categories/${item.slug}`}
+                    layout={layout}
+                    isMobile={isMobile}
+                  />
+                ))}
+
+                {/* Dummy element to add space at the end of the line */}
+                <li className="w-6 sm:w-10 md:w-16 flex-shrink-0" />
+              </>
             )}
           </ul>
         </Container>

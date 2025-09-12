@@ -574,6 +574,7 @@ export interface GridWrapperProps extends BaseClassNameProps, WithChildren {
   isScrollable?: boolean;
   gridCols?: string;
   itemClassName?: string;
+  disableGridOnMd?: boolean;
 }
 
 export interface AuthLayoutProps extends SectionComponentProps {
@@ -1037,14 +1038,6 @@ export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;
   className?: string;
-}
-
-export interface getSlugsProps {
-  getSlugs: (subCategoryId: number) => {
-    categorySlug: string;
-    subCategorySlug: string;
-  } | null;
-  error?: string;
 }
 
 export interface HomeSectionsProps extends getSlugsProps {

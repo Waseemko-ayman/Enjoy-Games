@@ -8,6 +8,7 @@ import Loading from '@/components/molecules/loading';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
 import { useRouter } from 'next/navigation';
 import { API_IMAGE_URL } from '@/config/api';
+import NoDataMessage from '@/components/organism/NoDataMessage';
 const ProductCard = dynamic(() => import('@/components/atomic/ProductCard'), {
   loading: () => <Loading />,
 });
@@ -26,9 +27,11 @@ const BestSellers: React.FC<BestSellersProps> = ({
         <Loading />
       ) : error ? (
         <ErrorFetching />
+      ) : bestSeller?.length === 0 ? (
+        <NoDataMessage />
       ) : (
         <GridWrapper isScrollable>
-          {bestSeller.map((card, index) => {
+          {bestSeller?.map((card, index) => {
             const slugs =
               card.sub_category_id !== undefined
                 ? getSlugs(card.sub_category_id)

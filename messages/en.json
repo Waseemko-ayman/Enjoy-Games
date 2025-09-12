@@ -1168,7 +1168,9 @@
     "selectAllUnread": "Select all unread",
     "readable": "Readable",
     "welcomeMessage": "Hello! I'm your EnjoyGames assistant. I'm here to help you with questions about our products, services, and provide general support. How can I assist you today?",
-    "linkCopied": "Link copied!"
+    "linkCopied": "Link copied!",
+    "noDataAvailable": "No data available",
+    "noDataAvailableDesc": "Data will be available soon, stay tuned."
   },
   "Languages": {
     "english": "English",

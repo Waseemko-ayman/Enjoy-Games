@@ -15,12 +15,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       bgColor="bg-[var(--enjoy-glass-lavender)]"
     >
       <div className="flex items-center justify-between bg-enjoy-primary rounded-sm p-2 h-fit">
-        <Image
-          src={`/assets/${image}.GIF`}
-          alt={imgAlt}
-          width={50}
-          height={50}
-        />
+        <Image src={image} alt={imgAlt} width={50} height={50} />
       </div>
       <div>
         <h4 className="text-base mb-1 font-semibold">{title}</h4>

@@ -18,7 +18,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
           <Image src={image} alt={name} width={500} height={500} />
         </div>
       </Suspense>
-      <h2 className="text-xl font-bold text-[var(--enjoy-gray-650)] mt-2.5">
+      <h2 className="text-base md:text-lg font-bold text-[var(--enjoy-gray-650)] mt-2.5">
         {name}
       </h2>
     </div>
