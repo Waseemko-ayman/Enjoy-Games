@@ -574,6 +574,7 @@ export interface GridWrapperProps extends BaseClassNameProps, WithChildren {
   isScrollable?: boolean;
   gridCols?: string;
   itemClassName?: string;
+  disableGridOnMd?: boolean;
 }
 
 export interface AuthLayoutProps extends SectionComponentProps {

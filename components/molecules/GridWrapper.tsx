@@ -7,9 +7,13 @@ const GridWrapper = ({
   isScrollable = false,
   gridCols = 'lg:grid-cols-4',
   itemClassName = '',
+  disableGridOnMd = false,
 }: GridWrapperProps) => {
+  // إذا isScrollable و disableGridOnMd true نستخدم flex بدون grid على md وفوق
   const baseClass = isScrollable
-    ? `flex max-md:overflow-x-auto max-md:scroll-smooth max-md:px-2 py-4 scrollbar-none md:grid md:grid-cols-2 md:grid-cols-3 ${gridCols}`
+    ? disableGridOnMd
+      ? `flex overflow-x-auto scroll-smooth px-2 py-4 gap-5 scrollbar-none`
+      : `flex max-md:overflow-x-auto max-md:scroll-smooth max-md:px-2 py-4 scrollbar-none md:grid md:grid-cols-2 md:grid-cols-3 ${gridCols}`
     : `grid sm:grid-cols-2 md:grid-cols-3 ${gridCols}`;
 
   return (

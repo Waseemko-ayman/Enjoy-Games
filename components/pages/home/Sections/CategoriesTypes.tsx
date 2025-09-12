@@ -24,6 +24,8 @@ const CategoriesTypes = ({
   loading: boolean;
   error: boolean;
 }) => {
+  const isScrollable = (categories?.length ?? 0) > 10;
+
   return (
     <Container>
       <SectionComponent>
@@ -35,14 +37,9 @@ const CategoriesTypes = ({
           <NoDataMessage />
         ) : (
           <GridWrapper
-            otherClassName="max-lg:overflow-x-auto max-lg:scroll-smooth max-lg:px-2"
-            gridCols={
-              (categories?.length ?? 0) > 4
-                ? 'lg:grid-cols-5'
-                : 'lg:grid-cols-4'
-            }
-            itemClassName="max-md:!min-w-[120px]"
-            isScrollable
+            isScrollable={isScrollable}
+            disableGridOnMd={true}
+            itemClassName={isScrollable ? '!min-w-[180px]' : '!min-w-[200px]'}
           >
             {categories?.map((item: Category) => (
               <SectionTypeCard
