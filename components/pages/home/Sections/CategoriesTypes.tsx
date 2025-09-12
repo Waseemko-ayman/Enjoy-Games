@@ -39,7 +39,9 @@ const CategoriesTypes = ({
           <GridWrapper
             isScrollable={isScrollable}
             disableGridOnMd={true}
-            itemClassName={isScrollable ? '!min-w-[180px]' : '!min-w-[200px]'}
+            itemClassName={`max-md:!min-w-[120px] ${
+              isScrollable ? 'md:!min-w-[180px]' : 'md:!min-w-[200px]'
+            }`}
           >
             {categories?.map((item: Category) => (
               <SectionTypeCard
