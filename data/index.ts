@@ -50,19 +50,19 @@ export const EnjoyWinWinData = [
 export const ServiceData = [
   {
     id: 1,
-    image: 'paper-plane',
+    image: 'paper-plane.gif',
     alt: 'paper-plane',
     translationKey: 'paperPlane',
   },
   {
     id: 2,
-    image: 'credit-card',
+    image: 'credit-card.gif',
     alt: 'credit-card',
     translationKey: 'creditCard',
   },
   {
     id: 3,
-    image: 'phone',
+    image: 'phone.gif',
     alt: 'phone',
     translationKey: 'phone',
   },

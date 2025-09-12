@@ -23,7 +23,7 @@ const ServiceAdvantages = ({ t }: { t: TranslationFunction }) => {
               <AnimatedWrapper key={card.id} custom={index}>
                 <ServiceCard
                   imgAlt={card.alt}
-                  image={card.image}
+                  image={`/${card.image}`}
                   title={title}
                   description={description}
                 />
