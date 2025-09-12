@@ -20,7 +20,7 @@ const Stats = ({
   getError: string;
 }) => {
   const getCardValue = (value?: string | number) => {
-    if (getLoading) return <ButtonLoading borderColor="border-black" />;
+    if (getLoading) return <ButtonLoading borderColor="border-enjoy-primary" />;
     if (getError)
       return (
         <InlineError textColor="text-enjoy-primary" otherClassName="text-xs" />
