@@ -28,9 +28,9 @@ const UserPopup = () => {
                       <h5 className="font-semibold text-sm">
                         {rankT('title')}
                       </h5>
-                      <div className="bg-enjoy-primary text-white w-5 h-5 text-xs flex items-center justify-center rounded-full">
+                      {/* <div className="bg-enjoy-primary text-white w-5 h-5 text-xs flex items-center justify-center rounded-full">
                         {section.rank?.level}
-                      </div>
+                      </div> */}
                     </div>
                     <p className="text-xs text-enjoy-primary font-medium">
                       {rankT('subtitle')}

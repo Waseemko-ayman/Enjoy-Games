@@ -7,13 +7,13 @@ import NewlyArrived from './Sections/NewlyArrived';
 // import RedeemPoints from './Sections/RedeemPoints';
 import EnjoyWinWin from './Sections/EnjoyWinWin';
 import ServiceAdvantages from './Sections/ServiceAdvantages';
-import WalletSection from './Sections/WalletSection';
+// import WalletSection from './Sections/WalletSection';
 import HeroBanner from './Sections/HeroBanner';
 import { useTranslations } from 'next-intl';
 import { useCategories } from '@/context/CategoriesContext';
 import { useMainContent } from '@/context/MainContentContext';
 import { getCategoryAndSubCategorySlugs } from '@/utils/helpers';
-import { WalletProvider } from '@/context/WalletContext';
+// import { WalletProvider } from '@/context/WalletContext';
 
 const HomePage = () => {
   const t = useTranslations('HomePage');
@@ -40,9 +40,9 @@ const HomePage = () => {
         loading={categoriesLoading}
         error={categoriesError}
       />
-      <WalletProvider>
+      {/* <WalletProvider>
         <WalletSection t={t} />
-      </WalletProvider>
+      </WalletProvider> */}
       <BestSellers
         t={t}
         bestSeller={data?.best_seller ?? []}

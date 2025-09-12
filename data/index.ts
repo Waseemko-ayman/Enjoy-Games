@@ -15,9 +15,9 @@ import {
   FaTelegram,
   FaTiktok,
   FaUser,
-  FaWallet,
+  // FaWallet,
 } from 'react-icons/fa6';
-import { IoArrowRedoOutline, IoWalletOutline } from 'react-icons/io5';
+import { IoArrowRedoOutline } from 'react-icons/io5';
 import { MdEmail, MdOutlineAlternateEmail } from 'react-icons/md';
 import { PiSparkleFill } from 'react-icons/pi';
 import { PATHS } from './paths';
@@ -178,7 +178,7 @@ export const menuLists = [
     id: 1,
     linksItem: [
       { id: 1, key: 'stars', icon: IoArrowRedoOutline, link: PATHS.STARS.link },
-      { id: 2, key: 'wallet', icon: IoWalletOutline, link: PATHS.WALLET.link },
+      // { id: 2, key: 'wallet', icon: IoWalletOutline, link: PATHS.WALLET.link },
       // {
       //   id: 3,
       //   key: 'interests',
@@ -233,14 +233,14 @@ export const userList = [
       },
     ],
   },
-  {
-    section: 'rank',
-    rank: {
-      level: 1,
-      title: 'الرتبة الحالية لحسابك',
-      subtitle: 'زيادة الرتبة تعني زيادة العائد لكل عملية',
-    },
-  },
+  // {
+  //   section: 'rank',
+  //   rank: {
+  //     level: 1,
+  //     title: 'الرتبة الحالية لحسابك',
+  //     subtitle: 'زيادة الرتبة تعني زيادة العائد لكل عملية',
+  //   },
+  // },
   {
     section: 'general',
     items: [
@@ -267,15 +267,15 @@ export const userList = [
   {
     section: 'wallet',
     items: [
+      // {
+      //   id: 8,
+      //   title: 'المحفظة',
+      //   link: PATHS.WALLET.link,
+      //   icon: FaWallet,
+      //   badge: '#0',
+      // },
       {
         id: 8,
-        title: 'المحفظة',
-        link: PATHS.WALLET.link,
-        icon: FaWallet,
-        badge: '#0',
-      },
-      {
-        id: 9,
         title: 'دعواتي',
         link: PATHS.REFERRALS.link,
         icon: FaFlag,
