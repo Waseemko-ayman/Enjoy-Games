@@ -1040,14 +1040,6 @@ export interface PaginationProps {
   className?: string;
 }
 
-export interface getSlugsProps {
-  getSlugs: (subCategoryId: number) => {
-    categorySlug: string;
-    subCategorySlug: string;
-  } | null;
-  error?: string;
-}
-
 export interface HomeSectionsProps extends getSlugsProps {
   t: TranslationFunction;
   isLoading: boolean;
