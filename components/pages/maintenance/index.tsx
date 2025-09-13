@@ -13,26 +13,24 @@ const MaintenancePage = () => {
       <GamepadBackground />
       <Container otherClassName="w-full">
         <div className="flex items-center justify-center lg:justify-evenly gap-2 flex-col lg:flex-row">
-          <Image
-            src="/assets/maintenance.png"
-            alt="maintenance"
-            width={500}
-            height={500}
-          />
           <div className="text-center lg:text-right">
             <div className="flex items-center flex-col max-md:justify-center md:flex-row gap-2 md:gap-5">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold max-md:order-2">
-                المتجر قيد الصيانة
-              </h1>
               <Image
                 src="/assets/logo.png"
                 alt="Enjoy Games Logo"
                 width={100}
                 height={100}
               />
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold max-md:order-2">
+                المتجر قيد الصيانة
+              </h1>
             </div>
             <p className="mt-2">عزيزي العميل المتجر قيد الصيانة</p>
-            <div className="border-t border-gray-300 flex items-center justify-center lg:justify-end gap-3 mt-4 py-4">
+            <div className="border-t border-gray-300 flex items-center justify-center lg:justify-start gap-3 mt-4 py-4">
+              <div className="bg-enjoy-primary text-white text-xs py-2 px-4 max-w-2xl rounded-full flex items-center justify-between gap-3">
+                <FaMobile />
+                <p>تواصل معنا</p>
+              </div>
               <div className="flex items-center gap-5">
                 {FOOTER_LINKS_DATA.socialMedia.map((item, index) => (
                   <AnimatedWrapper key={item.id} custom={index}>
@@ -48,12 +46,14 @@ const MaintenancePage = () => {
                   </AnimatedWrapper>
                 ))}
               </div>
-              <div className="bg-enjoy-primary text-white text-xs py-2 px-4 max-w-2xl rounded-full flex items-center justify-between gap-3">
-                <p>تواصل معنا</p>
-                <FaMobile />
-              </div>
             </div>
           </div>
+          <Image
+            src="/assets/maintenance.png"
+            alt="maintenance"
+            width={500}
+            height={500}
+          />
         </div>
       </Container>
     </div>
