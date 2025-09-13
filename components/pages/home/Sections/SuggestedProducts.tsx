@@ -53,6 +53,7 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({
                       router.push(path);
                     }
                   }}
+                  tall
                 />
               </AnimatedWrapper>
             );

@@ -41,6 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   otherClassNameBtn,
   icon,
   productData,
+  imgOtherClassName,
   // interestId,
 }) => {
   const [open, setOpen] = useState(false);
@@ -129,9 +130,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <div>
       <CardWrapper className="p-3 transform transition-transform duration-300 hover:-translate-y-2">
         <div>
+          {/* <div
+            className={`relative w-full h-0 pb-[95%] cursor-pointer`}
+            onClick={onClick}
+          > */}
           <div
             className={`relative w-full h-0 cursor-pointer ${
-              tall ? 'pb-[133.33%]' : 'pb-[65%]'
+              tall ? 'pb-[110%]' : 'pb-[95%]'
             }`}
             onClick={onClick}
           >
@@ -140,7 +145,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               alt={imgAlt}
               title={imgTitle}
               fill
-              className="absolute inset-0 object-cover rounded-[6px]"
+              className={`absolute inset-0 object-cover rounded-[6px] ${imgOtherClassName}`}
             />
             {discount && (
               <span className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-semibold px-2 py-1 rounded-lg shadow-md z-10">

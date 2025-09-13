@@ -104,6 +104,7 @@ export interface ProductCardProps {
   // onAddToCart?: () => void;
   formScheme?: Record<string, any>;
   productData?: ProductCardProps;
+  imgOtherClassName?: string;
   // interestId: string | number;
 }
 
