@@ -135,8 +135,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
             onClick={onClick}
           > */}
           <div
-            className={`relative w-full h-0 cursor-pointer ${
-              tall ? 'pb-[110%]' : 'pb-[95%]'
+            className={`relative w-full cursor-pointer overflow-hidden rounded-[6px] ${
+              tall ? 'h-[250px]' : 'h-[230px]'
             }`}
             onClick={onClick}
           >
@@ -145,8 +145,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
               alt={imgAlt}
               title={imgTitle}
               fill
-              className={`absolute inset-0 object-cover rounded-[6px] ${imgOtherClassName}`}
+              sizes="(max-width: 768px) 100vw, 200px"
+              className={`object-cover w-full h-full ${imgOtherClassName}`}
             />
+
             {discount && (
               <span className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-semibold px-2 py-1 rounded-lg shadow-md z-10">
                 {t('rival')} {discount.amount} {discount.currency}
@@ -155,11 +157,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
 
           <h3
-            className={`mt-3.5 relative flex items-center justify-between ${
+            className={`mt-3.5 relative ${
+              tall ? 'line-clamp-1' : 'line-clamp-2'
+            } ${
               variant === 'row'
                 ? 'font-bold text-base'
                 : 'font-semibold inline-block mb-1.5 text-[15px] text-[var(--enjoy-gray-650)] hover:text-[var(--enjoy-gray-300)] transition-all duration-600'
             }`}
+            title={title}
           >
             {title}
             {/* <Button
