@@ -2,12 +2,14 @@ import { CategoryCardProps } from '@/interfaces';
 import Image from 'next/image';
 import React, { Suspense } from 'react';
 import Loading from './loading';
+import useIsMobile from '@/hook/useIsMobile';
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
   onClick,
   image = '#',
   name,
 }) => {
+  const isMobile = useIsMobile();
   return (
     <div
       onClick={onClick}
@@ -18,7 +20,11 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
           <Image src={image} alt={name} width={500} height={500} />
         </div>
       </Suspense>
-      <h2 className="text-base md:text-lg font-bold text-[var(--enjoy-gray-650)] mt-2.5">
+      <h2
+        className={`${
+          isMobile ? 'text-sm' : 'text-base'
+        } font-bold text-[var(--enjoy-gray-650)] mt-2.5`}
+      >
         {name}
       </h2>
     </div>
