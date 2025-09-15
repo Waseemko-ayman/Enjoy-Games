@@ -23,60 +23,60 @@
         "ChangeCountryCurrencyTitle": "تغيير الدولة - العملة",
         "ChangeCountryCurrencyDescription": "إختر الدولة والعملة المناسبة لك من القائمة أدناه.",
         "PopupMenuTitle": "قائمة المستخدم والتنقل",
-        "PopupMenuDescription": "الوصول إلى معلومات حسابك، خيارات تسجيل الدخول، قائمة التنقل، وخيار تسجيل الخروج."
-      },
-      "countries": {
-        "saudi-arabia": {
-          "name": "السعودية",
-          "currency": "الريال السعودي"
-        },
-        "united-arab-emirates": {
-          "name": "الإمارات",
-          "currency": "درهم إماراتي"
-        },
-        "kuwait": {
-          "name": "الكويت",
-          "currency": "الدينار الكويتي"
-        },
-        "qatar": {
-          "name": "قطر",
-          "currency": "الريال القطري"
-        },
-        "bahrain": {
-          "name": "البحرين",
-          "currency": "الدينار البحريني"
-        },
-        "oman": {
-          "name": "عمان",
-          "currency": "الريال العماني"
-        },
-        "iraq": {
-          "name": "العراق",
-          "currency": "الدينار العراقي"
-        },
-        "egypt": {
-          "name": "مصر",
-          "currency": "الجنيه المصري"
-        },
-        "jordan": {
-          "name": "الأردن",
-          "currency": "الدينار الأردني"
-        },
-        "usa": {
-          "name": "الولايات المتحدة",
-          "currency": "الدولار الأمريكي"
-        },
-        "germany": {
-          "name": "ألمانيا",
-          "currency": "اليورو"
-        },
-        "united-kingdom": {
-          "name": "المملكة المتحدة",
-          "currency": "الجنيه الإسترليني"
-        },
-        "australia": {
-          "name": "أستراليا",
-          "currency": "الدولار الأسترالي"
+        "PopupMenuDescription": "الوصول إلى معلومات حسابك، خيارات تسجيل الدخول، قائمة التنقل، وخيار تسجيل الخروج.",
+        "countries": {
+          "saudi-arabia": {
+            "name": "السعودية",
+            "currency": "الريال السعودي"
+          },
+          "united-arab-emirates": {
+            "name": "الإمارات",
+            "currency": "درهم إماراتي"
+          },
+          "kuwait": {
+            "name": "الكويت",
+            "currency": "الدينار الكويتي"
+          },
+          "qatar": {
+            "name": "قطر",
+            "currency": "الريال القطري"
+          },
+          "bahrain": {
+            "name": "البحرين",
+            "currency": "الدينار البحريني"
+          },
+          "oman": {
+            "name": "عمان",
+            "currency": "الريال العماني"
+          },
+          "iraq": {
+            "name": "العراق",
+            "currency": "الدينار العراقي"
+          },
+          "egypt": {
+            "name": "مصر",
+            "currency": "الجنيه المصري"
+          },
+          "jordan": {
+            "name": "الأردن",
+            "currency": "الدينار الأردني"
+          },
+          "usa": {
+            "name": "الولايات المتحدة",
+            "currency": "الدولار الأمريكي"
+          },
+          "germany": {
+            "name": "ألمانيا",
+            "currency": "اليورو"
+          },
+          "united-kingdom": {
+            "name": "المملكة المتحدة",
+            "currency": "الجنيه الإسترليني"
+          },
+          "australia": {
+            "name": "أستراليا",
+            "currency": "الدولار الأسترالي"
+          }
         }
       }
     },

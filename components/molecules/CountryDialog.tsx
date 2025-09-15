@@ -23,13 +23,13 @@ const CountryDialog: React.FC<CountryDrawerProps> = ({
   setOpen,
 }) => {
   const { isArabic } = useToggleLocale();
-  const t = useTranslations('Layout.header');
+  const t = useTranslations('Layout.header.navBarPopup');
   return (
     <CustomDialog
       open={open}
       setOpen={setOpen}
-      title={t('navBarPopup.ChangeCountryCurrencyTitle')}
-      description={t('navBarPopup.ChangeCountryCurrencyDescription')}
+      title={t('ChangeCountryCurrencyTitle')}
+      description={t('ChangeCountryCurrencyDescription')}
       trigger={
         <button className="flex items-center justify-between w-full gap-2 cursor-pointer">
           <div className="flex items-center gap-3 font-semibold">

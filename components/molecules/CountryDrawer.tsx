@@ -43,8 +43,9 @@ const CountryDrawer: React.FC<CountryDrawerProps> = ({
                 width={22}
                 height={16}
               />
-              <h4 className="text-base font-normal">
-                {selectedCountry.name} - {selectedCountry.currency}
+              <h4 className="text-sm">
+                {t(`countries.${selectedCountry.img}.name`)} -{' '}
+                {t(`countries.${selectedCountry.img}.currency`)}
               </h4>
             </div>
             {isArabic ? <IoIosArrowBack /> : <IoIosArrowForward />}
