@@ -16,7 +16,7 @@ const CountrySelectorContent: React.FC<CountrySelectorContentProps> = ({
   return (
     <>
       <h5 className="text-lg font-bold mb-5">
-        {t('navBarPopup.ChangeCountryCurrencyTitle')}
+        {t('ChangeCountryCurrencyTitle')}
       </h5>
       <div className="max-h-[420px] overflow-y-auto space-y-4 mb-5 px-2 scrollbar-none">
         <SelectableList

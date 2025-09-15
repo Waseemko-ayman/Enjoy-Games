@@ -23,60 +23,60 @@
         "ChangeCountryCurrencyTitle": "Change Country - Currency",
         "ChangeCountryCurrencyDescription": "Select your preferred country and currency from the list below.",
         "PopupMenuTitle": "User Account and Navigation Menu",
-        "PopupMenuDescription": "Access your account information, authentication options, menu navigation, and logout."
-      },
-      "countries": {
-        "saudi-arabia": {
-          "name": "Saudi Arabia",
-          "currency": "Saudi Riyal"
-        },
-        "united-arab-emirates": {
-          "name": "United Arab Emirates",
-          "currency": "Emirati Dirham"
-        },
-        "kuwait": {
-          "name": "Kuwait",
-          "currency": "Kuwaiti Dinar"
-        },
-        "qatar": {
-          "name": "Qatar",
-          "currency": "Qatari Riyal"
-        },
-        "bahrain": {
-          "name": "Bahrain",
-          "currency": "Bahraini Dinar"
-        },
-        "oman": {
-          "name": "Oman",
-          "currency": "Omani Riyal"
-        },
-        "iraq": {
-          "name": "Iraq",
-          "currency": "Iraqi Dinar"
-        },
-        "egypt": {
-          "name": "Egypt",
-          "currency": "Egyptian Pound"
-        },
-        "jordan": {
-          "name": "Jordan",
-          "currency": "Jordanian Dinar"
-        },
-        "usa": {
-          "name": "United States",
-          "currency": "US Dollar"
-        },
-        "germany": {
-          "name": "Germany",
-          "currency": "Euro"
-        },
-        "united-kingdom": {
-          "name": "United Kingdom",
-          "currency": "Sterling"
-        },
-        "australia": {
-          "name": "Australia",
-          "currency": "Australian dollar"
+        "PopupMenuDescription": "Access your account information, authentication options, menu navigation, and logout.",
+        "countries": {
+          "saudi-arabia": {
+            "name": "Saudi Arabia",
+            "currency": "Saudi Riyal"
+          },
+          "united-arab-emirates": {
+            "name": "United Arab Emirates",
+            "currency": "Emirati Dirham"
+          },
+          "kuwait": {
+            "name": "Kuwait",
+            "currency": "Kuwaiti Dinar"
+          },
+          "qatar": {
+            "name": "Qatar",
+            "currency": "Qatari Riyal"
+          },
+          "bahrain": {
+            "name": "Bahrain",
+            "currency": "Bahraini Dinar"
+          },
+          "oman": {
+            "name": "Oman",
+            "currency": "Omani Riyal"
+          },
+          "iraq": {
+            "name": "Iraq",
+            "currency": "Iraqi Dinar"
+          },
+          "egypt": {
+            "name": "Egypt",
+            "currency": "Egyptian Pound"
+          },
+          "jordan": {
+            "name": "Jordan",
+            "currency": "Jordanian Dinar"
+          },
+          "usa": {
+            "name": "United States",
+            "currency": "US Dollar"
+          },
+          "germany": {
+            "name": "Germany",
+            "currency": "Euro"
+          },
+          "united-kingdom": {
+            "name": "United Kingdom",
+            "currency": "Sterling"
+          },
+          "australia": {
+            "name": "Australia",
+            "currency": "Australian dollar"
+          }
         }
       }
     },

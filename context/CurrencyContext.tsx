@@ -17,10 +17,15 @@ const CurrencyContext = createContext<CurrencyContextType>({
 export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [selectedCountry, setSelectedCountry] = useState<Country>(() => {
+  const [selectedCountry, setSelectedCountry] = useState<Country>(countries[0]);
+
+  useEffect(() => {
     const storedCode = localStorage.getItem('currencyCode');
-    return countries.find((c) => c.code === storedCode) || countries[0];
-  });
+    if (storedCode) {
+      const country = countries.find((c) => c.code === storedCode);
+      if (country) setSelectedCountry(country);
+    }
+  }, []);
 
   useEffect(() => {
     if (selectedCountry) {
