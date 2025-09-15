@@ -157,9 +157,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
 
           <h3
-            className={`mt-3.5 relative ${
-              tall ? 'line-clamp-1' : 'line-clamp-2'
-            } ${
+            className={`mt-3.5 relative line-clamp-1 ${
               variant === 'row'
                 ? 'font-bold text-base'
                 : 'font-semibold inline-block mb-1.5 text-[15px] text-[var(--enjoy-gray-650)] hover:text-[var(--enjoy-gray-300)] transition-all duration-600'

@@ -4,11 +4,19 @@ import Container from '../organism/Container';
 import Layer from '../atomic/Layer';
 import useIsMobile from '@/hook/useIsMobile';
 
-const ResponsiveWrapper = ({ children }: { children: React.ReactNode }) => {
+const ResponsiveWrapper = ({
+  children,
+  otherClassName,
+}: {
+  children: React.ReactNode;
+  otherClassName?: string;
+}) => {
   const isMobile = useIsMobile();
 
   return (
-    <Layer>{isMobile ? children : <Container>{children}</Container>}</Layer>
+    <Layer otherClassName={otherClassName}>
+      {isMobile ? children : <Container>{children}</Container>}
+    </Layer>
   );
 };
 
