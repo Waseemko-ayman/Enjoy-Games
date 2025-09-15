@@ -79,7 +79,6 @@ const CreateUsers = ({
   // ----------------------------------------------------------------
 
   const onSubmit: SubmitHandler<CreateUsersPorps> = async (data) => {
-    console.log(data);
     try {
       const formData = new FormData();
       formData.append('name', data.name);
@@ -91,7 +90,6 @@ const CreateUsers = ({
       const response = await add(formData);
 
       if (response) {
-        console.log(response);
         showToast(response.message);
         reset();
         triggerRefresh(refreshKey);

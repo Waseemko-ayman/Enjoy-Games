@@ -10,8 +10,6 @@ const OrderDetailsPage = ({ id }: { id: string }) => {
   // API Hook
   const { get, data: items, isLoading, error } = useAPI(`order/${id}/items`);
 
-  console.log(items);
-
   useEffect(() => {
     get();
   }, [get]);

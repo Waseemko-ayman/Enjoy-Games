@@ -36,6 +36,7 @@ import { API_IMAGE_URL } from '@/config/api';
 import dynamic from 'next/dynamic';
 import { FaStar } from 'react-icons/fa6';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import Link from 'next/link';
 const DynamicImage = dynamic(() => import('next/image'), {
   loading: () => <Loading />,
   ssr: false,
@@ -47,6 +48,7 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
   const inputsTxt = useTranslations('Inputs');
   const btnTxt = useTranslations('BtnTexts');
   const msgTxts = useTranslations('Messages');
+  const ariaTxts = useTranslations('ariaLabels.links');
   const { isArabic } = useToggleLocale();
   const { addToCart } = useCartContext();
   const { showToast } = useToast();
@@ -118,12 +120,16 @@ const ProductDetailsSections = ({ product }: { product: ProductCardProps }) => {
               const Icon = item.icon;
               return (
                 <AnimatedWrapper key={item.id} custom={index}>
-                  <div key={item.id} className="cursor-pointer">
+                  <Link
+                    href={item.url}
+                    aria-label={ariaTxts(item.ariaLabel)}
+                    className="cursor-pointer"
+                  >
                     <Icon
                       size={18}
                       className="hover:text-enjoy-primary transition-all duration-400"
                     />
-                  </div>
+                  </Link>
                 </AnimatedWrapper>
               );
             })}

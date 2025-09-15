@@ -36,8 +36,6 @@ const MobileHeader = () => {
   const { title: categoryLabel, loading: loadingCategory } =
     useCategoryTitle(categorySlug);
 
-  console.log(categoryLabel);
-
   // نستخدم العنوان المحمّل بدل slug لو متوفر
   const title = loadingCategory
     ? loadingT('loadingMessage')
