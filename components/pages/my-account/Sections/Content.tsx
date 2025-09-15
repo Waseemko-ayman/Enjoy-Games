@@ -62,7 +62,6 @@ const Content = () => {
   } = methods;
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    // console.log(data);
     try {
       const formData = toFormData(data);
       const response = await add(formData);

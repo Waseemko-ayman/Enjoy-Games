@@ -15,7 +15,6 @@ const AccountOptions = ({ t }: { t: TranslationFunction }) => {
     const updated = [...checked];
     updated[index] = !updated[index];
     setValue('options', updated);
-    console.log(updated);
   };
 
   return (

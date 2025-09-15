@@ -73,7 +73,6 @@ const TicketDetailsPage = ({ id }: { id: string }) => {
       try {
         const res = await getTicket(ticketId);
         setTicket(res?.data);
-        console.log('res?.data', res?.data);
       } catch (err: any) {
         console.error(err);
       } finally {

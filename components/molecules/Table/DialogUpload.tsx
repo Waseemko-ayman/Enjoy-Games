@@ -65,7 +65,6 @@ const DialogUpload = ({ rowId }: IdProps) => {
       reset();
       setOpen(false);
       showToast(res?.message);
-      console.log(res);
     } catch (err: any) {
       const apiError = err?.response?.message;
       showToast(apiError, 'error');

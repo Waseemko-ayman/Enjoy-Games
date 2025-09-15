@@ -54,8 +54,7 @@ const PayPalSettings = ({ value }: { value: string }) => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = () => {
     reset();
   };
 

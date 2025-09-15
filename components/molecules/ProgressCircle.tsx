@@ -21,8 +21,6 @@ const ProgressCircle: React.FC<ProgressCircleProps> = ({
   isLoading,
   error,
 }) => {
-  console.log(progress);
-
   const t = useTranslations('MaxupProgram.Upgrade.percentageSection');
   return (
     <div className="flex justify-center">
