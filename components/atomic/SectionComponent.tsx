@@ -7,10 +7,11 @@ import useIsMobile from '@/hook/useIsMobile';
 const SectionComponent: React.FC<SectionComponentProps> = ({
   title,
   children,
+  otherClassName,
 }) => {
   const isMobile = useIsMobile();
   return (
-    <ResponsiveWrapper>
+    <ResponsiveWrapper otherClassName={otherClassName}>
       <AnimatedWrapper>
         <h2
           className={`${

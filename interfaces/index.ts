@@ -433,6 +433,7 @@ export interface ImageProps extends BaseClassNameProps {
 
 export interface SectionComponentProps extends WithChildren {
   title?: string;
+  otherClassName?: string;
 }
 
 export interface ContactInfoProps extends BaseIconProps {
