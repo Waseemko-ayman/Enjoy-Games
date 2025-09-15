@@ -40,7 +40,7 @@ const SheetContentComp = () => {
   return (
     <div>
       {isLoading ? (
-        <Loading />
+        <Loading borderColor="border-white" />
       ) : error ? (
         <ErrorFetching />
       ) : categories?.length === 0 ? (
@@ -49,7 +49,7 @@ const SheetContentComp = () => {
         <div
           className={
             categories?.length > 8
-              ? 'max-h-screen overflow-y-auto pr-2 scrollbar-none'
+              ? 'relative max-h-[calc(100vh-170px)] overflow-y-auto pr-2 scrollbar-none'
               : ''
           }
         >
@@ -79,7 +79,7 @@ const SheetContentComp = () => {
                       {item.name}
                     </span>
                   }
-                  otherClassName="text-white"
+                  otherClassName="text-white !text-base"
                   showArrow
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                 />
@@ -87,17 +87,17 @@ const SheetContentComp = () => {
                 {hasSubmenu && isOpen && (
                   <div
                     className={`z-50 mt-2 border border-gray-100 rounded-xl shadow-lg bg-white scrollbar-none
-                ${
-                  item.sub_categories.length > 3
-                    ? 'max-h-[300px] overflow-y-auto p-3 grid grid-cols-2 gap-2'
-                    : 'p-2'
-                }
-                w-full
-                ${
-                  isLastTwoItems
-                    ? 'lg:absolute lg:left-full lg:top-0 lg:ml-2 lg:w-[320px]'
-                    : 'lg:absolute lg:right-full lg:top-0 lg:ml-2 lg:w-[320px]'
-                }`}
+                    ${
+                      item.sub_categories.length > 3
+                        ? 'max-h-[300px] overflow-y-auto p-3 grid grid-cols-2 gap-2'
+                        : 'p-2'
+                    }
+                    w-full
+                    ${
+                      isLastTwoItems
+                        ? 'lg:absolute lg:left-full lg:top-0 lg:ml-2 lg:w-[320px]'
+                        : 'lg:absolute lg:right-full lg:top-0 lg:ml-2 lg:w-[320px]'
+                    }`}
                   >
                     {item.sub_categories.map((subItem, index) => (
                       <NavItem
