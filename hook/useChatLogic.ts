@@ -58,7 +58,7 @@ export function useChatLogic() {
 
   const uniqueId =
     typeof window !== 'undefined'
-      ? localStorage.getItem('unique_id') || ''
+      ? sessionStorage.getItem('unique_id') || ''
       : '';
 
   const [messages, setMessages] = useState<Message[]>(() => {

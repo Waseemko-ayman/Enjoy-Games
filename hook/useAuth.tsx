@@ -65,8 +65,8 @@ const reducer = (state: AuthState, action: Action): AuthState => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(action?.payload?.user));
       // Generate unique_id if not exists
-      if (!localStorage.getItem('unique_id')) {
-        localStorage.setItem('unique_id', generateUniqueId());
+      if (!sessionStorage.getItem('unique_id')) {
+        sessionStorage.setItem('unique_id', generateUniqueId());
       }
       return {
         // user: action.payload?.user ?? null,
@@ -77,9 +77,8 @@ const reducer = (state: AuthState, action: Action): AuthState => {
       };
 
     case AUTH_ACTIONS.LOGOUT:
-      ['token', 'user', 'unique_id'].forEach((item) =>
-        localStorage.removeItem(item)
-      );
+      ['token', 'user'].forEach((item) => localStorage.removeItem(item));
+      ['unique_id'].forEach((item) => sessionStorage.removeItem(item));
       return {
         user: null,
         token: null,
@@ -124,7 +123,7 @@ const useAuth = () => {
 
       if (data?.success) {
         sessionStorage.setItem('otp_email', body.email);
-        sessionStorage.setItem('otp_password', body.password);
+        // sessionStorage.setItem('otp_password', body.password);
 
         showToast(data?.message);
         router.replace(PATHS.OTP);
@@ -187,7 +186,7 @@ const useAuth = () => {
         });
 
         sessionStorage.removeItem('otp_email');
-        sessionStorage.removeItem('otp_password');
+        // sessionStorage.removeItem('otp_password');
         showToast(data?.message);
         router.replace(PATHS.HOME.link);
       } else {
