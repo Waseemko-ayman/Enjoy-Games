@@ -56,8 +56,8 @@ export function DashboardSidebar() {
           />
         </Link>
       </div>
-      <div className="flex-1 justify-between overflow-auto p-2">
-        <div className="flex flex-col items-start justify-between gap-4 h-full">
+      <div className="flex-1 overflow-auto p-2">
+        <div className="flex flex-col items-start gap-4">
           <nav className="grid items-start text-sm font-medium w-full">
             {sidebarLinks.map((link) => (
               <Link
@@ -75,6 +75,7 @@ export function DashboardSidebar() {
           </nav>
         </div>
       </div>
+
       <div className="mt-auto border-t border-t-gray-300 p-4">
         <div className="flex items-center gap-2 rounded-lg border border-gray-300 p-4">
           {isLoading ? (
