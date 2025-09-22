@@ -6,4 +6,7 @@ export const routing = defineRouting({
 
   // Used when no locale matches
   defaultLocale: 'ar',
+  // Disable automatic locale detection based on the user's preferences
+  // Simply means: **Disable automatic language selection based on browser or cookies**.
+  localeDetection: false,
 });
