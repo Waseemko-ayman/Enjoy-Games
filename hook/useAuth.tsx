@@ -78,7 +78,13 @@ const reducer = (state: AuthState, action: Action): AuthState => {
 
     case AUTH_ACTIONS.LOGOUT:
       ['token', 'user'].forEach((item) => localStorage.removeItem(item));
-      ['unique_id'].forEach((item) => sessionStorage.removeItem(item));
+      const uniqueId = sessionStorage.getItem('unique_id');
+      sessionStorage.removeItem('unique_id');
+      if (uniqueId) {
+        const msgs = JSON.parse(sessionStorage.getItem('messages') || '[]');
+        const filtered = msgs.filter((m: any) => m.unique_id !== uniqueId);
+        sessionStorage.setItem('messages', JSON.stringify(filtered));
+      }
       return {
         user: null,
         token: null,
