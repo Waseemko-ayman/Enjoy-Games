@@ -23,8 +23,6 @@ export default function HeroBanner({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const ariaTxts = useTranslations('ariaLabels.btns');
 
-  console.log(sliders);
-
   useEffect(() => {
     if (sliders?.length > 1) {
       const interval = setInterval(() => {
