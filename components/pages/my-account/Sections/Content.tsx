@@ -41,6 +41,8 @@ const Content = () => {
     error: getError,
   } = useAPI('user/my-info');
 
+  console.log(user);
+
   // Update User Information
   const { add, isLoading } = useAPI('update-user');
 

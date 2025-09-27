@@ -19,6 +19,7 @@ import SocialLogin from '@/components/molecules/SocialLogin';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 import { generateUniqueId } from '@/hook/useAuth';
 import { useReferralCode } from '@/hook/ReferralCodeContext';
+import { useSearchParams } from 'next/navigation';
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,6 +30,9 @@ const SignupPage = () => {
   const authTxts = useTranslations('Auth');
   const btnTxts = useTranslations('BtnTexts');
   const reqTxts = useTranslations('Layout.footer.LearnMore');
+
+  const searchParams = useSearchParams();
+  const referralCode = searchParams.get('referral_code');
 
   const { signup, isLoading } = useAuthContext();
   const { setReferralCode } = useReferralCode();
@@ -62,6 +66,9 @@ const SignupPage = () => {
     formState: { errors },
   } = useForm<signupFormData>({
     resolver: yupResolver(schema) as any,
+    defaultValues: {
+      referral_code: referralCode || '',
+    },
   });
   const onSubmit = (data: signupFormData) => {
     signup(data);

@@ -21,10 +21,14 @@ const InvitationLink = ({
   const { showToast } = useToast();
   const msgsT = useTranslations('Messages');
 
+  const domain = window.location.origin;
+
   // Context hook
   const { referralCode } = useReferralCode();
 
-  const link = `/auth/signup?referral_code=${referralCode || userReferralCode}`;
+  const link = `${domain}/auth/signup?referral_code=${
+    referralCode || userReferralCode
+  }`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(link).then(() => {
