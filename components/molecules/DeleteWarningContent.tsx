@@ -5,6 +5,8 @@ import Button from '@/components/atomic/Button';
 type DeleteWarningContentProps = {
   msgTxts: any;
   btnTexts: any;
+  deleteLocation?: string;
+  item?: string;
   onCancel: () => void;
   onDelete: () => void;
 };
@@ -12,6 +14,8 @@ type DeleteWarningContentProps = {
 export const DeleteWarningContent: React.FC<DeleteWarningContentProps> = ({
   msgTxts,
   btnTexts,
+  deleteLocation,
+  item,
   onCancel,
   onDelete,
 }) => {
@@ -24,11 +28,18 @@ export const DeleteWarningContent: React.FC<DeleteWarningContentProps> = ({
             {msgTxts('deleteWarningTitle')}
           </h3>
           <p className="text-gray-700">
-            {msgTxts.rich('deleteWarningMessage', {
-              item: (chunks: any) => (
-                <span className="font-bold text-red-600">{chunks}</span>
-              ),
-            })}
+            {msgTxts.rich(
+              'deleteWarningMessage',
+              { item, deleteLocation },
+              {
+                item: (chunks: string) => (
+                  <span className="font-bold text-red-600">{chunks}</span>
+                ),
+                deleteLocation: (chunks: string) => (
+                  <span className="font-medium text-gray-900">{chunks}</span>
+                ),
+              }
+            )}
           </p>
         </div>
       </div>

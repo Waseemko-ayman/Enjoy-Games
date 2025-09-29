@@ -26,6 +26,7 @@ const AllCategories = ({
       createTabValue="createCategory"
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
+      deleteLocation={t('sidebar.categories')}
     />
   );
 };

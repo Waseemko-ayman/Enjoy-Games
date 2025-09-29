@@ -147,6 +147,7 @@ const CartContent: React.FC<CartContentProps> = ({
                           setOpen(false);
                         }
                       }}
+                      deleteLocation={item?.title}
                     />
                   </ResponsiveDialogDrawer>
                 </div>

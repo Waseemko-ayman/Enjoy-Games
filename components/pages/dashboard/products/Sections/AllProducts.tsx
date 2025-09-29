@@ -26,6 +26,7 @@ const AllProducts = ({
       placeholder={t('Inputs.placeHolders.searchProduct')}
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
+      deleteLocation={t('sidebar.products')}
     />
   );
 };

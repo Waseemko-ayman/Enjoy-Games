@@ -40,6 +40,7 @@ interface DataTableBodyProps<T> {
   showEdit?: boolean;
   showActionsColumn?: boolean;
   onRowPatched?: (id: string | number, patch: Partial<T>) => void;
+  deleteLocation?: string;
 }
 
 function formatHeader(key: string) {
@@ -59,6 +60,7 @@ const DataTableBody = <T extends { id: string | number }>({
   showEdit,
   showActionsColumn = true,
   onRowPatched,
+  deleteLocation,
 }: DataTableBodyProps<T>) => {
   // Users
   const [openUserId, setOpenUserId] = useState<string | null>(null);
@@ -546,6 +548,8 @@ const DataTableBody = <T extends { id: string | number }>({
                             <DeleteWarningContent
                               msgTxts={msgTxts}
                               btnTexts={btnTexts}
+                              deleteLocation={deleteLocation}
+                              item={row?.name || row?.title || `#${row.id}`}
                               onCancel={() => setOpenDeleteId(null)}
                               onDelete={() => {
                                 onDelete(row.id);

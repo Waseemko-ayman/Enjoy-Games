@@ -26,6 +26,7 @@ const AllSubCategories = ({
       createTabValue="createSubCategory"
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
+      deleteLocation={t('SectionsTitles.subCategories')}
     />
   );
 };

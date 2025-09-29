@@ -11,7 +11,7 @@ export function middleware(req: NextRequest) {
 
   // التحقق مما إذا كان المسار يحتوي على locale
   const localeMatch = pathname.match(/^\/(ar|en)(\/|$)/);
-  const locale = localeMatch ? localeMatch[1] : 'ar'; // افتراضي إذا لم يوجد locale
+  const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
 
   // استثناء الملفات الثابتة وAPI routes
   if (

@@ -27,6 +27,7 @@ interface GenericAllProps<T> {
   customFilter?: (rows: any[], currentFilter: string) => any[];
   filterOptions?: { id: string; label: string }[];
   onFilterChange?: (filter: string) => void;
+  deleteLocation?: string;
 }
 
 const GenericAllTable = <T,>({
@@ -45,6 +46,7 @@ const GenericAllTable = <T,>({
   customFilter,
   filterOptions,
   onFilterChange,
+  deleteLocation,
 }: GenericAllProps<T>) => {
   // --- Filter State ---
   const [filter, setFilter] = useState('all');
@@ -146,6 +148,7 @@ const GenericAllTable = <T,>({
         filterOptions={filterOptions}
         isLoading={isLoading}
         error={error}
+        deleteLocation={deleteLocation}
       />
     </SettingsTab>
   );

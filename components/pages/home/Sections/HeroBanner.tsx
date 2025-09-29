@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
@@ -23,15 +24,16 @@ export default function HeroBanner({
   const ariaTxts = useTranslations('ariaLabels.btns');
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      handleNextSlide();
-    }, 5000);
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSlide]);
+    if (sliders?.length > 1) {
+      const interval = setInterval(() => {
+        handleNextSlide();
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [sliders?.length]);
 
   const handleNextSlide = () => {
-    if (isTransitioning) return;
+    if (isTransitioning || sliders?.length <= 1) return;
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentSlide((prev) => (prev + 1) % sliders.length);

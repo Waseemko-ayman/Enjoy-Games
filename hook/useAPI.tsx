@@ -92,17 +92,13 @@ const useAPI = <
   const [state, dispatch] = useReducer(reduce<ResponseData>, initialState);
 
   const get = useCallback(
-    async (getConfig?: AxiosRequestConfig) => {
+    async (path?: string, getConfig?: AxiosRequestConfig) => {
       try {
         dispatch({ type: API_ACTIONS.SET_LOADING });
         const res = await axiosInstance.get<{
           data: ResponseData | ResponseData[];
-        }>(`/${url}`, {
-          ...config,
-          ...getConfig,
-        });
+        }>(`/${url}${path ? `/${path}` : ''}`, { ...config, ...getConfig });
         dispatch({ type: API_ACTIONS.GET, payload: res?.data?.data });
-        // return res?.data?.data;
         return res?.data;
       } catch (error) {
         dispatch({ type: API_ACTIONS.ERROR, payload: error });

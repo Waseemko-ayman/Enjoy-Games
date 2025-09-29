@@ -138,7 +138,6 @@ export function ChatModal({
                             <Link
                               key={l.url}
                               href={l.url}
-                              target="_blank"
                               className="px-2 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition"
                             >
                               {l.title_ar || l.title_en || l.url}

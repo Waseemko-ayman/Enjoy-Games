@@ -43,6 +43,7 @@ const AllCodes = ({
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
       createTabValue="CreateCodes"
+      deleteLocation={t('sidebar.codes')}
     />
   );
 };

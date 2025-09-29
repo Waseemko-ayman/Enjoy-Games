@@ -234,6 +234,8 @@
     "pending": "Pending",
     "processing": "Processing",
     "paid": "Paid",
+    "approved": "Approved",
+    "blocked": "Blocked",
     "manageAndTrackYourOrders": "Manage and track your orders",
     "yourOrders": "Your Orders",
     "sortedByDate": "Sorted by date",
@@ -766,7 +768,8 @@
         "title": "Order Products",
         "desc": "Browse all products included in this order"
       },
-      "uploadDoc": "Upload documentation"
+      "uploadDoc": "Upload documentation",
+      "suspiciousTransactions": "Suspicious Transactions"
     },
     "Users": {
       "title": "All Users",
@@ -796,6 +799,48 @@
     "settings": {
       "title": "Account Settings",
       "desc": "Update your account information"
+    },
+    "socialStats": {
+      "title": "Social Login Statistics",
+      "subtitle": "Detailed analysis of social platforms usage",
+      "totalUsers": "Total Users",
+      "chartTitle": "Platforms Distribution",
+      "noDataTitle": "No Data Available",
+      "noDataDescription": "No users have registered via social platforms yet",
+      "user": "user"
+    },
+    "SuspiciousTransactionsStats": {
+      "FraudDetectionDashboard": "Fraud Detection Dashboard",
+      "SecurityDashboard": "Security Dashboard",
+      "MonitorStats": "Monitor suspicious transaction statistics and security metrics",
+      "TotalCases": "Total Cases",
+      "AcceptedTransactions": "Accepted Transactions",
+      "BlockedTransactions": "Blocked Transactions",
+      "BlockRate": "Block Rate",
+      "CountryMismatches": "Country Mismatches",
+      "KeyMetrics": "Key Metrics",
+      "DetectionAccuracy": "Detection Accuracy",
+      "DetectionAccuracySubtitle": "Correctly identified transactions",
+      "FalsePositiveRate": "False Positive Rate",
+      "FalsePositiveSubtitle": "Incorrectly flagged as suspicious",
+      "ResponseTime": "Response Time",
+      "ResponseTimeSubtitle": "Average processing time",
+      "riskScoreDistribution": "Risk Score Distribution",
+      "highRisk": "High Risk",
+      "mediumRisk": "Medium Risk",
+      "lowRisk": "Low Risk",
+      "averageRiskScore": "Average Risk Score",
+      "NoTransactions": "No Suspicious Transactions",
+      "NoSuspiciousDetected": "No suspicious transactions detected yet.",
+      "NoFilteredTransactions": "No {filter} transactions at this time.",
+      "RiskFactors": "Risk Factors",
+      "ReviewInformation": "Review Information",
+      "ReviewedBy": "Reviewed by",
+      "User": "User",
+      "PaymentID": "Payment ID",
+      "IP": "IP Address",
+      "Card": "Card",
+      "selected": "selected"
     }
   },
   "errorBoundary": {
@@ -866,8 +911,7 @@
     "check": "Check",
     "sendEmail": "email",
     "backToHome": "Back to Home",
-    "continueWithGoogle": "Continue with Google",
-    "continueWithFacebook": "Continue with Facebook",
+    "continueWith": "Continue with {name}",
     "next": "Next",
     "previous": "Previous",
     "filter": "Filter",
@@ -885,7 +929,11 @@
     "reply": "Reply",
     "sending": "Sending...",
     "changeAvatar": "Change Avatar",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "Approve": "Approve",
+    "Block": "Block",
+    "approveSelected": "Approve Selected",
+    "blockSelected": "Block Selected"
   },
   "Inputs": {
     "labels": {
@@ -1158,7 +1206,7 @@
     "undefined": "undefined",
     "unavailable": "unavailable",
     "deleteWarningTitle": "Warning",
-    "deleteWarningMessage": "Are you sure you want to remove {item} from the cart?",
+    "deleteWarningMessage": "Are you sure you want to remove {item} from the {deleteLocation}?",
     "errorNotifications": "Error fetching notifications:",
     "noNotifications": "No notifications yet",
     "justNow": "Just now",

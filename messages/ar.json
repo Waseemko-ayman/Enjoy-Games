@@ -234,6 +234,8 @@
     "pending": "قيد الانتظار",
     "processing": "قيد المعالجة",
     "paid": "مدفوع",
+    "approved": "موافقة",
+    "blocked": "محظور",
     "manageAndTrackYourOrders": "إدارة وتتبع طلباتك",
     "yourOrders": "طلباتك",
     "sortedByDate": "مرتبة حسب التاريخ",
@@ -770,7 +772,8 @@
         "title": "منتجات الطلب",
         "desc": "استعرض كافة المنتجات الموجودة في هذا الطلب"
       },
-      "uploadDoc": "رفع التوثيق"
+      "uploadDoc": "رفع التوثيق",
+      "suspiciousTransactions": "المعاملات المشبوهة"
     },
     "Users": {
       "title": "جميع المستخدمين",
@@ -800,6 +803,48 @@
     "settings": {
       "title": "إعدادات الحساب",
       "desc": "تحديث معلومات حسابك"
+    },
+    "socialStats": {
+      "title": "إحصائيات تسجيل الدخول الاجتماعي",
+      "subtitle": "تحليل مفصل لاستخدام منصات التواصل الاجتماعي",
+      "totalUsers": "إجمالي المستخدمين",
+      "chartTitle": "التوزيع البياني للمنصات",
+      "noDataTitle": "لا توجد بيانات متاحة",
+      "noDataDescription": "لم يتم تسجيل أي مستخدمين عبر منصات التواصل الاجتماعي بعد",
+      "user": "مستخدم"
+    },
+    "SuspiciousTransactionsStats": {
+      "FraudDetectionDashboard": "لوحة معلومات كشف الاحتيال",
+      "SecurityDashboard": "لوحة أمان",
+      "MonitorStats": "مراقبة إحصائيات المعاملات المشبوهة ومؤشرات الأمان",
+      "TotalCases": "إجمالي الحالات",
+      "AcceptedTransactions": "المعاملات المقبولة",
+      "BlockedTransactions": "المعاملات المحظورة",
+      "BlockRate": "معدل الحظر",
+      "CountryMismatches": "إختلافات في الدولة",
+      "KeyMetrics": "المؤشرات الرئيسية",
+      "DetectionAccuracy": "دقة الكشف",
+      "DetectionAccuracySubtitle": "المعاملات المحددة بشكل صحيح",
+      "FalsePositiveRate": "معدل الإيجابيات الكاذبة",
+      "FalsePositiveSubtitle": "تم الإبلاغ عنها بشكل غير صحيح كمشبوهة",
+      "ResponseTime": "زمن الاستجابة",
+      "ResponseTimeSubtitle": "متوسط وقت المعالجة",
+      "riskScoreDistribution": "توزيع درجة المخاطر",
+      "highRisk": "مخاطر عالية",
+      "mediumRisk": "مخاطر متوسطة",
+      "lowRisk": "مخاطر منخفضة",
+      "averageRiskScore": "متوسط درجة المخاطر",
+      "NoTransactions": "لا معاملات مشبوهة",
+      "NoSuspiciousDetected": "لا توجد معاملات مشبوهة حتى الآن.",
+      "NoFilteredTransactions": "لا توجد معاملات {filter} في هذا الوقت.",
+      "RiskFactors": "عوامل المخاطر",
+      "ReviewInformation": "معلومات المراجعة",
+      "ReviewedBy": "تمت المراجعة بواسطة",
+      "User": "المستخدم",
+      "PaymentID": "معرّف الدفع",
+      "IP": "عنوان IP",
+      "Card": "البطاقة",
+      "selected": "تم اختياره"
     }
   },
   "errorBoundary": {
@@ -870,8 +915,7 @@
     "check": "تحقق",
     "sendEmail": "الإيميل",
     "backToHome": "العودة إلى الرئيسية",
-    "continueWithGoogle": "المتابعة باستخدام جوجل",
-    "continueWithFacebook": "المتابعة باستخدام فيسبوك",
+    "continueWith": "المتابعة باستخدام {name}",
     "next": "التالي",
     "previous": "السابق",
     "filter": "تصفية",
@@ -889,7 +933,11 @@
     "reply": "رد",
     "sending": "إرسال...",
     "changeAvatar": "تغيير الصورة الشخصية",
-    "confirm": "تأكيد"
+    "confirm": "تأكيد",
+    "Approve": "قبول",
+    "Block": "حظر",
+    "approveSelected": "اعتماد العناصر المحددة",
+    "blockSelected": "حظر العناصر المحددة"
   },
   "Inputs": {
     "labels": {
@@ -1161,7 +1209,7 @@
     "undefined": "غير محدد",
     "unavailable": "غير متوفر",
     "deleteWarningTitle": "تحذير",
-    "deleteWarningMessage": "هل أنت متأكد أنك تريد حذف {item} من السلة؟",
+    "deleteWarningMessage": "هل أنت متأكد أنك تريد حذف {item} من {deleteLocation}؟",
     "errorNotifications": "خطأ في جلب الإشعارات:",
     "noNotifications": "لا يوجد إشعارات",
     "justNow": "الآن",

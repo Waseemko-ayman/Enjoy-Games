@@ -1388,3 +1388,40 @@ export interface signupFormData extends LoginFormData {
   name: string;
   password_confirmation: string;
 }
+
+export interface SuspiciousTransaction {
+  id: string;
+  payment_id: string;
+  user_id: string;
+  user_name: string;
+  user_email: string;
+  risk_score: number;
+  risk_factors: string[];
+  user_ip: string;
+  user_country: string;
+  card_country: string;
+  amount_cents: number;
+  amount: number;
+  status: 'pending' | 'approved' | 'blocked';
+  analyzed_at: string;
+  reviewed_at: string | null;
+  reviewed_by: string | null;
+  review_notes: string | null;
+}
+
+export interface FraudApiResponse {
+  data: {
+    suspicious_transactions: SuspiciousTransaction[];
+    total_count: number;
+    pending_review: number;
+    approved: number;
+    blocked: number;
+  };
+}
+
+export interface FraudStats {
+  total_count: number;
+  pending_review: number;
+  approved: number;
+  blocked: number;
+}

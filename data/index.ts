@@ -280,19 +280,25 @@ export const userList = [
         link: PATHS.REFERRALS.link,
         icon: FaFlag,
       },
-    ],
-  },
-  {
-    section: 'dashboard',
-    items: [
       {
-        id: 10,
+        id: 9,
         title: 'لوحة التحكم',
         link: PATHS.DASHBOARD.HOME.ROOT,
         icon: FaTachometerAlt,
       },
     ],
   },
+  // {
+  //   section: 'dashboard',
+  //   items: [
+  //     {
+  //       id: 10,
+  //       title: 'لوحة التحكم',
+  //       link: PATHS.DASHBOARD.HOME.ROOT,
+  //       icon: FaTachometerAlt,
+  //     },
+  //   ],
+  // },
   {
     section: 'logout',
     items: [{ id: 11, title: 'تسجيل خروج', icon: FiLogOut }],

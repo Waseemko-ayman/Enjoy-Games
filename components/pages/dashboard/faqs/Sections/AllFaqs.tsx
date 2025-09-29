@@ -41,6 +41,7 @@ const AllFaqs = ({
         id: item.labelKey,
         label: t(`Dashboard.faqs.FaqsFilters.${item.labelKey}`),
       }))}
+      deleteLocation={t('sidebar.faqs')}
     />
   );
 };

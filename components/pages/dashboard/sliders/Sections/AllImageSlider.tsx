@@ -24,6 +24,7 @@ const AllImageSlider = ({
       placeholder={t('Inputs.placeHolders.searchImage')}
       onTabChange={onTabChange}
       showEdit={false}
+      deleteLocation={t('sidebar.sliders')}
     />
   );
 };

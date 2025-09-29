@@ -58,12 +58,12 @@ export function useChatLogic() {
 
   const uniqueId =
     typeof window !== 'undefined'
-      ? localStorage.getItem('unique_id') || ''
+      ? sessionStorage.getItem('unique_id') || ''
       : '';
 
   const [messages, setMessages] = useState<Message[]>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = JSON.parse(localStorage.getItem('messages') || '[]').map(
+    if (typeof window !== 'undefined' && uniqueId) {
+      const saved = JSON.parse(sessionStorage.getItem('messages') || '[]').map(
         (m: any) => ({
           ...m,
           timestamp: new Date(m.timestamp),
@@ -95,7 +95,7 @@ export function useChatLogic() {
       };
       setMessages((prev) => {
         const updated = [...prev, userMessage];
-        localStorage.setItem('messages', JSON.stringify(updated));
+        sessionStorage.setItem('messages', JSON.stringify(updated));
         return updated;
       });
 
@@ -169,7 +169,8 @@ export function useChatLogic() {
 
         setMessages((prev) => {
           const updated = [...prev, aiMessage];
-          localStorage.setItem('messages', JSON.stringify(updated));
+          if (uniqueId)
+            sessionStorage.setItem('messages', JSON.stringify(updated));
           return updated;
         });
       } catch (error: any) {

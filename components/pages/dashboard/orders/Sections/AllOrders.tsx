@@ -36,6 +36,7 @@ const AllOrders = ({
         id: item.labelKey,
         label: t(`MyPurchases.${item.labelKey}`),
       }))}
+      deleteLocation={t('sidebar.orders')}
     />
   );
 };
