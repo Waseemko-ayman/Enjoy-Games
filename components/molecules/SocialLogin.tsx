@@ -1,31 +1,84 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Button from '@/components/atomic/Button';
 import useAPI from '@/hook/useAPI';
+import { useToast } from '@/lib/toast';
+import Loading from './loading';
+import ErrorFetching from './ErrorFetching';
 
 interface SocialLoginProps {
   btnTxts: (key: string) => string;
   authTxts: (key: string) => string;
-  onClick?: (provider: string) => void;
 }
 
-const SocialLogin: React.FC<SocialLoginProps> = ({
-  btnTxts,
-  authTxts,
-  onClick,
-}) => {
-  const { get, data: social } = useAPI('social/providers');
+const providerImages: Record<string, string> = {
+  google: '/assets/google.png',
+  facebook: '/assets/facebook.png',
+  apple: '/assets/apple.png',
+};
 
-  const providerImages: Record<string, string> = {
-    google: '/assets/google.png',
-    facebook: '/assets/facebook.png',
-    apple: '/assets/apple.png',
+const SocialLogin: React.FC<SocialLoginProps> = ({ btnTxts, authTxts }) => {
+  // Toast notifications
+  const { showToast } = useToast();
+
+  const {
+    get: getProviders,
+    data: social,
+    isLoading,
+    error,
+  } = useAPI<any, any>('social/providers');
+  const { get: redirect } = useAPI<any, any>('social/redirect');
+  const { get: callback } = useAPI<any, any>('social/callback');
+  const { add } = useAPI<any, any>('social/login');
+
+  const handleSocialClick = async (provider: any) => {
+    try {
+      const res = await redirect(provider);
+      if (res?.data?.url) {
+        window.open(
+          res.data.url,
+          '_blank',
+          'width=500,height=700,top=40,left=400'
+        );
+      }
+    } catch (err) {
+      const apiError = (err as any)?.response?.data?.message;
+      showToast(apiError, 'error');
+    }
   };
 
   useEffect(() => {
-    get();
-  }, [get]);
+    getProviders();
+  }, [getProviders]);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const provider = url.searchParams.get('provider');
+    const code = url.searchParams.get('code');
+
+    if (provider && code) {
+      callback(provider)
+        .then(async (res) => {
+          const accessToken = res?.data?.access_token;
+          if (!accessToken) return;
+
+          const loginBody = {
+            provider,
+            access_token: accessToken,
+            device_type: 'web',
+            device_id: navigator.userAgent, // Or any ID you generate for the server
+          };
+          const loginRes = await add(loginBody);
+          if (loginRes.data?.token) {
+            localStorage.setItem('token', loginRes.data.token);
+            console.log('Login success:', loginRes.data);
+          }
+        })
+        .catch((err) => console.error('Callback error:', err));
+    }
+  }, [callback]);
 
   return (
     <>
@@ -40,23 +93,29 @@ const SocialLogin: React.FC<SocialLoginProps> = ({
 
       {/* Social Buttons */}
       <div className="flex flex-col gap-3 max-sm:gap-2">
-        {social?.map((provider: any) => (
-          <Button
-            key={provider.value}
-            type="button"
-            variant="ghost"
-            otherClassName="border border-gray-300 py-2 text-sm text-enjoy-primary-deep !font-normal hover:!bg-[#f4f4ff]"
-            handleClick={() => onClick?.(provider.value)}
-          >
-            <Image
-              src={providerImages[provider.value]}
-              alt={provider.label}
-              width={25}
-              height={25}
-            />
-            {(btnTxts as any)('continueWith', { name: provider.label })}
-          </Button>
-        ))}
+        {isLoading ? (
+          <Loading />
+        ) : error ? (
+          <ErrorFetching />
+        ) : (
+          social?.map((provider: any) => (
+            <Button
+              key={provider.value}
+              type="button"
+              variant="ghost"
+              otherClassName="border border-gray-300 py-2 text-sm text-enjoy-primary-deep !font-normal hover:!bg-[#f4f4ff]"
+              handleClick={() => handleSocialClick?.(provider.value)}
+            >
+              <Image
+                src={providerImages[provider.value] || '/assets/google.png'}
+                alt={provider.label}
+                width={25}
+                height={25}
+              />
+              {(btnTxts as any)('continueWith', { name: provider.label })}
+            </Button>
+          ))
+        )}
       </div>
     </>
   );
