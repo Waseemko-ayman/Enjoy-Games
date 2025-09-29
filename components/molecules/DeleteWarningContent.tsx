@@ -5,7 +5,7 @@ import Button from '@/components/atomic/Button';
 type DeleteWarningContentProps = {
   msgTxts: any;
   btnTexts: any;
-  deleteLocation: string;
+  deleteLocation?: string;
   item?: string;
   onCancel: () => void;
   onDelete: () => void;

@@ -21,7 +21,7 @@ interface DataTableProps<T extends { id: number | string }> {
   filterOptions?: { id: string; label: string }[];
   isLoading: boolean;
   error: string;
-  deleteLocation: string;
+  deleteLocation?: string;
 }
 
 function getItemsPerPageOptions(totalItems: number) {

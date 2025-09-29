@@ -40,7 +40,7 @@ interface DataTableBodyProps<T> {
   showEdit?: boolean;
   showActionsColumn?: boolean;
   onRowPatched?: (id: string | number, patch: Partial<T>) => void;
-  deleteLocation: string;
+  deleteLocation?: string;
 }
 
 function formatHeader(key: string) {
