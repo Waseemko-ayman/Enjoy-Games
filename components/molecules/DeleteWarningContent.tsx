@@ -6,7 +6,7 @@ type DeleteWarningContentProps = {
   msgTxts: any;
   btnTexts: any;
   deleteLocation: string;
-  item: string;
+  item?: string;
   onCancel: () => void;
   onDelete: () => void;
 };
