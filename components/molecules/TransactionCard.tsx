@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import {
   Shield,
@@ -11,6 +12,7 @@ import {
 } from 'lucide-react';
 import { SuspiciousTransaction } from '@/interfaces';
 import { useTranslations } from 'next-intl';
+import FormField from '../ui/FormField';
 
 interface TransactionCardProps {
   transaction: SuspiciousTransaction;
@@ -18,11 +20,15 @@ interface TransactionCardProps {
     transactionId: string,
     status: 'approved' | 'blocked'
   ) => void;
+  selected?: boolean;
+  onSelect?: (selected: boolean) => void;
 }
 
 export const TransactionCard: React.FC<TransactionCardProps> = ({
   transaction,
   onStatusUpdate,
+  selected = false,
+  onSelect,
 }) => {
   const t = useTranslations('Dashboard.SuspiciousTransactionsStats');
   const btnT = useTranslations('BtnTexts');
@@ -77,6 +83,14 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+      {onSelect && (
+        <FormField
+          type="checkbox"
+          inputName="select-transaction"
+          checked={selected}
+          handleChange={(e: any) => onSelect(e.target.checked)}
+        />
+      )}
       <div className="p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">

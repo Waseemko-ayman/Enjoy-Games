@@ -16,6 +16,9 @@ import React, { useEffect, useState } from 'react';
 const SuspiciousTransactions = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [transactionsData, setTransactionsData] = useState<any[]>([]);
+  const [selectedTransactions, setSelectedTransactions] = useState<string[]>(
+    []
+  );
   const [stats, setStats] = useState<FraudStats>({
     total_count: 0,
     pending_review: 0,
@@ -24,11 +27,15 @@ const SuspiciousTransactions = () => {
   });
 
   const t = useTranslations('Dashboard.SuspiciousTransactionsStats');
+  const btnT = useTranslations('BtnTexts');
   const { showToast } = useToast();
 
   // API Hook
   const { get, data, isLoading, error } = useAPI('suspicious-transactions');
   const { add: reviewTransaction } = useAPI('suspicious-transactions/review');
+  const { add: bulkReviewTransaction } = useAPI(
+    'suspicious-transactions/bulk-review'
+  );
 
   useEffect(() => {
     get();
@@ -72,6 +79,22 @@ const SuspiciousTransactions = () => {
     }
   };
 
+  const handleBulkReview = async (decision: 'approved' | 'blocked') => {
+    if (selectedTransactions.length === 0) return;
+    try {
+      await bulkReviewTransaction({
+        transaction_ids: selectedTransactions,
+        decision,
+        notes: 'مراجعة مجمعة',
+      });
+      showToast('Bulk review completed successfully');
+      get(); // تحديث البيانات
+      setSelectedTransactions([]);
+    } catch (err: any) {
+      showToast(err?.res?.message, 'error');
+    }
+  };
+
   const filteredTransactions = transactionsData.filter((t) => {
     if (activeFilter === 'all') return true;
     return t.status === activeFilter;
@@ -99,8 +122,35 @@ const SuspiciousTransactions = () => {
             activeFilter={activeFilter}
             onFilterChange={setActiveFilter}
             stats={stats}
+            isLoading={isLoading}
+            error={error}
           />
         </div>
+
+        {/* Bulk Actions */}
+        {transactionsData.length > 0 && (
+          <div className="flex items-center justify-between mb-4 px-6">
+            <div className="flex gap-2">
+              <button
+                disabled={selectedTransactions.length === 0}
+                onClick={() => handleBulkReview('approved')}
+                className="px-3 py-1 bg-green-600 text-white rounded disabled:opacity-50"
+              >
+                {btnT('approveSelected')}
+              </button>
+              <button
+                disabled={selectedTransactions.length === 0}
+                onClick={() => handleBulkReview('blocked')}
+                className="px-3 py-1 bg-red-600 text-white rounded disabled:opacity-50"
+              >
+                {btnT('blockSelected')}
+              </button>
+            </div>
+            <span>
+              {selectedTransactions.length} :{t('selected')}
+            </span>
+          </div>
+        )}
 
         {/* Transactions List */}
         {isLoading ? (
@@ -126,6 +176,20 @@ const SuspiciousTransactions = () => {
                 <TransactionCard
                   key={transaction.id}
                   transaction={transaction}
+                  selected={selectedTransactions.includes(transaction.id)}
+                  onSelect={(selected) => {
+                    if (selected)
+                      setSelectedTransactions([
+                        ...selectedTransactions,
+                        transaction.id,
+                      ]);
+                    else
+                      setSelectedTransactions(
+                        selectedTransactions.filter(
+                          (id) => id !== transaction.id
+                        )
+                      );
+                  }}
                   onStatusUpdate={handleStatusUpdate}
                 />
               ))

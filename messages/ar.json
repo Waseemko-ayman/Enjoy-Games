@@ -843,7 +843,8 @@
       "User": "المستخدم",
       "PaymentID": "معرّف الدفع",
       "IP": "عنوان IP",
-      "Card": "البطاقة"
+      "Card": "البطاقة",
+      "selected": "تم اختياره"
     }
   },
   "errorBoundary": {
@@ -934,7 +935,9 @@
     "changeAvatar": "تغيير الصورة الشخصية",
     "confirm": "تأكيد",
     "Approve": "قبول",
-    "Block": "حظر"
+    "Block": "حظر",
+    "approveSelected": "اعتماد العناصر المحددة",
+    "blockSelected": "حظر العناصر المحددة"
   },
   "Inputs": {
     "labels": {

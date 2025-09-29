@@ -49,6 +49,7 @@ interface FormFieldProps {
   error?: FieldError;
   editId?: string | number | null;
   readOnly?: boolean;
+  checked?: boolean;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -69,6 +70,8 @@ const FormField: React.FC<FormFieldProps> = ({
   error,
   editId,
   readOnly,
+  checked,
+  handleChange,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
@@ -228,33 +231,43 @@ const FormField: React.FC<FormFieldProps> = ({
         />
       ) : type === 'checkbox' ? (
         <div className="mt-2">
-          <Controller
-            control={control}
-            name={inputName}
-            render={({ field: { onChange, value, ref, name } }) => (
-              <label className="flex items-center cursor-pointer select-none gap-3">
-                <input
-                  ref={ref}
-                  type="checkbox"
-                  name={name}
-                  checked={!!value}
-                  onChange={(e) => onChange(e.target.checked)}
-                  className="peer sr-only"
-                  disabled={disabled}
-                />
-                <div className="w-6 h-6 rounded-lg border border-gray-300 peer-checked:bg-green-600 flex items-center justify-center transition-colors">
-                  {!!value && <FaCheck className="w-3 h-3 text-white" />}
-                </div>
-                <span
-                  className={`text-sm transition-colors ${
-                    value ? 'text-gray-700' : 'text-gray-400'
-                  }`}
-                >
-                  {placeholder}
-                </span>
-              </label>
-            )}
-          />
+          {control ? (
+            <Controller
+              control={control}
+              name={inputName}
+              render={({ field: { onChange, value, ref, name } }) => (
+                <label className="flex items-center cursor-pointer select-none gap-3">
+                  <input
+                    ref={ref}
+                    type="checkbox"
+                    name={name}
+                    checked={checked ?? !!value}
+                    onChange={(e) => onChange(e.target.checked)}
+                    className="peer sr-only"
+                    disabled={disabled}
+                  />
+                  <div className="w-6 h-6 rounded-lg border border-gray-300 peer-checked:bg-green-600 flex items-center justify-center transition-colors">
+                    {!!value && <FaCheck className="w-3 h-3 text-white" />}
+                  </div>
+                  <span className="text-sm">{placeholder}</span>
+                </label>
+              )}
+            />
+          ) : (
+            <label className="flex items-center cursor-pointer select-none gap-3">
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={handleChange}
+                className="peer sr-only"
+                disabled={disabled}
+              />
+              <div className="w-6 h-6 rounded-lg border border-gray-300 peer-checked:bg-green-600 flex items-center justify-center transition-colors">
+                {checked && <FaCheck className="w-3 h-3 text-white" />}
+              </div>
+              <span className="text-sm">{placeholder}</span>
+            </label>
+          )}
         </div>
       ) : (
         <div className="relative">
