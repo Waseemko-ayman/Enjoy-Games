@@ -9,7 +9,7 @@ import React from 'react';
 const UserPopup = () => {
   const t = useTranslations();
   const rankT = useTranslations('MyAccount.rank');
-  const { logout } = useAuthContext();
+  const { user, logout } = useAuthContext();
 
   const handleLogout = () => {
     logout();
@@ -46,31 +46,42 @@ const UserPopup = () => {
               key={index}
               className="border-b border-b-gray-200 py-2 last:border-0"
             >
-              {section.items?.map((item, index) => {
-                const { key, namespace } = getTranslationKey(item.title);
-                return (
-                  <AnimatedWrapper key={item.id} custom={index}>
-                    <li className="w-full">
-                      <NavItem
-                        icon={item.icon}
-                        name={t(`${namespace}.${key}`)}
-                        otherClassNameIcon={`text-sm ${
-                          item.title === 'تسجيل خروج'
-                            ? '!text-red-500'
-                            : 'text-gray-500'
-                        }`}
-                        otherClassName={`!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg ${
-                          item.title === 'تسجيل خروج' ? '!text-red-500' : ''
-                        }`}
-                        {...('link' in item ? { linkPath: item.link } : {})}
-                        onClick={
-                          item.title === 'تسجيل خروج' ? handleLogout : undefined
-                        }
-                      />
-                    </li>
-                  </AnimatedWrapper>
-                );
-              })}
+              {section.items
+                ?.filter((item) => {
+                  if (item.title === 'لوحة التحكم' && !user?.is_admin) {
+                    return false;
+                  }
+                  return true;
+                })
+                .map((item, index) => {
+                  const { key, namespace } = getTranslationKey(item.title);
+                  return (
+                    <AnimatedWrapper key={item.id} custom={index}>
+                      <li className="w-full">
+                        <NavItem
+                          icon={item.icon}
+                          name={t(`${namespace}.${key}`)}
+                          otherClassNameIcon={`text-sm ${
+                            item.title === 'تسجيل خروج'
+                              ? '!text-red-500'
+                              : 'text-gray-500'
+                          }`}
+                          otherClassName={`!px-2 !py-3 !text-sm hover:bg-[#f4f4ff] rounded-lg ${
+                            item.title === 'تسجيل خروج' ? '!text-red-500' : ''
+                          }`}
+                          linkPath={
+                            'link' in item ? (item.link as string) : undefined
+                          }
+                          onClick={
+                            item.title === 'تسجيل خروج'
+                              ? handleLogout
+                              : undefined
+                          }
+                        />
+                      </li>
+                    </AnimatedWrapper>
+                  );
+                })}
             </div>
           );
         })}

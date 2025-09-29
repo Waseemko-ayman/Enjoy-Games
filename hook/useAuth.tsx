@@ -17,6 +17,8 @@ interface User {
   gender?: string;
   photo?: string;
   referral_code?: string;
+  roles?: string[];
+  is_admin?: boolean;
   created_at?: string;
   updated_at?: string;
 }
