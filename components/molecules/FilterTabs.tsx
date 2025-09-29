@@ -1,6 +1,7 @@
 import React from 'react';
 import { Shield, Clock, CheckCircle, XCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import ButtonLoading from '../atomic/ButtonLoading';
 
 interface FilterTabsProps {
   activeFilter: string;
@@ -11,12 +12,16 @@ interface FilterTabsProps {
     approved: number;
     blocked: number;
   };
+  isLoading: boolean;
+  error: string | null | undefined;
 }
 
 export const FilterTabs: React.FC<FilterTabsProps> = ({
   activeFilter,
   onFilterChange,
   stats,
+  isLoading,
+  error,
 }) => {
   const t = useTranslations('MyPurchases');
 
@@ -79,7 +84,13 @@ export const FilterTabs: React.FC<FilterTabsProps> = ({
                     : 'bg-gray-100 text-gray-600'
                 }`}
               >
-                {tab.count}
+                {isLoading ? (
+                  <ButtonLoading borderColor="border-black" />
+                ) : error ? (
+                  0
+                ) : (
+                  tab.count
+                )}
               </span>
             </button>
           );
