@@ -53,6 +53,7 @@ const AllSubscribers = ({ value }: { value: string }) => {
       onFilterChange={(id) => setSelectedProductId(id === 'all' ? '' : id)}
       showEdit={false}
       showActionsColumn={false}
+      deleteLocation={t('sidebar.productSubscribers')}
     />
   );
 };

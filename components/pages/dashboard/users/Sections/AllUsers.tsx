@@ -24,6 +24,7 @@ const AllUsers = ({
       placeholder={t('Inputs.placeHolders.searchUser')}
       onTabChange={onTabChange}
       showEdit={false}
+      deleteLocation={t('sidebar.users')}
     />
   );
 };

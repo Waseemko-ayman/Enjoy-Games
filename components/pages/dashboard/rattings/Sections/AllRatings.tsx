@@ -27,6 +27,7 @@ const AllRatings = ({
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
       showEdit={false}
+      deleteLocation={t('sidebar.ratings')}
     />
   );
 };

@@ -21,6 +21,7 @@ const AllTickets = ({
       placeholder={t('Inputs.placeHolders.searchTicket')}
       onTabChange={onTabChange}
       showEdit={false}
+      deleteLocation={t('sidebar.tickets')}
     />
   );
 };

@@ -21,6 +21,7 @@ interface DataTableProps<T extends { id: number | string }> {
   filterOptions?: { id: string; label: string }[];
   isLoading: boolean;
   error: string;
+  deleteLocation: string;
 }
 
 function getItemsPerPageOptions(totalItems: number) {
@@ -50,6 +51,7 @@ export function DataTable<T extends { id: number | string }>({
   filterOptions,
   isLoading,
   error,
+  deleteLocation,
 }: DataTableProps<T>) {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm] = useDebounce(searchTerm, 700);
@@ -145,6 +147,7 @@ export function DataTable<T extends { id: number | string }>({
             showEdit={showEdit}
             showActionsColumn={showActionsColumn}
             onRowPatched={onRowPatched}
+            deleteLocation={deleteLocation}
           />
           {totalPages > 1 && (
             <DataTablePagination

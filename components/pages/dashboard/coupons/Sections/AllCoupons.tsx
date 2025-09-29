@@ -27,6 +27,7 @@ const AllCoupons = ({
       onEditIdChange={onEditIdChange}
       onTabChange={onTabChange}
       showEdit={false}
+      deleteLocation={t('sidebar.coupons')}
     />
   );
 };
