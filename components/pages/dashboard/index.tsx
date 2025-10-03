@@ -6,7 +6,7 @@ import { OrderChart } from '@/components/ui/orders-chart';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import useAPI from '@/hook/useAPI';
-import SocialStats from '@/components/ui/display/socialStats';
+import SocialStats from '@/components/ui/display/SocialStats';
 import SuspiciousTransactionsStats from '@/components/ui/display/suspiciousTransactionsStats';
 
 const DashboardPage = () => {
