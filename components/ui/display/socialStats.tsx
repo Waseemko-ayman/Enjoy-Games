@@ -31,9 +31,6 @@ const SocialStats = () => {
     get();
   }, [get]);
 
-  if (isLoading) return <Loading />;
-  if (error) return <ErrorFetching />;
-
   const providersData = data?.providers
     ? Object.entries(data.providers).map(([key, value]) => {
         const providerInfo = data.enabled_providers.find(
@@ -94,131 +91,143 @@ const SocialStats = () => {
     <Card className="col-span-4 overflow-hidden">
       <CardContent className="p-0">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
-          <div className="flex items-center justify-between">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 md:p-6 text-white">
+          <div className="flex items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-white/20 rounded-lg">
                   <BarChart3 size={24} />
                 </div>
-                <h2 className="text-xl font-bold">{t('title')}</h2>
+                <h2 className="text-base md:text-lg lg:text-xl font-bold">
+                  {t('title')}
+                </h2>
               </div>
-              <p className="text-blue-100 text-sm">{t('subtitle')}</p>
+              <p className="text-blue-100 text-xs md:text-sm">
+                {t('subtitle')}
+              </p>
             </div>
             <div className="text-right">
-              <div className="flex items-center gap-2 text-3xl font-bold">
+              <div className="flex items-center gap-2 text-lg md:text-xl lg:text-3xl font-bold">
                 <Users size={28} />
                 {totalUsers.toLocaleString('ar')}
               </div>
-              <p className="text-blue-100 text-sm">{t('totalUsers')}</p>
+              <p className="text-blue-100 text-xs md:text-sm">
+                {t('totalUsers')}
+              </p>
             </div>
           </div>
         </div>
 
         <div className="p-6">
-          {/* Stats Cards Section */}
-          <div className='mb-10'>
-            <div className="grid grid-cols-3 gap-4">
-              {data?.enabled_providers?.map((provider: any) => {
-                const providerValue = data.providers[provider.value] || 0;
-                const percentage =
-                  totalUsers > 0 ? (providerValue / totalUsers) * 100 : 0;
+          {isLoading ? (
+            <Loading />
+          ) : error ? (
+            <ErrorFetching />
+          ) : (
+            <>
+              <div className="mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {data?.enabled_providers?.map((provider: any) => {
+                    const providerValue = data.providers[provider.value] || 0;
+                    const percentage =
+                      totalUsers > 0 ? (providerValue / totalUsers) * 100 : 0;
 
-                return (
-                  <div
-                    key={provider.value}
-                    // className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300"
-                    className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      {providerImages[provider.value] && (
-                        <Image
-                          src={providerImages[provider.value]}
-                          alt={provider.label}
-                          width={30}
-                          height={30}
-                        />
-                      )}
-                      <div>
-                        <h3 className="font-semibold text-sm">
-                          {provider.label}
-                        </h3>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          {percentage.toFixed(1)}%
-                        </p>
-                      </div>
-                    </div>
-                    <div className="text-2xl font-bold">
-                      {providerValue.toLocaleString('ar')}
-                    </div>
-                    <div className="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
+                    return (
                       <div
-                        className="h-full rounded-full transition-all duration-700 ease-out"
-                        style={{
-                          backgroundColor: provider.color,
-                          width: `${percentage}%`,
-                        }}
-                      />
+                        key={provider.value}
+                        // className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300"
+                        className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
+                      >
+                        <div className="flex items-center gap-3 mb-3">
+                          {providerImages[provider.value] && (
+                            <Image
+                              src={providerImages[provider.value]}
+                              alt={provider.label}
+                              width={30}
+                              height={30}
+                            />
+                          )}
+                          <div>
+                            <h3 className="font-semibold text-sm">
+                              {provider.label}
+                            </h3>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                              {percentage.toFixed(1)}%
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-2xl font-bold">
+                          {providerValue.toLocaleString('ar')}
+                        </div>
+                        <div className="mt-2 h-1 bg-gray-200 rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all duration-700 ease-out"
+                            style={{
+                              backgroundColor: provider.color,
+                              width: `${percentage}%`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div>
+                {hasData ? (
+                  <div className="bg-white rounded-xl p-6 border border-gray-300">
+                    <div className="flex items-center gap-2 mb-4">
+                      <TrendingUp size={20} className="text-blue-600" />
+                      <h3 className="font-semibold">{t('chartTitle')}</h3>
+                    </div>
+                    <div className="h-[320px]">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <PieChart>
+                          <Pie
+                            data={providersData}
+                            dataKey="value"
+                            nameKey="name"
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={60}
+                            outerRadius={120}
+                            paddingAngle={4}
+                            animationBegin={0}
+                            animationDuration={1000}
+                          >
+                            {providersData.map((entry, index) => (
+                              <Cell
+                                key={`cell-${index}`}
+                                fill={entry.color}
+                                stroke={entry.color}
+                                strokeWidth={2}
+                              />
+                            ))}
+                          </Pie>
+                          <Tooltip content={<CustomTooltip />} />
+                          <Legend content={<CustomLegend />} />
+                        </PieChart>
+                      </ResponsiveContainer>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Chart Section */}
-          <div>
-            {hasData ? (
-              <div className="bg-white rounded-xl p-6 border border-gray-300">
-                <div className="flex items-center gap-2 mb-4">
-                  <TrendingUp size={20} className="text-blue-600" />
-                  <h3 className="font-semibold">{t('chartTitle')}</h3>
-                </div>
-                <div className="h-[320px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={providersData}
-                        dataKey="value"
-                        nameKey="name"
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={60}
-                        outerRadius={120}
-                        paddingAngle={4}
-                        animationBegin={0}
-                        animationDuration={1000}
-                      >
-                        {providersData.map((entry, index) => (
-                          <Cell
-                            key={`cell-${index}`}
-                            fill={entry.color}
-                            stroke={entry.color}
-                            strokeWidth={2}
-                          />
-                        ))}
-                      </Pie>
-                      <Tooltip content={<CustomTooltip />} />
-                      <Legend content={<CustomLegend />} />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
+                ) : (
+                  // <div className="bg-white dark:bg-gray-800 rounded-xl p-12 text-center border border-gray-100 dark:border-gray-700">
+                  <div className="rounded-xl p-12 text-center border border-gray-300">
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <BarChart3 size={32} className="text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {t('noDataTitle')}
+                    </h3>
+                    <p className="text-gray-500 dark:text-gray-400">
+                      {t('noDataDescription')}
+                    </p>
+                  </div>
+                )}
               </div>
-            ) : (
-              // <div className="bg-white dark:bg-gray-800 rounded-xl p-12 text-center border border-gray-100 dark:border-gray-700">
-              <div className="rounded-xl p-12 text-center border border-gray-300">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <BarChart3 size={32} className="text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">
-                  {t('noDataTitle')}
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400">
-                  {t('noDataDescription')}
-                </p>
-              </div>
-            )}
-          </div>
+            </>
+          )}
         </div>
       </CardContent>
     </Card>
