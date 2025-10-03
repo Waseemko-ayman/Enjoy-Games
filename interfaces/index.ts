@@ -10,6 +10,7 @@ import {
   NavbarLayout,
 } from '@/utils/type';
 import { Variants } from 'framer-motion';
+import { LucideIcon } from 'lucide-react';
 import { Messages, useTranslations } from 'next-intl';
 import { ElementType, JSX, ReactNode } from 'react';
 
@@ -1446,4 +1447,12 @@ export interface TimeoutSettings {
   current_timeout_minutes: number;
   current_timeout_hours: number;
   settings: TimeoutSettingsSite;
+}
+
+export interface SiteCardProps {
+  icon: LucideIcon;
+  gradient: string;
+  titleKey: string;
+  settings: any;
+  t: TranslationFunction;
 }
