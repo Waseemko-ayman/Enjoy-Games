@@ -392,7 +392,7 @@
     "basketSummary": "ملخص السلة",
     "choosePaymentMethod": "إختر وسيلة الدفع",
     "emptyStateTitle": "سلتك جاهزة وتناديك للتسوق",
-    "termsAndPrivacyAgreement": "بالانتقال إلى الدفع فانت تتوافق على <termsLink>سياسة الاستخدام</termsLink> و <privacyLink>سياسة الخصوصية</privacyLink> لـ إنجوي قيمز",
+    "termsAndPrivacyAgreement": "بالانتقال إلى الدفع فانت تتوافق على <termsLink>سياسة الاستخدام</termsLink> و <privacyLink>سياسة الخصوصية</privacyLink> والشروط والأحكام لـ إنجوي قيمز",
     "discountCoupon": "كوبون الخصم:",
     "cartSummary": "ملخص سلة التسوق",
     "rewards": {
@@ -802,7 +802,38 @@
     },
     "settings": {
       "title": "إعدادات الحساب",
-      "desc": "تحديث معلومات حسابك"
+      "desc": "تحديث معلومات حسابك",
+      "pageDesc": "إدارة إعدادات حسابك وتفضيلاتك",
+      "sissionTimeout": {
+        "title": "إعدادات مهلة الجلسة",
+        "desc": "جلب إعدادات مدة الجلسة العالمية الحالية (بالدقائق والساعات) لكل حالة من حالات الموقع",
+        "CurrentStatus": "الحالة الحالية",
+        "Live": "مباشر",
+        "Demo": "تجريبي",
+        "TimeoutDuration": "مدة الجلسة",
+        "Minutes": "دقيقة",
+        "InHours": "بالساعات",
+        "Hours": "ساعة",
+        "DemoSite": "الموقع التجريبي",
+        "LiveSite": "الموقع المباشر",
+        "TimeoutMinutes": "المدة (بالدقائق)",
+        "TimeoutHours": "المدة (بالساعات)",
+        "Note": "ملاحظة",
+        "NoteMessage": "تحدد إعدادات انتهاء الجلسة المدة التي يبقى فيها المستخدمون مصادق عليهم قبل الحاجة لإعادة تسجيل الدخول. قم بتعديل هذه القيم وفق متطلبات الأمان لديك.",
+        "FakeWebsite": "موقع تجريبي",
+        "OfficialWebsite": "الموقع الرسمي",
+        "UpdateSessionTimeout": "تحديث وقت الجلسة",
+        "UpdateDesc": "قم بتعيين القيم العالمية لمدة الجلسات التجريبية والحية (بالدقائق).",
+        "DemoMinutes": "التجريبية (بالدقائق)",
+        "LiveMinutes": "الحية (بالدقائق)",
+        "UpdateSettings": "تحديث الإعدادات",
+        "session_ended": "لا توجد جلسة نشطة",
+        "session_time_label": "وقت انتهاء الجلسة",
+        "SessionSuccessfully": "تم تعيين مدة الجلسة بنجاح",
+        "SessionFaild": "حدث خطأ أثناء تعيين الجلسة",
+        "SessionSuccessfullyCleared": "تم مسح الجلسة بنجاح",
+        "SessionFaildCleared": "حدث خطأ أثناء مسح الجلسة"
+      }
     },
     "socialStats": {
       "title": "إحصائيات تسجيل الدخول الاجتماعي",
@@ -902,7 +933,7 @@
     "createAccount": "أنشىء حساب",
     "logout": "تسجيل خروج",
     "MoreAboutParticipateAndWin": "المزيد عن شارك وإربح",
-    "MoreAboutEnjoyGames": "المزيد عن إنجوي قيمز",
+    "MoreAboutEnjoyGames": "المزيد عن ولاء إنجوي قيمز",
     "AddTicket": "أضف تذكرة",
     "faqs": "الأسئلة الشائعة",
     "sendTicket": "إرسال التذكرة",
@@ -937,7 +968,9 @@
     "Approve": "قبول",
     "Block": "حظر",
     "approveSelected": "اعتماد العناصر المحددة",
-    "blockSelected": "حظر العناصر المحددة"
+    "blockSelected": "حظر العناصر المحددة",
+    "extend_button": "تمديد الجلسة",
+    "extending_button": "جاري التمديد..."
   },
   "Inputs": {
     "labels": {

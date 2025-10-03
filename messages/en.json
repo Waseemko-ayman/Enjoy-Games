@@ -392,7 +392,7 @@
     "basketSummary": "Basket Summary",
     "choosePaymentMethod": "Choose Payment Method",
     "emptyStateTitle": "Your basket is ready and waiting for you to shop",
-    "termsAndPrivacyAgreement": "By proceeding to payment you agree to <termsLink>Terms of Use</termsLink> and <privacyLink>Privacy Policy</privacyLink> of Enjoy Games",
+    "termsAndPrivacyAgreement": "By proceeding to payment you agree to <termsLink>Terms of Use</termsLink> and <privacyLink>Privacy Policy</privacyLink>, and the Enjoy Games Terms and Conditions.",
     "discountCoupon": "Discount Coupon:",
     "cartSummary": "Shopping Cart Summary",
     "rewards": {
@@ -798,7 +798,38 @@
     },
     "settings": {
       "title": "Account Settings",
-      "desc": "Update your account information"
+      "desc": "Update your account information",
+      "pageDesc": "Manage your account settings and preferences",
+      "sissionTimeout": {
+        "title": "Session Timeout Settings",
+        "desc": "Gets the current global session duration settings (in minutes and hours) for each site instance.",
+        "CurrentStatus": "Current Status",
+        "Live": "Live",
+        "Demo": "Demo",
+        "TimeoutDuration": "Timeout Duration",
+        "Minutes": "min",
+        "InHours": "In Hours",
+        "Hours": "hrs",
+        "DemoSite": "Demo Site",
+        "LiveSite": "Live Site",
+        "TimeoutMinutes": "Timeout (minutes)",
+        "TimeoutHours": "Timeout (hours)",
+        "Note": "Note",
+        "NoteMessage": "Session timeout settings determine how long users remain authenticated before requiring re-login. Adjust these values based on your security requirements.",
+        "FakeWebsite": "fake website",
+        "OfficialWebsite": "official website",
+        "UpdateSessionTimeout": "Update Session Timeout",
+        "UpdateDesc": "Set global timeout values for demo and live sessions (minutes).",
+        "DemoMinutes": "Demo (minutes)",
+        "LiveMinutes": "Live (minutes)",
+        "UpdateSettings": "Update Settings",
+        "session_ended": "No active session",
+        "session_time_label": "Session expires in",
+        "SessionSuccessfully": "Session duration set successfully",
+        "SessionFaild": "An error occurred while setting the session.",
+        "SessionSuccessfullyCleared": "The session was successfully cleared.",
+        "SessionFaildCleared": "An error occurred while clearing the session."
+      }
     },
     "socialStats": {
       "title": "Social Login Statistics",
@@ -898,7 +929,7 @@
     "createAccount": "Create an Account",
     "logout": "Logout",
     "MoreAboutParticipateAndWin": "More About Participate and Win",
-    "MoreAboutEnjoyGames": "More About Enjoy Games",
+    "MoreAboutEnjoyGames": "More About Loyalty Enjoy Games",
     "AddTicket": "Add Ticket",
     "faqs": "FAQS",
     "sendTicket": "Send Ticket",
@@ -933,7 +964,9 @@
     "Approve": "Approve",
     "Block": "Block",
     "approveSelected": "Approve Selected",
-    "blockSelected": "Block Selected"
+    "blockSelected": "Block Selected",
+    "extend_button": "Extend Session",
+    "extending_button": "Extending..."
   },
   "Inputs": {
     "labels": {
