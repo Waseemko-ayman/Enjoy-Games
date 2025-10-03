@@ -1,15 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { LucideIcon } from 'lucide-react';
-import { TranslationFunction } from '@/interfaces';
-
-interface SiteCardProps {
-  icon: LucideIcon;
-  gradient: string; // tailwind classes like "from-amber-500 to-orange-500"
-  titleKey: string; // translation key e.g. "DemoSite" or "LiveSite"
-  settings: any;
-  t: TranslationFunction;
-}
+import { SiteCardProps } from '@/interfaces';
 
 const SiteCard = ({
   icon: Icon,
