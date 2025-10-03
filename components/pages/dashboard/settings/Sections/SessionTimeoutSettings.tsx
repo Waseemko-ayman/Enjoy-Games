@@ -98,13 +98,13 @@ const SessionTimeoutSettings = () => {
   const timeoutData = [
     {
       label: t('TimeoutDuration'),
-      value: settings?.current_timeout_minutes,
+      value: settings?.current_timeout_minutes ?? 0,
       unit: t('Minutes'),
       icon: <Clock className="w-5 h-5 text-slate-500" />,
     },
     {
       label: t('InHours'),
-      value: settings?.current_timeout_hours,
+      value: settings?.current_timeout_hours ?? 0,
       unit: t('Hours'),
       icon: <Clock className="w-5 h-5 text-slate-500" />,
     },
