@@ -1425,3 +1425,25 @@ export interface FraudStats {
   approved: number;
   blocked: number;
 }
+
+export interface TimeoutSettingsSite {
+  demo: {
+    timeout_minutes: number;
+    timeout_hours: number;
+    label: string;
+  };
+  live: {
+    timeout_minutes: number;
+    timeout_hours: number;
+    label: string;
+  };
+}
+
+export interface TimeoutSettings {
+  demo_timeout_minutes: number;
+  live_timeout_minutes: number;
+  current_status: string;
+  current_timeout_minutes: number;
+  current_timeout_hours: number;
+  settings: TimeoutSettingsSite;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -17,15 +18,29 @@ import { InputTypes } from '@/utils/type';
 import { useRouter } from 'next/navigation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 import SocialLogin from '@/components/molecules/SocialLogin';
+import useAPI from '@/hook/useAPI';
+import { useToast } from '@/lib/toast';
 
 const LoginPage = () => {
   const [showPass, setShowPass] = useState(false);
+
+  // Translations
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const authTxts = useTranslations('Auth');
   const btnTxts = useTranslations('BtnTexts');
+  const t = useTranslations('Dashboard.settings.sissionTimeout');
+
+  // Context
   const { login, isLoading, token } = useAuthContext();
+
   const router = useRouter();
+
+  // Notifications
+  const { showToast } = useToast();
+
+  // Hook for API
+  const { add: setSessionAPI } = useAPI<any, any>('session-timeout/set');
 
   const schema = Yup.object().shape({
     email: Yup.string()
@@ -47,8 +62,14 @@ const LoginPage = () => {
     setShowPass(!showPass);
   };
 
-  const onSubmit = (data: LoginFormData) => {
-    login(data);
+  const onSubmit = async (data: LoginFormData) => {
+    await login(data);
+    try {
+      const res = await setSessionAPI({});
+      showToast(res?.data?.message || t('SessionSuccessfully'));
+    } catch (err: any) {
+      showToast(err?.response?.data?.message || t('SessionFaild'), 'error');
+    }
     reset();
   };
 

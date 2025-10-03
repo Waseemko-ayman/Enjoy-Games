@@ -1,18 +1,43 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CardWrapper from '@/components/atomic/CardWrapper';
 import NavItem from '@/components/atomic/NavItem';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { useAuthContext } from '@/context/AuthContext';
 import { userList } from '@/data';
+import useAPI from '@/hook/useAPI';
+import { useToast } from '@/lib/toast';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const UserPopup = () => {
+  // Translations
   const t = useTranslations();
   const rankT = useTranslations('MyAccount.rank');
+
+  // Notifications
+  const { showToast } = useToast();
+
+  // Context
   const { user, logout } = useAuthContext();
 
-  const handleLogout = () => {
+  // Hook for API
+  const { add: clearSessionAPI } = useAPI<any, any>('session-timeout/clear');
+
+  const handleLogout = async () => {
     logout();
+    try {
+      const res = await clearSessionAPI({});
+      showToast(
+        res?.data?.message ||
+          t('Dashboard.settings.sissionTimeout.SessionSuccessfullyCleared')
+      );
+    } catch (err: any) {
+      showToast(
+        err?.response?.data?.message ||
+          t('Dashboard.settings.sissionTimeout.SessionFaildCleared'),
+        'error'
+      );
+    }
   };
 
   return (

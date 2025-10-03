@@ -7,10 +7,14 @@ import TabsNavigation from '@/components/ui/display/TabsNavigation';
 import GeneralSettings from './Sections/GeneralSettings';
 import AccountSettings from './Sections/AccountSettings';
 import { UserInfoProvider } from '@/context/UserInfoContext';
+import SessionTimeoutSettings from './Sections/SessionTimeoutSettings';
+import { useTranslations } from 'next-intl';
 
 const SettingsPage = () => {
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const t = useTranslations();
 
   const handleSave = () => {
     setSaving(true);
@@ -28,15 +32,19 @@ const SettingsPage = () => {
   };
 
   const tabsData = [
+    { value: 'account', label: t('MyAccount.AccountInfo') },
+    {
+      value: 'session-timeout',
+      label: t('Dashboard.settings.sissionTimeout.title'),
+    },
     // { value: 'general', label: 'General' },
-    { value: 'account', label: 'Account' },
   ];
 
   return (
     <div className="space-y-6">
       <PageTitle
-        title="Settings"
-        description="Manage your account settings and preferences"
+        title={t('sidebar.settings')}
+        description={t('Dashboard.settings.pageDesc')}
       />
       <Tabs defaultValue="account" className="w-full">
         <TabsNavigation tabs={tabsData} />
@@ -48,6 +56,7 @@ const SettingsPage = () => {
         <UserInfoProvider>
           <AccountSettings />
         </UserInfoProvider>
+        <SessionTimeoutSettings />
       </Tabs>
     </div>
   );
