@@ -91,7 +91,7 @@ const SocialStats = () => {
     <Card className="col-span-4 overflow-hidden">
       <CardContent className="p-0">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 md:p-6 text-white">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 md:p-6 text-white">
           <div className="flex items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-3 mb-2">
@@ -118,7 +118,7 @@ const SocialStats = () => {
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="p-3 md:p-6">
           {isLoading ? (
             <Loading />
           ) : error ? (
@@ -126,7 +126,7 @@ const SocialStats = () => {
           ) : (
             <>
               <div className="mb-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                   {data?.enabled_providers?.map((provider: any) => {
                     const providerValue = data.providers[provider.value] || 0;
                     const percentage =
