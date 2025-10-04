@@ -6,8 +6,8 @@ import { OrderChart } from '@/components/ui/orders-chart';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import useAPI from '@/hook/useAPI';
-import SocialStats from '@/components/ui/display/SocialStats';
 import SuspiciousTransactionsStats from '@/components/ui/display/suspiciousTransactionsStats';
+import SocialStats from '@/components/ui/display/SocialStats';
 
 const DashboardPage = () => {
   const [startDate, setStartDate] = useState<Date | undefined>(undefined);
