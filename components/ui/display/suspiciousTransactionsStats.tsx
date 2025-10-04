@@ -39,7 +39,7 @@ const SuspiciousTransactionsStats = () => {
     <Card className="min-h-screen overflow-hidden col-span-4">
       <CardContent className="p-0">
         {/* Header */}
-        <div className="mb-8 bg-gradient-to-r from-blue-600 to-purple-600 p-4 md:p-6 text-white">
+        <div className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 p-3 md:p-6 text-white">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-white/20 rounded-lg">
               <Shield size={24} />
@@ -58,8 +58,8 @@ const SuspiciousTransactionsStats = () => {
         ) : error ? (
           <ErrorFetching />
         ) : (
-          <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2 p-6">
+          <div className="p-3 md:p-6">
+            <div className="grid grid-cols-2 gap-6 mb-6">
               <StatCard
                 title={t('TotalCases')}
                 value={data.total_suspicious_transactions}
@@ -97,7 +97,7 @@ const SuspiciousTransactionsStats = () => {
               />
             </div>
 
-            <div className="p-6">
+            <div>
               <RiskDistributionCard
                 high={riskDistribution?.high}
                 medium={riskDistribution?.medium}
