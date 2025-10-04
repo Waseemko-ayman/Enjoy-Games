@@ -26,6 +26,7 @@ export function ChatModal({
   const { messages, isTyping, sendMessage } = useChatLogic();
   const t = useTranslations('Layout.HelpSection');
   const inputTxts = useTranslations('Inputs.placeHolders');
+  const typesLinksT = useTranslations('sidebar');
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -118,14 +119,14 @@ export function ChatModal({
 
                     const title =
                       type === 'category'
-                        ? 'Categories'
+                        ? typesLinksT('categories')
                         : type === 'sub_category'
-                        ? 'Subcategories'
+                        ? typesLinksT('subCategories')
                         : type === 'product'
-                        ? 'Products'
+                        ? typesLinksT('products')
                         : type === 'support'
-                        ? 'Support'
-                        : 'Orders';
+                        ? typesLinksT('support')
+                        : typesLinksT('orders');
 
                     return (
                       <div
@@ -138,7 +139,7 @@ export function ChatModal({
                             <Link
                               key={l.url}
                               href={l.url}
-                              className="px-2 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition"
+                              className="px-3 py-1 border border-enjoy-primary text-enjoy-primary rounded-full hover:bg-enjoy-primary hover:text-white transition"
                             >
                               {l.title_ar || l.title_en || l.url}
                             </Link>

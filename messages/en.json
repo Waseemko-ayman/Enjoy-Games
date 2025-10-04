@@ -675,7 +675,8 @@
     "notifications": "Notifications",
     "users": "Users",
     "productSubscribers": "Product Subscribers",
-    "settings": "Settings"
+    "settings": "Settings",
+    "support": "Support"
   },
   "Dashboard": {
     "desc": "Welcome to your order management orders",

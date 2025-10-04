@@ -679,7 +679,8 @@
     "notifications": "الإشعارات",
     "users": "المستخدمين",
     "productSubscribers": "المشتركين بالمنتجات",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "support": "الدعم"
   },
   "Dashboard": {
     "desc": "مرحباً بكم في إدارة طلباتكم",
