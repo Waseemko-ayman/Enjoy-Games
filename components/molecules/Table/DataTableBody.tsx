@@ -392,10 +392,17 @@ const DataTableBody = <T extends { id: string | number }>({
 
                     // === التعديل هنا ===
                     const cellValue = (row as any)[col];
+                    // const isLink =
+                    //   ['shipping_payment', 'shipping_method'].includes(
+                    //     String(col)
+                    //   ) && cellValue === 'code';
+
                     const isLink =
-                      ['shipping_payment', 'shipping_method'].includes(
+                      (['shipping_payment', 'shipping_method'].includes(
                         String(col)
-                      ) && cellValue === 'code';
+                      ) &&
+                        cellValue === 'code') ||
+                      (col === 'codes_count' && Number(cellValue) > 0);
 
                     return (
                       <td
