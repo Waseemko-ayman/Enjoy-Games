@@ -5,6 +5,7 @@ import { FiClock } from 'react-icons/fi';
 import useAPI from '@/hook/useAPI';
 import { useTranslations } from 'next-intl';
 import { FaX } from 'react-icons/fa6';
+import { useAuthContext } from '@/context/AuthContext';
 
 interface SessionInfo {
   user_id: number;
@@ -19,6 +20,9 @@ const FloatingSessionTimer = () => {
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isOpen, setIsOpen] = useState(false);
 
+  const { token, logout } = useAuthContext();
+  const hasToken = !!token;
+
   const t = useTranslations('Dashboard.settings.sissionTimeout');
   const btnT = useTranslations('BtnTexts');
 
@@ -28,20 +32,6 @@ const FloatingSessionTimer = () => {
   const { add: extendSessionAPI, isLoading } = useAPI<any, any>(
     'session-timeout/extend'
   );
-
-  // تحديث الوقت
-  useEffect(() => {
-    if (data?.expires_at) {
-      const diff = new Date(data.expires_at).getTime() - Date.now();
-      setTimeLeft(Math.max(Math.floor(diff / 1000), 0));
-
-      const interval = setInterval(() => {
-        setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [data]);
 
   const extendSession = async () => {
     try {
@@ -55,11 +45,43 @@ const FloatingSessionTimer = () => {
     }
   };
 
+  // تحديث الوقت
   useEffect(() => {
-    getSession();
-  }, [getSession]);
+    if (hasToken && data?.expires_at) {
+      const diff = new Date(data.expires_at).getTime() - Date.now();
+      setTimeLeft(Math.max(Math.floor(diff / 1000), 0));
 
-  // ألوان العداد
+      const interval = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            logout();
+            clearInterval(interval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [data, hasToken, logout]);
+
+  // Monitor session expiration from API
+  useEffect(() => {
+    if (data?.is_expired) {
+      logout();
+    }
+  }, [data, logout]);
+
+  useEffect(() => {
+    if (hasToken) {
+      getSession();
+    }
+  }, [getSession, hasToken]);
+
+  if (!hasToken) return null;
+
+  // Counter colors
   const timerColor =
     timeLeft <= 10 ? 'text-red-600 font-bold' : 'text-gray-900 font-bold';
   const minutes = Math.floor(timeLeft / 60);
