@@ -78,23 +78,25 @@ export function DashboardSidebar() {
           <nav className="grid items-start text-sm font-medium w-full">
             {sidebarLinks
               .filter((link) => {
-                // Public links visible to everyone
-                const alwaysVisible = ['enjoyGames', 'dashboard'];
+                const alwaysVisible = ['enjoyGames'];
                 if (alwaysVisible.includes(link.title)) return true;
 
-                // Links that require specific permissions
+                if (
+                  link.title === 'dashboard' &&
+                  permissions.includes('manage orders')
+                )
+                  return true;
+
                 if (link.title === 'productSubscribers') {
                   return permissions.includes('manage users');
                 }
 
-                // If he is an admin, everything will appear to him.
                 if (isAdmin) return true;
 
-                // Check the required permission
                 const requiredPermission = linkPermissionMap[link.title];
-                if (!requiredPermission) return false;
-
-                return permissions.includes(requiredPermission);
+                return requiredPermission
+                  ? permissions.includes(requiredPermission)
+                  : false;
               })
               .map((link) => (
                 <Link
