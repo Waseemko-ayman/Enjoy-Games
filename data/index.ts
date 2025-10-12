@@ -78,7 +78,7 @@ export const contactData = [
   {
     id: 2,
     label: 'helpCenter',
-    email: 'Support@chargerspeed.online',
+    email: 'support@chargerspeed.online',
     icon: IoMdHelpCircle,
   },
 ];
