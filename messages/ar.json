@@ -684,6 +684,10 @@
   },
   "Dashboard": {
     "desc": "مرحباً بكم في إدارة طلباتكم",
+    "roles": {
+      "admin": "مسؤول",
+      "user": "مستخدم"
+    },
     "overview": {
       "title": "نظرة عامة على الطلبات",
       "desc": "تحليل الطلبات خلال الفترة المحددة",
@@ -710,7 +714,9 @@
       "desc": "قم بإنشاء وإدارة الأكواد لمتجرك",
       "manageCodes": "إدارة جميع الأكواد في مكان واحد",
       "createCode": "إنشاء كود",
-      "createNewCode": "إنشاء كود جديد"
+      "createNewCode": "إنشاء كود جديد",
+      "CreateBulkImportCodes": "إنشاء أكواد بالجملة",
+      "ImportCodes": "استيراد أكواد"
     },
     "categories": {
       "title": "إنشاء قسم",
@@ -735,7 +741,12 @@
       "desc": "قم بإنشاء وإدارة المنتجات لمتجرك",
       "manageProducts": "إدارة جميع المنتجات في مكان واحد",
       "createProduct": "إنشاء منتج",
-      "createNewProduct": "إنشاء منتج جديد"
+      "createNewProduct": "إنشاء منتج جديد",
+      "InventoryStatistics": {
+        "title": "إحصائيات مخزون الأكواد",
+        "desc": "اطلع على إحصائيات الأكواد لكل منتج وتحقق من المخزون المتاح والمستخدم"
+      },
+      "codeInventoryStatistics": "إحصائيات مخزون الأكواد"
     },
     "coupons": {
       "title": "جميع الكوبونات",
@@ -971,7 +982,9 @@
     "approveSelected": "اعتماد العناصر المحددة",
     "blockSelected": "حظر العناصر المحددة",
     "extend_button": "تمديد الجلسة",
-    "extending_button": "جاري التمديد..."
+    "extending_button": "جاري التمديد...",
+    "AddCode": "إضافة كود",
+    "Remove": "حذف"
   },
   "Inputs": {
     "labels": {
@@ -979,7 +992,7 @@
       "email": "البريد الإلكتروني",
       "password": "كلمة المرور",
       "password_confirmation": "تأكيد كلمة المرور",
-      "referral_code": "كود الإحالة (إختياري)",
+      "referral_code": "كود الدعوة (إختياري)",
       "gender": "الجنس",
       "phone": "رقم الجوال",
       "birthDate": "تاريخ الميلاد",
@@ -1011,8 +1024,10 @@
       "priceBefore": "السعر القديم",
       "shippingPayment": "طريقة الدفع",
       "code": "كود",
-      "accountId": "رقم تعريفي",
-      "multiId": "رقمين تعريفيين",
+      "bulkCodes": "أكواد بالجملة",
+      "notes": "ملاحظات",
+      "accountId": "رقم ID",
+      "multiId": "رقمين IDs",
       "access": "صلاحية الدخول أو بيانات الحساب",
       "discount": "الخصم",
       "vatRate": "معدل ضريبة القيمة المضافة",
@@ -1061,7 +1076,7 @@
       "password": "كلمة المرور الخاصة بك",
       "repassword": "تأكيد كلمة المرور",
       "password_confirmation": "تأكيد كلمة المرور",
-      "referralCode": "كود الإحالة",
+      "referralCode": "كود الدعوة",
       "searchCategories": "البحث عن الفئات...",
       "searchSubCategories": "البحث عن الفئات الفرعية...",
       "searchCodes": "البحث عن الكود...",
@@ -1094,6 +1109,8 @@
       "addImage": "أضف صورة",
       "productID": "المنتج",
       "writeCode": "أكتب الكود",
+      "writeCodes": "أكتب الأكواد",
+      "writeNotes": "أكتب الملاحظات",
       "writeValue": "أدخل قيمة الكوبون",
       "selectType": "إختر النوع",
       "writeUsageLimit": "أدخل حد الاستخدام",
@@ -1139,7 +1156,7 @@
       "genderInvalid": "الرجاء اختيار الجنس",
       "passwordRequired": "كلمة المرور مطلوبة",
       "repasswordRequired": "يجب تأكيد كلمة المرور",
-      "referralCodeInvalid": "كود الإحالة غير صالح",
+      "referralCodeInvalid": "كود الدعوة غير صالح",
       "repasswordNotMatch": "كلمة المرور غير متطابقة",
       "genderRequired": "الجنس مطلوب",
       "avatarRequired": "الصورة مطلوبة",

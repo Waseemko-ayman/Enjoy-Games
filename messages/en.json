@@ -680,6 +680,10 @@
   },
   "Dashboard": {
     "desc": "Welcome to your order management orders",
+    "roles": {
+      "admin": "Administrator",
+      "user": "User"
+    },
     "overview": {
       "title": "Orders Overview",
       "desc": "Analysis of orders during the specified period",
@@ -706,7 +710,9 @@
       "desc": "Create and manage codes for your store",
       "manageCodes": "Manage all codes in one place",
       "createCode": "Create a code",
-      "createNewCode": "Create a new code"
+      "createNewCode": "Create a new code",
+      "CreateBulkImportCodes": "Create Bulk Codes",
+      "ImportCodes": "Import Codes"
     },
     "categories": {
       "title": "Create a section",
@@ -731,7 +737,12 @@
       "desc": "Create and manage products for your store",
       "manageProducts": "Manage all products in one place",
       "createProduct": "Create Product",
-      "createNewProduct": "Create New Product"
+      "createNewProduct": "Create New Product",
+      "InventoryStatistics": {
+        "title": "Code Inventory Statistics",
+        "desc": "View code statistics for each product and check available and used stock"
+      },
+      "codeInventoryStatistics": "Code Inventory Statistics"
     },
     "coupons": {
       "title": "All Coupons",
@@ -967,7 +978,9 @@
     "approveSelected": "Approve Selected",
     "blockSelected": "Block Selected",
     "extend_button": "Extend Session",
-    "extending_button": "Extending..."
+    "extending_button": "Extending...",
+    "AddCode": "Add Code",
+    "Remove": "Remove"
   },
   "Inputs": {
     "labels": {
@@ -1007,6 +1020,8 @@
       "priceBefore": "Old Price",
       "shippingPayment": "Payment Method",
       "code": "Code",
+      "bulkCodes": "Bulk Codes",
+      "notes": "Notes",
       "accountId": "Account ID",
       "multiId": "Multiple IDs",
       "access": "Access / Account Data",
@@ -1091,6 +1106,8 @@
       "addImage": "Add image",
       "productID": "Product",
       "writeCode": "Enter code",
+      "writeCodes": "Enter codes",
+      "writeNotes": "Enter notes",
       "writeValue": "Enter coupon value",
       "selectType": "Select type",
       "writeUsageLimit": "Enter usage limit",
