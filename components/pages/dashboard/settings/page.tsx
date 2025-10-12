@@ -9,12 +9,14 @@ import AccountSettings from './Sections/AccountSettings';
 import { UserInfoProvider } from '@/context/UserInfoContext';
 import SessionTimeoutSettings from './Sections/SessionTimeoutSettings';
 import { useTranslations } from 'next-intl';
+import { useToggleLocale } from '@/hook/useToggleLocale';
 
 const SettingsPage = () => {
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const t = useTranslations();
+  const { isArabic } = useToggleLocale();
 
   const handleSave = () => {
     setSaving(true);
@@ -46,7 +48,11 @@ const SettingsPage = () => {
         title={t('sidebar.settings')}
         description={t('Dashboard.settings.pageDesc')}
       />
-      <Tabs defaultValue="account" className="w-full">
+      <Tabs
+        defaultValue="account"
+        className={`w-full ${isArabic ? 'rtl' : 'ltr'}`}
+        dir={isArabic ? 'rtl' : 'ltr'}
+      >
         <TabsNavigation tabs={tabsData} />
         <GeneralSettings
           saving={saving}
