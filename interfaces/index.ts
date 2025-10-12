@@ -1456,3 +1456,16 @@ export interface SiteCardProps {
   settings: any;
   t: TranslationFunction;
 }
+
+export interface ProductInventoryStats {
+  product_id: number;
+  product_title: {
+    en: string;
+    ar: string;
+  };
+  total_codes: number;
+  available_codes: number;
+  used_codes: number;
+  is_in_stock: boolean;
+  stock_percentage: number;
+}
