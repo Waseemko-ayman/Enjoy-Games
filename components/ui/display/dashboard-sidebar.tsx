@@ -18,28 +18,44 @@ import InlineError from '@/components/molecules/InlineError';
 import Avatar from '@/components/atomic/Avatar';
 import { useUserInfo } from '@/context/UserInfoContext';
 import { API_IMAGE_URL } from '@/config/api';
+import { useAuthContext } from '@/context/AuthContext';
 
 export function DashboardSidebar() {
   const [isOpen, setIsOpen] = useState(false);
-
-  // Translations
   const t = useTranslations();
-
-  // Pathname
   const rawPathname = usePathname();
   const pathname = rawPathname.replace(/^\/(en|ar)(?=\/|$)/, '') || '/';
-
-  // Hooks
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(991);
   const { isArabic } = useToggleLocale();
-
-  // Get User Information
   const { user, isLoading, error } = useUserInfo();
+  const { user: userInfo } = useAuthContext();
 
-  // Close the mobile menu when navigating
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
+
+  const permissions = userInfo?.permissions || [];
+
+  // Permissions required for each link
+  const linkPermissionMap: Record<string, string> = {
+    categories: 'manage categories',
+    subCategories: 'manage subcategories',
+    products: 'manage products',
+    coupons: 'manage coupons',
+    codes: 'manage codes',
+    sliders: 'manage sliders',
+    ratings: 'manage ratings',
+    orders: 'manage orders',
+    users: 'manage users',
+    settings: 'manage settings',
+    tickets: 'reply tickets',
+  };
+
+  // Full permissions = user admin
+  const allPermissions = Object.values(linkPermissionMap);
+  const isAdmin =
+    permissions.length &&
+    allPermissions.every((perm) => permissions.includes(perm));
 
   const SidebarContent = () => (
     <>
@@ -56,27 +72,48 @@ export function DashboardSidebar() {
           />
         </Link>
       </div>
+
       <div className="flex-1 overflow-auto p-2">
         <div className="flex flex-col items-start gap-4">
           <nav className="grid items-start text-sm font-medium w-full">
-            {sidebarLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  'flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-black hover:bg-muted',
-                  pathname === link.href && 'bg-muted text-black'
-                )}
-              >
-                <link.icon className="h-4 w-4" />
-                {t(`sidebar.${link.title}`)}
-              </Link>
-            ))}
+            {sidebarLinks
+              .filter((link) => {
+                // Public links visible to everyone
+                const alwaysVisible = ['enjoyGames', 'dashboard'];
+                if (alwaysVisible.includes(link.title)) return true;
+
+                // Links that require specific permissions
+                if (link.title === 'productSubscribers') {
+                  return permissions.includes('manage users');
+                }
+
+                // If he is an admin, everything will appear to him.
+                if (isAdmin) return true;
+
+                // Check the required permission
+                const requiredPermission = linkPermissionMap[link.title];
+                if (!requiredPermission) return false;
+
+                return permissions.includes(requiredPermission);
+              })
+              .map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    'flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-black hover:bg-muted',
+                    pathname === link.href && 'bg-muted text-black'
+                  )}
+                >
+                  <link.icon className="h-4 w-4" />
+                  {t(`sidebar.${link.title}`)}
+                </Link>
+              ))}
           </nav>
         </div>
       </div>
 
-      <div className="mt-auto border-t border-t-gray-300 p-4">
+      <div className="mt-auto border-t border-t-gray-300 p-3">
         <div className="flex items-center gap-2 rounded-lg border border-gray-300 p-4">
           {isLoading ? (
             <ButtonLoading borderColor="text-black" />
@@ -93,8 +130,16 @@ export function DashboardSidebar() {
             />
           )}
           <div>
-            <p className="text-sm font-medium">{user?.name}</p>
-            {/* <p className="text-xs text-muted-foreground">{user?.role}</p> */}
+            <p className="text-sm font-medium">
+              {isLoading ? t('Loading.loadingMessage') : user?.name}
+            </p>
+            <p className="text-xs">
+              {isLoading
+                ? t('Loading.loadingMessage')
+                : userInfo?.is_admin
+                ? t('Dashboard.roles.admin')
+                : t('Dashboard.roles.user')}
+            </p>
           </div>
         </div>
       </div>
@@ -103,12 +148,11 @@ export function DashboardSidebar() {
 
   return (
     <>
-      {/* Mobile Menu Button */}
       {isMobile && (
         <div className={`fixed ${isArabic ? 'left-4' : 'right-4'} top-4 z-40`}>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="md:hidden">
+              <Button variant="outline" size="icon">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
@@ -120,9 +164,8 @@ export function DashboardSidebar() {
         </div>
       )}
 
-      {/* Desktop Sidebar */}
       {!isMobile && (
-        <div className="hidden md:flex h-screen w-64 flex-col justify-between border border-gray-300 bg-white rounded-br-lg">
+        <div className="hidden lg:flex h-screen w-64 flex-col justify-between border border-gray-300 bg-white rounded-br-lg">
           <SidebarContent />
         </div>
       )}

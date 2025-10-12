@@ -72,8 +72,11 @@ const UserPopup = () => {
               className="border-b border-b-gray-200 py-2 last:border-0"
             >
               {section.items
-                ?.filter((item) => {
-                  if (item.title === 'لوحة التحكم' && !user?.is_admin) {
+                .filter((item) => {
+                  if (
+                    item.title === 'لوحة التحكم' &&
+                    (!user?.permissions || user?.permissions?.length === 0)
+                  ) {
                     return false;
                   }
                   return true;

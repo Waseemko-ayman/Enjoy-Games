@@ -16,7 +16,7 @@ const MenuLists = () => {
   const t = useTranslations('Layout.header.navBarPopup');
   const langTexts = useTranslations('Languages');
   const titleTxts = useTranslations('PagesHeaderTitles');
-  const { token } = useAuthContext();
+  const { user, token } = useAuthContext();
 
   return (
     <div className="mt-4">
@@ -25,6 +25,13 @@ const MenuLists = () => {
           if (link.key === 'dashboard' && !token) {
             return false;
           }
+          if (
+            link.key === 'dashboard' &&
+            (!user?.permissions || user?.permissions?.length === 0)
+          ) {
+            return false;
+          }
+
           return true;
         });
 
