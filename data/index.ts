@@ -810,3 +810,9 @@ export const signupInputs = [
     placeholder: 'referralCode',
   },
 ];
+
+export const UsersTypes = [
+  { id: 1, labelKey: 'all' },
+  { id: 2, labelKey: 'employees' },
+  { id: 3, labelKey: 'customers' },
+];

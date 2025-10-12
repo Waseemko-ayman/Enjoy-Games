@@ -686,7 +686,10 @@
     "desc": "مرحباً بكم في إدارة طلباتكم",
     "roles": {
       "admin": "مسؤول",
-      "user": "مستخدم"
+      "user": "مستخدم",
+      "all":"الكل",
+      "employees": "موظفين",
+      "customers": "عملاء"
     },
     "overview": {
       "title": "نظرة عامة على الطلبات",
@@ -1050,7 +1053,7 @@
       "subject": "العنوان",
       "message": "الوصف",
       "attachments": "المرفقات",
-      "permissions": "الأذونات",
+      "permissions": "الصلاحيات",
       "status": "الحالة"
     },
     "placeHolders": {
@@ -1128,8 +1131,8 @@
       "selectAttachments": "إختر ملفات",
       "typeYourReply": "أكتب ردك هنا...",
       "searchUser": "البحث عن مستحدم...",
-      "selectPermissions": "حدد الأذونات",
-      "permissions": "إختار الأذونات",
+      "selectPermissions": "حدد الصلاحيات",
+      "permissions": "إختار الصلاحيات",
       "status": "إختار الحالة"
     },
     "options": {
@@ -1197,7 +1200,7 @@
       "arabicImageRequired": "الصورة بالعربية مطلوبة",
       "englishImageRequired": "الصورة بالإنجليزية مطلوبة",
       "fileRequired": "الملف مطلوب",
-      "permissionsRequired": "الأذونات مطلوبة",
+      "permissionsRequired": "الصلاحيات مطلوبة",
       "statusRequired": "الحالة مطلوبة",
       "messageRequired": "الرسالة مطلوبة",
       "termsAccepted": "يجب الموافقة على الشروط وسياسة الخصوصية",

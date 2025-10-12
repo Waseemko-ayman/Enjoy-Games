@@ -682,7 +682,10 @@
     "desc": "Welcome to your order management orders",
     "roles": {
       "admin": "Administrator",
-      "user": "User"
+      "user": "User",
+      "all": "All",
+      "employees": "Employees",
+      "customers": "Customers"
     },
     "overview": {
       "title": "Orders Overview",
