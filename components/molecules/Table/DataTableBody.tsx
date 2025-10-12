@@ -391,7 +391,14 @@ const DataTableBody = <T extends { id: string | number }>({
                     }
 
                     // === التعديل هنا ===
-                    const cellValue = (row as any)[col];
+                    const rawValue = (row as any)[col];
+                    const cellValue =
+                      rawValue === null ||
+                      rawValue === undefined ||
+                      rawValue === ''
+                        ? t('unavailable')
+                        : rawValue;
+
                     // const isLink =
                     //   ['shipping_payment', 'shipping_method'].includes(
                     //     String(col)
@@ -402,7 +409,12 @@ const DataTableBody = <T extends { id: string | number }>({
                         String(col)
                       ) &&
                         cellValue === 'code') ||
-                      (col === 'codes_count' && Number(cellValue) > 0);
+                      ([
+                        'codes_count',
+                        'total_codes',
+                        'available_codes',
+                      ].includes(String(col)) &&
+                        Number(cellValue) > 0);
 
                     return (
                       <td
@@ -411,9 +423,16 @@ const DataTableBody = <T extends { id: string | number }>({
                       >
                         {isLink ? (
                           <Link
+                            // href={{
+                            //   pathname: PATHS.CODES,
+                            //   query: { fromProduct: row.id },
+                            // }}
                             href={{
                               pathname: PATHS.CODES,
-                              query: { fromProduct: row.id },
+                              query:
+                                col === 'available_codes'
+                                  ? { availableForProduct: row.id }
+                                  : { fromProduct: row.id },
                             }}
                             onClick={() => setSelectedProductId(Number(row.id))}
                             className="text-blue-600 underline"
