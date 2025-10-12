@@ -15,7 +15,6 @@ import { signupFormData } from '@/interfaces';
 import FormError from '@/components/atomic/FormError';
 import { InputTypes } from '@/utils/type';
 import { useAuthContext } from '@/context/AuthContext';
-import SocialLogin from '@/components/molecules/SocialLogin';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 import { generateUniqueId } from '@/hook/useAuth';
 import { useReferralCode } from '@/hook/ReferralCodeContext';
@@ -137,7 +136,7 @@ const SignupPage = () => {
         );
       })}
 
-      <SocialLogin btnTxts={btnTxts} authTxts={authTxts} />
+      {/* <SocialLogin btnTxts={btnTxts} authTxts={authTxts} /> */}
 
       <p className="text-xs text-[var(--enjoy-gray-650)] font-normal text-center mt-4">
         {authTxts('registerationReq')}{' '}
