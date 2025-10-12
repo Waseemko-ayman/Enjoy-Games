@@ -21,14 +21,23 @@ import { ReferralCodeProvider } from '@/hook/ReferralCodeContext';
 import { API_URL } from '@/config/api';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetch(`${API_URL}/get/seo`, { next: { revalidate: 0 } });
-  const data = await res.json();
-
-  return {
-    title: data?.title || 'Enjoy Games',
-    description: data?.description || 'Enjoy Games',
-    keywords: data?.keywords || 'enjoy games,website,codes,digital products',
-  };
+  try {
+    const res = await fetch(`${API_URL}/get/seo`, { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to fetch SEO data');
+    const data = await res.json();
+    return {
+      title: data?.title || 'Enjoy Games',
+      description: data?.description || 'Enjoy Games',
+      keywords: data?.keywords || 'enjoy games,website,codes,digital products',
+    };
+  } catch (error) {
+    console.error('Metadata fetch error:', error);
+    return {
+      title: 'Enjoy Games',
+      description: 'Enjoy Games',
+      keywords: 'enjoy games,website,codes,digital products',
+    };
+  }
 }
 
 const ibmArabic = IBM_Plex_Sans_Arabic({
