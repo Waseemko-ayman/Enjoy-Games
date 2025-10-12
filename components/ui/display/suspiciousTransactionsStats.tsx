@@ -53,59 +53,60 @@ const SuspiciousTransactionsStats = () => {
           </p>
         </div>
 
-        {isLoading ? (
-          <Loading />
-        ) : error ? (
-          <ErrorFetching />
-        ) : (
-          <div className="p-3 md:p-6">
-            <div className="grid grid-cols-2 gap-6 mb-6">
-              <StatCard
-                title={t('TotalCases')}
-                value={data.total_suspicious_transactions}
-                icon={<AlertTriangle className="w-6 h-6" />}
-                trend={0}
-                color="blue"
-              />
-              <StatCard
-                title={t('AcceptedTransactions')}
-                value={data.approved}
-                icon={<CheckCircle className="w-6 h-6" />}
-                trend={0}
-                color="green"
-              />
-              <StatCard
-                title={t('BlockedTransactions')}
-                value={data.blocked}
-                icon={<XCircle className="w-6 h-6" />}
-                trend={0}
-                color="red"
-              />
-              <StatCard
-                title={t('BlockRate')}
-                value={(data?.block_rate || 0).toFixed(1)}
-                icon={<Shield className="w-6 h-6" />}
-                color="amber"
-                suffix="%"
-              />
-              <StatCard
-                title={t('CountryMismatches')}
-                value={data.country_mismatches}
-                icon={<Globe className="w-6 h-6" />}
-                trend={0}
-                color="purple"
-              />
-            </div>
+        <div className="p-3 md:p-6">
+          {isLoading ? (
+            <Loading />
+          ) : error ? (
+            <ErrorFetching />
+          ) : (
+            <>
+              <div className="grid grid-cols-2 gap-6 mb-6">
+                <StatCard
+                  title={t('TotalCases')}
+                  value={data.total_suspicious_transactions}
+                  icon={<AlertTriangle className="w-6 h-6" />}
+                  trend={0}
+                  color="blue"
+                />
+                <StatCard
+                  title={t('AcceptedTransactions')}
+                  value={data.approved}
+                  icon={<CheckCircle className="w-6 h-6" />}
+                  trend={0}
+                  color="green"
+                />
+                <StatCard
+                  title={t('BlockedTransactions')}
+                  value={data.blocked}
+                  icon={<XCircle className="w-6 h-6" />}
+                  trend={0}
+                  color="red"
+                />
+                <StatCard
+                  title={t('BlockRate')}
+                  value={(data?.block_rate || 0).toFixed(1)}
+                  icon={<Shield className="w-6 h-6" />}
+                  color="amber"
+                  suffix="%"
+                />
+                <StatCard
+                  title={t('CountryMismatches')}
+                  value={data.country_mismatches}
+                  icon={<Globe className="w-6 h-6" />}
+                  trend={0}
+                  color="purple"
+                />
+              </div>
 
-            <div>
-              <RiskDistributionCard
-                high={riskDistribution?.high}
-                medium={riskDistribution?.medium}
-                low={riskDistribution?.low}
-                average={riskDistribution?.average}
-              />
+              <div>
+                <RiskDistributionCard
+                  high={riskDistribution?.high}
+                  medium={riskDistribution?.medium}
+                  low={riskDistribution?.low}
+                  average={riskDistribution?.average}
+                />
 
-              {/* <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                {/* <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-6">
                 {t('KeyMetrics')}
               </h3>
@@ -130,9 +131,10 @@ const SuspiciousTransactionsStats = () => {
                 />
               </div>
             </div> */}
-            </div>
-          </div>
-        )}
+              </div>
+            </>
+          )}
+        </div>
       </CardContent>
     </Card>
   );
