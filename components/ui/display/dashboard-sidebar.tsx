@@ -19,6 +19,7 @@ import Avatar from '@/components/atomic/Avatar';
 import { useUserInfo } from '@/context/UserInfoContext';
 import { API_IMAGE_URL } from '@/config/api';
 import { useAuthContext } from '@/context/AuthContext';
+import { linkPermissionMap } from '@/utils/linkPermissionMap';
 
 export function DashboardSidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,21 +36,6 @@ export function DashboardSidebar() {
   }, [pathname]);
 
   const permissions = userInfo?.permissions || [];
-
-  // Permissions required for each link
-  const linkPermissionMap: Record<string, string> = {
-    categories: 'manage categories',
-    subCategories: 'manage subcategories',
-    products: 'manage products',
-    coupons: 'manage coupons',
-    codes: 'manage codes',
-    sliders: 'manage sliders',
-    ratings: 'manage ratings',
-    orders: 'manage orders',
-    users: 'manage users',
-    settings: 'manage settings',
-    tickets: 'reply tickets',
-  };
 
   // Full permissions = user admin
   const allPermissions = Object.values(linkPermissionMap);
