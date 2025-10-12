@@ -100,7 +100,26 @@ export function ChatModal({
                   </span>
                 </div>
               )}
-              <p className="text-sm">{message.text}</p>
+              <p className="text-sm whitespace-pre-wrap">
+                {message.text
+                  .replace(/\((https?:\/\/[^\s)]+)\)/g, '$1')
+                  .split(/(https?:\/\/[^\s]+)/g)
+                  .map((part, i) =>
+                    part.match(/^https?:\/\/[^\s]+$/) ? (
+                      <Link
+                        key={i}
+                        href={part}
+                        target="_blank"
+                        className="inline-block max-w-[140px] truncate text-xs px-2 py-1 border border-enjoy-primary text-enjoy-primary rounded-full hover:bg-enjoy-primary hover:text-white transition mx-1"
+                        title={part}
+                      >
+                        {part}
+                      </Link>
+                    ) : (
+                      part
+                    )
+                  )}
+              </p>
 
               {/* روابط مصنفة حسب النوع */}
               {message.links && (
@@ -139,7 +158,8 @@ export function ChatModal({
                             <Link
                               key={l.url}
                               href={l.url}
-                              className="px-3 py-1 border border-enjoy-primary text-enjoy-primary rounded-full hover:bg-enjoy-primary hover:text-white transition"
+                              className="max-w-full truncate text-sm px-2 py-1 border border-enjoy-primary text-enjoy-primary rounded-full hover:bg-enjoy-primary hover:text-white transition"
+                              title={l.title_ar || l.title_en || l.url}
                             >
                               {l.title_ar || l.title_en || l.url}
                             </Link>
