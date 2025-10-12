@@ -50,6 +50,7 @@ interface FormFieldProps {
   editId?: string | number | null;
   readOnly?: boolean;
   checked?: boolean;
+  otherClassName?: string;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -72,6 +73,7 @@ const FormField: React.FC<FormFieldProps> = ({
   readOnly,
   checked,
   handleChange,
+  otherClassName,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
@@ -94,7 +96,7 @@ const FormField: React.FC<FormFieldProps> = ({
       : [];
 
   return (
-    <div className="space-y-2">
+    <div className={`space-y-2 ${otherClassName}`}>
       {label && <label htmlFor={id}>{label}</label>}
 
       {type === 'editor' && control ? (
