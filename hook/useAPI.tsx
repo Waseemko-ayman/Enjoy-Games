@@ -82,14 +82,27 @@ const reduce = <T,>(state: State<T>, action: Action<T>): State<T> => {
   }
 };
 
+// const useAPI = <
+//   RequestBody = unknown,
+//   ResponseData extends Record<string, unknown> = Record<string, unknown>
+// >(
+//   url: string,
+//   config?: AxiosRequestConfig
+// ) => {
+type UrlType<RequestParam = any> = string | ((param: RequestParam) => string);
+
 const useAPI = <
   RequestBody = unknown,
-  ResponseData extends Record<string, unknown> = Record<string, unknown>
+  ResponseData extends Record<string, unknown> = Record<string, unknown>,
+  RequestParam = any
 >(
-  url: string,
+  url: UrlType<RequestParam>,
   config?: AxiosRequestConfig
 ) => {
   const [state, dispatch] = useReducer(reduce<ResponseData>, initialState);
+
+    const getUrl = (param?: RequestParam) =>
+      typeof url === 'function' ? url(param!) : url;
 
   const get = useCallback(
     async (path?: string, getConfig?: AxiosRequestConfig) => {
@@ -128,17 +141,38 @@ const useAPI = <
     }
   };
 
-  const add = async (body: RequestBody, postConfig?: AxiosRequestConfig) => {
+  // const add = async (body: RequestBody, postConfig?: AxiosRequestConfig) => {
+  //   try {
+  //     dispatch({ type: API_ACTIONS.SET_LOADING });
+  //     const res = await axiosInstance.post<{
+  //       success: boolean;
+  //       message: string;
+  //       data: ResponseData;
+  //     }>(`/${url}`, body, {
+  //       ...config,
+  //       ...postConfig,
+  //     });
+  //     dispatch({ type: API_ACTIONS.POST, payload: res?.data?.data });
+  //     return res.data;
+  //   } catch (error) {
+  //     dispatch({ type: API_ACTIONS.ERROR, payload: error });
+  //     throw error;
+  //   }
+  // };
+
+  const add = async (
+    body: RequestBody,
+    param?: RequestParam,
+    postConfig?: AxiosRequestConfig
+  ) => {
     try {
       dispatch({ type: API_ACTIONS.SET_LOADING });
+      const urlToUse = getUrl(param);
       const res = await axiosInstance.post<{
         success: boolean;
         message: string;
         data: ResponseData;
-      }>(`/${url}`, body, {
-        ...config,
-        ...postConfig,
-      });
+      }>(`/${urlToUse}`, body, { ...config, ...postConfig });
       dispatch({ type: API_ACTIONS.POST, payload: res?.data?.data });
       return res.data;
     } catch (error) {
