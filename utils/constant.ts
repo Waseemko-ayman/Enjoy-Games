@@ -392,6 +392,23 @@ export const CreateCodesFields = [
   },
 ];
 
+export const BulkImportCodes = [
+  {
+    id: 'product_id',
+    name: 'productID',
+    label: 'productID',
+    placeholder: 'productID',
+    type: 'select',
+  },
+  {
+    id: 'codes',
+    name: 'codes',
+    label: 'codes',
+    placeholder: 'writeCodes',
+    type: 'dynamic',
+  },
+];
+
 export const CreateCouponsFields = [
   {
     id: 'code',
