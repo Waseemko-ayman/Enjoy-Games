@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -37,12 +37,12 @@ const UserPermissionsDrawer: React.FC<UserPermissionsDrawerProps> = ({
   const { showToast } = useToast();
   const isMobile = useIsMobile();
 
+  const { get, data: user } = useAPI(`users`);
+  const { add, isLoading } = useAPI(`users/update/${userId}/permissions`);
+
   const schema = yup.object().shape({
-    permissions: yup
-      .array()
-      .of(yup.string().required())
-      .min(1, t('Inputs.errorsMsgs.permissionsRequired'))
-      .defined(), // ← يضمن إنها مش undefined
+    permissions: yup.array().of(yup.string().required()).defined(), // ← يضمن إنها مش undefined
+    // .min(1, t('Inputs.errorsMsgs.permissionsRequired'))
   });
 
   const {
@@ -51,20 +51,25 @@ const UserPermissionsDrawer: React.FC<UserPermissionsDrawerProps> = ({
     formState: { errors },
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
-    defaultValues: { permissions: [] },
+    defaultValues: { permissions: user?.permissions || [] },
   });
-
-  const { add, isLoading } = useAPI(`users/update/${userId}/permissions`);
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      const response = await add(data);
+      const payload = data?.permissions?.includes('')
+        ? { permissions: [] }
+        : data;
+      const response = await add(payload);
       showToast(response.message);
       setOpen(false);
     } catch (err: any) {
       showToast(err?.response?.message || 'حدث خطأ', 'error');
     }
   };
+
+  useEffect(() => {
+    get();
+  }, [get]);
 
   return (
     <ResponsiveDialogDrawer
