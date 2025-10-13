@@ -114,22 +114,6 @@ const DataTableBody = <T extends { id: string | number }>({
     []
   );
 
-  // const visibleColumns = filteredColumns.reduce<(keyof T | string)[]>(
-  //   (acc, col) => {
-  //     if (col === 'updated_at' || col === 'user_id') return acc;
-
-  //     if (
-  //       col === 'image' &&
-  //       data.some((item) => item[col] && typeof item[col] === 'object')
-  //     ) {
-  //       return [...acc, 'image_ar', 'image_en'];
-  //     }
-
-  //     return [...acc, col];
-  //   },
-  //   []
-  // );
-
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-center">
@@ -246,28 +230,6 @@ const DataTableBody = <T extends { id: string | number }>({
                       );
                     }
 
-                    // if (
-                    //   columnKey === 'items' &&
-                    //   Array.isArray((row as any)[col])
-                    // ) {
-                    //   return (
-                    //     <td
-                    //       key={columnKey}
-                    //       className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden"
-                    //     >
-                    //       <Link
-                    //         href={PATHS.ORDERS.ITEM.replace(
-                    //           ':id',
-                    //           String(row.id)
-                    //         )}
-                    //         className="text-blue-600"
-                    //       >
-                    //         {(row as any)[col].length} Items
-                    //       </Link>
-                    //     </td>
-                    //   );
-                    // }
-
                     if (columnKey === 'image_ar' || columnKey === 'image_en') {
                       const lang = columnKey.split('_')[1] as 'ar' | 'en';
                       const imageUrl = (row as any).image?.[lang] || '';
@@ -361,7 +323,7 @@ const DataTableBody = <T extends { id: string | number }>({
                     }
 
                     if (
-                      columnKey === 'image' &&
+                      (columnKey === 'image' || columnKey === 'photo') &&
                       typeof (row as any)[col] === 'string'
                     ) {
                       return (
