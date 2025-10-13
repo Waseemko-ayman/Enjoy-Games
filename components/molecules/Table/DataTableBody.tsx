@@ -173,6 +173,7 @@ const DataTableBody = <T extends { id: string | number }>({
                           <td
                             key={columnKey}
                             className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden"
+                            title={value || t('unavailable')}
                           >
                             {value ? (
                               <div className="flex justify-center">
@@ -198,7 +199,11 @@ const DataTableBody = <T extends { id: string | number }>({
 
                       // Otherwise → We display the text
                       return (
-                        <td key={columnKey} className="px-6 py-4 truncate">
+                        <td
+                          key={columnKey}
+                          className="px-6 py-4 truncate"
+                          title={value || t('unavailable')}
+                        >
                           {value ?? t('unavailable')}
                         </td>
                       );
@@ -382,6 +387,7 @@ const DataTableBody = <T extends { id: string | number }>({
                       <td
                         key={columnKey}
                         className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden"
+                        title={String(cellValue)}
                       >
                         {isLink ? (
                           <Link
