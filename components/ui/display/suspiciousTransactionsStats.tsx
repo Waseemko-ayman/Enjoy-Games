@@ -1,19 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import {
-  Shield,
-  AlertTriangle,
-  CheckCircle,
-  XCircle,
-  Globe,
-} from 'lucide-react';
+import { Shield } from 'lucide-react';
 import { Card, CardContent } from '../card';
-import StatCard from './StatCard';
+import StateCard from './StateCard';
 import RiskDistributionCard from './RiskDistributionCard';
 import { useTranslations } from 'next-intl';
 import useAPI from '@/hook/useAPI';
 import Loading from '@/components/molecules/loading';
 import ErrorFetching from '@/components/molecules/ErrorFetching';
+import { getStatCardData } from '@/data/StateCardData';
 
 const SuspiciousTransactionsStats = () => {
   const t = useTranslations('Dashboard.SuspiciousTransactionsStats');
@@ -35,6 +30,8 @@ const SuspiciousTransactionsStats = () => {
     average: data.average_risk_score,
   };
 
+  const StateCardData = getStatCardData(t, data);
+
   return (
     <Card className="min-h-screen overflow-hidden col-span-4">
       <CardContent className="p-0">
@@ -44,11 +41,11 @@ const SuspiciousTransactionsStats = () => {
             <div className="p-2 bg-white/20 rounded-lg">
               <Shield size={24} />
             </div>
-            <h1 className="text-base md:text-lg lg:text-xl font-bold">
+            <h1 className="text-xl md:text-2xl font-bold">
               {t('SecurityDashboard')}
             </h1>
           </div>
-          <p className="text-blue-100 text-xs md:text-sm">
+          <p className="text-blue-100 text-sm md:text-base">
             {t('MonitorStats')}
           </p>
         </div>
@@ -61,41 +58,23 @@ const SuspiciousTransactionsStats = () => {
           ) : (
             <>
               <div className="grid grid-cols-2 gap-6 mb-6">
-                <StatCard
-                  title={t('TotalCases')}
-                  value={data.total_suspicious_transactions}
-                  icon={<AlertTriangle className="w-6 h-6" />}
-                  trend={0}
-                  color="blue"
-                />
-                <StatCard
-                  title={t('AcceptedTransactions')}
-                  value={data.approved}
-                  icon={<CheckCircle className="w-6 h-6" />}
-                  trend={0}
-                  color="green"
-                />
-                <StatCard
-                  title={t('BlockedTransactions')}
-                  value={data.blocked}
-                  icon={<XCircle className="w-6 h-6" />}
-                  trend={0}
-                  color="red"
-                />
-                <StatCard
-                  title={t('BlockRate')}
-                  value={(data?.block_rate || 0).toFixed(1)}
-                  icon={<Shield className="w-6 h-6" />}
-                  color="amber"
-                  suffix="%"
-                />
-                <StatCard
-                  title={t('CountryMismatches')}
-                  value={data.country_mismatches}
-                  icon={<Globe className="w-6 h-6" />}
-                  trend={0}
-                  color="purple"
-                />
+                {StateCardData.map((item, index) => {
+                  const isLastOdd =
+                    StateCardData.length % 2 !== 0 &&
+                    index === StateCardData.length - 1;
+
+                  return (
+                    <StateCard
+                      key={index}
+                      title={item.title}
+                      value={item.value}
+                      icon={item.icon}
+                      color={item.color}
+                      suffix={item.suffix}
+                      otherClassName={isLastOdd ? 'col-span-2' : ''}
+                    />
+                  );
+                })}
               </div>
 
               <div>
