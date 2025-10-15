@@ -29,6 +29,7 @@ const ProductsPage = () => {
       allComponent={AllProducts}
       createComponent={CreateProducts}
       overviewComponent={CodeInventoryStats}
+      overviewTabValue="codeInventoryStatistics"
     />
   );
 };
