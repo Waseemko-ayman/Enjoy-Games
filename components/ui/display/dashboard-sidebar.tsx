@@ -140,7 +140,7 @@ export function DashboardSidebar() {
         <div className={`fixed ${isArabic ? 'left-4' : 'right-4'} top-4 z-40`}>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon">
+              <Button variant="outline" size="icon" className='shadow-xl'>
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
