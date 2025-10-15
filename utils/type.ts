@@ -33,6 +33,8 @@ export type InputTypes =
   | 'textarea'
   | 'checkbox';
 
+export type StateCardColors = 'blue' | 'green' | 'red' | 'amber' | 'purple';
+
 export type Option = { id: string | number | null; name: string };
 export type ProductOption = { id: string; name: string };
 export type ValueOption = { value: string | number; label: string };
