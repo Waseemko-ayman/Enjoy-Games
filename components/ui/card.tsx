@@ -56,7 +56,7 @@ const CardDescription = React.forwardRef<
       ref={ref}
       className={cn(
         'text-muted-foreground',
-        isArabic ? 'text-base' : 'text-sm',
+        isArabic ? 'text-sm md:text-base' : 'text-sm',
         className
       )}
       {...props}
