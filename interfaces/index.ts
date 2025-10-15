@@ -8,6 +8,7 @@ import {
   CommonCardVariant,
   footerListsName,
   NavbarLayout,
+  StateCardColors,
 } from '@/utils/type';
 import { Variants } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
@@ -1468,4 +1469,14 @@ export interface ProductInventoryStats {
   used_codes: number;
   is_in_stock: boolean;
   stock_percentage: number;
+}
+
+export interface StateCardItem {
+  title: string;
+  value: number | string;
+  icon: React.ReactNode;
+  trend?: number;
+  color: StateCardColors;
+  suffix?: string;
+  otherClassName?: string;
 }
