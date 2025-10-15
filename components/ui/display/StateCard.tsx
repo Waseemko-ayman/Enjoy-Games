@@ -1,22 +1,13 @@
 import React from 'react';
-import { TrendingUp } from 'lucide-react';
+import { StateCardItem } from '@/interfaces';
 
-type Props = {
-  title: string;
-  value: number | string;
-  icon: React.ReactNode;
-  trend?: number;
-  color: 'blue' | 'green' | 'red' | 'amber' | 'purple';
-  suffix?: string;
-};
-
-const StatCard: React.FC<Props> = ({
+const StateCard: React.FC<StateCardItem> = ({
   title,
   value,
   icon,
-  trend,
   color,
   suffix = '',
+  otherClassName,
 }) => {
   const colorClasses = {
     blue: 'bg-blue-50 border-blue-200 text-blue-600',
@@ -27,10 +18,12 @@ const StatCard: React.FC<Props> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-6 hover:shadow-md transition-shadow duration-200">
-      <div className="flex items-center justify-between mb-4">
+    <div
+      className={`bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-5 hover:shadow-md transition-shadow duration-200 ${otherClassName}`}
+    >
+      <div className="flex items-center max-[425px]:justify-center mb-3">
         <div className={`p-3 rounded-lg ${colorClasses[color]}`}>{icon}</div>
-        {trend !== undefined && (
+        {/* {trend !== undefined && (
           <div
             className={`flex items-center text-sm font-medium gap-1 ${
               trend >= 0 ? 'text-green-600' : 'text-red-600'
@@ -41,9 +34,11 @@ const StatCard: React.FC<Props> = ({
             />
             {Math.abs(trend)}%
           </div>
-        )}
+        )} */}
       </div>
-      <div className="space-y-1">
+      <div
+        className={`space-y-1 flex items-center max-[425px]:justify-center gap-2 max-[425px]:flex-col`}
+      >
         <p className="text-2xl font-bold text-gray-900">
           {typeof value === 'number' ? value.toLocaleString() : value}
           {suffix}
@@ -54,12 +49,12 @@ const StatCard: React.FC<Props> = ({
   );
 };
 
-export default StatCard;
+export default StateCard;
 
 // import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 // // import { ArrowDown, ArrowUp } from 'lucide-react';
 
-// interface StatCardProps {
+// interface StateCardProps {
 //   title: string;
 //   amount: string;
 //   // percentage: string;
@@ -68,14 +63,14 @@ export default StatCard;
 //   // comparison: string;
 // }
 
-// const StatCard = ({
+// const StateCard = ({
 //   title,
 //   amount,
 //   // percentage,
 //   icon: Icon,
 //   // trend,
 //   // comparison,
-// }: StatCardProps) => {
+// }: StateCardProps) => {
 //   return (
 //     <Card>
 //       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -107,4 +102,4 @@ export default StatCard;
 //   );
 // };
 
-// export default StatCard;
+// export default StateCard;
