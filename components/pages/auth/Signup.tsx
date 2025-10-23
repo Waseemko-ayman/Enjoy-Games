@@ -19,10 +19,13 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 import { generateUniqueId } from '@/hook/useAuth';
 import { useReferralCode } from '@/hook/ReferralCodeContext';
 import { useSearchParams } from 'next/navigation';
+import { alphanumericWithArabicRegex, emailRegex } from '@/utils/regex';
+import Loading from '@/components/molecules/loading';
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPageLoading, setShowPageLoading] = useState(false);
 
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
@@ -36,8 +39,6 @@ const SignupPage = () => {
   const { signup, isLoading } = useAuthContext();
   const { setReferralCode } = useReferralCode();
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{5,}$/;
   const referralRegex = /^[A-Za-z0-9]*$/;
 
   const schema = Yup.object().shape({
@@ -71,6 +72,7 @@ const SignupPage = () => {
   });
   const onSubmit = (data: signupFormData) => {
     signup(data);
+    setShowPageLoading(true);
     const referralCode = generateUniqueId();
     setReferralCode(referralCode);
     reset();
@@ -94,6 +96,9 @@ const SignupPage = () => {
 
   const getInputType = (name: string, defaultType: string) =>
     isPasswordField(name) && getShowState(name) ? 'text' : defaultType;
+
+  if (showPageLoading)
+    return <Loading otherClassName="mt-0 min-h-[calc(100vh-200px)]" />;
 
   return (
     <AuthLayout

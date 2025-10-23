@@ -19,9 +19,11 @@ import { useRouter } from 'next/navigation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 import useAPI from '@/hook/useAPI';
 import { useToast } from '@/lib/toast';
+import Loading from '@/components/molecules/loading';
 
 const LoginPage = () => {
   const [showPass, setShowPass] = useState(false);
+  const [showPageLoading, setShowPageLoading] = useState(false);
 
   // Translations
   const inputsTxts = useTranslations('Inputs');
@@ -63,6 +65,7 @@ const LoginPage = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     await login(data);
+    setShowPageLoading(true);
     try {
       const res = await setSessionAPI({});
       showToast(res?.data?.message || t('SessionSuccessfully'));
@@ -81,6 +84,9 @@ const LoginPage = () => {
       router.replace(PATHS.OTP);
     }
   }, [token, router]);
+
+  if (showPageLoading)
+    return <Loading otherClassName="mt-0 min-h-[calc(100vh-200px)]" />;
 
   return (
     <AuthLayout
