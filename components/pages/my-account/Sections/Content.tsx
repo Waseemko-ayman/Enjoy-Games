@@ -23,6 +23,7 @@ import {
   getAccountSchema,
   toFormData,
 } from '@/utils/accountSchema';
+import UserPermissions from './UserPermissions';
 
 const Content = () => {
   const isMobile = useIsMobile();
@@ -40,6 +41,8 @@ const Content = () => {
     isLoading: getLoading,
     error: getError,
   } = useAPI('user/my-info');
+
+  console.log(user);
 
   // Update User Information
   const { add, isLoading } = useAPI('update-user');
@@ -62,6 +65,7 @@ const Content = () => {
   } = methods;
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    // console.log(data)
     try {
       const formData = toFormData(data);
       const response = await add(formData);
@@ -109,6 +113,8 @@ const Content = () => {
                 {/* Account Options */}
                 {/* <AccountOptions t={t} /> */}
 
+                <UserPermissions permissions={user?.permissions} />
+
                 <AnimatedWrapper>
                   <Button
                     type="submit"
@@ -144,6 +150,7 @@ const Content = () => {
                     t={t}
                     walletBalance={user?.wallet_balance}
                     points={user?.points}
+                    roles={user?.roles}
                     getLoading={getLoading}
                     getError={getError}
                   />
