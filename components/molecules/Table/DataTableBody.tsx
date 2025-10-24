@@ -25,6 +25,7 @@ import Loading from '../loading';
 import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
 import { DeleteWarningContent } from '../DeleteWarningContent';
 import useIsMobile from '@/hook/useIsMobile';
+import { permissionsOptions } from '@/utils/constant';
 const DynamicImage = dynamic(() => import('next/image'), {
   loading: () => <Loading />,
   ssr: false,
@@ -78,6 +79,7 @@ const DataTableBody = <T extends { id: string | number }>({
   const t = useTranslations('Messages');
   const btnTexts = useTranslations('BtnTexts');
   const msgTxts = useTranslations('Messages');
+  const dashboardT = useTranslations('Dashboard');
 
   const pathname = usePathname();
   const isOrdersPage = pathname?.includes('/dashboard/orders');
@@ -359,12 +361,52 @@ const DataTableBody = <T extends { id: string | number }>({
 
                     // === التعديل هنا ===
                     const rawValue = (row as any)[col];
+
                     const cellValue =
-                      rawValue === null ||
-                      rawValue === undefined ||
-                      rawValue === ''
+                      columnKey === 'roles'
+                        ? Array.isArray(rawValue)
+                          ? rawValue
+                              .map((role: string) =>
+                                dashboardT(`roles.${role}`)
+                              )
+                              .join(', ')
+                          : dashboardT(`roles.${rawValue}`)
+                        : columnKey === 'permissions'
+                        ? Array.isArray(rawValue)
+                          ? rawValue.length > 0
+                            ? rawValue
+                                .map((perm: string) =>
+                                  dashboardT(
+                                    `Users.permissions.${
+                                      permissionsOptions.find(
+                                        (p) => p.id === perm
+                                      )?.name ?? perm
+                                    }`
+                                  )
+                                )
+                                .join(', ')
+                            : t('unavailable')
+                          : rawValue
+                          ? dashboardT(
+                              `Users.permissions.${
+                                permissionsOptions.find(
+                                  (p) => p.id === rawValue
+                                )?.name ?? rawValue
+                              }`
+                            )
+                          : t('unavailable')
+                        : rawValue === null ||
+                          rawValue === undefined ||
+                          rawValue === ''
                         ? t('unavailable')
                         : rawValue;
+
+                    // const cellValue =
+                    //   rawValue === null ||
+                    //   rawValue === undefined ||
+                    //   rawValue === ''
+                    //     ? t('unavailable')
+                    //     : rawValue;
 
                     // const isLink =
                     //   ['shipping_payment', 'shipping_method'].includes(
@@ -399,10 +441,12 @@ const DataTableBody = <T extends { id: string | number }>({
                               pathname: PATHS.CODES,
                               query:
                                 col === 'available_codes'
-                                  ? { availableForProduct: row.id }
-                                  : { fromProduct: row.id },
+                                  ? { availableForProduct: row?.product_id }
+                                  : { fromProduct: row?.product_id },
                             }}
-                            onClick={() => setSelectedProductId(Number(row.id))}
+                            onClick={() =>
+                              setSelectedProductId(Number(row.product_id))
+                            }
                             className="text-blue-600 underline"
                           >
                             {String(cellValue)}
