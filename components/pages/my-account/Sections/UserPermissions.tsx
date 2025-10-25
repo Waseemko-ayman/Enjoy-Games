@@ -1,3 +1,4 @@
+import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { permissionsOptions } from '@/utils/constant';
 import { CheckCircle, ShieldOff } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -19,16 +20,15 @@ const UserPermissions = ({ permissions }: { permissions: string[] }) => {
       {permissions?.length > 0 ? (
         <ul className="flex items-center flex-wrap gap-2">
           {permissions.map((perm: string, i: number) => (
-            <li
-              key={i}
-              className="flex items-center gap-2 bg-[var(--enjoy-gray-200)] px-3 py-2 rounded-xl text-sm text-gray-700 w-fit cursor-default hover:bg-enjoy-primary hover:!text-white transition-all duration-200 group"
-            >
-              <CheckCircle
-                size={14}
-                className="text-enjoy-primary group-hover:!text-white transition-all duration-200"
-              />
-              <span>{getTranslatedName(perm)}</span>
-            </li>
+            <AnimatedWrapper key={i} custom={i}>
+              <li className="flex items-center gap-2 bg-[var(--enjoy-gray-200)] px-3 py-2 rounded-xl text-sm text-gray-700 w-fit cursor-default hover:bg-enjoy-primary hover:!text-white transition-all duration-200 group">
+                <CheckCircle
+                  size={14}
+                  className="text-enjoy-primary group-hover:!text-white transition-all duration-200"
+                />
+                <span>{getTranslatedName(perm)}</span>
+              </li>
+            </AnimatedWrapper>
           ))}
         </ul>
       ) : (
