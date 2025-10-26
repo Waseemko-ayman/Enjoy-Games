@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from 'yup';
-
-const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{5,}$/;
+import { alphanumericWithArabicRegex } from './regex';
 
 export const getAccountSchema = (
   t: (key: string) => string,
@@ -15,18 +14,77 @@ export const getAccountSchema = (
           'الاسم يجب أن يحتوي على حروف أو أرقام فقط ويكون طوله على الأقل حرفين'
       )
       .required(t('Inputs.errorsMsgs.usernameRequired') || 'الاسم مطلوب'),
+    // date: Yup.string()
+    //   .nullable()
+    //   .optional()
+    //   .test(
+    //     'valid-date',
+    //     `${t('Inputs.errorsMsgs.invalidDate')} ${currentYear}`,
+    //     (value) => {
+    //       if (!value) return true;
+    //       const year = new Date(value).getFullYear();
+    //       return year >= 1935 && year <= currentYear;
+    //     }
+    //   ),
     date: Yup.string()
       .nullable()
       .optional()
-      .test(
-        'valid-date',
-        `${t('Inputs.errorsMsgs.invalidDate')} ${currentYear}`,
-        (value) => {
-          if (!value) return true;
-          const year = new Date(value).getFullYear();
-          return year >= 1935 && year <= currentYear;
+      .test('valid-date', '', (value, context) => {
+        if (!value) return true; // فارغ مسموح به
+
+        // تحقق من وجود الفاصل '/'
+        if (!value.includes('/')) {
+          return context.createError({
+            message:
+              t('Inputs.errorsMsgs.invalidDateFormat') ||
+              'التاريخ يجب أن يحتوي على الفاصل "/" بالشكل MM/DD/YYYY',
+          });
         }
-      ),
+
+        const parts = value.split('/');
+        if (parts.length !== 3) {
+          return context.createError({
+            message:
+              t('Inputs.errorsMsgs.invalidDateStructure') ||
+              'التاريخ غير صحيح، يجب أن يكون بالشكل MM/DD/YYYY',
+          });
+        }
+
+        const [month, day, year] = parts.map(Number);
+
+        if (isNaN(month) || isNaN(day) || isNaN(year)) {
+          return context.createError({
+            message:
+              t('Inputs.errorsMsgs.invalidDateNumbers') ||
+              'التاريخ يجب أن يحتوي على أرقام صحيحة فقط',
+          });
+        }
+
+        if (month < 1 || month > 12) {
+          return context.createError({
+            message:
+              t('Inputs.errorsMsgs.invalidMonth') ||
+              'الشهر يجب أن يكون بين 1 و 12',
+          });
+        }
+
+        if (day < 1 || day > 31) {
+          return context.createError({
+            message:
+              t('Inputs.errorsMsgs.invalidDay') ||
+              'اليوم يجب أن يكون بين 1 و 31',
+          });
+        }
+
+        if (year < 1935 || year > currentYear) {
+          return context.createError({
+            message: `${t('Inputs.errorsMsgs.invalidDate')} ${currentYear}`,
+          });
+        }
+
+        return true; // Everything is correct
+      }),
+
     gender: Yup.string()
       .nullable()
       .optional()
@@ -56,7 +114,10 @@ export const getAccountDefaultValues = (user: any) => ({
   name: user?.name || '',
   email: user?.email || '',
   phone: user?.phone || '',
-  date: user?.date || null,
+  date: user?.date || '',
+  // date: user?.date
+  //   ? new Date(user.date).toISOString().split('T')[0] // YYYY-MM-DD
+  //   : '',
   gender: user?.gender || null,
   photo: user?.photo || null,
   password: user?.password || null,
