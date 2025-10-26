@@ -18,6 +18,16 @@ import { TranslationFunction } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import FormError from '@/components/atomic/FormError';
 import { InputTypes } from '@/utils/type';
+// import { Button } from '@/components/ui/button';
+// import { CalendarIcon } from 'lucide-react';
+// import {
+//   Popover,
+//   PopoverContent,
+//   PopoverTrigger,
+// } from '@/components/ui/popover';
+// import { Calendar } from '@/components/ui/calendar';
+// import { format } from 'date-fns';
+
 interface FormProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
@@ -55,6 +65,39 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
           return (
             <AnimatedWrapper key={input.id} custom={index}>
               <div className="relative">
+                {/* input.type === 'date' ? (
+                <Controller
+                  name={input.name}
+                  control={control}
+                  render={({ field: { value, onChange } }) => (
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={`justify-start text-left font-normal h-9 px-3 ${
+                            errors[input.name] ? 'border-red-500' : ''
+                          }`}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {value
+                            ? format(new Date(value), 'MM/dd/yyyy')
+                            : placeholder}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={value ? new Date(value) : undefined}
+                          onSelect={(date) => onChange(date)}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date('1935-01-01')
+                          }
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                />
+                ) : */}
                 {input.type === 'number' ? (
                   <div>
                     <label className="block text-gray-700 font-normal text-sm mb-2">
@@ -71,7 +114,7 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                           onChange={onChange}
                           placeholder={placeholder}
                           className={`px-4 py-3 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)]`}
-                          readOnly
+                          // readOnly
                         />
                       )}
                     />
@@ -91,9 +134,7 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                         errors[input.name] ? 'border-red-500' : ''
                       }
                       {...register(input.name)}
-                      readOnly={
-                        input.name === 'email' || input.name === 'phone'
-                      }
+                      readOnly={input.name === 'email'}
                     />
                     {errors[input.name] && (
                       <FormError
