@@ -29,19 +29,22 @@ export function DashboardSidebar() {
   const isMobile = useIsMobile(991);
   const { isArabic } = useToggleLocale();
   const { user, isLoading, error } = useUserInfo();
-  const { user: userInfo } = useAuthContext();
+  const { user: authUser } = useAuthContext();
 
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  const permissions = userInfo?.permissions || [];
+  const permissions = authUser?.permissions || [];
+
+  const roles = authUser?.roles || [];
+  const isAdmin = authUser?.is_admin || roles.includes('admin');
 
   // Full permissions = user admin
-  const allPermissions = Object.values(linkPermissionMap);
-  const isAdmin =
-    permissions.length &&
-    allPermissions.every((perm) => permissions.includes(perm));
+  // const allPermissions = Object.values(linkPermissionMap);
+  // const isAdmin =
+  //   permissions.length &&
+  //   allPermissions.every((perm) => permissions.includes(perm));
 
   const SidebarContent = () => (
     <>
@@ -124,7 +127,7 @@ export function DashboardSidebar() {
             <p className="text-xs">
               {isLoading
                 ? t('Loading.loadingMessage')
-                : userInfo?.is_admin
+                : authUser?.is_admin
                 ? t('Dashboard.roles.admin')
                 : t('Dashboard.roles.user')}
             </p>
@@ -140,7 +143,7 @@ export function DashboardSidebar() {
         <div className={`fixed ${isArabic ? 'left-4' : 'right-4'} top-4 z-40`}>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className='shadow-xl'>
+              <Button variant="outline" size="icon" className="shadow-xl">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
