@@ -8,17 +8,22 @@ import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useToast } from '@/lib/toast';
 import useAPI from '@/hook/useAPI';
-import { CreateUsersFields } from '@/utils/constant';
+import { CreateCustomersFields } from '@/utils/constant';
 import FormField from '@/components/ui/FormField';
 import { InputTypes } from '@/utils/type';
 import SettingsTab from '@/components/ui/display/SettingsTab';
 import { useUpdateContent } from '@/context/updateContentContext';
 import { useTranslations } from 'next-intl';
-import { CreateUsersPorps } from '@/interfaces';
+import { CreateCustomersPorps } from '@/interfaces';
+import {
+  alphanumericWithArabicRegex,
+  emailRegex,
+  phoneReqExp,
+} from '@/utils/regex';
 
 // ----------------------------------------------------------------
 
-const CreateUsers = ({
+const CreateCustomers = ({
   value,
   onTabChange,
 }: {
@@ -32,9 +37,6 @@ const CreateUsers = ({
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const { triggerRefresh } = useUpdateContent();
   const refreshKey = 'users';
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{5,}$/;
 
   // ----------------------------------------------------------------
 
@@ -53,10 +55,10 @@ const CreateUsers = ({
       .string()
       .oneOf([yup.ref('password')], errorsMsgs('repasswordNotMatch'))
       .required(errorsMsgs('repasswordRequired')),
-    permissions: yup
-      .array()
-      .of(yup.string())
-      .required(errorsMsgs('permissionsRequired')),
+    phone: yup
+      .string()
+      .matches(phoneReqExp, errorsMsgs('phoneInvalid'))
+      .required(errorsMsgs('phoneRequired')),
   });
 
   // ----------------------------------------------------------------
@@ -67,7 +69,7 @@ const CreateUsers = ({
     reset,
     control,
     formState: { errors },
-  } = useForm<CreateUsersPorps>({
+  } = useForm<CreateCustomersPorps>({
     resolver: yupResolver(schema),
   });
 
@@ -78,14 +80,14 @@ const CreateUsers = ({
 
   // ----------------------------------------------------------------
 
-  const onSubmit: SubmitHandler<CreateUsersPorps> = async (data) => {
+  const onSubmit: SubmitHandler<CreateCustomersPorps> = async (data) => {
     try {
       const formData = new FormData();
       formData.append('name', data.name);
       formData.append('email', data.email);
       formData.append('password', data.password);
       formData.append('password_confirmation', data.password_confirmation);
-      formData.append('permissions', JSON.stringify(data.permissions));
+      formData.append('phone', data.phone);
 
       const response = await add(formData);
 
@@ -93,7 +95,7 @@ const CreateUsers = ({
         showToast(response.message);
         reset();
         triggerRefresh(refreshKey);
-        onTabChange('allUsers');
+        onTabChange('allCustomer');
       }
     } catch (err: any) {
       showToast(err?.response?.message || 'حدث خطأ', 'error');
@@ -110,31 +112,23 @@ const CreateUsers = ({
     >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="grid gap-5 md:grid-cols-2 mb-5">
-          {CreateUsersFields.map(
-            ({ id, label, name, placeholder, type, options }) => {
-              const isMultiSelect = ['permissions'].includes(name);
-              return (
-                <FormField
-                  key={id}
-                  inputName={name}
-                  type={type as InputTypes}
-                  label={t(`Inputs.labels.${label}`)}
-                  placeholder={t(`Inputs.placeHolders.${placeholder}`)}
-                  register={register}
-                  options={options?.map((opt) => ({
-                    id: opt.id,
-                    name: t(`Dashboard.Users.permissions.${opt.name}`),
-                  }))}
-                  control={control}
-                  isMulti={isMultiSelect}
-                  error={
-                    errors[name as keyof CreateUsersPorps] as
-                      | FieldError
-                      | undefined
-                  }
-                />
-              );
-            }
+          {CreateCustomersFields.map(
+            ({ id, label, name, placeholder, type }) => (
+              <FormField
+                key={id}
+                inputName={name}
+                type={type as InputTypes}
+                label={t(`Inputs.labels.${label}`)}
+                placeholder={t(`Inputs.placeHolders.${placeholder}`)}
+                register={register}
+                control={control}
+                error={
+                  errors[name as keyof CreateCustomersPorps] as
+                    | FieldError
+                    | undefined
+                }
+              />
+            )
           )}
         </div>
         <Button type="submit">
@@ -145,4 +139,4 @@ const CreateUsers = ({
   );
 };
 
-export default CreateUsers;
+export default CreateCustomers;
