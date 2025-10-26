@@ -64,7 +64,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
     const inputsTxt = useTranslations('Inputs.placeHolders');
 
     const InputElement =
-      type === 'select' ? (
+      type === 'select' && control ? (
         <Controller
           name={inputName}
           control={control}
@@ -96,7 +96,7 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
             </Select>
           )}
         />
-        // <Select
+      ) : // <Select
       //   value={value != null ? String(value) : ''}
       //   onValueChange={(val) =>
       //     onChange?.({ target: { name: inputName, value: val } } as any)
@@ -119,7 +119,6 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
       //     ))}
       //   </SelectContent>
       // </Select>
-      ) : 
       type === 'textarea' ? (
         <textarea
           ref={ref as React.Ref<HTMLTextAreaElement>}
