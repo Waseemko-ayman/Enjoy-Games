@@ -694,7 +694,7 @@ export function OrderChart({
         title={t('Dashboard.overview.title')}
         description={t('Dashboard.overview.desc')}
       />
-      <CardContent className="pl-2">
+      <CardContent>
         <Tabs
           value={activeTab}
           className="w-full"
