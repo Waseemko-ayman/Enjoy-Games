@@ -709,6 +709,7 @@ export interface myAccountStatsProps {
   amount?: string | number | JSX.Element;
   currency?: string | number | JSX.Element;
   href?: string;
+  role?: string | React.ReactNode;
 }
 
 export interface UserInfo {
@@ -722,6 +723,9 @@ export interface UserInfo {
   gender?: 'male' | 'female' | null;
   photo?: FileList | string | null;
   referral_code: string;
+  roles: string[];
+  permissions: string[];
+  is_admin: boolean;
 }
 
 export interface UserInfoContextType extends APIRequest {
@@ -862,6 +866,10 @@ export interface signupFormData extends LoginFormData {
 
 export interface CreateUsersPorps extends signupFormData {
   permissions: (string | undefined)[];
+}
+
+export interface CreateCustomersPorps extends signupFormData {
+  phone: string;
 }
 
 type Account = {
