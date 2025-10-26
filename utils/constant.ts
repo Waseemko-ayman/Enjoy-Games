@@ -68,8 +68,13 @@ export const sidebarLinks = [
     icon: FiShoppingCart,
   },
   {
-    title: 'users',
-    href: PATHS.DASHBOARD.USERS,
+    title: 'employees',
+    href: PATHS.DASHBOARD.EMPLOYEES,
+    icon: FiUsers,
+  },
+  {
+    title: 'customers',
+    href: PATHS.DASHBOARD.CUSTOMERS,
     icon: FiUsers,
   },
   {
@@ -355,6 +360,44 @@ export const CreateUsersFields = [
     name: 'permissions',
     placeholder: 'selectPermissions',
     options: permissionsOptions,
+  },
+];
+
+export const CreateCustomersFields = [
+  {
+    id: 1,
+    type: 'text',
+    label: 'name',
+    name: 'name',
+    placeholder: 'writeYorName',
+  },
+  {
+    id: 2,
+    type: 'email',
+    label: 'email',
+    name: 'email',
+    placeholder: 'writeYorEmail',
+  },
+  {
+    id: 3,
+    type: 'text',
+    label: 'password',
+    name: 'password',
+    placeholder: 'yourPassword',
+  },
+  {
+    id: 4,
+    type: 'text',
+    label: 'password_confirmation',
+    name: 'password_confirmation',
+    placeholder: 'repassword',
+  },
+  {
+    id: 5,
+    type: 'number',
+    name: 'phone',
+    label: 'phone',
+    placeholder: 'phone',
   },
 ];
 
