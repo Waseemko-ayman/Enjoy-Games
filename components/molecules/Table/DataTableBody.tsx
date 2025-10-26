@@ -83,7 +83,8 @@ const DataTableBody = <T extends { id: string | number }>({
 
   const pathname = usePathname();
   const isOrdersPage = pathname?.includes('/dashboard/orders');
-  const isUsersPage = pathname?.includes('/dashboard/users');
+  const isCustomerPage = pathname?.includes('/dashboard/customers');
+  const isEmployeePage = pathname?.includes('/dashboard/employees');
   const isTicketsPage = pathname?.includes('/dashboard/tickets');
 
   const filteredColumns = columns.filter((col) => {
@@ -455,7 +456,24 @@ const DataTableBody = <T extends { id: string | number }>({
                           (() => {
                             try {
                               const obj = JSON.parse(cellValue);
-                              return obj.email ?? JSON.stringify(obj);
+
+                              if ('account_1' in obj && 'account_2' in obj) {
+                                return `Accounts: ${obj.account_1} / ${obj.account_2}`;
+                              }
+
+                              if ('account_id' in obj) {
+                                return `Account ID: ${obj.account_id}`;
+                              }
+
+                              if ('email' in obj) {
+                                return `Email: ${obj.email}`;
+                              }
+
+                              if ('login_method' in obj) {
+                                return `Access via ${obj.login_method}`;
+                              }
+
+                              return JSON.stringify(obj); // fallback
                             } catch {
                               return String(cellValue);
                             }
@@ -525,7 +543,7 @@ const DataTableBody = <T extends { id: string | number }>({
                           >
                             <Edit2 className="h-4 w-4" />
                           </Button>
-                        ) : isUsersPage ? (
+                        ) : isCustomerPage || isEmployeePage ? (
                           <UserPermissionsDrawer
                             userId={row.id}
                             open={openUserId === String(row.id)}
