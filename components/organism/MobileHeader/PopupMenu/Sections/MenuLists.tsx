@@ -27,7 +27,8 @@ const MenuLists = () => {
           }
           if (
             link.key === 'dashboard' &&
-            (!user?.permissions || user?.permissions?.length === 0)
+            (!user?.permissions || user?.permissions?.length === 0) &&
+            !user?.roles?.includes('admin')
           ) {
             return false;
           }

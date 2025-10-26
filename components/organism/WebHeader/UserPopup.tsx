@@ -18,7 +18,7 @@ const UserPopup = () => {
   const { showToast } = useToast();
 
   // Context
-  const { user, logout } = useAuthContext();
+  const { token, user, logout } = useAuthContext();
 
   // Hook for API
   const { add: clearSessionAPI } = useAPI<any, any>('session-timeout/clear');
@@ -73,9 +73,11 @@ const UserPopup = () => {
             >
               {section.items
                 .filter((item) => {
+                  if (item.title === 'حسابي' && !token) return false;
                   if (
                     item.title === 'لوحة التحكم' &&
-                    (!user?.permissions || user?.permissions?.length === 0)
+                    (!user?.permissions || user?.permissions?.length === 0) &&
+                    !user?.roles?.includes('admin')
                   ) {
                     return false;
                   }

@@ -17,7 +17,11 @@ export default function DashboardGuard({
 
   useEffect(() => {
     const isDashboardPath = pathname.startsWith(PATHS_DATA.DASHBOARD.HOME.ROOT);
-    const noPermissions = !user?.permissions || user.permissions.length === 0;
+    // const noPermissions =
+    //   !user?.permissions || user.permissions.length === 0;
+    const noPermissions =
+      (!user?.permissions || user.permissions.length === 0) &&
+      !user?.roles?.includes('admin');
 
     if (!isLoading && isDashboardPath) {
       if (!token) {
