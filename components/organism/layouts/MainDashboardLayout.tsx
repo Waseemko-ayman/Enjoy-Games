@@ -7,7 +7,7 @@ const MainDashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex h-screen bg-white overflow-hidden">
       <UserInfoProvider>
-        <div className="h-full sticky top-0">
+        <div className="h-full sticky top-0 z-50">
           <DashboardSidebar />
         </div>
       </UserInfoProvider>
