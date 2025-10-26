@@ -217,7 +217,8 @@
     "statsTitles": {
       "balance": "My Balance",
       "currentLevel": "You currently have",
-      "interests": "Interests"
+      "interests": "Interests",
+      "role": "Role"
     },
     "accountOptions": {
       "sendCardCodeToEmail": "Send card code to email",
@@ -673,7 +674,8 @@
     "ratings": "Ratings",
     "orders": "Orders",
     "notifications": "Notifications",
-    "users": "Users",
+    "employees": "Employees",
+    "customers": "Customers",
     "productSubscribers": "Product Subscribers",
     "settings": "Settings",
     "support": "Support"
@@ -683,6 +685,8 @@
     "roles": {
       "admin": "Administrator",
       "user": "User",
+      "custom": "Custom",
+      "moderator": "Moderator",
       "all": "All",
       "employees": "Employees",
       "customers": "Customers"
@@ -787,11 +791,16 @@
       "suspiciousTransactions": "Suspicious Transactions"
     },
     "Users": {
-      "title": "All Users",
-      "desc": "Manage Users for your store",
-      "manageUsers": "Manage all Users in one place",
-      "createUsers": "Create Users",
-      "createNewUsers": "Create new User",
+      "CustomerTitle": "All Customers",
+      "CustomerDesc": "Manage Customers for your store",
+      "EmployeeTitle": "All Employees",
+      "EmployeeDesc": "Manage Employees for your store",
+      "manageCustomers": "Manage all Customers in one place",
+      "manageEmployees": "Manage all Employees in one place",
+      "createEmployees": "Create Employees",
+      "createNewEmployee": "Create new Employee",
+      "createCustomers": "Create Customers",
+      "createNewCustomers": "Create new Customer",
       "permissions": {
         "manageProducts": "Manage Products",
         "manageSettings": "Manage Settings",
@@ -804,7 +813,9 @@
         "manageOrders": "Manage Orders",
         "manageRatings": "Manage Ratings",
         "replyTickets": "Reply Tickets"
-      }
+      },
+      "userPermissions": "User Permissions",
+      "noPermissions": "No permissions assigned to this user."
     },
     "productSubscribers": {
       "title": "All subscribers to a product",
@@ -1127,7 +1138,8 @@
       "writeMessage": "Enter description...",
       "selectAttachments": "Select files",
       "typeYourReply": "write your response here...",
-      "searchUser": "Search for user...",
+      "searchCustomer": "Search for customer...",
+      "searchEmployee": "Search for employee...",
       "selectPermissions": "Select Permissions",
       "permissions": "Select Permissions",
       "status": "Select Status"
@@ -1152,6 +1164,7 @@
       "loginMethodRequired": "Login Method Required",
       "accountIdRequired": "ID Number Required",
       "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Invalid mobile number",
       "birthDateRequired": "Birth date is required",
       "genderOneOf": "Please select a gender",
       "genderRequired": "Gender is required",

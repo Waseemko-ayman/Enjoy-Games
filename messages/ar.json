@@ -217,7 +217,8 @@
     "statsTitles": {
       "balance": "رصيدي",
       "currentLevel": "لديك حاليا",
-      "interests": "الإهتمامات"
+      "interests": "الإهتمامات",
+      "role": "الدور"
     },
     "accountOptions": {
       "sendCardCodeToEmail": "إرسال كود البطاقة إلى البريد الإلكتروني",
@@ -677,7 +678,8 @@
     "ratings": "التقييمات",
     "orders": "الطلبات",
     "notifications": "الإشعارات",
-    "users": "المستخدمين",
+    "employees": "الموظفين",
+    "customers": "العملاء",
     "productSubscribers": "المشتركين بالمنتجات",
     "settings": "الإعدادات",
     "support": "الدعم"
@@ -687,7 +689,9 @@
     "roles": {
       "admin": "مسؤول",
       "user": "مستخدم",
-      "all":"الكل",
+      "custom": "عميل",
+      "moderator": "مشرف",
+      "all": "الكل",
       "employees": "موظفين",
       "customers": "عملاء"
     },
@@ -791,11 +795,16 @@
       "suspiciousTransactions": "المعاملات المشبوهة"
     },
     "Users": {
-      "title": "جميع المستخدمين",
-      "desc": "إدارة المستخدمين لمتجرك",
-      "manageUsers": "إدارة جميع المستخدمين في مكان واحد",
-      "createUsers": "إنشاء مستخدمين",
-      "createNewUsers": "إنشاء مستخدم جديد",
+      "CustomerTitle": "جميع العملاء",
+      "CustomerDesc": "إدارة العملاء لمتجرك",
+      "EmployeeTitle": "جميع الموظفين",
+      "EmployeeDesc": "إدارة الموظفين لمتجرك",
+      "manageCustomers": "إدارة جميع العملاء في مكان واحد",
+      "manageEmployees": "إدارة جميع الموظفين في مكان واحد",
+      "createEmployees": "إنشاء موظفين",
+      "createNewEmployees": "إنشاء موظف جديد",
+      "createCustomers": "إنشاء عملاء",
+      "createNewCustomers": "إنشاء عملاء جديد",
       "permissions": {
         "manageProducts": "إدارة المنتجات",
         "manageSettings": "إدارة الإعدادات",
@@ -808,7 +817,9 @@
         "manageOrders": "إدارة الطلبات",
         "manageRatings": "إدارة التقييمات",
         "replyTickets": "الرد على التذاكر"
-      }
+      },
+      "userPermissions": "أذونات المستخدم",
+      "noPermissions": "لم يتم تعيين أي أذونات لهذا المستخدم."
     },
     "productSubscribers": {
       "title": "جميع المشتركين بمنتج",
@@ -1130,7 +1141,8 @@
       "writeMessage": "أكتب الوصف...",
       "selectAttachments": "إختر ملفات",
       "typeYourReply": "أكتب ردك هنا...",
-      "searchUser": "البحث عن مستحدم...",
+      "searchCustomer": "البحث عن عميل...",
+      "searchEmployee": "البحث عن موظف...",
       "selectPermissions": "حدد الصلاحيات",
       "permissions": "إختار الصلاحيات",
       "status": "إختار الحالة"
@@ -1155,6 +1167,7 @@
       "loginMethodRequired": "طريقة تسجيل الدخول مطلوبة",
       "accountIdRequired": "رقم الآيدي مطلوب",
       "phoneRequired": "رقم الجوال مطلوب",
+      "phoneInvalid": "رقم الجوال غير صحيح",
       "birthDateRequired": "تاريخ الميلاد مطلوب",
       "genderInvalid": "الرجاء اختيار الجنس",
       "passwordRequired": "كلمة المرور مطلوبة",
