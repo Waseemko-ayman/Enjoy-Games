@@ -530,7 +530,7 @@ export const inputData = [
   {
     id: 4,
     label: 'تاريخ الميلاد',
-    type: 'text',
+    type: 'date',
     placeholder: '--/--/----',
     name: 'date',
   },
