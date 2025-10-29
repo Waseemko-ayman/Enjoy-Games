@@ -45,6 +45,12 @@ interface DataTableBodyProps<T> {
 }
 
 function formatHeader(key: string) {
+  if (key.startsWith('user_')) {
+    const parts = key.split('_');
+    const keyVar = parts[1] ?? '';
+    return keyVar ? `User ${keyVar.charAt(0).toUpperCase() + keyVar.slice(1)}` : 'User';
+  }
+
   return key
     .replace(/_/g, ' ')
     .replace(/\b\w/g, (char) => char.toUpperCase())
@@ -102,6 +108,13 @@ const DataTableBody = <T extends { id: string | number }>({
       if (col === 'updated_at' || col === 'user_id') return acc;
 
       const sampleValue = data.find((item) => item[col] != null)?.[col];
+
+      if (col === 'user' && sampleValue && typeof sampleValue === 'object') {
+        return [
+          ...acc,
+          ...Object.keys(sampleValue).map((key) => `user_${key}`),
+        ];
+      }
 
       // If the value is object and it contains ar/en → we separate it
       if (
@@ -161,6 +174,21 @@ const DataTableBody = <T extends { id: string | number }>({
                 >
                   {visibleColumns.map((col) => {
                     const columnKey = String(col);
+
+                    if (columnKey.startsWith('user_')) {
+                      const key = columnKey.split('_')[1]; // name أو email
+                      const value =
+                        (row as any).user?.[key] ?? t('unavailable');
+                      return (
+                        <td
+                          key={columnKey}
+                          className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden"
+                          title={value}
+                        >
+                          {value}
+                        </td>
+                      );
+                    }
 
                     // === cell render ===
                     if (
