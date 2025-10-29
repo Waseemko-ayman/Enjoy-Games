@@ -324,7 +324,7 @@ export const ticketsStatus = [
   { id: 'closed', name: 'closed' },
 ];
 
-export const CreateUsersFields = [
+export const CreateEmployeesFields = [
   {
     id: 1,
     type: 'text',
@@ -355,11 +355,51 @@ export const CreateUsersFields = [
   },
   {
     id: 5,
+    type: 'number',
+    name: 'phone',
+    label: 'phone',
+    placeholder: 'phone',
+  },
+  {
+    id: 6,
+    type: 'date',
+    name: 'date',
+    label: 'date',
+    placeholder: 'date',
+  },
+  {
+    id: 7,
+    label: 'gender',
+    type: 'select',
+    placeholder: 'gender',
+    name: 'gender',
+    options: [
+      {
+        id: 1,
+        value: 'male',
+        labelKey: 'male',
+      },
+      {
+        id: 2,
+        value: 'female',
+        labelKey: 'female',
+      },
+    ],
+  },
+  {
+    id: 8,
     type: 'multi-select',
     label: 'permissions',
     name: 'permissions',
     placeholder: 'selectPermissions',
     options: permissionsOptions,
+  },
+  {
+    id: 9,
+    type: 'file',
+    label: 'profileImage',
+    name: 'photo',
+    placeholder: 'addImage',
   },
 ];
 
@@ -398,6 +438,40 @@ export const CreateCustomersFields = [
     name: 'phone',
     label: 'phone',
     placeholder: 'phone',
+  },
+  {
+    id: 6,
+    type: 'date',
+    name: 'date',
+    label: 'date',
+    placeholder: 'date',
+  },
+  {
+    id: 7,
+    label: 'gender',
+    type: 'select',
+    placeholder: 'gender',
+    name: 'gender',
+    options: [
+      {
+        id: 1,
+        value: 'male',
+        labelKey: 'male',
+      },
+      {
+        id: 2,
+        value: 'female',
+        labelKey: 'female',
+      },
+    ],
+  },
+  {
+    id: 8,
+    type: 'multi-select',
+    label: 'permissions',
+    name: 'permissions',
+    placeholder: 'selectPermissions',
+    options: permissionsOptions,
   },
 ];
 
