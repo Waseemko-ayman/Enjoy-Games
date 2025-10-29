@@ -181,7 +181,6 @@ const AccountSettings = () => {
                                   onChange={onChange}
                                   placeholder={placeholder}
                                   className={`px-4 py-3 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)]`}
-                                  readOnly
                                 />
                               )}
                             />
@@ -193,6 +192,7 @@ const AccountSettings = () => {
                               type={input.type as InputTypes}
                               label={label}
                               placeholder={placeholder}
+                              control={control}
                               Icon={input.icon}
                               iconClassName="h-4 w-4 text-gray-400"
                               inputName={input.name}
@@ -203,9 +203,7 @@ const AccountSettings = () => {
                                   : ''
                               }
                               {...register(input.name as keyof FormValues)}
-                              readOnly={
-                                input.name === 'email' || input.name === 'phone'
-                              }
+                              readOnly={input.name === 'email'}
                             />
                             {errors[input.name as keyof FormValues] && (
                               <FormError

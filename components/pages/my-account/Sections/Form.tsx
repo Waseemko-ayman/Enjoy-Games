@@ -96,6 +96,7 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                       Icon={input.icon}
                       iconClassName="h-4 w-4 text-gray-400"
                       inputName={input.name}
+                      control={control}
                       options={options}
                       otherClassNameContainer={
                         errors[input.name] ? 'border-red-500' : ''
