@@ -65,39 +65,6 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
           return (
             <AnimatedWrapper key={input.id} custom={index}>
               <div className="relative">
-                {/* input.type === 'date' ? (
-                <Controller
-                  name={input.name}
-                  control={control}
-                  render={({ field: { value, onChange } }) => (
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className={`justify-start text-left font-normal h-9 px-3 ${
-                            errors[input.name] ? 'border-red-500' : ''
-                          }`}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {value
-                            ? format(new Date(value), 'MM/dd/yyyy')
-                            : placeholder}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0">
-                        <Calendar
-                          mode="single"
-                          selected={value ? new Date(value) : undefined}
-                          onSelect={(date) => onChange(date)}
-                          disabled={(date) =>
-                            date > new Date() || date < new Date('1935-01-01')
-                          }
-                        />
-                      </PopoverContent>
-                    </Popover>
-                  )}
-                />
-                ) : */}
                 {input.type === 'number' ? (
                   <div>
                     <label className="block text-gray-700 font-normal text-sm mb-2">
