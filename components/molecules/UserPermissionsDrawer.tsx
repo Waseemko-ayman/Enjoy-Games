@@ -43,8 +43,6 @@ const UserPermissionsDrawer: React.FC<UserPermissionsDrawerProps> = ({
 
   const userPermissions = user?.find((u: any) => u.id === userId)?.permissions;
 
-  console.log(userPermissions);
-
   const schema = yup.object().shape({
     permissions: yup.array().of(yup.string().required()).defined(), // ← يضمن إنها مش undefined
     // .min(1, t('Inputs.errorsMsgs.permissionsRequired'))
