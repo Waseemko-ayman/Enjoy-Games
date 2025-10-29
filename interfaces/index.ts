@@ -864,12 +864,15 @@ export interface signupFormData extends LoginFormData {
   referral_code?: string | null;
 }
 
-export interface CreateUsersPorps extends signupFormData {
-  permissions: (string | undefined)[];
+export interface CreateCustomersPorps extends signupFormData {
+  permissions?: (string | undefined)[];
+  phone?: string;
+  date?: string;
+  gender?: 'male' | 'female';
 }
 
-export interface CreateCustomersPorps extends signupFormData {
-  phone: string;
+export interface CreateEmployeesPorps extends signupFormData, CreateCustomersPorps {
+  photo?: FileList | string | null;
 }
 
 type Account = {
