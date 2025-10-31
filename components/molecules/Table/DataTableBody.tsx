@@ -48,7 +48,9 @@ function formatHeader(key: string) {
   if (key.startsWith('user_')) {
     const parts = key.split('_');
     const keyVar = parts[1] ?? '';
-    return keyVar ? `User ${keyVar.charAt(0).toUpperCase() + keyVar.slice(1)}` : 'User';
+    return keyVar
+      ? `User ${keyVar.charAt(0).toUpperCase() + keyVar.slice(1)}`
+      : 'User';
   }
 
   return key
@@ -278,8 +280,9 @@ const DataTableBody = <T extends { id: string | number }>({
                             <div className="flex justify-center">
                               <DynamicImage
                                 src={
-                                  `${API_IMAGE_URL}${imageUrl}` ||
-                                  '/assets/no-image-available.webp'
+                                  imageUrl
+                                    ? `${API_IMAGE_URL}${imageUrl}`
+                                    : '/assets/no-image-available.webp'
                                 }
                                 alt={`${lang} image`}
                                 width={80}
@@ -319,8 +322,9 @@ const DataTableBody = <T extends { id: string | number }>({
                                   <DynamicImage
                                     key={idx}
                                     src={
-                                      `${API_IMAGE_URL}${img.image}` ||
-                                      '/assets/no-image-available.webp'
+                                      img.image
+                                        ? `${API_IMAGE_URL}${img.image}`
+                                        : '/assets/no-image-available.webp'
                                     }
                                     alt={`image-${idx}`}
                                     width={80}
@@ -337,8 +341,9 @@ const DataTableBody = <T extends { id: string | number }>({
                             ) : (
                               <DynamicImage
                                 src={
-                                  `${API_IMAGE_URL}${images[0].image}` ||
-                                  '/assets/no-image-available.webp'
+                                  images[0].image
+                                    ? `${API_IMAGE_URL}${images[0].image}`
+                                    : '/assets/no-image-available.webp'
                                 }
                                 alt={`image`}
                                 width={100}

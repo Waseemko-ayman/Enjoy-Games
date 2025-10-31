@@ -69,7 +69,9 @@ const AccountSettings = () => {
   const getPhotoSrc = () => {
     if (avatarPreview) return avatarPreview; // New selected image
     if (user?.photo && typeof user?.photo === 'string')
-      return `${API_IMAGE_URL}${user?.photo}`; //Existing link
+      return user?.photo
+        ? `${API_IMAGE_URL}${user?.photo}`
+        : '/assets/user-avatar.png'; //Existing link
   };
 
   const schema = getAccountSchema(t, currentYear);

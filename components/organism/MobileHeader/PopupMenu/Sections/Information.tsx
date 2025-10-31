@@ -24,6 +24,8 @@ const Information = () => {
   const { myWallet, isLoading, error } = useWallet();
   const { user, isLoading: infoLoading, error: infoError } = useUserInfo();
 
+  console.log(user);
+
   return (
     <CardWrapper
       bgColor="bg-white"
@@ -38,7 +40,9 @@ const Information = () => {
           ) : (
             <Avatar
               imgSrc={
-                `${API_IMAGE_URL}${user?.photo}` || '/assets/user-avatar.png'
+                user?.photo
+                  ? `${API_IMAGE_URL}${user.photo}`
+                  : '/assets/user-avatar.png'
               }
               imgAlt="character"
               width={30}

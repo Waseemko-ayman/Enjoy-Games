@@ -200,8 +200,9 @@ const ReviewSection = ({
                 {rating.images.map((img: any) => (
                   <Image
                     src={
-                      `${API_IMAGE_URL}${img.img}` ||
-                      '/assets/no-image-available.webp'
+                      img.img
+                        ? `${API_IMAGE_URL}${img.img}`
+                        : '/assets/no-image-available.webp'
                     }
                     key={img.id}
                     alt="Rating"

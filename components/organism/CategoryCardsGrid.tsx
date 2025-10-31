@@ -51,8 +51,9 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({
               <AnimatedWrapper key={card.id} custom={index}>
                 <CategoryCard
                   image={
-                    `${API_IMAGE_URL}${card.image}` ||
-                    '/assets/no-image-available.webp'
+                    card.image
+                      ? `${API_IMAGE_URL}${card.image}`
+                      : '/assets/no-image-available.webp'
                   }
                   name={card.name}
                   onClick={() => {

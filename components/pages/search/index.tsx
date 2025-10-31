@@ -137,8 +137,9 @@ const SearchPage = () => {
                         <AnimatedWrapper key={card.id} custom={index}>
                           <ProductCard
                             image={
-                              `${API_IMAGE_URL}${image}` ||
-                              '/assets/no-image-available.webp'
+                              image
+                                ? `${API_IMAGE_URL}${image}`
+                                : '/assets/no-image-available.webp'
                             }
                             imgAlt={card.title}
                             imgTitle={card.title}

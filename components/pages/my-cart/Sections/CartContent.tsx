@@ -108,8 +108,9 @@ const CartContent: React.FC<CartContentProps> = ({
                   <div className="flex max-sm:w-full max-sm:flex-col gap-2 sm:gap-4">
                     <Image
                       src={
-                        `${API_IMAGE_URL}${item.image}` ||
-                        '/assets/no-image-available.webp'
+                        item.image
+                          ? `${API_IMAGE_URL}${item.image}`
+                          : '/assets/no-image-available.webp'
                       }
                       alt={item.title}
                       width={170}

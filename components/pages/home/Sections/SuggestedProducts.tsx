@@ -40,8 +40,9 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({
               <AnimatedWrapper key={card.id} custom={index}>
                 <ProductCard
                   image={
-                    `${API_IMAGE_URL}${card.image}` ||
-                    '/assets/no-image-available.webp'
+                    card.image
+                      ? `${API_IMAGE_URL}${card.image}`
+                      : '/assets/no-image-available.webp'
                   }
                   imgAlt={card.title}
                   imgTitle={card.title}

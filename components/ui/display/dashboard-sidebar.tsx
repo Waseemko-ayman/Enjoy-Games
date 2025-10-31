@@ -104,7 +104,9 @@ export function DashboardSidebar() {
           ) : (
             <Avatar
               imgSrc={
-                `${API_IMAGE_URL}${user?.photo}` || '/assets/user-avatar.png'
+                user?.photo
+                  ? `${API_IMAGE_URL}${user?.photo}`
+                  : '/assets/user-avatar.png'
               }
               imgAlt="character"
               width={30}

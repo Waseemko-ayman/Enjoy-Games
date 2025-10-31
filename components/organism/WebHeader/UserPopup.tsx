@@ -3,6 +3,7 @@ import CardWrapper from '@/components/atomic/CardWrapper';
 import NavItem from '@/components/atomic/NavItem';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { useAuthContext } from '@/context/AuthContext';
+import { useUserInfo } from '@/context/UserInfoContext';
 import { userList } from '@/data';
 import useAPI from '@/hook/useAPI';
 import { useToast } from '@/lib/toast';
@@ -18,7 +19,8 @@ const UserPopup = () => {
   const { showToast } = useToast();
 
   // Context
-  const { token, user, logout } = useAuthContext();
+  const { token, logout } = useAuthContext();
+  const { user } = useUserInfo();
 
   // Hook for API
   const { add: clearSessionAPI } = useAPI<any, any>('session-timeout/clear');
