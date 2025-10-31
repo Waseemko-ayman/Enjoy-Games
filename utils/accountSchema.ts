@@ -118,20 +118,22 @@ export const getAccountDefaultValues = (user: any) => ({
 
 export const toFormData = (data: Record<string, any>) => {
   const formData = new FormData();
+
   Object.entries(data).forEach(([key, value]) => {
     if (key === 'photo') {
       if (value instanceof FileList && value.length > 0) {
-        formData.append('photo', value[0].name); // فقط اسم الملف
-      } else if (typeof value === 'string') {
-        formData.append('photo', value);
+        formData.append('photo', value[0]); // إرسال الملف نفسه
       }
+      // لا تفعل شيء إذا القيمة string (اسم الصورة موجود مسبقًا)
     } else if (key === 'permissions' && Array.isArray(value)) {
       value.forEach((v) => formData.append('permissions[]', v));
     } else if (value != null) {
       formData.append(key, value as any);
     } else {
-      formData.append(key, ''); // Always make the value an empty string instead of null/undefined
+      formData.append(key, '');
     }
   });
+
   return formData;
 };
+
