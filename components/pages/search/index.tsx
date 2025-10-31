@@ -54,46 +54,6 @@ const SearchPage = () => {
             <ErrorFetching />
           ) : (
             <div className="space-y-6">
-              {/* {categories.length > 0 && (
-                <>
-                  <h2 className="text-xl font-semibold mt-8 mb-4">
-                    {secTxts('categories')}
-                  </h2>
-                  <GridWrapper otherClassName="gap-5" isScrollable>
-                    {categories.map((card, index) => {
-                      // const { image, ...cardWithoutImage } = card;
-                      const firstSubCategory = card.sub_categories?.[0];
-                      const slugs =
-                        firstSubCategory !== undefined
-                          ? getCategoryAndSubCategorySlugs(
-                              categories,
-                              firstSubCategory.id
-                            )
-                          : null;
-                      return (
-                        <AnimatedWrapper key={card.id} custom={index}>
-                          <CategoryCard
-                            image={
-                              `${API_IMAGE_URL}${image}` ||
-                              '/assets/no-image-available.webp'
-                            }
-                            name={card.name}
-                            onClick={() => {
-                              if (slugs) {
-                                const { categorySlug, subCategorySlug } = slugs;
-                                router.push(
-                                  `/categories/${categorySlug}/${subCategorySlug}`
-                                );
-                              }
-                            }}
-                          />
-                        </AnimatedWrapper>
-                      );
-                    })}
-                  </GridWrapper>
-                </>
-              )} */}
-
               {categories.length > 0 && (
                 <>
                   <h2 className="text-xl font-semibold mt-8 mb-4">
@@ -104,7 +64,11 @@ const SearchPage = () => {
                       <Suspense key={item.id} fallback={<Loading />}>
                         <SectionTypeCard
                           path={`/categories/${item.slug}`}
-                          imgSrc={'/assets/digitalStores.webp'}
+                          imgSrc={
+                            item.image
+                              ? `${API_IMAGE_URL}${item.image}`
+                              : '/assets/no-image-available.webp'
+                          }
                           imgAlt={item.name}
                           imgTitle={item.name}
                           title={item.name}
@@ -114,6 +78,53 @@ const SearchPage = () => {
                         />
                       </Suspense>
                     ))}
+                  </GridWrapper>
+                </>
+              )}
+
+              {subCategories.length > 0 && (
+                <>
+                  <h2 className="text-xl font-semibold mt-8 mb-4">
+                    {secTxts('subCategories')}
+                  </h2>
+                  <GridWrapper otherClassName="gap-5" isScrollable>
+                    {subCategories.map((sub, index) => {
+                      const { image, ...cardWithoutImage } = sub;
+                      const slugs =
+                        sub.id !== undefined
+                          ? getCategoryAndSubCategorySlugs(categories, sub.id)
+                          : null;
+                      return (
+                        <AnimatedWrapper key={sub.id} custom={index}>
+                          <ProductCard
+                            key={sub.id}
+                            imgAlt={sub.name}
+                            imgTitle={sub.name}
+                            title={sub.name}
+                            image={
+                              image
+                                ? `${API_IMAGE_URL}${image}`
+                                : '/assets/no-image-available.webp'
+                            }
+                            showBtn={true}
+                            btnVariant="primary"
+                            btnText={btnTxts('addToCart')}
+                            showDesc
+                            // productData={sub}
+                            onClick={() => {
+                              if (slugs) {
+                                const { categorySlug, subCategorySlug } = slugs;
+
+                                router.push(
+                                  `/categories/${categorySlug}/${subCategorySlug}`
+                                );
+                              }
+                            }}
+                            {...cardWithoutImage}
+                          />
+                        </AnimatedWrapper>
+                      );
+                    })}
                   </GridWrapper>
                 </>
               )}
@@ -164,55 +175,9 @@ const SearchPage = () => {
                 </>
               )}
 
-              {subCategories.length > 0 && (
-                <>
-                  <h2 className="text-xl font-semibold mt-8 mb-4">
-                    {secTxts('subCategories')}
-                  </h2>
-                  <GridWrapper otherClassName="gap-5" isScrollable>
-                    {subCategories.map((sub, index) => {
-                      const { image, ...cardWithoutImage } = sub;
-                      const slugs =
-                        sub.id !== undefined
-                          ? getCategoryAndSubCategorySlugs(categories, sub.id)
-                          : null;
-                      return (
-                        <AnimatedWrapper key={sub.id} custom={index}>
-                          <ProductCard
-                            key={sub.id}
-                            imgAlt={sub.name}
-                            imgTitle={sub.name}
-                            title={sub.name}
-                            image={
-                              `${API_IMAGE_URL}${image}` ||
-                              '/assets/no-image-available.webp'
-                            }
-                            showBtn={true}
-                            btnVariant="primary"
-                            btnText={btnTxts('addToCart')}
-                            showDesc
-                            // productData={sub}
-                            onClick={() => {
-                              if (slugs) {
-                                const { categorySlug, subCategorySlug } = slugs;
-
-                                router.push(
-                                  `/categories/${categorySlug}/${subCategorySlug}/product/${sub.slug}`
-                                );
-                              }
-                            }}
-                            {...cardWithoutImage}
-                          />
-                        </AnimatedWrapper>
-                      );
-                    })}
-                  </GridWrapper>
-                </>
-              )}
-
-              {products.length === 0 &&
-                categories.length === 0 &&
-                subCategories.length === 0 && <p>{searchTexts('noResult')}</p>}
+              {categories.length === 0 &&
+                subCategories.length === 0 &&
+                products.length === 0 && <p>{searchTexts('noResult')}</p>}
             </div>
           )}
         </SectionComponent>
