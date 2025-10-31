@@ -5,32 +5,29 @@ import { useAuthContext } from '@/context/AuthContext';
 import Loading from '../molecules/loading';
 // import { PATHS as PATHS_DATA } from '@/data/paths';
 import { PATHS as PATHS_HELPER } from '@/utils/router.helper';
+import { useUserInfo } from '@/context/UserInfoContext';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const { user, token, isLoading } = useAuthContext();
+  const { token } = useAuthContext();
+
+  // Get User Information
+  const { user, isLoading } = useUserInfo();
 
   useEffect(() => {
-    if (!isLoading) {
-      // if (!token) {
-      //   router.push(PATHS_HELPER.AUTH.LOGIN);
-      // } else if (!user?.permissions || user.permissions.length === 0) {
-      //   router.push(PATHS_DATA.HOME.link);
-      // }
-      if (!token) {
-        router.push(PATHS_HELPER.AUTH.LOGIN);
-      }
+    if (!isLoading && !token) {
+      router.push(PATHS_HELPER.AUTH.LOGIN);
     }
   }, [token, user, isLoading, router]);
 
-  if (isLoading) return <Loading />;
-  // if (!token || !user?.permissions || user.permissions.length === 0)
-  if (
-    !token ||
-    ((!user?.permissions || user.permissions.length === 0) &&
-      !user?.roles?.includes('admin'))
-  )
-    return null;
+  if (isLoading)
+    return <Loading otherClassName="mt-0 min-h-[calc(100vh-200px)]" />;
+
+  const canAccessDashboard =
+    (user?.permissions && user.permissions.length > 0) ||
+    user?.roles?.includes('admin');
+
+  if (!token || !canAccessDashboard) return null;
 
   return <>{children}</>;
 };
