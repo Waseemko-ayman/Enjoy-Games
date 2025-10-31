@@ -19,7 +19,6 @@ import {
   DrawerTitle,
 } from '@/components/ui/drawer';
 import { WalletProvider } from '@/context/WalletContext';
-import { UserInfoProvider } from '@/context/UserInfoContext';
 
 const PopupMenu: React.FC<PopupMenuProps> = ({ open, onOpenChange }) => {
   const { token, logout } = useAuthContext();
@@ -44,13 +43,11 @@ const PopupMenu: React.FC<PopupMenuProps> = ({ open, onOpenChange }) => {
         <PopupHeader onClose={() => onOpenChange(false)} />
         <div className="px-4 mt-4">
           {token ? (
-            <UserInfoProvider>
-              <WalletProvider>
-                <AnimatedWrapper>
-                  <Information />
-                </AnimatedWrapper>
-              </WalletProvider>
-            </UserInfoProvider>
+            <WalletProvider>
+              <AnimatedWrapper>
+                <Information />
+              </AnimatedWrapper>
+            </WalletProvider>
           ) : (
             <AuthButtons t={t} />
           )}

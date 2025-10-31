@@ -4,7 +4,6 @@ import { Tabs } from '@/components/ui/tabs';
 import PageTitle from '@/components/ui/common/PageTitle';
 import TabsNavigation from '@/components/ui/display/TabsNavigation';
 import AccountSettings from './Sections/AccountSettings';
-import { UserInfoProvider } from '@/context/UserInfoContext';
 import SessionTimeoutSettings from './Sections/SessionTimeoutSettings';
 import { useTranslations } from 'next-intl';
 import { useToggleLocale } from '@/hook/useToggleLocale';
@@ -33,9 +32,7 @@ const SettingsPage = () => {
         dir={isArabic ? 'rtl' : 'ltr'}
       >
         <TabsNavigation tabs={tabsData} />
-        <UserInfoProvider>
-          <AccountSettings />
-        </UserInfoProvider>
+        <AccountSettings />
         <SessionTimeoutSettings />
       </Tabs>
     </div>
