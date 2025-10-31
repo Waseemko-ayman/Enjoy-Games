@@ -24,8 +24,6 @@ const Information = () => {
   const { myWallet, isLoading, error } = useWallet();
   const { user, isLoading: infoLoading, error: infoError } = useUserInfo();
 
-  console.log(user);
-
   return (
     <CardWrapper
       bgColor="bg-white"
