@@ -1141,6 +1141,7 @@
       "typeYourReply": "write your response here...",
       "searchCustomer": "Search for customer...",
       "searchEmployee": "Search for employee...",
+      "searchUser": "Search for user...",
       "selectPermissions": "Select Permissions",
       "permissions": "Select Permissions",
       "status": "Select Status"
