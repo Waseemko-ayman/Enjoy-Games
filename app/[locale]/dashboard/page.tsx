@@ -1,18 +1,28 @@
 'use client';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuthContext } from '@/context/AuthContext';
 import { linkPermissionMap } from '@/utils/linkPermissionMap';
 import DashboardPage from '@/components/pages/dashboard';
+import { useUserInfo } from '@/context/UserInfoContext';
 
 const Dashboard = () => {
   const router = useRouter();
-  const { user } = useAuthContext();
+  // Get User Information
+  const { user } = useUserInfo();
 
   useEffect(() => {
     if (!user) return;
 
-    if (!user?.is_admin && user?.permissions?.length) {
+    const isAdmin = user?.is_admin || user?.roles?.includes('admin');
+
+    // If Admin -> Logs in directly
+    if (isAdmin) return;
+
+    // If Manage Orders -> Logs in to the main dashboard page
+    if (user?.permissions?.includes('manage orders')) return;
+
+    // Otherwise -> Goes to the first page he has access to
+    if (user?.permissions?.length) {
       const firstAllowed = Object.entries(linkPermissionMap).find(([, perm]) =>
         user?.permissions?.includes(perm)
       );
@@ -22,12 +32,17 @@ const Dashboard = () => {
       } else {
         router.replace('/');
       }
+    } else {
+      router.replace('/');
     }
   }, [user, router]);
 
-  if (user?.is_admin) return <DashboardPage />;
+  const isAdmin = user?.is_admin || user?.roles?.includes('admin');
 
-  // During conversion, we do not display the dashboard content.
+  if (isAdmin || user?.permissions?.includes('manage orders'))
+    return <DashboardPage />;
+
+  // During the conversion, we do not display anything
   return null;
 };
 
