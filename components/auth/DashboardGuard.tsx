@@ -5,23 +5,26 @@ import { useAuthContext } from '@/context/AuthContext';
 import { PATHS as PATHS_DATA } from '@/data/paths';
 import { PATHS as PATHS_HELPER } from '@/utils/router.helper';
 import { linkPermissionMap } from '@/utils/linkPermissionMap';
+import Loading from '../molecules/loading';
+import { useUserInfo } from '@/context/UserInfoContext';
 
 export default function DashboardGuard({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { user, token, isLoading } = useAuthContext();
+  const { token } = useAuthContext();
+
+  // Get User Information
+  const { user, isLoading } = useUserInfo();
+
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    const isDashboardPath = pathname.startsWith(PATHS_DATA.DASHBOARD.HOME.ROOT);
-    // const noPermissions =
-    //   !user?.permissions || user.permissions.length === 0;
-    const noPermissions =
-      (!user?.permissions || user.permissions.length === 0) &&
-      !user?.roles?.includes('admin');
+    const pathnameWithoutLocale = pathname.replace(/^\/(en|ar)/, '');
+    const isDashboardPath = pathnameWithoutLocale.startsWith('/dashboard');
+    // const isDashboardPath = pathname.startsWith(PATHS_DATA.DASHBOARD.HOME.ROOT);
 
     if (!isLoading && isDashboardPath) {
       if (!token) {
@@ -29,16 +32,26 @@ export default function DashboardGuard({
         return;
       }
 
-      if (noPermissions) {
+      // const canAccessDashboard =
+      //   (user?.permissions && user.permissions.length > 0) ||
+      //   user?.roles?.includes('admin');
+      const canAccessDashboard =
+        user?.permissions?.includes('manage orders') ||
+        user?.roles?.includes('admin');
+
+      if (!canAccessDashboard) {
         router.push(PATHS_DATA.HOME.link);
         return;
       }
 
       // --- Check page validity ---
-      const segment = pathname.split('/dashboard/')[1]?.split('/')[0];
+      const segment = pathnameWithoutLocale
+        .split('/dashboard/')[1]
+        ?.split('/')[0];
       const requiredPermission = linkPermissionMap[segment];
       const hasPermission = requiredPermission
-        ? user?.permissions?.includes(requiredPermission)
+        ? user?.permissions?.includes(requiredPermission) ||
+          user?.roles?.includes('admin')
         : true;
 
       if (!hasPermission) {
@@ -46,6 +59,9 @@ export default function DashboardGuard({
       }
     }
   }, [pathname, token, isLoading, user, router]);
+
+  if (isLoading)
+    return <Loading otherClassName="mt-0 min-h-[calc(100vh-200px)]" />;
 
   return <>{children}</>;
 }
