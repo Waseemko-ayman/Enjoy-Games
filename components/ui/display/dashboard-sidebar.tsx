@@ -18,7 +18,6 @@ import InlineError from '@/components/molecules/InlineError';
 import Avatar from '@/components/atomic/Avatar';
 import { useUserInfo } from '@/context/UserInfoContext';
 import { API_IMAGE_URL } from '@/config/api';
-import { useAuthContext } from '@/context/AuthContext';
 import { linkPermissionMap } from '@/utils/linkPermissionMap';
 
 export function DashboardSidebar() {
@@ -29,22 +28,14 @@ export function DashboardSidebar() {
   const isMobile = useIsMobile(991);
   const { isArabic } = useToggleLocale();
   const { user, isLoading, error } = useUserInfo();
-  const { user: authUser } = useAuthContext();
 
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  const permissions = authUser?.permissions || [];
-
-  const roles = authUser?.roles || [];
-  const isAdmin = authUser?.is_admin || roles.includes('admin');
-
-  // Full permissions = user admin
-  // const allPermissions = Object.values(linkPermissionMap);
-  // const isAdmin =
-  //   permissions.length &&
-  //   allPermissions.every((perm) => permissions.includes(perm));
+  const permissions = user?.permissions || [];
+  const roles = user?.roles || [];
+  const isAdmin = user?.is_admin || roles.includes('admin');
 
   const SidebarContent = () => (
     <>
@@ -127,7 +118,7 @@ export function DashboardSidebar() {
             <p className="text-xs">
               {isLoading
                 ? t('Loading.loadingMessage')
-                : authUser?.is_admin
+                : user?.is_admin
                 ? t('Dashboard.roles.admin')
                 : t('Dashboard.roles.user')}
             </p>
