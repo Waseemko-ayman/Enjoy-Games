@@ -19,6 +19,7 @@ import { OrdersProvider } from '@/context/OrdersContext';
 import { InterestsProvider } from '@/context/InterestsContext';
 import { ReferralCodeProvider } from '@/hook/ReferralCodeContext';
 import { API_URL } from '@/config/api';
+import { UserInfoProvider } from '@/context/UserInfoContext';
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -71,25 +72,27 @@ export default async function RootLayout({
           <LocaleSync />
           <ErrorBoundary>
             <AuthProvider>
-              <ProductCodesProvider>
-                <UpdateContentProvider>
-                  <CurrencyProvider>
-                    <CartProvider>
-                      <TicketsProvider>
-                        <OrdersProvider>
-                          <InterestsProvider>
-                            <ReferralCodeProvider>
-                              <BodyWrapper>
-                                <DashboardGuard>{children}</DashboardGuard>
-                              </BodyWrapper>
-                            </ReferralCodeProvider>
-                          </InterestsProvider>
-                        </OrdersProvider>
-                      </TicketsProvider>
-                    </CartProvider>
-                  </CurrencyProvider>
-                </UpdateContentProvider>
-              </ProductCodesProvider>
+              <UserInfoProvider>
+                <ProductCodesProvider>
+                  <UpdateContentProvider>
+                    <CurrencyProvider>
+                      <CartProvider>
+                        <TicketsProvider>
+                          <OrdersProvider>
+                            <InterestsProvider>
+                              <ReferralCodeProvider>
+                                <BodyWrapper>
+                                  <DashboardGuard>{children}</DashboardGuard>
+                                </BodyWrapper>
+                              </ReferralCodeProvider>
+                            </InterestsProvider>
+                          </OrdersProvider>
+                        </TicketsProvider>
+                      </CartProvider>
+                    </CurrencyProvider>
+                  </UpdateContentProvider>
+                </ProductCodesProvider>
+              </UserInfoProvider>
             </AuthProvider>
           </ErrorBoundary>
         </NextIntlClientProvider>
