@@ -721,7 +721,7 @@ export interface UserInfo {
   phone?: string;
   date?: string;
   gender?: 'male' | 'female' | null;
-  photo?: FileList | string | null;
+  photo?: File | FileList | string | null;
   referral_code: string;
   roles: string[];
   permissions: string[];
