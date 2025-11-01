@@ -1,6 +1,5 @@
 'use client';
 import React, { ReactNode } from 'react';
-import BackgroundCircles from '../../molecules/BackgroundCircles';
 import Link from 'next/link';
 import { PATHS } from '@/data/paths';
 import { FaX } from 'react-icons/fa6';
@@ -8,6 +7,7 @@ import { useToggleLocale } from '@/hook/useToggleLocale';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import BackgroundGradientWrapper from '@/components/molecules/BackgroundGradientWrapper';
 
 const MainAuthLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
@@ -18,10 +18,7 @@ const MainAuthLayout = ({ children }: { children: ReactNode }) => {
   const t = useTranslations('Languages');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-purple-50 to-white relative overflow-hidden">
-      {/* Background Circles */}
-      <BackgroundCircles />
-
+    <BackgroundGradientWrapper>
       <div className="relative">
         {/* Header */}
         <div className="flex justify-between items-center py-3 px-6">
@@ -48,7 +45,7 @@ const MainAuthLayout = ({ children }: { children: ReactNode }) => {
         </div>
         {children}
       </div>
-    </div>
+    </BackgroundGradientWrapper>
   );
 };
 

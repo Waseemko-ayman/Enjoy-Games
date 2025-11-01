@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect } from 'react';
 import useAPI from '@/hook/useAPI';
 import { UserInfoContextType, UserInfo } from '@/interfaces';
+import { useAuthContext } from './AuthContext';
 
 const UserInfoContext = createContext<UserInfoContextType>({
   user: null,
@@ -15,10 +16,11 @@ export const UserInfoProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { get, data, isLoading, error } = useAPI<UserInfo>('user/my-info');
+  const { token } = useAuthContext();
 
   useEffect(() => {
-    get();
-  }, [get]);
+    if (token) get();
+  }, [token, get]);
 
   const refresh = () => get();
 
