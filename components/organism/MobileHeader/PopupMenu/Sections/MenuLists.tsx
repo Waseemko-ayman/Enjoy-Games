@@ -8,6 +8,7 @@ import { FaGlobe } from 'react-icons/fa6';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { useTranslations } from 'next-intl';
 import { useAuthContext } from '@/context/AuthContext';
+import { useUserInfo } from '@/context/UserInfoContext';
 
 const MenuLists = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
@@ -16,7 +17,8 @@ const MenuLists = () => {
   const t = useTranslations('Layout.header.navBarPopup');
   const langTexts = useTranslations('Languages');
   const titleTxts = useTranslations('PagesHeaderTitles');
-  const { user, token } = useAuthContext();
+  const { token } = useAuthContext();
+  const { user } = useUserInfo();
 
   return (
     <div className="mt-4">
