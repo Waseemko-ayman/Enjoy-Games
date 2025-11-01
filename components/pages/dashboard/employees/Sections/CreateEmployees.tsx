@@ -3,22 +3,28 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
-import * as yup from 'yup';
+// import * as yup from 'yup';
 import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useToast } from '@/lib/toast';
 import useAPI from '@/hook/useAPI';
-import { CreateUsersFields } from '@/utils/constant';
 import FormField from '@/components/ui/FormField';
 import { InputTypes } from '@/utils/type';
 import SettingsTab from '@/components/ui/display/SettingsTab';
 import { useUpdateContent } from '@/context/updateContentContext';
 import { useTranslations } from 'next-intl';
-import { CreateUsersPorps } from '@/interfaces';
+import { CreateEmployeesPorps } from '@/interfaces';
+// import {
+//   alphanumericWithArabicRegex,
+//   emailRegex,
+//   phoneReqExp,
+// } from '@/utils/regex';
+import { CreateEmployeesFields } from '@/utils/constant';
+import { getUserSchema, toFormData } from '@/utils/accountSchema';
 
 // ----------------------------------------------------------------
 
-const CreateUsers = ({
+const CreateEmployees = ({
   value,
   onTabChange,
 }: {
@@ -29,35 +35,16 @@ const CreateUsers = ({
 }) => {
   const { showToast } = useToast();
   const t = useTranslations();
-  const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const { triggerRefresh } = useUpdateContent();
   const refreshKey = 'users';
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const alphanumericWithArabicRegex = /^[A-Za-z\u0621-\u064A0-9_ ]{5,}$/;
+  // Date Now
+  const date = new Date();
+  const currentYear = date.getFullYear();
 
   // ----------------------------------------------------------------
 
-  const schema = yup.object().shape({
-    name: yup
-      .string()
-      .matches(alphanumericWithArabicRegex, errorsMsgs('usernameInvalid'))
-      .required('usernameRequired'),
-    email: yup
-      .string()
-      .email()
-      .matches(emailRegex, errorsMsgs('emailPatternInvalid'))
-      .required(errorsMsgs('emailRequired')),
-    password: yup.string().required(errorsMsgs('passwordRequired')),
-    password_confirmation: yup
-      .string()
-      .oneOf([yup.ref('password')], errorsMsgs('repasswordNotMatch'))
-      .required(errorsMsgs('repasswordRequired')),
-    permissions: yup
-      .array()
-      .of(yup.string())
-      .required(errorsMsgs('permissionsRequired')),
-  });
+  const schema = getUserSchema(t, currentYear);
 
   // ----------------------------------------------------------------
 
@@ -67,33 +54,27 @@ const CreateUsers = ({
     reset,
     control,
     formState: { errors },
-  } = useForm<CreateUsersPorps>({
-    resolver: yupResolver(schema),
+  } = useForm<CreateEmployeesPorps>({
+    resolver: yupResolver(schema) as any,
   });
 
   // ----------------------------------------------------------------
 
   // API Hook
-  const { add, isLoading } = useAPI<FormData, any>('users/create');
+  const { add, isLoading } = useAPI<FormData, any>('employees/create');
 
   // ----------------------------------------------------------------
 
-  const onSubmit: SubmitHandler<CreateUsersPorps> = async (data) => {
+  const onSubmit: SubmitHandler<CreateEmployeesPorps> = async (data) => {
     try {
-      const formData = new FormData();
-      formData.append('name', data.name);
-      formData.append('email', data.email);
-      formData.append('password', data.password);
-      formData.append('password_confirmation', data.password_confirmation);
-      formData.append('permissions', JSON.stringify(data.permissions));
-
+      const formData = toFormData(data);
       const response = await add(formData);
 
       if (response) {
         showToast(response.message);
         reset();
         triggerRefresh(refreshKey);
-        onTabChange('allUsers');
+        onTabChange('allEmployee');
       }
     } catch (err: any) {
       showToast(err?.response?.message || 'حدث خطأ', 'error');
@@ -105,14 +86,33 @@ const CreateUsers = ({
   return (
     <SettingsTab
       value={value}
-      title={t('Dashboard.products.createProduct')}
-      description={t('Dashboard.products.createNewProduct')}
+      title={t('Dashboard.Users.createEmployees')}
+      description={t('Dashboard.Users.createNewEmployees')}
     >
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="grid gap-5 md:grid-cols-2 mb-5">
-          {CreateUsersFields.map(
+          {CreateEmployeesFields.map(
             ({ id, label, name, placeholder, type, options }) => {
               const isMultiSelect = ['permissions'].includes(name);
+              const fieldOptions = options?.map((opt) => {
+                if ('labelKey' in opt && 'value' in opt) {
+                  return {
+                    id: opt.id,
+                    name:
+                      t(`Inputs.options.gender.${opt.labelKey}`) ||
+                      opt.labelKey,
+                    value: opt.value,
+                  };
+                } else if ('name' in opt) {
+                  return {
+                    id: opt.id,
+                    name:
+                      t(`Dashboard.Users.permissions.${opt.name}`) || opt.name,
+                    value: opt.id,
+                  };
+                }
+                return opt;
+              });
               return (
                 <FormField
                   key={id}
@@ -121,14 +121,15 @@ const CreateUsers = ({
                   label={t(`Inputs.labels.${label}`)}
                   placeholder={t(`Inputs.placeHolders.${placeholder}`)}
                   register={register}
-                  options={options?.map((opt) => ({
-                    id: opt.id,
-                    name: t(`Dashboard.Users.permissions.${opt.name}`),
-                  }))}
+                  options={fieldOptions}
+                  // options={options?.map((opt) => ({
+                  //   id: opt.id,
+                  //   name: t(`Dashboard.Users.permissions.${opt.name}`),
+                  // }))}
                   control={control}
                   isMulti={isMultiSelect}
                   error={
-                    errors[name as keyof CreateUsersPorps] as
+                    errors[name as keyof CreateEmployeesPorps] as
                       | FieldError
                       | undefined
                   }
@@ -145,4 +146,4 @@ const CreateUsers = ({
   );
 };
 
-export default CreateUsers;
+export default CreateEmployees;

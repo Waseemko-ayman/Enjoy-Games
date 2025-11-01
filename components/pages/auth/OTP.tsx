@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
@@ -12,6 +13,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { PATHS } from '@/data/paths';
 import { useRouter } from 'next/navigation';
+import useAPI from '@/hook/useAPI';
+import { useToast } from '@/lib/toast';
 
 const otpSchema = yup.object({
   otp: yup.string().required(),
@@ -22,11 +25,22 @@ type OtpFormData = yup.InferType<typeof otpSchema>;
 const OTPPage = () => {
   const [timeLeft, setTimeLeft] = React.useState(300);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
-  const authTxts = useTranslations('Auth');
-  const btnTxts = useTranslations('BtnTexts');
-  const { verifyOtp, isLoading, login, token } = useAuthContext();
 
   const router = useRouter();
+
+  // Translations
+  const authTxts = useTranslations('Auth');
+  const btnTxts = useTranslations('BtnTexts');
+  const t = useTranslations('Dashboard.settings.sissionTimeout');
+
+  // Context
+  const { verifyOtp, isLoading, login, token } = useAuthContext();
+
+  // Notifications
+  const { showToast } = useToast();
+
+  // Hook for API
+  const { add: setSessionAPI } = useAPI<any, any>('session-timeout/set');
 
   const {
     register,
@@ -117,6 +131,13 @@ const OTPPage = () => {
         throw new Error(authTxts('emailNotFound'));
       }
       await verifyOtp(email, data.otp);
+
+      try {
+        const res = await setSessionAPI({});
+        showToast(res?.data?.message || t('SessionSuccessfully'));
+      } catch (err: any) {
+        showToast(err?.response?.data?.message || t('SessionFaild'), 'error');
+      }
     } catch (error) {
       console.error(`${authTxts('verificationFailedCode')}:`, error);
     }

@@ -8,8 +8,10 @@ import {
   CommonCardVariant,
   footerListsName,
   NavbarLayout,
+  StateCardColors,
 } from '@/utils/type';
 import { Variants } from 'framer-motion';
+import { LucideIcon } from 'lucide-react';
 import { Messages, useTranslations } from 'next-intl';
 import { ElementType, JSX, ReactNode } from 'react';
 
@@ -707,6 +709,7 @@ export interface myAccountStatsProps {
   amount?: string | number | JSX.Element;
   currency?: string | number | JSX.Element;
   href?: string;
+  role?: string | React.ReactNode;
 }
 
 export interface UserInfo {
@@ -718,8 +721,11 @@ export interface UserInfo {
   phone?: string;
   date?: string;
   gender?: 'male' | 'female' | null;
-  photo?: FileList | string | null;
+  photo?: File | FileList | string | null;
   referral_code: string;
+  roles: string[];
+  permissions: string[];
+  is_admin: boolean;
 }
 
 export interface UserInfoContextType extends APIRequest {
@@ -858,8 +864,15 @@ export interface signupFormData extends LoginFormData {
   referral_code?: string | null;
 }
 
-export interface CreateUsersPorps extends signupFormData {
-  permissions: (string | undefined)[];
+export interface CreateCustomersPorps extends signupFormData {
+  permissions?: (string | undefined)[];
+  phone?: string;
+  date?: string;
+  gender?: 'male' | 'female';
+}
+
+export interface CreateEmployeesPorps extends signupFormData, CreateCustomersPorps {
+  photo?: FileList | string | null;
 }
 
 type Account = {
@@ -1424,4 +1437,57 @@ export interface FraudStats {
   pending_review: number;
   approved: number;
   blocked: number;
+}
+
+export interface TimeoutSettingsSite {
+  demo: {
+    timeout_minutes: number;
+    timeout_hours: number;
+    label: string;
+  };
+  live: {
+    timeout_minutes: number;
+    timeout_hours: number;
+    label: string;
+  };
+}
+
+export interface TimeoutSettings {
+  demo_timeout_minutes: number;
+  live_timeout_minutes: number;
+  current_status: string;
+  current_timeout_minutes: number;
+  current_timeout_hours: number;
+  settings: TimeoutSettingsSite;
+}
+
+export interface SiteCardProps {
+  icon: LucideIcon;
+  gradient: string;
+  titleKey: string;
+  settings: any;
+  t: TranslationFunction;
+}
+
+export interface ProductInventoryStats {
+  product_id: number;
+  product_title: {
+    en: string;
+    ar: string;
+  };
+  total_codes: number;
+  available_codes: number;
+  used_codes: number;
+  is_in_stock: boolean;
+  stock_percentage: number;
+}
+
+export interface StateCardItem {
+  title: string;
+  value: number | string;
+  icon: React.ReactNode;
+  trend?: number;
+  color: StateCardColors;
+  suffix?: string;
+  otherClassName?: string;
 }

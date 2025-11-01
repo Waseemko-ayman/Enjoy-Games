@@ -1,15 +1,15 @@
 'use client';
 import React from 'react';
 import { DashboardSidebar } from '@/components/ui/display/dashboard-sidebar';
-import { UserInfoProvider } from '@/context/UserInfoContext';
 
 const MainDashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-screen flex-col md:flex-row bg-white">
-      <UserInfoProvider>
+    <div className="flex h-screen bg-white overflow-hidden">
+      <div className="h-full sticky top-0 z-50">
         <DashboardSidebar />
-      </UserInfoProvider>
-      <main className="flex-1 p-4 pt-16 md:p-6 md:pt-6 overflow-x-hidden">
+      </div>
+
+      <main className="flex-1 overflow-y-auto p-4 pt-16 md:p-6 md:pt-6">
         {children}
       </main>
     </div>

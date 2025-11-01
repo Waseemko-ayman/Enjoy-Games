@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -16,16 +17,31 @@ import { useAuthContext } from '@/context/AuthContext';
 import { InputTypes } from '@/utils/type';
 import { useRouter } from 'next/navigation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
-import SocialLogin from '@/components/molecules/SocialLogin';
+import useAPI from '@/hook/useAPI';
+import { useToast } from '@/lib/toast';
+import Loading from '@/components/molecules/loading';
 
 const LoginPage = () => {
   const [showPass, setShowPass] = useState(false);
+  const [showPageLoading, setShowPageLoading] = useState(false);
+
+  // Translations
   const inputsTxts = useTranslations('Inputs');
   const errorsMsgs = useTranslations('Inputs.errorsMsgs');
   const authTxts = useTranslations('Auth');
   const btnTxts = useTranslations('BtnTexts');
+  const t = useTranslations('Dashboard.settings.sissionTimeout');
+
+  // Context
   const { login, isLoading, token } = useAuthContext();
+
   const router = useRouter();
+
+  // Notifications
+  const { showToast } = useToast();
+
+  // Hook for API
+  const { add: setSessionAPI } = useAPI<any, any>('session-timeout/set');
 
   const schema = Yup.object().shape({
     email: Yup.string()
@@ -47,8 +63,15 @@ const LoginPage = () => {
     setShowPass(!showPass);
   };
 
-  const onSubmit = (data: LoginFormData) => {
-    login(data);
+  const onSubmit = async (data: LoginFormData) => {
+    await login(data);
+    setShowPageLoading(true);
+    try {
+      const res = await setSessionAPI({});
+      showToast(res?.data?.message || t('SessionSuccessfully'));
+    } catch (err: any) {
+      showToast(err?.response?.data?.message || t('SessionFaild'), 'error');
+    }
     reset();
   };
 
@@ -61,6 +84,9 @@ const LoginPage = () => {
       router.replace(PATHS.OTP);
     }
   }, [token, router]);
+
+  if (showPageLoading)
+    return <Loading otherClassName="mt-0 min-h-[calc(100vh-200px)]" />;
 
   return (
     <AuthLayout
@@ -115,7 +141,7 @@ const LoginPage = () => {
         );
       })}
 
-      <SocialLogin btnTxts={btnTxts} authTxts={authTxts} />
+      {/* <SocialLogin btnTxts={btnTxts} authTxts={authTxts} /> */}
 
       <p className="text-xs text-[var(--enjoy-gray-650)] font-normal text-center mt-4">
         {authTxts('dontHaveAccount')}{' '}

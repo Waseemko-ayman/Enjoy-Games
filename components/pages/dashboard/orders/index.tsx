@@ -22,6 +22,7 @@ const OrdersPage = () => {
       tabs={tabsData}
       allComponent={AllOrders}
       overviewComponent={SuspiciousTransactions}
+      overviewTabValue="suspiciousTransactions"
     />
   );
 };

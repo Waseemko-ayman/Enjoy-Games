@@ -217,7 +217,8 @@
     "statsTitles": {
       "balance": "My Balance",
       "currentLevel": "You currently have",
-      "interests": "Interests"
+      "interests": "Interests",
+      "role": "Role"
     },
     "accountOptions": {
       "sendCardCodeToEmail": "Send card code to email",
@@ -392,7 +393,7 @@
     "basketSummary": "Basket Summary",
     "choosePaymentMethod": "Choose Payment Method",
     "emptyStateTitle": "Your basket is ready and waiting for you to shop",
-    "termsAndPrivacyAgreement": "By proceeding to payment you agree to <termsLink>Terms of Use</termsLink> and <privacyLink>Privacy Policy</privacyLink> of Enjoy Games",
+    "termsAndPrivacyAgreement": "By proceeding to payment you agree to <termsLink>Terms of Use</termsLink> and <privacyLink>Privacy Policy</privacyLink>, and the Enjoy Games Terms and Conditions.",
     "discountCoupon": "Discount Coupon:",
     "cartSummary": "Shopping Cart Summary",
     "rewards": {
@@ -673,12 +674,23 @@
     "ratings": "Ratings",
     "orders": "Orders",
     "notifications": "Notifications",
-    "users": "Users",
+    "employees": "Employees",
+    "customers": "Customers",
     "productSubscribers": "Product Subscribers",
-    "settings": "Settings"
+    "settings": "Settings",
+    "support": "Support"
   },
   "Dashboard": {
     "desc": "Welcome to your order management orders",
+    "roles": {
+      "admin": "Administrator",
+      "user": "User",
+      "custom": "Custom",
+      "moderator": "Moderator",
+      "all": "All",
+      "employees": "Employees",
+      "customers": "Customers"
+    },
     "overview": {
       "title": "Orders Overview",
       "desc": "Analysis of orders during the specified period",
@@ -705,7 +717,9 @@
       "desc": "Create and manage codes for your store",
       "manageCodes": "Manage all codes in one place",
       "createCode": "Create a code",
-      "createNewCode": "Create a new code"
+      "createNewCode": "Create a new code",
+      "CreateBulkImportCodes": "Create Bulk Codes",
+      "ImportCodes": "Import Codes"
     },
     "categories": {
       "title": "Create a section",
@@ -730,7 +744,12 @@
       "desc": "Create and manage products for your store",
       "manageProducts": "Manage all products in one place",
       "createProduct": "Create Product",
-      "createNewProduct": "Create New Product"
+      "createNewProduct": "Create New Product",
+      "InventoryStatistics": {
+        "title": "Code Inventory Statistics",
+        "desc": "View code statistics for each product and check available and used stock"
+      },
+      "codeInventoryStatistics": "Code Inventory Statistics"
     },
     "coupons": {
       "title": "All Coupons",
@@ -772,11 +791,16 @@
       "suspiciousTransactions": "Suspicious Transactions"
     },
     "Users": {
-      "title": "All Users",
-      "desc": "Manage Users for your store",
-      "manageUsers": "Manage all Users in one place",
-      "createUsers": "Create Users",
-      "createNewUsers": "Create new User",
+      "CustomerTitle": "All Customers",
+      "CustomerDesc": "Manage Customers for your store",
+      "EmployeeTitle": "All Employees",
+      "EmployeeDesc": "Manage Employees for your store",
+      "manageCustomers": "Manage all Customers in one place",
+      "manageEmployees": "Manage all Employees in one place",
+      "createEmployees": "Create Employees",
+      "createNewEmployee": "Create new Employee",
+      "createCustomers": "Create Customers",
+      "createNewCustomers": "Create new Customer",
       "permissions": {
         "manageProducts": "Manage Products",
         "manageSettings": "Manage Settings",
@@ -789,7 +813,9 @@
         "manageOrders": "Manage Orders",
         "manageRatings": "Manage Ratings",
         "replyTickets": "Reply Tickets"
-      }
+      },
+      "userPermissions": "User Permissions",
+      "noPermissions": "No permissions assigned to this user."
     },
     "productSubscribers": {
       "title": "All subscribers to a product",
@@ -798,7 +824,38 @@
     },
     "settings": {
       "title": "Account Settings",
-      "desc": "Update your account information"
+      "desc": "Update your account information",
+      "pageDesc": "Manage your account settings and preferences",
+      "sissionTimeout": {
+        "title": "Session Timeout Settings",
+        "desc": "Gets the current global session duration settings (in minutes and hours) for each site instance.",
+        "CurrentStatus": "Current Status",
+        "Live": "Live",
+        "Demo": "Demo",
+        "TimeoutDuration": "Timeout Duration",
+        "Minutes": "min",
+        "InHours": "In Hours",
+        "Hours": "hrs",
+        "DemoSite": "Demo Site",
+        "LiveSite": "Live Site",
+        "TimeoutMinutes": "Timeout (minutes)",
+        "TimeoutHours": "Timeout (hours)",
+        "Note": "Note",
+        "NoteMessage": "Session timeout settings determine how long users remain authenticated before requiring re-login. Adjust these values based on your security requirements.",
+        "FakeWebsite": "fake website",
+        "OfficialWebsite": "official website",
+        "UpdateSessionTimeout": "Update Session Timeout",
+        "UpdateDesc": "Set global timeout values for demo and live sessions (minutes).",
+        "DemoMinutes": "Demo (minutes)",
+        "LiveMinutes": "Live (minutes)",
+        "UpdateSettings": "Update Settings",
+        "session_ended": "No active session",
+        "session_time_label": "Session expires in",
+        "SessionSuccessfully": "Session duration set successfully",
+        "SessionFaild": "An error occurred while setting the session.",
+        "SessionSuccessfullyCleared": "The session was successfully cleared.",
+        "SessionFaildCleared": "An error occurred while clearing the session."
+      }
     },
     "socialStats": {
       "title": "Social Login Statistics",
@@ -898,7 +955,7 @@
     "createAccount": "Create an Account",
     "logout": "Logout",
     "MoreAboutParticipateAndWin": "More About Participate and Win",
-    "MoreAboutEnjoyGames": "More About Enjoy Games",
+    "MoreAboutEnjoyGames": "More About Loyalty Enjoy Games",
     "AddTicket": "Add Ticket",
     "faqs": "FAQS",
     "sendTicket": "Send Ticket",
@@ -933,7 +990,11 @@
     "Approve": "Approve",
     "Block": "Block",
     "approveSelected": "Approve Selected",
-    "blockSelected": "Block Selected"
+    "blockSelected": "Block Selected",
+    "extend_button": "Extend Session",
+    "extending_button": "Extending...",
+    "AddCode": "Add Code",
+    "Remove": "Remove"
   },
   "Inputs": {
     "labels": {
@@ -944,7 +1005,7 @@
       "referral_code": "Referral Code (Optional)",
       "gender": "Gender",
       "phone": "Mobile Number",
-      "birthDate": "Birth Date",
+      "date": "Birth Date",
       "quantity": "Quantity",
       "twitter": "Twitter",
       "facebook": "Facebook",
@@ -959,6 +1020,7 @@
       "englishName": "Name (English)",
       "icon": "Icon",
       "image": "Image",
+      "profileImage": "Profile Image",
       "categoryID": "Category",
       "parentID": "Subcategory",
       "arabicTitle": "Title (Arabic)",
@@ -973,6 +1035,8 @@
       "priceBefore": "Old Price",
       "shippingPayment": "Payment Method",
       "code": "Code",
+      "bulkCodes": "Bulk Codes",
+      "notes": "Notes",
       "accountId": "Account ID",
       "multiId": "Multiple IDs",
       "access": "Access / Account Data",
@@ -1010,7 +1074,7 @@
       "name": "",
       "email": "",
       "phone": "xxxxxxxxx",
-      "birthDate": "--/--/----",
+      "date": "--/--/----",
       "gender": "Select Gender",
       "writeCouponHere": "Enter coupon code here...",
       "Choose": "Choose...",
@@ -1057,6 +1121,8 @@
       "addImage": "Add image",
       "productID": "Product",
       "writeCode": "Enter code",
+      "writeCodes": "Enter codes",
+      "writeNotes": "Enter notes",
       "writeValue": "Enter coupon value",
       "selectType": "Select type",
       "writeUsageLimit": "Enter usage limit",
@@ -1073,6 +1139,8 @@
       "writeMessage": "Enter description...",
       "selectAttachments": "Select files",
       "typeYourReply": "write your response here...",
+      "searchCustomer": "Search for customer...",
+      "searchEmployee": "Search for employee...",
       "searchUser": "Search for user...",
       "selectPermissions": "Select Permissions",
       "permissions": "Select Permissions",
@@ -1098,6 +1166,7 @@
       "loginMethodRequired": "Login Method Required",
       "accountIdRequired": "ID Number Required",
       "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Invalid mobile number",
       "birthDateRequired": "Birth date is required",
       "genderOneOf": "Please select a gender",
       "genderRequired": "Gender is required",
@@ -1148,6 +1217,11 @@
       "messageRequired": "Message Required",
       "termsAccepted": "Terms and Privacy Policy must be accepted.",
       "invalidDate": "Date must be between 1935 and",
+      "invalidDateFormat": "The date must include '/' in the format MM/DD/YYYY",
+      "invalidDateStructure": "Invalid date, should be in MM/DD/YYYY format",
+      "invalidDateNumbers": "The date must contain valid numbers only",
+      "invalidMonth": "Month must be between 1 and 12",
+      "invalidDay": "Day must be between 1 and 31",
       "unlockAccountRequired": "Account unlock required"
     }
   },

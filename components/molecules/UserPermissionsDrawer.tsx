@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -14,6 +14,7 @@ import Button from '../atomic/Button';
 import ButtonLoading from '../atomic/ButtonLoading';
 import useIsMobile from '@/hook/useIsMobile';
 import { permissionsOptions } from '@/utils/constant';
+import Loading from './loading';
 
 interface UserPermissionsDrawerProps {
   userId: string | number;
@@ -37,34 +38,48 @@ const UserPermissionsDrawer: React.FC<UserPermissionsDrawerProps> = ({
   const { showToast } = useToast();
   const isMobile = useIsMobile();
 
+  const { get, data: user, isLoading: userInfoLoading } = useAPI(`users/all`);
+  const { add, isLoading } = useAPI(`users/update/${userId}/permissions`);
+
+  const userPermissions = user?.find((u: any) => u.id === userId)?.permissions;
+
   const schema = yup.object().shape({
-    permissions: yup
-      .array()
-      .of(yup.string().required())
-      .min(1, t('Inputs.errorsMsgs.permissionsRequired'))
-      .defined(), // ← يضمن إنها مش undefined
+    permissions: yup.array().of(yup.string().required()).defined(), // ← يضمن إنها مش undefined
+    // .min(1, t('Inputs.errorsMsgs.permissionsRequired'))
   });
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: { permissions: [] },
   });
 
-  const { add, isLoading } = useAPI(`users/update/${userId}/permissions`);
-
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      const response = await add(data);
+      const payload = data?.permissions?.includes('')
+        ? { permissions: [] }
+        : data;
+      const response = await add(payload);
       showToast(response.message);
       setOpen(false);
     } catch (err: any) {
       showToast(err?.response?.message || 'حدث خطأ', 'error');
     }
   };
+
+  useEffect(() => {
+    if (open && userPermissions) {
+      reset({ permissions: userPermissions });
+    }
+  }, [open, userPermissions, reset]);
+
+  useEffect(() => {
+    if (open) get();
+  }, [open, get]);
 
   return (
     <ResponsiveDialogDrawer
@@ -73,24 +88,28 @@ const UserPermissionsDrawer: React.FC<UserPermissionsDrawerProps> = ({
       isMobile={isMobile}
       trigger={trigger}
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <FormField
-          inputName="permissions"
-          type="multi-select"
-          label={t('Inputs.labels.permissions')}
-          placeholder={t('Inputs.placeHolders.permissions')}
-          control={control}
-          isMulti
-          options={permissionsOptions.map((opt) => ({
-            id: opt.id,
-            name: t(`Dashboard.Users.permissions.${opt.name}`) || '',
-          }))}
-          error={errors['permissions'] as FieldError | undefined}
-        />
-        <Button type="submit" otherClassName="p-3">
-          {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
-        </Button>
-      </form>
+      {userInfoLoading ? (
+        <Loading width="w-12" height="h-12" otherClassName="!mt-0" />
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <FormField
+            inputName="permissions"
+            type="multi-select"
+            label={t('Inputs.labels.permissions')}
+            placeholder={t('Inputs.placeHolders.permissions')}
+            control={control}
+            isMulti
+            options={permissionsOptions.map((opt) => ({
+              id: opt.id,
+              name: t(`Dashboard.Users.permissions.${opt.name}`) || '',
+            }))}
+            error={errors['permissions'] as FieldError | undefined}
+          />
+          <Button type="submit" otherClassName="p-3">
+            {isLoading ? <ButtonLoading /> : t('BtnTexts.SaveChanges')}
+          </Button>
+        </form>
+      )}
     </ResponsiveDialogDrawer>
   );
 };

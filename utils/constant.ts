@@ -68,8 +68,13 @@ export const sidebarLinks = [
     icon: FiShoppingCart,
   },
   {
-    title: 'users',
-    href: PATHS.DASHBOARD.USERS,
+    title: 'employees',
+    href: PATHS.DASHBOARD.EMPLOYEES,
+    icon: FiUsers,
+  },
+  {
+    title: 'customers',
+    href: PATHS.DASHBOARD.CUSTOMERS,
     icon: FiUsers,
   },
   {
@@ -319,7 +324,7 @@ export const ticketsStatus = [
   { id: 'closed', name: 'closed' },
 ];
 
-export const CreateUsersFields = [
+export const CreateEmployeesFields = [
   {
     id: 1,
     type: 'text',
@@ -350,6 +355,118 @@ export const CreateUsersFields = [
   },
   {
     id: 5,
+    type: 'number',
+    name: 'phone',
+    label: 'phone',
+    placeholder: 'phone',
+  },
+  {
+    id: 6,
+    type: 'date',
+    name: 'date',
+    label: 'date',
+    placeholder: 'date',
+  },
+  {
+    id: 7,
+    label: 'gender',
+    type: 'select',
+    placeholder: 'gender',
+    name: 'gender',
+    options: [
+      {
+        id: 1,
+        value: 'male',
+        labelKey: 'male',
+      },
+      {
+        id: 2,
+        value: 'female',
+        labelKey: 'female',
+      },
+    ],
+  },
+  {
+    id: 8,
+    type: 'multi-select',
+    label: 'permissions',
+    name: 'permissions',
+    placeholder: 'selectPermissions',
+    options: permissionsOptions,
+  },
+  {
+    id: 9,
+    type: 'file',
+    label: 'profileImage',
+    name: 'photo',
+    placeholder: 'addImage',
+  },
+];
+
+export const CreateCustomersFields = [
+  {
+    id: 1,
+    type: 'text',
+    label: 'name',
+    name: 'name',
+    placeholder: 'writeYorName',
+  },
+  {
+    id: 2,
+    type: 'email',
+    label: 'email',
+    name: 'email',
+    placeholder: 'writeYorEmail',
+  },
+  {
+    id: 3,
+    type: 'text',
+    label: 'password',
+    name: 'password',
+    placeholder: 'yourPassword',
+  },
+  {
+    id: 4,
+    type: 'text',
+    label: 'password_confirmation',
+    name: 'password_confirmation',
+    placeholder: 'repassword',
+  },
+  {
+    id: 5,
+    type: 'number',
+    name: 'phone',
+    label: 'phone',
+    placeholder: 'phone',
+  },
+  {
+    id: 6,
+    type: 'date',
+    name: 'date',
+    label: 'date',
+    placeholder: 'date',
+  },
+  {
+    id: 7,
+    label: 'gender',
+    type: 'select',
+    placeholder: 'gender',
+    name: 'gender',
+    options: [
+      {
+        id: 1,
+        value: 'male',
+        labelKey: 'male',
+      },
+      {
+        id: 2,
+        value: 'female',
+        labelKey: 'female',
+      },
+    ],
+  },
+  {
+    id: 8,
     type: 'multi-select',
     label: 'permissions',
     name: 'permissions',
@@ -389,6 +506,23 @@ export const CreateCodesFields = [
     label: 'code',
     placeholder: 'writeCode',
     type: 'text',
+  },
+];
+
+export const BulkImportCodes = [
+  {
+    id: 'product_id',
+    name: 'productID',
+    label: 'productID',
+    placeholder: 'productID',
+    type: 'select',
+  },
+  {
+    id: 'codes',
+    name: 'codes',
+    label: 'codes',
+    placeholder: 'writeCodes',
+    type: 'dynamic',
   },
 ];
 

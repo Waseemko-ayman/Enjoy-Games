@@ -54,46 +54,6 @@ const SearchPage = () => {
             <ErrorFetching />
           ) : (
             <div className="space-y-6">
-              {/* {categories.length > 0 && (
-                <>
-                  <h2 className="text-xl font-semibold mt-8 mb-4">
-                    {secTxts('categories')}
-                  </h2>
-                  <GridWrapper otherClassName="gap-5" isScrollable>
-                    {categories.map((card, index) => {
-                      // const { image, ...cardWithoutImage } = card;
-                      const firstSubCategory = card.sub_categories?.[0];
-                      const slugs =
-                        firstSubCategory !== undefined
-                          ? getCategoryAndSubCategorySlugs(
-                              categories,
-                              firstSubCategory.id
-                            )
-                          : null;
-                      return (
-                        <AnimatedWrapper key={card.id} custom={index}>
-                          <CategoryCard
-                            image={
-                              `${API_IMAGE_URL}${image}` ||
-                              '/assets/no-image-available.webp'
-                            }
-                            name={card.name}
-                            onClick={() => {
-                              if (slugs) {
-                                const { categorySlug, subCategorySlug } = slugs;
-                                router.push(
-                                  `/categories/${categorySlug}/${subCategorySlug}`
-                                );
-                              }
-                            }}
-                          />
-                        </AnimatedWrapper>
-                      );
-                    })}
-                  </GridWrapper>
-                </>
-              )} */}
-
               {categories.length > 0 && (
                 <>
                   <h2 className="text-xl font-semibold mt-8 mb-4">
@@ -104,7 +64,11 @@ const SearchPage = () => {
                       <Suspense key={item.id} fallback={<Loading />}>
                         <SectionTypeCard
                           path={`/categories/${item.slug}`}
-                          imgSrc={'/assets/digitalStores.webp'}
+                          imgSrc={
+                            item.image
+                              ? `${API_IMAGE_URL}${item.image}`
+                              : '/assets/no-image-available.webp'
+                          }
                           imgAlt={item.name}
                           imgTitle={item.name}
                           title={item.name}
@@ -114,51 +78,6 @@ const SearchPage = () => {
                         />
                       </Suspense>
                     ))}
-                  </GridWrapper>
-                </>
-              )}
-
-              {products.length > 0 && (
-                <>
-                  <h2 className="text-xl font-semibold mb-4">
-                    {secTxts('products')}
-                  </h2>
-                  <GridWrapper otherClassName="gap-5" isScrollable>
-                    {products.map((card, index) => {
-                      const { image, ...cardWithoutImage } = card;
-                      const slugs =
-                        card.sub_category_id !== undefined
-                          ? getCategoryAndSubCategorySlugs(
-                              categories,
-                              card.sub_category_id
-                            )
-                          : null;
-                      return (
-                        <AnimatedWrapper key={card.id} custom={index}>
-                          <ProductCard
-                            image={
-                              `${API_IMAGE_URL}${image}` ||
-                              '/assets/no-image-available.webp'
-                            }
-                            imgAlt={card.title}
-                            imgTitle={card.title}
-                            showDesc
-                            btnVariant="primary"
-                            btnText={btnTxts('BuyNow')}
-                            showBtn
-                            onClick={() => {
-                              if (slugs) {
-                                const { categorySlug, subCategorySlug } = slugs;
-                                const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
-                                router.push(path);
-                              }
-                            }}
-                            productData={card}
-                            {...cardWithoutImage}
-                          />
-                        </AnimatedWrapper>
-                      );
-                    })}
                   </GridWrapper>
                 </>
               )}
@@ -183,8 +102,9 @@ const SearchPage = () => {
                             imgTitle={sub.name}
                             title={sub.name}
                             image={
-                              `${API_IMAGE_URL}${image}` ||
-                              '/assets/no-image-available.webp'
+                              image
+                                ? `${API_IMAGE_URL}${image}`
+                                : '/assets/no-image-available.webp'
                             }
                             showBtn={true}
                             btnVariant="primary"
@@ -196,7 +116,7 @@ const SearchPage = () => {
                                 const { categorySlug, subCategorySlug } = slugs;
 
                                 router.push(
-                                  `/categories/${categorySlug}/${subCategorySlug}/product/${sub.slug}`
+                                  `/categories/${categorySlug}/${subCategorySlug}`
                                 );
                               }
                             }}
@@ -209,9 +129,55 @@ const SearchPage = () => {
                 </>
               )}
 
-              {products.length === 0 &&
-                categories.length === 0 &&
-                subCategories.length === 0 && <p>{searchTexts('noResult')}</p>}
+              {products.length > 0 && (
+                <>
+                  <h2 className="text-xl font-semibold mb-4">
+                    {secTxts('products')}
+                  </h2>
+                  <GridWrapper otherClassName="gap-5" isScrollable>
+                    {products.map((card, index) => {
+                      const { image, ...cardWithoutImage } = card;
+                      const slugs =
+                        card.sub_category_id !== undefined
+                          ? getCategoryAndSubCategorySlugs(
+                              categories,
+                              card.sub_category_id
+                            )
+                          : null;
+                      return (
+                        <AnimatedWrapper key={card.id} custom={index}>
+                          <ProductCard
+                            image={
+                              image
+                                ? `${API_IMAGE_URL}${image}`
+                                : '/assets/no-image-available.webp'
+                            }
+                            imgAlt={card.title}
+                            imgTitle={card.title}
+                            showDesc
+                            btnVariant="primary"
+                            btnText={btnTxts('BuyNow')}
+                            showBtn
+                            onClick={() => {
+                              if (slugs) {
+                                const { categorySlug, subCategorySlug } = slugs;
+                                const path = `/categories/${categorySlug}/${subCategorySlug}/product/${card.slug}`;
+                                router.push(path);
+                              }
+                            }}
+                            productData={card}
+                            {...cardWithoutImage}
+                          />
+                        </AnimatedWrapper>
+                      );
+                    })}
+                  </GridWrapper>
+                </>
+              )}
+
+              {categories.length === 0 &&
+                subCategories.length === 0 &&
+                products.length === 0 && <p>{searchTexts('noResult')}</p>}
             </div>
           )}
         </SectionComponent>

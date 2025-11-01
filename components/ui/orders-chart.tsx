@@ -55,9 +55,6 @@ export function OrderChart({
     get();
   }, [get]);
 
-  if (isLoading || addLoading) return <Loading />;
-  if (error) return <ErrorFetching />;
-
   const formatCurrency = (value: number) => `${value.toLocaleString()}`;
   const formatNumber = (value: number) => value.toLocaleString();
 
@@ -207,16 +204,6 @@ export function OrderChart({
       },
     ];
   };
-
-  const tabsData = [
-    { value: 'today', label: t('BtnTexts.today') },
-    { value: 'weekly', label: t('BtnTexts.weekly') },
-    { value: 'monthly', label: t('BtnTexts.monthly') },
-    { value: 'yearly', label: t('BtnTexts.yearly') },
-    ...(dateData
-      ? [{ value: 'custom', label: t('BtnTexts.customRange') }]
-      : []),
-  ];
 
   const renderChart = (): JSX.Element => {
     switch (activeTab) {
@@ -691,24 +678,40 @@ export function OrderChart({
     </>
   );
 
+  const tabsData = [
+    { value: 'today', label: t('BtnTexts.today') },
+    { value: 'weekly', label: t('BtnTexts.weekly') },
+    { value: 'monthly', label: t('BtnTexts.monthly') },
+    { value: 'yearly', label: t('BtnTexts.yearly') },
+    ...(dateData
+      ? [{ value: 'custom', label: t('BtnTexts.customRange') }]
+      : []),
+  ];
+
   return (
     <Card className="col-span-4">
       <CardHeaderContent
         title={t('Dashboard.overview.title')}
         description={t('Dashboard.overview.desc')}
       />
-      <CardContent className="pl-2">
+      <CardContent>
         <Tabs
           value={activeTab}
           className="w-full"
           onValueChange={(value) => setActiveTab(value)}
         >
           <TabsNavigation tabs={tabsData} />
-          <div className="h-[250px] sm:h-[300px] mt-4">
-            <ResponsiveContainer width="100%" height="100%">
-              {renderChart()}
-            </ResponsiveContainer>
-          </div>
+          {isLoading || addLoading ? (
+            <Loading />
+          ) : error ? (
+            <ErrorFetching />
+          ) : (
+            <div className="h-[250px] sm:h-[300px] mt-4">
+              <ResponsiveContainer width="100%" height="100%">
+                {renderChart()}
+              </ResponsiveContainer>
+            </div>
+          )}
         </Tabs>
       </CardContent>
     </Card>

@@ -1,10 +1,10 @@
 'use client';
 import GenericAllTable from '@/components/organism/GenericAllTable';
-import { CreateUsersPorps } from '@/interfaces';
+import { CreateCustomersPorps } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-const AllUsers = ({
+const AllCustomers = ({
   value,
   onTabChange,
 }: {
@@ -14,19 +14,19 @@ const AllUsers = ({
   const t = useTranslations();
 
   return (
-    <GenericAllTable<CreateUsersPorps>
+    <GenericAllTable<CreateCustomersPorps>
       value={value}
-      title={t('Dashboard.Users.title')}
-      description={t('Dashboard.Users.manageUsers')}
+      title={t('Dashboard.Users.CustomerTitle')}
+      description={t('Dashboard.Users.manageCustomers')}
       apiEndpoint="users"
-      createTabValue="createUsers"
+      createTabValue="createCustomers"
       deleteEndpoint="users/delete"
-      placeholder={t('Inputs.placeHolders.searchUser')}
+      placeholder={t('Inputs.placeHolders.searchCustomer')}
       onTabChange={onTabChange}
       showEdit={false}
-      deleteLocation={t('sidebar.users')}
+      deleteLocation={t('sidebar.customers')}
     />
   );
 };
 
-export default AllUsers;
+export default AllCustomers;

@@ -25,6 +25,7 @@ import Loading from '../loading';
 import ResponsiveDialogDrawer from '@/components/organism/ResponsiveDialogDrawer';
 import { DeleteWarningContent } from '../DeleteWarningContent';
 import useIsMobile from '@/hook/useIsMobile';
+import { permissionsOptions } from '@/utils/constant';
 const DynamicImage = dynamic(() => import('next/image'), {
   loading: () => <Loading />,
   ssr: false,
@@ -44,6 +45,14 @@ interface DataTableBodyProps<T> {
 }
 
 function formatHeader(key: string) {
+  if (key.startsWith('user_')) {
+    const parts = key.split('_');
+    const keyVar = parts[1] ?? '';
+    return keyVar
+      ? `User ${keyVar.charAt(0).toUpperCase() + keyVar.slice(1)}`
+      : 'User';
+  }
+
   return key
     .replace(/_/g, ' ')
     .replace(/\b\w/g, (char) => char.toUpperCase())
@@ -78,10 +87,12 @@ const DataTableBody = <T extends { id: string | number }>({
   const t = useTranslations('Messages');
   const btnTexts = useTranslations('BtnTexts');
   const msgTxts = useTranslations('Messages');
+  const dashboardT = useTranslations('Dashboard');
 
   const pathname = usePathname();
   const isOrdersPage = pathname?.includes('/dashboard/orders');
-  const isUsersPage = pathname?.includes('/dashboard/users');
+  const isCustomerPage = pathname?.includes('/dashboard/customers');
+  const isEmployeePage = pathname?.includes('/dashboard/employees');
   const isTicketsPage = pathname?.includes('/dashboard/tickets');
 
   const filteredColumns = columns.filter((col) => {
@@ -100,6 +111,13 @@ const DataTableBody = <T extends { id: string | number }>({
 
       const sampleValue = data.find((item) => item[col] != null)?.[col];
 
+      if (col === 'user' && sampleValue && typeof sampleValue === 'object') {
+        return [
+          ...acc,
+          ...Object.keys(sampleValue).map((key) => `user_${key}`),
+        ];
+      }
+
       // If the value is object and it contains ar/en → we separate it
       if (
         sampleValue &&
@@ -113,22 +131,6 @@ const DataTableBody = <T extends { id: string | number }>({
     },
     []
   );
-
-  // const visibleColumns = filteredColumns.reduce<(keyof T | string)[]>(
-  //   (acc, col) => {
-  //     if (col === 'updated_at' || col === 'user_id') return acc;
-
-  //     if (
-  //       col === 'image' &&
-  //       data.some((item) => item[col] && typeof item[col] === 'object')
-  //     ) {
-  //       return [...acc, 'image_ar', 'image_en'];
-  //     }
-
-  //     return [...acc, col];
-  //   },
-  //   []
-  // );
 
   return (
     <div className="overflow-x-auto">
@@ -175,6 +177,21 @@ const DataTableBody = <T extends { id: string | number }>({
                   {visibleColumns.map((col) => {
                     const columnKey = String(col);
 
+                    if (columnKey.startsWith('user_')) {
+                      const key = columnKey.split('_')[1]; // name أو email
+                      const value =
+                        (row as any).user?.[key] ?? t('unavailable');
+                      return (
+                        <td
+                          key={columnKey}
+                          className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden"
+                          title={value}
+                        >
+                          {value}
+                        </td>
+                      );
+                    }
+
                     // === cell render ===
                     if (
                       columnKey.endsWith('_ar') ||
@@ -189,6 +206,7 @@ const DataTableBody = <T extends { id: string | number }>({
                           <td
                             key={columnKey}
                             className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden"
+                            title={value || t('unavailable')}
                           >
                             {value ? (
                               <div className="flex justify-center">
@@ -214,7 +232,11 @@ const DataTableBody = <T extends { id: string | number }>({
 
                       // Otherwise → We display the text
                       return (
-                        <td key={columnKey} className="px-6 py-4 truncate">
+                        <td
+                          key={columnKey}
+                          className="px-6 py-4 truncate"
+                          title={value || t('unavailable')}
+                        >
                           {value ?? t('unavailable')}
                         </td>
                       );
@@ -246,28 +268,6 @@ const DataTableBody = <T extends { id: string | number }>({
                       );
                     }
 
-                    // if (
-                    //   columnKey === 'items' &&
-                    //   Array.isArray((row as any)[col])
-                    // ) {
-                    //   return (
-                    //     <td
-                    //       key={columnKey}
-                    //       className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden"
-                    //     >
-                    //       <Link
-                    //         href={PATHS.ORDERS.ITEM.replace(
-                    //           ':id',
-                    //           String(row.id)
-                    //         )}
-                    //         className="text-blue-600"
-                    //       >
-                    //         {(row as any)[col].length} Items
-                    //       </Link>
-                    //     </td>
-                    //   );
-                    // }
-
                     if (columnKey === 'image_ar' || columnKey === 'image_en') {
                       const lang = columnKey.split('_')[1] as 'ar' | 'en';
                       const imageUrl = (row as any).image?.[lang] || '';
@@ -280,8 +280,9 @@ const DataTableBody = <T extends { id: string | number }>({
                             <div className="flex justify-center">
                               <DynamicImage
                                 src={
-                                  `${API_IMAGE_URL}${imageUrl}` ||
-                                  '/assets/no-image-available.webp'
+                                  imageUrl
+                                    ? `${API_IMAGE_URL}${imageUrl}`
+                                    : '/assets/no-image-available.webp'
                                 }
                                 alt={`${lang} image`}
                                 width={80}
@@ -321,8 +322,9 @@ const DataTableBody = <T extends { id: string | number }>({
                                   <DynamicImage
                                     key={idx}
                                     src={
-                                      `${API_IMAGE_URL}${img.image}` ||
-                                      '/assets/no-image-available.webp'
+                                      img.image
+                                        ? `${API_IMAGE_URL}${img.image}`
+                                        : '/assets/no-image-available.webp'
                                     }
                                     alt={`image-${idx}`}
                                     width={80}
@@ -339,8 +341,9 @@ const DataTableBody = <T extends { id: string | number }>({
                             ) : (
                               <DynamicImage
                                 src={
-                                  `${API_IMAGE_URL}${images[0].image}` ||
-                                  '/assets/no-image-available.webp'
+                                  images[0].image
+                                    ? `${API_IMAGE_URL}${images[0].image}`
+                                    : '/assets/no-image-available.webp'
                                 }
                                 alt={`image`}
                                 width={100}
@@ -361,7 +364,7 @@ const DataTableBody = <T extends { id: string | number }>({
                     }
 
                     if (
-                      columnKey === 'image' &&
+                      (columnKey === 'image' || columnKey === 'photo') &&
                       typeof (row as any)[col] === 'string'
                     ) {
                       return (
@@ -391,24 +394,93 @@ const DataTableBody = <T extends { id: string | number }>({
                     }
 
                     // === التعديل هنا ===
-                    const cellValue = (row as any)[col];
+                    const rawValue = (row as any)[col];
+
+                    const cellValue =
+                      columnKey === 'roles'
+                        ? Array.isArray(rawValue)
+                          ? rawValue
+                              .map((role: string) =>
+                                dashboardT(`roles.${role}`)
+                              )
+                              .join(', ')
+                          : dashboardT(`roles.${rawValue}`)
+                        : columnKey === 'permissions'
+                        ? Array.isArray(rawValue)
+                          ? rawValue.length > 0
+                            ? rawValue
+                                .map((perm: string) =>
+                                  dashboardT(
+                                    `Users.permissions.${
+                                      permissionsOptions.find(
+                                        (p) => p.id === perm
+                                      )?.name ?? perm
+                                    }`
+                                  )
+                                )
+                                .join(', ')
+                            : t('unavailable')
+                          : rawValue
+                          ? dashboardT(
+                              `Users.permissions.${
+                                permissionsOptions.find(
+                                  (p) => p.id === rawValue
+                                )?.name ?? rawValue
+                              }`
+                            )
+                          : t('unavailable')
+                        : rawValue === null ||
+                          rawValue === undefined ||
+                          rawValue === ''
+                        ? t('unavailable')
+                        : rawValue;
+
+                    // const cellValue =
+                    //   rawValue === null ||
+                    //   rawValue === undefined ||
+                    //   rawValue === ''
+                    //     ? t('unavailable')
+                    //     : rawValue;
+
+                    // const isLink =
+                    //   ['shipping_payment', 'shipping_method'].includes(
+                    //     String(col)
+                    //   ) && cellValue === 'code';
+
                     const isLink =
-                      ['shipping_payment', 'shipping_method'].includes(
+                      (['shipping_payment', 'shipping_method'].includes(
                         String(col)
-                      ) && cellValue === 'code';
+                      ) &&
+                        cellValue === 'code') ||
+                      ([
+                        'codes_count',
+                        'total_codes',
+                        'available_codes',
+                      ].includes(String(col)) &&
+                        Number(cellValue) > 0);
 
                     return (
                       <td
                         key={columnKey}
                         className="px-6 py-4 max-w-xs truncate whitespace-nowrap overflow-hidden"
+                        title={String(cellValue)}
                       >
                         {isLink ? (
                           <Link
+                            // href={{
+                            //   pathname: PATHS.CODES,
+                            //   query: { fromProduct: row.id },
+                            // }}
                             href={{
                               pathname: PATHS.CODES,
-                              query: { fromProduct: row.id },
+                              query:
+                                col === 'available_codes'
+                                  ? { availableForProduct: row?.product_id }
+                                  : { fromProduct: row?.product_id },
                             }}
-                            onClick={() => setSelectedProductId(Number(row.id))}
+                            onClick={() =>
+                              setSelectedProductId(Number(row.product_id))
+                            }
                             className="text-blue-600 underline"
                           >
                             {String(cellValue)}
@@ -417,7 +489,24 @@ const DataTableBody = <T extends { id: string | number }>({
                           (() => {
                             try {
                               const obj = JSON.parse(cellValue);
-                              return obj.email ?? JSON.stringify(obj);
+
+                              if ('account_1' in obj && 'account_2' in obj) {
+                                return `Accounts: ${obj.account_1} / ${obj.account_2}`;
+                              }
+
+                              if ('account_id' in obj) {
+                                return `Account ID: ${obj.account_id}`;
+                              }
+
+                              if ('email' in obj) {
+                                return `Email: ${obj.email}`;
+                              }
+
+                              if ('login_method' in obj) {
+                                return `Access via ${obj.login_method}`;
+                              }
+
+                              return JSON.stringify(obj); // fallback
                             } catch {
                               return String(cellValue);
                             }
@@ -487,7 +576,7 @@ const DataTableBody = <T extends { id: string | number }>({
                           >
                             <Edit2 className="h-4 w-4" />
                           </Button>
-                        ) : isUsersPage ? (
+                        ) : isCustomerPage || isEmployeePage ? (
                           <UserPermissionsDrawer
                             userId={row.id}
                             open={openUserId === String(row.id)}

@@ -78,7 +78,7 @@ export const contactData = [
   {
     id: 2,
     label: 'helpCenter',
-    email: 'Support@chargerspeed.online',
+    email: 'support@chargerspeed.online',
     icon: IoMdHelpCircle,
   },
 ];
@@ -178,6 +178,7 @@ export const menuLists = [
     id: 1,
     linksItem: [
       { id: 1, key: 'stars', icon: IoArrowRedoOutline, link: PATHS.STARS.link },
+      { id: 2, key: 'tickets', icon: FaRegFlag, link: PATHS.TICKETS.ROOT.link },
       // { id: 2, key: 'wallet', icon: IoWalletOutline, link: PATHS.WALLET.link },
       // {
       //   id: 3,
@@ -190,26 +191,25 @@ export const menuLists = [
   {
     id: 2,
     linksItem: [
-      { id: 1, key: 'tickets', icon: FaRegFlag, link: PATHS.TICKETS.ROOT.link },
       {
-        id: 2,
+        id: 1,
         key: 'faqs',
         icon: IoMdHelpCircleOutline,
         link: PATHS.FAQS.link,
       },
       {
-        id: 3,
+        id: 2,
         key: 'referrals',
         icon: FaRegFlag,
         link: PATHS.REFERRALS.link,
       },
       {
-        id: 4,
+        id: 3,
         key: 'dashboard',
         icon: FaTachometerAlt,
         link: PATHS.DASHBOARD.HOME.ROOT,
       },
-      // { id: 3, key: 'TalkToCustomerService', icon: MdOutlineEmail, link: '#' },
+      // { id: 4, key: 'TalkToCustomerService', icon: MdOutlineEmail, link: '#' },
     ],
   },
 ];
@@ -532,7 +532,7 @@ export const inputData = [
     label: 'تاريخ الميلاد',
     type: 'date',
     placeholder: '--/--/----',
-    name: 'birthDate',
+    name: 'date',
   },
   {
     id: 5,
@@ -809,4 +809,10 @@ export const signupInputs = [
     name: 'referral_code',
     placeholder: 'referralCode',
   },
+];
+
+export const UsersTypes = [
+  { id: 1, labelKey: 'all' },
+  { id: 2, labelKey: 'employees' },
+  { id: 3, labelKey: 'customers' },
 ];

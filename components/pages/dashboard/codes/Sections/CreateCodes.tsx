@@ -156,7 +156,6 @@ const CreateCodes = ({
             });
           }
         } catch (error) {
-          console.error('فشل في جلب بيانات القسم:', error);
           const apiError = (error as any)?.response?.message;
           showToast(apiError, 'error');
         }

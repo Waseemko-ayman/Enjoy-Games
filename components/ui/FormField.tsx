@@ -50,6 +50,7 @@ interface FormFieldProps {
   editId?: string | number | null;
   readOnly?: boolean;
   checked?: boolean;
+  otherClassName?: string;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -72,6 +73,7 @@ const FormField: React.FC<FormFieldProps> = ({
   readOnly,
   checked,
   handleChange,
+  otherClassName,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
@@ -94,7 +96,7 @@ const FormField: React.FC<FormFieldProps> = ({
       : [];
 
   return (
-    <div className="space-y-2">
+    <div className={`space-y-2 ${otherClassName}`}>
       {label && <label htmlFor={id}>{label}</label>}
 
       {type === 'editor' && control ? (
@@ -129,11 +131,19 @@ const FormField: React.FC<FormFieldProps> = ({
                     className={`w-full justify-between ${errorStyle}`}
                     disabled={disabled}
                   >
-                    {field.value !== null && field.value !== ''
+                    {/* {field.value !== null && field.value !== ''
                       ? options.find(
                           (opt) =>
                             String(opt.id !== null ? opt.id : '') ===
                             String(field.value)
+                        )?.name
+                      : SelectValuePlaceholder} */}
+
+                    {field.value
+                      ? options.find(
+                          (opt) =>
+                            ('value' in opt && opt.value === field.value) ||
+                            String(opt.id) === String(field.value)
                         )?.name
                       : SelectValuePlaceholder}
 
@@ -158,8 +168,11 @@ const FormField: React.FC<FormFieldProps> = ({
                             key={String(opt.id)}
                             value={`${opt.id} ${opt.name}`}
                             onSelect={() => {
+                              // field.onChange(
+                              //   opt.id !== null ? String(opt.id) : null
+                              // );
                               field.onChange(
-                                opt.id !== null ? String(opt.id) : null
+                                'value' in opt ? opt.value : String(opt.id)
                               );
                               setOpen(false);
                               setSearch('');

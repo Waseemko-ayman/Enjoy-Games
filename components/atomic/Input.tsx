@@ -64,31 +64,62 @@ const Input = React.forwardRef<HTMLElement, InputProps>(
     const inputsTxt = useTranslations('Inputs.placeHolders');
 
     const InputElement =
-      type === 'select' ? (
-        <Select
-          value={value != null ? String(value) : ''}
-          onValueChange={(val) =>
-            onChange?.({ target: { name: inputName, value: val } } as any)
-          }
-        >
-          <SelectTrigger
-            className={`text-gray-500 text-right ${inputClasses} !h-[46px] bg-white focus:ring-0 focus:outline-none`}
-          >
-            <SelectValue placeholder={placeholder || inputsTxt('Choose')} />
-          </SelectTrigger>
-          <SelectContent>
-            {options.map((opt) => (
-              <SelectItem
-                key={opt.id}
-                value={opt.value || ''}
-                className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
+      type === 'select' && control ? (
+        <Controller
+          name={inputName}
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Select
+              value={field.value != null ? String(field.value) : ''}
+              // onValueChange={(val) =>
+              //   onChange?.({ target: { name: inputName, value: val } } as any)
+              // }
+              onValueChange={field.onChange}
+            >
+              <SelectTrigger
+                className={`text-gray-500 text-right ${inputClasses} !h-[46px] bg-white focus:ring-0 focus:outline-none`}
               >
-                {opt.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      ) : type === 'textarea' ? (
+                <SelectValue placeholder={placeholder || inputsTxt('Choose')} />
+              </SelectTrigger>
+              <SelectContent>
+                {options.map((opt) => (
+                  <SelectItem
+                    key={opt.id}
+                    value={opt.value || ''}
+                    className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
+                  >
+                    {opt.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+      ) : // <Select
+      //   value={value != null ? String(value) : ''}
+      //   onValueChange={(val) =>
+      //     onChange?.({ target: { name: inputName, value: val } } as any)
+      //   }
+      // >
+      //   <SelectTrigger
+      //     className={`text-gray-500 text-right ${inputClasses} !h-[46px] bg-white focus:ring-0 focus:outline-none`}
+      //   >
+      //     <SelectValue placeholder={placeholder || inputsTxt('Choose')} />
+      //   </SelectTrigger>
+      //   <SelectContent>
+      //     {options.map((opt) => (
+      //       <SelectItem
+      //         key={opt.id}
+      //         value={opt.value || ''}
+      //         className="hover:bg-[#f4f4ff] hover:text-enjoy-primary"
+      //       >
+      //         {opt.label}
+      //       </SelectItem>
+      //     ))}
+      //   </SelectContent>
+      // </Select>
+      type === 'textarea' ? (
         <textarea
           ref={ref as React.Ref<HTMLTextAreaElement>}
           name={inputName}

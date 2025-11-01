@@ -18,6 +18,16 @@ import { TranslationFunction } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import FormError from '@/components/atomic/FormError';
 import { InputTypes } from '@/utils/type';
+// import { Button } from '@/components/ui/button';
+// import { CalendarIcon } from 'lucide-react';
+// import {
+//   Popover,
+//   PopoverContent,
+//   PopoverTrigger,
+// } from '@/components/ui/popover';
+// import { Calendar } from '@/components/ui/calendar';
+// import { format } from 'date-fns';
+
 interface FormProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
@@ -71,7 +81,7 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                           onChange={onChange}
                           placeholder={placeholder}
                           className={`px-4 py-3 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-5 focus:ring-[var(--enjoy-primary)]`}
-                          readOnly
+                          // readOnly
                         />
                       )}
                     />
@@ -86,14 +96,13 @@ const Form: React.FC<FormProps> = ({ register, errors, control, t }) => {
                       Icon={input.icon}
                       iconClassName="h-4 w-4 text-gray-400"
                       inputName={input.name}
+                      control={control}
                       options={options}
                       otherClassNameContainer={
                         errors[input.name] ? 'border-red-500' : ''
                       }
                       {...register(input.name)}
-                      readOnly={
-                        input.name === 'email' || input.name === 'phone'
-                      }
+                      readOnly={input.name === 'email'}
                     />
                     {errors[input.name] && (
                       <FormError

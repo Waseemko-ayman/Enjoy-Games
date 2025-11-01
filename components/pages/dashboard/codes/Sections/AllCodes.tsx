@@ -1,10 +1,11 @@
 'use client';
 import GenericAllTable from '@/components/organism/GenericAllTable';
 import { useProductCodes } from '@/context/selectedProductId';
+import { useUpdateContent } from '@/context/updateContentContext';
 import { CodesResponse } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const AllCodes = ({
   value,
@@ -17,7 +18,9 @@ const AllCodes = ({
 }) => {
   const t = useTranslations();
   const { selectedProductId, setSelectedProductId } = useProductCodes();
+    const { refreshFlags } = useUpdateContent();
   const searchParams = useSearchParams();
+  const [refreshKey, setRefreshKey] = useState(0);
 
   // مسح selectedProductId إذا تم الدخول مباشرة
   useEffect(() => {
@@ -28,12 +31,21 @@ const AllCodes = ({
 
   // تحديد API endpoint
   const fromProductId = searchParams.get('fromProduct') || selectedProductId;
-  const apiEndpoint = fromProductId
+  const availableForProductId = searchParams.get('availableForProduct');
+
+  const apiEndpoint = availableForProductId
+    ? `products/${availableForProductId}/available-codes`
+    : fromProductId
     ? `product/${fromProductId}/codes`
     : 'codes';
 
+  useEffect(() => {
+    setRefreshKey((prev) => prev + 1);
+  }, [refreshFlags.codes]);
+
   return (
     <GenericAllTable<CodesResponse>
+      key={refreshKey}
       value={value}
       title={t('Dashboard.codes.title')}
       description={t('Dashboard.codes.manageCodes')}

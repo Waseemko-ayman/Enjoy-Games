@@ -217,7 +217,8 @@
     "statsTitles": {
       "balance": "رصيدي",
       "currentLevel": "لديك حاليا",
-      "interests": "الإهتمامات"
+      "interests": "الإهتمامات",
+      "role": "الدور"
     },
     "accountOptions": {
       "sendCardCodeToEmail": "إرسال كود البطاقة إلى البريد الإلكتروني",
@@ -392,7 +393,7 @@
     "basketSummary": "ملخص السلة",
     "choosePaymentMethod": "إختر وسيلة الدفع",
     "emptyStateTitle": "سلتك جاهزة وتناديك للتسوق",
-    "termsAndPrivacyAgreement": "بالانتقال إلى الدفع فانت تتوافق على <termsLink>سياسة الاستخدام</termsLink> و <privacyLink>سياسة الخصوصية</privacyLink> لـ إنجوي قيمز",
+    "termsAndPrivacyAgreement": "بالانتقال إلى الدفع فانت تتوافق على <termsLink>سياسة الاستخدام</termsLink> و <privacyLink>سياسة الخصوصية</privacyLink> والشروط والأحكام لـ إنجوي قيمز",
     "discountCoupon": "كوبون الخصم:",
     "cartSummary": "ملخص سلة التسوق",
     "rewards": {
@@ -677,12 +678,23 @@
     "ratings": "التقييمات",
     "orders": "الطلبات",
     "notifications": "الإشعارات",
-    "users": "المستخدمين",
+    "employees": "الموظفين",
+    "customers": "العملاء",
     "productSubscribers": "المشتركين بالمنتجات",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "support": "الدعم"
   },
   "Dashboard": {
     "desc": "مرحباً بكم في إدارة طلباتكم",
+    "roles": {
+      "admin": "مسؤول",
+      "user": "مستخدم",
+      "custom": "عميل",
+      "moderator": "مشرف",
+      "all": "الكل",
+      "employees": "موظفين",
+      "customers": "عملاء"
+    },
     "overview": {
       "title": "نظرة عامة على الطلبات",
       "desc": "تحليل الطلبات خلال الفترة المحددة",
@@ -709,7 +721,9 @@
       "desc": "قم بإنشاء وإدارة الأكواد لمتجرك",
       "manageCodes": "إدارة جميع الأكواد في مكان واحد",
       "createCode": "إنشاء كود",
-      "createNewCode": "إنشاء كود جديد"
+      "createNewCode": "إنشاء كود جديد",
+      "CreateBulkImportCodes": "إنشاء أكواد بالجملة",
+      "ImportCodes": "استيراد أكواد"
     },
     "categories": {
       "title": "إنشاء قسم",
@@ -734,7 +748,12 @@
       "desc": "قم بإنشاء وإدارة المنتجات لمتجرك",
       "manageProducts": "إدارة جميع المنتجات في مكان واحد",
       "createProduct": "إنشاء منتج",
-      "createNewProduct": "إنشاء منتج جديد"
+      "createNewProduct": "إنشاء منتج جديد",
+      "InventoryStatistics": {
+        "title": "إحصائيات مخزون الأكواد",
+        "desc": "اطلع على إحصائيات الأكواد لكل منتج وتحقق من المخزون المتاح والمستخدم"
+      },
+      "codeInventoryStatistics": "إحصائيات مخزون الأكواد"
     },
     "coupons": {
       "title": "جميع الكوبونات",
@@ -776,11 +795,16 @@
       "suspiciousTransactions": "المعاملات المشبوهة"
     },
     "Users": {
-      "title": "جميع المستخدمين",
-      "desc": "إدارة المستخدمين لمتجرك",
-      "manageUsers": "إدارة جميع المستخدمين في مكان واحد",
-      "createUsers": "إنشاء مستخدمين",
-      "createNewUsers": "إنشاء مستخدم جديد",
+      "CustomerTitle": "جميع العملاء",
+      "CustomerDesc": "إدارة العملاء لمتجرك",
+      "EmployeeTitle": "جميع الموظفين",
+      "EmployeeDesc": "إدارة الموظفين لمتجرك",
+      "manageCustomers": "إدارة جميع العملاء في مكان واحد",
+      "manageEmployees": "إدارة جميع الموظفين في مكان واحد",
+      "createEmployees": "إنشاء موظفين",
+      "createNewEmployees": "إنشاء موظف جديد",
+      "createCustomers": "إنشاء عملاء",
+      "createNewCustomers": "إنشاء عملاء جديد",
       "permissions": {
         "manageProducts": "إدارة المنتجات",
         "manageSettings": "إدارة الإعدادات",
@@ -793,7 +817,9 @@
         "manageOrders": "إدارة الطلبات",
         "manageRatings": "إدارة التقييمات",
         "replyTickets": "الرد على التذاكر"
-      }
+      },
+      "userPermissions": "أذونات المستخدم",
+      "noPermissions": "لم يتم تعيين أي أذونات لهذا المستخدم."
     },
     "productSubscribers": {
       "title": "جميع المشتركين بمنتج",
@@ -802,7 +828,38 @@
     },
     "settings": {
       "title": "إعدادات الحساب",
-      "desc": "تحديث معلومات حسابك"
+      "desc": "تحديث معلومات حسابك",
+      "pageDesc": "إدارة إعدادات حسابك وتفضيلاتك",
+      "sissionTimeout": {
+        "title": "إعدادات مهلة الجلسة",
+        "desc": "جلب إعدادات مدة الجلسة العالمية الحالية (بالدقائق والساعات) لكل حالة من حالات الموقع",
+        "CurrentStatus": "الحالة الحالية",
+        "Live": "مباشر",
+        "Demo": "تجريبي",
+        "TimeoutDuration": "مدة الجلسة",
+        "Minutes": "دقيقة",
+        "InHours": "بالساعات",
+        "Hours": "ساعة",
+        "DemoSite": "الموقع التجريبي",
+        "LiveSite": "الموقع المباشر",
+        "TimeoutMinutes": "المدة (بالدقائق)",
+        "TimeoutHours": "المدة (بالساعات)",
+        "Note": "ملاحظة",
+        "NoteMessage": "تحدد إعدادات انتهاء الجلسة المدة التي يبقى فيها المستخدمون مصادق عليهم قبل الحاجة لإعادة تسجيل الدخول. قم بتعديل هذه القيم وفق متطلبات الأمان لديك.",
+        "FakeWebsite": "موقع تجريبي",
+        "OfficialWebsite": "الموقع الرسمي",
+        "UpdateSessionTimeout": "تحديث وقت الجلسة",
+        "UpdateDesc": "قم بتعيين القيم العالمية لمدة الجلسات التجريبية والحية (بالدقائق).",
+        "DemoMinutes": "التجريبية (بالدقائق)",
+        "LiveMinutes": "الحية (بالدقائق)",
+        "UpdateSettings": "تحديث الإعدادات",
+        "session_ended": "لا توجد جلسة نشطة",
+        "session_time_label": "وقت انتهاء الجلسة",
+        "SessionSuccessfully": "تم تعيين مدة الجلسة بنجاح",
+        "SessionFaild": "حدث خطأ أثناء تعيين الجلسة",
+        "SessionSuccessfullyCleared": "تم مسح الجلسة بنجاح",
+        "SessionFaildCleared": "حدث خطأ أثناء مسح الجلسة"
+      }
     },
     "socialStats": {
       "title": "إحصائيات تسجيل الدخول الاجتماعي",
@@ -902,7 +959,7 @@
     "createAccount": "أنشىء حساب",
     "logout": "تسجيل خروج",
     "MoreAboutParticipateAndWin": "المزيد عن شارك وإربح",
-    "MoreAboutEnjoyGames": "المزيد عن إنجوي قيمز",
+    "MoreAboutEnjoyGames": "المزيد عن ولاء إنجوي قيمز",
     "AddTicket": "أضف تذكرة",
     "faqs": "الأسئلة الشائعة",
     "sendTicket": "إرسال التذكرة",
@@ -937,7 +994,11 @@
     "Approve": "قبول",
     "Block": "حظر",
     "approveSelected": "اعتماد العناصر المحددة",
-    "blockSelected": "حظر العناصر المحددة"
+    "blockSelected": "حظر العناصر المحددة",
+    "extend_button": "تمديد الجلسة",
+    "extending_button": "جاري التمديد...",
+    "AddCode": "إضافة كود",
+    "Remove": "حذف"
   },
   "Inputs": {
     "labels": {
@@ -945,10 +1006,10 @@
       "email": "البريد الإلكتروني",
       "password": "كلمة المرور",
       "password_confirmation": "تأكيد كلمة المرور",
-      "referral_code": "كود الإحالة (إختياري)",
+      "referral_code": "كود الدعوة (إختياري)",
       "gender": "الجنس",
       "phone": "رقم الجوال",
-      "birthDate": "تاريخ الميلاد",
+      "date": "تاريخ الميلاد",
       "quantity": "الكمية",
       "twitter": "تويتر",
       "facebook": "فيس بوك",
@@ -963,6 +1024,7 @@
       "englishName": "الإسم (إنجليزي)",
       "icon": "أيقونة",
       "image": "صورة",
+      "profileImage": "صورة شخصية",
       "categoryID": "القسم",
       "parentID": "القسم الثانوي",
       "arabicTitle": "العنوان (عربي)",
@@ -977,8 +1039,10 @@
       "priceBefore": "السعر القديم",
       "shippingPayment": "طريقة الدفع",
       "code": "كود",
-      "accountId": "رقم تعريفي",
-      "multiId": "رقمين تعريفيين",
+      "bulkCodes": "أكواد بالجملة",
+      "notes": "ملاحظات",
+      "accountId": "رقم ID",
+      "multiId": "رقمين IDs",
       "access": "صلاحية الدخول أو بيانات الحساب",
       "discount": "الخصم",
       "vatRate": "معدل ضريبة القيمة المضافة",
@@ -1001,7 +1065,7 @@
       "subject": "العنوان",
       "message": "الوصف",
       "attachments": "المرفقات",
-      "permissions": "الأذونات",
+      "permissions": "الصلاحيات",
       "status": "الحالة"
     },
     "placeHolders": {
@@ -1013,7 +1077,7 @@
       "name": "",
       "email": "",
       "phone": "xxxxxxxxx",
-      "birthDate": "--/--/----",
+      "date": "--/--/----",
       "gender": "حدد الجنس",
       "writeCouponHere": "أكتب كود القسيم هنا...",
       "Choose": "إختر...",
@@ -1027,7 +1091,7 @@
       "password": "كلمة المرور الخاصة بك",
       "repassword": "تأكيد كلمة المرور",
       "password_confirmation": "تأكيد كلمة المرور",
-      "referralCode": "كود الإحالة",
+      "referralCode": "كود الدعوة",
       "searchCategories": "البحث عن الفئات...",
       "searchSubCategories": "البحث عن الفئات الفرعية...",
       "searchCodes": "البحث عن الكود...",
@@ -1060,6 +1124,8 @@
       "addImage": "أضف صورة",
       "productID": "المنتج",
       "writeCode": "أكتب الكود",
+      "writeCodes": "أكتب الأكواد",
+      "writeNotes": "أكتب الملاحظات",
       "writeValue": "أدخل قيمة الكوبون",
       "selectType": "إختر النوع",
       "writeUsageLimit": "أدخل حد الاستخدام",
@@ -1076,9 +1142,11 @@
       "writeMessage": "أكتب الوصف...",
       "selectAttachments": "إختر ملفات",
       "typeYourReply": "أكتب ردك هنا...",
-      "searchUser": "البحث عن مستحدم...",
-      "selectPermissions": "حدد الأذونات",
-      "permissions": "إختار الأذونات",
+      "searchCustomer": "البحث عن عميل...",
+      "searchEmployee": "البحث عن موظف...",
+      "searchUser": "البحث عن مستخدم...",
+      "selectPermissions": "حدد الصلاحيات",
+      "permissions": "إختار الصلاحيات",
       "status": "إختار الحالة"
     },
     "options": {
@@ -1101,11 +1169,12 @@
       "loginMethodRequired": "طريقة تسجيل الدخول مطلوبة",
       "accountIdRequired": "رقم الآيدي مطلوب",
       "phoneRequired": "رقم الجوال مطلوب",
+      "phoneInvalid": "رقم الجوال غير صحيح",
       "birthDateRequired": "تاريخ الميلاد مطلوب",
       "genderInvalid": "الرجاء اختيار الجنس",
       "passwordRequired": "كلمة المرور مطلوبة",
       "repasswordRequired": "يجب تأكيد كلمة المرور",
-      "referralCodeInvalid": "كود الإحالة غير صالح",
+      "referralCodeInvalid": "كود الدعوة غير صالح",
       "repasswordNotMatch": "كلمة المرور غير متطابقة",
       "genderRequired": "الجنس مطلوب",
       "avatarRequired": "الصورة مطلوبة",
@@ -1146,11 +1215,16 @@
       "arabicImageRequired": "الصورة بالعربية مطلوبة",
       "englishImageRequired": "الصورة بالإنجليزية مطلوبة",
       "fileRequired": "الملف مطلوب",
-      "permissionsRequired": "الأذونات مطلوبة",
+      "permissionsRequired": "الصلاحيات مطلوبة",
       "statusRequired": "الحالة مطلوبة",
       "messageRequired": "الرسالة مطلوبة",
       "termsAccepted": "يجب الموافقة على الشروط وسياسة الخصوصية",
       "invalidDate": "التاريخ يجب أن يكون بين 1935 و",
+      "invalidDateFormat": "التاريخ يجب أن يحتوي على الفاصل \"/\" بالشكل MM/DD/YYYY",
+      "invalidDateStructure": "التاريخ غير صحيح، يجب أن يكون بالشكل MM/DD/YYYY",
+      "invalidDateNumbers": "التاريخ يجب أن يحتوي على أرقام صحيحة فقط",
+      "invalidMonth": "الشهر يجب أن يكون بين 1 و 12",
+      "invalidDay": "اليوم يجب أن يكون بين 1 و 31",
       "unlockAccountRequired": "إلغاء قفل الحساب مطلوب"
     }
   },

@@ -1,22 +1,34 @@
 'use client';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { PATHS } from '@/utils/router.helper';
 import { useAuthContext } from '@/context/AuthContext';
 import Loading from '../molecules/loading';
+// import { PATHS as PATHS_DATA } from '@/data/paths';
+import { PATHS as PATHS_HELPER } from '@/utils/router.helper';
+import { useUserInfo } from '@/context/UserInfoContext';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const { token, isLoading } = useAuthContext();
+  const { token } = useAuthContext();
+
+  // Get User Information
+  const { user, isLoading } = useUserInfo();
 
   useEffect(() => {
-    if (!token) {
-      router.push(PATHS.AUTH.LOGIN);
+    if (!isLoading && !token) {
+      router.push(PATHS_HELPER.AUTH.LOGIN);
     }
-  }, [token, router]);
+  }, [token, user, isLoading, router]);
 
-  if (!token) return null;
-  if (isLoading) return <Loading />;
+  if (isLoading)
+    return <Loading otherClassName="mt-0 min-h-[calc(100vh-200px)]" />;
+
+  const canAccessDashboard =
+    (user?.permissions && user.permissions.length > 0) ||
+    user?.roles?.includes('admin');
+
+  if (!token || !canAccessDashboard) return null;
+
   return <>{children}</>;
 };
 

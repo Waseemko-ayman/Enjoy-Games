@@ -1,18 +1,45 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CardWrapper from '@/components/atomic/CardWrapper';
 import NavItem from '@/components/atomic/NavItem';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { useAuthContext } from '@/context/AuthContext';
+import { useUserInfo } from '@/context/UserInfoContext';
 import { userList } from '@/data';
+import useAPI from '@/hook/useAPI';
+import { useToast } from '@/lib/toast';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const UserPopup = () => {
+  // Translations
   const t = useTranslations();
   const rankT = useTranslations('MyAccount.rank');
-  const { user, logout } = useAuthContext();
 
-  const handleLogout = () => {
+  // Notifications
+  const { showToast } = useToast();
+
+  // Context
+  const { token, logout } = useAuthContext();
+  const { user } = useUserInfo();
+
+  // Hook for API
+  const { add: clearSessionAPI } = useAPI<any, any>('session-timeout/clear');
+
+  const handleLogout = async () => {
     logout();
+    try {
+      const res = await clearSessionAPI({});
+      showToast(
+        res?.data?.message ||
+          t('Dashboard.settings.sissionTimeout.SessionSuccessfullyCleared')
+      );
+    } catch (err: any) {
+      showToast(
+        err?.response?.data?.message ||
+          t('Dashboard.settings.sissionTimeout.SessionFaildCleared'),
+        'error'
+      );
+    }
   };
 
   return (
@@ -47,8 +74,13 @@ const UserPopup = () => {
               className="border-b border-b-gray-200 py-2 last:border-0"
             >
               {section.items
-                ?.filter((item) => {
-                  if (item.title === 'لوحة التحكم' && !user?.is_admin) {
+                .filter((item) => {
+                  if (item.title === 'حسابي' && !token) return false;
+                  if (
+                    item.title === 'لوحة التحكم' &&
+                    (!user?.permissions || user?.permissions?.length === 0) &&
+                    !user?.roles?.includes('admin')
+                  ) {
                     return false;
                   }
                   return true;

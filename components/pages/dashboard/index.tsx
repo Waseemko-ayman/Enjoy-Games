@@ -6,7 +6,6 @@ import { OrderChart } from '@/components/ui/orders-chart';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import useAPI from '@/hook/useAPI';
-import SocialStats from '@/components/ui/display/socialStats';
 import SuspiciousTransactionsStats from '@/components/ui/display/suspiciousTransactionsStats';
 
 const DashboardPage = () => {
@@ -53,7 +52,7 @@ const DashboardPage = () => {
       />
       {/* <OrdersStats /> */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-        <div className="md:col-span-1 lg:col-span-5 space-y-5">
+        <div className="md:col-span-2 lg:col-span-5 space-y-5">
           <OrderChart
             startDate={startDate}
             endDate={endDate}
@@ -62,7 +61,7 @@ const DashboardPage = () => {
             setActiveTab={setActiveTab}
             addLoading={addLoading}
           />
-          <SocialStats />
+          {/* <SocialStats /> */}
           <SuspiciousTransactionsStats />
         </div>
         <div className="md:col-span-1 lg:col-span-2">

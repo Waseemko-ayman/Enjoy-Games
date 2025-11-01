@@ -23,6 +23,7 @@ import {
   getAccountSchema,
   toFormData,
 } from '@/utils/accountSchema';
+import UserPermissions from './UserPermissions';
 
 const Content = () => {
   const isMobile = useIsMobile();
@@ -109,6 +110,8 @@ const Content = () => {
                 {/* Account Options */}
                 {/* <AccountOptions t={t} /> */}
 
+                <UserPermissions permissions={user?.permissions} />
+
                 <AnimatedWrapper>
                   <Button
                     type="submit"
@@ -144,6 +147,7 @@ const Content = () => {
                     t={t}
                     walletBalance={user?.wallet_balance}
                     points={user?.points}
+                    roles={user?.roles}
                     getLoading={getLoading}
                     getError={getError}
                   />
