@@ -7,6 +7,7 @@ import { PATHS as PATHS_HELPER } from '@/utils/router.helper';
 import { linkPermissionMap } from '@/utils/linkPermissionMap';
 import Loading from '../molecules/loading';
 import { useUserInfo } from '@/context/UserInfoContext';
+import BackgroundGradientWrapper from '../molecules/BackgroundGradientWrapper';
 
 export default function DashboardGuard({
   children,
@@ -61,7 +62,11 @@ export default function DashboardGuard({
   }, [pathname, token, isLoading, user, router]);
 
   if (isLoading)
-    return <Loading otherClassName="mt-0 min-h-[calc(100vh-200px)]" />;
+    return (
+      <BackgroundGradientWrapper>
+        <Loading otherClassName="mt-0 min-h-[calc(100vh-200px)]" />
+      </BackgroundGradientWrapper>
+    );
 
   return <>{children}</>;
 }
