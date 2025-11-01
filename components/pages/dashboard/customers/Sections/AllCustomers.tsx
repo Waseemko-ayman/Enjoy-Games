@@ -1,6 +1,6 @@
 'use client';
 import GenericAllTable from '@/components/organism/GenericAllTable';
-import { CreateUsersPorps } from '@/interfaces';
+import { CreateCustomersPorps } from '@/interfaces';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -14,7 +14,7 @@ const AllCustomers = ({
   const t = useTranslations();
 
   return (
-    <GenericAllTable<CreateUsersPorps>
+    <GenericAllTable<CreateCustomersPorps>
       value={value}
       title={t('Dashboard.Users.CustomerTitle')}
       description={t('Dashboard.Users.manageCustomers')}
