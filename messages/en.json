@@ -854,7 +854,8 @@
         "SessionSuccessfully": "Session duration set successfully",
         "SessionFaild": "An error occurred while setting the session.",
         "SessionSuccessfullyCleared": "The session was successfully cleared.",
-        "SessionFaildCleared": "An error occurred while clearing the session."
+        "SessionFaildCleared": "An error occurred while clearing the session.",
+        "MinTimeoutError": "The minimum allowed value is 30 minutes."
       }
     },
     "socialStats": {

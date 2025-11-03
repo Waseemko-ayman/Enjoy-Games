@@ -858,7 +858,8 @@
         "SessionSuccessfully": "تم تعيين مدة الجلسة بنجاح",
         "SessionFaild": "حدث خطأ أثناء تعيين الجلسة",
         "SessionSuccessfullyCleared": "تم مسح الجلسة بنجاح",
-        "SessionFaildCleared": "حدث خطأ أثناء مسح الجلسة"
+        "SessionFaildCleared": "حدث خطأ أثناء مسح الجلسة",
+        "MinTimeoutError": "الحد الأدنى هو 30 دقيقة"
       }
     },
     "socialStats": {
