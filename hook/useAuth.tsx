@@ -7,6 +7,7 @@ import { PATHS } from '@/data/paths';
 import { LoginFormData, signupFormData } from '@/interfaces';
 import { useLocale, useTranslations } from 'next-intl';
 import { useToast } from '@/lib/toast';
+import Cookies from 'js-cookie';
 
 interface User {
   id: number;
@@ -44,9 +45,9 @@ interface Action {
 const initialState: AuthState = {
   user:
     typeof window !== 'undefined'
-      ? JSON.parse(localStorage.getItem('user') || 'null')
+      ? JSON.parse(Cookies.get('user') || 'null')
       : null,
-  token: typeof window !== 'undefined' ? localStorage.getItem('token') : null,
+  token: typeof window !== 'undefined' ? Cookies.get('token') || null : null,
   isLoading: false,
   error: null,
 };
@@ -63,10 +64,13 @@ const reducer = (state: AuthState, action: Action): AuthState => {
       };
 
     case AUTH_ACTIONS.CONFIRM_OTP:
-      const token =
-        action.payload?.token || localStorage.getItem('token') || '';
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(action?.payload?.user));
+      const token = action.payload?.token || Cookies.get('token') || '';
+      Cookies.set('token', token, { expires: 7, secure: true });
+      Cookies.set('user', JSON.stringify(action.payload?.user || {}), {
+        expires: 7,
+        secure: true,
+      });
+
       // Generate unique_id if not exists
       if (!sessionStorage.getItem('unique_id')) {
         sessionStorage.setItem('unique_id', generateUniqueId());
@@ -80,7 +84,7 @@ const reducer = (state: AuthState, action: Action): AuthState => {
       };
 
     case AUTH_ACTIONS.LOGOUT:
-      ['token', 'user'].forEach((item) => localStorage.removeItem(item));
+      ['token', 'user'].forEach((item) => Cookies.remove(item));
       const uniqueId = sessionStorage.getItem('unique_id');
       sessionStorage.removeItem('unique_id');
       if (uniqueId) {
