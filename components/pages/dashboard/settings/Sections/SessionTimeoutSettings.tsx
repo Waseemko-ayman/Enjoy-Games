@@ -35,15 +35,23 @@ const inputFields = [
   },
 ];
 
-const schema = yup.object().shape({
-  demo_minutes: yup.number().nullable().notRequired(),
-  live_minutes: yup.number().nullable().notRequired(),
-});
-
 const SessionTimeoutSettings = () => {
   // Translations
   const t = useTranslations('Dashboard.settings.sissionTimeout');
   const btnT = useTranslations('BtnTexts');
+
+  const schema = yup.object().shape({
+    demo_minutes: yup
+      .number()
+      .nullable()
+      .notRequired()
+      .min(30, t('MinTimeoutError')),
+    live_minutes: yup
+      .number()
+      .nullable()
+      .notRequired()
+      .min(30, t('MinTimeoutError')),
+  });
 
   // Notifications
   const { showToast } = useToast();
@@ -55,24 +63,49 @@ const SessionTimeoutSettings = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: yupResolver(schema) as unknown as Resolver<FormValues>,
     defaultValues: {
-      demo_minutes: settings?.demo_timeout_minutes || 0,
-      live_minutes: settings?.live_timeout_minutes || 0,
+      demo_minutes: 0,
+      live_minutes: 0,
     },
   });
 
   const onSubmit = async (data: FormValues) => {
-    console.log('Form Data =>', data);
+    const payloads = [];
+    if (data.demo_minutes) {
+      payloads.push({
+        site_status: 'demo',
+        timeout_minutes: data.demo_minutes,
+      });
+    }
+    if (data.live_minutes) {
+      payloads.push({
+        site_status: 'live',
+        timeout_minutes: data.live_minutes,
+      });
+    }
     try {
-      const response = await add(data);
+      let response;
+      for (const payload of payloads) {
+        response = await add(payload);
+      }
       showToast(response?.message || 'تم التحديث بنجاح');
     } catch (error: any) {
       showToast(error?.response?.message, 'error');
     }
   };
+
+  useEffect(() => {
+    if (settings) {
+      reset({
+        demo_minutes: settings?.settings?.demo?.timeout_minutes || 0,
+        live_minutes: settings?.settings?.live?.timeout_minutes || 0,
+      });
+    }
+  }, [settings, reset]);
 
   useEffect(() => {
     get();
