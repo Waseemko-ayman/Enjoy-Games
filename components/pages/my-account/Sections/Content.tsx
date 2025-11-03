@@ -24,6 +24,7 @@ import {
   toFormData,
 } from '@/utils/accountSchema';
 import UserPermissions from './UserPermissions';
+import { useUserInfo } from '@/context/UserInfoContext';
 
 const Content = () => {
   const isMobile = useIsMobile();
@@ -35,12 +36,7 @@ const Content = () => {
   const errorsTxts = useTranslations();
 
   // Get User Information
-  const {
-    get,
-    data: user,
-    isLoading: getLoading,
-    error: getError,
-  } = useAPI('user/my-info');
+  const { user, isLoading: getLoading, error: getError } = useUserInfo();
 
   // Update User Information
   const { add, isLoading } = useAPI('update-user');
@@ -76,10 +72,6 @@ const Content = () => {
   useEffect(() => {
     if (user) reset(getAccountDefaultValues(user));
   }, [user, reset]);
-
-  useEffect(() => {
-    get();
-  }, [get]);
 
   return (
     <FormProvider {...methods}>
