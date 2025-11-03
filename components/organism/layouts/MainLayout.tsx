@@ -13,9 +13,8 @@ import { FloatingChatWidget } from '../FloatingChatWidget';
 import FloatingActions from '../../atomic/FloatingActions';
 import { CategoriesProvider } from '@/context/CategoriesContext';
 import { MainContentProvider } from '@/context/MainContentContext';
-// import FloatingSessionTimer from '../FloatingSessionTimer';
-// import { useAuthContext } from '@/context/AuthContext';
-// import { useUserInfo } from '@/context/UserInfoContext';
+import FloatingSessionTimer from '../FloatingSessionTimer';
+import { useUserInfo } from '@/context/UserInfoContext';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -25,8 +24,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const isCartPage = pathWithoutLocale === 'my-cart';
 
   const isMobile = useIsMobile();
-  // const { user } = useAuthContext();
-  // const { user } = useUserInfo();
+  const { user } = useUserInfo();
 
   return (
     <CategoriesProvider>
@@ -53,9 +51,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
 
         <FloatingChatWidget />
         <FloatingActions phone="+96893809093" />
-        {/* {user?.roles && !user?.roles?.includes('admin') && (
+        {user?.roles && !user?.roles?.includes('admin') && (
           <FloatingSessionTimer />
-        )} */}
+        )}
       </MainContentProvider>
     </CategoriesProvider>
   );
