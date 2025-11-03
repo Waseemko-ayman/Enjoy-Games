@@ -6,6 +6,7 @@ import useAPI from '@/hook/useAPI';
 import { useTranslations } from 'next-intl';
 import { FaX } from 'react-icons/fa6';
 import { useAuthContext } from '@/context/AuthContext';
+import ButtonLoading from '../atomic/ButtonLoading';
 
 interface SessionInfo {
   user_id: number;
@@ -13,6 +14,9 @@ interface SessionInfo {
   is_expired: boolean;
   expires_at: string | null;
   timeout_minutes: number;
+  remaining_minutes: number;
+  remaining_hours: number;
+  site_status: 'demo' | 'live';
   message: string;
 }
 
@@ -26,9 +30,11 @@ const FloatingSessionTimer = () => {
   const t = useTranslations('Dashboard.settings.sissionTimeout');
   const btnT = useTranslations('BtnTexts');
 
-  const { get: getSession, data } = useAPI<SessionInfo, any>(
-    'session-timeout/info'
-  );
+  const {
+    get: getSession,
+    data,
+    isLoading: getIsLoading,
+  } = useAPI<SessionInfo, any>('session-timeout/info');
   const { add: extendSessionAPI, isLoading } = useAPI<any, any>(
     'session-timeout/extend'
   );
@@ -36,34 +42,34 @@ const FloatingSessionTimer = () => {
   const extendSession = async () => {
     try {
       const res = await extendSessionAPI({});
-      if (res?.data?.expires_at) {
-        const diff = new Date(res.data.expires_at).getTime() - Date.now();
-        setTimeLeft(Math.max(Math.floor(diff / 1000), 0));
+      if (res?.data?.extended_until) {
+        await getSession(); // Get the updated session from the server
       }
     } catch (err) {
       console.error(err);
     }
   };
 
-  // تحديث الوقت
+  // Time update
   useEffect(() => {
-    if (hasToken && data?.expires_at) {
-      const diff = new Date(data.expires_at).getTime() - Date.now();
-      setTimeLeft(Math.max(Math.floor(diff / 1000), 0));
+    if (!data || !hasToken) return;
 
-      const interval = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
-            logout();
-            clearInterval(interval);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
+    // Convert minutes to seconds
+    const initialTimeLeft = Math.max(data?.remaining_minutes * 60, 0);
+    setTimeLeft(initialTimeLeft);
 
-      return () => clearInterval(interval);
-    }
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          logout();
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, [data, hasToken, logout]);
 
   // Monitor session expiration from API
@@ -85,7 +91,7 @@ const FloatingSessionTimer = () => {
   const timerColor =
     timeLeft <= 10 ? 'text-red-600 font-bold' : 'text-gray-900 font-bold';
   const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
+  const seconds = Math.floor(timeLeft % 60);
 
   const ClockButton = () => (
     <Button
@@ -106,7 +112,7 @@ const FloatingSessionTimer = () => {
     </Button>
   );
 
-  const ExtendSessionButtonButton = () => (
+  const ExtendSessionButton = () => (
     <Button
       otherClassName="px-5 py-2 text-sm shadow-sm hover:shadow-md"
       handleClick={extendSession}
@@ -151,13 +157,17 @@ const FloatingSessionTimer = () => {
           <p className="text-sm text-gray-600 font-medium">
             {t('session_time_label')}:
           </p>
-          <p className={`text-xl tabular-nums ${timerColor}`}>
-            {minutes.toString().padStart(2, '0')}:
-            {seconds.toString().padStart(2, '0')}
-          </p>
+          {getIsLoading ? (
+            <ButtonLoading borderColor="border-black" />
+          ) : (
+            <p className={`text-xl tabular-nums ${timerColor}`}>
+              {minutes.toString().padStart(2, '0')}:
+              {seconds.toString().padStart(2, '0')}
+            </p>
+          )}
         </div>
         <div className="w-px h-6 bg-gray-300"></div>
-        <ExtendSessionButtonButton />
+        <ExtendSessionButton />
       </div>
 
       {/* Mobile version */}
@@ -167,21 +177,23 @@ const FloatingSessionTimer = () => {
 
         {/* Retracted Panel */}
         <div
-          className={`fixed top-1/2 right-0 -translate-y-1/2 bg-white shadow-xl px-3 py-2 rounded-l-lg flex items-center gap-4 border border-gray-200 z-50 transform transition-transform duration-300 ${
+          className={`fixed top-1/2 right-0 -translate-y-1/2 bg-white shadow-xl px-3 py-2 rounded-l-lg flex items-center gap-10 border border-gray-200 z-50 transform transition-transform duration-300 ${
             isOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          <div className="flex items-center gap-2">
-            <p className="text-sm text-gray-600 font-medium">
+          <div>
+            <p className="text-base text-gray-600 font-medium mb-3">
               {t('session_time_label')}:
             </p>
-            <p className={`text-xl tabular-nums ${timerColor}`}>
-              {minutes.toString().padStart(2, '0')}:
-              {seconds.toString().padStart(2, '0')}
-            </p>
+            <div className="flex items-center gap-3">
+              <p className={`text-xl tabular-nums ${timerColor}`}>
+                {minutes.toString().padStart(2, '0')}:
+                {seconds.toString().padStart(2, '0')}
+              </p>
+              <div className="w-px h-6 bg-gray-300"></div>
+              <ExtendSessionButton />
+            </div>
           </div>
-          <div className="w-px h-6 bg-gray-300"></div>
-          <ExtendSessionButtonButton />
 
           <CloseButton />
         </div>
