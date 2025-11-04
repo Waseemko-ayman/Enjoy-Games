@@ -14,7 +14,7 @@ const ProfilePicture = ({
   photo,
 }: {
   t: TranslationFunction;
-  photo: FileList | string | null;
+  photo?: FileList | File | string | null;
 }) => {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);

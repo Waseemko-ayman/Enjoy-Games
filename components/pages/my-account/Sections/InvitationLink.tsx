@@ -15,7 +15,7 @@ const InvitationLink = ({
   userReferralCode,
 }: {
   t: TranslationFunction;
-  userReferralCode: string;
+  userReferralCode?: string;
 }) => {
   const [copied, setCopied] = useState(false);
   const { showToast } = useToast();

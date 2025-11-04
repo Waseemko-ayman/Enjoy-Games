@@ -4,14 +4,15 @@ import { useRouter } from 'next/navigation';
 import { linkPermissionMap } from '@/utils/linkPermissionMap';
 import DashboardPage from '@/components/pages/dashboard';
 import { useUserInfo } from '@/context/UserInfoContext';
+import Loading from '@/components/molecules/loading';
 
 const Dashboard = () => {
   const router = useRouter();
   // Get User Information
-  const { user } = useUserInfo();
+  const { user, isLoading } = useUserInfo();
 
   useEffect(() => {
-    if (!user) return;
+    if (isLoading || !user) return;
 
     const isAdmin = user?.is_admin || user?.roles?.includes('admin');
 
@@ -35,10 +36,14 @@ const Dashboard = () => {
     } else {
       router.replace('/');
     }
-  }, [user, router]);
+  }, [user, router, isLoading]);
+
+  if (isLoading || !user) {
+    return <Loading otherClassName="mt-0 min-h-[calc(100vh-200px)]" />;
+  }
 
   const isAdmin = user?.is_admin || user?.roles?.includes('admin');
-
+  
   if (isAdmin || user?.permissions?.includes('manage orders'))
     return <DashboardPage />;
 

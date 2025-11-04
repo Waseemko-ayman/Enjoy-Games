@@ -16,9 +16,9 @@ const Stats = ({
   getError,
 }: {
   t: TranslationFunction;
-  walletBalance: string;
-  points: number;
-  roles: string[];
+  walletBalance?: string;
+  points?: number;
+  roles?: string[];
   getLoading: boolean;
   getError: string;
 }) => {

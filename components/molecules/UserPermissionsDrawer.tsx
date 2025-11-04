@@ -22,6 +22,7 @@ interface UserPermissionsDrawerProps {
   setOpen: (val: boolean) => void;
   // permissionsOptions: { id: string; name: string }[];
   trigger?: React.ReactNode;
+  onUpdated?: (updatedData: any) => void;
 }
 
 interface FormValues {
@@ -33,6 +34,7 @@ const UserPermissionsDrawer: React.FC<UserPermissionsDrawerProps> = ({
   open,
   setOpen,
   trigger,
+  onUpdated,
 }) => {
   const t = useTranslations();
   const { showToast } = useToast();
@@ -65,6 +67,7 @@ const UserPermissionsDrawer: React.FC<UserPermissionsDrawerProps> = ({
         : data;
       const response = await add(payload);
       showToast(response.message);
+      onUpdated?.({ permissions: payload.permissions });
       setOpen(false);
     } catch (err: any) {
       showToast(err?.response?.message || 'حدث خطأ', 'error');

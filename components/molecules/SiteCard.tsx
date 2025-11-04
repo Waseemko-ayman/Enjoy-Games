@@ -1,5 +1,6 @@
 import React from 'react';
 import { SiteCardProps } from '@/interfaces';
+import ButtonLoading from '../atomic/ButtonLoading';
 
 const SiteCard = ({
   icon: Icon,
@@ -7,6 +8,7 @@ const SiteCard = ({
   titleKey,
   settings,
   t,
+  getIsLoading,
 }: SiteCardProps) => {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
@@ -29,7 +31,11 @@ const SiteCard = ({
               {t('TimeoutMinutes')}
             </span>
             <span className="text-2xl font-bold text-slate-900">
-              {settings?.timeout_minutes ?? 0}
+              {getIsLoading ? (
+                <ButtonLoading borderColor="border-black" />
+              ) : (
+                settings?.timeout_minutes ?? 0
+              )}
             </span>
           </div>
 
@@ -38,7 +44,11 @@ const SiteCard = ({
               {t('TimeoutHours')}
             </span>
             <span className="text-2xl font-bold text-slate-900">
-              {settings?.timeout_hours ?? 0}
+              {getIsLoading ? (
+                <ButtonLoading borderColor="border-black" />
+              ) : (
+                settings?.timeout_hours ?? 0
+              )}
             </span>
           </div>
         </div>
