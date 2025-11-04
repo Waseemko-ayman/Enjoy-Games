@@ -583,6 +583,9 @@ const DataTableBody = <T extends { id: string | number }>({
                             setOpen={(val: boolean) =>
                               setOpenUserId(val ? String(row.id) : null)
                             }
+                            onUpdated={(updatedData) =>
+                              onRowPatched?.(row.id, updatedData)
+                            }
                             trigger={
                               <Button
                                 onClick={() => setOpenUserId(String(row.id))}
