@@ -51,6 +51,7 @@ const AccountSettings = () => {
     user,
     isLoading: userInfoLoading,
     error: userInfoError,
+    refresh,
   } = useUserInfo();
 
   // Update User Information
@@ -94,6 +95,7 @@ const AccountSettings = () => {
       const response = await add(formData);
       reset(data);
       showToast(response?.message || 'تم التحديث بنجاح');
+      refresh();
     } catch (error: any) {
       showToast(error?.response?.message || 'حدث خطأ أثناء التحديث', 'error');
     }
