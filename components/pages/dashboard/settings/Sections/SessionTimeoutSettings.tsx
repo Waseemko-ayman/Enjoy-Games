@@ -57,7 +57,11 @@ const SessionTimeoutSettings = () => {
   const { showToast } = useToast();
 
   // API Hooks
-  const { get, data: settings } = useAPI('session-timeout/settings');
+  const {
+    get,
+    data: settings,
+    isLoading: getIsLoading,
+  } = useAPI('session-timeout/settings');
   const { add, isLoading } = useAPI('session-timeout/update');
 
   const {
@@ -93,6 +97,7 @@ const SessionTimeoutSettings = () => {
         response = await add(payload);
       }
       showToast(response?.message || 'تم التحديث بنجاح');
+      get(); // Refresh settings after update
     } catch (error: any) {
       showToast(error?.response?.message, 'error');
     }
@@ -162,7 +167,13 @@ const SessionTimeoutSettings = () => {
                 : 'bg-amber-100 text-amber-800'
             }`}
           >
-            {isLive ? t('Live') : t('Demo')}
+            {getIsLoading ? (
+              <ButtonLoading borderColor="border-black" />
+            ) : isLive ? (
+              t('Live')
+            ) : (
+              t('Demo')
+            )}
           </span>
         </div>
 
@@ -174,6 +185,7 @@ const SessionTimeoutSettings = () => {
               label={item.label}
               value={item.value}
               unit={item.unit}
+              getIsLoading={getIsLoading}
             />
           ))}
         </div>
@@ -189,6 +201,7 @@ const SessionTimeoutSettings = () => {
             titleKey={t(card.key)}
             settings={card.settings}
             t={t}
+            getIsLoading={getIsLoading}
           />
         ))}
       </div>

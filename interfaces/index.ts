@@ -1467,6 +1467,7 @@ export interface SiteCardProps {
   titleKey: string;
   settings: any;
   t: TranslationFunction;
+  getIsLoading: boolean;
 }
 
 export interface ProductInventoryStats {
