@@ -25,7 +25,8 @@ export default function DashboardGuard({
   useEffect(() => {
     const pathnameWithoutLocale = pathname.replace(/^\/(en|ar)/, '');
     const isDashboardPath = pathnameWithoutLocale.startsWith('/dashboard');
-    // const isDashboardPath = pathname.startsWith(PATHS_DATA.DASHBOARD.HOME.ROOT);
+
+    if (isLoading || !user) return;
 
     if (!isLoading && isDashboardPath) {
       if (!token) {
@@ -33,9 +34,6 @@ export default function DashboardGuard({
         return;
       }
 
-      // const canAccessDashboard =
-      //   (user?.permissions && user.permissions.length > 0) ||
-      //   user?.roles?.includes('admin');
       const canAccessDashboard =
         user?.permissions?.includes('manage orders') ||
         user?.roles?.includes('admin');
