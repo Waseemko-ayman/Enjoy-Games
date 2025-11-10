@@ -166,7 +166,6 @@ const useAuth = () => {
 
       if (data?.success) {
         sessionStorage.setItem('otp_email', body.email);
-
         showToast(data?.message);
         router.replace(PATHS.OTP);
       } else {
@@ -199,7 +198,6 @@ const useAuth = () => {
         });
 
         sessionStorage.removeItem('otp_email');
-        // sessionStorage.removeItem('otp_password');
         showToast(data?.message);
         router.replace(PATHS.HOME.link);
       } else {
