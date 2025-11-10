@@ -7,6 +7,7 @@ import AccountSettings from './Sections/AccountSettings';
 import SessionTimeoutSettings from './Sections/SessionTimeoutSettings';
 import { useTranslations } from 'next-intl';
 import { useToggleLocale } from '@/hook/useToggleLocale';
+import MaintenanceSettings from './Sections/MaintenanceSettings';
 
 const SettingsPage = () => {
   const t = useTranslations();
@@ -17,6 +18,10 @@ const SettingsPage = () => {
     {
       value: 'session-timeout',
       label: t('Dashboard.settings.sissionTimeout.title'),
+    },
+    {
+      value: 'maintenance',
+      label: t('Dashboard.settings.Maintenance.title'),
     },
   ];
 
@@ -31,9 +36,10 @@ const SettingsPage = () => {
         className={`w-full ${isArabic ? 'rtl' : 'ltr'}`}
         dir={isArabic ? 'rtl' : 'ltr'}
       >
-        <TabsNavigation tabs={tabsData} />
+        <TabsNavigation tabs={tabsData} useFlexOnMobile />
         <AccountSettings />
         <SessionTimeoutSettings />
+        <MaintenanceSettings />
       </Tabs>
     </div>
   );

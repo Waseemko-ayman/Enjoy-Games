@@ -856,6 +856,31 @@
         "SessionSuccessfullyCleared": "The session was successfully cleared.",
         "SessionFaildCleared": "An error occurred while clearing the session.",
         "MinTimeoutError": "The minimum allowed value is 30 minutes."
+      },
+      "Maintenance": {
+        "title": "Maintenance Page Settings",
+        "desc": "Manage maintenance page settings and customize messages and elements displayed during activation",
+        "MaintenanceMode": "Maintenance mode",
+        "SiteAvailable": "Activated",
+        "SiteDisabled": "Disabled",
+        "AdditionalInfo": "Additional Information",
+        "AdminAccess": "Admin users will still have access to the dashboard",
+        "API503": "API endpoints will return a 503 status code during maintenance",
+        "EstimatedTime": "Users will see an estimated time for when service resumes",
+        "Overview": "When enabled, the system will display a maintenance page to all users. This is useful during updates, migrations, or scheduled downtime.",
+        "ActiveInfoTitle": "System in Maintenance Mode",
+        "ActiveInfoDesc": "All users are currently seeing the maintenance page. Remember to disable this mode once maintenance is complete.",
+        "subtitle": "We’re working to improve your experience",
+        "updating_title": "Updates in Progress",
+        "updating_description": "We’re currently making improvements to provide you with a better experience. We’ll be back soon with enhanced features and improved performance.",
+        "expected_return": "Expected to be back shortly",
+        "system_update_title": "System Update",
+        "system_update_desc": "Security updates and performance improvements",
+        "add_features_title": "Adding Features",
+        "add_features_desc": "New features to enhance user experience",
+        "fast_return_title": "Quick Return",
+        "fast_return_desc": "We’ll be back as soon as possible",
+        "thanks": "Thank you for your patience and understanding"
       }
     },
     "socialStats": {

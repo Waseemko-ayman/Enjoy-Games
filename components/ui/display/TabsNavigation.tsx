@@ -11,16 +11,20 @@ interface TabsNavigationProps {
   tabs: Tab[];
   variant?: 'default' | 'segmented';
   children?: React.ReactNode;
+  useFlexOnMobile?: boolean;
 }
 
 const TabsNavigation: React.FC<TabsNavigationProps> = ({
   tabs,
   variant = 'default',
   children,
+  useFlexOnMobile = false,
 }) => {
   const { isArabic } = useToggleLocale();
 
-  const columnsClass = `grid w-full ${
+  const columnsClass = ` ${
+    useFlexOnMobile ? 'flex space-x-2 sm:grid' : 'grid'
+  } w-full ${
     tabs.length === 2
       ? 'grid-cols-2'
       : tabs.length === 3
@@ -34,7 +38,9 @@ const TabsNavigation: React.FC<TabsNavigationProps> = ({
 
   const tabsList = (
     <TabsList
-      className={`${variant === 'default' ? columnsClass : ''}`}
+      className={`${
+        variant === 'default' ? columnsClass : ''
+      } overflow-x-auto whitespace-nowrap`}
       variant="classic"
     >
       {tabs.map((tab) => (
