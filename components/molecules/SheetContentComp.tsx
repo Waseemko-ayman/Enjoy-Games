@@ -42,7 +42,7 @@ const SheetContentComp = () => {
       {isLoading ? (
         <Loading borderColor="border-white" />
       ) : error ? (
-        <ErrorFetching />
+        <ErrorFetching error={error} />
       ) : categories?.length === 0 ? (
         <NoDataMessage />
       ) : (

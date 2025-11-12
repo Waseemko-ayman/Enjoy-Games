@@ -72,7 +72,7 @@ const PaymentOptions: React.FC<PaymentOptionsProps> = ({
         {methodLoading ? (
           <Loading />
         ) : methodError ? (
-          <ErrorFetching />
+          <ErrorFetching error={methodError} />
         ) : (
           methods?.map((method: PaymentMethod) => (
             <label key={method.value}>

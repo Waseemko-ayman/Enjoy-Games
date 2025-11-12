@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React from 'react';
 import { FaArrowsRotate } from 'react-icons/fa6';
@@ -5,12 +6,13 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Button from '../atomic/Button';
 
-const ErrorFetching = () => {
+const ErrorFetching = ({ error }: { error?: any }) => {
   const t = useTranslations('Messages');
   const btnTxts = useTranslations('BtnTexts');
   const handleClick = () => {
     location.reload();
   };
+
   return (
     <div className="text-center px-3 pb-10 mt-10 relative z-20">
       <Image
@@ -22,7 +24,7 @@ const ErrorFetching = () => {
         height={128}
       />
       <h2 className="text-center text-lg md:text-xl lg:text-xl mt-4 mb-2">
-        {t('errorMessage')}
+        {error?.response?.data.message || t('errorMessage')}
       </h2>
       <Button
         handleClick={handleClick}

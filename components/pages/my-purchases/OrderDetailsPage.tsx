@@ -20,7 +20,7 @@ const OrderDetailsPage = ({ id }: { id: string }) => {
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <ErrorFetching />
+        <ErrorFetching error={error} />
       ) : (
         <OrderDetailsContent items={items} />
       )}

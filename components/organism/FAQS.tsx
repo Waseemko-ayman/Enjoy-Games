@@ -51,7 +51,7 @@ const FAQS = ({ showTitle = false }: { showTitle?: boolean }) => {
             {isLoading ? (
               <Loading />
             ) : error ? (
-              <ErrorFetching />
+              <ErrorFetching error={error} />
             ) : faqs?.length === 0 ? (
               <NoDataMessage />
             ) : (

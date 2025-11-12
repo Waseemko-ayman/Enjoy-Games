@@ -26,7 +26,7 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <ErrorFetching />
+        <ErrorFetching error={error} />
       ) : suggestedProducts?.length === 0 ? (
         <NoDataMessage />
       ) : (

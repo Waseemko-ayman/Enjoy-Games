@@ -54,7 +54,7 @@ const SuspiciousTransactionsStats = () => {
           {isLoading ? (
             <Loading />
           ) : error ? (
-            <ErrorFetching />
+            <ErrorFetching error={error} />
           ) : (
             <>
               <div className="grid grid-cols-2 gap-6 mb-6">

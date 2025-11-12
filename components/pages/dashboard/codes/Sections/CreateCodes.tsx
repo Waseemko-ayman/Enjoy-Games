@@ -181,7 +181,7 @@ const CreateCodes = ({
         {getSingleIsLoading ? (
           <Loading />
         ) : getSingleError ? (
-          <ErrorFetching />
+          <ErrorFetching error={getSingleError} />
         ) : (
           <>
             <div className="grid gap-5 md:grid-cols-2 mb-5">

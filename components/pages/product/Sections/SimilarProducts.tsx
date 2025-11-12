@@ -26,7 +26,7 @@ const SimilarProducts: React.FC<SimilarProductsProps> = ({
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <ErrorFetching />
+        <ErrorFetching error={error} />
       ) : (
         <GridWrapper otherClassName="gap-5" isScrollable>
           {Array.isArray(products) &&

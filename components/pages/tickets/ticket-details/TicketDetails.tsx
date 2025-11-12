@@ -88,7 +88,7 @@ const TicketDetailsPage = ({ id }: { id: string }) => {
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <ErrorFetching />
+        <ErrorFetching error={error} />
       ) : !ticket ? (
         <Loading />
       ) : (

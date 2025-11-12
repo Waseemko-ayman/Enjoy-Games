@@ -135,7 +135,7 @@ export function DataTable<T extends { id: number | string }>({
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <ErrorFetching />
+        <ErrorFetching error={error} />
       ) : (
         <>
           <DataTableBody

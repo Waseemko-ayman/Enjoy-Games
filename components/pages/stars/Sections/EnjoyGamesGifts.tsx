@@ -35,7 +35,7 @@ const EnjoyGamesGifts: React.FC<getSlugsProps> = ({ getSlugs }) => {
         {isLoading ? (
           <Loading />
         ) : error ? (
-          <ErrorFetching />
+          <ErrorFetching error={error} />
         ) : (
           <GridWrapper otherClassName="gap-5" isScrollable>
             {Array.isArray(data?.newly_arrived) &&

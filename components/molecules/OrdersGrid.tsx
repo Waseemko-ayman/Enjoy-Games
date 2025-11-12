@@ -61,7 +61,7 @@ const OrdersGrid: React.FC<OrdersGridProps> = ({
         {isLoading ? (
           <Loading />
         ) : error ? (
-          <ErrorFetching />
+          <ErrorFetching error={error} />
         ) : (
           paginatedOrders?.map((order) => (
             <OrderCard key={order.id} order={order} />

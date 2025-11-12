@@ -115,7 +115,7 @@ const AccountSettings = () => {
         {userInfoLoading ? (
           <Loading />
         ) : userInfoError ? (
-          <ErrorFetching />
+          <ErrorFetching error={userInfoError} />
         ) : (
           <>
             <div className="flex flex-col gap-6 lg:flex-row">

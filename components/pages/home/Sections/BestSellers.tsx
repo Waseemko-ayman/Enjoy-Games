@@ -26,7 +26,7 @@ const BestSellers: React.FC<BestSellersProps> = ({
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <ErrorFetching />
+        <ErrorFetching error={error} />
       ) : bestSeller?.length === 0 ? (
         <NoDataMessage />
       ) : (
