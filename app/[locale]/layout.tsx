@@ -16,7 +16,6 @@ import { UpdateContentProvider } from '@/context/updateContentContext';
 import { ProductCodesProvider } from '@/context/selectedProductId';
 import DashboardGuard from '@/components/auth/DashboardGuard';
 import { OrdersProvider } from '@/context/OrdersContext';
-import { InterestsProvider } from '@/context/InterestsContext';
 import { ReferralCodeProvider } from '@/hook/ReferralCodeContext';
 import { API_URL } from '@/config/api';
 import { UserInfoProvider } from '@/context/UserInfoContext';
@@ -79,13 +78,11 @@ export default async function RootLayout({
                       <CartProvider>
                         <TicketsProvider>
                           <OrdersProvider>
-                            <InterestsProvider>
-                              <ReferralCodeProvider>
-                                <BodyWrapper>
-                                  <DashboardGuard>{children}</DashboardGuard>
-                                </BodyWrapper>
-                              </ReferralCodeProvider>
-                            </InterestsProvider>
+                            <ReferralCodeProvider>
+                              <BodyWrapper>
+                                <DashboardGuard>{children}</DashboardGuard>
+                              </BodyWrapper>
+                            </ReferralCodeProvider>
                           </OrdersProvider>
                         </TicketsProvider>
                       </CartProvider>
