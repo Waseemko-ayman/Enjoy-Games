@@ -64,13 +64,19 @@ const LoginPage = () => {
   };
 
   const onSubmit = async (data: LoginFormData) => {
-    await login(data);
-    setShowPageLoading(true);
     try {
+      const loginRes: any = await login(data);
+      if (!loginRes?.success) {
+        return;
+      }
+      setShowPageLoading(true);
+
       const res = await setSessionAPI({});
       showToast(res?.data?.message || t('SessionSuccessfully'));
     } catch (err: any) {
       showToast(err?.response?.data?.message || t('SessionFaild'), 'error');
+    } finally {
+      setShowPageLoading(false);
     }
     reset();
   };
