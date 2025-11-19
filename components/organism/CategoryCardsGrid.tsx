@@ -39,7 +39,7 @@ const CategoryCardsGrid: FC<CategoryPageProps> = ({
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <ErrorFetching />
+        <ErrorFetching error={error} />
       ) : (
         <>
           <GridWrapper

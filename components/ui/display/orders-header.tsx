@@ -11,8 +11,6 @@ import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/components/atomic/ButtonLoading';
-import { FaGlobe } from 'react-icons/fa6';
-import { useToggleLocale } from '@/hook/useToggleLocale';
 
 export function OrdersHeader({
   startDate,
@@ -36,8 +34,6 @@ export function OrdersHeader({
   >;
 }) {
   const t = useTranslations();
-  const langTexts = useTranslations('Languages');
-  const { toggleLocale, isArabic } = useToggleLocale();
 
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -109,7 +105,6 @@ export function OrdersHeader({
           </PopoverContent>
         </Popover>
         <Button
-          variant="outline"
           size="sm"
           className="h-9"
           onClick={() => onFilter()}
@@ -123,10 +118,6 @@ export function OrdersHeader({
               {t('BtnTexts.filter')}
             </>
           )}
-        </Button>
-        <Button size="sm" className="h-9" onClick={toggleLocale}>
-          <FaGlobe className="mr-2 h-4 w-4" />
-          {isArabic ? langTexts('english') : langTexts('arabic')}
         </Button>
         {/* <Button size="sm" className="h-9">
           <Download className="mr-2 h-4 w-4" />

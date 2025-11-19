@@ -28,7 +28,7 @@ const MobileNavbar = () => {
     <>
       <div className="bg-white pt-3 pb-5 fixed right-0 bottom-0 w-full z-[999] shadow-[0_-6px_44px_0_rgba(0,0,0,0.1)]">
         <Container>
-          <ul className="flex items-center justify-between gap-3">
+          <ul className="flex items-center justify-around gap-3">
             {navBarLinks
               .filter((item) => !(item.hideWhenAuth && token))
               .map((item, index) => (

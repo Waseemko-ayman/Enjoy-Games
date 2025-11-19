@@ -156,7 +156,7 @@ const SuspiciousTransactions = () => {
         {isLoading ? (
           <Loading />
         ) : error ? (
-          <ErrorFetching />
+          <ErrorFetching error={error} />
         ) : (
           <div className="space-y-4 p-2">
             {transactionsData?.length === 0 ? (

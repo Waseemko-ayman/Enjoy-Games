@@ -37,7 +37,7 @@ const TierProgressWrapper: React.FC<TierProgressWrapperProps> = ({
                 {isLoading ? (
                   <Loading />
                 ) : error ? (
-                  <ErrorFetching />
+                  <ErrorFetching error={error} />
                 ) : (
                   <div className="flex justify-between items-center pt-10 max-sm:pt-7 space-x-9 px-5 sm:px-0">
                     {children}

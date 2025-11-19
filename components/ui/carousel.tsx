@@ -194,9 +194,9 @@ function CarouselPrevious({
         'absolute size-8 rounded-full hover:!bg-[#7338f0] hover:!text-white',
         orientation === 'horizontal'
           ? isArabic
-            ? '-bottom-12 right-4 md:top-1/2 md:right-[-3rem] md:left-auto md:translate-y-[-50%]'
-            : '-bottom-12 left-4 md:top-1/2 md:left-[-3rem] md:translate-y-[-50%]'
-          : 'md:top-[-3rem] md:left-1/2 md:translate-x-[-50%] md:rotate-90',
+            ? '-bottom-12 right-4 min-[1170px]:top-1/2 min-[1170px]:right-[-3rem] min-[1170px]:left-auto min-[1170px]:translate-y-[-50%]'
+            : '-bottom-12 left-4 min-[1170px]:top-1/2 min-[1170px]:left-[-3rem] min-[1170px]:translate-y-[-50%]'
+          : 'min-[1170px]:top-[-3rem] min-[1170px]:left-1/2 min-[1170px]:translate-x-[-50%] min-[1170px]:rotate-90',
 
         className
       )}
@@ -229,9 +229,9 @@ function CarouselNext({
         'absolute size-8 rounded-full hover:!bg-[#7338f0] hover:!text-white',
         orientation === 'horizontal'
           ? isArabic
-            ? '-bottom-12 left-4 md:top-1/2 md:left-[-3rem] md:right-auto md:translate-y-[-50%]'
-            : '-bottom-12 right-4 md:top-1/2 md:right-[-3rem] md:translate-y-[-50%]'
-          : 'md:bottom-[-3rem] md:left-1/2 md:translate-x-[-50%] md:rotate-90',
+            ? '-bottom-12 left-4 min-[1170px]:top-1/2 min-[1170px]:left-[-3rem] min-[1170px]:right-auto min-[1170px]:translate-y-[-50%]'
+            : '-bottom-12 right-4 min-[1170px]:top-1/2 min-[1170px]:right-[-3rem] min-[1170px]:translate-y-[-50%]'
+          : 'min-[1170px]:bottom-[-3rem] min-[1170px]:left-1/2 min-[1170px]:translate-x-[-50%] min-[1170px]:rotate-90',
         className
       )}
       disabled={!canScrollNext}

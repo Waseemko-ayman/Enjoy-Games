@@ -1,16 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
 import CardWrapper from '@/components/atomic/CardWrapper';
 import NavItem from '@/components/atomic/NavItem';
 import AnimatedWrapper from '@/components/molecules/FramerMotion/AnimatedWrapper';
 import { useAuthContext } from '@/context/AuthContext';
 import { useUserInfo } from '@/context/UserInfoContext';
 import { userList } from '@/data';
+import { PATHS } from '@/data/paths';
 import useAPI from '@/hook/useAPI';
 import { useToast } from '@/lib/toast';
 import { useTranslations } from 'next-intl';
-import React from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 const UserPopup = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const isMyAccountPage = pathname.endsWith(PATHS.MY_ACCOUNT.ROOT.link);
+
   // Translations
   const t = useTranslations();
   const rankT = useTranslations('MyAccount.rank');
@@ -27,6 +34,10 @@ const UserPopup = () => {
 
   const handleLogout = async () => {
     logout();
+    if (isMyAccountPage) {
+      router.push(PATHS.HOME.link);
+      return;
+    }
     try {
       const res = await clearSessionAPI({});
       showToast(

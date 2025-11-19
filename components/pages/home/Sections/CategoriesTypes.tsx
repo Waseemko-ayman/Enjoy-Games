@@ -32,7 +32,7 @@ const CategoriesTypes = ({
 }: {
   categories?: Category[];
   loading: boolean;
-  error: boolean;
+  error: boolean | string;
 }) => {
   return (
     <Container>
@@ -40,7 +40,7 @@ const CategoriesTypes = ({
         {loading ? (
           <Loading />
         ) : error ? (
-          <ErrorFetching />
+          <ErrorFetching error={error} />
         ) : categories?.length === 0 ? (
           <NoDataMessage />
         ) : (

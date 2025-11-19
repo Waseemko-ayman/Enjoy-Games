@@ -39,7 +39,7 @@ const TicketsPage = () => {
   } = usePagination<Ticket>({ data: tickets || [], itemsPerPage: 9 });
 
   if (isLoading) return <Loading />;
-  if (error) return <ErrorFetching />;
+  if (error) return <ErrorFetching error={error} />;
 
   return (
     <div>

@@ -100,7 +100,7 @@ const InterestsPage = () => {
         {isLoading.get ? (
           <Loading />
         ) : error.get ? (
-          <ErrorFetching />
+          <ErrorFetching error={error} />
         ) : paginatedInterests?.length < 6 ? (
           <Container>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">

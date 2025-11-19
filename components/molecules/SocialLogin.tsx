@@ -96,7 +96,7 @@ const SocialLogin: React.FC<SocialLoginProps> = ({ btnTxts, authTxts }) => {
         {isLoading ? (
           <Loading />
         ) : error ? (
-          <ErrorFetching />
+          <ErrorFetching error={error} />
         ) : (
           social?.map((provider: any) => (
             <Button

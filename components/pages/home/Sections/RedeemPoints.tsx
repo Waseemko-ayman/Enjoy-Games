@@ -51,7 +51,7 @@ const RedeemPoints: React.FC<NewlyArrivedProps> = ({
         {isLoading ? (
           <Loading />
         ) : error ? (
-          <ErrorFetching />
+          <ErrorFetching error={error} />
         ) : newlyArrived?.length === 0 ? (
           <NoDataMessage />
         ) : (

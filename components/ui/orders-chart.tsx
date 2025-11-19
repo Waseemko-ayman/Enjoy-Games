@@ -704,7 +704,7 @@ export function OrderChart({
           {isLoading || addLoading ? (
             <Loading />
           ) : error ? (
-            <ErrorFetching />
+            <ErrorFetching error={error} />
           ) : (
             <div className="h-[250px] sm:h-[300px] mt-4">
               <ResponsiveContainer width="100%" height="100%">

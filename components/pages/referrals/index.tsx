@@ -71,7 +71,7 @@ const ReferralsPage = () => {
             {isLoading ? (
               <Loading />
             ) : error ? (
-              <ErrorFetching />
+              <ErrorFetching error={error} />
             ) : referralsData?.referrals?.length === 0 ? (
               <p className="text-gray-500">{t('noFriends')}</p>
             ) : (

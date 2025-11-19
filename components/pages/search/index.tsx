@@ -51,7 +51,7 @@ const SearchPage = () => {
           {isLoading ? (
             <Loading />
           ) : error ? (
-            <ErrorFetching />
+            <ErrorFetching error={error} />
           ) : (
             <div className="space-y-6">
               {categories.length > 0 && (

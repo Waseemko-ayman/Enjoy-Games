@@ -58,7 +58,7 @@ export default function HeroBanner({
           {loading ? (
             <Loading />
           ) : error ? (
-            <ErrorFetching />
+            <ErrorFetching error={error} />
           ) : sliders?.length === 0 ? (
             <NoDataMessage />
           ) : (

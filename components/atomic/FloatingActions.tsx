@@ -5,6 +5,7 @@ import { FaWhatsapp, FaArrowUp } from 'react-icons/fa';
 import Button from './Button';
 import { useToggleLocale } from '@/hook/useToggleLocale';
 import { usePathname } from 'next/navigation';
+import { PATHS } from '@/data/paths';
 
 interface FloatingActionsProps {
   phone: string;
@@ -27,7 +28,7 @@ const FloatingActions: React.FC<FloatingActionsProps> = ({ phone }) => {
 
   const { isArabic } = useToggleLocale();
   const pathname = usePathname();
-  const isMyCartPage = pathname.endsWith('/my-cart');
+  const isMyCartPage = pathname.endsWith(PATHS.MY_CART.link);
 
   return (
     <div

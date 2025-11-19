@@ -816,3 +816,9 @@ export const UsersTypes = [
   { id: 2, labelKey: 'employees' },
   { id: 3, labelKey: 'customers' },
 ];
+
+export const maintenanceAdditionalInfoKeys = [
+  'AdminAccess',
+  'API503',
+  'EstimatedTime',
+];
