@@ -149,15 +149,23 @@ const LoginPage = () => {
 
       {/* <SocialLogin btnTxts={btnTxts} authTxts={authTxts} /> */}
 
-      <p className="text-xs text-[var(--enjoy-gray-650)] font-normal text-center mt-4">
-        {authTxts('dontHaveAccount')}{' '}
+      <div className="flex items-center flex-col justify-center md:flex-row md:justify-between gap-3 md:gap-2 mt-5">
+        <p className="text-xs text-[var(--enjoy-gray-650)] font-normal text-center">
+          {authTxts('dontHaveAccount')}{' '}
+          <Link
+            href={PATHS.SIGNUP}
+            className="text-enjoy-primary font-semibold hover:text-enjoy-primary-soft transition-colors duration-500"
+          >
+            {btnTxts('createAccount')}
+          </Link>
+        </p>
         <Link
-          href={PATHS.SIGNUP}
-          className="text-enjoy-primary font-semibold hover:text-enjoy-primary-soft transition-colors duration-500"
+          href={PATHS.FORGET_PASS}
+          className="text-xs text-enjoy-primary font-semibold hover:text-enjoy-primary-soft transition-colors duration-500"
         >
-          {btnTxts('createAccount')}
+          {authTxts('forgetPassword')}
         </Link>
-      </p>
+      </div>
     </AuthLayout>
   );
 };

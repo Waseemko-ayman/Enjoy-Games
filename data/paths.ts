@@ -65,8 +65,8 @@ export const PATHS = {
   LOGIN: '/auth/login',
   SIGNUP: '/auth/signup',
   OTP: '/auth/otp',
-  RESET_PASS: '/reset-password',
-  FORGET_PASS: '/forget-password',
+  RESET_PASS: '/auth/reset-password',
+  FORGET_PASS: '/auth/forget-password',
   // MAX_PROGRAM: { name: 'مكسب', link: '/maxup-program' },
 };
 

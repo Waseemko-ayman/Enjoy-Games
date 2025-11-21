@@ -827,7 +827,7 @@
       "desc": "Update your account information",
       "pageDesc": "Manage your account settings and preferences",
       "sissionTimeout": {
-        "title": "Session Timeout Settings",
+        "title": "Session Timeout",
         "desc": "Gets the current global session duration settings (in minutes and hours) for each site instance.",
         "CurrentStatus": "Current Status",
         "Live": "Live",
@@ -858,7 +858,7 @@
         "MinTimeoutError": "The minimum allowed value is 30 minutes."
       },
       "Maintenance": {
-        "title": "Maintenance Page Settings",
+        "title": "Maintenance Page",
         "desc": "Manage maintenance page settings and customize messages and elements displayed during activation",
         "MaintenanceMode": "Maintenance mode",
         "SiteAvailable": "Activated",
@@ -1020,7 +1020,9 @@
     "extend_button": "Extend Session",
     "extending_button": "Extending...",
     "AddCode": "Add Code",
-    "Remove": "Remove"
+    "Remove": "Remove",
+    "PasswordRecovery": "Password Recovery",
+    "Changing": "Changing"
   },
   "Inputs": {
     "labels": {
@@ -1198,6 +1200,7 @@
       "genderRequired": "Gender is required",
       "passwordRequired": "Password is required",
       "repasswordRequired": "Password confirmation is required",
+      "passwordRequirements": "Password must include uppercase, lowercase, number, special character, and be at least 8 characters long",
       "referralCodeInvalid": "Invalid referral code",
       "repasswordNotMatch": "Passwords do not match",
       "avatarRequired": "Image is required",
@@ -1256,7 +1259,12 @@
     "signupTitle": "Welcome to EnjoyGames",
     "signupDesc": "Create New Account",
     "otpDesc": "You have received a message with a verification code via email.",
+    "forgetPassTitle": "Forgot your password",
+    "forgetPassDesc": "Regain access to your Enjoy Games account by resetting your password.",
+    "resetPassTitle": "Reset Password",
+    "resetPassDesc": "Change your password to regain access to your Enjoy Games account.",
     "dontHaveAccount": "Don't have an account?",
+    "forgetPassword": "Forget your password?",
     "registerationReq": "Create an new account; You implicitly agreed on",
     "termsAndConditions": "Terms and Conditions",
     "sendNewCode": "Send a new code after",

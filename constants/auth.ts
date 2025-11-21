@@ -3,6 +3,8 @@ export const AUTH_API_PATHS = {
   SIGNUP: 'register',
   CONFIRM_OTP: '/confirm-otp',
   LOGOUT: '/logout',
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
 };
 
 export const AUTH_ACTIONS = {
@@ -12,4 +14,6 @@ export const AUTH_ACTIONS = {
   SET_LOADING: 'SET_LOADING',
   SET_LOADING_FALSE: 'SET_LOADING_FALSE',
   SET_ERROR: 'SET_ERROR',
+  FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+  RESET_PASSWORD: 'RESET_PASSWORD',
 };
