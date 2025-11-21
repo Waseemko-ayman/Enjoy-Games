@@ -12,6 +12,7 @@ import { InputTypes } from '@/utils/type';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 import FormError from '@/components/atomic/FormError';
 import { resetPassInputs } from '@/data';
+import { passwordRegex } from '@/utils/regex';
 
 const ResetPasswordPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,7 +29,9 @@ const ResetPasswordPage = () => {
   const btnTxts = useTranslations('BtnTexts');
 
   const schema = Yup.object().shape({
-    password: Yup.string().required(errorsMsgs('passwordRequired')),
+    password: Yup.string()
+      .matches(passwordRegex, errorsMsgs('passwordRequirements'))
+      .required(errorsMsgs('passwordRequired')),
     password_confirmation: Yup.string()
       .oneOf([Yup.ref('password')], errorsMsgs('repasswordNotMatch'))
       .required(errorsMsgs('repasswordRequired')),

@@ -19,7 +19,11 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 import { generateUniqueId } from '@/hook/useAuth';
 import { useReferralCode } from '@/hook/ReferralCodeContext';
 import { useSearchParams } from 'next/navigation';
-import { alphanumericWithArabicRegex, emailRegex } from '@/utils/regex';
+import {
+  alphanumericWithArabicRegex,
+  emailRegex,
+  passwordRegex,
+} from '@/utils/regex';
 import Loading from '@/components/molecules/loading';
 
 const SignupPage = () => {
@@ -49,7 +53,9 @@ const SignupPage = () => {
       .email()
       .matches(emailRegex, errorsMsgs('emailPatternInvalid'))
       .required(errorsMsgs('emailRequired')),
-    password: Yup.string().required(errorsMsgs('passwordRequired')),
+    password: Yup.string()
+      .matches(passwordRegex, errorsMsgs('passwordRequirements'))
+      .required(errorsMsgs('passwordRequired')),
     password_confirmation: Yup.string()
       .oneOf([Yup.ref('password')], errorsMsgs('repasswordNotMatch'))
       .required(errorsMsgs('repasswordRequired')),

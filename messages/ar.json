@@ -1202,6 +1202,7 @@
       "genderInvalid": "الرجاء اختيار الجنس",
       "passwordRequired": "كلمة المرور مطلوبة",
       "repasswordRequired": "يجب تأكيد كلمة المرور",
+      "passwordRequirements": "يجب أن تحتوي كلمة المرور على حرف كبير، حرف صغير، رقم، رمز خاص، وأن تكون ٨ أحرف على الأقل",
       "referralCodeInvalid": "كود الدعوة غير صالح",
       "repasswordNotMatch": "كلمة المرور غير متطابقة",
       "genderRequired": "الجنس مطلوب",

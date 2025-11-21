@@ -1200,6 +1200,7 @@
       "genderRequired": "Gender is required",
       "passwordRequired": "Password is required",
       "repasswordRequired": "Password confirmation is required",
+      "passwordRequirements": "Password must include uppercase, lowercase, number, special character, and be at least 8 characters long",
       "referralCodeInvalid": "Invalid referral code",
       "repasswordNotMatch": "Passwords do not match",
       "avatarRequired": "Image is required",
