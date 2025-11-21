@@ -12,7 +12,8 @@ import BackgroundGradientWrapper from '@/components/molecules/BackgroundGradient
 const MainAuthLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
   const pathWithoutLocale = pathname.split('/').slice(3).join('/');
-  const isSignupPage = pathWithoutLocale === 'signup';
+  const isSignupPage =
+    pathWithoutLocale === 'signup' || pathWithoutLocale === 'forget-password';
 
   const { toggleLocale, isArabic } = useToggleLocale();
   const t = useTranslations('Languages');

@@ -4,7 +4,11 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { AUTH_ACTIONS, AUTH_API_PATHS } from '@/constants/auth';
 import { PATHS } from '@/data/paths';
-import { LoginFormData, signupFormData } from '@/interfaces';
+import {
+  ForgetPasswordFormData,
+  LoginFormData,
+  signupFormData,
+} from '@/interfaces';
 import { useLocale, useTranslations } from 'next-intl';
 import { useToast } from '@/lib/toast';
 import Cookies from 'js-cookie';
@@ -95,6 +99,20 @@ const reducer = (state: AuthState, action: Action): AuthState => {
       return {
         user: null,
         token: null,
+        isLoading: false,
+        error: null,
+      };
+
+    case AUTH_ACTIONS.FORGOT_PASSWORD:
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+      };
+
+    case AUTH_ACTIONS.RESET_PASSWORD:
+      return {
+        ...state,
         isLoading: false,
         error: null,
       };
@@ -244,12 +262,77 @@ const useAuth = () => {
     }
   };
 
+  const forgotPassword = async (body: ForgetPasswordFormData) => {
+    dispatch({ type: AUTH_ACTIONS.SET_LOADING });
+
+    try {
+      const { data } = await axios.post(
+        `/api/${AUTH_API_PATHS.FORGOT_PASSWORD}`,
+        body,
+        config
+      );
+
+      if (data?.success) {
+        dispatch({ type: AUTH_ACTIONS.FORGOT_PASSWORD });
+        showToast(data?.message);
+        return true;
+      } else {
+        showToast(data?.message, 'error');
+        return false;
+      }
+    } catch (error: any) {
+      const errorMsg = error.response?.data?.message || error.message;
+      dispatch({
+        type: AUTH_ACTIONS.SET_ERROR,
+        payload: { error: errorMsg },
+      });
+      showToast(errorMsg, 'error');
+      return false;
+    } finally {
+      dispatch({ type: AUTH_ACTIONS.SET_LOADING_FALSE });
+    }
+  };
+
+  const resetPassword = async (body: any) => {
+    dispatch({ type: AUTH_ACTIONS.SET_LOADING });
+
+    try {
+      const { data } = await axios.post(
+        `/api/${AUTH_API_PATHS.RESET_PASSWORD}`,
+        body,
+        config
+      );
+
+      if (data?.success) {
+        dispatch({ type: AUTH_ACTIONS.RESET_PASSWORD });
+        showToast(data?.message);
+        router.replace(PATHS.LOGIN); // عادة بعد الريسيت ينتقل للوجين
+        return true;
+      } else {
+        showToast(data?.message, 'error');
+        return false;
+      }
+    } catch (error: any) {
+      const errorMsg = error.response?.data?.message || error.message;
+      dispatch({
+        type: AUTH_ACTIONS.SET_ERROR,
+        payload: { error: errorMsg },
+      });
+      showToast(errorMsg, 'error');
+      return false;
+    } finally {
+      dispatch({ type: AUTH_ACTIONS.SET_LOADING_FALSE });
+    }
+  };
+
   return {
     ...state,
     login,
     signup,
     verifyOtp,
     logout,
+    forgotPassword,
+    resetPassword,
   };
 };
 

@@ -811,6 +811,23 @@ export const signupInputs = [
   },
 ];
 
+export const resetPassInputs = [
+  {
+    id: 1,
+    type: 'password',
+    label: 'password',
+    name: 'password',
+    placeholder: 'yourPassword',
+  },
+  {
+    id: 2,
+    type: 'password',
+    label: 'password_confirmation',
+    name: 'password_confirmation',
+    placeholder: 'repassword',
+  },
+];
+
 export const UsersTypes = [
   { id: 1, labelKey: 'all' },
   { id: 2, labelKey: 'employees' },

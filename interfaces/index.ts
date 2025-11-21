@@ -858,6 +858,15 @@ export interface LoginFormData {
   password: string;
 }
 
+export interface ForgetPasswordFormData {
+  email: string;
+}
+
+export interface ResetPasswordFormData {
+  password: string;
+  password_confirmation: string;
+}
+
 export interface signupFormData extends LoginFormData {
   name: string;
   password_confirmation: string;
@@ -871,7 +880,9 @@ export interface CreateCustomersPorps extends signupFormData {
   gender?: 'male' | 'female';
 }
 
-export interface CreateEmployeesPorps extends signupFormData, CreateCustomersPorps {
+export interface CreateEmployeesPorps
+  extends signupFormData,
+    CreateCustomersPorps {
   photo?: FileList | string | null;
 }
 
