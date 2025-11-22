@@ -160,6 +160,10 @@ const OTPPage = () => {
     const otpEmail = sessionStorage.getItem('otp_email');
 
     if (!otpEmail) router.replace(PATHS.LOGIN);
+
+    if (inputRefs.current[0]) {
+      inputRefs.current[0].focus();
+    }
   }, []);
 
   return (
