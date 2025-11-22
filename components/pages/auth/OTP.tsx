@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AuthLayout from '@/components/organism/layouts/AuthLayout';
 import Button from '@/components/atomic/Button';
 import { useTranslations } from 'next-intl';
@@ -23,7 +23,8 @@ const otpSchema = yup.object({
 type OtpFormData = yup.InferType<typeof otpSchema>;
 
 const OTPPage = () => {
-  const [timeLeft, setTimeLeft] = React.useState(300);
+  const [timeLeft, setTimeLeft] = useState(300);
+  const [, setVerified] = useState(false);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   const router = useRouter();
@@ -34,7 +35,7 @@ const OTPPage = () => {
   const t = useTranslations('Dashboard.settings.sissionTimeout');
 
   // Context
-  const { verifyOtp, isLoading, login, token } = useAuthContext();
+  const { verifyOtp, isLoading, login } = useAuthContext();
 
   // Notifications
   const { showToast } = useToast();
@@ -131,6 +132,8 @@ const OTPPage = () => {
         throw new Error(authTxts('emailNotFound'));
       }
       await verifyOtp(email, data.otp);
+      setVerified(true);
+      router.replace(PATHS.HOME.link);
 
       try {
         const res = await setSessionAPI({});
@@ -156,12 +159,12 @@ const OTPPage = () => {
   useEffect(() => {
     const otpEmail = sessionStorage.getItem('otp_email');
 
-    if (token) {
-      router.replace(PATHS.HOME.link);
-    } else if (!otpEmail) {
-      router.replace(PATHS.LOGIN);
+    if (!otpEmail) router.replace(PATHS.LOGIN);
+
+    if (inputRefs.current[0]) {
+      inputRefs.current[0].focus();
     }
-  }, [token, router]);
+  }, []);
 
   return (
     <AuthLayout

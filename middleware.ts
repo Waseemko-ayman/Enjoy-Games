@@ -16,32 +16,33 @@ export async function middleware(req: NextRequest) {
   const headers: HeadersInit = { Accept: 'application/json' };
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
-  // التحقق من locale في المسار
+  // استخراج الـ locale من المسار
   const localeMatch = pathname.match(/^\/(ar|en)(\/|$)/);
   const locale = localeMatch ? localeMatch[1] : null;
 
+  // لو ما في locale → إعادة توجيه للـ default locale
   if (!locale) {
-    // إعادة توجيه أي مسار بدون locale لإضافة الـ default locale
     const url = req.nextUrl.clone();
     url.pathname = `/${routing.defaultLocale}${pathname}`;
     return NextResponse.redirect(url);
   }
 
-  // إزالة الـ locale من pathname لمقارنات أسهل
+  // إزالة الـ locale من بداية المسار
   const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
 
-  const isMaintenancePage = pathWithoutLocale === "/maintenance";
+  const isMaintenancePage = pathWithoutLocale === '/maintenance';
 
-  // استثناء الملفات الثابتة و API routes
+  // استثناء ملفات النظام
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/static') ||
     pathname.includes('.')
-  )
+  ) {
     return intlMiddleware(req);
+  }
 
-  // جلب حالة الصيانة
+  // حالة الصيانة من API
   let maintenanceMode = false;
   try {
     const res = await fetch(
@@ -51,33 +52,39 @@ export async function middleware(req: NextRequest) {
         cache: 'no-store',
       }
     );
+
     const data = await res.json();
-    if (!res.ok || !data?.data?.is_maintenance) {
-      maintenanceMode = true;
-    } else {
-      maintenanceMode = data?.data?.is_maintenance;
-    }
+    maintenanceMode = res.ok && data?.data?.is_maintenance === true;
   } catch (err) {
     console.error('Error fetching maintenance status:', err);
     maintenanceMode = true;
   }
 
-  // مسارات عامة لا تحتاج أي تحقق
-  const publicPaths = [PATHS.HOME.ROOT, PATHS.AUTH.LOGIN, PATHS.AUTH.OTP];
+  // المسارات العامة المتاحة دائماً
+  const publicPaths = [
+    PATHS.HOME.ROOT,
+    PATHS.AUTH.LOGIN,
+    PATHS.AUTH.OTP,
+    PATHS.AUTH.FORGET_PASS,
+    PATHS.AUTH.RESET_PASS,
+  ];
 
-  if (publicPaths.some((p) => pathWithoutLocale.startsWith(p))) {
-    return intlMiddleware(req);
-  }
+  const isPublicPath = publicPaths.some((p) => pathWithoutLocale.startsWith(p));
+  const isAdmin =
+    token &&
+    (user?.roles?.includes('admin') || (user?.permissions?.length ?? 0) > 0);
 
-  // حالة الصيانة
+  // -------------------------
+  //       ✨ حالة الصيانة
+  // -------------------------
   if (maintenanceMode) {
-    if (
-      token &&
-      (user?.roles?.includes('admin') || (user?.permissions?.length ?? 0) > 0)
-    ) {
-      return intlMiddleware(req);
-    }
+    // 1) الأدمن يدخل بشكل طبيعي
+    if (isAdmin) return intlMiddleware(req);
 
+    // 2) المسارات العامة تبقى متاحة
+    if (isPublicPath) return intlMiddleware(req);
+
+    // 3) أي مسار آخر → صفحة الصيانة
     if (!isMaintenancePage) {
       const url = req.nextUrl.clone();
       url.pathname = `/${locale}/maintenance`;
@@ -87,7 +94,11 @@ export async function middleware(req: NextRequest) {
     return intlMiddleware(req);
   }
 
-  // منع الدخول للصفحة maintenance إذا لم يكن الموقع في الصيانة
+  // -------------------------
+  //     🚫 الموقع ليس بصيانة
+  // -------------------------
+
+  // لو الموقع ليس في صيانة، ومنع الدخول لصفحة الصيانة نفسها:
   if (!maintenanceMode && isMaintenancePage) {
     const url = req.nextUrl.clone();
     url.pathname = `/${locale}`;
